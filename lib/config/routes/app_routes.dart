@@ -30,6 +30,7 @@ class AppRoutes {
       //     builder: (context) => Details(service: service),
       //   );
       //
+      
       case Routes.loginRoute:
         return PageTransition(
           child: const LoginScreen(),
