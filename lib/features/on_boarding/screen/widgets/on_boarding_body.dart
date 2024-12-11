@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/custom_skip_row.dart';
+import 'package:travel_club/features/auth/widgets/custom_forward.dart';
 
 class CustomOnBoardingBody extends StatelessWidget {
   const CustomOnBoardingBody({
@@ -21,30 +23,42 @@ class CustomOnBoardingBody extends StatelessWidget {
       width: getWidthSize(context),
       height: getHeightSize(context),
       color: backgroundColor,
-      child: Column(
+      child: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
-          SizedBox(
-            height: getHeightSize(context) * 0.05,
+          Positioned(
+            top: 0,
+            child: SizedBox(
+                height: getHeightSize(context) * 0.65,
+                width: getWidthSize(context),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(height: getHeightSize(context) * 0.01),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
+                          child: CustomSkipRow(
+                              onTap: onTap, backgroundColor: AppColors.white),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: getHeightSize(context) * 0.01,
+                          horizontal: getWidthSize(context) * 0.1),
+                      child: Image.asset(
+                        image,
+                        // height: getHeightSize(context) * 0.,
+                        // width: getSize(context) / 1.1,
+                      ),
+                    ),
+                  ],
+                )),
           ),
-          Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: getWidthSize(context) / 22),
-            child:
-                CustomSkipRow(onTap: onTap, backgroundColor: AppColors.white),
-          ),
-          Center(
-            child: Padding(
-              padding: EdgeInsets.all(getWidthSize(context) / 22),
-              child: Image.asset(
-                image,
-                height: getHeightSize(context) * 0.4,
-                // width: getSize(context) / 1.1,
-              ),
-            ),
-          ),
-          Spacer(),
           Container(
-            //  height: getHeightSize(context) * 0.4,
+            height: getHeightSize(context) * 0.35,
             width: getWidthSize(context),
             decoration: BoxDecoration(
               color: AppColors.white,
@@ -53,22 +67,30 @@ class CustomOnBoardingBody extends StatelessWidget {
                 topRight: Radius.circular(18.r),
               ),
             ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: getHeightSize(context) * 0.05),
-                  child: Text(
-                    text,
-                    textAlign: TextAlign.center,
-                    style:
-                        getBoldStyle(color: AppColors.black, fontSize: 22.sp),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: getHeightSize(context) * 0.04),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      AutoSizeText(
+                        text,
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        style: getSemiBoldStyle(fontSize: 20.sp),
+                      ),
+                      Image.asset(ImageAssets.container,
+                          height: getHeightSize(context) * 0.05,
+                          color: backgroundColor),
+                    ],
                   ),
-                ),
-                SvgPicture.asset(AppIcons.container,
-                    height: 100.h, color: backgroundColor),
-                SizedBox(height: getHeightSize(context) * 0.05),
-                
-              ],
+                  CustomForward(
+                    onTap: onTap,
+                  )
+                ],
+              ),
             ),
           )
         ],

@@ -43,7 +43,7 @@ dependencies:
   overlay_loader_with_app_icon: ^0.0.4
   flutter_screenutil: ^5.9.3
   dotted_border: ^2.1.0
-
+  auto_size_text: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

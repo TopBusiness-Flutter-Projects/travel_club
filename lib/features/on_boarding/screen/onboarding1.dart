@@ -26,7 +26,7 @@ class OnBoarding1 extends StatelessWidget {
             text: AppTranslations.onboarding1,
             onTap: () {
               cubit.pageController.animateToPage(1,
-                  duration: const Duration(milliseconds: 1000),
+                  duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut);
             },
           ),

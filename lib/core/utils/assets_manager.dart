@@ -18,6 +18,9 @@ class ImageAssets {
   static const String onBoarding1 = '$imagePath/onboarding1.png';
   static const String onBoarding2 = '$imagePath/onboarding2.png';
   static const String onBoarding3 = '$imagePath/onboarding3.png';
+  static const String container = '$imagePath/container.png';
+  static const String forward = '$imagePath/forward.png';
+
 
   // icons
   static const String phoneIcon = '$iconsPath/phone.svg';
