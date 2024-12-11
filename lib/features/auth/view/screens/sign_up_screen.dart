@@ -11,6 +11,7 @@ import '../../../../core/widgets/custom_skip_row.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../widgets/custom_forward.dart';
 import '../widgets/custom_title.dart';
+import '../widgets/show_terms_bottom_sheet.dart';
 import '../widgets/social_login.dart';
 
 
@@ -86,7 +87,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                children: [
                Center(child: Text(AppTranslations.termsAndConditions,style: getMediumStyle(fontSize: 12.sp))),
                SizedBox(height: 5.h,),
-               Center(child: Text(AppTranslations.terms,style: getMediumStyle(fontSize: 12.sp,color: AppColors.primary)))
+               GestureDetector(
+                 onTap: (){
+                   showTermsBottomSheet(context);
+                 },
+                   child: Center(child: Text(AppTranslations.terms,style: getMediumStyle(fontSize: 12.sp,color: AppColors.primary))))
              ],)
 
               ],),
