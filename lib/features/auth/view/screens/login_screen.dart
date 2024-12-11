@@ -6,10 +6,12 @@ import 'package:travel_club/features/auth/cubit/cubit.dart';
 import 'package:travel_club/features/auth/cubit/state.dart';
 
 import '../../../../config/routes/app_routes.dart';
+import '../../../../core/widgets/custom_skip_row.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../widgets/custom_container.dart';
 import '../widgets/custom_forward.dart';
 import '../widgets/custom_title.dart';
+import '../widgets/social_login.dart';
 
 
 
@@ -36,8 +38,12 @@ class _LoginScreenState extends State<LoginScreen> {
              mainAxisAlignment: MainAxisAlignment.start,
              children: [
                SizedBox(height: 10.h,),
-
-               CustomContainer(),
+               Padding(
+                 padding: EdgeInsets.symmetric(horizontal: 10.w),
+                 child: CustomSkipRow(
+                     onTap:(){}, backgroundColor: AppColors.yellow),
+               ),
+              // CustomContainer(),
                SizedBox(height: 10.h,),
 
                CustomTitle(title: AppTranslations.login,),
@@ -52,14 +58,27 @@ class _LoginScreenState extends State<LoginScreen> {
                Row(
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                  children: [
-                   Text("نسيت كلمة المرور ؟",style: getUnderLine(fontSize: 20,color: AppColors.white),),
+                   Text(AppTranslations.forget_pass,style: getUnderLine(fontSize: 14.sp,color: AppColors.primary,fontweight: FontWeight.w500),),
                    CustomForward(onTap: (){
                      Navigator.pushNamed(context, Routes.newPass);
                    },),
                  ],
-               )
+               ),
+               SizedBox(height: 30.h,),
+
+               SocialLoginRow(),
+               SizedBox(height: 20.h,),
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                 Text(""),
+                   SizedBox(width: 7.w,),
+                   Text(AppTranslations.forget_pass,style: getUnderLine(fontSize: 14.sp,color: AppColors.primary,fontweight: FontWeight.w500),),
+
+               ],)
+
              ],),
-         )
+         ),
        // Center(
        //   child: ElevatedButton(
        //       onPressed: () {

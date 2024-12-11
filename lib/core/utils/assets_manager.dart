@@ -47,5 +47,7 @@ class AppIcons {
 
   static const String key= '$iconsPath/key.svg';
   static const String phone= '$iconsPath/phone.svg';
+  static const String facebook= '$iconsPath/facebook.svg';
+  static const String google= '$iconsPath/google_icon.svg';
 
 }

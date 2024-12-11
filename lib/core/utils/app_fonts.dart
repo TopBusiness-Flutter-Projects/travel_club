@@ -26,7 +26,7 @@ TextStyle getLineOverStyle({bool isBold = true}) {
   );
 }
 
-TextStyle getUnderLine({Color? color, double? fontSize}) {
+TextStyle getUnderLine({Color? color, double? fontSize,FontWeight ?fontweight }) {
   return TextStyle(
     decoration: TextDecoration.underline,
     decorationColor: color ?? AppColors.secondPrimary,
@@ -35,7 +35,7 @@ TextStyle getUnderLine({Color? color, double? fontSize}) {
     fontSize: fontSize ?? 18.sp,
     fontFamily: AppStrings.fontFamily,
     color: color ?? AppColors.black,
-    fontWeight: FontWeight.w600,
+    fontWeight: fontweight??FontWeight.w600,
   );
 }
 //textcolor

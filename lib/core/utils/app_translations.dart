@@ -14,5 +14,7 @@ class AppTranslations {
   static  String phone = 'phone'.tr();
   static  String writePhone = 'write_phone'.tr();
   static  String pass = 'pass'.tr();
+  static  String forget_pass = 'forget_pass'.tr();
+  static  String you_can_login = 'You_can_log_in_with'.tr();
   static  String confirmNewPass = 'confirm_new_pass'.tr();
 }
