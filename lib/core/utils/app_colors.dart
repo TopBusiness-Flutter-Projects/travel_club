@@ -15,6 +15,7 @@ class AppColors {
   static Color lbny = HexColor('#A1DAF8');
   static Color yellow = HexColor('#FFCC23');
   static Color blue = HexColor('#003B64');
+  static Color onboarding3 = HexColor('#A2CCCA');
   static Color white = Colors.white;
 
   // static Color red = HexColor('#FF0000');

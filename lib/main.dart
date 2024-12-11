@@ -28,9 +28,33 @@ void main() async {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (ctx, child) {
-          return const MyApp();
+          return const MyAppWithScreenUtil();
         },
       )),
     ),
   );
+}
+class MyAppWithScreenUtil extends StatelessWidget {
+  const MyAppWithScreenUtil({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder: (context) {
+        // Use MediaQuery to get the current screen size
+        final mediaQuery = MediaQuery.of(context);
+        final screenWidth = mediaQuery.size.width;
+        final screenHeight = mediaQuery.size.height;
+        return ScreenUtilInit(
+          designSize: Size(screenWidth, screenHeight),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (context, child) {
+            return HotRestartController(
+              child: const MyApp(),
+            );
+          },
+        );
+      },
+    );
+  }
 }
