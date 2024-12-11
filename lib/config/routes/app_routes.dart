@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_club/features/main_screen/screens/main_screen.dart';
+import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
@@ -21,15 +22,13 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
         );
-
-      // case Routes.detailsRoute:
-      //   final service = settings.arguments as ServicesModel;
-      //   return MaterialPageRoute(
-      //     // Extract the service model argument from the settings arguments map
-      //
-      //     builder: (context) => Details(service: service),
-      //   );
-      //
+      case Routes.onboardingPageScreenRoute:
+        return PageTransition(
+          child: const OnBoardinScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 800),
+        );
       case Routes.loginRoute:
         return PageTransition(
           child: const LoginScreen(),
@@ -71,3 +70,11 @@ class AppRoutes {
     );
   }
 }
+  // case Routes.detailsRoute:
+      //   final service = settings.arguments as ServicesModel;
+      //   return MaterialPageRoute(
+      //     // Extract the service model argument from the settings arguments map
+      //
+      //     builder: (context) => Details(service: service),
+      //   );
+      //
