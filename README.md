@@ -1,16 +1,26 @@
-# travel_club
+# Travel Club
 
-A new Flutter project.
+<div align="center">
+    <img align="center" src="https://github.com/TopBusiness-Flutter-Projects/travel_club/blob/main/assets/images/splash_logo.png" alt="CENTER">
+</div>
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+<div align="center">
+    <h1>
+         DEVELOPED BY
+    </h1>
+</div>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### MOBILE DEVELOPER TEAM :
+
+- ### [AHMED ELSAPAGH](https://www.github.com/ahmedelsapagh10)
+- ### [Thanaa Adel](https://github.com/ThanaaAdel)
+- ### [MAHMOUD AMER](https://www.github.com/mamer8)
+- ### [Nehal Elsamoly](https://github.com/NehalElsamoly)
+  
+### BACKEND DEVELOPER TEAM :
+
+- ### [ABDALLAH MAHMOUD (ELDAPOUR)](https://www.github.com/eldapour)
+
