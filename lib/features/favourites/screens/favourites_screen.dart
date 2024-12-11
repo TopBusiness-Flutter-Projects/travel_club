@@ -1,8 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/features/main_screen/cubit/cubit.dart';
-import 'package:travel_club/features/main_screen/cubit/state.dart';
 
 import '../cubit/favourites_cubit.dart';
 import '../cubit/favourites_state.dart';

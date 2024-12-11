@@ -1,6 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/preferences/preferences.dart';
+import 'package:travel_club/core/utils/restart_app_class.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 import 'package:travel_club/features/main_screen/cubit/state.dart';
 
@@ -20,7 +23,23 @@ class _AccountScreenState extends State<AccountScreen> {
     return BlocBuilder<AccountCubit, AccountState>(
       builder: (context, state) {
         return Center(
-          child: Text('Home Screen'),
+          child: InkWell(
+              onTap: () {
+                if (EasyLocalization.of(context)!.locale.languageCode == 'ar') {
+                  EasyLocalization.of(context)!.setLocale(Locale('en', ''));
+                  // Preferences.instance
+                  //     .savedLang(AppStrings.englishCode);
+                  // Preferences.instance.getSavedLang();
+                  HotRestartController.performHotRestart(context);
+                } else {
+                  EasyLocalization.of(context)!.setLocale(Locale('ar', ''));
+                  // Preferences.instance
+                  //     .savedLang(AppStrings.arabicCode);
+                  // Preferences.instance.getSavedLang();
+                  HotRestartController.performHotRestart(context);
+                }
+              },
+              child: Text('Language ')),
         );
       },
     );
