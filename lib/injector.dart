@@ -8,7 +8,7 @@ import 'core/api/dio_consumer.dart';
 import 'features/login/cubit/cubit.dart';
 import 'features/login/data/login_repo_impl.dart';
 import 'features/main_screen/cubit/cubit.dart';
-import 'features/main_screen/data/repo/main_repo.dart';
+import 'features/main_screen/data/repo/main_repo_impl.dart';
 import 'features/splash/cubit/cubit.dart';
 
 
