@@ -4,7 +4,8 @@ import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../features/login/screens/login_screen.dart';
+
+import '../../features/auth/login/screens/login_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
