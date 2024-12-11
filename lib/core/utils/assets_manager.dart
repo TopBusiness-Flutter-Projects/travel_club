@@ -29,5 +29,12 @@ class AppIcons{
   static const String container = '$iconsPath/container.svg';
   static const String correct_green = '$iconsPath/correct_green.svg';
   static const String entertainment= '$iconsPath/entertainment.svg';
+  static const String feeding= '$iconsPath/feeding.svg';
+  static const String forward= '$iconsPath/forward.svg';
+  static const String notification= '$iconsPath/notification.svg';
+  static const String setting= '$iconsPath/settings.svg';
+  static const String superMarker= '$iconsPath/super_market.svg';
+  static const String transport= '$iconsPath/transportation.svg';
+  static const String villa= '$iconsPath/villas.svg';
 
 }
