@@ -4,19 +4,20 @@ import 'dart:io';
 import 'package:dio/io.dart'; // Updated import
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:travel_club/core/api/status_code.dart';
+import '../../injector.dart';
 import '../error/exceptions.dart';
 import 'app_interceptors.dart';
 import 'base_api_consumer.dart';
 import 'end_points.dart';
-import 'package:travel_club/injector.dart' as injector;
 
 class DioConsumer implements BaseApiConsumer {
   final Dio client;
 
   DioConsumer({required this.client}) {
     (client.httpClientAdapter as IOHttpClientAdapter)
-            .onHttpClientCreate = // Updated class name
+        .onHttpClientCreate = // Updated class name
         (HttpClient client) {
       client.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
@@ -34,9 +35,27 @@ class DioConsumer implements BaseApiConsumer {
         return status != null && status < StatusCode.internalServerError;
       };
 
-    client.interceptors.add(injector.serviceLocator<AppInterceptors>());
+    client.interceptors.add(serviceLocator<AppInterceptors>());
+    client.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 90,
+        enabled: kDebugMode,
+        filter: (options, args){
+          // don't print requests with uris containing '/posts'
+          if(options.path.contains('/posts')){
+            return false;
+          }
+          // don't print responses with unit8 list data
+          return !args.isResponse || !args.hasUint8ListData;
+        }
+    ));
     if (kDebugMode) {
-      client.interceptors.add(injector.serviceLocator<LogInterceptor>());
+      client.interceptors.add(serviceLocator<LogInterceptor>());
     }
   }
 
@@ -50,17 +69,17 @@ class DioConsumer implements BaseApiConsumer {
         options: options,
       );
       return _handleResponseAsJson(response);
-    } on DioException catch (error) {
-      _handleDioException(error);
+    } on DioError catch (error) {
+      _handleDioError(error);
     }
   }
 
   @override
   Future<dynamic> post(String path,
       {Map<String, dynamic>? body,
-      bool formDataIsEnabled = false,
-      Map<String, dynamic>? queryParameters,
-      Options? options}) async {
+        bool formDataIsEnabled = false,
+        Map<String, dynamic>? queryParameters,
+        Options? options}) async {
     try {
       final response = await client.post(
         path,
@@ -69,16 +88,16 @@ class DioConsumer implements BaseApiConsumer {
         options: options,
       );
       return _handleResponseAsJson(response);
-    } on DioException catch (error) {
-      _handleDioException(error);
+    } on DioError catch (error) {
+      _handleDioError(error);
     }
   }
 
   @override
   Future<dynamic> put(String path,
       {Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters,
-      Options? options}) async {
+        Map<String, dynamic>? queryParameters,
+        Options? options}) async {
     try {
       final response = await client.put(
         path,
@@ -87,17 +106,17 @@ class DioConsumer implements BaseApiConsumer {
         options: options,
       );
       return _handleResponseAsJson(response);
-    } on DioException catch (error) {
-      _handleDioException(error);
+    } on DioError catch (error) {
+      _handleDioError(error);
     }
   }
 
   @override
   Future<dynamic> delete(String path,
       {bool formDataIsEnabled = false,
-      Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters,
-      Options? options}) async {
+        Map<String, dynamic>? body,
+        Map<String, dynamic>? queryParameters,
+        Options? options}) async {
     try {
       final response = await client.delete(
         path,
@@ -106,8 +125,27 @@ class DioConsumer implements BaseApiConsumer {
         options: options,
       );
       return _handleResponseAsJson(response);
-    } on DioException catch (error) {
-      _handleDioException(error);
+    } on DioError catch (error) {
+      _handleDioError(error);
+    }
+  }
+
+  @override
+  Future<dynamic> newPost(String path,
+      {bool formDataIsEnabled = false,
+        Map<String, dynamic>? body,
+        Map<String, dynamic>? queryParameters,
+        Options? options}) async {
+    try {
+      final response = await client.post(
+        path,
+        data: formDataIsEnabled ? FormData.fromMap(body!) : body,
+        queryParameters: queryParameters,
+        options: options,
+      );
+      return response;
+    } on DioError catch (error) {
+      _handleDioError(error);
     }
   }
 
@@ -120,13 +158,13 @@ class DioConsumer implements BaseApiConsumer {
     }
   }
 
-  void _handleDioException(DioException error) {
+  void _handleDioError(DioError error) {
     switch (error.type) {
-      case DioExceptionType.connectionTimeout:
-      case DioExceptionType.sendTimeout:
-      case DioExceptionType.receiveTimeout:
+      case DioErrorType.connectionTimeout:
+      case DioErrorType.sendTimeout:
+      case DioErrorType.receiveTimeout:
         throw const FetchDataException();
-      case DioExceptionType.badResponse:
+      case DioErrorType.badResponse:
         switch (error.response?.statusCode) {
           case StatusCode.badRequest:
             throw const BadRequestException();
@@ -142,9 +180,9 @@ class DioConsumer implements BaseApiConsumer {
           default:
             throw const FetchDataException();
         }
-      case DioExceptionType.cancel:
+      case DioErrorType.cancel:
         throw const FetchDataException();
-      case DioExceptionType.unknown:
+      case DioErrorType.unknown:
       default:
         throw const NoInternetConnectionException();
     }
