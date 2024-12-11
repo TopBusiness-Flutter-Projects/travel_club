@@ -31,40 +31,13 @@ Future<void> setup() async {
   ); serviceLocator.registerFactory(
         () => LoginCubit(serviceLocator()),
   );
-  // serviceLocator.registerFactory(() => OnboardingCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => HomeCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => PaymentCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => DetailsCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => ChatCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => EventCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => ProfileCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => PlacedetailsCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => MyTripCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => ChooseRoomCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => FavouriteCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => EditCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => SearchHomeCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => NotificationCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => SettingCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => VisaCardCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => SupportCubit(serviceLocator()));
-  // serviceLocator.registerFactory(() => AuthCubit(serviceLocator()));
 
-  ///////////////////////////////////////////////////////////////////////////////
-
-  //! External
-  // Shared Preferences
   final sharedPreferences = await SharedPreferences.getInstance();
   serviceLocator.registerLazySingleton(() => sharedPreferences);
 
   // serviceLocator.registerLazySingleton(() => ServiceApi(serviceLocator()));
   serviceLocator.registerLazySingleton(() => LoginRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => MainRepoImpl(serviceLocator()));
-  // serviceLocator.registerLazySingleton(() => ServiceApiOnBoarding(serviceLocator()));
-  // serviceLocator.registerLazySingleton(() => RepoImplForAuth(serviceLocator()));
-  // serviceLocator.registerLazySingleton(() => HomeRepoImpl(serviceLocator()));
-  // serviceLocator.registerLazySingleton(() => PlaceDetailRpoImpl(serviceLocator()));
-  // serviceLocator.registerLazySingleton(() => DetailsHotelRepoImpl(serviceLocator()));
 
   serviceLocator.registerLazySingleton<BaseApiConsumer>(
           () => DioConsumer(client: serviceLocator()));
