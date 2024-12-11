@@ -21,12 +21,12 @@ class OnBoarding3 extends StatelessWidget {
           body: Column(
             children: [
               SizedBox(
-                height: getSize(context) / 22,
+                height: getWidthSize(context) / 22,
               ),
               Flexible(
                 fit: FlexFit.tight,
                 child: Padding(
-                  padding: EdgeInsets.all(getSize(context) / 22),
+                  padding: EdgeInsets.all(getWidthSize(context) / 22),
                   child: Center(
                     child: Image.asset(
                       ImageAssets.introBackgroundImage2,
@@ -35,28 +35,28 @@ class OnBoarding3 extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: getSize(context) / 12),
+              SizedBox(height: getWidthSize(context) / 12),
               Container(
                 child: Text(
                   'مبيعاتك أسهل وأكثر كفاءة',
                   style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontWeight: FontWeight.bold,
-                      fontSize: getSize(context) / 18),
+                      fontSize: getWidthSize(context) / 18),
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(getSize(context) / 44),
+                padding: EdgeInsets.all(getWidthSize(context) / 44),
                 child: Text(
                   'حقق أهدافك البيعية بفضل إدارة متقدمة للعمليات والمزيد من التحكم في كل خطوة.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Tajawal',
-                      fontSize: getSize(context) / 22),
+                      fontSize: getWidthSize(context) / 22),
                 ),
               ),
-              SizedBox(height: getSize(context) / 12),
+              SizedBox(height: getWidthSize(context) / 12),
             ],
           ),
         );
