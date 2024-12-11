@@ -7,4 +7,5 @@ class AppTranslations {
   static  String onboarding1 = 'onboarding1'.tr();
   static  String onboarding2 = 'onboarding2'.tr();
   static  String onboarding3 = 'onboarding3'.tr();
+  static  String writeNewPass = 'write_new_pass'.tr();
 }
