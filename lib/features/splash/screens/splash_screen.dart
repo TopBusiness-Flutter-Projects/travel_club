@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/assets_manager.dart';
 import '../../../../config/routes/app_routes.dart';
@@ -31,29 +32,25 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _getStoreUser() async {
-     Navigator.pushReplacementNamed(context, Routes.loginRoute);
-
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // if (prefs.getString('onBoarding') != null) {
-    //   if (prefs.getString('user') != null) {
-    //     Navigator.pushReplacementNamed(context, Routes.mainRoute);
-    //   } else {
-    //     Navigator.pushNamedAndRemoveUntil(
-    //       context,
-    //       Routes.loginRoute,
-    //       ModalRoute.withName(
-    //         Routes.initialRoute,
-    //       ),
-    //     );
-    //   }
-    // } else {
-    //   Navigator.pushReplacementNamed(
-    //     context,
-    //     Routes.initialRoute,
-
-    //     ///onBprading
-    //   );
-    // }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool('onBoarding') != null) {
+      if (prefs.getString('user') != null) {
+        Navigator.pushReplacementNamed(context, Routes.mainRoute);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          Routes.loginRoute,
+          ModalRoute.withName(
+            Routes.initialRoute,
+          ),
+        );
+      }
+    } else {
+      Navigator.pushReplacementNamed(
+        context,
+        Routes.onboardingPageScreenRoute,
+      );
+    }
   }
 
   @override
@@ -81,7 +78,7 @@ class _SplashScreenState extends State<SplashScreen>
             child: Hero(
               tag: 'logo',
               child: Image.asset(
-                ImageAssets.logoImage,
+                ImageAssets.splashLogo,
                 height: getHeightSize(context) * 0.3,
                 // width: getWidthSize(context) / 1.2,
               ),
