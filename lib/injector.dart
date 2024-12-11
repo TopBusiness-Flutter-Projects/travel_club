@@ -39,7 +39,7 @@ Future<void> setup() async {
 ///////////////////////////////////////////////////////////////////
 //!-------------------------Declare Repo---------------------------
   serviceLocator.registerLazySingleton(() => LoginRepo(serviceLocator()));
-  serviceLocator.registerLazySingleton(() => MainRepo(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => MainRepoImpl(serviceLocator()));
 
 //!----------------------------------------------------------------
 

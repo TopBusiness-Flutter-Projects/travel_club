@@ -1,6 +1,6 @@
 import '../../../core/api/dio_consumer.dart';
 
-class MainRepo {
+class MainRepoImpl {
   DioConsumer api;
-  MainRepo(this.api);
+  MainRepoImpl(this.api);
 }

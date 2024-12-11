@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="113" height="113" viewBox="0 0 113 113">
+  <defs>
+    <filter id="Ellipse_12" x="0" y="0" width="113" height="113" filterUnits="userSpaceOnUse">
+      <feOffset dy="8" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#a1daf8" flood-opacity="0.565"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_94" data-name="Group 94" transform="translate(-131 -613)">
+    <g transform="matrix(1, 0, 0, 1, 131, 613)" filter="url(#Ellipse_12)">
+      <circle id="Ellipse_12-2" data-name="Ellipse 12" cx="32.5" cy="32.5" r="32.5" transform="translate(24 16)" fill="#009fe3"/>
+    </g>
+    <g id="vuesax_outline_arrow-left" data-name="vuesax/outline/arrow-left" transform="translate(-508 462)">
+      <g id="arrow-left">
+        <path id="Vector" d="M6.817,13.637a.742.742,0,0,1-.53-.22L.218,7.347a.754.754,0,0,1,0-1.06L6.287.218a.75.75,0,0,1,1.06,1.06l-5.54,5.54,5.54,5.54a.754.754,0,0,1,0,1.06A.725.725,0,0,1,6.817,13.637Z" transform="translate(686.753 193.182)" fill="#fff"/>
+        <path id="Vector-2" data-name="Vector" d="M17.58,1.5H.75A.755.755,0,0,1,0,.75.755.755,0,0,1,.75,0H17.58a.755.755,0,0,1,.75.75A.755.755,0,0,1,17.58,1.5Z" transform="translate(686.92 199.25)" fill="#fff"/>
+        <path id="Vector-3" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(684 188)" fill="none" opacity="0"/>
+      </g>
+    </g>
+  </g>
+</svg>
