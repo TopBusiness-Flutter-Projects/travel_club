@@ -31,12 +31,8 @@ SizedBox(height: 20.h,),
                   ),
                   SizedBox(width: 8),
                   Text(
-                    'فيس بوك',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                      AppTranslations.facebook,
+                    style:getRegularStyle(fontSize: 14.sp)
                   ),
                 ],
               ),
@@ -60,12 +56,8 @@ SizedBox(height: 20.h,),
                   ),
                   SizedBox(width: 8),
                   Text(
-                    'جوجل',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                      AppTranslations.google,
+                    style:getRegularStyle(fontSize: 14.sp)
                   ),
                 ],
               ),

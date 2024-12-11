@@ -44,6 +44,7 @@ class AppIcons {
   static const String superMarker = '$iconsPath/super_market.svg';
   static const String transport = '$iconsPath/transportation.svg';
   static const String villa = '$iconsPath/villas.svg';
+  static const String profile = '$iconsPath/profile.svg';
 
   static const String key= '$iconsPath/key.svg';
   static const String phone= '$iconsPath/phone.svg';
