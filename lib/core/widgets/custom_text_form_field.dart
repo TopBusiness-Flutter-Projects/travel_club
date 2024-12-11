@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:travel_club/core/exports.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -10,6 +11,7 @@ class CustomTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final double? borderRadius;
   final bool? enabled;
+  final String? title;
   final bool isMessage;
   final bool isPassword;
   final String? Function(String?)? validator;
@@ -32,6 +34,7 @@ class CustomTextField extends StatefulWidget {
     this.onSubmitted,
     this.borderRadius,
     this.enabled = true,
+    this.title
   });
 
   @override
@@ -60,100 +63,102 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.isMessage ? 150.h : null,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8),
-        child: TextFormField(
-            enabled: widget.enabled,
-            controller: widget.controller,
-            expands: false,
-            onTap: widget.onTap,
-            onTapOutside: (event) {
-              FocusManager.instance.primaryFocus?.unfocus();
-            },
-            focusNode: myFocusNode,
-            style: getBoldStyle(),
-            onChanged: widget.onChanged,
-            validator: widget.validator,
-            keyboardType: widget.keyboardType,
-            maxLines: widget.isMessage ? 5 : 1,
-            minLines: widget.isMessage ? 5 : 1,
-            onFieldSubmitted: widget.onSubmitted,
-            initialValue: widget.initialValue,
-            obscureText: widget.isPassword ? !showPassword : false,
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: widget.enabled!
-                    ? AppColors.white
-                    : AppColors.gray.withOpacity(0.5),
-                labelText: widget.labelText,
-                labelStyle: getRegularStyle(
-                    fontHeight: 1.5,
-                    color: myFocusNode.hasFocus
-                        ? AppColors.primary
-                        : AppColors.gray),
-                prefixIcon: widget.prefixIcon,
-                prefixIconColor:
-                    myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
-                suffixIconColor:
-                    myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
-                suffixIcon: widget.isPassword
-                    ? showPassword
-                        ? IconButton(
-                            icon: Icon(
-                              widget.isPassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: AppColors.primary,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                showPassword = !showPassword;
-                              });
-                            },
-                          )
-                        : IconButton(
-                            icon: Icon(
-                              !widget.isPassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: AppColors.primary,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                showPassword = !showPassword;
-                              });
-                            })
-                    : widget.suffixIcon,
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 8, vertical: 18.h),
-                hintStyle: getRegularStyle(color: AppColors.gray, fontSize: 14),
-                errorStyle: getRegularStyle(color: AppColors.red),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.gray, width: 1.5),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(widget.borderRadius ?? 10.r))),
-                disabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.gray, width: 1.5),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(widget.borderRadius ?? 10.r))),
-                // focused border style
-                focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: AppColors.primary, width: 1.5),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(widget.borderRadius ?? 10.r))),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+      if(widget.title==null)
+          SizedBox(
+            height: widget.isMessage ? 150.h : null,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 8,horizontal:8.0 ),
+              child: TextFormField(
+                  enabled: widget.enabled,
+                  controller: widget.controller,
+                  expands: false,
+                  onTap: widget.onTap,
+                  onTapOutside: (event) {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
+                  focusNode: myFocusNode,
+                  style: getBoldStyle(),
+                  onChanged: widget.onChanged,
+                  validator: widget.validator,
+                  keyboardType: widget.keyboardType,
+                  maxLines: widget.isMessage ? 5 : 1,
+                  minLines: widget.isMessage ? 5 : 1,
+                  onFieldSubmitted: widget.onSubmitted,
+                  initialValue: widget.initialValue,
+                  obscureText: widget.isPassword ? !showPassword : false,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: widget.enabled!
+                          ? AppColors.lightWhite
+                          : AppColors.gray.withOpacity(0.5),
+                      labelText: widget.labelText,
+                      labelStyle: getRegularStyle(
+                          fontHeight: 1.5,
+                          color: myFocusNode.hasFocus
+                              ? AppColors.primary
+                              : AppColors.gray),
+                      prefixIcon: widget.prefixIcon,
+                      prefixIconColor:
+                          myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
+                      suffixIconColor:
+                          myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
+                      suffixIcon: widget.isPassword
+                          ?  InkWell(
+                          onTap: () {
+                            setState(() {
+                              showPassword = !showPassword;
+                            });
+                          }
+                  //     },                    },
+                          //   onPressed: () {
+                          //       setState(() {
+                          //         showPassword = !showPassword;
+                          //       });
+                          //     },
+                          //    },
+                        ,  child: Padding(
+                          padding: const EdgeInsets.all(11.0),
+                          child: SvgPicture.asset(AppIcons.key),
+                        ))
 
-                // error border style
-                errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.red, width: 1.5),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(widget.borderRadius ?? 10.r))),
-                focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.red, width: 1.5),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(widget.borderRadius ?? 10.r))))),
+                          : widget.suffixIcon,
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                      hintStyle: getRegularStyle(color: AppColors.gray, fontSize: 14),
+                      errorStyle: getRegularStyle(color: AppColors.red),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.lightWhite, width: 0),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(widget.borderRadius ?? 30.r))),
+                      disabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.gray, width: 1.5),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(widget.borderRadius ?? 10.r))),
+                      // focused border style
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: AppColors.primary, width: 1.5),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(widget.borderRadius ?? 10.r))),
+
+                      // error border style
+                      errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.red, width: 1.5),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(widget.borderRadius ?? 10.r))),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.red, width: 1.5),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(widget.borderRadius ?? 10.r))))),
+            ),
+          ),
+        ],
       ),
     );
   }

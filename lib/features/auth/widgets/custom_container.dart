@@ -7,16 +7,25 @@ class CustomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // width: 83.w,
+      // height:36.h ,
       decoration: BoxDecoration(
-        color: AppColors.lightWhite
+        color: AppColors.lightWhite,
+        borderRadius: BorderRadius.circular(15.r)
       ),
-child: Row(
-  children: [
-//grey
-Icon(Icons.arrow_back_ios),
-    Text("back".tr(),style: getSemiBoldStyle(color: AppColors.grey),),
+child: Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+  //grey
+  Icon(Icons.arrow_back_ios,color: AppColors.grey,),
+      Text(AppTranslations.back,style: getSemiBoldStyle(color: AppColors.grey,fontSize: 14.sp),),
 
-  ],
+    ],
+  ),
 ),
     );
   }
