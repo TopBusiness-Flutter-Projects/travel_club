@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:travel_club/features/auth/view/screens/new_pass_screen.dart';
 import 'package:travel_club/features/main_screen/screens/main_screen.dart';
 import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
-
-import '../../features/auth/login/screens/login_screen.dart';
+import '../../features/auth/view/screens/login_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
   static const String loginRoute = '/login';
   static const String mainRoute = '/main';
+  static const String newPass = '/newPass';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
 }
 
@@ -28,14 +29,20 @@ class AppRoutes {
           child: const OnBoardinScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 800),
+          duration: const Duration(milliseconds: 200),
+        );   case Routes.newPass:
+        return PageTransition(
+          child: const NewPasswordScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
         );
       case Routes.loginRoute:
         return PageTransition(
           child: const LoginScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 800),
+          duration: const Duration(milliseconds: 200),
         );
 
       case Routes.mainRoute:
@@ -43,7 +50,7 @@ class AppRoutes {
           child: const MainScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 800),
+          duration: const Duration(milliseconds: 200),
         );
       //
       // case Routes.resultOfLessonExam:
