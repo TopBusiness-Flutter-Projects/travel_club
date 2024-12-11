@@ -55,14 +55,14 @@ Future<void> setup() async {
       ),
     ),
   );
-  serviceLocator.registerLazySingleton(
-        () => LogInterceptor(
-      request: false,
-      requestBody: false,
-      requestHeader: false,
-      responseBody: false,
-      responseHeader: false,
-      error: false,
-    ),
-  );
+  // serviceLocator.registerLazySingleton(
+  //       () => LogInterceptor(
+  //     request: false,
+  //     requestBody: false,
+  //     requestHeader: false,
+  //     responseBody: false,
+  //     responseHeader: false,
+  //     error: false,
+  //   ),
+  // );
 }
