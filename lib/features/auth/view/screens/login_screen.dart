@@ -11,8 +11,6 @@ import '../widgets/custom_container.dart';
 import '../widgets/custom_forward.dart';
 import '../widgets/custom_title.dart';
 
-
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -23,51 +21,73 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
- return  BlocBuilder<LoginCubit,LoginState>(builder: (BuildContext context, state) {  return SafeArea(
-     child: Scaffold(
-
-         backgroundColor: AppColors.white,
-         body:
-         Padding(
-           padding: const EdgeInsets.all(8.0),
-           child: Column(
-
-             crossAxisAlignment: CrossAxisAlignment.start,
-             mainAxisAlignment: MainAxisAlignment.start,
-             children: [
-               SizedBox(height: 10.h,),
-
-               CustomContainer(),
-               SizedBox(height: 10.h,),
-
-               CustomTitle(title: AppTranslations.login,),
-               SizedBox(height: 10.h,),
-               CustomTextField(enabled:true,title: AppTranslations.phone,hintText: AppTranslations.writePhone,suffixIcon:
-               Padding(
-                 padding: const EdgeInsets.all(8.0),
-                 child: SvgPicture.asset(AppIcons.phone),
-               )),
-               CustomTextField(enabled:true,isPassword: true,title: AppTranslations.pass,hintText: AppTranslations.writePass,),
-               SizedBox(height: 30.h,),
-               Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: [
-                   Text("نسيت كلمة المرور ؟",style: getUnderLine(fontSize: 20,color: AppColors.white),),
-                   CustomForward(onTap: (){
-                     Navigator.pushNamed(context, Routes.newPass);
-                   },),
-                 ],
-               )
-             ],),
-         )
-       // Center(
-       //   child: ElevatedButton(
-       //       onPressed: () {
-       //         Navigator.pushReplacementNamed(context, Routes.mainRoute);
-       //       },
-       //       child: const Text('Nav To Main Screen')),
-       // ),
-     ),
-   ); },);
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (BuildContext context, state) {
+        return SafeArea(
+          child: Scaffold(
+              body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 10.h,
+                ),
+                CustomContainer(),
+                SizedBox(
+                  height: 10.h,
+                ),
+                CustomTitle(
+                  title: AppTranslations.login,
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                CustomTextField(
+                    enabled: true,
+                    title: AppTranslations.phone,
+                    hintText: AppTranslations.writePhone,
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgPicture.asset(AppIcons.phone),
+                    )),
+                CustomTextField(
+                  enabled: true,
+                  isPassword: true,
+                  title: AppTranslations.pass,
+                  hintText: AppTranslations.writePass,
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "نسيت كلمة المرور ؟",
+                      style: getUnderLine(fontSize: 20, color: AppColors.white),
+                    ),
+                    CustomForward(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.newPass);
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
+              // Center(
+              //   child: ElevatedButton(
+              //       onPressed: () {
+              //         Navigator.pushReplacementNamed(context, Routes.mainRoute);
+              //       },
+              //       child: const Text('Nav To Main Screen')),
+              // ),
+              ),
+        );
+      },
+    );
   }
 }
