@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/utils/app_colors.dart';
 
 import '../../../core/utils/assets_manager.dart';
 
 import '../../../core/utils/get_size.dart';
 import '../cubit/onboarding_cubit.dart';
+import 'widgets/on_boarding_body.dart';
 
 class OnBoarding1 extends StatelessWidget {
   const OnBoarding1({super.key});
@@ -17,55 +20,15 @@ class OnBoarding1 extends StatelessWidget {
       builder: (context, state) {
         OnboardingCubit cubit = context.read<OnboardingCubit>();
         return Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            actions: [],
-          ),
-          body: Column(
-            children: [
-              SizedBox(
-                height: getWidthSize(context) / 22,
-              ),
-              Flexible(
-                fit: FlexFit.tight,
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(getWidthSize(context) / 22),
-                    child: Image.asset(
-                      ImageAssets.introBackgroundImage,
-                      // width: getSize(context) / 1.1,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: getWidthSize(context) / 12),
-
-              // SizedBox(height: getSize(context) / 12),
-              Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: getWidthSize(context) / 44),
-                child: Text(
-                  'نجاحك في البيع يبدأ هنا',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: 'Tajawal',
-                      fontWeight: FontWeight.bold,
-                      fontSize: getWidthSize(context) / 18),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(getWidthSize(context) / 44),
-                child: Text(
-                  'أطلق إمكانياتك كمندوب مبيعات، وتابع فرصك وصفقاتك بكل سهولة.',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Tajawal',
-                      fontSize: getWidthSize(context) / 22),
-                ),
-              ),
-
-              // SizedBox(height: getSize(context) / 12)
-            ],
+          body: CustomOnBoardingBody(
+            backgroundColor: AppColors.lbny,
+            image: ImageAssets.onBoarding1,
+            text: AppTranslations.onboarding1,
+            onTap: () {
+              cubit.pageController.animateToPage(1,
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.easeInOut);
+            },
           ),
         );
       },

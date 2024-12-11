@@ -13,8 +13,6 @@ TextStyle _getTextStyle(
       fontWeight: fontWeight);
 }
 
-
-
 TextStyle getLineOverStyle({bool isBold = true}) {
   return TextStyle(
     decoration: TextDecoration.lineThrough,
@@ -33,7 +31,7 @@ TextStyle getUnderLine({Color? color, double? fontSize}) {
     decoration: TextDecoration.underline,
     decorationColor: color ?? AppColors.secondPrimary,
     // height: 2,
-    decorationThickness: 4,
+    decorationThickness: 2,
     fontSize: fontSize ?? 18.sp,
     fontFamily: AppStrings.fontFamily,
     color: color ?? AppColors.black,
@@ -41,7 +39,6 @@ TextStyle getUnderLine({Color? color, double? fontSize}) {
   );
 }
 //textcolor
-
 
 // light style 300
 TextStyle getLightStyle({Color? color, double? fontHeight, double? fontSize}) {
@@ -51,6 +48,7 @@ TextStyle getLightStyle({Color? color, double? fontHeight, double? fontSize}) {
       fontSize: fontSize ?? 16.sp,
       fontHeight: fontHeight);
 }
+
 // regular style 400
 TextStyle getRegularStyle(
     {Color? color, double? fontHeight, double? fontSize}) {

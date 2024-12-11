@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _getStoreUser() async {
-     Navigator.pushReplacementNamed(context, Routes.loginRoute);
+    Navigator.pushReplacementNamed(context, Routes.onboardingPageScreenRoute);
 
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // if (prefs.getString('onBoarding') != null) {
@@ -81,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen>
             child: Hero(
               tag: 'logo',
               child: Image.asset(
-                ImageAssets.logoImage,
+                ImageAssets.splashLogo,
                 height: getHeightSize(context) * 0.3,
                 // width: getWidthSize(context) / 1.2,
               ),

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel_club/features/on_boarding/cubit/onboarding_cubit.dart';
 import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';
@@ -38,6 +39,7 @@ Future<void> setup() async {
   // serviceLocator.registerLazySingleton(() => ServiceApi(serviceLocator()));
   serviceLocator.registerLazySingleton(() => LoginRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => MainRepoImpl(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => OnboardingCubit());
 
   serviceLocator.registerLazySingleton<BaseApiConsumer>(
           () => DioConsumer(client: serviceLocator()));
