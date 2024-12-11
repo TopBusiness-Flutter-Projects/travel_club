@@ -1,4 +1,4 @@
-import '../../../core/exports.dart';
+import '../../../../core/exports.dart';
 
 class CustomTitle extends StatelessWidget {
    CustomTitle({super.key,required this.title,this.discreption});

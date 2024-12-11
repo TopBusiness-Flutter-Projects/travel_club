@@ -5,8 +5,9 @@ import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';
 
-import 'features/auth/login/cubit/cubit.dart';
-import 'features/auth/login/data/login_repo_impl.dart';
+import 'features/auth/cubit/cubit.dart';
+import 'features/auth/data/login_repo_impl.dart';
+
 import 'features/main_screen/cubit/cubit.dart';
 import 'features/main_screen/data/repo/main_repo_impl.dart';
 import 'features/splash/cubit/cubit.dart';

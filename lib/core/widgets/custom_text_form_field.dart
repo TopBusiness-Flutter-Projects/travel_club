@@ -7,11 +7,13 @@ class CustomTextField extends StatefulWidget {
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
   final String? initialValue;
+
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final double? borderRadius;
   final bool? enabled;
   final String? title;
+  final String? hintText;
   final bool isMessage;
   final bool isPassword;
   final String? Function(String?)? validator;
@@ -21,6 +23,7 @@ class CustomTextField extends StatefulWidget {
   const CustomTextField({
     super.key,
     this.labelText,
+    this.hintText,
     this.prefixIcon,
     this.validator,
     this.suffixIcon,
@@ -70,7 +73,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
       if(widget.title!=null)...[
-        Text(widget.title!,style: getMediumStyle(color: AppColors.secondPrimary),),
+        Text(widget.title!,style: getMediumStyle(color: AppColors.secondPrimary,fontSize: 14.sp),),
         SizedBox(height: 1.h,),
       ],
           SizedBox(
@@ -79,6 +82,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               padding: EdgeInsets.symmetric(vertical: 8.h,horizontal:3.0.w ),
               child: TextFormField(
                   enabled: widget.enabled,
+
                   controller: widget.controller,
                   expands: false,
                   onTap: widget.onTap,
@@ -94,6 +98,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   minLines: widget.isMessage ? 5 : 1,
                   onFieldSubmitted: widget.onSubmitted,
                   initialValue: widget.initialValue,
+
                   obscureText: widget.isPassword ? !showPassword : false,
                   decoration: InputDecoration(
                       filled: true,
@@ -107,6 +112,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                               ? AppColors.primary
                               : AppColors.gray),
                       prefixIcon: widget.prefixIcon,
+                      hintText: widget.hintText,
+                      hintStyle: getRegularStyle(color: AppColors.secondPrimary, fontSize: 14.sp),
+
                       prefixIconColor:
                           myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
                       suffixIconColor:
@@ -117,7 +125,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                             setState(() {
                               showPassword = !showPassword;
                             });
-                          }
+                          },
                   //     },                    },
                           //   onPressed: () {
                           //       setState(() {
@@ -125,7 +133,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                           //       });
                           //     },
                           //    },
-                        ,  child: Padding(
+                          child: Padding(
                           padding: const EdgeInsets.all(11.0),
                           child: SvgPicture.asset(AppIcons.key),
                         ))
@@ -133,7 +141,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                           : widget.suffixIcon,
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                      hintStyle: getRegularStyle(color: AppColors.gray, fontSize: 14),
+                      // hintStyle: getRegularStyle(color: AppColors.gray, fontSize: 14),
                       errorStyle: getRegularStyle(color: AppColors.red),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: AppColors.lightWhite, width: 0),
@@ -142,23 +150,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       disabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: AppColors.gray, width: 1.5),
                           borderRadius: BorderRadius.all(
-                              Radius.circular(widget.borderRadius ?? 10.r))),
+                              Radius.circular(widget.borderRadius ?? 30.r))),
                       // focused border style
                       focusedBorder: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: AppColors.primary, width: 1.5),
                           borderRadius: BorderRadius.all(
-                              Radius.circular(widget.borderRadius ?? 10.r))),
+                              Radius.circular(widget.borderRadius ?? 30.r))),
 
                       // error border style
                       errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: AppColors.red, width: 1.5),
                           borderRadius: BorderRadius.all(
-                              Radius.circular(widget.borderRadius ?? 10.r))),
+                              Radius.circular(widget.borderRadius ?? 30.r))),
                       focusedErrorBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: AppColors.red, width: 1.5),
                           borderRadius: BorderRadius.all(
-                              Radius.circular(widget.borderRadius ?? 10.r))))),
+                              Radius.circular(widget.borderRadius ?? 30.r))))),
             ),
           ),
         ],

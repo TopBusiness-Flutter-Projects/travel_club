@@ -38,5 +38,6 @@ class AppIcons{
   static const String transport= '$iconsPath/transportation.svg';
   static const String villa= '$iconsPath/villas.svg';
   static const String key= '$iconsPath/key.svg';
+  static const String phone= '$iconsPath/phone.svg';
 
 }

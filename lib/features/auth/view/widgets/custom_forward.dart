@@ -1,6 +1,7 @@
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/exports.dart';
+import '../../../../core/exports.dart';
+
 
 class CustomForward extends StatelessWidget {
   const CustomForward({super.key,this.onTap});

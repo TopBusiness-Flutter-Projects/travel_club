@@ -7,7 +7,7 @@ import 'config/routes/app_routes.dart';
 import 'config/themes/app_theme.dart';
 import 'core/utils/app_strings.dart';
 import 'package:travel_club/injector.dart' as injector;
-import 'features/auth/login/cubit/cubit.dart';
+import 'features/auth/cubit/cubit.dart';
 import 'features/splash/cubit/cubit.dart';
 
 class MyApp extends StatefulWidget {

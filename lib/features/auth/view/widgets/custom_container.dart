@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 
-import '../../../core/exports.dart';
+import '../../../../core/exports.dart';
 
 class CustomContainer extends StatelessWidget {
    CustomContainer({super.key});
@@ -11,10 +11,10 @@ class CustomContainer extends StatelessWidget {
       // height:36.h ,
       decoration: BoxDecoration(
         color: AppColors.lightWhite,
-        borderRadius: BorderRadius.circular(15.r)
+        borderRadius: BorderRadius.circular(18.r)
       ),
 child: Padding(
-  padding: const EdgeInsets.all(8.0),
+  padding: const EdgeInsets.all(10.0),
   child: Row(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
