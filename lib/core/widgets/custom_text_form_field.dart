@@ -69,11 +69,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-      if(widget.title==null)
+      if(widget.title!=null)...[
+        Text(widget.title!,style: getMediumStyle(color: AppColors.secondPrimary),),
+        SizedBox(height: 1.h,),
+      ],
           SizedBox(
             height: widget.isMessage ? 150.h : null,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 8,horizontal:8.0 ),
+              padding: EdgeInsets.symmetric(vertical: 8.h,horizontal:3.0.w ),
               child: TextFormField(
                   enabled: widget.enabled,
                   controller: widget.controller,
