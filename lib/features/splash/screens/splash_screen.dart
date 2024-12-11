@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/assets_manager.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _getStoreUser() async {
-    Navigator.pushReplacementNamed(context, Routes.loginRoute);
+    // Navigator.pushReplacementNamed(context, Routes.onboardingPageScreenRoute);
 
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // if (prefs.getString('onBoarding') != null) {
@@ -79,12 +80,10 @@ class _SplashScreenState extends State<SplashScreen>
           Center(
             child: Hero(
               tag: 'logo',
-              child: SizedBox(
-                child: Image.asset(
-                  ImageAssets.logoImage,
-                  // height: getSize(context) / 1.2,
-                  // width: getSize(context) / 1.2,
-                ),
+              child: Image.asset(
+                ImageAssets.logoImage,
+                height: getHeightSize(context) * 0.3,
+                // width: getWidthSize(context) / 1.2,
               ),
             ),
           ),

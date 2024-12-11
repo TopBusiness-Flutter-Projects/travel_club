@@ -45,10 +45,10 @@ class _OnBoardinScreenState extends State<OnBoardinScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: getSize(context) / 12),
+                  SizedBox(height: getWidthSize(context) / 12),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: getSize(context) / 16),
+                    padding: EdgeInsets.symmetric(
+                        vertical: getWidthSize(context) / 16),
                     child: SmoothPageIndicator(
                       controller: cubit.pageController,
                       count: cubit.numPages,
@@ -56,8 +56,8 @@ class _OnBoardinScreenState extends State<OnBoardinScreen> {
                       effect: WormEffect(
                         activeDotColor: AppColors.primary,
                         dotColor: AppColors.gray,
-                        dotHeight: getSize(context) / 44,
-                        dotWidth: getSize(context) / 44,
+                        dotHeight: getWidthSize(context) / 44,
+                        dotWidth: getWidthSize(context) / 44,
                         type: WormType.underground,
                       ),
                     ),
@@ -66,10 +66,10 @@ class _OnBoardinScreenState extends State<OnBoardinScreen> {
                       ? Column(
                           children: [
                             MaterialButton(
-                                minWidth: getSize(context) / 1.2,
+                                minWidth: getWidthSize(context) / 1.2,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
-                                        getSize(context) / 8)),
+                                        getWidthSize(context) / 8)),
                                 color: AppColors.primary,
                                 onPressed: () {
                                   cubit.pageController.animateToPage(1,
@@ -79,21 +79,21 @@ class _OnBoardinScreenState extends State<OnBoardinScreen> {
                                 },
                                 child: Container(
                                   margin: EdgeInsets.symmetric(
-                                      vertical: getSize(context) / 44,
-                                      horizontal: getSize(context) / 44),
+                                      vertical: getWidthSize(context) / 44,
+                                      horizontal: getWidthSize(context) / 44),
                                   padding: EdgeInsets.symmetric(
-                                      vertical: getSize(context) / 100,
-                                      horizontal: getSize(context) / 32),
+                                      vertical: getWidthSize(context) / 100,
+                                      horizontal: getWidthSize(context) / 32),
                                   decoration: BoxDecoration(
                                       // color: AppColors.primary,
                                       borderRadius: BorderRadius.circular(
-                                          getSize(context) / 44)),
+                                          getWidthSize(context) / 44)),
                                   child: Text(
                                     trans.tr('next'),
                                     style: TextStyle(
                                         fontFamily: 'Tajawal',
                                         color: AppColors.white,
-                                        fontSize: getSize(context) / 22),
+                                        fontSize: getWidthSize(context) / 22),
                                   ),
                                 )),
                             InkWell(
@@ -106,21 +106,21 @@ class _OnBoardinScreenState extends State<OnBoardinScreen> {
                                 },
                                 child: Container(
                                   margin: EdgeInsets.symmetric(
-                                      vertical: getSize(context) / 44,
-                                      horizontal: getSize(context) / 44),
+                                      vertical: getWidthSize(context) / 44,
+                                      horizontal: getWidthSize(context) / 44),
                                   padding: EdgeInsets.symmetric(
-                                      vertical: getSize(context) / 100,
-                                      horizontal: getSize(context) / 32),
+                                      vertical: getWidthSize(context) / 100,
+                                      horizontal: getWidthSize(context) / 32),
                                   decoration: BoxDecoration(
                                       // color: AppColors.primary,
                                       borderRadius: BorderRadius.circular(
-                                          getSize(context) / 44)),
+                                          getWidthSize(context) / 44)),
                                   child: Text(
                                     trans.tr('skip'),
                                     style: TextStyle(
                                         fontFamily: 'Tajawal',
                                         color: AppColors.primary,
-                                        fontSize: getSize(context) / 22),
+                                        fontSize: getWidthSize(context) / 22),
                                   ),
                                 )),
                           ],
@@ -128,10 +128,10 @@ class _OnBoardinScreenState extends State<OnBoardinScreen> {
                       : Column(
                           children: [
                             MaterialButton(
-                                minWidth: getSize(context) / 1.2,
+                                minWidth: getWidthSize(context) / 1.2,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
-                                        getSize(context) / 8)),
+                                        getWidthSize(context) / 8)),
                                 color: AppColors.primary,
                                 onPressed: () async {
                                   Navigator.pushReplacementNamed(
@@ -144,30 +144,30 @@ class _OnBoardinScreenState extends State<OnBoardinScreen> {
                                 },
                                 child: Container(
                                   margin: EdgeInsets.symmetric(
-                                      vertical: getSize(context) / 44,
-                                      horizontal: getSize(context) / 44),
+                                      vertical: getWidthSize(context) / 44,
+                                      horizontal: getWidthSize(context) / 44),
                                   padding: EdgeInsets.symmetric(
-                                      vertical: getSize(context) / 100,
-                                      horizontal: getSize(context) / 32),
+                                      vertical: getWidthSize(context) / 100,
+                                      horizontal: getWidthSize(context) / 32),
                                   decoration: BoxDecoration(
                                       // color: AppColors.primary,
                                       borderRadius: BorderRadius.circular(
-                                          getSize(context) / 44)),
+                                          getWidthSize(context) / 44)),
                                   child: Text(
                                     trans.tr('start_now'),
                                     style: TextStyle(
                                         fontFamily: 'Tajawal',
                                         color: AppColors.white,
-                                        fontSize: getSize(context) / 22),
+                                        fontSize: getWidthSize(context) / 22),
                                   ),
                                 )),
                             Container(
                                 margin: EdgeInsets.symmetric(
-                                    vertical: getSize(context) / 44,
-                                    horizontal: getSize(context) / 44),
+                                    vertical: getWidthSize(context) / 44,
+                                    horizontal: getWidthSize(context) / 44),
                                 padding: EdgeInsets.symmetric(
-                                    vertical: getSize(context) / 100,
-                                    horizontal: getSize(context) / 32),
+                                    vertical: getWidthSize(context) / 100,
+                                    horizontal: getWidthSize(context) / 32),
                                 child: Text('')),
                           ],
                         ),
@@ -175,7 +175,7 @@ class _OnBoardinScreenState extends State<OnBoardinScreen> {
                     padding: const EdgeInsets.all(5),
                     color: Colors.white,
                     child: Image.asset(ImageAssets.topbusinessImage,
-                        width: getSize(context) / 3),
+                        width: getWidthSize(context) / 3),
                   ),
                 ],
               ),
