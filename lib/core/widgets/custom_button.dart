@@ -10,23 +10,24 @@ class CustomButton extends StatelessWidget {
     this.onTap,
     required this.title,
   });
- final  void Function()? onTap;
- final String title;
+  final void Function()? onTap;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: getSize(context) / 12, vertical: getSize(context) / 32),
+          horizontal: getWidthSize(context) / 12,
+          vertical: getWidthSize(context) / 32),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(getSize(context) / 12),
+        borderRadius: BorderRadius.circular(getWidthSize(context) / 12),
         child: Container(
           width: double.infinity,
           alignment: Alignment.center,
-          padding: EdgeInsets.all(getSize(context) / 32),
+          padding: EdgeInsets.all(getWidthSize(context) / 32),
           decoration: BoxDecoration(
             color: AppColors.primary,
-            borderRadius: BorderRadius.circular(getSize(context) / 12),
+            borderRadius: BorderRadius.circular(getWidthSize(context) / 12),
           ),
           child: Text(
             title,

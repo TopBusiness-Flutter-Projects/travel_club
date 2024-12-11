@@ -24,13 +24,13 @@ class OnBoarding1 extends StatelessWidget {
           body: Column(
             children: [
               SizedBox(
-                height: getSize(context) / 22,
+                height: getWidthSize(context) / 22,
               ),
               Flexible(
                 fit: FlexFit.tight,
                 child: Center(
                   child: Padding(
-                    padding: EdgeInsets.all(getSize(context) / 22),
+                    padding: EdgeInsets.all(getWidthSize(context) / 22),
                     child: Image.asset(
                       ImageAssets.introBackgroundImage,
                       // width: getSize(context) / 1.1,
@@ -38,29 +38,29 @@ class OnBoarding1 extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: getSize(context) / 12),
+              SizedBox(height: getWidthSize(context) / 12),
 
               // SizedBox(height: getSize(context) / 12),
               Container(
-                padding:
-                    EdgeInsets.symmetric(horizontal: getSize(context) / 44),
+                padding: EdgeInsets.symmetric(
+                    horizontal: getWidthSize(context) / 44),
                 child: Text(
                   'نجاحك في البيع يبدأ هنا',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontWeight: FontWeight.bold,
-                      fontSize: getSize(context) / 18),
+                      fontSize: getWidthSize(context) / 18),
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(getSize(context) / 44),
+                padding: EdgeInsets.all(getWidthSize(context) / 44),
                 child: Text(
                   'أطلق إمكانياتك كمندوب مبيعات، وتابع فرصك وصفقاتك بكل سهولة.',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Tajawal',
-                      fontSize: getSize(context) / 22),
+                      fontSize: getWidthSize(context) / 22),
                 ),
               ),
 
