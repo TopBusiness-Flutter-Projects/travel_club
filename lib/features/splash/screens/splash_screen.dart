@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _getStoreUser() async {
-    // Navigator.pushReplacementNamed(context, Routes.onboardingPageScreenRoute);
+     Navigator.pushReplacementNamed(context, Routes.loginRoute);
 
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // if (prefs.getString('onBoarding') != null) {
