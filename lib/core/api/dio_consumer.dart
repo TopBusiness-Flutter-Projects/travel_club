@@ -54,9 +54,9 @@ class DioConsumer implements BaseApiConsumer {
           return !args.isResponse || !args.hasUint8ListData;
         }
     ));
-    if (kDebugMode) {
-      client.interceptors.add(serviceLocator<LogInterceptor>());
-    }
+    // if (kDebugMode) {
+    //   client.interceptors.add(serviceLocator<LogInterceptor>());
+    // }
   }
 
   @override
