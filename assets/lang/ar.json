@@ -8,14 +8,23 @@
   "write_pass": "ادخل كلمة المرور",
   "write_phone": "ادخل  رقم الهاتف",
   "phone": "رقم الهاتف",
-  "confirm_new_pass": "تاكيد كلمه المرور الجديدة"
-
-  "back": "الرجوع",
-  "write_new_pass": "ادخل كلمة المرور الجديدة",
-
+  "confirm_new_pass": "تاكيد كلمه المرور الجديدة",
   "skip": "تخطي",
+  "sign_up": "حساب جديد",
   "onboarding1": "هيا يمكنك السفر الان الي جميع الاماكن السياحيه بشكل اسهل",
   "onboarding2": "وفرنا لك مجموعة من افضل المطاعم والاكلات المتنوعة في كل مكان",
   "onboarding3": "والعديد من افضل شركات النقل والسياحة لجميع انواع التنقلات",
-  "lasss": ""
+  "forget_pass": "نسيت كلمة المرور ؟",
+  "You_can_log_in_with": "يمكنك تسجيل الدخول بواسطة",
+  "donot_have_an_account": "لا تمتلك حساب ؟",
+  "create_an_account_now": "انشاء حساب الان",
+  "google": "جوجل",
+  "facebook": "فيسبوك",
+  "full_name": "الاسم كاملا",
+  "write_full_name": " ادخل الاسم كاملا",
+  "terms_and_conditions": " الشروط والاحكام",
+  "by_signing_up_you_agree_to_our": " بقيامك بتسجيل حسابك معنا فانت قد وافقت علي ",
+  "phone_number_is_required": "يجب ادخال رقم تليفونك ",
+  "please_enter_a_valid_phone_number": "الرجاء ادخال رقم هاتف صالح"
 }
+ 

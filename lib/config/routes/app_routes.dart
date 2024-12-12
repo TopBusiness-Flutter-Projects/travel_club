@@ -6,12 +6,14 @@ import 'package:travel_club/features/splash/screens/splash_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../features/auth/view/screens/login_screen.dart';
+import '../../features/auth/view/screens/sign_up_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
   static const String loginRoute = '/login';
   static const String mainRoute = '/main';
   static const String newPass = '/newPass';
+  static const String signUp = '/signUp';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
 }
 
@@ -30,7 +32,15 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );   case Routes.newPass:
+        );
+        case Routes.signUp:
+        return PageTransition(
+          child:   SignUpScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.newPass:
         return PageTransition(
           child: const NewPasswordScreen(),
           type: PageTransitionType.fade,
