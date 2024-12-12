@@ -1,9 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-
 import '../../../../core/exports.dart';
-import '../../../auth/view/widgets/custom_forward.dart';
 import '../widgets/custom_row.dart';
 
 class DetailsAccomendation extends StatelessWidget {
@@ -23,7 +20,7 @@ class DetailsAccomendation extends StatelessWidget {
           width: getWidthSize(context),
           child: Stack(
             alignment: Alignment.topCenter,
-          
+
             children: [
               Stack(
                 children: [
@@ -77,7 +74,7 @@ class DetailsAccomendation extends StatelessWidget {
               Positioned(
                 bottom: 0,
                 child: Container(
-                  height: getHeightSize(context) * 0.5,
+                  height: getHeightSize(context) * 0.55,
                   width: getWidthSize(context),
                   decoration: BoxDecoration(
                     color: AppColors.white,
@@ -86,43 +83,56 @@ class DetailsAccomendation extends StatelessWidget {
                       topRight: Radius.circular(18.r),
                     ),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("نبذة عن الفندق",style: getMediumStyle(color: AppColors.secondPrimary,fontSize: 14.sp),),
-                      AutoSizeText(
-                    "jbfhbehfbehjbfkjbedkfjbekfbehjb"
-                  ,                      maxLines: 2,
-                        textAlign: TextAlign.center,
-                        style: getMediumStyle(fontSize: 14.sp,color: AppColors.grey),
-                      ),
-                      Text("ما يقدمه الفندق",style: getMediumStyle(color: AppColors.secondPrimary,fontSize: 14.sp),),
-                  SizedBox(
-                    height: 50,
-                    child: ListView.builder(
-                      itemCount: 20,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                      return Column(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SvgPicture.asset(AppIcons.profile),
-                          Text("حمام سباحة",style: getMediumStyle(fontSize: 12.sp),)
-                        ],);
-                    },),
-                  ),
-                      Text("الموقع علي الخريطة",style: getMediumStyle(fontSize: 12.sp),),
-Container(
-  width: double.infinity,
-  decoration: BoxDecoration(
-    color: AppColors.red,
-    borderRadius: BorderRadius.all(
-       Radius.circular(30.r),
-    ),
-  ),
-  child: Image.asset(ImageAssets.map,width: double.infinity,fit:BoxFit.cover,),
-)
-                    ],
+                          Text("نبذة عن الفندق",style: getMediumStyle(color: AppColors.secondPrimary,fontSize: 14.sp),),
+                          Text(   """خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو, إجلاء 
+                          وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المقيتة
+                          في, اقتصّت المحور حدة و. هذه ما طرفاً عالمية استسلام,
+                          الصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسر
+                          كارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحث
+                          تعداد الجنوب.""",                          style: getMediumStyle(fontSize: 14.sp,color: AppColors.grey),
+                          ),
+                          SizedBox(height: 10.h,),
+                          Text("ما يقدمه الفندق",style: getMediumStyle(color: AppColors.secondPrimary,fontSize: 14.sp),),
+                          SizedBox(height: 10.h,),
+
+                          SizedBox(
+                        height: 80,
+                        child: ListView.builder(
+                          itemCount: 20,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context, int index) {
+                          return Column(
+                            children: [
+                              SvgPicture.asset(AppIcons.profile),
+                              SizedBox(height: 10.h,),
+
+                              Text("حمام سباحة",style: getMediumStyle(fontSize: 12.sp),)
+                            ],);
+                        },),
+                      ),
+                          Text("الموقع علي الخريطة",style: getMediumStyle(fontSize: 12.sp),),
+                          SizedBox(height: 10.h,),
+
+                          Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: AppColors.red,
+                          borderRadius: BorderRadius.all(
+                             Radius.circular(30.r),
+                          ),
+                        ),
+                        child: Image.asset(ImageAssets.map,width: double.infinity,fit:BoxFit.cover,),
+                      )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               )
