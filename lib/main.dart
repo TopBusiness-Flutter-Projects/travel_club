@@ -22,18 +22,11 @@ void main() async {
       saveLocale: true,
       startLocale: const Locale('ar', ''),
       fallbackLocale: const Locale('ar', ''),
-      child: HotRestartController(
-          child: ScreenUtilInit(
-        designSize: const Size(360, 690),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (ctx, child) {
-          return const MyAppWithScreenUtil();
-        },
-      )),
+      child: const MyAppWithScreenUtil(),
     ),
   );
 }
+
 class MyAppWithScreenUtil extends StatelessWidget {
   const MyAppWithScreenUtil({Key? key}) : super(key: key);
   @override

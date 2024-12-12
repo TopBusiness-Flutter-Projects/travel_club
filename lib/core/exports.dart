@@ -3,6 +3,9 @@ export 'package:flutter/material.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_svg/svg.dart';
+export 'package:travel_club/core/widgets/custom_container_with_shadow.dart';
+export 'package:auto_size_text/auto_size_text.dart';
+
 
 // Utils
 export 'package:travel_club/core/utils/assets_manager.dart';
