@@ -24,4 +24,6 @@
 ### BACKEND DEVELOPER TEAM :
 
 - ### [ABDALLAH MAHMOUD (ELDAPOUR)](https://www.github.com/eldapour)
+- ### [Mohamed Magdy (Matter)](https://www.github.com/mohamedmagdy233)
+
 
