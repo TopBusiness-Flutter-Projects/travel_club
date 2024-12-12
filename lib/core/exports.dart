@@ -2,6 +2,7 @@
 export 'package:flutter/material.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
+export 'package:flutter_svg/svg.dart';
 
 // Utils
 export 'package:travel_club/core/utils/assets_manager.dart';

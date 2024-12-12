@@ -13,8 +13,6 @@ import '../widgets/custom_forward.dart';
 import '../widgets/custom_title.dart';
 import '../widgets/social_login.dart';
 
-
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 

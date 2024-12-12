@@ -30,31 +30,25 @@ class _SplashScreenState extends State<SplashScreen>
       },
     );
   }
-
   Future<void> _getStoreUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // if (prefs.getBool('onBoarding') != null) {
-    //   if (prefs.getString('user') != null) {
-    //     Navigator.pushReplacementNamed(context, Routes.mainRoute);
-    //   } else {
-    //     Navigator.pushNamedAndRemoveUntil(
-    //       context,
-    //       Routes.loginRoute,
-    //       ModalRoute.withName(
-    //         Routes.initialRoute,
-    //       ),
-    //     );
-    //   }
-    // } else {
-    //   Navigator.pushReplacementNamed(
-    //     context,
-    //     Routes.onboardingPageScreenRoute,
-    //   );
-    // }
-    Navigator.pushReplacementNamed(
-      context,
-      Routes.onboardingPageScreenRoute,
-    );
+    if (prefs.getBool('onBoarding') != null) {
+      // TODO
+      if (prefs.getString('user') == null) {
+        Navigator.pushReplacementNamed(context, Routes.mainRoute);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          Routes.loginRoute,
+          (route) => false,
+        );
+      }
+    } else {
+      Navigator.pushReplacementNamed(
+        context,
+        Routes.onboardingPageScreenRoute,
+      );
+    }
   }
 
   @override

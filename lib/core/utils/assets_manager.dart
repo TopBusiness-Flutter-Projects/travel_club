@@ -35,7 +35,7 @@ class AppIcons {
   static const String camps = '$iconsPath/camps.svg';
   static const String chalets = '$iconsPath/chalets.svg';
   static const String container = '$iconsPath/container.svg';
-  static const String correct_green = '$iconsPath/correct_green.svg';
+  static const String correctGreen = '$iconsPath/correct_green.svg';
   static const String entertainment = '$iconsPath/entertainment.svg';
   static const String feeding = '$iconsPath/feeding.svg';
   static const String forward = '$iconsPath/forward.svg';
@@ -48,6 +48,10 @@ class AppIcons {
 
   static const String key= '$iconsPath/key.svg';
   static const String phone= '$iconsPath/phone.svg';
+  static const String home= '$iconsPath/home.svg';
+  static const String myBookings= '$iconsPath/booking.svg';
+  static const String favourites= '$iconsPath/favourite.svg';
+  static const String myAccount= '$iconsPath/account.svg';
   static const String facebook= '$iconsPath/facebook.svg';
   static const String google= '$iconsPath/google_icon.svg';
 
