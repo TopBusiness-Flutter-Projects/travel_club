@@ -29,7 +29,6 @@ class AppTranslations {
   static String myBookings = 'my_bookings'.tr();
   static String favorites = 'favorites'.tr();
   static String myAccount = 'my_account'.tr();
-
   static String fullName = 'full_name'.tr();
   static String writeFullName = 'write_full_name'.tr();
   static String signUp = 'sign_up'.tr();
@@ -37,7 +36,6 @@ class AppTranslations {
   static String termsAndConditions = "by_signing_up_you_agree_to_our".tr();
   static String youCanLogin = "You_can_log_in_with".tr();
   static String forgetPass = 'forget_pass'.tr();
-
   static String havenotAccount = 'donot_have_an_account'.tr();
   static String createNewAccount = 'create_an_account_now'.tr();
   static String google = 'google'.tr();
@@ -45,4 +43,51 @@ class AppTranslations {
   static String phoneNumberIsRequired = 'phone_number_is_required'.tr();
   static String pleaseEnterValidPhoneNumber =
       'please_enter_a_valid_phone_number'.tr();
+  static String mostPlaceRating = 'most_place_rating'.tr();
+  static String personRating = 'person_rating'.tr();
+  static String filter = 'filter'.tr();
+  static String orderBy = 'order_by'.tr();
+  static String map = 'map'.tr();
+  static String menu = 'menu'.tr();
+  static String details = 'details'.tr();
+  static String about = 'about'.tr();
+  static String whatItOffers = 'what_it_offers'.tr();
+  static String locationOnMap = 'location_on_map'.tr();
+  static String rating = 'rating'.tr();
+  static String oneStar = 'one_star'.tr();
+  static String twoStars = 'two_stars'.tr();
+  static String stars = 'stars'.tr();
+  static String facilities = 'facilities'.tr();
+  static String resultsFilter = 'results_filter'.tr();
+  static String results = 'results'.tr();
+  static String removeFilter = 'remove_filter'.tr();
+  static String mostRating = 'most_rating'.tr();
+  static String mostPrice = 'most_price'.tr();
+  static String lowestRating = 'lowest_rating'.tr();
+  static String lowestPrice = 'lowest_price'.tr();
+  static String nearest = 'nearest'.tr();
+  static String orderResults = 'order_results'.tr();
+  static String booking = 'booking'.tr();
+  static String selectArrivalAndDeparture = 'select_arrival_and_departure'.tr();
+  static String from = 'from'.tr();
+  static String to = 'to'.tr();
+  static String chooseTheBestOption = 'choose_the_best_option'.tr();
+  static String cancelFree = 'cancel_free'.tr();
+  static String withoutTax = 'without_tax'.tr();
+  static String selectGoingAndReturn = 'select_going_and_return'.tr();
+  static String favoriteChoice = 'favorite_choice'.tr();
+  static String changeChoice = 'change_choice'.tr();
+  static String paymentDetails = 'payment_details'.tr();
+  static String bookingPrice = 'booking_price'.tr();
+  static String tax = 'tax'.tr();
+  static String total = 'total'.tr();
+  static String areYouHaveACoupon = 'are_you_have_a_coupon'.tr();
+  static String enterCoupon = 'enter_coupon'.tr();
+  static String applay = 'applay'.tr();
+  static String completePayment = 'complete_payment'.tr();
+  static String paymentProcess = 'payment_process'.tr();
+  static String bookingSuccess = 'booking_success'.tr();
+  static String bookingSuccessMessage = 'booking_success_message'.tr();
+  static String goToBookings = 'go_to_bookings'.tr();
+  static String payNow = 'pay_now'.tr();
 }
