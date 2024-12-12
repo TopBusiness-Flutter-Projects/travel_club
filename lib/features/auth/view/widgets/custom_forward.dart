@@ -16,12 +16,12 @@ class CustomForward extends StatelessWidget {
                 quarterTurns: 2,
                 child: Image.asset(
                   ImageAssets.forward,
-                  height: getHeightSize(context) * 0.1,
+                  height: getHeightSize(context) * 0.09,
                 ),
               )
             : Image.asset(
                 ImageAssets.forward,
-                height: getHeightSize(context) * 0.1,
+                height: getHeightSize(context) * 0.09,
               ));
   }
 }

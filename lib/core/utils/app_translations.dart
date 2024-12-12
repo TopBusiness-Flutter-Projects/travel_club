@@ -30,4 +30,17 @@ class AppTranslations {
   static  String favorites = 'favorites'.tr();
   static  String myAccount = 'my_account'.tr();
 
+  static String fullName = 'full_name'.tr();
+  static String writeFullName = 'write_full_name'.tr();
+  static String signUp = 'sign_up'.tr();
+  static String terms = "terms_and_conditions".tr();
+  static String termsAndConditions = "by_signing_up_you_agree_to_our".tr();
+
+  static String havenotAccount = 'donot_have_an_account'.tr();
+  static String createNewAccount = 'create_an_account_now'.tr();
+  static String google = 'google'.tr();
+  static String facebook = 'facebook'.tr();
+  static String phoneNumberIsRequired = 'phone_number_is_required'.tr();
+  static String pleaseEnterValidPhoneNumber = 'please_enter_a_valid_phone_number'.tr();
 }
+ 
