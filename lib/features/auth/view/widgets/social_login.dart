@@ -9,8 +9,17 @@ class SocialLoginRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Center(child: Text(AppTranslations.you_can_login,style: getRegularStyle(fontSize: 14.sp,color: AppColors.secondPrimary,),)),
-SizedBox(height: 20.h,),
+        Center(
+            child: Text(
+          AppTranslations.youCanLogin,
+          style: getRegularStyle(
+            fontSize: 14.sp,
+            color: AppColors.secondPrimary,
+          ),
+        )),
+        SizedBox(
+          height: 20.h,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -25,19 +34,17 @@ SizedBox(height: 20.h,),
               child: Row(
                 children: [
                   SvgPicture.asset(
-                  AppIcons.facebook, // Add your Facebook logo here
+                    AppIcons.facebook, // Add your Facebook logo here
                     width: 20,
                     height: 20,
                   ),
                   SizedBox(width: 8),
-                  Text(
-                      AppTranslations.facebook,
-                    style:getRegularStyle(fontSize: 14.sp)
-                  ),
+                  Text(AppTranslations.facebook,
+                      style: getRegularStyle(fontSize: 14.sp)),
                 ],
               ),
             ),
-           SizedBox(width: 16.w), // Space between the containers
+            SizedBox(width: 16.w), // Space between the containers
 
             // Google Container
             Container(
@@ -50,15 +57,13 @@ SizedBox(height: 20.h,),
               child: Row(
                 children: [
                   SvgPicture.asset(
-                   AppIcons.google, // Add your Google logo here
+                    AppIcons.google, // Add your Google logo here
                     width: 20,
                     height: 20,
                   ),
                   SizedBox(width: 8),
-                  Text(
-                      AppTranslations.google,
-                    style:getRegularStyle(fontSize: 14.sp)
-                  ),
+                  Text(AppTranslations.google,
+                      style: getRegularStyle(fontSize: 14.sp)),
                 ],
               ),
             ),
@@ -68,5 +73,3 @@ SizedBox(height: 20.h,),
     );
   }
 }
-
-
