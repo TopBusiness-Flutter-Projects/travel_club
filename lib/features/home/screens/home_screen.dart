@@ -2,8 +2,7 @@
 
 import 'package:travel_club/core/exports.dart';
 
-import '../cubit/home_cubit.dart';
-import '../cubit/home_state.dart';
+import 'home_body.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,13 +13,25 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    HomeCubit cubit = context.read<HomeCubit>();
-    return BlocBuilder<HomeCubit, HomeState>(
-      builder: (context, state) {
-        return Center(
-          child: Text('Home Screen'),
-        );
-      },
+    return SizedBox(
+      height: getHeightSize(context),
+      width: getWidthSize(context),
+      child: Stack(
+        children: [
+          Positioned(
+              top: 0,
+              child: Image.asset(
+                ImageAssets.mask,
+                fit: BoxFit.cover,
+                height: getHeightSize(context) * 0.3,
+                width: getWidthSize(context),
+              )),
+          SizedBox(
+              height: getHeightSize(context),
+              width: getWidthSize(context),
+              child: const HomeBody())
+        ],
+      ),
     );
   }
 }
