@@ -9,6 +9,7 @@ class AppColors {
   static Color green = HexColor('#14CE7F');
   static Color greyborder = HexColor('#EFEFEF');
   static Color lightWhite = HexColor('#F2F5F7');
+  static Color lightWhite2 = HexColor('#F6FAFB');
   static Color lightBlue1 = HexColor('#E1EDF2');
   static Color  lightBlue2= HexColor('#D2E1E8');
   static Color samawy = HexColor('#B1C9D3');

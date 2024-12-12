@@ -4,11 +4,9 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/app_colors.dart';
 import 'package:travel_club/features/auth/cubit/cubit.dart';
 import 'package:travel_club/features/auth/cubit/state.dart';
-
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/widgets/custom_skip_row.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
-import '../widgets/custom_container.dart';
 import '../widgets/custom_forward.dart';
 import '../widgets/custom_title.dart';
 import '../widgets/social_login.dart';
@@ -91,18 +89,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            AppTranslations.forgetPass,
-                            style: getUnderLine(
-                                fontSize: 14.sp,
-                                color: AppColors.primary,
-                                fontweight: FontWeight.w500),
+                          //forget pass
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.pushNamed(context, Routes.forgetPass);
+                            },
+                            child: Text(
+                              AppTranslations.forgetPass,
+                              style: getUnderLine(
+                                  fontSize: 14.sp,
+                                  color: AppColors.primary,
+                                  fontweight: FontWeight.w500),
+                            ),
                           ),
                           CustomForward(
                             onTap: () {
-                              if (cubit.formKeyLogin.currentState!.validate()) {
-                                Navigator.pushNamed(context, Routes.newPass);
-                              }
+                              // if (cubit.formKeyLogin.currentState!.validate()) {
+                              //   Navigator.pushNamed(context, Routes.detailsAccomendation);
+                              // }
+                              Navigator.pushNamed(context, Routes.detailsAccomendation);
+
                             },
                           ),
                         ],

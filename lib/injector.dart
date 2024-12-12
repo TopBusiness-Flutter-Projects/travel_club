@@ -10,7 +10,6 @@ import 'package:travel_club/features/my_account/data/repo/account_repo_impl.dart
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_cubit.dart';
 import 'package:travel_club/features/my_bookings/data/repo/my_bookings_repo_impl.dart';
 import 'package:travel_club/features/on_boarding/cubit/onboarding_cubit.dart';
-
 import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';

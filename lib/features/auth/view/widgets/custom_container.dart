@@ -15,16 +15,22 @@ class CustomContainer extends StatelessWidget {
       ),
 child: Padding(
   padding: const EdgeInsets.all(10.0),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    mainAxisSize: MainAxisSize.min,
-    children: [
-  //grey
-  Icon(Icons.arrow_back_ios,color: AppColors.grey,),
-      Text(AppTranslations.back,style: getSemiBoldStyle(color: AppColors.grey,fontSize: 14.sp),),
+  child: GestureDetector(
+    onTap: (){
+      Navigator.pop(context);
 
-    ],
+    },
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+    //grey
+    Icon(Icons.arrow_back_ios,color: AppColors.grey,),
+        Text(AppTranslations.back,style: getSemiBoldStyle(color: AppColors.grey,fontSize: 14.sp),),
+
+      ],
+    ),
   ),
 ),
     );

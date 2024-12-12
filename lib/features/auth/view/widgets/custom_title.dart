@@ -11,8 +11,10 @@ String ?discreption;
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(title,style: getSemiBoldStyle(color: AppColors.blue,fontSize: 20.sp)),
-        if(discreption!=null)
-        Text(discreption!,style: getMediumStyle(color: AppColors.grey,fontSize: 14.sp),)
+        if(discreption!=null)...[
+          SizedBox(height: 10.h,),
+          Text(discreption!,style: getMediumStyle(color: AppColors.grey,fontSize: 14.sp),)
+        ]
       ],
     );
   }
