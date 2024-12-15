@@ -23,33 +23,36 @@ class NewPasswordScreen extends StatefulWidget {
 class _NewPasswordScreenState extends State<NewPasswordScreen> {
   @override
   Widget build(BuildContext context) {
+    var cubit=context.read<LoginCubit>();
   return BlocBuilder<LoginCubit,LoginState>(builder: (BuildContext context, state) {  return SafeArea(
      child: Scaffold(
          backgroundColor: AppColors.white,
          body:
          Padding(
            padding: const EdgeInsets.all(8.0),
-           child: Column(
+           child: Form(
+             key: cubit.formKeyNewPass,
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               mainAxisAlignment: MainAxisAlignment.start,
+               children: [
+                 SizedBox(height: 10.h,),
 
-             crossAxisAlignment: CrossAxisAlignment.start,
-             mainAxisAlignment: MainAxisAlignment.start,
-             children: [
-               SizedBox(height: 10.h,),
+                 CustomContainer(),
+                 SizedBox(height: 10.h,),
 
-               CustomContainer(),
-               SizedBox(height: 10.h,),
-
-               CustomTitle(title: AppTranslations.writeNewPass,),
-               SizedBox(height: 10.h,),
-               CustomTextField(enabled:true,isPassword: true,title: AppTranslations.newPass,hintText: AppTranslations.writeNewPass,),
-               CustomTextField(enabled:true,isPassword: true,title: AppTranslations.confirmNewPass,hintText: AppTranslations.writeNewPass,),
-               SizedBox(height: 30.h,),
-               Center(
-                 child: CustomForward(onTap: (){
-                   Navigator.pushNamed(context, Routes.loginRoute);
-                 },),
-               )
-             ],),
+                 CustomTitle(title: AppTranslations.writeNewPass,),
+                 SizedBox(height: 10.h,),
+                 CustomTextField(enabled:true,isPassword: true,title: AppTranslations.newPass,hintText: AppTranslations.writeNewPass,),
+                 CustomTextField(enabled:true,isPassword: true,title: AppTranslations.confirmNewPass,hintText: AppTranslations.writeNewPass,),
+                 SizedBox(height: 30.h,),
+                 Center(
+                   child: CustomForward(onTap: (){
+                     Navigator.pushNamed(context, Routes.otpScreen,arguments:true);
+                   },),
+                 )
+               ],),
+           ),
          )
        // Center(
        //   child: ElevatedButton(

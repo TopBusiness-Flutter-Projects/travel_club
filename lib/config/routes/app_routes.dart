@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_club/features/accommodation/view/screens/details_accomendation.dart';
 import 'package:travel_club/features/auth/view/screens/new_pass_screen.dart';
 import 'package:travel_club/features/main_screen/screens/main_screen.dart';
 import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
@@ -6,7 +7,10 @@ import 'package:travel_club/features/other_services/screens/other_services_scree
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../features/auth/view/screens/apply_screen.dart';
+import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
+import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
 
 class Routes {
@@ -15,6 +19,10 @@ class Routes {
   static const String mainRoute = '/main';
   static const String newPass = '/newPass';
   static const String signUp = '/signUp';
+  static const String forgetPass = '/forgetPass';
+  static const String otpScreen = '/otpScreen';
+  static const String apply = '/apply';
+  static const String detailsAccomendation = '/detailsAccomendation';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
   static const String otherServicesRoute = '/otherServicesRoute';
 }
@@ -31,6 +39,33 @@ class AppRoutes {
       case Routes.onboardingPageScreenRoute:
         return PageTransition(
           child: const OnBoardinScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );  case Routes.detailsAccomendation:
+        return PageTransition(
+          child: const DetailsAccommendation(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );case Routes.apply:
+        return PageTransition(
+          child: const ApplyScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.forgetPass:
+        return PageTransition(
+          child: const ForgetPasswordScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.otpScreen:
+          final bool isPass = settings.arguments as bool; // Expect an int index here
+        return PageTransition(
+          child:  OtpScreen(isPasss: isPass,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
