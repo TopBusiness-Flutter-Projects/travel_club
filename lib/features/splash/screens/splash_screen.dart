@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   _startDelay() async {
     _timer = Timer(
-      const Duration(seconds: 8, milliseconds: 500),
+      const Duration(seconds: 3),
       () {
         _goNext();
       },
