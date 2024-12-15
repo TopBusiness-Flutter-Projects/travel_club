@@ -5,7 +5,7 @@ import '../../../../core/exports.dart';
 import '../../cubit/details_accomendation_cubit.dart';
 import '../widgets/container_in_center.dart';
 import '../widgets/container_under_swiper.dart';
-import '../widgets/custom_row.dart';
+import '../widgets/custom_appbar_row.dart';
 import '../widgets/custom_swiper.dart';
 
 class DetailsAccommendation extends StatelessWidget {

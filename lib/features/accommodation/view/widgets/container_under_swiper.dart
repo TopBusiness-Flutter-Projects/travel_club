@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../../core/exports.dart';
 import '../../cubit/details_accomendation_cubit.dart';
 
@@ -30,7 +32,7 @@ class ContainerUnderSwiper  extends StatelessWidget {
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
                    Text(
-                     "نبذة عن الفندق",
+                     AppTranslations.about,
                      style: getMediumStyle(
                        color: AppColors.secondPrimary,
                        fontSize: 14.sp,
@@ -50,7 +52,7 @@ class ContainerUnderSwiper  extends StatelessWidget {
                    ),
                    SizedBox(height: 10.h),
                    Text(
-                     "ما يقدمه الفندق",
+                    AppTranslations.whatItOffers,
                      style: getMediumStyle(
                        color: AppColors.secondPrimary,
                        fontSize: 14.sp,
