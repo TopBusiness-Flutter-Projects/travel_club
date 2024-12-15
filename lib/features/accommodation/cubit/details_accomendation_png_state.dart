@@ -1,6 +1,6 @@
-part of 'details_accomendation_png_cubit.dart';
+part of 'details_accomendation_cubit.dart';
 
 @immutable
-sealed class DetailsAccomendationPngState {}
+abstract class DetailsAccomendationState {}
 
-final class DetailsAccomendationPngInitial extends DetailsAccomendationPngState {}
+final class DetailsAccomendationPngInitial extends DetailsAccomendationState {}

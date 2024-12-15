@@ -13,6 +13,8 @@ import 'package:travel_club/features/on_boarding/cubit/onboarding_cubit.dart';
 import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';
+import 'features/accommodation/cubit/details_accomendation_cubit.dart';
+import 'features/accommodation/data/repo/details_accomendation_repo_impl.dart';
 import 'features/auth/cubit/cubit.dart';
 import 'features/auth/data/login_repo_impl.dart';
 import 'features/main_screen/cubit/cubit.dart';
@@ -48,10 +50,14 @@ Future<void> setup() async {
   serviceLocator.registerFactory(
     () => AccountCubit(serviceLocator()),
   );
+  serviceLocator.registerFactory(
+    () => DetailsAccomendationCubit(serviceLocator()),
+  );
 //!-------------------------Declare Repo---------------------------
   serviceLocator.registerLazySingleton(() => LoginRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => MainRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => HomeRepoImpl(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => DetailsAccomendationRepoImpl(serviceLocator()));
   serviceLocator
       .registerLazySingleton(() => FavouritesRepoImpl(serviceLocator()));
   serviceLocator

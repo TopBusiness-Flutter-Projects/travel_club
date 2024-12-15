@@ -42,7 +42,7 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );  case Routes.detailsAccomendation:
         return PageTransition(
-          child: const DetailsAccomendation(),
+          child: const DetailsAccommendation(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

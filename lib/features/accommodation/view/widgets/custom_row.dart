@@ -1,4 +1,5 @@
 import '../../../../core/exports.dart';
+import 'custom_back_button.dart';
 
 class CustomRow extends StatelessWidget {
   const CustomRow({super.key});
@@ -10,27 +11,7 @@ class CustomRow extends StatelessWidget {
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            width: 44.w, // Adjust size as needed
-            height: 44.h,
-            decoration: BoxDecoration(
-              color: AppColors.lightWhite,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(15), // Circular with rounded corners
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.black.withOpacity(0.1),
-              //     blurRadius: 10,
-              //     offset: Offset(0, 4), // Positioning the shadow
-              //   ),
-              // ],
-            ),
-            child: Icon(
-              Icons.arrow_back_ios, // Icon similar to the image
-              color: Colors.grey, // Match the color of the arrow
-              size: 18.sp, // Adjust size as needed
-            ),
-          ),
+         CustomBackButton(),
           Spacer(),
           Expanded(child: Text("التفاصيل",style: getMediumStyle(color: AppColors.blue,fontSize: 16.sp),)),
           Container(
