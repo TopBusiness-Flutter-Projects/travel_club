@@ -50,6 +50,7 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
         //
+    //
         case Routes.apply:
         return PageTransition(
           child: const ApplyScreen(),
