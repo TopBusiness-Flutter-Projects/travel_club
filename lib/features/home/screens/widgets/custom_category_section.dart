@@ -12,6 +12,7 @@ class CustomCategorySection extends StatelessWidget {
         child: ListView.builder(
           itemBuilder: (context, index) => CustomCategoryContainer(
             categoryModel: categories[index],
+            islast: index == categories.length - 1,
           ),
           itemCount: categories.length,
           scrollDirection: Axis.horizontal,
@@ -40,13 +41,16 @@ class CustomCategoryContainer extends StatelessWidget {
   const CustomCategoryContainer({
     super.key,
     required this.categoryModel,
+    this.islast = false,
   });
   final CategoryModel categoryModel;
+  final bool islast;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.only(
           start: getHorizontalPadding(context),
+          end: islast ? getHorizontalPadding(context) : 0,
           bottom: getHeightSize(context) * 0.01),
       child: CustomContainerWithShadow(
         width: getWidthSize(context) * 0.27,

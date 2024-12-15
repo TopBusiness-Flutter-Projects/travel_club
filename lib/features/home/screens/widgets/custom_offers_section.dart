@@ -35,7 +35,9 @@ class CustomOffersSection extends StatelessWidget {
         SizedBox(
             height: getHeightSize(context) * 0.34,
             child: ListView.builder(
-              itemBuilder: (context, index) => CustomOffersContainer(),
+              itemBuilder: (context, index) => CustomOffersContainer(
+                isLast: index == 2,
+              ),
               itemCount: 3,
               scrollDirection: Axis.horizontal,
             ))
@@ -46,14 +48,16 @@ class CustomOffersSection extends StatelessWidget {
 
 class CustomOffersContainer extends StatelessWidget {
   const CustomOffersContainer({
+    this.isLast = false,
     super.key,
   });
-
+  final bool isLast;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.only(
           start: getHorizontalPadding(context),
+          end: isLast ? getHorizontalPadding(context) : 0,
           bottom: getHeightSize(context) * 0.01),
       child: CustomContainerWithShadow(
           width: getWidthSize(context) * 0.8,

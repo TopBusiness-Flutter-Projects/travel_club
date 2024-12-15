@@ -35,7 +35,8 @@ class CustomBagSection extends StatelessWidget {
         SizedBox(
             height: getHeightSize(context) * 0.3,
             child: ListView.builder(
-              itemBuilder: (context, index) => CustomBagContainer(),
+              itemBuilder: (context, index) =>
+                  CustomBagContainer(islast: index == 2),
               itemCount: 3,
               scrollDirection: Axis.horizontal,
             ))
@@ -46,14 +47,17 @@ class CustomBagSection extends StatelessWidget {
 
 class CustomBagContainer extends StatelessWidget {
   const CustomBagContainer({
+    this.islast = false,
     super.key,
   });
+  final bool islast;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.only(
           start: getHorizontalPadding(context),
+          end: islast ? getHorizontalPadding(context) : 0,
           bottom: getHeightSize(context) * 0.01),
       child: CustomContainerWithShadow(
           width: getWidthSize(context) * 0.55,
