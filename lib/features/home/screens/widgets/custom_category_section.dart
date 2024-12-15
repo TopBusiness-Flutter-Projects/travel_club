@@ -7,7 +7,9 @@ class CustomCategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<CategoryModel> categories = [
-      CategoryModel(title: AppTranslations.accommodation, image: AppIcons.bed),
+      CategoryModel(title: AppTranslations.accommodation, image: AppIcons.bed,onTap: () {
+        Navigator.pushNamed(context, Routes.accomendation);
+      }),
       CategoryModel(
           title: AppTranslations.transportation,
           image: AppIcons.transport,

@@ -2,11 +2,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import '../../../../core/exports.dart';
-import '../../cubit/details_accomendation_cubit.dart';
-import '../widgets/container_in_center.dart';
-import '../widgets/container_under_swiper.dart';
-import '../widgets/custom_appbar_row.dart';
-import '../widgets/custom_swiper.dart';
+import '../../cubit/accomendation_cubit.dart';
+import '../widgets/details_widgets/container_in_center.dart';
+import '../widgets/details_widgets/container_under_swiper.dart';
+import '../widgets/details_widgets/custom_appbar_row.dart';
+import '../widgets/details_widgets/custom_swiper.dart';
 
 class DetailsAccommendation extends StatelessWidget {
   const DetailsAccommendation({super.key});
@@ -14,7 +14,7 @@ class DetailsAccommendation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-   return BlocBuilder<DetailsAccomendationCubit, DetailsAccomendationState>(builder: (context, state) {
+   return BlocBuilder<AccomendationCubit, AccomendationState>(builder: (context, state) {
      return SafeArea(
        child: Scaffold(
          body: SizedBox(

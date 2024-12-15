@@ -1,14 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 
-import '../../../../core/exports.dart';
-import '../../cubit/details_accomendation_cubit.dart';
+import '../../../../../core/exports.dart';
+import '../../../cubit/accomendation_cubit.dart';
 
 class ContainerUnderSwiper  extends StatelessWidget {
   const ContainerUnderSwiper({super.key});
 
   @override
   Widget build(BuildContext context) {
-  return BlocBuilder<DetailsAccomendationCubit, DetailsAccomendationState>(builder: (BuildContext context, state) {
+  return BlocBuilder<AccomendationCubit, AccomendationState>(builder: (BuildContext context, state) {
      return     Positioned(
        bottom: 0,
        child: Container(

@@ -1,5 +1,5 @@
 
-import '../../../../core/exports.dart';
+import '../../../../../core/exports.dart';
 
 class CustomRow extends StatelessWidget {
   const CustomRow({super.key});

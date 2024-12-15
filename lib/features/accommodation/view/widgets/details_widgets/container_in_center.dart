@@ -1,15 +1,15 @@
 import 'package:flutter_rating/flutter_rating.dart';
 
-import '../../../../core/exports.dart';
-import '../../cubit/details_accomendation_cubit.dart';
+import '../../../../../core/exports.dart';
+import '../../../cubit/accomendation_cubit.dart';
 
 class ContainerInCenter extends StatelessWidget {
    ContainerInCenter({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var cubit=context.read<DetailsAccomendationCubit>();
-   return BlocBuilder<DetailsAccomendationCubit, DetailsAccomendationState>(builder: (BuildContext context, state) {
+    var cubit=context.read<AccomendationCubit>();
+   return BlocBuilder<AccomendationCubit, AccomendationState>(builder: (BuildContext context, state) {
      return    Positioned(
        top: getHeightSize(context) * 0.29, // Adjust position from the top
        left: getWidthSize(context) * 0.05, // Adjust position from the left
