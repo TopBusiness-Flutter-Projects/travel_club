@@ -1,8 +1,8 @@
-import '../../../../core/exports.dart';
+import '../exports.dart';
 
 class CustomBackButton extends StatelessWidget {
-   CustomBackButton({super.key,this.onTap});
- void Function()? onTap;
+   const CustomBackButton({super.key,this.onTap});
+final  void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return  InkWell(
