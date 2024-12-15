@@ -20,6 +20,7 @@ class ImageAssets {
   static const String onBoarding3 = '$imagePath/onboarding3.png';
   static const String container = '$imagePath/container.png';
   static const String forward = '$imagePath/forward.png';
+  static const String map = '$imagePath/map.png';
 
 
   // icons
@@ -47,12 +48,14 @@ class AppIcons {
   static const String villa = '$iconsPath/villas.svg';
   static const String profile = '$iconsPath/profile.svg';
   static const String search = '$iconsPath/search.svg';
+  static const String star = '$iconsPath/star.svg';
 
   static const String key= '$iconsPath/key.svg';
   static const String phone= '$iconsPath/phone.svg';
   static const String home= '$iconsPath/home.svg';
   static const String myBookings= '$iconsPath/booking.svg';
   static const String favourites= '$iconsPath/favourite.svg';
+  static const String share= '$iconsPath/share.svg';
   static const String myAccount= '$iconsPath/account.svg';
   static const String facebook= '$iconsPath/facebook.svg';
   static const String google= '$iconsPath/google_icon.svg';

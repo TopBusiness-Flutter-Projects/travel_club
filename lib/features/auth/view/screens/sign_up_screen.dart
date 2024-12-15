@@ -1,35 +1,23 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/utils/app_colors.dart';
 import 'package:travel_club/features/auth/cubit/cubit.dart';
 import 'package:travel_club/features/auth/cubit/state.dart';
-
-import '../../../../config/routes/app_routes.dart';
 import '../../../../core/widgets/custom_skip_row.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../widgets/custom_forward.dart';
 import '../widgets/custom_title.dart';
 import '../widgets/show_terms_bottom_sheet.dart';
 import '../widgets/social_login.dart';
-
-
-
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
-
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
-
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     var cubit=context.read<LoginCubit>();
     return  BlocBuilder<LoginCubit,LoginState>(builder: (BuildContext context, state) {  return SafeArea(
       child: Scaffold(
-        //  backgroundColor: AppColors.white,
         body:
         Form(
           key: cubit.formKeySignUp,
@@ -39,6 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(height: 10.h,),
+                //skip
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
                   child: CustomSkipRow(
@@ -46,6 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 // CustomContainer(),
                 SizedBox(height: 10.h,),
+                //title
                 CustomTitle(title: AppTranslations.signUp,),
                 SizedBox(height: 10.h,),
                 CustomTextField(controller: cubit.nameController,enabled:true,title: AppTranslations.fullName,hintText: AppTranslations.writeFullName,suffixIcon:
@@ -71,17 +61,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 CustomTextField(controller: cubit.passwordControllerSignUp,enabled:true,isPassword: true,title: AppTranslations.pass,hintText: AppTranslations.writePass,),
                 SizedBox(height: 30.h,),
+                //forward
                 Center(
                   child: CustomForward(onTap: (){
-                    if(cubit.formKeySignUp.currentState!.validate()){
-                      Navigator.pushNamed(context, Routes.newPass);
-                    }
+                   //  if(cubit.formKeySignUp.currentState!.validate()){
+                   // //   Navigator.pushNamed(context, Routes.newPass);
+                   //    Navigator.pushNamed(context, Routes.otpScreen);
+                   //  }
+                    Navigator.pushNamed(context, Routes.otpScreen,arguments:false);
+
                   },),
                 ),
                 SizedBox(height: 30.h,),
-
+//social
                 SocialLoginRow(),
                 SizedBox(height: 20.h,),
+             //terms
              Column(
 
                children: [
