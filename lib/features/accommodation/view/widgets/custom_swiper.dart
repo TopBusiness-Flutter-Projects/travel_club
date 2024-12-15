@@ -14,6 +14,11 @@ class CustomSwiper extends StatelessWidget {
        height: getHeightSize(context) * 0.65,
        width: getWidthSize(context),
        child: Swiper(
+         // controller: ,
+         onIndexChanged: (index) {
+         //  => cubit.currentIndex = index
+       cubit.changeIndex(index);
+         },
          itemCount:cubit. imageUrls.length,
          itemBuilder: (BuildContext context, int index) {
            return Container(

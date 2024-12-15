@@ -7,7 +7,6 @@ class OtherServicesScreen extends StatefulWidget {
   @override
   State<OtherServicesScreen> createState() => _OtherServicesScreenState();
 }
-
 class _OtherServicesScreenState extends State<OtherServicesScreen> {
   @override
   Widget build(BuildContext context) {

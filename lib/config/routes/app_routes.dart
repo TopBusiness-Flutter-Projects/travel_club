@@ -51,6 +51,7 @@ class AppRoutes {
         );
         //
     //
+    
         case Routes.apply:
         return PageTransition(
           child: const ApplyScreen(),
