@@ -5,6 +5,7 @@ export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_svg/svg.dart';
 export 'package:travel_club/core/widgets/custom_container_with_shadow.dart';
 export 'package:auto_size_text/auto_size_text.dart';
+export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 
 // Utils
