@@ -3,8 +3,8 @@ import 'package:travel_club/core/exports.dart';
 import '../data/repo/other_services_repo_impl.dart';
 import 'other_services_state.dart';
 
-class OtherServicesScreenCubit extends Cubit<OtherServicesScreenState> {
-  OtherServicesScreenCubit(this.api) : super(OtherServicesScreenInitial());
-  OtherServicesScreenRepoImpl api;
+class OtherServicesCubit extends Cubit<OtherServicesScreenState> {
+  OtherServicesCubit(this.api) : super(OtherServicesScreenInitial());
+  OtherServicesRepoImpl api;
   TextEditingController searchController = TextEditingController();
 }

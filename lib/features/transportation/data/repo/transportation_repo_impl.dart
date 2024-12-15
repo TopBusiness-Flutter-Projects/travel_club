@@ -1,6 +1,6 @@
 import '../../../../core/api/base_api_consumer.dart';
 
-class OtherServicesRepoImpl {
+class TransportationRepoImpl {
   final BaseApiConsumer api;
-  OtherServicesRepoImpl(this.api);
+  TransportationRepoImpl(this.api);
 }
