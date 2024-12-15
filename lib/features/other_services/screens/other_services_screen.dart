@@ -14,19 +14,22 @@ class _OtherServicesScreenState extends State<OtherServicesScreen> {
     return CustomScreen(
       appbarTitle: AppTranslations.otherServices,
       body: SingleChildScrollView(
-          child: StaggeredGrid.count(
-              crossAxisCount: 3,
-              mainAxisSpacing: 10.h,
-              crossAxisSpacing: 10.w,
-              children: List.generate(
-                  10,
-                  (index) => OtherServicesContainer(
-                        categoryModel: OtherServicesModel(
-                          title: "neww",
-                          image: AppIcons.others,
-                          onTap: () {},
-                        ),
-                      )))),
+          child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 10.h),
+        child: StaggeredGrid.count(
+            crossAxisCount: 2,
+            mainAxisSpacing: 0,
+            crossAxisSpacing: 0,
+            children: List.generate(
+                80,
+                (index) => OtherServicesContainer(
+                      categoryModel: OtherServicesModel(
+                        title: "ترزييي",
+                        image: AppIcons.others,
+                        onTap: () {},
+                      ),
+                    ))),
+      )),
     );
   }
 }
@@ -43,33 +46,32 @@ class OtherServicesContainer extends StatelessWidget {
   const OtherServicesContainer({
     super.key,
     required this.categoryModel,
-    this.islast = false,
   });
   final OtherServicesModel categoryModel;
-  final bool islast;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.only(
-          start: getHorizontalPadding(context),
-          end: islast ? getHorizontalPadding(context) : 0,
-          bottom: getHeightSize(context) * 0.01),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       child: GestureDetector(
         onTap: categoryModel.onTap,
         child: CustomContainerWithShadow(
-          width: getWidthSize(context) * 0.27,
+          // width: getWidthSize(context) * 0.27,
+
           child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: getWidthSize(context) * 0.01),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            padding: EdgeInsets.symmetric(
+                horizontal: getWidthSize(context) * 0.02,
+                vertical: getHeightSize(context) * 0.02),
+            child: Row(
               children: [
                 SvgPicture.asset(
                   categoryModel.image,
-                  height: getHeightSize(context) * 0.05,
+                  width: getWidthSize(context) * 0.13,
                 ),
-                AutoSizeText(categoryModel.title,
-                    maxLines: 1, style: getMediumStyle(fontSize: 13.sp)),
+                SizedBox(width: getWidthSize(context) * 0.02),
+                Flexible(
+                  child: AutoSizeText(categoryModel.title,
+                      maxLines: 2, style: getMediumStyle(fontSize: 13.sp)),
+                ),
               ],
             ),
           ),
