@@ -12,6 +12,7 @@ class _OtherServicesScreenState extends State<OtherServicesScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScreen(
+      appbarTitle: 'Other Services',
       body: Center(child: Text('Other Services Screen')),
     );
   }
