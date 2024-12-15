@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travel_club/features/auth/view/screens/new_pass_screen.dart';
 import 'package:travel_club/features/main_screen/screens/main_screen.dart';
 import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
+import 'package:travel_club/features/other_services/screens/other_services_screen.dart';
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
@@ -15,6 +16,7 @@ class Routes {
   static const String newPass = '/newPass';
   static const String signUp = '/signUp';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
+  static const String otherServicesRoute = '/otherServicesRoute';
 }
 
 class AppRoutes {
@@ -58,6 +60,13 @@ class AppRoutes {
       case Routes.mainRoute:
         return PageTransition(
           child: const MainScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.otherServicesRoute:
+        return PageTransition(
+          child: const OtherServicesScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

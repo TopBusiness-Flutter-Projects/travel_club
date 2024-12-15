@@ -16,5 +16,6 @@ export 'package:travel_club/core/utils/app_fonts.dart';
 export 'package:travel_club/core/utils/get_size.dart';
 export 'package:travel_club/core/utils/dialogs.dart';
 export 'package:travel_club/config/routes/app_routes.dart';
+export 'package:travel_club/core/widgets/custom_screen.dart';
 
 

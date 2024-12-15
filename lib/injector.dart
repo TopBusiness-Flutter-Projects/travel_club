@@ -10,6 +10,8 @@ import 'package:travel_club/features/my_account/data/repo/account_repo_impl.dart
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_cubit.dart';
 import 'package:travel_club/features/my_bookings/data/repo/my_bookings_repo_impl.dart';
 import 'package:travel_club/features/on_boarding/cubit/onboarding_cubit.dart';
+import 'package:travel_club/features/other_services/cubit/other_services_cubit.dart';
+import 'package:travel_club/features/other_services/data/repo/other_services_repo_impl.dart';
 
 import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
@@ -49,6 +51,9 @@ Future<void> setup() async {
   serviceLocator.registerFactory(
     () => AccountCubit(serviceLocator()),
   );
+  serviceLocator.registerFactory(
+    () => OtherServicesScreenCubit(serviceLocator()),
+  );
 //!-------------------------Declare Repo---------------------------
   serviceLocator.registerLazySingleton(() => LoginRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => MainRepoImpl(serviceLocator()));
@@ -58,6 +63,8 @@ Future<void> setup() async {
   serviceLocator
       .registerLazySingleton(() => MyBookingsRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => AccountRepoImpl(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => OtherServicesScreenRepoImpl
+  (serviceLocator()));
 
 //!-------------------------Declare Interceptors---------------------------
 
