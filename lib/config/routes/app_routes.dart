@@ -5,6 +5,7 @@ import 'package:travel_club/features/main_screen/screens/main_screen.dart';
 import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/other_services/screens/other_services_screen.dart';
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
+import 'package:travel_club/features/transportation/screens/transportation_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../features/auth/view/screens/apply_screen.dart';
@@ -25,6 +26,7 @@ class Routes {
   static const String detailsAccomendation = '/detailsAccomendation';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
   static const String otherServicesRoute = '/otherServicesRoute';
+  static const String transportationRoute = '/transportationRoute';
 }
 
 class AppRoutes {
@@ -106,6 +108,13 @@ class AppRoutes {
       case Routes.otherServicesRoute:
         return PageTransition(
           child: const OtherServicesScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.transportationRoute:
+        return PageTransition(
+          child: const TransportationScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

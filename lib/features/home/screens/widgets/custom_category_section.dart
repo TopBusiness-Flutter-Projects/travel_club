@@ -9,10 +9,18 @@ class CustomCategorySection extends StatelessWidget {
     List<CategoryModel> categories = [
       CategoryModel(title: AppTranslations.accommodation, image: AppIcons.bed),
       CategoryModel(
-          title: AppTranslations.transportation, image: AppIcons.transport),
+          title: AppTranslations.transportation,
+          image: AppIcons.transport,
+          onTap: () {
+            Navigator.pushNamed(context, Routes.transportationRoute);
+          }),
       CategoryModel(title: AppTranslations.food, image: AppIcons.feeding),
       CategoryModel(
-          title: AppTranslations.entertainment, image: AppIcons.entertainment),
+          title: AppTranslations.entertainment,
+          image: AppIcons.entertainment,
+          onTap: () {
+            // Navigator.pushNamed(context, AppRoutes.entertainment);
+          }),
       CategoryModel(
           title: AppTranslations.otherServices,
           image: AppIcons.others,
