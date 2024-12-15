@@ -19,6 +19,7 @@ export 'package:travel_club/core/utils/dialogs.dart';
 export 'package:travel_club/config/routes/app_routes.dart';
 export 'package:travel_club/core/widgets/custom_screen.dart';
 export 'package:travel_club/core/widgets/custom_back_button.dart';
+export 'package:travel_club/core/widgets/show_loading_indicator.dart';
 
 
 

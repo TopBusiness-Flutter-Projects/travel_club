@@ -5,5 +5,10 @@ import 'transportation_state.dart';
 class TransportationCubit extends Cubit<TransportationState> {
   TransportationCubit(this.api) : super(TransportationInitial());
   TransportationRepoImpl api;
-  TextEditingController searchController = TextEditingController();
+  bool goOnly = true;
+
+  void changeGoOnly( bool value) {
+    goOnly = value;
+    emit(TransportationInitial());
+  }
 }

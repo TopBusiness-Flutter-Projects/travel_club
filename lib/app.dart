@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:travel_club/features/favourites/cubit/favourites_cubit.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
+import 'package:travel_club/features/location/cubit/location_cubit.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_cubit.dart';
 import 'package:travel_club/features/on_boarding/cubit/onboarding_cubit.dart';
+import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'config/routes/app_routes.dart';
 import 'config/themes/app_theme.dart';
 import 'core/utils/app_strings.dart';
@@ -65,6 +68,12 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<MyBookingsCubit>(),
+          ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<TransportationCubit>(),
+          ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<LocationCubit>(),
           ),
         ],
         child: GetMaterialApp(
