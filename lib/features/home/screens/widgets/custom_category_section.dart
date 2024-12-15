@@ -56,7 +56,7 @@ class CustomCategoryContainer extends StatelessWidget {
         width: getWidthSize(context) * 0.27,
         child: Padding(
           padding:
-              EdgeInsets.symmetric(horizontal: getWidthSize(context) * 0.06),
+              EdgeInsets.symmetric(horizontal: getWidthSize(context) * 0.01),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -65,7 +65,7 @@ class CustomCategoryContainer extends StatelessWidget {
                 height: getHeightSize(context) * 0.05,
               ),
               AutoSizeText(categoryModel.title,
-                  maxLines: 1, style: getMediumStyle(fontSize: 14.sp)),
+                  maxLines: 1, style: getMediumStyle(fontSize: 13.sp)),
             ],
           ),
         ),
