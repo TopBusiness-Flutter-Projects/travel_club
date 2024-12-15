@@ -65,6 +65,7 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
+
         case Routes.otpScreen:
           final bool isPass = settings.arguments as bool; // Expect an int index here
         return PageTransition(
