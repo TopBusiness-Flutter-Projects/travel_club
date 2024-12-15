@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   _startDelay() async {
     _timer = Timer(
-      const Duration(seconds: 8, milliseconds: 500),
+      const Duration(seconds: 3),
       () {
         _goNext();
       },
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen>
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('onBoarding') != null) {
       // TODO
-      if (prefs.getString('user') != null) {
+      if (prefs.getString('user') == null) {
         Navigator.pushReplacementNamed(context, Routes.mainRoute);
       } else {
         Navigator.pushNamedAndRemoveUntil(
