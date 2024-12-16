@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/api/base_api_consumer.dart';
 import 'package:travel_club/core/api/dio_consumer.dart';
-import 'package:travel_club/features/accommodation/cubit/details_accomendation_cubit.dart';
+import 'package:travel_club/features/accommodation/cubit/accomendation_cubit.dart';
 import 'package:travel_club/features/accommodation/data/repo/details_accomendation_repo_impl.dart';
 import 'package:travel_club/features/auth/cubit/cubit.dart';
 import 'package:travel_club/features/auth/data/login_repo_impl.dart';
@@ -55,7 +55,7 @@ Future<void> setup() async {
     () => AccountCubit(serviceLocator()),
   );
   serviceLocator.registerFactory(
-    () => DetailsAccomendationCubit(serviceLocator()),
+    () => AccomendationCubit(serviceLocator()),
   );
   serviceLocator.registerFactory(
     () => OtherServicesCubit(serviceLocator()),

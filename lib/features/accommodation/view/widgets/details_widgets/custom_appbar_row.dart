@@ -1,5 +1,5 @@
 
-import '../../../../core/exports.dart';
+import '../../../../../core/exports.dart';
 
 class CustomRow extends StatelessWidget {
   const CustomRow({super.key});
@@ -7,7 +7,7 @@ class CustomRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return     Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(3.0),
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -42,13 +42,6 @@ class CustomRow extends StatelessWidget {
                 color: AppColors.lightWhite,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(15), // Circular with rounded corners
-                // boxShadow: [
-                //   BoxShadow(
-                //     color: Colors.black.withOpacity(0.1),
-                //     blurRadius: 10,
-                //     offset: Offset(0, 4), // Positioning the shadow
-                //   ),
-                // ],
               ),
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
