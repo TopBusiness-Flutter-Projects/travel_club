@@ -60,12 +60,7 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-        //
-    //
-
-        case Routes.apply:
-      //
-      //
+     
       case Routes.apply:
         return PageTransition(
           child: const ApplyScreen(),
@@ -106,7 +101,7 @@ class AppRoutes {
         );
       case Routes.signUp:
         return PageTransition(
-          child: SignUpScreen(),
+          child: const SignUpScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
