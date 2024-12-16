@@ -8,6 +8,8 @@ import 'package:travel_club/features/splash/screens/splash_screen.dart';
 import 'package:travel_club/features/transportation/screens/transportation_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../features/accommodation/view/screens/accomendation_screen.dart';
+import '../../features/accommodation/view/screens/hotels_screen.dart';
 import '../../features/auth/view/screens/apply_screen.dart';
 import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
@@ -23,6 +25,8 @@ class Routes {
   static const String forgetPass = '/forgetPass';
   static const String otpScreen = '/otpScreen';
   static const String apply = '/apply';
+  static const String hotelsScreen = '/hotelsScreen';
+  static const String accomendation = '/accomendation';
   static const String detailsAccomendation = '/detailsAccomendation';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
   static const String otherServicesRoute = '/otherServicesRoute';
@@ -53,9 +57,22 @@ class AppRoutes {
         );
         //
     //
+
         case Routes.apply:
         return PageTransition(
           child: const ApplyScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );    case Routes.hotelsScreen:
+        return PageTransition(
+          child: const HotelsScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );   case Routes.accomendation:
+        return PageTransition(
+          child: const AccomendationScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

@@ -1,19 +1,24 @@
 import 'package:card_swiper/card_swiper.dart';
 
-import '../../../../core/exports.dart';
-import '../../cubit/details_accomendation_cubit.dart';
+import '../../../../../core/exports.dart';
+import '../../../cubit/accomendation_cubit.dart';
 
 class CustomSwiper extends StatelessWidget {
   const CustomSwiper({super.key});
 
   @override
   Widget build(BuildContext context) {
-   var cubit=context.read<DetailsAccomendationCubit>();
-   return BlocBuilder<DetailsAccomendationCubit, DetailsAccomendationState>(builder: (BuildContext context, state) {  return   Positioned(
+   var cubit=context.read<AccomendationCubit>();
+   return BlocBuilder<AccomendationCubit, AccomendationState>(builder: (BuildContext context, state) {  return   Positioned(
      child: SizedBox(
        height: getHeightSize(context) * 0.65,
        width: getWidthSize(context),
        child: Swiper(
+         // controller: ,
+         onIndexChanged: (index) {
+         //  => cubit.currentIndex = index
+       cubit.changeIndex(index);
+         },
          itemCount:cubit. imageUrls.length,
          itemBuilder: (BuildContext context, int index) {
            return Container(
