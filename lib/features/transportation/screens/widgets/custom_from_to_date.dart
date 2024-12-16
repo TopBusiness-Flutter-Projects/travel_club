@@ -17,36 +17,48 @@ class CustomFromToDate extends StatelessWidget {
             color: AppColors.lightWhite2,
             borderRadius: BorderRadius.circular(30.r),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: DatePickerField(
-                  selectedDate: cubit.fromDate!,
-                  onTap: () {
-                    cubit.onSelectedDate(true, context);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5.0),
-                child: SvgPicture.asset(
-                  AppIcons.line,
-                  height: 50.h,
-                  width: 20.w,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Expanded(
-                child: DatePickerField(
-                  selectedDate: cubit.toDate!,
-                  onTap: () {
-                    cubit.onSelectedDate(false, context);
-                  },
-                ),
-              ),
-            ],
-          ));
+          child: cubit.goOnly
+              ? Padding(
+                  padding: EdgeInsets.all(18.h),
+                  child: DatePickerField(
+                    selectedDate: cubit.singleDate!,
+                    onTap: () {
+                      cubit.onSelectedDateSingle(context: context);
+                    },
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: DatePickerField(
+                        selectedDate: cubit.fromDate!,
+                        onTap: () {
+                          cubit.onSelectedDate(
+                              isStartDate: true, context: context);
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5.h),
+                      child: SvgPicture.asset(
+                        AppIcons.line,
+                        height: 50.h,
+                        width: 20.w,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Expanded(
+                      child: DatePickerField(
+                        selectedDate: cubit.toDate!,
+                        onTap: () {
+                          cubit.onSelectedDate(
+                              isStartDate: false, context: context);
+                        },
+                      ),
+                    ),
+                  ],
+                ));
     });
   }
 }
