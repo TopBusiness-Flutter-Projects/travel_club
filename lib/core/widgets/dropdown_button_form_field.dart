@@ -1,60 +1,79 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
 
-class DropdownButtonFormFieldWidget extends StatefulWidget {
-  const DropdownButtonFormFieldWidget(
-      {super.key,
-      required this.items,
-      required this.title,
-      this.dataType,
-      required this.onChanged});
-
+class CustomDropdownButtonFormField extends StatelessWidget {
   final List<String> items;
-  final String title;
-  final String? dataType;
-  final void Function(String?)? onChanged;
-  @override
-  State<DropdownButtonFormFieldWidget> createState() =>
-      _DropdownButtonFormFieldWidgetState();
-}
+  final String? value;
+  final String? hint;
+  final ValueChanged<String?>? onChanged;
+  final FormFieldValidator<String>? validator;
 
-class _DropdownButtonFormFieldWidgetState
-    extends State<DropdownButtonFormFieldWidget> {
+  const CustomDropdownButtonFormField({
+    super.key,
+    required this.items,
+    this.value,
+    this.onChanged,
+    this.validator,
+    this.hint,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.0.sp),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            widget.title,
-            style: getBoldStyle(),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: DropdownButtonFormField<String>(
+        icon: Container(),
+        value: value,
+        decoration: InputDecoration(
+          hintText: hint ?? "اختر",
+          contentPadding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 5.h),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
+            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
           ),
-          SizedBox(
-            height: 10.h,
+          hintStyle: getRegularStyle(
+            color: AppColors.grey1,
+            fontSize: 15.sp,
+            fontHeight: 2,
           ),
-          SizedBox(
-            height: 60.h,
-            child: DropdownButtonFormField<String>(
-                value: widget.dataType,
-                decoration: InputDecoration(
-                  // labelText: widget.title,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                items: widget.items
-                    .map((option) => DropdownMenuItem(
-                          value: option,
-                          child: Text(option),
-                        ))
-                    .toList(),
-                onChanged: widget.onChanged),
+          errorStyle: getRegularStyle(color: AppColors.red),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
+            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
           ),
-        ],
+          disabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
+            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
+            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
+          ),
+          errorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
+            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
+          ),
+          focusedErrorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
+            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
+          ),
+          suffixIcon: Padding(
+            padding:
+                EdgeInsets.only(right: 8.w), // Adjust padding for alignment
+            child: Icon(
+              Icons.expand_more_rounded, // Suffix icon
+              color: AppColors.grey1,
+            ),
+          ),
+        ),
+        alignment: Alignment.bottomCenter,
+        items: items.map((String item) {
+          return DropdownMenuItem<String>(
+            value: item,
+            child: Text(item),
+          );
+        }).toList(),
+        onChanged: onChanged,
+        validator: validator,
       ),
     );
   }
