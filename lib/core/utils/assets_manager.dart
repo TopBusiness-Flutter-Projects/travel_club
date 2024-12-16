@@ -21,6 +21,7 @@ class ImageAssets {
   static const String container = '$imagePath/container.png';
   static const String forward = '$imagePath/forward.png';
   static const String map = '$imagePath/map.png';
+  static const String marker = '$imagePath/marker.png';
 
 
   // icons

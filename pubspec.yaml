@@ -48,6 +48,11 @@ dependencies:
   pinput: ^5.0.0
   flutter_rating: ^2.0.2
   flutter_staggered_grid_view:
+  geolocator: ^12.0.0
+  geocoding:
+  location: ^6.0.2
+  google_maps_flutter:
+  dotted_line: ^3.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

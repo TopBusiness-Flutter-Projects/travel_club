@@ -11,6 +11,8 @@ import 'package:travel_club/features/favourites/cubit/favourites_cubit.dart';
 import 'package:travel_club/features/favourites/data/repo/favourites_repo_impl.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
 import 'package:travel_club/features/home/data/repo/home_repo_impl.dart';
+import 'package:travel_club/features/location/cubit/location_cubit.dart';
+import 'package:travel_club/features/location/data/repo/location_repo_impl.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 import 'package:travel_club/features/main_screen/data/repo/main_repo_impl.dart';
 import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
@@ -61,6 +63,9 @@ Future<void> setup() async {
   serviceLocator.registerFactory(
     () => TransportationCubit(serviceLocator()),
   );
+  serviceLocator.registerFactory(
+    () => LocationCubit(serviceLocator()),
+  );
 //!-------------------------Declare Repo---------------------------
   serviceLocator.registerLazySingleton(() => LoginRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => MainRepoImpl(serviceLocator()));
@@ -76,6 +81,8 @@ Future<void> setup() async {
       .registerLazySingleton(() => OtherServicesRepoImpl(serviceLocator()));
   serviceLocator
       .registerLazySingleton(() => TransportationRepoImpl(serviceLocator()));
+  serviceLocator
+      .registerLazySingleton(() => LocationRepoImpl(serviceLocator()));
 
 //!-------------------------Declare Interceptors---------------------------
 
