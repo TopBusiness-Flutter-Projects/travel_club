@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_club/core/exports.dart';
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_strings.dart';
@@ -29,10 +30,7 @@ class CustomButton extends StatelessWidget {
           ),
           child: Text(
             title,
-            style: TextStyle(
-              color: AppColors.white,
-              fontFamily: AppStrings.fontFamily,
-            ),
+            style:getSemiBoldStyle(color: AppColors.white,fontSize: 14.sp)
           ),
         ),
       ),

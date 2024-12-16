@@ -25,7 +25,7 @@ class CustomHomeAppbar extends StatelessWidget {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(AppTranslations.welcome,
                 style: getMediumStyle(fontSize: 14.sp, color: AppColors.grey)),
-            Text("ابن الأكابر",
+            Text("نهوله",
                 style: getSemiBoldStyle(color: AppColors.blue, fontSize: 18.sp))
           ]),
         ),

@@ -17,6 +17,7 @@ import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
 import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
+import '../../features/booking/screens/booking_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -28,6 +29,7 @@ class Routes {
   static const String otpScreen = '/otpScreen';
   static const String apply = '/apply';
   static const String hotelsScreen = '/hotelsScreen';
+  static const String bookingAccomodation = '/bookingAccomodation';
   static const String accomendation = '/accomendation';
   static const String detailsAccomendation = '/detailsAccomendation';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
@@ -73,9 +75,17 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );   case Routes.accomendation:
+        );
+        case Routes.accomendation:
         return PageTransition(
           child: const AccomendationScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.bookingAccomodation:
+        return PageTransition(
+          child: const AccommodationBooking(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
