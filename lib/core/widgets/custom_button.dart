@@ -15,9 +15,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: getWidthSize(context) / 12,
-          vertical: getWidthSize(context) / 32),
+      padding: EdgeInsets.symmetric(vertical: getWidthSize(context) / 32),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(getWidthSize(context) / 12),

@@ -22,7 +22,7 @@ class ImageAssets {
   static const String forward = '$imagePath/forward.png';
   static const String map = '$imagePath/map.png';
   static const String marker = '$imagePath/marker.png';
-
+  static const String fromLocation = '$imagePath/fromLocation.png';
 
   // icons
   static const String phoneIcon = '$iconsPath/phone.svg';
@@ -54,14 +54,16 @@ class AppIcons {
   static const String star = '$iconsPath/star.svg';
   static const String filter = '$iconsPath/filter.svg';
 
-  static const String key= '$iconsPath/key.svg';
-  static const String phone= '$iconsPath/phone.svg';
-  static const String home= '$iconsPath/home.svg';
-  static const String myBookings= '$iconsPath/booking.svg';
-  static const String favourites= '$iconsPath/favourite.svg';
-  static const String share= '$iconsPath/share.svg';
-  static const String myAccount= '$iconsPath/account.svg';
-  static const String facebook= '$iconsPath/facebook.svg';
-  static const String google= '$iconsPath/google_icon.svg';
+  static const String key = '$iconsPath/key.svg';
+  static const String phone = '$iconsPath/phone.svg';
+  static const String home = '$iconsPath/home.svg';
+  static const String myBookings = '$iconsPath/booking.svg';
+  static const String favourites = '$iconsPath/favourite.svg';
+  static const String share = '$iconsPath/share.svg';
+  static const String myAccount = '$iconsPath/account.svg';
+  static const String facebook = '$iconsPath/facebook.svg';
+  static const String google = '$iconsPath/google_icon.svg';
+  static const String calendar = '$iconsPath/calendar.svg';
+  static const String line = '$iconsPath/line.svg';
 
 }
