@@ -73,6 +73,7 @@ class AppTranslations {
   static String to = 'to'.tr();
   static String chooseTheBestOption = 'choose_the_best_option'.tr();
   static String cancelFree = 'cancel_free'.tr();
+  static String bookNow = 'book_now'.tr();
   static String withoutTax = 'without_tax'.tr();
   static String selectGoingAndReturn = 'select_going_and_return'.tr();
   static String favoriteChoice = 'favorite_choice'.tr();

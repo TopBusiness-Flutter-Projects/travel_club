@@ -44,6 +44,7 @@ class AppIcons {
   static const String order = '$iconsPath/order.svg';
   static const String map = '$iconsPath/map.svg';
   static const String forward = '$iconsPath/forward.svg';
+  static const String correct = '$iconsPath/correct.svg';
   static const String notification = '$iconsPath/notification.svg';
   static const String setting = '$iconsPath/settings.svg';
   static const String superMarker = '$iconsPath/super_market.svg';
@@ -53,6 +54,7 @@ class AppIcons {
   static const String search = '$iconsPath/search.svg';
   static const String star = '$iconsPath/star.svg';
   static const String filter = '$iconsPath/filter.svg';
+  static const String bookingHotel = '$iconsPath/booking_accomodation.svg';
 
   static const String key = '$iconsPath/key.svg';
   static const String phone = '$iconsPath/phone.svg';

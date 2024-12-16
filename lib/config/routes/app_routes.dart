@@ -10,6 +10,7 @@ import 'package:travel_club/features/transportation/screens/transportation_map_s
 import 'package:travel_club/features/transportation/screens/transportation_menu_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../features/accommodation/booking/screens/booking_screen.dart';
 import '../../features/accommodation/view/screens/accomendation_screen.dart';
 import '../../features/accommodation/view/screens/hotels_screen.dart';
 import '../../features/auth/view/screens/apply_screen.dart';
@@ -17,7 +18,6 @@ import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
 import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
-import '../../features/booking/screens/booking_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -41,7 +41,6 @@ class Routes {
 
 class AppRoutes {
   static String route = '';
-
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.initialRoute:
@@ -62,7 +61,6 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-     
       case Routes.apply:
         return PageTransition(
           child: const ApplyScreen(),
