@@ -5,12 +5,13 @@ import '../../../../../core/exports.dart';
 import '../../../cubit/accomendation_cubit.dart';
 class HotelsModel {
   final String title;
-  final String discription;
+  final String? discription;
   final String image;
   final int rate;
+  final bool ?isFavorite;
   final void Function()? onTap;
 
-  HotelsModel(  {required this.title,required this.rate,required this.discription, required this.image, this.onTap});
+  HotelsModel(   {required this.title,required this.rate,this.isFavorite=true, this.discription, required this.image, this.onTap});
 }
 // class AccomendationRating extends StatelessWidget {
 //    AccomendationRating({super.key,required this.hotelsModel});
@@ -60,6 +61,7 @@ class CustomWidgetRating extends StatelessWidget {
                                 hotelsModel?.image.toString()??""),
                             fit: BoxFit.cover)),
                   ),
+                  hotelsModel?.isFavorite==true?
                   Positioned(
                       top: 4.h,
                       right: 6.w,
@@ -72,7 +74,7 @@ class CustomWidgetRating extends StatelessWidget {
                           size: 25.sp,
                         ),
                       )
-                  )
+                  ):Container()
                 ],
               ),
               //  SizedBox(width: 5.w,),
@@ -99,7 +101,7 @@ class CustomWidgetRating extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 2.h,),
-
+                      hotelsModel?.discription==null?SizedBox():
                       Text(hotelsModel?.discription.toString()??"",style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
                     ],
                   ),

@@ -10,7 +10,10 @@ import 'package:travel_club/features/transportation/screens/transportation_map_s
 import 'package:travel_club/features/transportation/screens/transportation_menu_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../features/accommodation/booking/screens/booking_screen.dart';
+import '../../features/accommodation/view/booking_accommodation/screens/booking_accommodation_screen.dart';
+import '../../features/accommodation/view/booking_accommodation/screens/done_payment.dart';
+import '../../features/accommodation/view/booking_accommodation/screens/payment_process_screen.dart';
+import '../../features/accommodation/view/booking_accommodation/screens/second_booking_accommodation_screen.dart';
 import '../../features/accommodation/view/screens/accomendation_screen.dart';
 import '../../features/accommodation/view/screens/hotels_screen.dart';
 import '../../features/auth/view/screens/apply_screen.dart';
@@ -28,6 +31,8 @@ class Routes {
   static const String forgetPass = '/forgetPass';
   static const String otpScreen = '/otpScreen';
   static const String apply = '/apply';
+  static const String donePayment = '/donePayment';
+  static const String payment = '/payment';
   static const String hotelsScreen = '/hotelsScreen';
   static const String bookingAccomodation = '/bookingAccomodation';
   static const String accomendation = '/accomendation';
@@ -35,6 +40,7 @@ class Routes {
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
   static const String otherServicesRoute = '/otherServicesRoute';
   static const String transportationRoute = '/transportationRoute';
+  static const String secondBookingAccommodation = '/secondBookingAccommodation';
   static const String transportationMenuRoute = '/transportationMenuRoute';
   static const String transportationBookingDetailsRoute = '/transportationBookingDetailsRoute';
 }
@@ -57,6 +63,12 @@ class AppRoutes {
       case Routes.detailsAccomendation:
         return PageTransition(
           child: const DetailsAccommendation(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );  case Routes.donePayment:
+        return PageTransition(
+          child: const DonePaymentScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -158,6 +170,14 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
+
+        case Routes.secondBookingAccommodation:
+        return PageTransition(
+          child: const SecondAccommodationBooking(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
      
       case Routes.transportationBookingDetailsRoute:
         return PageTransition(
@@ -166,7 +186,14 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-     
+       case Routes.payment:
+        return PageTransition(
+          child:PaymentProcessScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+
       // case Routes.resultOfLessonExam:
       //   ResponseOfApplyLessonExmamData model =
       //       settings.arguments as ResponseOfApplyLessonExmamData;

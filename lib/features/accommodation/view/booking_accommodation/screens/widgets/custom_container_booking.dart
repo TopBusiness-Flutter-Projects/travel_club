@@ -1,6 +1,7 @@
-import '../../../../../core/exports.dart';
-import '../../../../transportation/cubit/transportation_cubit.dart';
-import '../../../cubit/accomendation_cubit.dart';
+import '../../../../../../core/exports.dart';
+import '../../../../../transportation/cubit/transportation_cubit.dart';
+import '../../../../cubit/accomendation_cubit.dart';
+
 import 'custom_rooms_widget.dart';
 import 'custom_rounded_button.dart';
 
@@ -53,9 +54,11 @@ class CustomContainerBooking extends StatelessWidget {
                         children: [
                           Text("السعر ل ٤ ليالي",style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
                           Text("5000 جنيه مصري",style: getSemiBoldStyle(fontSize: 16.sp,color: AppColors.primary),),
-                          Text("غير شامل الضريبة",style: getRegularStyle(fontSize: 12.sp,color:AppColors.grey ),),
+                          Text(AppTranslations.withoutTax,style: getRegularStyle(fontSize: 12.sp,color:AppColors.grey ),),
                         ],),
-                      CustomRoundedButton()                          ],)
+                      CustomRoundedButton(onTap: (){
+                        Navigator.pushNamed(context, Routes.secondBookingAccommodation);
+                      },)                          ],)
                 ],
               ),
             )

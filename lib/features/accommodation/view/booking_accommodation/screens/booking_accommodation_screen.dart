@@ -1,12 +1,12 @@
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/features/accommodation/booking/screens/widgets/custom_container_booking.dart';
-import '../../../../core/utils/app_fonts.dart';
-import '../../../../core/utils/app_translations.dart';
-import '../../../transportation/cubit/transportation_cubit.dart';
-import '../../../transportation/screens/widgets/custom_from_to_date.dart';
-import '../../cubit/accomendation_cubit.dart';
+import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_container_booking.dart';
+
+import '../../../../transportation/cubit/transportation_cubit.dart';
+import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
+import '../../../cubit/accomendation_cubit.dart';
+
 
 class AccommodationBooking extends StatefulWidget {
   const AccommodationBooking({super.key});
@@ -14,7 +14,6 @@ class AccommodationBooking extends StatefulWidget {
   @override
   State<AccommodationBooking> createState() => _AccommodationBookingState();
 }
-
 class _AccommodationBookingState extends State<AccommodationBooking> {
   @override
   void initState() {

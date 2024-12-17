@@ -1,4 +1,4 @@
-import '../../../../../core/exports.dart';
+import '../../../../../../core/exports.dart';
 
 class CustomRoomsWidget extends StatelessWidget {
   const CustomRoomsWidget({super.key});

@@ -4,8 +4,12 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 import 'package:travel_club/features/main_screen/cubit/state.dart';
 
+import '../../home/screens/home_body.dart';
+import '../../home/screens/widgets/custom_appbar.dart';
+import '../../home/screens/widgets/custom_category_section.dart';
 import '../cubit/my_bookings_cubit.dart';
 import '../cubit/my_bookings_state.dart';
+import 'my_booking_body.dart';
 
 class MyBookingsScreen extends StatefulWidget {
   const MyBookingsScreen({super.key});
@@ -19,8 +23,25 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
     MyBookingsCubit cubit = context.read<MyBookingsCubit>();
     return BlocBuilder<MyBookingsCubit, MyBookingsState>(
       builder: (context, state) {
-        return Center(
-          child: Text('My Bookings Screen'),
+        return SizedBox(
+          height: getHeightSize(context),
+          width: getWidthSize(context),
+          child: Stack(
+            children: [
+              Positioned(
+                  top: 0,
+                  child: Image.asset(
+                    ImageAssets.mask,
+                    fit: BoxFit.cover,
+                    height: getHeightSize(context) * 0.3,
+                    width: getWidthSize(context),
+                  )),
+              SizedBox(
+                  height: getHeightSize(context),
+                  width: getWidthSize(context),
+                  child: const Bookingbody())
+            ],
+          ),
         );
       },
     );
