@@ -89,5 +89,5 @@ class TransportationCubit extends Cubit<TransportationState> {
         .format(selectedDate); // تاريخ اليوم كقيمة افتراضية
   }
 
-  int seatColumnCount = 11;
+  int seatRowsCount =11;
 }

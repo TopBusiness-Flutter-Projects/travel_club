@@ -121,12 +121,12 @@ class CustomSeatCatalogeWidget extends StatelessWidget {
                   child: ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: cubit.seatColumnCount,
+                      itemCount: cubit.seatRowsCount,
                       itemBuilder: (context, index) => CustomSeatsRow(
                             columnNumber: index,
-                            seatType: index == cubit.seatColumnCount - 3
+                            seatType: index == cubit.seatRowsCount - 3
                                 ? SeatType.two
-                                : index == cubit.seatColumnCount - 1
+                                : index == cubit.seatRowsCount - 1
                                     ? SeatType.five
                                     : SeatType.four,
                           )),
@@ -165,7 +165,7 @@ class CustomSeatsRow extends StatelessWidget {
           children: List.generate(5, (index) {
             int currentRow = columnNumber;
 
-            int rowIndex = currentRow == cubit.seatColumnCount - 2
+            int rowIndex = currentRow == cubit.seatRowsCount - 2
                 ? index + currentRow * 5 - currentRow - 2
                 : index + currentRow * 5 - currentRow;
             if (seatType == SeatType.two) {
