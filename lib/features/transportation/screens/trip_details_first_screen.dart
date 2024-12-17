@@ -43,92 +43,100 @@ class CustomSeatCatalogeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(getHorizontalPadding(context)),
-      child: CustomContainerWithShadow(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: AppColors.lightWhite,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(
-                      25.r), // Circular with rounded corners
+    TransportationCubit cubit = context.read<TransportationCubit>();
+    return BlocBuilder<TransportationCubit, TransportationState>(
+        builder: (context, state) {
+      return Padding(
+        padding: EdgeInsets.all(getHorizontalPadding(context)),
+        child: CustomContainerWithShadow(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.lightWhite,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(
+                        25.r), // Circular with rounded corners
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Row(children: [
+                              Image.asset(ImageAssets.seat,
+                                  color: AppColors.samawy,
+                                  width: getWidthSize(context) * 0.06),
+                              SizedBox(width: getWidthSize(context) * 0.02),
+                              Flexible(
+                                child: AutoSizeText(
+                                  AppTranslations.busy,
+                                  maxLines: 2,
+                                  style: getMediumStyle(
+                                      fontSize: 14.sp, color: AppColors.blue),
+                                ),
+                              )
+                            ]),
+                          ),
+                          Expanded(
+                            child: Row(children: [
+                              Image.asset(ImageAssets.seat,
+                                  color: AppColors.primary,
+                                  width: getWidthSize(context) * 0.06),
+                              SizedBox(width: getWidthSize(context) * 0.02),
+                              Flexible(
+                                child: AutoSizeText(
+                                  maxLines: 2,
+                                  AppTranslations.available,
+                                  style: getMediumStyle(
+                                      fontSize: 14.sp, color: AppColors.blue),
+                                ),
+                              )
+                            ]),
+                          ),
+                          Expanded(
+                            child: Row(children: [
+                              Image.asset(ImageAssets.seat,
+                                  color: AppColors.green,
+                                  width: getWidthSize(context) * 0.06),
+                              SizedBox(width: getWidthSize(context) * 0.02),
+                              Flexible(
+                                child: AutoSizeText(
+                                  maxLines: 2,
+                                  AppTranslations.yourSeat,
+                                  style: getMediumStyle(
+                                      fontSize: 14.sp, color: AppColors.blue),
+                                ),
+                              )
+                            ]),
+                          ),
+                        ]),
+                  ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Row(children: [
-                            Image.asset(ImageAssets.seat,
-                                color: AppColors.samawy,
-                                width: getWidthSize(context) * 0.06),
-                            SizedBox(width: getWidthSize(context) * 0.02),
-                            Flexible(
-                              child: AutoSizeText(
-                                AppTranslations.busy,
-                                maxLines: 2,
-                                style: getMediumStyle(
-                                    fontSize: 14.sp, color: AppColors.blue),
-                              ),
-                            )
-                          ]),
-                        ),
-                        Expanded(
-                          child: Row(children: [
-                            Image.asset(ImageAssets.seat,
-                                color: AppColors.primary,
-                                width: getWidthSize(context) * 0.06),
-                            SizedBox(width: getWidthSize(context) * 0.02),
-                            Flexible(
-                              child: AutoSizeText(
-                                maxLines: 2,
-                                AppTranslations.available,
-                                style: getMediumStyle(
-                                    fontSize: 14.sp, color: AppColors.blue),
-                              ),
-                            )
-                          ]),
-                        ),
-                        Expanded(
-                          child: Row(children: [
-                            Image.asset(ImageAssets.seat,
-                                color: AppColors.green,
-                                width: getWidthSize(context) * 0.06),
-                            SizedBox(width: getWidthSize(context) * 0.02),
-                            Flexible(
-                              child: AutoSizeText(
-                                maxLines: 2,
-                                AppTranslations.yourSeat,
-                                style: getMediumStyle(
-                                    fontSize: 14.sp, color: AppColors.blue),
-                              ),
-                            )
-                          ]),
-                        ),
-                      ]),
-                ),
-              ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 11,
-                  itemBuilder: (context, index) => CustomSeatsRow(
-                        seatType: index == 8
-                            ? SeatType.two
-                            : index == 10
-                                ? SeatType.five
-                                : SeatType.four,
-                      ))
-            ],
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: cubit.seatColumnCount,
+                      itemBuilder: (context, index) => CustomSeatsRow(
+                            columnNumber: index,
+                            seatType: index == cubit.seatColumnCount - 3
+                                ? SeatType.two
+                                : index == cubit.seatColumnCount - 1
+                                    ? SeatType.five
+                                    : SeatType.four,
+                          )),
+                )
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 
@@ -143,43 +151,55 @@ class CustomSeatsRow extends StatelessWidget {
   const CustomSeatsRow({
     super.key,
     this.seatType = SeatType.four,
+    required this.columnNumber,
   });
   final SeatType seatType;
+  final int columnNumber;
   @override
   Widget build(BuildContext context) {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(5, (index) {
-          if (seatType == SeatType.two) {
-            return index == 0 || index == 1
-                ? CustomSeat(
-                    isAvailable: true,
-                    isSelected: false,
-                    seatNumber: index.toString(),
-                  )
-                : SizedBox(
-                    width: getWidthSize(context) * 0.13,
-                  );
-          } else if (seatType == SeatType.five) {
-            return CustomSeat(
-              isAvailable: true,
-              isSelected: false,
-              seatNumber: index.toString(),
-            );
-          } else if (seatType == SeatType.four) {
-            return index == 2
-                ? SizedBox(
-                    width: getWidthSize(context) * 0.13,
-                  )
-                : CustomSeat(
-                    isAvailable: true,
-                    isSelected: false,
-                    seatNumber: index.toString(),
-                  );
-          } else {
-            return Container();
-          }
-        }));
+    TransportationCubit cubit = context.read<TransportationCubit>();
+    return BlocBuilder<TransportationCubit, TransportationState>(
+        builder: (context, state) {
+      return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: List.generate(5, (index) {
+            int currentRow = columnNumber;
+
+            int rowIndex = currentRow == cubit.seatColumnCount - 2
+                ? index + currentRow * 5 - currentRow - 2
+                : index + currentRow * 5 - currentRow;
+            if (seatType == SeatType.two) {
+              return index == 0 || index == 1
+                  ? CustomSeat(
+                      isAvailable: true,
+                      isSelected: false,
+                      seatNumber: '${rowIndex + 1}',
+                    )
+                  : SizedBox(
+                      width: getWidthSize(context) * 0.13,
+                    );
+            } else if (seatType == SeatType.five) {
+              return CustomSeat(
+                isAvailable: true,
+                isSelected: false,
+                seatNumber: '${rowIndex - 1}',
+              );
+            } else if (seatType == SeatType.four) {
+              return index == 2
+                  ? SizedBox(
+                      width: getWidthSize(context) * 0.13,
+                    )
+                  : CustomSeat(
+                      isAvailable: true,
+                      isSelected: false,
+                      seatNumber: index > 2 ? '${rowIndex}' : '${rowIndex + 1}',
+                      // seatNumber: index > 2 ? '${index}' : '${index + 1}',
+                    );
+            } else {
+              return Container();
+            }
+          }));
+    });
   }
 }
 
