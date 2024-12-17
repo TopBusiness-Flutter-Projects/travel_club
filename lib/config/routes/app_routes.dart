@@ -6,8 +6,10 @@ import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/other_services/screens/other_services_screen.dart';
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
 import 'package:travel_club/features/transportation/screens/booking_details_screen.dart';
+import 'package:travel_club/features/transportation/screens/search_result_screen%20.dart';
 import 'package:travel_club/features/transportation/screens/transportation_map_screen.dart';
 import 'package:travel_club/features/transportation/screens/transportation_menu_screen.dart';
+import 'package:travel_club/features/transportation/screens/trip_details_first_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../features/accommodation/view/screens/accomendation_screen.dart';
@@ -34,7 +36,14 @@ class Routes {
   static const String otherServicesRoute = '/otherServicesRoute';
   static const String transportationRoute = '/transportationRoute';
   static const String transportationMenuRoute = '/transportationMenuRoute';
-  static const String transportationBookingDetailsRoute = '/transportationBookingDetailsRoute';
+  static const String transportationBookingDetailsRoute =
+      '/transportationBookingDetailsRoute';
+  static const String transportationSearchResultRoute =
+      '/transportationSearchResultRoute';
+  static const String tripDetailsfirstRoute =
+      '/tripDetailsfirstRoute';
+  static const String tripDetailsSecondRoute =
+      '/tripDetailsSecondRoute';
 }
 
 class AppRoutes {
@@ -60,20 +69,22 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-     
+
       case Routes.apply:
         return PageTransition(
           child: const ApplyScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );    case Routes.hotelsScreen:
+        );
+      case Routes.hotelsScreen:
         return PageTransition(
           child: const HotelsScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );   case Routes.accomendation:
+        );
+      case Routes.accomendation:
         return PageTransition(
           child: const AccomendationScreen(),
           type: PageTransitionType.fade,
@@ -142,7 +153,7 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-     
+
       case Routes.transportationMenuRoute:
         return PageTransition(
           child: const TransportationMenuScreen(),
@@ -150,7 +161,7 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-     
+
       case Routes.transportationBookingDetailsRoute:
         return PageTransition(
           child: const TransportationBookingDetailsScreen(),
@@ -158,7 +169,22 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-     
+
+      case Routes.transportationSearchResultRoute:
+        return PageTransition(
+          child: const TransportationSearchResultScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.tripDetailsfirstRoute:
+        return PageTransition(
+          child: const TripDetailsFirstScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+
       // case Routes.resultOfLessonExam:
       //   ResponseOfApplyLessonExmamData model =
       //       settings.arguments as ResponseOfApplyLessonExmamData;

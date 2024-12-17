@@ -23,6 +23,12 @@ class TransportationBookingDetailsScreen extends StatefulWidget {
 class _TransportationBookingDetailsScreenState
     extends State<TransportationBookingDetailsScreen> {
   @override
+  void initState() {
+    context.read<TransportationCubit>().goOnly = true;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     TransportationCubit cubit = context.read<TransportationCubit>();
     return BlocBuilder<TransportationCubit, TransportationState>(
@@ -47,7 +53,10 @@ class _TransportationBookingDetailsScreenState
                     Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: getVerticalPadding(context)),
-                      child: Text(AppTranslations.selectGoingAndReturn,
+                      child: Text(
+                          cubit.goOnly
+                              ? AppTranslations.selectGoing
+                              : AppTranslations.selectGoingAndReturn,
                           style: getMediumStyle(fontSize: 14.sp)),
                     ),
                     CustomFromToDate(),
@@ -56,7 +65,10 @@ class _TransportationBookingDetailsScreenState
                     ),
                     CustomButton(
                         title: AppTranslations.transportationResults,
-                        onTap: () {})
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, Routes.transportationSearchResultRoute);
+                        })
                   ]),
             ),
           ));

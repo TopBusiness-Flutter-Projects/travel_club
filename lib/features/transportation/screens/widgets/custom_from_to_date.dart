@@ -32,7 +32,7 @@ class CustomFromToDate extends StatelessWidget {
                   children: [
                     Expanded(
                       child: DatePickerField(
-                        selectedDate: cubit.fromDate!,
+                        selectedDate: cubit.fromDate,
                         onTap: () {
                           cubit.onSelectedDate(
                               isStartDate: true, context: context);

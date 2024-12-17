@@ -75,6 +75,7 @@ class AppTranslations {
   static String cancelFree = 'cancel_free'.tr();
   static String withoutTax = 'without_tax'.tr();
   static String selectGoingAndReturn = 'select_going_and_return'.tr();
+  static String selectGoing = 'select_going'.tr();
   static String favoriteChoice = 'favorite_choice'.tr();
   static String changeChoice = 'change_choice'.tr();
   static String paymentDetails = 'payment_details'.tr();

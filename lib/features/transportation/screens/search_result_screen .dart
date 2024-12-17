@@ -7,8 +7,10 @@ import 'package:travel_club/features/transportation/cubit/transportation_state.d
 
 import 'widgets/custom_booked_company_container.dart';
 import 'widgets/custom_from_to_date.dart';
+import 'widgets/custom_from_to_details_yellow_container.dart';
 import 'widgets/custom_from_to_section.dart';
 import 'widgets/custom_go_back_container.dart';
+import 'widgets/custom_search_result_container.dart';
 
 class TransportationSearchResultScreen extends StatefulWidget {
   const TransportationSearchResultScreen({super.key});
@@ -25,38 +27,25 @@ class _TransportationSearchResultScreenState
     return BlocBuilder<TransportationCubit, TransportationState>(
         builder: (context, state) {
       return CustomScreen(
-          appbarTitle: AppTranslations.bookingDetails,
-          body: SingleChildScrollView(
-            child: Padding(
+          appbarTitle: AppTranslations.searchResults,
+          body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Padding(
               padding: EdgeInsets.all(getHorizontalPadding(context)),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CustomBookedCompanyContainer(),
-                    SizedBox(
-                      height: getVerticalPadding(context),
-                    ),
-                    const CustomGoBackContainer(),
-                    SizedBox(
-                      height: getVerticalPadding(context),
-                    ),
-                    CustomFomToSection(),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: getVerticalPadding(context)),
-                      child: Text(AppTranslations.selectGoingAndReturn,
-                          style: getMediumStyle(fontSize: 14.sp)),
-                    ),
-                    CustomFromToDate(),
-                    SizedBox(
-                      height: getVerticalPadding(context),
-                    ),
-                    CustomButton(
-                        title: AppTranslations.transportationResults,
-                        onTap: () {})
-                  ]),
+              child: CustomFromToDetails(cubit: cubit),
             ),
-          ));
+            Expanded(
+              child: ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, Routes.tripDetailsfirstRoute);
+                      },
+                      child: CustomSearchResultContainer()),
+                  separatorBuilder: (context, index) => SizedBox(height: 20.h),
+                  itemCount: 5),
+            )
+          ]));
     });
   }
 }

@@ -23,6 +23,7 @@ class ImageAssets {
   static const String map = '$imagePath/map.png';
   static const String marker = '$imagePath/marker.png';
   static const String fromLocation = '$imagePath/fromLocation.png';
+  static const String seat = '$imagePath/seat.png';
 
   // icons
   static const String phoneIcon = '$iconsPath/phone.svg';
@@ -65,5 +66,6 @@ class AppIcons {
   static const String google = '$iconsPath/google_icon.svg';
   static const String calendar = '$iconsPath/calendar.svg';
   static const String line = '$iconsPath/line.svg';
+  static const String bus = '$iconsPath/bus.svg';
 
 }
