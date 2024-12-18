@@ -48,7 +48,8 @@ class _SecondAccommodationBookingState extends State<SecondAccommodationBooking>
                 CustomFromToDate(),
                 SizedBox(height: 20.h,),
                 //custom widget rating hotel
-                CustomWidgetRating(hotelsModel: HotelsModel(title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 ,isFavorite: false, image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+                CustomWidgetRating(hotelsModel: HotelsModel(title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 ,isFavorite: false,
+                    image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
                     onTap: (){
                       Navigator.pushNamed(context, Routes.detailsAccomendation);
                     }),),

@@ -88,11 +88,12 @@
   "booking_success_message": "تم الانتهاء من الحجز بنجاح ورقم المرجعي للحجز الخاص بك هو ",
   "go_to_bookings": "الذهاب لحجوزاتي",
   "pay_now": "ادفع الان",
-
+  "payment_has_been_made": "تم الدفع ",
   "locationRequired": "مطلوب إذن تحديد الموقع",
   "openSettings": "فتح الإعدادات",
   "locationDescribtion": "تم رفض إذن تحديد الموقع بشكل دائم. يُرجى تمكينه في الإعدادات للمتابعة.",
   "cancel": "الغاء",
+  "cancel_booking": "الغاء الحجز",
   "tranportation_results": "نتائج المواصلات",
   "companies_menu": "قائمة الشركات",
   "person_rate_company": " فرد قيم الشركة",
@@ -112,10 +113,26 @@
   "ticket_price": "سعر التذكرة",
   "quantity": "الكمية",
   "total_price": "السعر الكلي",
+  "price_for": "السعر ل",
   "ticket": "تذكرة",
   "book_now": "أحجز الان",
 
   "": "",
+  "number_booking": "الرقم المرجعي للحجز",
+  "experience_evaluation": "تقييم التجربة",
+  "details_booking": "تفاصيل الحجز",
+  "send_rate": "ارسال تقيمك",
+  "rate_experince": "تقييم تجربتك",
+  "how_rate_experience_service": "كم تقيم التجربة في نظافة المكان",
+  "how_rate_experience_clean": "كم تقيم الخدمه بالمكان",
+  "how_rate_experience_recommend": "كم نسبه ترشيحك للمكان لاشخاص اخرين؟",
+  "how_rate_experience_food": "كم تقيمك لخدمه الطعام ؟",
+  "write_comment": "اكتب تعليقا عن زيارتك",
+  "a_morning": "صباحا",
+  "food_bookings": "حجوزات الطعام",
+  "accommodation_bookings": "حجوزات الاقامة",
+  "tickets_price": " سعر التذاكر",
+
   "lasss": ""
 }
 

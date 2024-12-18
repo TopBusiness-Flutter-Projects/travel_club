@@ -8,10 +8,10 @@ class MyBookingsCubit extends Cubit<MyBookingsState> {
   MyBookingsRepoImpl api;
   int selcetedIndex=0;
   List<String>Catogries=[
-    "حجوزات الاقامه",
+    AppTranslations.accommodationBookings,
     AppTranslations.transportation,
-    "حجزات الطعام"
-  ];
+    AppTranslations.foodBookings
+      ];
 void changeContainer(int index){
   selcetedIndex=index;
   emit(IndexChanged());

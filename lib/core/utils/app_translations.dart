@@ -11,11 +11,14 @@ class AppTranslations {
   static String writeNewPass = 'write_new_pass'.tr();
   static String writePass = 'write_pass'.tr();
   static String newPass = 'new_pass'.tr();
+  static String foodBookings = 'food_bookings'.tr();
+  static String accommodationBookings = 'accommodation_bookings'.tr();
   static String phone = 'phone'.tr();
   static String writePhone = 'write_phone'.tr();
   static String pass = 'pass'.tr();
   static String confirmNewPass = 'confirm_new_pass'.tr();
   static String welcome = 'welcome'.tr();
+  static String morning = 'a_morning'.tr();
   static String accommodation = 'accommodation'.tr();
   static String transportation = 'transportation'.tr();
   static String food = 'food'.tr();
@@ -68,8 +71,11 @@ class AppTranslations {
   static String nearest = 'nearest'.tr();
   static String orderResults = 'order_results'.tr();
   static String booking = 'booking'.tr();
+  static String detailsBooking = 'details_booking'.tr();
+  static String ExperienceEvaluation = 'experience_evaluation'.tr();
   static String selectArrivalAndDeparture = 'select_arrival_and_departure'.tr();
   static String from = 'from'.tr();
+  static String paymentHasBeenMade = 'payment_has_been_made'.tr();
   static String to = 'to'.tr();
   static String chooseTheBestOption = 'choose_the_best_option'.tr();
   static String cancelFree = 'cancel_free'.tr();
@@ -88,6 +94,8 @@ class AppTranslations {
   static String completePayment = 'complete_payment'.tr();
   static String paymentProcess = 'payment_process'.tr();
   static String bookingSuccess = 'booking_success'.tr();
+  static String numberBooking = 'number_booking'.tr();
+  static String priceFor = 'price_for'.tr();
   static String bookingSuccessMessage = 'booking_success_message'.tr();
   static String goToBookings = 'go_to_bookings'.tr();
   static String payNow = 'pay_now'.tr();
@@ -115,4 +123,13 @@ class AppTranslations {
   static String quantity = 'quantity'.tr();
   static String totalPrice = 'total_price'.tr();
   static String ticket = 'ticket'.tr();
+  static String cancelBooking = 'cancel_booking'.tr();
+  static String sendRate = 'send_rate'.tr();
+  static String howRateExperienceService = 'how_rate_experience_service'.tr();
+  static String howRateExperienceClean = 'how_rate_experience_clean'.tr();
+  static String howRateExperienceRecommend = 'how_rate_experience_recommend'.tr();
+  static String howRateExperienceFood = 'how_rate_experience_food'.tr();
+  static String writeComment = 'write_comment'.tr();
+  static String rateExperince = 'rate_experince'.tr();
+  static String ticketsPrice = 'tickets_price'.tr();
 }

@@ -4,8 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
 
 class CustomRoundedButton extends StatelessWidget {
-   CustomRoundedButton({super.key, this.onTap});
+   CustomRoundedButton({super.key, this.onTap,this.title});
   void Function()? onTap;
+  String ?title;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,7 +23,7 @@ class CustomRoundedButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            AppTranslations.bookNow,
+         title ??  AppTranslations.bookNow,
             style: TextStyle(
               color: Colors.blue, // Text color
               fontSize: 18, // Text size

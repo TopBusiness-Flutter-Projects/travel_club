@@ -21,6 +21,7 @@ import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
 import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
+import '../../features/my_bookings/view/screens/accommodation_booking/screens/details_booking_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -34,6 +35,7 @@ class Routes {
   static const String donePayment = '/donePayment';
   static const String payment = '/payment';
   static const String hotelsScreen = '/hotelsScreen';
+  static const String detailsBooking = '/detailsBooking';
   static const String bookingAccomodation = '/bookingAccomodation';
   static const String accomendation = '/accomendation';
   static const String detailsAccomendation = '/detailsAccomendation';
@@ -63,6 +65,12 @@ class AppRoutes {
       case Routes.detailsAccomendation:
         return PageTransition(
           child: const DetailsAccommendation(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );   case Routes.detailsBooking:
+        return PageTransition(
+          child: const DetailsBooking(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -142,8 +150,10 @@ class AppRoutes {
         );
 
       case Routes.mainRoute:
+        // final int index =
+        // settings.arguments as int; // Expect an int
         return PageTransition(
-          child: const MainScreen(),
+          child:  MainScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

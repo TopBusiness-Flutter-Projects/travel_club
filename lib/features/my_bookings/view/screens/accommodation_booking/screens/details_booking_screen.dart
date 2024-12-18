@@ -1,0 +1,100 @@
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/widgets/custom_button.dart';
+import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/payment_widget.dart';
+import 'package:travel_club/features/my_bookings/cubit/my_bookings_state.dart';
+import '../../../../../accommodation/view/booking_accommodation/screens/widgets/custom_container_booking.dart';
+import '../../../../../accommodation/view/booking_accommodation/screens/widgets/custom_rounded_button.dart';
+import '../../../../../transportation/cubit/transportation_cubit.dart';
+import '../../../../../transportation/screens/widgets/custom_from_to_date.dart';
+import '../../../../cubit/my_bookings_cubit.dart';
+import '../widgets/big_container.dart';
+import '../widgets/custom_booking_accommodation_body.dart';
+import '../widgets/show_model_bottom_sheet.dart';
+
+class DetailsBooking extends StatefulWidget {
+  const DetailsBooking({super.key});
+
+  @override
+  State<DetailsBooking> createState() => _DetailsBookingState();
+}
+class _DetailsBookingState extends State<DetailsBooking> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    context.read<TransportationCubit>().goOnly=false;
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MyBookingsCubit,MyBookingsState>(builder: (BuildContext context, state) {
+      return CustomScreen(appbarTitle: AppTranslations.detailsBooking,
+        body:
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 20.h,),
+                 CustomBookingAccommodationContainerBig(),
+                SizedBox(height: 25.h,),
+                //text
+                Text(AppTranslations.selectGoingAndReturn,style: getMediumStyle(fontSize: 14.sp),),
+                SizedBox(height: 20.h,),
+                //from and to date
+                CustomFromToDate(),
+                SizedBox(height: 20.h,),
+                //custom widget rating hotel
+
+                SizedBox(height: 20.h,),
+                //prefer hotel
+                Text(AppTranslations.chooseTheBestOption,style: getMediumStyle(fontSize: 14.sp),),
+                //custom contanier
+                SizedBox(height: 20.h,),
+
+                CustomContainerBooking(),
+                SizedBox(height: 10.h,),
+//payment
+                SizedBox(height: 20.h,),
+                PaymentWidget(isDetailsBooking: true,),
+                SizedBox(height: 20.h,),
+//copun
+
+                SizedBox(height: 10.h,),
+
+//button
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomButton(
+color: AppColors.red,
+                        title: AppTranslations.cancelBooking,
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.payment);
+                        },
+                      ),
+                    ),
+                    SizedBox(width: 10.w), // Add spacing between buttons
+                    Expanded(
+                      child:    CustomRoundedButton(title: AppTranslations.ExperienceEvaluation,onTap: (){
+                        showModelBottomSheet(context);
+        // Navigator.pushNamed(context, Routes.);
+        },)
+                    ),
+                  ],
+                ),
+                SizedBox(height: 40.h,)
+
+              ],
+            ),
+          ),
+        ),
+      );
+    },);
+  }
+}
+

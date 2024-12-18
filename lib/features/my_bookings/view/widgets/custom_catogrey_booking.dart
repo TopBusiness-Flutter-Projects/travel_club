@@ -3,6 +3,7 @@ import 'package:travel_club/core/exports.dart';
 import '../../cubit/my_bookings_cubit.dart';
 import '../../cubit/my_bookings_state.dart';
 
+
 class CustomBookingSection extends StatelessWidget {
    CustomBookingSection({
     super.key,this.index
@@ -13,7 +14,7 @@ class CustomBookingSection extends StatelessWidget {
     MyBookingsCubit cubit = context.read<MyBookingsCubit>();
 
     return BlocBuilder<MyBookingsCubit,MyBookingsState >(builder: (BuildContext context, state) {
-      return InkWell(
+      return GestureDetector(
       onTap: () {
         cubit.changeContainer(index!);
       },
