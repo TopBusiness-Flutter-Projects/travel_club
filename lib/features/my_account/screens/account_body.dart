@@ -1,13 +1,8 @@
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/my_account/screens/widgets/custom_row.dart';
-import 'package:travel_club/features/my_bookings/view/transportation_booking/widgets/custom_booking_transportation_body.dart';
-import 'package:travel_club/features/my_bookings/view/widgets/custom_catogrey_booking.dart';
-import '../../accommodation/view/widgets/details_widgets/custom_appbar_row.dart';
 import '../../home/screens/widgets/custom_appbar.dart';
 import '../../my_bookings/cubit/my_bookings_cubit.dart';
 import '../../my_bookings/cubit/my_bookings_state.dart';
-import '../../my_bookings/view/accommodation_booking/screens/custom_booking_accommodation_body.dart';
-import '../../my_bookings/view/food_booking/screens/custom_booking_food.dart';
 
 
 
