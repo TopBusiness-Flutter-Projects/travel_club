@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../../config/routes/app_routes.dart';
 
-import '../../../../cubit/my_bookings_cubit.dart';
-import '../../../../cubit/my_bookings_state.dart';
 
+
+import '../../../cubit/my_bookings_cubit.dart';
+import '../../../cubit/my_bookings_state.dart';
 import 'big_container.dart';
 //model
 class TransportationBookingModel {

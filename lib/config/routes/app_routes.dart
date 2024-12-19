@@ -21,7 +21,7 @@ import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
 import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
-import '../../features/my_bookings/view/screens/accommodation_booking/screens/details_booking_screen.dart';
+import '../../features/my_bookings/view/accommodation_booking/screens/details_booking_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
