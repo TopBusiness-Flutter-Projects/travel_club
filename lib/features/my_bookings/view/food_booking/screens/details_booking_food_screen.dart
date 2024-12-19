@@ -10,16 +10,18 @@ import '../../../../accommodation/view/booking_accommodation/screens/widgets/cus
 import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/my_bookings_cubit.dart';
-import '../widgets/big_container.dart';
-import '../widgets/show_model_bottom_sheet.dart';
+import '../../accommodation_booking/widgets/show_model_bottom_sheet.dart';
+import '../widgets/big_container_food.dart';
+import '../widgets/member_details.dart';
 
-class DetailsBooking extends StatefulWidget {
-  const DetailsBooking({super.key});
+
+class DetailsBookingFood extends StatefulWidget {
+  const DetailsBookingFood({super.key});
 
   @override
-  State<DetailsBooking> createState() => _DetailsBookingState();
+  State<DetailsBookingFood> createState() => _DetailsBookingFoodState();
 }
-class _DetailsBookingState extends State<DetailsBooking> {
+class _DetailsBookingFoodState extends State<DetailsBookingFood> {
   @override
   void initState() {
     // TODO: implement initState
@@ -39,38 +41,22 @@ class _DetailsBookingState extends State<DetailsBooking> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.h,),
-                 CustomBookingAccommodationContainerBig(),
-                SizedBox(height: 25.h,),
-                //text
-                Text(AppTranslations.selectGoingAndReturn,style: getMediumStyle(fontSize: 14.sp),),
-                SizedBox(height: 20.h,),
+              CustomBookingFoodContainerBig(foodModel: FoodModel(numofnights: "4 ليالي ",price:"5000",title:"nono",date: "13/12/2002",rate: 0,numOfBooking: "48721728" ,status: false),),                //text
+
                 //from and to date
-                CustomFromToDate(),
-                SizedBox(height: 20.h,),
-                //custom widget rating hotel
 
-                SizedBox(height: 20.h,),
-                //prefer hotel
-                Text(AppTranslations.chooseTheBestOption,style: getMediumStyle(fontSize: 14.sp),),
-                //custom contanier
-                SizedBox(height: 20.h,),
+                SizedBox(height: 30.h,),
+//members details
 
-                CustomContainerBooking(),
-                SizedBox(height: 10.h,),
-//payment
-                SizedBox(height: 20.h,),
-                PaymentWidget(isDetailsBooking: true,),
-                SizedBox(height: 20.h,),
-//copun
+                MemberDetails(),
 
                 SizedBox(height: 10.h,),
-
 //button
                 Row(
                   children: [
                     Expanded(
                       child: CustomButton(
-color: AppColors.red,
+                        color: AppColors.red,
                         title: AppTranslations.cancelBooking,
                         onTap: () {
                           Navigator.pushNamed(context, Routes.payment);
@@ -79,10 +65,10 @@ color: AppColors.red,
                     ),
                     SizedBox(width: 10.w), // Add spacing between buttons
                     Expanded(
-                      child:    CustomRoundedButton(title: AppTranslations.ExperienceEvaluation,onTap: (){
-                        showModelBottomSheetRatting(context);
-        // Navigator.pushNamed(context, Routes.);
-        },)
+                        child:    CustomRoundedButton(title: AppTranslations.ExperienceEvaluation,onTap: (){
+                          showModelBottomSheetRatting(context);
+                          // Navigator.pushNamed(context, Routes.);
+                        },)
                     ),
                   ],
                 ),

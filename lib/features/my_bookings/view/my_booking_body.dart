@@ -1,18 +1,11 @@
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/widgets/custom_text_form_field.dart';
-import 'package:travel_club/features/accommodation/view/widgets/acommendation_widgets/accomendation_rating.dart';
 import 'package:travel_club/features/my_bookings/view/transportation_booking/widgets/custom_booking_transportation_body.dart';
 import 'package:travel_club/features/my_bookings/view/widgets/custom_catogrey_booking.dart';
-
-import '../../home/cubit/home_cubit.dart';
-import '../../home/cubit/home_state.dart';
 import '../../home/screens/widgets/custom_appbar.dart';
-import '../../home/screens/widgets/custom_bag_section.dart';
-import '../../home/screens/widgets/custom_category_section.dart';
-import '../../home/screens/widgets/custom_offers_section.dart';
 import '../cubit/my_bookings_cubit.dart';
 import '../cubit/my_bookings_state.dart';
-import 'accommodation_booking/widgets/custom_booking_accommodation_body.dart';
+import 'accommodation_booking/screens/custom_booking_accommodation_body.dart';
+import 'food_booking/screens/custom_booking_food.dart';
 
 
 
@@ -57,16 +50,16 @@ class _BookingbodyState extends State<Bookingbody> {
                   ),
                 ),
               //body ...
-              if(cubit.Catogries[cubit.selcetedIndex] ==     AppTranslations.accommodationBookings
-              )...[
+              if(cubit.categories[cubit.selectedIndex] ==     AppTranslations.accommodationBookings
+              )
                 AccommodationBookingBody(),
                 // SizedBox(height: 30.h,)
 
-              ]else if(cubit.Catogries[cubit.selcetedIndex] == AppTranslations.transportation)...[
+               if(cubit.categories[cubit.selectedIndex] == AppTranslations.transportation)
                 TransportationBookingBody(),
-              ]else...[
-                Text("nonoonononono")
-              ]
+              if(cubit.categories[cubit.selectedIndex] ==AppTranslations.foodBookings)
+                FoodBookingBody()
+
             ],
           ),
         ),

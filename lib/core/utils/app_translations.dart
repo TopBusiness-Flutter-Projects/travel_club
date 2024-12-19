@@ -132,4 +132,15 @@ class AppTranslations {
   static String writeComment = 'write_comment'.tr();
   static String rateExperince = 'rate_experince'.tr();
   static String ticketsPrice = 'tickets_price'.tr();
+  static String numberOfMembers = 'number_of_members'.tr();
+  static String bookAppointment = 'book_appointment'.tr();
+  static String members = 'members'.tr();
+  static String callPhone = 'call_phone'.tr();
+  static String nameOwner = 'name_owner'.tr();
+  static String personalData = 'personal_data'.tr();
+  static String changeLang = 'change_language'.tr();
+  static String contactUs = 'contact_us'.tr();
+  static String aboutUs = 'about_us'.tr();
+  static String PrivacyAndSecurity = 'privacy_and_security'.tr();
+  static String shareApp = 'share_app'.tr();
 }

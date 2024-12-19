@@ -103,7 +103,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: widget.enabled!
-                          ? AppColors.lightWhite
+                          ? AppColors.lightWhite2
                           : AppColors.gray.withOpacity(0.5),
                       labelText: widget.labelText,
                       labelStyle: getRegularStyle(

@@ -110,6 +110,7 @@
   "trip_details": "تفاصيل الرحلة",
   "next": "التالي",
   "number_of_seats": "عدد المقاعد",
+  "number_of_members": "عدد الافراد",
   "ticket_price": "سعر التذكرة",
   "quantity": "الكمية",
   "total_price": "السعر الكلي",
@@ -132,6 +133,16 @@
   "food_bookings": "حجوزات الطعام",
   "accommodation_bookings": "حجوزات الاقامة",
   "tickets_price": " سعر التذاكر",
+  "book_appointment": "موعد الحجز ",
+  "members": " افراد",
+  "call_phone": "هاتف التواصل",
+  "name_owner": "اسم صاحب الحجز",
+  "personal_data": "البيانات الشخصية",
+  "change_language": "تغيير اللغه",
+  "contact_us": "تواصل معنا",
+  "about_us": "عن التطبيق",
+  "privacy_and_security": "الخصوصية والامان",
+  "share_app": "شارك التطبيق",
 
   "lasss": ""
 }

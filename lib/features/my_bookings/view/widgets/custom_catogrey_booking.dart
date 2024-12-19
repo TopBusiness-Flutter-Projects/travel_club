@@ -19,16 +19,16 @@ class CustomBookingSection extends StatelessWidget {
         cubit.changeContainer(index!);
       },
       child: CustomContainerWithShadow(
-        color: cubit.selcetedIndex == index
+        color: cubit.selectedIndex == index
             ? AppColors.primary // Selected color
             : AppColors.white,  // Default color
         isShadow: false,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Text(
-            cubit. Catogries[index!],
+            cubit. categories[index!],
             style: TextStyle(
-              color: cubit.selcetedIndex == index
+              color: cubit.selectedIndex == index
                   ? AppColors.white  // Text color for selected
                   : AppColors.secondPrimary, // Text color for default
             ),

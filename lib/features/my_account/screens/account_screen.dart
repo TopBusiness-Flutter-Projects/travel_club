@@ -9,6 +9,7 @@ import 'package:travel_club/features/main_screen/cubit/state.dart';
 
 import '../cubit/account_cubit.dart';
 import '../cubit/account_state.dart';
+import 'account_body.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -22,24 +23,25 @@ class _AccountScreenState extends State<AccountScreen> {
     AccountCubit cubit = context.read<AccountCubit>();
     return BlocBuilder<AccountCubit, AccountState>(
       builder: (context, state) {
-        return Center(
-          child: InkWell(
-              onTap: () {
-                if (EasyLocalization.of(context)!.locale.languageCode == 'ar') {
-                  EasyLocalization.of(context)!.setLocale(Locale('en', ''));
-                  // Preferences.instance
-                  //     .savedLang(AppStrings.englishCode);
-                  // Preferences.instance.getSavedLang();
-                  HotRestartController.performHotRestart(context);
-                } else {
-                  EasyLocalization.of(context)!.setLocale(Locale('ar', ''));
-                  // Preferences.instance
-                  //     .savedLang(AppStrings.arabicCode);
-                  // Preferences.instance.getSavedLang();
-                  HotRestartController.performHotRestart(context);
-                }
-              },
-              child: Text('Language ')),
+        return SizedBox(
+          height: getHeightSize(context),
+          width: getWidthSize(context),
+          child: Stack(
+            children: [
+              Positioned(
+                  top: 0,
+                  child: Image.asset(
+                    ImageAssets.mask,
+                    fit: BoxFit.cover,
+                    height: getHeightSize(context) * 0.3,
+                    width: getWidthSize(context),
+                  )),
+              SizedBox(
+                  height: getHeightSize(context),
+                  width: getWidthSize(context),
+                  child: const Accountbody())
+            ],
+          ),
         );
       },
     );

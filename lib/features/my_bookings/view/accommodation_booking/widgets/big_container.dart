@@ -4,7 +4,7 @@ import 'package:travel_club/features/my_bookings/view/accommodation_booking/widg
 
 import '../../../../../../core/exports.dart';
 import '../../../../accommodation/view/widgets/acommendation_widgets/accomendation_rating.dart';
-import 'custom_booking_accommodation_body.dart';
+import '../screens/custom_booking_accommodation_body.dart';
 
 class CustomBookingAccommodationContainerBig extends StatelessWidget {
   const CustomBookingAccommodationContainerBig({super.key});
@@ -17,9 +17,11 @@ class CustomBookingAccommodationContainerBig extends StatelessWidget {
           child: Column(
             children: [
               //custom container
+
               CustomBookingAccommodationContainerSmall(hotelsModel: HotelsModel(title: "title", rate: 4, isFavorite: false ,image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",),),
               //Row
               Row(
+
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

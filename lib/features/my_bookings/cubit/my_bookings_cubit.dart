@@ -6,14 +6,14 @@ import 'my_bookings_state.dart';
 class MyBookingsCubit extends Cubit<MyBookingsState> {
   MyBookingsCubit(this.api) : super(MyBookingsInitial());
   MyBookingsRepoImpl api;
-  int selcetedIndex=0;
-  List<String>Catogries=[
+  int selectedIndex=0;
+  List<String>categories=[
     AppTranslations.accommodationBookings,
     AppTranslations.transportation,
     AppTranslations.foodBookings
       ];
 void changeContainer(int index){
-  selcetedIndex=index;
+  selectedIndex=index;
   emit(IndexChanged());
 }
 }

@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../config/routes/app_routes.dart';
 
-import 'big_container.dart';
+import '../widgets/big_container.dart';
 
 
 

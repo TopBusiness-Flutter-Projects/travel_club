@@ -22,6 +22,7 @@ import '../../features/auth/view/screens/login_screen.dart';
 import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
 import '../../features/my_bookings/view/accommodation_booking/screens/details_booking_screen.dart';
+import '../../features/my_bookings/view/food_booking/screens/details_booking_food_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -38,6 +39,7 @@ class Routes {
   static const String detailsBooking = '/detailsBooking';
   static const String bookingAccomodation = '/bookingAccomodation';
   static const String accomendation = '/accomendation';
+  static const String detailsBookingFood = '/detailsBookingFood';
   static const String detailsAccomendation = '/detailsAccomendation';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
   static const String otherServicesRoute = '/otherServicesRoute';
@@ -77,6 +79,12 @@ class AppRoutes {
         );  case Routes.donePayment:
         return PageTransition(
           child: const DonePaymentScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );case Routes.detailsBookingFood:
+        return PageTransition(
+          child: const DetailsBookingFood(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
