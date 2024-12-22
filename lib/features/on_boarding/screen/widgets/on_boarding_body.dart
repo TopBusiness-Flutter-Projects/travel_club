@@ -16,7 +16,6 @@ class CustomOnBoardingBody extends StatelessWidget {
   final Color backgroundColor;
   final String text;
   final void Function()? onTap;
-
   @override
   Widget build(BuildContext context) {
     return Container(
