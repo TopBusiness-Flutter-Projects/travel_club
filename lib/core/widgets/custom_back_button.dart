@@ -15,7 +15,7 @@ final  void Function()? onTap;
         decoration: BoxDecoration(
           color: AppColors.lightWhite,
           shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(15), // Circular with rounded corners
+          borderRadius: BorderRadius.circular(15.r), // Circular with rounded corners
         ),
         child: Icon(
           Icons.arrow_back_ios, // Icon similar to the image

@@ -16,6 +16,7 @@ class CustomTextField extends StatefulWidget {
   final String? hintText;
   final bool isMessage;
   final bool isPassword;
+  final bool ischange;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -37,6 +38,7 @@ class CustomTextField extends StatefulWidget {
     this.onSubmitted,
     this.borderRadius,
     this.enabled = true,
+    this.ischange = false,
     this.title
   });
 
@@ -103,7 +105,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: widget.enabled!
-                          ? AppColors.lightWhite
+                          ? AppColors.lightWhite2
                           : AppColors.gray.withOpacity(0.5),
                       labelText: widget.labelText,
                       labelStyle: getRegularStyle(
@@ -119,28 +121,30 @@ class _CustomTextFieldState extends State<CustomTextField> {
                           myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
                       suffixIconColor:
                           myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
-                      suffixIcon: widget.isPassword
+                      suffixIcon: widget.ischange?
+                      InkWell(
+                          onTap: () {
+                            setState(() {
+                              showPassword = !showPassword;
+                            });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(11.0),
+                            child: Text(AppTranslations.change,style: getUnderLine(fontSize: 14.sp,color: AppColors.primary),),
+                          )):
+                      widget.isPassword
                           ?  InkWell(
                           onTap: () {
                             setState(() {
                               showPassword = !showPassword;
                             });
                           },
-                  //     },                    },
-                          //   onPressed: () {
-                          //       setState(() {
-                          //         showPassword = !showPassword;
-                          //       });
-                          //     },
-                          //    },
                           child: Padding(
                           padding: const EdgeInsets.all(11.0),
                           child: SvgPicture.asset(AppIcons.key),
                         ))
-
                           : widget.suffixIcon,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                       // hintStyle: getRegularStyle(color: AppColors.gray, fontSize: 14),
                       errorStyle: getRegularStyle(color: AppColors.red),
                       enabledBorder: OutlineInputBorder(

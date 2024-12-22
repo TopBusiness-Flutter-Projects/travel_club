@@ -1,35 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:travel_club/core/exports.dart';
-
-
-
-// class HomePage extends StatelessWidget {
-//   void _showFilterBottomSheet(BuildContext context) {
-//     showModalBottomSheet(
-//       context: context,
-//       isScrollControlled: true,
-//       shape: RoundedRectangleBorder(
-//         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-//       ),
-//       builder: (BuildContext context) {
-//         return FilterBottomSheet();
-//       },
-//     );
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text("BottomSheet Example")),
-//       body: Center(
-//         child: ElevatedButton(
-//           onPressed: () => _showFilterBottomSheet(context),
-//           child: Text("Open Filter"),
-//         ),
-//       ),
-//     );
-//   }
-// }
+import '../../../../core/widgets/center_bottom_sheet.dart';
+import '../../../../core/widgets/custom_button.dart';
+import '../../cubit/accomendation_cubit.dart';
+import 'hotels_widgets/custom_check_box.dart';
 
 class FilterBottomSheet extends StatefulWidget {
   @override
@@ -37,109 +11,94 @@ class FilterBottomSheet extends StatefulWidget {
 }
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
-  bool oneStar = true;
-  bool twoStars = false;
-  bool threeStars = false;
-  bool fourStars = false;
-  bool zeroStars = false;
-
-  bool wifi = true;
-  bool privateGarage = true;
-  bool privatePool = false;
-  bool privateBeach = false;
-  bool coffeeShop = false;
-
   @override
   Widget build(BuildContext context) {
+    var cubit= context.read<AccomendationCubit>();
+  return BlocBuilder<AccomendationCubit, AccomendationState>(builder: (BuildContext context, state) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
+
           SizedBox(height: 10.h),
+          //custom center bottomshhet
+          CenterBottomSheet(),
+          SizedBox(height: 20.h),
+
           Text(
-            "فلتر النتائج",
+            AppTranslations.resultsFilter,
             style: getSemiBoldStyle(fontSize: 20.sp),
           ),
           SizedBox(height: 30.h),
+          //تصنيف النجوم
           Text(
-            "تصنيف عدد النجوم",
+            AppTranslations.rating,
             style:getSemiBoldStyle(fontSize: 14.sp),
           ),
-          Expanded(
-            child: GridView.builder(
-              itemCount: 5,
-              shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //rate
+          GridView.builder(
+            itemCount: 5,
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, // Number of columns in the grid
               mainAxisSpacing: 10, // Vertical spacing
-              crossAxisSpacing: 10, // Horizontal spacing
+              crossAxisSpacing: 5, // Horizontal spacing
               childAspectRatio: 3, // Aspect ratio for each grid item (adjust for appearance)
             )  , itemBuilder: (BuildContext context, int index) {
-              return buildCheckbox("نجمة واحدة", oneStar, (val) => setState(() => oneStar = val!));
-            },),
-          ),
-          // buildCheckbox("نجمتان", twoStars, (val) => setState(() => twoStars = val!)),
-          // buildCheckbox("3 نجوم", threeStars, (val) => setState(() => threeStars = val!)),
-          // buildCheckbox("4 نجوم", fourStars, (val) => setState(() => fourStars = val!)),
-          // buildCheckbox("0 نجوم", zeroStars, (val) => setState(() => zeroStars = val!)),
+            return CustomCheckBox(starsFilter: cubit.starsFilters[index],
+    );
 
+          },),
           SizedBox(height: 16.h),
+//المرافق
           Text(
-            "المرافق",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            AppTranslations.facilities,
+            style:getSemiBoldStyle(fontSize: 14.sp),
           ),
-          buildCheckbox("واي فاي", wifi, (val) => setState(() => wifi = val!)),
-          buildCheckbox("كراج خاص", privateGarage, (val) => setState(() => privateGarage = val!)),
-          buildCheckbox("مسبح خاص", privatePool, (val) => setState(() => privatePool = val!)),
-          buildCheckbox("شاطئ خاص", privateBeach, (val) => setState(() => privateBeach = val!)),
-          buildCheckbox("كوفي شوب", coffeeShop, (val) => setState(() => coffeeShop = val!)),
+          //facilities
+          GridView.builder(
+            itemCount: cubit.Facilities.length,
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Number of columns in the grid
+              mainAxisSpacing: 5, // Vertical spacing
+              crossAxisSpacing: 5, // Horizontal spacing
+              childAspectRatio: 3, // Aspect ratio for each grid item (adjust for appearance)
+            )  , itemBuilder: (BuildContext context, int index) {
+            return CustomCheckBox(starsFilter:cubit.Facilities[index],);
+          },),
+          SizedBox(height: 5.h,),
+          //row
+          Row(children: [
+            Expanded(child: CustomButton(title: AppTranslations.results,onTap: (){},)),
 
-          SizedBox(height: 16.h),
-          ElevatedButton(
-            onPressed: () {
-              // Implement the action for filtering results
-              Navigator.pop(context);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 12),
-            ),
-            child: Text(
-              "تصفية النتائج",
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                oneStar = true;
-                twoStars = threeStars = fourStars = zeroStars = false;
-                wifi = privateGarage = true;
-                privatePool = privateBeach = coffeeShop = false;
-              });
-            },
-            child: Text(
-              "حذف الفلتر",
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-            ),
-          ),
+            // SizedBox(
+            //   width: 255.w,
+            //   height: 42.h,
+            //   child: ElevatedButton(onPressed: (){}, child: Text(AppTranslations.results,style: getSemiBoldStyle(color: AppColors.white,fontSize: 12.sp),),style:ElevatedButton.styleFrom(backgroundColor: AppColors.primary,) ,),
+            // ),
+            SizedBox(width: 4.w,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: (){
+                 cubit. removeFilter();
+                },
+                  child: Text(AppTranslations.removeFilter,style: getSemiBoldStyle(color: AppColors.red,fontSize: 14.sp),)),
+            )],),
+          SizedBox(height: 5.h,),
+
         ],
+
       ),
     );
+  },);
   }
 
-  Widget buildCheckbox(String title, bool value, Function(bool?) onChanged) {
-    return CheckboxListTile(
-      title: Text(title, textAlign: TextAlign.right),
-      value: value,
-      onChanged: onChanged,
-      controlAffinity: ListTileControlAffinity.leading,
-    );
-  }
 }
+
+
