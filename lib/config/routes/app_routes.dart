@@ -163,8 +163,7 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-      case Routes.accomendation:
-        );
+
         case Routes.accomendation:
         return PageTransition(
           child: const AccomendationScreen(),
