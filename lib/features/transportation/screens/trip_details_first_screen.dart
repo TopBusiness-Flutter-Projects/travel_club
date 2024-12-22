@@ -124,9 +124,11 @@ class CustomSeatCatalogeWidget extends StatelessWidget {
                       itemCount: cubit.seatRowsCount,
                       itemBuilder: (context, index) => CustomSeatsRow(
                             columnNumber: index,
-                            seatType: index == cubit.seatRowsCount - 3
+                            seatType: index == cubit.seatRowsCount - 3 ||
+                                    index == 0 // الكرسي اللي قبل قبل الأخير
                                 ? SeatType.two
-                                : index == cubit.seatRowsCount - 1
+                                : index ==
+                                        cubit.seatRowsCount - 1 // الكرسي الأخير
                                     ? SeatType.five
                                     : SeatType.four,
                           )),
@@ -165,9 +167,14 @@ class CustomSeatsRow extends StatelessWidget {
           children: List.generate(5, (index) {
             int currentRow = columnNumber;
 
-            int rowIndex = currentRow == cubit.seatRowsCount - 2
-                ? index + currentRow * 5 - currentRow - 2
-                : index + currentRow * 5 - currentRow;
+            /// هنا بقول الكرسي اللي قبل الأخير هيعمل سكيب لكرسيين عشان هما مش موجودين في الصف اللي قبله
+            int rowIndex = currentRow == 0
+                ? index + 1
+                : currentRow == 1
+                    ? index + 3
+                    : currentRow == cubit.seatRowsCount - 2
+                        ? index + currentRow * 5 - currentRow - 3
+                        : index + currentRow * 5 - currentRow - 1;
             if (seatType == SeatType.two) {
               return index == 0 || index == 1
                   ? CustomSeat(
