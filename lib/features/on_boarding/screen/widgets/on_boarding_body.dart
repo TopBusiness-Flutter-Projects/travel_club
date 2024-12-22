@@ -32,21 +32,18 @@ class CustomOnBoardingBody extends StatelessWidget {
                 height: getHeightSize(context) * 0.65,
                 width: getWidthSize(context),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(height: getHeightSize(context) * 0.01),
-                    Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: CustomSkipRow(
-                              onTap: onTap, backgroundColor: AppColors.white),
-                        ),
-                      ],
+                    SizedBox(height: getHeightSize(context) * 0.05),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: CustomSkipRow(
+                          onTap: onTap, backgroundColor: AppColors.white),
                     ),
+                    Spacer(),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          vertical: getHeightSize(context) * 0.01,
+                          vertical: getHeightSize(context) * 0.04,
                           horizontal: getWidthSize(context) * 0.1),
                       child: Image.asset(
                         image,
