@@ -88,4 +88,6 @@ class TransportationCubit extends Cubit<TransportationState> {
     singleDate = DateFormat('yyyy-MM-dd', 'en')
         .format(selectedDate); // تاريخ اليوم كقيمة افتراضية
   }
+
+  int seatRowsCount =11;
 }

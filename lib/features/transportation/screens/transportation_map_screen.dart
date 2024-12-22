@@ -44,12 +44,16 @@ class _TransportationMapScreenState extends State<TransportationMapScreen> {
                     ]),
               ),
               Spacer(),
-              CustomButton(
-                  title: AppTranslations.transportationResults,
-                  onTap: () {
-                    Navigator.pushNamed(
-                        context, Routes.transportationMenuRoute);
-                  }),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: getHorizontalPadding(context) * 2.5),
+                child: CustomButton(
+                    title: AppTranslations.transportationResults,
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, Routes.transportationMenuRoute);
+                    }),
+              ),
             ]),
           ],
         ),
