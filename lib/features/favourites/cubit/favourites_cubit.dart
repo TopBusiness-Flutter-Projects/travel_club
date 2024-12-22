@@ -6,4 +6,14 @@ import 'favourites_state.dart';
 class FavouritesCubit extends Cubit<FavouritesState> {
   FavouritesCubit(this.api) : super(FavouritesInitial());
   FavouritesRepoImpl api;
+  int selectedIndex=0;
+  List<String>categories=[
+    AppTranslations.accommodationBookings,
+    AppTranslations.transportation,
+    AppTranslations.foodBookings
+  ];
+  void changeContainer(int index){
+    selectedIndex=index;
+    emit(IndexChanged());
+  }
 }

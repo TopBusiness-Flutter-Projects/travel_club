@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_club/core/exports.dart';
 
 import '../show_model_bottom_sheet.dart';
+import '../show_order_bottom.dart';
 
 class CustomFilterBar extends StatelessWidget {
   const CustomFilterBar({super.key});
@@ -45,10 +46,24 @@ class CustomFilterBar extends StatelessWidget {
           Container(height:50.h ,width: 1.w,color: Colors.blueGrey.shade100,),
         //  Divider(color: Colors.blueGrey.shade100, thickness: 1,height: ,),
           // ترتيب حسب
-          _buildFilterItem(
-            icon: AppIcons.order
-            , // Flutter built-in icon for layers
-            label: AppTranslations.orderBy,
+          InkWell(
+            onTap: (){
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                ),
+                builder: (BuildContext context) {
+                  return OrderBottomSheet();
+                },
+              );
+            },
+            child: _buildFilterItem(
+              icon: AppIcons.order
+              , // Flutter built-in icon for layers
+              label: AppTranslations.orderBy,
+            ),
           ),
           Container(height:50.h ,width: 1.w,color: Colors.blueGrey.shade100,),
           SizedBox(width: 4.w,),
@@ -63,25 +78,22 @@ class CustomFilterBar extends StatelessWidget {
   }
 
   Widget _buildFilterItem({required String icon, required String label}) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-
-            SvgPicture.asset(icon, color: Colors.blueGrey,),
-             SizedBox(width: 4.w),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.blueGrey.shade700,
-                fontWeight: FontWeight.w500,
-              ),
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SvgPicture.asset(icon, color: Colors.blueGrey,),
+           SizedBox(width: 4.w),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.blueGrey.shade700,
+              fontWeight: FontWeight.w500,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

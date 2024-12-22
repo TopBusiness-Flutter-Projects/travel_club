@@ -9,7 +9,8 @@ import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 import 'package:travel_club/features/main_screen/cubit/state.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+   MainScreen({super.key,this.index});
+  int ?index;
   @override
   State<MainScreen> createState() => _MainScreenState();
 }

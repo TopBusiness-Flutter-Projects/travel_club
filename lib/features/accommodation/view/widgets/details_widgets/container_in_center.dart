@@ -88,7 +88,9 @@ class ContainerInCenter extends StatelessWidget {
 
                            )   ],),
                          //     Spacer(),
-                         ElevatedButton(onPressed: (){}, child: Text("احجز الان",style: getSemiBoldStyle(color: AppColors.white,fontSize: 14.sp),),style:ElevatedButton.styleFrom(backgroundColor: AppColors.primary),)
+                         ElevatedButton(onPressed: (){
+                           Navigator.pushNamed(context, Routes.bookingAccomodation );
+                         }, child: Text("احجز الان",style: getSemiBoldStyle(color: AppColors.white,fontSize: 14.sp),),style:ElevatedButton.styleFrom(backgroundColor: AppColors.primary),)
 
                        ],)
 

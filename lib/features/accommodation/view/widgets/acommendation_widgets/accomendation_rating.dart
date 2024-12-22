@@ -5,103 +5,103 @@ import '../../../../../core/exports.dart';
 import '../../../cubit/accomendation_cubit.dart';
 class HotelsModel {
   final String title;
-  final String discription;
+  final String? discription;
   final String image;
   final int rate;
+  final bool ?isFavorite;
+   bool ?isFavoriteTrue;
   final void Function()? onTap;
 
-  HotelsModel(  {required this.title,required this.rate,required this.discription, required this.image, this.onTap});
+  HotelsModel(   {this.isFavoriteTrue=false,required this.title,required this.rate,this.isFavorite=true, this.discription, required this.image, this.onTap});
 }
-class AccomendationRating extends StatelessWidget {
-   AccomendationRating({super.key,required this.hotelsModel});
+class CustomWidgetRating extends StatefulWidget {
+   CustomWidgetRating({super.key,required this.hotelsModel});
   HotelsModel? hotelsModel;
+
+  @override
+  State<CustomWidgetRating> createState() => _CustomWidgetRatingState();
+}
+
+class _CustomWidgetRatingState extends State<CustomWidgetRating> {
   @override
   Widget build(BuildContext context) {
-   return BlocBuilder<AccomendationCubit, AccomendationState>(builder: (BuildContext context, state) {  return   Padding(
-     padding: const EdgeInsets.all(0.0),
-     child: Expanded(
-       //  height: getHeightSize(context) * 0.9,
-         child: ListView.separated(
-             physics: BouncingScrollPhysics(),
-             shrinkWrap: true,
-             // scrollDirection: Axis.horizontal,
-             itemCount: 6,
-             separatorBuilder: (context, index) => SizedBox(
-               width: 10.w,
-               height: 1.h,
-             ),
-             itemBuilder: (context, index) => Padding(
-                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-                 child:GestureDetector(
-                            onTap: hotelsModel?.onTap ,
-                   child: CustomContainerWithShadow(
-                     child: Row(children: [
-                       //stack image and heart
-                       Stack(
-                         children: [
-                           Container(
-                             height: getHeightSize(context) * 0.23,
-                             width: getWidthSize(context) * 0.4,
-                             decoration: BoxDecoration(
-                                 color: AppColors.white,
+    return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child:GestureDetector(
+          onTap: widget.hotelsModel?.onTap ,
+          child: CustomContainerWithShadow(
+            child: Row(children: [
+              //stack image and heart
+              Stack(
+                children: [
+                  Container(
+                    height: getHeightSize(context) * 0.23,
+                    width: getWidthSize(context) * 0.4,
+                    decoration: BoxDecoration(
+                        color: AppColors.white,
 
-                                 borderRadius: BorderRadius.circular(20.r),
-                                 image: DecorationImage(
-                                     image: NetworkImage(
-                                         hotelsModel?.image.toString()??""),
-                                     fit: BoxFit.cover)),
-                           ),
-                           Positioned(
-                               top: 4.h,
-                               right: 6.w,
-                               child:
-                               CircleAvatar(
-                                 backgroundColor: AppColors.lightWhite,
-                                 child: Icon(
-                                   CupertinoIcons.heart,
-                                   color: AppColors.secondPrimary,
-                                   size: 25.sp,
-                                 ),
-                               )
-                           )
-                         ],
-                       ),
-                       //  SizedBox(width: 5.w,),
-                       //
-                       Expanded(
-                         child: Padding(
-                           padding: const EdgeInsets.all(8.0),
-                           child: Column(
-                             crossAxisAlignment: CrossAxisAlignment.start,
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             children: [
-                               SizedBox(height: 10.h,),
-                               Text(hotelsModel?.title.toString()??"",overflow: TextOverflow.ellipsis,style: getSemiBoldStyle(fontSize: 14.sp),maxLines: 2,),
+                        borderRadius: BorderRadius.circular(20.r),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                widget.hotelsModel?.image.toString()??""),
+                            fit: BoxFit.cover)),
+                  ),
+                  widget.hotelsModel?.isFavorite==true?
+                  Positioned(
+                      top: 4.h,
+                      right: 6.w,
+                      child: GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            widget.hotelsModel!.isFavoriteTrue = !(widget.hotelsModel!.isFavoriteTrue ?? false);
+                          });
 
-                               SizedBox(height: 20.h,),
-                               Row(
-                                 children: [
-                                   StarRating(
-                                       rating: hotelsModel?.rate?.toDouble()??1,
-                                       allowHalfRating: false,
-                                       onRatingChanged: (rating){
-                                         //   => setState(() => this.rating = rating
-                                       }),
-                                 ],
-                               ),
-                               SizedBox(height: 2.h,),
+                        },
+                        child: CircleAvatar(
+                          backgroundColor:  widget.hotelsModel?.isFavoriteTrue==true?AppColors.red: AppColors.lightWhite,
+                          child: Icon(
+                            CupertinoIcons.heart,
+                            color:  widget.hotelsModel?.isFavoriteTrue==true?AppColors.white: AppColors.secondPrimary,
+                            size: 25.sp,
+                          ),
+                        ),
+                      )
+                  ):Container()
+                ],
+              ),
+              //  SizedBox(width: 5.w,),
+              //
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(height: 10.h,),
+                      Text(widget.hotelsModel?.title.toString()??"",overflow: TextOverflow.ellipsis,style: getSemiBoldStyle(fontSize: 14.sp),maxLines: 2,),
 
-                               Text(hotelsModel?.discription.toString()??"",style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
-                             ],
-                           ),
-                         ),
-                       )
-                     ],),
-                   ),
-                 )
-             )
-         )
-     ),
-   ); },);
+                      SizedBox(height: 20.h,),
+                      Row(
+                        children: [
+                          StarRating(
+                              rating: widget.hotelsModel?.rate?.toDouble()??1,
+                              allowHalfRating: false,
+                              onRatingChanged: (rating){
+                                //   => setState(() => this.rating = rating
+                              }),
+                        ],
+                      ),
+                      SizedBox(height: 2.h,),
+                      widget.hotelsModel?.discription==null?SizedBox():
+                      Text(widget.hotelsModel?.discription.toString()??"",style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
+                    ],
+                  ),
+                ),
+              )
+            ],),
+          ),
+        )
+    );
   }
 }

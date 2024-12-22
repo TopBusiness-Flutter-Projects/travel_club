@@ -6,4 +6,14 @@ import 'account_state.dart';
 class AccountCubit extends Cubit<AccountState> {
   AccountCubit(this.api) : super(AccountInitial());
   AccountRepoImpl api;
+  GlobalKey<FormState> formInfo = GlobalKey<FormState>();
+  late TextEditingController nameController = TextEditingController();
+  late TextEditingController phoneController = TextEditingController();
+  late TextEditingController passController = TextEditingController();
+  String? selectedLanguage = 'Arabic';
+  void changeLanguage(String newLanguage) {
+    selectedLanguage = newLanguage; // Update the selected language
+    emit(AccountLanguageChanged()); // Emit a new state to notify the UI
+  }
+
 }
