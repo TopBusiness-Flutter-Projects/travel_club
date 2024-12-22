@@ -17,6 +17,8 @@ import 'core/utils/app_strings.dart';
 import 'package:travel_club/injector.dart' as injector;
 import 'features/accommodation/cubit/accomendation_cubit.dart';
 import 'features/auth/cubit/cubit.dart';
+import 'features/entertainment/cubit/entertainment_cubit.dart';
+import 'features/notification/cubit/notification_cubit.dart';
 import 'features/splash/cubit/cubit.dart';
 
 class MyApp extends StatefulWidget {
@@ -53,6 +55,8 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<MainCubit>(),
+          ),  BlocProvider(
+            create: (_) => injector.serviceLocator<NotificationCubit>(),
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<OnboardingCubit>(),
@@ -74,6 +78,8 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<LocationCubit>(),
+          ),   BlocProvider(
+            create: (_) => injector.serviceLocator<EntertainmentCubit>(),
           ),
         ],
         child: GetMaterialApp(

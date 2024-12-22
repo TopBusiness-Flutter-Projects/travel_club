@@ -1,7 +1,7 @@
 import 'package:travel_club/core/exports.dart';
 
 class CustomHomeAppbar extends StatelessWidget {
-   CustomHomeAppbar({
+    CustomHomeAppbar({
     super.key,required this.isHome,required this.title
   });
 bool isHome;
@@ -44,19 +44,24 @@ if(isHome==true)...[
         SizedBox(
           width: getWidthSize(context) * 0.05,
         ),
-        Container(
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(15.r),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(8.w),
-              child: Badge(
-                  backgroundColor: AppColors.primary,
-                  isLabelVisible: true,
-                  alignment: AlignmentDirectional.topStart,
-                  child: SvgPicture.asset(AppIcons.notification)),
-            )),
+        GestureDetector(
+          onTap: (){
+            Navigator.pushNamed(context, Routes.notificationScreen);
+          },
+          child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(15.r),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(8.w),
+                child: Badge(
+                    backgroundColor: AppColors.primary,
+                    isLabelVisible: true,
+                    alignment: AlignmentDirectional.topStart,
+                    child: SvgPicture.asset(AppIcons.notification)),
+              )),
+        ),
       ]
       ),
     );

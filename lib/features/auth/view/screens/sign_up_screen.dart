@@ -52,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   }
                   return null; // valid phone number
                 },),
-                CustomTextField(controller: cubit.passwordControllerSignUp,enabled:true,title: AppTranslations.phone,hintText: AppTranslations.writePhone,suffixIcon:
+                CustomTextField(controller: cubit.phoneControllerSignUp,enabled:true,title: AppTranslations.phone,hintText: AppTranslations.writePhone,suffixIcon:
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SvgPicture.asset(AppIcons.phone),

@@ -143,4 +143,15 @@ class AppTranslations {
   static String aboutUs = 'about_us'.tr();
   static String PrivacyAndSecurity = 'privacy_and_security'.tr();
   static String shareApp = 'share_app'.tr();
+  static String logout = 'logout'.tr();
+  static String change = 'change'.tr();
+  static String savedChanges = 'save_changes'.tr();
+  static String proplemTitle = 'problem_title'.tr();
+  static String message = 'message'.tr();
+  static String send = 'send'.tr();
+  static String whoUs = 'who_us'.tr();
+  static String whoUsOffer = 'who_we_offer'.tr();
+  static String privacy = 'privacy'.tr();
+  static String cancellationPolicy = 'cancellation_policy'.tr();
+  static String notifications = 'notifications'.tr();
 }

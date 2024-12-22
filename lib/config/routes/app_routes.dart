@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:travel_club/features/accommodation/view/screens/details_accomendation.dart';
 import 'package:travel_club/features/auth/view/screens/new_pass_screen.dart';
 import 'package:travel_club/features/main_screen/screens/main_screen.dart';
+import 'package:travel_club/features/my_account/screens/about_us.dart';
+import 'package:travel_club/features/my_account/screens/contact_us.dart';
 import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/other_services/screens/other_services_screen.dart';
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
@@ -21,6 +23,10 @@ import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
 import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
+import '../../features/my_account/screens/change_lang.dart';
+import '../../features/notification/screens/notification_screen.dart';
+import '../../features/my_account/screens/privacy_screen.dart';
+import '../../features/my_account/screens/profile_info.dart';
 import '../../features/my_bookings/view/accommodation_booking/screens/details_booking_screen.dart';
 import '../../features/my_bookings/view/food_booking/screens/details_booking_food_screen.dart';
 
@@ -35,7 +41,13 @@ class Routes {
   static const String apply = '/apply';
   static const String donePayment = '/donePayment';
   static const String payment = '/payment';
+  static const String contact = '/contact';
+  static const String aboutUs = '/aboutUs';
+  static const String changeLanguage = '/changeLanguage';
+  static const String profileInfo = '/profileInfo';
+  static const String privacyRoute = '/privacyRoute';
   static const String hotelsScreen = '/hotelsScreen';
+  static const String notificationScreen = '/notification';
   static const String detailsBooking = '/detailsBooking';
   static const String bookingAccomodation = '/bookingAccomodation';
   static const String accomendation = '/accomendation';
@@ -63,10 +75,48 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
+        );  case Routes.notificationScreen:
+        return PageTransition(
+          child: const NotificationScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );   case Routes.privacyRoute:
+        return PageTransition(
+          child: const PrivacyScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsAccomendation:
         return PageTransition(
           child: const DetailsAccommendation(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );case Routes.aboutUs:
+        return PageTransition(
+          child: const AboutUs(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.contact:
+        return PageTransition(
+          child: const ContactUs(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.profileInfo:
+        return PageTransition(
+          child: const ProfileInfo(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );  case Routes.changeLanguage:
+        return PageTransition(
+          child: const ChangeLang(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

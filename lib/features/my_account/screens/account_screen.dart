@@ -1,12 +1,5 @@
-// ignore_for_file: deprecated_member_use
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/preferences/preferences.dart';
-import 'package:travel_club/core/utils/restart_app_class.dart';
-import 'package:travel_club/features/main_screen/cubit/cubit.dart';
-import 'package:travel_club/features/main_screen/cubit/state.dart';
-
 import '../cubit/account_cubit.dart';
 import '../cubit/account_state.dart';
 import 'account_body.dart';

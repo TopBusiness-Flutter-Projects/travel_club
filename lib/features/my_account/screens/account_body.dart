@@ -1,17 +1,19 @@
+import 'dart:io';
+
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/my_account/screens/widgets/custom_container.dart';
 import 'package:travel_club/features/my_account/screens/widgets/custom_row.dart';
 import '../../home/screens/widgets/custom_appbar.dart';
 import '../../my_bookings/cubit/my_bookings_cubit.dart';
-import '../../my_bookings/cubit/my_bookings_state.dart';
-
-
-
+import '../cubit/account_cubit.dart';
+import '../cubit/account_state.dart';
 
 class Accountbody extends StatefulWidget {
   const Accountbody({
     super.key,
   });
-
   @override
   State<Accountbody> createState() => _AccountbodyState();
 }
@@ -20,62 +22,64 @@ class _AccountbodyState extends State<Accountbody> {
   @override
   Widget build(BuildContext context) {
     MyBookingsCubit cubit = context.read<MyBookingsCubit>();
-    return BlocBuilder<MyBookingsCubit,MyBookingsState >(builder: (context, state) {
-      return ListView(children: [
+    return BlocBuilder<AccountCubit,AccountState >(builder: (context, state) {
+      return Column(
+          children: [
         SizedBox(height: getVerticalPadding(context) * 2),
         //app bar
         CustomHomeAppbar(isHome: false, title: 'نونو',),
-        SizedBox(height: 40.h,),
+       // SizedBox(height: 10.h,),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-             Padding(
-               padding: const EdgeInsets.all(1.0),
-               child: CustomContainerWithShadow(
-                   child:
-               Padding(
-                 padding: const EdgeInsets.all(8.0),
-                 child: Row(
-                   children: [
-                     Padding(
-                       padding: const EdgeInsets.all(8.0),
-                       child: CircleAvatar(
-                                  backgroundColor:AppColors.grey.withOpacity(.2),
-                           child: Padding(
-                             padding: const EdgeInsets.all(3.0),
-                             child: Image.asset(ImageAssets.profile,color: AppColors.grey,),
-                           )),
-                     ),
-                     SizedBox(height: 30.h,),
-                     Padding(
-                       padding: const EdgeInsets.all(8.0),
-                       child: Column(
-                         crossAxisAlignment: CrossAxisAlignment.start,
-                         children: [
-                         Text("احمد مختار"),
-                         Text("01027639683"),
-                       ],),
-                     )
+                //custom container above list view
+                CustomContainerMyAccount(),
+//list view
+Expanded(
+  child: ListView(
+    shrinkWrap: true,
+   // crossAxisAlignment:   CrossAxisAlignment.start,
+    children: [
+   // SizedBox(height: 30.h,),
+    CustomRowProfile(title: AppTranslations.personalData,onTap: (){
+      Navigator.pushNamed(context, Routes.profileInfo);
+    },),
+    CustomRowProfile(title: AppTranslations.changeLang,onTap: (){
+      Navigator.pushNamed(context, Routes.changeLanguage);
+    },),
+    CustomRowProfile(title: AppTranslations.contactUs,onTap: (){
+      Navigator.pushNamed(context, Routes.contact);
+    },),
+    CustomRowProfile(title:AppTranslations.aboutUs,onTap: (){
 
-                   ],
-                 ),
-               ),
-               ),
-             ),
-SizedBox(height: 30.h,),
-                CustomRowProfile(title: AppTranslations.personalData,),
-                CustomRowProfile(title: AppTranslations.changeLang,),
-                CustomRowProfile(title: AppTranslations.contactUs,),
-                CustomRowProfile(title:AppTranslations.aboutUs,),
-                CustomRowProfile(title: AppTranslations.PrivacyAndSecurity,),
-                CustomRowProfile(title:AppTranslations.shareApp,),
-                CustomRowProfile(title: 'البيانات الشخصية',),
+      Navigator.pushNamed(context, Routes.aboutUs);
+    },),
+    CustomRowProfile(title: AppTranslations.PrivacyAndSecurity,onTap: (){
+      Navigator.pushNamed(context, Routes.privacyRoute);
+    },),
+    CustomRowProfile(title:AppTranslations.shareApp,onTap: ()async{
+      PackageInfo packageInfo =
+          await PackageInfo.fromPlatform();
+      String url = '';
+      String packageName = packageInfo.packageName;
+      if (Platform.isAndroid) {
+        url =
+        "https://play.google.com/store/apps/details?id=$packageName";
+      } else if (Platform.isIOS) {
+        url = 'https://apps.apple.com/us/app/$packageName';
+      }
+      await Share.share(url);
+    },),
+    CustomRowProfile(title: AppTranslations.logout,),
+    SizedBox(height: 100.h,),
+    //  SizedBox(height: 100.h,),
+  ],),
+)
+
               ],
-
-
             ),
           ),
         ),
