@@ -40,14 +40,12 @@ class ContainerUnderSwiperEntertainment  extends StatelessWidget {
                   AboutWidget()
                 else...[
                   SizedBox(height: 9.h,),
-                  Expanded(
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
-                      itemCount: 5, itemBuilder: (BuildContext context, int index) {
-                      return CustomServiceContainer();
-                            }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10.h); },),
-                  ),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    itemCount: 5, itemBuilder: (BuildContext context, int index) {
+                    return CustomServiceContainer();
+                          }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10.h); },),
                   SizedBox(height: 100.h,)
                 ]
 
