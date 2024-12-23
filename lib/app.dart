@@ -19,6 +19,7 @@ import 'features/accommodation/cubit/accomendation_cubit.dart';
 import 'features/auth/cubit/cubit.dart';
 import 'features/entertainment/cubit/entertainment_cubit.dart';
 import 'features/notification/cubit/notification_cubit.dart';
+import 'features/other_services/cubit/other_services_cubit.dart';
 import 'features/splash/cubit/cubit.dart';
 
 class MyApp extends StatefulWidget {
@@ -72,6 +73,8 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<MyBookingsCubit>(),
+          ),    BlocProvider(
+            create: (_) => injector.serviceLocator<OtherServicesCubit>(),
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<TransportationCubit>(),

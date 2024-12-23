@@ -1,6 +1,7 @@
 import 'package:flutter_rating/flutter_rating.dart';
 
 import '../../../../../core/exports.dart';
+import '../../../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../../cubit/accomendation_cubit.dart';
 
 class ContainerInCenter extends StatelessWidget {
@@ -19,6 +20,7 @@ class ContainerInCenter extends StatelessWidget {
 
          child: Column(
            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+           //النقط
            children: [
              Row(
                mainAxisAlignment: MainAxisAlignment.center,
@@ -35,69 +37,8 @@ class ContainerInCenter extends StatelessWidget {
                    ),
                  );
                }).toList(),
-             )    ,        Expanded(
-               child: Container(
-                 //   height: getHeightSize(context) * 0.25,
-
-                 padding: EdgeInsets.symmetric(horizontal: 10.0),
-                 decoration: BoxDecoration(
-                   color: Colors.white,
-                   borderRadius: BorderRadius.circular(18.r),
-                   boxShadow: [
-                     BoxShadow(
-                       color: Colors.black.withOpacity(0.1),
-                       blurRadius: 5,
-                       offset: Offset(0, 4),
-                     ),
-                   ],
-                 ),
-                 child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                   children: [
-                     AutoSizeText(
-                       "مراسي ريزورت العين السخنه البحر الاحمر",
-                       maxLines: 1,
-                       textAlign: TextAlign.center,
-                       style: getSemiBoldStyle(
-                         color: AppColors.secondPrimary,
-                         fontSize: 14.sp,
-                       ),
-                     ),
-                     Row(
-                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                       children: [
-                     Column(children: [
-                           Row(
-                             children: [
-                               StarRating(
-                                   rating: 4,
-                                   allowHalfRating: false,
-                                   onRatingChanged: (rating){
-                                     //   => setState(() => this.rating = rating
-                                   }),
-                             ],
-                           ),
-                           SizedBox(height: 5.h,),
-                           AutoSizeText(
-                             "٢٠٠ فرد قام بتقيم الفندق",
-                             style: getUnderLine(
-                               color: AppColors.primary,
-                               fontSize: 12.sp,
-                             ),
-
-                           )   ],),
-                         //     Spacer(),
-                         ElevatedButton(onPressed: (){
-                           Navigator.pushNamed(context, Routes.bookingAccomodation );
-                         }, child: Text("احجز الان",style: getSemiBoldStyle(color: AppColors.white,fontSize: 14.sp),),style:ElevatedButton.styleFrom(backgroundColor: AppColors.primary),)
-
-                       ],)
-
-                   ],
-                 ),
-               ),
-             ),
+             )    ,
+             CustomContainerCompanies(),
            ],
          ),
        ),

@@ -25,12 +25,16 @@ import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
 import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
+import '../../features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
+import '../../features/entertainment/screens/entertainment_companies.dart';
+import '../../features/entertainment/screens/entertainment_screen.dart';
 import '../../features/my_account/screens/change_lang.dart';
 import '../../features/notification/screens/notification_screen.dart';
 import '../../features/my_account/screens/privacy_screen.dart';
 import '../../features/my_account/screens/profile_info.dart';
 import '../../features/my_bookings/view/accommodation_booking/screens/details_booking_screen.dart';
 import '../../features/my_bookings/view/food_booking/screens/details_booking_food_screen.dart';
+import '../../features/other_services/screens/widgets/details_other_service.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -51,13 +55,17 @@ class Routes {
   static const String hotelsScreen = '/hotelsScreen';
   static const String notificationScreen = '/notification';
   static const String detailsBooking = '/detailsBooking';
+  static const String compainiesEntertainment = '/compainiesEntertainment';
+  static const String entertainmentScreen = '/entertainmentScreen';
   static const String bookingAccomodation = '/bookingAccomodation';
   static const String accomendation = '/accomendation';
   static const String detailsBookingFood = '/detailsBookingFood';
+  static const String detailsEntertainment = '/detailsEntertainment';
   static const String detailsAccomendation = '/detailsAccomendation';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
   static const String otherServicesRoute = '/otherServicesRoute';
   static const String transportationRoute = '/transportationRoute';
+  static const String detailsOtherServices = '/detailsOtherServices';
   static const String secondBookingAccommodation = '/secondBookingAccommodation';
   static const String transportationMenuRoute = '/transportationMenuRoute';
   static const String transportationBookingDetailsRoute =
@@ -81,6 +89,34 @@ class AppRoutes {
       case Routes.onboardingPageScreenRoute:
         return PageTransition(
           child: const OnBoardinScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.detailsOtherServices:
+        return PageTransition(
+          child: const DetailsOtherService(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.detailsEntertainment:
+        return PageTransition(
+          child: const DetailsEntertainment(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.compainiesEntertainment:
+        return PageTransition(
+          child: const EntertainmentCompanies(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.entertainmentScreen:
+        return PageTransition(
+          child: const EntertainmentScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

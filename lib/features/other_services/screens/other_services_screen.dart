@@ -25,7 +25,9 @@ class _OtherServicesScreenState extends State<OtherServicesScreen> {
                       categoryModel: OtherServicesModel(
                         title: "ترزييي",
                         image: AppIcons.others,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.detailsOtherServices);
+                        },
                       ),
                     ))),
       )),
