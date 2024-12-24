@@ -26,6 +26,7 @@ class ImageAssets {
   static const String about = '$imagePath/about_us.png';
   static const String seat = '$imagePath/seat.png';
   static const String gml = '$imagePath/gml.png';
+  static const String foodContainer = '$imagePath/food_conatiner.png';
 
   // icons
   static const String phoneIcon = '$iconsPath/phone.svg';
@@ -75,6 +76,9 @@ class AppIcons {
   static const String bus = '$iconsPath/bus.svg';
   static const String call = '$iconsPath/call.svg';
   static const String whatsapp = '$iconsPath/whatsapp.svg';
+  static const String point = '$iconsPath/point.svg';
+  static const String location = '$iconsPath/location.svg';
+  static const String addCircle = '$iconsPath/addCircle.svg';
 
 
 }
