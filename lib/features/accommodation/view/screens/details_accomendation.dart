@@ -1,6 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:card_swiper/card_swiper.dart';
-import 'package:flutter_rating/flutter_rating.dart';
 import '../../../../core/exports.dart';
 import '../../cubit/accomendation_cubit.dart';
 import '../widgets/details_widgets/container_in_center.dart';

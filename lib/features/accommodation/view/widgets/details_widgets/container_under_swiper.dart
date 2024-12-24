@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../../core/exports.dart';
+import '../../../../entertainment/screens/details_of_entertainment/widgets/toggle_container.dart';
 import '../../../cubit/accomendation_cubit.dart';
 
 class ContainerUnderSwiper  extends StatelessWidget {
@@ -31,6 +32,7 @@ class ContainerUnderSwiper  extends StatelessWidget {
                  mainAxisAlignment: MainAxisAlignment.start,
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
+                   // ToggleButtonScreen(),
                    Text(
                      AppTranslations.about,
                      style: getMediumStyle(

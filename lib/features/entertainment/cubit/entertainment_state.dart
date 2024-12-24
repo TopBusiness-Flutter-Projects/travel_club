@@ -4,3 +4,4 @@ part of 'entertainment_cubit.dart';
 sealed class EntertainmentState {}
 
 final class EntertainmentInitial extends EntertainmentState {}
+final class ChangeIndex extends EntertainmentState {}
