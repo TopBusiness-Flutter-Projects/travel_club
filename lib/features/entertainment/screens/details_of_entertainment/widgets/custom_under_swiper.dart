@@ -1,11 +1,8 @@
 
 import 'package:travel_club/features/entertainment/screens/details_of_entertainment/widgets/toggle_container.dart';
-
 import '../../../../../../core/exports.dart';
-import '../../../../accommodation/cubit/accomendation_cubit.dart';
 import '../../../cubit/entertainment_cubit.dart';
 import 'about_widget.dart';
-import 'custom_contact_container.dart';
 import 'custom_service_container.dart';
 
 class ContainerUnderSwiperEntertainment  extends StatelessWidget {
