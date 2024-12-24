@@ -36,7 +36,7 @@ class _TransportationMapState extends State<TransportationMap> {
                   zoom: 12,
                 ),
                 onMapCreated: (GoogleMapController controller) {
-                  cubit.mapController = controller;
+                  cubit.mapControllerTransportation = controller;
                 },
                 markers: cubit.transportationMarkers,
               );

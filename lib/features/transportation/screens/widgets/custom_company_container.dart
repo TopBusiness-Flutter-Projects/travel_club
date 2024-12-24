@@ -25,8 +25,8 @@ class CustomCompanyContainer extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20.r),
                       child: CustomNetworkImage(
                         image: AppStrings.testImageUrl,
-                        width: 80.w,
-                        height: 80.w,
+                        width: getWidthSize(context) * 0.2,
+                        height: getWidthSize(context) * 0.2,
                       ),
                     ),
                     SizedBox(width: 8.w),
@@ -50,6 +50,7 @@ class CustomCompanyContainer extends StatelessWidget {
                                       allowHalfRating: false,
                                       emptyIcon: CupertinoIcons.star_fill,
                                       filledIcon: CupertinoIcons.star_fill,
+                                      // color: AppColors.yellow,
                                       onRatingChanged: (rating) {
                                         //   => setState(() => this.rating = rating
                                       }),

@@ -37,6 +37,8 @@ class CustomBookedCompanyContainer extends StatelessWidget {
                       allowHalfRating: false,
                       emptyIcon: CupertinoIcons.star_fill,
                       filledIcon: CupertinoIcons.star_fill,
+                      
+
                       onRatingChanged: (rating) {
                         //   => setState(() => this.rating = rating
                       }),
@@ -46,8 +48,8 @@ class CustomBookedCompanyContainer extends StatelessWidget {
                   child: AutoSizeText(
                     "200" + AppTranslations.personRateCompany,
                     maxLines: 2,
-                    style: getMediumStyle(
-                        fontSize: 13.sp, color: AppColors.grey),
+                    style:
+                        getMediumStyle(fontSize: 13.sp, color: AppColors.grey),
                   ),
                 ),
               ])

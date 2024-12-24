@@ -96,17 +96,12 @@ class TransportationCubit extends Cubit<TransportationState> {
   List<int> selectedSeats = [];
 
   void selectSeat(int seatNumber) {
-   
- selectedSeats.add(seatNumber);
-    emit(SeatChangedState());
     if (selectedSeats.contains(seatNumber)) {
       selectedSeats.remove(seatNumber);
-      emit(SeatChangedState());
     } else {
       selectedSeats.add(seatNumber);
-      emit(SeatChangedState());
     }
-     emit(SeatChangedState());
+    emit(SeatChangedState());
   }
 
   String convertToEnglishDigits(String input) {

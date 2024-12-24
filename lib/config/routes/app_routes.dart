@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:travel_club/features/accommodation/view/screens/details_accomendation.dart';
 import 'package:travel_club/features/auth/view/screens/new_pass_screen.dart';
+import 'package:travel_club/features/home/screens/best_bags_screen.dart';
+import 'package:travel_club/features/home/screens/new_offers_screen.dart';
 import 'package:travel_club/features/main_screen/screens/main_screen.dart';
 import 'package:travel_club/features/my_account/screens/about_us.dart';
 import 'package:travel_club/features/my_account/screens/contact_us.dart';
@@ -11,7 +13,8 @@ import 'package:travel_club/features/transportation/screens/booking_details_scre
 import 'package:travel_club/features/transportation/screens/search_result_screen%20.dart';
 import 'package:travel_club/features/transportation/screens/transportation_map_screen.dart';
 import 'package:travel_club/features/transportation/screens/transportation_menu_screen.dart';
-import 'package:travel_club/features/transportation/screens/trip_details_first_screen.dart';
+import 'package:travel_club/features/transportation/screens/trip_details_first_screen%20copy.dart';
+import 'package:travel_club/features/transportation/screens/trip_details_second_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../features/accommodation/view/booking_accommodation/screens/booking_accommodation_screen.dart';
@@ -66,16 +69,17 @@ class Routes {
   static const String otherServicesRoute = '/otherServicesRoute';
   static const String transportationRoute = '/transportationRoute';
   static const String detailsOtherServices = '/detailsOtherServices';
-  static const String secondBookingAccommodation = '/secondBookingAccommodation';
+  static const String secondBookingAccommodation =
+      '/secondBookingAccommodation';
   static const String transportationMenuRoute = '/transportationMenuRoute';
   static const String transportationBookingDetailsRoute =
       '/transportationBookingDetailsRoute';
   static const String transportationSearchResultRoute =
       '/transportationSearchResultRoute';
-  static const String tripDetailsfirstRoute =
-      '/tripDetailsfirstRoute';
-  static const String tripDetailsSecondRoute =
-      '/tripDetailsSecondRoute';
+  static const String tripDetailsfirstRoute = '/tripDetailsfirstRoute';
+  static const String tripDetailsSecondRoute = '/tripDetailsSecondRoute';
+  static const String offers = '/offers';
+  static const String bags = '/bags';
 }
 
 class AppRoutes {
@@ -93,40 +97,42 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-        case Routes.detailsOtherServices:
+      case Routes.detailsOtherServices:
         return PageTransition(
           child: const DetailsOtherService(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-        case Routes.detailsEntertainment:
+      case Routes.detailsEntertainment:
         return PageTransition(
           child: const DetailsEntertainment(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-        case Routes.compainiesEntertainment:
+      case Routes.compainiesEntertainment:
         return PageTransition(
           child: const EntertainmentCompanies(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-        case Routes.entertainmentScreen:
+      case Routes.entertainmentScreen:
         return PageTransition(
           child: const EntertainmentScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );  case Routes.notificationScreen:
+        );
+      case Routes.notificationScreen:
         return PageTransition(
           child: const NotificationScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );   case Routes.privacyRoute:
+        );
+      case Routes.privacyRoute:
         return PageTransition(
           child: const PrivacyScreen(),
           type: PageTransitionType.fade,
@@ -139,45 +145,50 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );case Routes.aboutUs:
+        );
+      case Routes.aboutUs:
         return PageTransition(
           child: const AboutUs(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-        case Routes.contact:
+      case Routes.contact:
         return PageTransition(
           child: const ContactUs(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-        case Routes.profileInfo:
+      case Routes.profileInfo:
         return PageTransition(
           child: const ProfileInfo(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );  case Routes.changeLanguage:
+        );
+      case Routes.changeLanguage:
         return PageTransition(
           child: const ChangeLang(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );   case Routes.detailsBooking:
+        );
+      case Routes.detailsBooking:
         return PageTransition(
           child: const DetailsBooking(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );  case Routes.donePayment:
+        );
+      case Routes.donePayment:
         return PageTransition(
           child: const DonePaymentScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );case Routes.detailsBookingFood:
+        );
+      case Routes.detailsBookingFood:
         return PageTransition(
           child: const DetailsBookingFood(),
           type: PageTransitionType.fade,
@@ -200,14 +211,14 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
 
-        case Routes.accomendation:
+      case Routes.accomendation:
         return PageTransition(
           child: const AccomendationScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-        case Routes.bookingAccomodation:
+      case Routes.bookingAccomodation:
         return PageTransition(
           child: const AccommodationBooking(),
           type: PageTransitionType.fade,
@@ -259,7 +270,7 @@ class AppRoutes {
         // final int index =
         // settings.arguments as int; // Expect an int
         return PageTransition(
-          child:  MainScreen(),
+          child: MainScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -287,7 +298,7 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
 
-        case Routes.secondBookingAccommodation:
+      case Routes.secondBookingAccommodation:
         return PageTransition(
           child: const SecondAccommodationBooking(),
           type: PageTransitionType.fade,
@@ -302,14 +313,13 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-       case Routes.payment:
+      case Routes.payment:
         return PageTransition(
-          child:PaymentProcessScreen(),
+          child: PaymentProcessScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-
 
       case Routes.transportationSearchResultRoute:
         return PageTransition(
@@ -321,6 +331,27 @@ class AppRoutes {
       case Routes.tripDetailsfirstRoute:
         return PageTransition(
           child: const TripDetailsFirstScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.tripDetailsSecondRoute:
+        return PageTransition(
+          child: const TripDetailsSecondScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.offers:
+        return PageTransition(
+          child: const NewOffersScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.bags:
+        return PageTransition(
+          child: const BestBagsScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

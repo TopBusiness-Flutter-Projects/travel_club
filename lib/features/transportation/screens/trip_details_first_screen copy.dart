@@ -51,7 +51,12 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
                           " - " +
                           AppTranslations.next,
                       onTap: () {
-                        // Navigator.pushNamed(context, Routes.tripDetailsSecondScreen);
+                        if (cubit.selectedSeats.isEmpty) {
+                          errorGetBar(AppTranslations.selectSeat);
+                          return;
+                        }
+                        Navigator.pushNamed(
+                            context, Routes.tripDetailsSecondRoute);
                       }),
                 );
               }),
@@ -185,6 +190,7 @@ class CustomSeatsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TransportationCubit cubit = context.read<TransportationCubit>();
+
     return BlocBuilder<TransportationCubit, TransportationState>(
         builder: (context, state) {
       return Row(
@@ -202,14 +208,16 @@ class CustomSeatsRow extends StatelessWidget {
                         : index + currentRow * 5 - currentRow - 1;
             if (seatType == SeatType.two) {
               return index == 0 || index == 1
-                  ? CustomSeat(cubit: cubit,
+                  ? CustomSeat(
+                      cubit: cubit,
                       seatNumber: '${rowIndex + 1}',
                     )
                   : SizedBox(
                       width: getWidthSize(context) * 0.13,
                     );
             } else if (seatType == SeatType.five) {
-              return CustomSeat(cubit: cubit,
+              return CustomSeat(
+                cubit: cubit,
                 seatNumber: '${rowIndex - 1}',
               );
             } else if (seatType == SeatType.four) {
@@ -217,7 +225,8 @@ class CustomSeatsRow extends StatelessWidget {
                   ? SizedBox(
                       width: getWidthSize(context) * 0.13,
                     )
-                  : CustomSeat( cubit: cubit,
+                  : CustomSeat(
+                      cubit: cubit,
                       seatNumber: index > 2 ? '${rowIndex}' : '${rowIndex + 1}',
                       // seatNumber: index > 2 ? '${index}' : '${index + 1}',
                     );
@@ -233,7 +242,8 @@ class CustomSeat extends StatefulWidget {
   const CustomSeat({
     super.key,
     required this.seatNumber,
-    this.isEditable = true, required this.cubit,
+    this.isEditable = true,
+    required this.cubit,
   });
 
   final String seatNumber;
@@ -246,73 +256,69 @@ class CustomSeat extends StatefulWidget {
 class _CustomSeatState extends State<CustomSeat> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        BlocBuilder<TransportationCubit, TransportationState>(
-            builder: (context, state) {
-          return Padding(
-            padding: EdgeInsets.only(
-                top: 15.h,
-                right: getHorizontalPadding(context) * 0.3,
-                left: getHorizontalPadding(context) * 0.3),
-            child: Stack(
-              alignment: Alignment.topCenter,
-              clipBehavior: Clip.none,
-              children: [
-                InkWell(
-                  onTap: widget.isEditable
-                      ? () {
-                          if (widget.cubit.reservedSeats
-                              .contains(int.parse(widget.seatNumber))) {
-                            return;
-                          }
-                          // setState(() {
-                          //   cubit.selectedSeats
-                          //           .contains(int.parse(widget.seatNumber))
-                          //       ? cubit.selectedSeats
-                          //           .remove(int.parse(widget.seatNumber))
-                          //       : cubit.selectedSeats
-                          //           .add(int.parse(widget.seatNumber));
-                          // });
-                          widget.cubit.selectSeat(int.parse(widget.seatNumber));
-                        }
-                      : null,
-                  child: Image.asset(
-                    ImageAssets.seat,
-                    color: widget.isEditable
-                        ?widget. cubit.selectedSeats
+    return BlocBuilder<TransportationCubit, TransportationState>(
+        builder: (context, state) {
+      return Padding(
+        padding: EdgeInsets.only(
+            top: 15.h,
+            right: getHorizontalPadding(context) * 0.3,
+            left: getHorizontalPadding(context) * 0.3),
+        child: Stack(
+          alignment: Alignment.topCenter,
+          clipBehavior: Clip.none,
+          children: [
+            InkWell(
+              onTap: widget.isEditable
+                  ? () {
+                      if (widget.cubit.reservedSeats
+                          .contains(int.parse(widget.seatNumber))) {
+                        return;
+                      }
+                      // setState(() {
+                      //   cubit.selectedSeats
+                      //           .contains(int.parse(widget.seatNumber))
+                      //       ? cubit.selectedSeats
+                      //           .remove(int.parse(widget.seatNumber))
+                      //       : cubit.selectedSeats
+                      //           .add(int.parse(widget.seatNumber));
+                      // });
+                      widget.cubit.selectSeat(int.parse(widget.seatNumber));
+                    }
+                  : null,
+              child: Image.asset(
+                ImageAssets.seat,
+                color: widget.isEditable
+                    ? widget.cubit.selectedSeats
+                            .contains(int.parse(widget.seatNumber))
+                        ? AppColors.green
+                        : widget.cubit.reservedSeats
                                 .contains(int.parse(widget.seatNumber))
-                            ? AppColors.green
-                            : widget.cubit.reservedSeats
-                                    .contains(int.parse(widget.seatNumber))
-                                ? AppColors.samawy
-                                : AppColors.primary
-                        : AppColors.green,
-                    width: getWidthSize(context) * 0.13,
+                            ? AppColors.samawy
+                            : AppColors.primary
+                    : AppColors.green,
+                width: getWidthSize(context) * 0.13,
+              ),
+            ),
+            Positioned(
+              top: -5.h,
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.yellow,
+                ),
+                height: 25.h,
+                width: 25.h,
+                child: Center(
+                  child: AutoSizeText(
+                    widget.seatNumber,
+                    style: getMediumStyle(fontSize: 12.sp),
                   ),
                 ),
-                Positioned(
-                  top: -5.h,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.yellow,
-                    ),
-                    height: 25.h,
-                    width: 25.h,
-                    child: Center(
-                      child: AutoSizeText(
-                        widget.seatNumber,
-                        style: getMediumStyle(fontSize: 12.sp),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          );
-        }),
-      ],
-    );
+              ),
+            )
+          ],
+        ),
+      );
+    });
   }
 }

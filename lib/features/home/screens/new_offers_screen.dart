@@ -1,28 +1,31 @@
-import 'package:travel_club/features/notification/screens/widgets/custom_container_widget.dart';
-
+import 'package:travel_club/features/home/cubit/home_cubit.dart';
+import 'package:travel_club/features/home/cubit/home_state.dart';
 import '../../../core/exports.dart';
-import '../cubit/notification_cubit.dart';
+import 'widgets/custom_offers_section.dart';
 
-class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({super.key});
+class NewOffersScreen extends StatelessWidget {
+  const NewOffersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NotificationCubit, NotificationState>(
+    return BlocBuilder<HomeCubit, HomeState>(
       builder: (BuildContext context, state) {
         return CustomScreen(
-            appbarTitle: AppTranslations.notifications,
+            appbarTitle: AppTranslations.newOffers,
             body: ListView.separated(
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
-                return CustomContainerWidget();
+                return CustomOffersContainer(
+                  isLast: true,
+                  isHome: false,
+                );
               },
               separatorBuilder: (BuildContext context, int index) {
                 return SizedBox(
                   height: getVerticalPadding(context) * 1,
                 );
               },
-              itemCount: 30,
+              itemCount: 20,
             ));
       },
     );
