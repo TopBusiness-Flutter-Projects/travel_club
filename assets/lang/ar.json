@@ -50,7 +50,7 @@
   "details": "التفاصيل",
   "about": "نبذة عن ",
   "what_it_offers": "ما يقدمه ",
-  "location_on_map": "الموقع علي الخريطة",
+    "location_on_map": "الموقع علي الخريطة",
   "rating": "تصنيف عدد النجوم",
   "one_star": "نجمه واحدة",
   "two_stars": "نجمتان",
@@ -155,6 +155,13 @@
   "privacy": "الخصوصية",
   "cancellation_policy": "سياسة الغاء الحجز",
   "notifications": "التنبيهات",
+  "entertainment_means": "وسائل الترفيه",
+  "list_of_companies": "قائمة الشركات",
+  "communication": "التواصل",
+  "services": "الخدمات",
+  "calling": "مكالمه",
+  "contact_whats_app": "تواصل واتس اب",
+  "nearest_places": "الاماكن الاقرب",
 
 
   "lasss": ""

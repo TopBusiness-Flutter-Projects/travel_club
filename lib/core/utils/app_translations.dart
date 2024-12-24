@@ -153,6 +153,13 @@ class AppTranslations {
   static String whoUs = 'who_us'.tr();
   static String whoUsOffer = 'who_we_offer'.tr();
   static String privacy = 'privacy'.tr();
+  static String ListOfCompanies = 'list_of_companies'.tr();
   static String cancellationPolicy = 'cancellation_policy'.tr();
   static String notifications = 'notifications'.tr();
+  static String communication = 'communication'.tr();
+  static String entertainmentMeans = 'entertainment_means'.tr();
+  static String services = 'services'.tr();
+  static String calling = 'calling'.tr();
+  static String contactWhatsApp = 'contact_whats_app'.tr();
+  static String nearstPlaces = 'nearest_places'.tr();
 }

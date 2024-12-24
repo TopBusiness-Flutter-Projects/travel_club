@@ -21,7 +21,7 @@ class CustomCategorySection extends StatelessWidget {
           title: AppTranslations.entertainment,
           image: AppIcons.entertainment,
           onTap: () {
-            // Navigator.pushNamed(context, AppRoutes.entertainment);
+            Navigator.pushNamed(context, Routes.entertainmentScreen);
           }),
       CategoryModel(
           title: AppTranslations.otherServices,

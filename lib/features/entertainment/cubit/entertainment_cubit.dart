@@ -8,4 +8,9 @@ part 'entertainment_state.dart';
 class EntertainmentCubit extends Cubit<EntertainmentState> {
   EntertainmentCubit(this.entertainmentRepoImpl) : super(EntertainmentInitial());
   EntertainmentRepoImpl? entertainmentRepoImpl;
+  bool isServiceSelected = false;
+void changeIndex(bool index) {
+  isServiceSelected = index;
+  emit(ChangeIndex());
+}
 }
