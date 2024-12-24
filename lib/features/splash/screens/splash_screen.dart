@@ -30,6 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
       },
     );
   }
+
   Future<void> _getStoreUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('onBoarding') != null) {
