@@ -32,6 +32,21 @@ TextStyle getUnderLine({Color? color, double? fontSize,FontWeight ?fontweight })
     decorationColor: color ?? AppColors.secondPrimary,
     // height: 2,
     decorationThickness: 2,
+
+    fontSize: fontSize ?? 18.sp,
+    fontFamily: AppStrings.fontFamily,
+    color: color ?? AppColors.black,
+    fontWeight: fontweight??FontWeight.w600,
+  );
+}
+//get through line
+TextStyle getThroughLine({Color? color, double? fontSize,FontWeight ?fontweight }) {
+  return TextStyle(
+    decoration: TextDecoration.lineThrough,
+    decorationColor: color ?? AppColors.secondPrimary,
+    // height: 2,
+    decorationThickness: 2,
+
     fontSize: fontSize ?? 18.sp,
     fontFamily: AppStrings.fontFamily,
     color: color ?? AppColors.black,

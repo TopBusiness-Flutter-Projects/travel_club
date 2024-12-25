@@ -31,6 +31,8 @@ import '../../features/auth/view/screens/sign_up_screen.dart';
 import '../../features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
 import '../../features/entertainment/screens/entertainment_companies.dart';
 import '../../features/entertainment/screens/entertainment_screen.dart';
+import '../../features/food/screens/details_of_food/screens/details_food_screen.dart';
+import '../../features/food/screens/food_screen.dart';
 import '../../features/my_account/screens/change_lang.dart';
 import '../../features/notification/screens/notification_screen.dart';
 import '../../features/my_account/screens/privacy_screen.dart';
@@ -62,6 +64,7 @@ class Routes {
   static const String entertainmentScreen = '/entertainmentScreen';
   static const String bookingAccomodation = '/bookingAccomodation';
   static const String accomendation = '/accomendation';
+  static const String foodScreen = '/foodScreen';
   static const String detailsBookingFood = '/detailsBookingFood';
   static const String detailsEntertainment = '/detailsEntertainment';
   static const String detailsAccomendation = '/detailsAccomendation';
@@ -71,6 +74,7 @@ class Routes {
   static const String detailsOtherServices = '/detailsOtherServices';
   static const String secondBookingAccommodation =
       '/secondBookingAccommodation';
+  static const String detailsFoodRoute = '/detailsFoodRoute';
   static const String transportationMenuRoute = '/transportationMenuRoute';
   static const String transportationBookingDetailsRoute =
       '/transportationBookingDetailsRoute';
@@ -96,10 +100,22 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
+        );case Routes.detailsFoodRoute:
+        return PageTransition(
+          child: const DetailsFood(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsOtherServices:
         return PageTransition(
           child: const DetailsOtherService(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );   case Routes.foodScreen:
+        return PageTransition(
+          child: const FoodScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

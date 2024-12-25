@@ -163,4 +163,9 @@ class AppTranslations {
   static String contactWhatsApp = 'contact_whats_app'.tr();
   static String nearstPlaces = 'nearest_places'.tr();
   static String selectSeat = 'select_seat'.tr();
+  static String allRestaurants = 'all_restaurants'.tr();
+  static String grilled = 'grilled'.tr();
+  static String fishes = 'fishes'.tr();
+  static String workingHours = 'working_hours'.tr();
+  static String personWhoRatedRestaurant = 'person_who_rated_restaurant'.tr();
 }

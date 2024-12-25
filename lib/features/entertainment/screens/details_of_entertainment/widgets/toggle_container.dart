@@ -16,7 +16,7 @@ class _ToggleButtonScreenState extends State<ToggleButtonScreen> {
     var cubit=context.read<EntertainmentCubit>();
  return BlocBuilder<EntertainmentCubit, EntertainmentState>(builder: (BuildContext context, state) {    return Center(
    child: Container(
-     padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+     padding: EdgeInsets.only(top: 50.0, right: 20.0, left: 20.0),
      decoration: BoxDecoration(
        borderRadius: BorderRadius.circular(30.0),
      ),

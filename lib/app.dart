@@ -18,6 +18,7 @@ import 'package:travel_club/injector.dart' as injector;
 import 'features/accommodation/cubit/accomendation_cubit.dart';
 import 'features/auth/cubit/cubit.dart';
 import 'features/entertainment/cubit/entertainment_cubit.dart';
+import 'features/food/cubit/food_cubit.dart';
 import 'features/notification/cubit/notification_cubit.dart';
 import 'features/other_services/cubit/other_services_cubit.dart';
 import 'features/splash/cubit/cubit.dart';
@@ -83,6 +84,8 @@ class _MyAppState extends State<MyApp> {
             create: (_) => injector.serviceLocator<LocationCubit>(),
           ),   BlocProvider(
             create: (_) => injector.serviceLocator<EntertainmentCubit>(),
+          ), BlocProvider(
+            create: (_) => injector.serviceLocator<FoodCubit>(),
           ),
         ],
         child: GetMaterialApp(
