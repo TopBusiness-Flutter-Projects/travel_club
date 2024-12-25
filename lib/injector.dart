@@ -28,6 +28,8 @@ import 'package:travel_club/features/transportation/data/repo/transportation_rep
 import 'core/api/app_interceptors.dart';
 import 'features/entertainment/cubit/entertainment_cubit.dart';
 import 'features/entertainment/data/repo/entertainment_repo_impl.dart';
+import 'features/food/cubit/food_cubit.dart';
+import 'features/food/data/repo/food_repo_impl.dart';
 import 'features/notification/cubit/notification_cubit.dart';
 import 'features/notification/data/repo/notification_repo_impl.dart';
 
@@ -63,6 +65,8 @@ Future<void> setup() async {
   );
   serviceLocator.registerFactory(
     () => OtherServicesCubit(serviceLocator()),
+  ); serviceLocator.registerFactory(
+    () => FoodCubit(serviceLocator()),
   );
   serviceLocator.registerFactory(
     () => TransportationCubit(serviceLocator()),
@@ -93,8 +97,8 @@ Future<void> setup() async {
       .registerLazySingleton(() => TransportationRepoImpl(serviceLocator()));
   serviceLocator
       .registerLazySingleton(() => LocationRepoImpl(serviceLocator()));
-serviceLocator
-      .registerLazySingleton(() => NotificationRepoImpl(serviceLocator()));
+serviceLocator.registerLazySingleton(() => NotificationRepoImpl(serviceLocator()));
+serviceLocator.registerLazySingleton(() => FoodRepoImpl(serviceLocator()));
 
 //!-------------------------Declare Interceptors---------------------------
 

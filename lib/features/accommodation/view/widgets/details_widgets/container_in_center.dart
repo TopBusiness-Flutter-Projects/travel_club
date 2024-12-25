@@ -16,7 +16,7 @@ class ContainerInCenter extends StatelessWidget {
        left: getWidthSize(context) * 0.05, // Adjust position from the left
        right: getWidthSize(context) * 0.05, // Adjust position from the right
        child: SizedBox(
-         height: getHeightSize(context) * 0.20,
+         height: getHeightSize(context) * 0.50,
 
          child: Column(
            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -24,7 +24,7 @@ class ContainerInCenter extends StatelessWidget {
            children: [
              Row(
                mainAxisAlignment: MainAxisAlignment.center,
-               children: cubit.imageUrls!.asMap().entries.map((entry) {
+               children: cubit.imageUrls.asMap().entries.map((entry) {
                  return Container(
                    width: 10.0,
                    height: 10.0,
@@ -32,12 +32,12 @@ class ContainerInCenter extends StatelessWidget {
                        vertical: 8.0, horizontal: 4.0),
                    decoration: BoxDecoration(
                        shape: BoxShape.circle,
-                       color:cubit.currentIndex == entry.key ? (AppColors.primary)
-                           .withOpacity( 0.4):AppColors.grey
+                       color:cubit.currentIndex == entry.key ? AppColors.white:(AppColors.white)
+                           .withOpacity( 0.4)
                    ),
                  );
                }).toList(),
-             )    ,
+             ),
              CustomContainerCompanies(),
            ],
          ),

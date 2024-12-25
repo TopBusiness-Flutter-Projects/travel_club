@@ -32,6 +32,7 @@ class ContainerUnderSwiperEntertainment  extends StatelessWidget {
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //togle
+                SizedBox(height: 30.h,),
                 ToggleButtonScreen(),
                 if(cubit.isServiceSelected==true)
                   AboutWidget()
