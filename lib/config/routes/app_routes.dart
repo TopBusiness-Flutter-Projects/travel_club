@@ -39,7 +39,7 @@ import '../../features/my_account/screens/privacy_screen.dart';
 import '../../features/my_account/screens/profile_info.dart';
 import '../../features/my_bookings/view/accommodation_booking/screens/details_booking_screen.dart';
 import '../../features/my_bookings/view/food_booking/screens/details_booking_food_screen.dart';
-import '../../features/other_services/screens/widgets/details_other_service.dart';
+import '../../features/other_services/screens/details_other_service.dart';
 
 class Routes {
   static const String initialRoute = '/';

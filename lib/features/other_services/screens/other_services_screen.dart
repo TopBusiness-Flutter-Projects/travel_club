@@ -7,6 +7,7 @@ class OtherServicesScreen extends StatefulWidget {
   @override
   State<OtherServicesScreen> createState() => _OtherServicesScreenState();
 }
+
 class _OtherServicesScreenState extends State<OtherServicesScreen> {
   @override
   Widget build(BuildContext context) {
@@ -20,13 +21,14 @@ class _OtherServicesScreenState extends State<OtherServicesScreen> {
             mainAxisSpacing: 0,
             crossAxisSpacing: 0,
             children: List.generate(
-                80,
+                7,
                 (index) => OtherServicesContainer(
                       categoryModel: OtherServicesModel(
-                        title: "ترزييي",
+                        title: "سوبر ماركت",
                         image: AppIcons.others,
                         onTap: () {
-                          Navigator.pushNamed(context, Routes.detailsOtherServices);
+                          Navigator.pushNamed(
+                              context, Routes.detailsOtherServices);
                         },
                       ),
                     ))),
@@ -64,9 +66,15 @@ class OtherServicesContainer extends StatelessWidget {
                 vertical: getHeightSize(context) * 0.02),
             child: Row(
               children: [
-                SvgPicture.asset(
-                  categoryModel.image,
+                // SvgPicture.asset(
+                //   categoryModel.image,
+                //   width: getWidthSize(context) * 0.13,
+                // ),
+                Image.network(
+                  "https://lotel.efaculty.tech/storage/cities/65701735112706.webp",
+                  fit: BoxFit.cover,
                   width: getWidthSize(context) * 0.13,
+                  // height: getHeightSize(context) * 0.2,
                 ),
                 SizedBox(width: getWidthSize(context) * 0.02),
                 Flexible(
