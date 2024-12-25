@@ -145,10 +145,11 @@ class LocationCubit extends Cubit<LocationState> {
         .asUint8List();
   }
 
-  GoogleMapController? mapController;
+  GoogleMapController? mapControllerTransportation;
+  GoogleMapController? mapControllerAccommodation;
   Future<void> updateCameraposition() async {
-    if (mapController != null && currentLocation != null) {
-      mapController!.animateCamera(
+    if (mapControllerTransportation != null && currentLocation != null) {
+      mapControllerTransportation!.animateCamera(
         CameraUpdate.newLatLng(
           LatLng(
             currentLocation!.latitude!,
@@ -160,7 +161,7 @@ class LocationCubit extends Cubit<LocationState> {
   }
 
   disposeController() {
-    mapController?.dispose();
+    mapControllerTransportation?.dispose();
     emit(DisposeMapState());
   }
 

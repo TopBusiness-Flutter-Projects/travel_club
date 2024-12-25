@@ -23,7 +23,7 @@ class _TransportationMapScreenState extends State<TransportationMapScreen> {
             SizedBox(
                 width: double.infinity,
                 height: getHeightSize(context),
-                child: TransportationMap()),
+                child: const TransportationMap()),
             Column(children: [
               SizedBox(height: getVerticalPadding(context) * 2),
               Padding(

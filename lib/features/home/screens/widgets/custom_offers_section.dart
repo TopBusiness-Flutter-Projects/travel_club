@@ -19,7 +19,9 @@ class CustomOffersSection extends StatelessWidget {
               Text(AppTranslations.newOffers,
                   style: getBoldStyle(fontSize: 16.sp)),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, '/offers');
+                },
                 child: Text(
                   AppTranslations.more,
                   style:
@@ -49,9 +51,11 @@ class CustomOffersSection extends StatelessWidget {
 class CustomOffersContainer extends StatelessWidget {
   const CustomOffersContainer({
     this.isLast = false,
+    this.isHome = true,
     super.key,
   });
   final bool isLast;
+  final bool isHome;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -60,7 +64,8 @@ class CustomOffersContainer extends StatelessWidget {
           end: isLast ? getHorizontalPadding(context) : 0,
           bottom: getHeightSize(context) * 0.01),
       child: CustomContainerWithShadow(
-          width: getWidthSize(context) * 0.8,
+          width: isHome ? getWidthSize(context) * 0.8 : null,
+          height: isHome ? null : getHeightSize(context) * 0.34,
           child: Column(
             children: [
               ClipRRect(
@@ -68,7 +73,9 @@ class CustomOffersContainer extends StatelessWidget {
                 child: Image.network(
                   AppStrings.testImageUrl,
                   fit: BoxFit.cover,
-                  width: getWidthSize(context) * 0.8,
+                  width: isHome
+                      ? getWidthSize(context) * 0.8
+                      : getWidthSize(context),
                   height: getHeightSize(context) * 0.2,
                 ),
               ),
@@ -90,11 +97,11 @@ class CustomOffersContainer extends StatelessWidget {
                               style: getMediumStyle(fontSize: 14.sp),
                             ),
                           ),
-                          Icon(
-                            CupertinoIcons.heart,
-                            color: AppColors.primary,
-                            size: 25.sp,
-                          )
+                          // Icon(
+                          //   CupertinoIcons.heart,
+                          //   color: AppColors.primary,
+                          //   size: 25.sp,
+                          // )
                         ],
                       ),
                       AutoSizeText(

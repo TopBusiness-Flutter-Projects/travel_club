@@ -7,7 +7,8 @@ import '../show_model_bottom_sheet.dart';
 import '../show_order_bottom.dart';
 
 class CustomFilterBar extends StatelessWidget {
-  const CustomFilterBar({super.key});
+  const CustomFilterBar({super.key, required this.mapWidget});
+  final Widget mapWidget ;
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +39,7 @@ class CustomFilterBar extends StatelessWidget {
     );
 
             },
-            child: _buildFilterItem(
-              icon: AppIcons.filter, // Flutter built-in icon for filter
-              label: AppTranslations.filter,
-            ),
+            child: BuildFilterItem(icon: AppIcons.filter, label: AppTranslations.filter),
           ),
           Container(height:50.h ,width: 1.w,color: Colors.blueGrey.shade100,),
         //  Divider(color: Colors.blueGrey.shade100, thickness: 1,height: ,),
@@ -59,25 +57,30 @@ class CustomFilterBar extends StatelessWidget {
                 },
               );
             },
-            child: _buildFilterItem(
-              icon: AppIcons.order
-              , // Flutter built-in icon for layers
-              label: AppTranslations.orderBy,
-            ),
+            child: BuildFilterItem(icon: AppIcons.order, label: AppTranslations.orderBy),
           ),
           Container(height:50.h ,width: 1.w,color: Colors.blueGrey.shade100,),
           SizedBox(width: 4.w,),
           // خريطة
-          _buildFilterItem(
-            icon: AppIcons.map, // Flutter built-in icon for map
-            label:AppTranslations.map,
-          ),
+        mapWidget
         ],
       ),
     );
   }
+}
 
-  Widget _buildFilterItem({required String icon, required String label}) {
+class BuildFilterItem extends StatelessWidget {
+  const BuildFilterItem({
+    super.key,
+    required this.icon,
+    required this.label,
+  });
+
+  final String icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(

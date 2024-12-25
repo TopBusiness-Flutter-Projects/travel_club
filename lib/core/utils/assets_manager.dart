@@ -22,6 +22,7 @@ class ImageAssets {
   static const String forward = '$imagePath/forward.png';
   static const String map = '$imagePath/map.png';
   static const String marker = '$imagePath/marker.png';
+  static const String markerSelect = '$imagePath/marker_selected.png';
   static const String fromLocation = '$imagePath/fromLocation.png';
   static const String about = '$imagePath/about_us.png';
   static const String seat = '$imagePath/seat.png';
@@ -47,6 +48,7 @@ class AppIcons {
   static const String others = '$iconsPath/others.svg';
   static const String order = '$iconsPath/order.svg';
   static const String map = '$iconsPath/map.svg';
+  static const String menu = '$iconsPath/menu.svg';
   static const String forward = '$iconsPath/forward.svg';
   static const String correct = '$iconsPath/correct.svg';
   static const String notification = '$iconsPath/notification.svg';
