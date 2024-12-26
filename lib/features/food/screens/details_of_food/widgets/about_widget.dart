@@ -1,6 +1,5 @@
 import '../../../../../core/exports.dart';
 import '../../../cubit/food_cubit.dart';
-import 'custom_contact_container.dart';
 
 class AboutWidgetFood extends StatelessWidget {
   const AboutWidgetFood({super.key});
@@ -67,7 +66,12 @@ class AboutWidgetFood extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10.h),
-
+ListView.separated(
+  shrinkWrap: true,
+  physics: NeverScrollableScrollPhysics(),
+  itemCount: 5, itemBuilder: (BuildContext context, int index) {
+return Text("السبت من ٩ ص : ٩ م",style: getMediumStyle(fontSize: 14.sp,color: AppColors.grey),);
+}, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 5.h,) ;},)
         ],),
     );
   },);

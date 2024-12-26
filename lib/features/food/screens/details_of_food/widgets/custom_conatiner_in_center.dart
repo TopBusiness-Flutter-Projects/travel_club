@@ -4,8 +4,10 @@ import 'package:travel_club/core/widgets/custom_button.dart';
 import '../../../../../core/exports.dart';
 
 class CustomContainerFood extends StatelessWidget {
-  CustomContainerFood({super.key,this.isDetails});
+  CustomContainerFood({super.key,this.isDetails,this.isBooking});
   bool ?isDetails;
+  bool ?isBooking=true;
+
   @override
   Widget build(BuildContext context) {
     return CustomContainerWithShadow(
@@ -62,9 +64,13 @@ class CustomContainerFood extends StatelessWidget {
                           SvgPicture.asset(AppIcons.location),
                             Flexible(child: Text("٢٠ شارع الملك الصالح / العين السخنه /مصر",maxLines: 2,style: getRegularStyle(fontSize: 12.sp),)),
                             SizedBox(width: 5.w,),
+                             isBooking==false?Flexible(child: Container()):
                             Flexible(child: Padding(
                               padding: const EdgeInsets.all(4.0),
-                              child: CustomButton(title: 'حجز طاولة',),
+                              child: CustomButton(title: 'حجز طاولة',onTap: (){
+                                Navigator.pushNamed(context, Routes.bookTable);
+
+                              },),
                             ))
                         ]),
 

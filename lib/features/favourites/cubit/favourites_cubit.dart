@@ -8,9 +8,9 @@ class FavouritesCubit extends Cubit<FavouritesState> {
   FavouritesRepoImpl api;
   int selectedIndex=0;
   List<String>categories=[
-    AppTranslations.accommodationBookings,
+    AppTranslations.accommodation,
     AppTranslations.transportation,
-    AppTranslations.foodBookings
+    AppTranslations.food
   ];
   void changeContainer(int index){
     selectedIndex=index;

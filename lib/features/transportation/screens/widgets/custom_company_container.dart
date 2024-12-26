@@ -25,8 +25,8 @@ class CustomCompanyContainer extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20.r),
                       child: CustomNetworkImage(
                         image: AppStrings.testImageUrl,
-                        width: getWidthSize(context) * 0.2,
-                        height: getWidthSize(context) * 0.2,
+                        width: 80.w,
+                        height: 80.w,
                       ),
                     ),
                     SizedBox(width: 8.w),
@@ -43,18 +43,14 @@ class CustomCompanyContainer extends StatelessWidget {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(
-                                  width: getWidthSize(context) * 0.3,
-                                  child: StarRating(
-                                      rating: 4,
-                                      allowHalfRating: false,
-                                      emptyIcon: CupertinoIcons.star_fill,
-                                      filledIcon: CupertinoIcons.star_fill,
-                                      // color: AppColors.yellow,
-                                      onRatingChanged: (rating) {
-                                        //   => setState(() => this.rating = rating
-                                      }),
-                                ),
+                                StarRating(
+                                    rating: 4,
+                                    allowHalfRating: false,
+                                    emptyIcon: CupertinoIcons.star_fill,
+                                    filledIcon: CupertinoIcons.star_fill,
+                                    onRatingChanged: (rating) {
+                                      //   => setState(() => this.rating = rating
+                                    }),
                                 SizedBox(width: 1.w),
                                 Flexible(
                                   child: AutoSizeText(

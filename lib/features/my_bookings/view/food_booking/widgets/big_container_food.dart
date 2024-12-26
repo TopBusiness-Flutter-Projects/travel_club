@@ -1,10 +1,7 @@
 //big conatiner
 
-import 'package:travel_club/features/my_bookings/view/accommodation_booking/widgets/small_container.dart';
 import 'package:travel_club/features/my_bookings/view/food_booking/widgets/small_container_food.dart';
-
 import '../../../../../../core/exports.dart';
-import '../../../../accommodation/view/widgets/acommendation_widgets/accomendation_rating.dart';
 import '../../../cubit/my_bookings_cubit.dart';
 import '../../../cubit/my_bookings_state.dart';
 class FoodModel {
@@ -19,6 +16,7 @@ void Function()? onTap;
 
   FoodModel(    { this.numofnights,this.onTap,this.title, this.rate,this.status=true, this.date, this.price,  this.numOfBooking,});
 }
+//big conatiner
 class CustomBookingFoodContainerBig extends StatelessWidget {
    CustomBookingFoodContainerBig({super.key,required this.foodModel});
  final FoodModel foodModel;
@@ -34,13 +32,14 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
             CustomBookingFoodContainerSmall(foodModel: FoodModel(title: "title", rate: 4, date: "date", price: "price", numOfBooking: "numOfBooking"),),
             //Row
             Row(
-
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(AppTranslations.numberBooking,style: getRegularStyle(color: AppColors.grey),),
                         SizedBox(height: 5.h,),
@@ -57,6 +56,7 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 5.h,),
 

@@ -1,5 +1,6 @@
 
-import 'package:travel_club/features/entertainment/screens/details_of_entertainment/widgets/toggle_container.dart';
+import 'package:flutter_rating/flutter_rating.dart';
+import 'package:travel_club/features/food/screens/details_of_food/widgets/rating_widget.dart';
 import 'package:travel_club/features/food/screens/details_of_food/widgets/sub_toggle_buttons.dart';
 import 'package:travel_club/features/food/screens/details_of_food/widgets/toggle_container.dart';
 import '../../../../../../core/exports.dart';
@@ -45,19 +46,31 @@ class ContainerUnderSwiperFood  extends StatelessWidget {
                   return CustomMenueContainer();
                 }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10.h); },),
               ]
-                 // AboutWidget()
+                //about
+                else if(cubit.selectedIndexMenue==1)...[
+                SizedBox(height: 9.h,),
+                AboutWidgetFood(),
+                // ListView.separated(
+                //   shrinkWrap: true,
+                //   physics: BouncingScrollPhysics(),
+                //   itemCount: 5, itemBuilder: (BuildContext context, int index) {
+                //   return CustomMenueContainer();
+                //         }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10.h); },),
+                SizedBox(height: 100.h,)
+              ]
+                 // rating()
                 else...[
                   SizedBox(height: 9.h,),
-                AboutWidgetFood(),
-                  // ListView.separated(
-                  //   shrinkWrap: true,
-                  //   physics: BouncingScrollPhysics(),
-                  //   itemCount: 5, itemBuilder: (BuildContext context, int index) {
-                  //   return CustomMenueContainer();
-                  //         }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10.h); },),
+
+                  ListView.separated(
+                    physics: BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 5, itemBuilder: (BuildContext context, int index) {
+                    return  RatingWidgetFood();
+                  }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10.h,); },),
+
                   SizedBox(height: 100.h,)
                 ]
-
               ],
             ),
           ),

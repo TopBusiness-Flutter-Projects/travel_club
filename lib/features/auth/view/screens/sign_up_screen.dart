@@ -29,10 +29,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 10.h,),
                 //skip
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: CustomSkipRow(
-                      onTap:(){}, backgroundColor: AppColors.yellow),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 83.w, // Adjust size as needed
+                    height: 36.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.lightWhite,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(15.r), // Circular with rounded corners
+                    ),
+                    child: GestureDetector(
+                      onTap: (){Navigator.pop(context);},
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                        children: [
+                          Icon(Icons.arrow_back_ios,color: AppColors.grey,),
+
+                          Text(AppTranslations.back,style: getSemiBoldStyle(color: AppColors.grey,fontSize: 14.sp),),
+                        ],
+                                          ),
+                      ),
+                    ),),
                 ),
+
+
+
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 10.w),
+                //   child: CustomSkipRow(
+                //       onTap:(){}, backgroundColor: AppColors.yellow),
+                // ),
                 // CustomContainer(),
                 SizedBox(height: 10.h,),
                 //title
