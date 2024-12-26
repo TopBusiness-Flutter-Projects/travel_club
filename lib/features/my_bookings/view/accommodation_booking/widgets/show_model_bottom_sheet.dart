@@ -18,7 +18,7 @@ void showModelBottomSheetRatting(context) {
  isScrollControlled: true,
       backgroundColor: AppColors.white,
       builder: (context) {
-
+var cubit=context.read<MyBookingsCubit>();
         return BlocBuilder<MyBookingsCubit,MyBookingsState>(builder: (BuildContext context, state) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -85,11 +85,15 @@ void showModelBottomSheetRatting(context) {
 
                   children: [
                     StarRating(
-                        rating: 1,
+                        rating: cubit.rating,
                         allowHalfRating: false,
-                        onRatingChanged: (rating){
-                          //   => setState(() => this.rating = rating
-                        }),
+                      onRatingChanged: (newRating) {
+                        // setState(() {
+                        //   cubit.rating = newRating;
+                        // });
+cubit.changeRating(newRating);
+                        }
+                        )
                   ],
                 ),                 SizedBox(height: 10),
 

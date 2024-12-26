@@ -25,13 +25,15 @@ class CustomBookingSectionFavourite extends StatelessWidget {
               : AppColors.white,  // Default color
           isShadow: false,
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              cubit. categories[index!],
-              style: TextStyle(
-                color: cubit.selectedIndex == index
-                    ? AppColors.white  // Text color for selected
-                    : AppColors.secondPrimary, // Text color for default
+            padding: const EdgeInsets.only(right: 30.0,left: 30.0),
+            child: Center(
+              child: Text(
+                cubit. categories[index!],
+                style: TextStyle(
+                  color: cubit.selectedIndex == index
+                      ? AppColors.white  // Text color for selected
+                      : AppColors.secondPrimary, // Text color for default
+                ),
               ),
             ),
           ),

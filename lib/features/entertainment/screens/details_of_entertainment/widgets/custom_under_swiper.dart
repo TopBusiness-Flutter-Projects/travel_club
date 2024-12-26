@@ -25,14 +25,14 @@ class ContainerUnderSwiperEntertainment  extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding:  EdgeInsets.only(top:                  getHeightSize(context) * 0.07,
+            padding:  EdgeInsets.only(top:                  getHeightSize(context) * 0.05,
             ),
             child: ListView(
               // mainAxisAlignment: MainAxisAlignment.start,
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //togle
-                SizedBox(height: 30.h,),
+              //  SizedBox(height: 30.h,),
                 ToggleButtonScreen(),
                 if(cubit.isServiceSelected==true)
                   AboutWidget()

@@ -43,17 +43,14 @@ class CustomCompanyContainer extends StatelessWidget {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(
-                                  width: getWidthSize(context) * 0.3,
-                                  child: StarRating(
-                                      rating: 4,
-                                      allowHalfRating: false,
-                                      emptyIcon: CupertinoIcons.star_fill,
-                                      filledIcon: CupertinoIcons.star_fill,
-                                      onRatingChanged: (rating) {
-                                        //   => setState(() => this.rating = rating
-                                      }),
-                                ),
+                                StarRating(
+                                    rating: 4,
+                                    allowHalfRating: false,
+                                    emptyIcon: CupertinoIcons.star_fill,
+                                    filledIcon: CupertinoIcons.star_fill,
+                                    onRatingChanged: (rating) {
+                                      //   => setState(() => this.rating = rating
+                                    }),
                                 SizedBox(width: 1.w),
                                 Flexible(
                                   child: AutoSizeText(

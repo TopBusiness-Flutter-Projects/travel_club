@@ -31,7 +31,7 @@ class CustomBookedCompanyContainer extends StatelessWidget {
               SizedBox(height: 8.h),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 SizedBox(
-                  width: getWidthSize(context) * 0.3,
+                //  width: getWidthSize(context) * 0.3,
                   child: StarRating(
                       rating: 4,
                       allowHalfRating: false,

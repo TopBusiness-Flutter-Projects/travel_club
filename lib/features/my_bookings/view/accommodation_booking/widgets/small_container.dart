@@ -4,16 +4,23 @@ import 'package:flutter_rating/flutter_rating.dart';
 import '../../../../../../core/exports.dart';
 import '../../../../accommodation/view/widgets/acommendation_widgets/accomendation_rating.dart';
 
-class CustomBookingAccommodationContainerSmall extends StatelessWidget {
+class CustomBookingAccommodationContainerSmall extends StatefulWidget {
   CustomBookingAccommodationContainerSmall({super.key,required this.hotelsModel});
   HotelsModel? hotelsModel;
+
+  @override
+  State<CustomBookingAccommodationContainerSmall> createState() => _CustomBookingAccommodationContainerSmallState();
+}
+
+class _CustomBookingAccommodationContainerSmallState extends State<CustomBookingAccommodationContainerSmall> {
+  double rating = 1; // Default rating
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child:GestureDetector(
-          onTap: hotelsModel?.onTap ,
+          onTap: widget.hotelsModel?.onTap ,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: CustomContainerWithShadow(
@@ -32,7 +39,7 @@ class CustomBookingAccommodationContainerSmall extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.r),
                         image: DecorationImage(
                             image: NetworkImage(
-                                hotelsModel?.image.toString()??""),
+                                widget.hotelsModel?.image.toString()??""),
                             fit: BoxFit.cover)),
                   ),
                 ),
@@ -46,21 +53,31 @@ class CustomBookingAccommodationContainerSmall extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // SizedBox(height: 10.h,),
-                      Text(hotelsModel?.title.toString()??"",overflow: TextOverflow.ellipsis,style: getSemiBoldStyle(fontSize: 14.sp),maxLines: 2,),
+                      Text(widget.hotelsModel?.title.toString()??"",overflow: TextOverflow.ellipsis,style: getSemiBoldStyle(fontSize: 14.sp),maxLines: 2,),
                       SizedBox(height: 20.h,),
                       Row(
                         children: [
                           StarRating(
-                              rating: hotelsModel?.rate?.toDouble()??1,
+                              rating: widget.hotelsModel?.rate.toDouble()??1,
                               allowHalfRating: false,
-                              onRatingChanged: (rating){
+                              // onRatingChanged: (rating){
+                              //   setState(() {
+                              //     this.rating = rating;
+                              //   });
                                 //   => setState(() => this.rating = rating
-                              }),
+                                // setState(() => this.rating = rating));
+                              //}
+              onRatingChanged: (newRating) {
+        setState(() {
+        this.rating = newRating;
+        });
+        },
+                              ),
                         ],
                       ),
                       SizedBox(height: 2.h,),
-                      hotelsModel?.discription==null?SizedBox():
-                      Text(hotelsModel?.discription.toString()??"",style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
+                      widget.hotelsModel?.discription==null?SizedBox():
+                      Text(widget.hotelsModel?.discription.toString()??"",style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
                     ],
                   ),
                 )

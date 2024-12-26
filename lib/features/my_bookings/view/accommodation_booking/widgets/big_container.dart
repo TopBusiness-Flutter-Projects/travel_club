@@ -28,6 +28,8 @@ class CustomBookingAccommodationContainerBig extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+
                         children: [
                           Text(AppTranslations.numberBooking,style: getRegularStyle(color: AppColors.grey),),
                           SizedBox(height: 5.h,),

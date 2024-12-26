@@ -26,13 +26,12 @@ class _BookingbodyState extends State<Bookingbody> {
       return Column(children: [
         SizedBox(height: getVerticalPadding(context) * 2),
          //app bar
-         CustomHomeAppbar(isHome: false, title: 'نونو',),
+         CustomHomeAppbar(isHome: false, title: AppTranslations.myBookings,),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //list view حجوزات اول حاجه
-
               Padding(
                   padding:  EdgeInsets.only(top:45.0.h,right: 10.w),
                   child: SizedBox(
@@ -50,10 +49,11 @@ class _BookingbodyState extends State<Bookingbody> {
                   ),
                 ),
               //body ...
-              if(cubit.categories[cubit.selectedIndex] ==     AppTranslations.accommodationBookings
-              )
+              if(cubit.categories[cubit.selectedIndex] ==     AppTranslations.accommodationBookings)...[
                 AccommodationBookingBody(),
-                // SizedBox(height: 30.h,)
+                 SizedBox(height: 90.h,)
+              ],
+
 
                if(cubit.categories[cubit.selectedIndex] == AppTranslations.transportation)
                 TransportationBookingBody(),

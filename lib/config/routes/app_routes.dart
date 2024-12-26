@@ -28,6 +28,7 @@ import '../../features/auth/view/screens/sign_up_screen.dart';
 import '../../features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
 import '../../features/entertainment/screens/entertainment_companies.dart';
 import '../../features/entertainment/screens/entertainment_screen.dart';
+import '../../features/food/screens/details_of_food/screens/book_table_screen.dart';
 import '../../features/food/screens/details_of_food/screens/details_food_screen.dart';
 import '../../features/food/screens/food_screen.dart';
 import '../../features/my_account/screens/change_lang.dart';
@@ -71,6 +72,7 @@ class Routes {
   static const String detailsOtherServices = '/detailsOtherServices';
   static const String secondBookingAccommodation = '/secondBookingAccommodation';
   static const String detailsFoodRoute = '/detailsFoodRoute';
+  static const String bookTable = '/bookTable';
   static const String transportationMenuRoute = '/transportationMenuRoute';
   static const String transportationBookingDetailsRoute =
       '/transportationBookingDetailsRoute';
@@ -106,6 +108,12 @@ class AppRoutes {
         case Routes.detailsOtherServices:
         return PageTransition(
           child: const DetailsOtherService(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );   case Routes.bookTable:
+        return PageTransition(
+          child: const BookTableScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

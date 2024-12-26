@@ -24,26 +24,26 @@ class SocialLoginRow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Facebook Container
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: AppColors.greyborder),
-              ),
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    AppIcons.facebook, // Add your Facebook logo here
-                    width: 20,
-                    height: 20,
-                  ),
-                  SizedBox(width: 8),
-                  Text(AppTranslations.facebook,
-                      style: getRegularStyle(fontSize: 14.sp)),
-                ],
-              ),
-            ),
+            // Container(
+            //   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            //   decoration: BoxDecoration(
+            //     color: Colors.white,
+            //     borderRadius: BorderRadius.circular(30),
+            //     border: Border.all(color: AppColors.greyborder),
+            //   ),
+            //   child: Row(
+            //     children: [
+            //       SvgPicture.asset(
+            //         AppIcons.facebook, // Add your Facebook logo here
+            //         width: 20,
+            //         height: 20,
+            //       ),
+            //       SizedBox(width: 8),
+            //       Text(AppTranslations.facebook,
+            //           style: getRegularStyle(fontSize: 14.sp)),
+            //     ],
+            //   ),
+            // ),
             SizedBox(width: 16.w), // Space between the containers
 
             // Google Container
