@@ -23,6 +23,7 @@ class CustomContainerCompanies extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text("شركة سيكرت ترافيل",style: getSemiBoldStyle(fontSize: 14.sp,),),
+                SizedBox(height: 10.h,),
                 Row(
                   children: [
                     Row(

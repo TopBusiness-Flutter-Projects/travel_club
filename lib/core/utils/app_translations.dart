@@ -169,5 +169,8 @@ class AppTranslations {
   static String departureTime = 'departure_time'.tr();
   static String checkinTime = 'checkin_time'.tr();
   static String workingHours = 'working_hours'.tr();
+  static String bookTable = 'book_table'.tr();
+  static String numberOfAttendees = 'number_of_attendees'.tr();
+  static String selectBookingDate = 'select_booking_date'.tr();
   static String personWhoRatedRestaurant = 'person_who_rated_restaurant'.tr();
 }

@@ -19,7 +19,7 @@ class HomeBody extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
       return Column(children: [
         SizedBox(height: getVerticalPadding(context) * 2),
-         CustomHomeAppbar(isHome: true, title: 'نهوله',),
+         CustomHomeAppbar(isHome: true, title: 'Guest',),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
