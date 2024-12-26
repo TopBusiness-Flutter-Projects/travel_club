@@ -24,7 +24,7 @@ class FoodBookingBody extends StatelessWidget {
 
                 Navigator.pushNamed(context, Routes.detailsBookingFood);
               },
-              child: CustomBookingFoodContainerBig(foodModel: FoodModel(numofnights: "4 ليالي ",price:"5000",title:"nono",date: "13/12/2002",rate: 0,numOfBooking: "48721728" ,status: false),));
+              child: CustomBookingFoodContainerBig(foodModel: FoodModel(numofnights: "4 ليالي ",price:"5000",title:"nono",date: "13/12/2002",rate: 0,numOfBooking: "48721728" ,status: index % 2 == 0),));
         },),
     );  }
 }
