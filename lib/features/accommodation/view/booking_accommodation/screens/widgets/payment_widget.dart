@@ -3,15 +3,15 @@ import 'package:dotted_line/dotted_line.dart';
 import '../../../../../../core/exports.dart';
 
 class PaymentWidget extends StatelessWidget {
-   PaymentWidget({super.key,this.isDetailsBooking = false});
-bool isDetailsBooking;
+   const PaymentWidget({super.key,this.isDetailsBooking = false});
+final bool isDetailsBooking;
   @override
   Widget build(BuildContext context) {
     return                 CustomContainerWithShadow(child: Padding(
       padding: const EdgeInsets.all(30.0),
       child: Column(
         children: [
-        if(isDetailsBooking==true)...[
+        if(isDetailsBooking)...[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -20,15 +20,15 @@ bool isDetailsBooking;
                 padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 7),
                 child: Center(child: Text(AppTranslations.paymentHasBeenMade,style: getMediumStyle(fontSize: 14.sp,color: AppColors.green),maxLines: 1,)),
               ) ,) ,
-            ],)
-        ],
+            ],),
+     SizedBox(height: 15.h,),   ],
 
-          SizedBox(height: 15.h,),
+          
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(AppTranslations.bookingPrice,style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
-              Text("5000"+AppTranslations.currency,style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.green)),
+              Text("5000${AppTranslations.currency}",style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.green)),
             ],),
           SizedBox(height: 15.h,),
           Row(

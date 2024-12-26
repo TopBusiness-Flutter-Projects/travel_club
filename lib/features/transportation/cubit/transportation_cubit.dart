@@ -92,4 +92,36 @@ class TransportationCubit extends Cubit<TransportationState> {
   // 13 >> 50 seats
   // 11 >>43
   int seatRowsCount = 13;
+  List<int> reservedSeats = [1, 4, 5, 22, 25, 26, 55, 41];
+  List<int> selectedSeats = [];
+
+  void selectSeat(int seatNumber) {
+    if (selectedSeats.contains(seatNumber)) {
+      selectedSeats.remove(seatNumber);
+    } else {
+      selectedSeats.add(seatNumber);
+    }
+    emit(SeatChangedState());
+  }
+
+  String convertToEnglishDigits(String input) {
+    const Map<String, String> arabicToEnglishDigits = {
+      '٠': '0',
+      '١': '1',
+      '٢': '2',
+      '٣': '3',
+      '٤': '4',
+      '٥': '5',
+      '٦': '6',
+      '٧': '7',
+      '٨': '8',
+      '٩': '9',
+    };
+    String output = input;
+    arabicToEnglishDigits.forEach((arabic, english) {
+      output = output.replaceAll(arabic, english);
+    });
+
+    return output;
+  }
 }

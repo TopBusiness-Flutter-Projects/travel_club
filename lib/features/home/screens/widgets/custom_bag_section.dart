@@ -19,7 +19,9 @@ class CustomBagSection extends StatelessWidget {
               Text(AppTranslations.bestBags,
                   style: getBoldStyle(fontSize: 16.sp)),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.bags);
+                },
                 child: Text(
                   AppTranslations.more,
                   style:
@@ -36,7 +38,7 @@ class CustomBagSection extends StatelessWidget {
             height: getHeightSize(context) * 0.3,
             child: ListView.builder(
               itemBuilder: (context, index) =>
-                  CustomBagContainer(islast: index == 2),
+                  CustomBagContainer(isLast: index == 2),
               itemCount: 3,
               scrollDirection: Axis.horizontal,
             ))
@@ -47,20 +49,23 @@ class CustomBagSection extends StatelessWidget {
 
 class CustomBagContainer extends StatelessWidget {
   const CustomBagContainer({
-    this.islast = false,
+    this.isLast = false,
+    this.isHome = true,
     super.key,
   });
-  final bool islast;
+  final bool isLast;
+  final bool isHome;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.only(
           start: getHorizontalPadding(context),
-          end: islast ? getHorizontalPadding(context) : 0,
+          end: isLast ? getHorizontalPadding(context) : 0,
           bottom: getHeightSize(context) * 0.01),
       child: CustomContainerWithShadow(
-          width: getWidthSize(context) * 0.55,
+          width: isHome ? getWidthSize(context) * 0.55 : getWidthSize(context),
+          height: isHome ? null : getHeightSize(context) * 0.3,
           child: Column(
             children: [
               ClipRRect(
@@ -68,7 +73,9 @@ class CustomBagContainer extends StatelessWidget {
                 child: Image.network(
                   AppStrings.testImageUrl,
                   fit: BoxFit.cover,
-                  width: getWidthSize(context) * 0.55,
+                  width: isHome
+                      ? getWidthSize(context) * 0.55
+                      : getWidthSize(context),
                   height: getHeightSize(context) * 0.2,
                 ),
               ),
@@ -101,11 +108,11 @@ class CustomBagContainer extends StatelessWidget {
                                   color: AppColors.grey, fontSize: 14.sp),
                             ),
                           ),
-                          Icon(
-                            CupertinoIcons.heart,
-                            color: AppColors.primary,
-                            size: 25.sp,
-                          )
+                          // Icon(
+                          //   CupertinoIcons.heart,
+                          //   color: AppColors.primary,
+                          //   size: 25.sp,
+                          // )
                         ],
                       ),
                     ],

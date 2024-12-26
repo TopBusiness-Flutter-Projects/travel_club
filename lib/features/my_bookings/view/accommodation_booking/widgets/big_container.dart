@@ -4,7 +4,6 @@ import 'package:travel_club/features/my_bookings/view/accommodation_booking/widg
 
 import '../../../../../../core/exports.dart';
 import '../../../../accommodation/view/widgets/acommendation_widgets/accomendation_rating.dart';
-import '../screens/custom_booking_accommodation_body.dart';
 
 class CustomBookingAccommodationContainerBig extends StatelessWidget {
   const CustomBookingAccommodationContainerBig({super.key});
@@ -70,6 +69,6 @@ class CustomBookingAccommodationContainerBig extends StatelessWidget {
               SizedBox(height: 5.h,)
             ],
           )),
-    );;
+    );
   }
 }
