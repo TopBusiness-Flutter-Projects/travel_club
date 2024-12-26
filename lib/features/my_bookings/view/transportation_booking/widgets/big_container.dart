@@ -6,11 +6,11 @@ import '../../../../../../core/exports.dart';
 import 'custom_booking_transportation_body.dart';
 
 class CustomBookingTransportationContainerBig extends StatelessWidget {
-  CustomBookingTransportationContainerBig({super.key,required this.ispaid});
-  bool ispaid=true;
+  CustomBookingTransportationContainerBig({super.key, required this.ispaid});
+  bool ispaid = true;
   @override
   Widget build(BuildContext context) {
-    return      Padding(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CustomContainerWithShadow(
           child: Column(

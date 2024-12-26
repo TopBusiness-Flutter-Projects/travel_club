@@ -29,9 +29,11 @@ class AcommendationContainer extends StatelessWidget {
                 vertical: getHeightSize(context) * 0.02),
             child: Row(
               children: [
-                SvgPicture.asset(
-                  categoryModel.image,
+                Image.network(
+                  "https://lotel.efaculty.tech/storage/cities/86621735113584.webp",
+                  fit: BoxFit.cover,
                   width: getWidthSize(context) * 0.13,
+                  // height: getHeightSize(context) * 0.2,
                 ),
                 SizedBox(width: getWidthSize(context) * 0.02),
                 Flexible(

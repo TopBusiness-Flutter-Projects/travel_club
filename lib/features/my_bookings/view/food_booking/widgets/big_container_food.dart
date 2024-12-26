@@ -4,30 +4,42 @@ import 'package:travel_club/features/my_bookings/view/food_booking/widgets/small
 import '../../../../../../core/exports.dart';
 import '../../../cubit/my_bookings_cubit.dart';
 import '../../../cubit/my_bookings_state.dart';
-class FoodModel {
-  String ?title;
- final int ?rate;
- final String ?date;
-final  String ?price;
-final  String ?numofnights;
- final bool ?status;
-final  String ?numOfBooking;
-void Function()? onTap;
 
-  FoodModel(    { this.numofnights,this.onTap,this.title, this.rate,this.status=true, this.date, this.price,  this.numOfBooking,});
+class FoodModel {
+  String? title;
+  final int? rate;
+  final String? date;
+  final String? price;
+  final String? numofnights;
+  final bool? status;
+  final String? numOfBooking;
+  void Function()? onTap;
+
+  FoodModel({
+    this.numofnights,
+    this.onTap,
+    this.title,
+    this.rate,
+    this.status = true,
+    this.date,
+    this.price,
+    this.numOfBooking,
+  });
 }
 //big conatiner
 class CustomBookingFoodContainerBig extends StatelessWidget {
-   CustomBookingFoodContainerBig({super.key,required this.foodModel});
- final FoodModel foodModel;
+  CustomBookingFoodContainerBig({super.key, required this.foodModel});
+  final FoodModel foodModel;
   @override
   Widget build(BuildContext context) {
-  return BlocBuilder<MyBookingsCubit,MyBookingsState>(builder: (BuildContext context, state) {   return      Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: CustomContainerWithShadow(
-        child: Column(
-          children: [
-            //custom container
+    return BlocBuilder<MyBookingsCubit, MyBookingsState>(
+      builder: (BuildContext context, state) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CustomContainerWithShadow(
+              child: Column(
+            children: [
+              //custom container
 
             CustomBookingFoodContainerSmall(foodModel: FoodModel(title: "title", rate: 4, date: "date", price: "price", numOfBooking: "numOfBooking"),),
             //Row

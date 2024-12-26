@@ -3,20 +3,29 @@ import 'package:flutter_rating/flutter_rating.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../cubit/accomendation_cubit.dart';
+
 class HotelsModel {
   final String title;
   final String? discription;
   final String image;
   final int rate;
-  final bool ?isFavorite;
-   bool ?isFavoriteTrue;
-  final void Function()? onTap;
+  final bool? isFavorite;
+  bool? isFavoriteTrue;
 
-  HotelsModel(   {this.isFavoriteTrue=false,required this.title,required this.rate,this.isFavorite=true, this.discription, required this.image, this.onTap});
+
+  HotelsModel(
+      {this.isFavoriteTrue = false,
+      required this.title,
+      required this.rate,
+      this.isFavorite = true,
+      this.discription,
+      required this.image,
+      });
 }
+
 class CustomWidgetRating extends StatefulWidget {
-   CustomWidgetRating({super.key,required this.hotelsModel});
-  HotelsModel? hotelsModel;
+  const CustomWidgetRating({super.key, required this.hotelsModel});
+  final HotelsModel? hotelsModel;
 
   @override
   State<CustomWidgetRating> createState() => _CustomWidgetRatingState();
@@ -27,8 +36,10 @@ class _CustomWidgetRatingState extends State<CustomWidgetRating> {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child:GestureDetector(
-          onTap: widget.hotelsModel?.onTap ,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, Routes.detailsAccomendation);
+          },
           child: CustomContainerWithShadow(
             child: Row(children: [
               //stack image and heart
@@ -101,7 +112,6 @@ class _CustomWidgetRatingState extends State<CustomWidgetRating> {
               )
             ],),
           ),
-        )
-    );
+        ));
   }
 }

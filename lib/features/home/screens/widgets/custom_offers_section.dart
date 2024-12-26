@@ -71,7 +71,7 @@ class CustomOffersContainer extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(20.r),
                 child: Image.network(
-                  AppStrings.testImageUrl,
+                  "https://lotel.efaculty.tech/storage/cities/85531735112807.webp",
                   fit: BoxFit.cover,
                   width: isHome
                       ? getWidthSize(context) * 0.8
@@ -93,7 +93,7 @@ class CustomOffersContainer extends StatelessWidget {
                             fit: FlexFit.tight,
                             child: AutoSizeText(
                               maxLines: 1,
-                              AppTranslations.newOffers,
+                                 "استمتع بخصم شم النسيم",
                               style: getMediumStyle(fontSize: 14.sp),
                             ),
                           ),
@@ -105,12 +105,12 @@ class CustomOffersContainer extends StatelessWidget {
                         ],
                       ),
                       AutoSizeText(
-                        AppTranslations.newOffers +
-                            " " +
+                        // AppTranslations.newOffers +
+                        //     " " +
                             // AppTranslations.newOffers +
                             // " " +
                             // AppTranslations.newOffers +
-                            " ",
+                            "تمتع بخصم ٥٠ ٪ علي جميع عروض السفر",
                         maxLines: 2,
                         style: getRegularStyle(
                             color: AppColors.grey, fontSize: 14.sp),
