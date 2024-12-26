@@ -71,7 +71,7 @@ class CustomBagContainer extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(20.r),
                 child: Image.network(
-                  AppStrings.testImageUrl,
+                  "https://lotel.efaculty.tech/storage/cities/35691735112791.webp",
                   fit: BoxFit.cover,
                   width: isHome
                       ? getWidthSize(context) * 0.55
@@ -88,12 +88,12 @@ class CustomBagContainer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AutoSizeText(
-                        AppTranslations.newOffers +
-                            " " +
+                        // AppTranslations.newOffers +
+                        //     " " +
                             // AppTranslations.newOffers +
                             // " " +
                             // AppTranslations.newOffers +
-                            " ",
+                            "حقيبة السفر الي تركيا",
                         maxLines: 1,
                         style: getMediumStyle(fontSize: 14.sp),
                       ),
@@ -103,7 +103,8 @@ class CustomBagContainer extends StatelessWidget {
                             fit: FlexFit.tight,
                             child: AutoSizeText(
                               maxLines: 1,
-                              AppTranslations.newOffers,
+                              "30000 جنية مصري",
+                              // AppTranslations.newOffers,
                               style: getRegularStyle(
                                   color: AppColors.grey, fontSize: 14.sp),
                             ),

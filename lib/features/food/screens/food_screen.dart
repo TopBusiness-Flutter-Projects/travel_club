@@ -1,14 +1,8 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_rating/flutter_rating.dart';
-
 import '../../../core/exports.dart';
 import '../cubit/food_cubit.dart';
 import '../widgets/big_container_food.dart';
-import '../widgets/small_container_food.dart';
-
 class FoodScreen extends StatelessWidget {
   const FoodScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     var cubit= context.read<FoodCubit>();

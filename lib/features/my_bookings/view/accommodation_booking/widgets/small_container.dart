@@ -20,7 +20,7 @@ class _CustomBookingAccommodationContainerSmallState extends State<CustomBooking
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child:GestureDetector(
-          onTap: widget.hotelsModel?.onTap ,
+        
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: CustomContainerWithShadow(

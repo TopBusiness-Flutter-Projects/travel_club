@@ -1,7 +1,7 @@
-import '../../../../core/exports.dart';
-import '../../cubit/other_services_cubit.dart';
-import '../../cubit/other_services_state.dart';
-import 'custom_nearst_others.dart';
+import '../../../core/exports.dart';
+import '../cubit/other_services_cubit.dart';
+import '../cubit/other_services_state.dart';
+import 'widgets/custom_nearst_others.dart';
 
 class DetailsOtherService extends StatelessWidget {
   const DetailsOtherService({super.key});

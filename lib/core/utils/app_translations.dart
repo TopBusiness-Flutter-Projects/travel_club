@@ -166,6 +166,8 @@ class AppTranslations {
   static String allRestaurants = 'all_restaurants'.tr();
   static String grilled = 'grilled'.tr();
   static String fishes = 'fishes'.tr();
+  static String departureTime = 'departure_time'.tr();
+  static String checkinTime = 'checkin_time'.tr();
   static String workingHours = 'working_hours'.tr();
   static String bookTable = 'book_table'.tr();
   static String numberOfAttendees = 'number_of_attendees'.tr();

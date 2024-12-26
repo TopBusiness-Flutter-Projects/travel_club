@@ -8,8 +8,6 @@ import '../../transportation/screens/widgets/custom_company_container.dart';
 import '../cubit/favourites_cubit.dart';
 import 'custom_favourite_catogrey.dart';
 
-
-
 class Favouritebody extends StatefulWidget {
   const Favouritebody({
     super.key,
@@ -23,7 +21,8 @@ class _FavouritebodyState extends State<Favouritebody> {
   @override
   Widget build(BuildContext context) {
     FavouritesCubit cubit = context.read<FavouritesCubit>();
-    return BlocBuilder<FavouritesCubit,FavouritesState >(builder: (context, state) {
+    return BlocBuilder<FavouritesCubit, FavouritesState>(
+        builder: (context, state) {
       return Column(children: [
         SizedBox(height: getVerticalPadding(context) * 2),
         //app bar
@@ -58,9 +57,7 @@ class _FavouritebodyState extends State<Favouritebody> {
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: CustomWidgetRating(hotelsModel: HotelsModel(title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 , discription: '٢٠٠ فرد قام بتقيم الفندق', image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-            onTap: (){
-              Navigator.pushNamed(context, Routes.detailsAccomendation);
-            }),),
+          ),),
       ),))
 
               ],

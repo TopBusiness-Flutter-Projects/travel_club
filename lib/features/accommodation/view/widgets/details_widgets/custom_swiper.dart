@@ -4,14 +4,14 @@ import '../../../../../core/exports.dart';
 import '../../../cubit/accomendation_cubit.dart';
 
 class CustomSwiper extends StatelessWidget {
-  const CustomSwiper({super.key});
-
+  const CustomSwiper({super.key, this.height});
+final double? height;
   @override
   Widget build(BuildContext context) {
    var cubit=context.read<AccomendationCubit>();
    return BlocBuilder<AccomendationCubit, AccomendationState>(builder: (BuildContext context, state) {  return   Positioned(
      child: SizedBox(
-       height: getHeightSize(context) * 0.65,
+       height:height?? getHeightSize(context) * 0.65,
        width: getWidthSize(context),
        child: Swiper(
          // controller: ,

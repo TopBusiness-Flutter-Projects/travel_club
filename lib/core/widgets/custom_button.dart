@@ -10,11 +10,12 @@ class CustomButton extends StatelessWidget {
     super.key,
     this.onTap,
     required this.title,
-     this.color,
+     this.color, this.width,
   });
   final void Function()? onTap;
   final String title;
   final Color? color;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +24,7 @@ class CustomButton extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(getWidthSize(context) / 12),
         child: Container(
-          width: double.infinity,
+          width:width?? double.infinity,
           alignment: Alignment.center,
           padding: EdgeInsets.all(getWidthSize(context) / 32),
           decoration: BoxDecoration(
