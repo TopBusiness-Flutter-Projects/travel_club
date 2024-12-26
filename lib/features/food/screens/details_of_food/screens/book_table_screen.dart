@@ -29,10 +29,13 @@ class BookTableScreen extends StatelessWidget {
                 Text(AppTranslations.numberOfAttendees,style: getMediumStyle(fontSize: 14.sp),),
                 CustomTextField(hintText: "٤ اشخاص",) ,
                 Text(AppTranslations.nameOwner,style: getMediumStyle(fontSize: 14.sp),),
-                CustomTextField() ,
+                CustomTextField(hintText: "احمد مختار علي",) ,
                 Text(AppTranslations.numberOfPhoneContact,style: getMediumStyle(fontSize: 14.sp),),
-                CustomTextField(),
-                CustomButton(title: AppTranslations.bookTable, onTap: (){}),
+                CustomTextField(hintText: "٠١١٢٦٠٥٣٤٥٢",),
+                CustomButton(
+                    title: AppTranslations.bookTable, onTap: (){
+                  Navigator.pushNamed(context, Routes.donePayment,arguments: true);
+                }),
               ],
             ),
         ));

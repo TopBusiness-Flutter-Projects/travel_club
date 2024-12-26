@@ -206,10 +206,12 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.donePayment:
+        bool isFood = settings.arguments as bool;
         return PageTransition(
-          child: const DonePaymentScreen(),
+          child:  DonePaymentScreen(isFood: isFood,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
+
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsBookingFood:
