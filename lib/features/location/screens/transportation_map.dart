@@ -27,6 +27,8 @@ class _TransportationMapState extends State<TransportationMap> {
         return cubit.currentLocation == null
             ? const Center(child: ShowLoadingIndicator())
             : GoogleMap(
+                zoomGesturesEnabled: true,
+                zoomControlsEnabled: true,
                 mapType: MapType.normal,
                 initialCameraPosition: CameraPosition(
                   target: LatLng(

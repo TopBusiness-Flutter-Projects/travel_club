@@ -120,6 +120,8 @@
   "book_now": "أحجز الان",
 
   "": "",
+  "checkin_time": "وقت التسليم",
+  "departure_time": "وقت المغادرة",
   "select_seat": "من فضلك اختر مقعد",
   "number_booking": "الرقم المرجعي للحجز",
   "experience_evaluation": "تقييم التجربة",
