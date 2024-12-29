@@ -27,7 +27,7 @@ int index;
                  SizedBox(height: 10.h,),
                  Padding(
                    padding: const EdgeInsets.only(right: 8.0),
-                   child: Container(child: Text("nahola"),),
+                   child: Container(child: Text("مطعم صبحي كابر روض الفرج"),),
                  ),
                  Padding(
                    padding: const EdgeInsets.only(right: 8.0),

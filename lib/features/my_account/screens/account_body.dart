@@ -27,7 +27,7 @@ class _AccountbodyState extends State<Accountbody> {
           children: [
         SizedBox(height: getVerticalPadding(context) * 2),
         //app bar
-        CustomHomeAppbar(isHome: false, title: 'نونو',),
+        CustomHomeAppbar(isHome: false, title: AppTranslations.myAccount,),
        // SizedBox(height: 10.h,),
         Expanded(
           child: Padding(
@@ -54,15 +54,13 @@ Expanded(
       Navigator.pushNamed(context, Routes.contact);
     },),
     CustomRowProfile(title:AppTranslations.aboutUs,onTap: (){
-
       Navigator.pushNamed(context, Routes.aboutUs);
     },),
     CustomRowProfile(title: AppTranslations.PrivacyAndSecurity,onTap: (){
       Navigator.pushNamed(context, Routes.privacyRoute);
     },),
     CustomRowProfile(title:AppTranslations.shareApp,onTap: ()async{
-      PackageInfo packageInfo =
-          await PackageInfo.fromPlatform();
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
       String url = '';
       String packageName = packageInfo.packageName;
       if (Platform.isAndroid) {
@@ -76,7 +74,8 @@ Expanded(
     CustomRowProfile(title: AppTranslations.logout,),
     SizedBox(height: 100.h,),
     //  SizedBox(height: 100.h,),
-  ],),
+  ],
+  ),
 )
 
               ],

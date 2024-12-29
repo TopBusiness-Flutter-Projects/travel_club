@@ -42,13 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: CustomSkipRow(
-                            onTap: () {}, backgroundColor: AppColors.yellow),
+                            onTap: () {
+                              Navigator.pushNamed(context, Routes.mainRoute);
+                            }, backgroundColor: AppColors.yellow),
                       ),
                       // CustomContainer(),
                       SizedBox(
                         height: 10.h,
                       ),
-
                       CustomTitle(
                         title: AppTranslations.login,
                       ),
@@ -107,8 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               // if (cubit.formKeyLogin.currentState!.validate()) {
                               //   Navigator.pushNamed(context, Routes.detailsAccomendation);
                               // }
-                              Navigator.pushNamed(context, Routes.detailsAccomendation);
-
+                            //  Navigator.pushNamed(context, Routes.detailsAccomendation);
+Navigator.pushNamed(context, Routes.mainRoute);
                             },
                           ),
                         ],
@@ -116,7 +117,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 30.h,
                       ),
-
                       SocialLoginRow(),
                       SizedBox(
                         height: 20.h,

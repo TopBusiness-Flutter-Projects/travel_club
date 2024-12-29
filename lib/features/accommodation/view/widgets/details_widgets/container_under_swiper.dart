@@ -26,8 +26,7 @@ class ContainerUnderSwiper  extends StatelessWidget {
            ),
          ),
          child: Padding(
-           padding:  EdgeInsets.only(top:                  getHeightSize(context) * 0.07,
-           ),
+           padding:  EdgeInsets.only(top:                  getHeightSize(context) * 0.07,),
            child: SingleChildScrollView(
              child: Padding(
                padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -36,6 +35,7 @@ class ContainerUnderSwiper  extends StatelessWidget {
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
                    // ToggleButtonScreen(),
+                   SizedBox(height: 7.h,),
                    Text(
                      AppTranslations.about,
                      style: getMediumStyle(
