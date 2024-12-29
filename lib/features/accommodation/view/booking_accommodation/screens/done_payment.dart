@@ -6,14 +6,14 @@ import '../../../../../core/exports.dart';
 import '../../../cubit/accomendation_cubit.dart';
 
 class DonePaymentScreen extends StatelessWidget {
-  const DonePaymentScreen({super.key});
-
+   DonePaymentScreen({super.key,this.isFood});
+bool ?isFood = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccomendationCubit, AccomendationState>(
       builder: (BuildContext context, state) {
         return CustomScreen(
-          appbarTitle: AppTranslations.paymentProcess,
+          appbarTitle:isFood==true?AppTranslations.doneBooking: AppTranslations.paymentProcess,
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: Column(
@@ -24,9 +24,12 @@ class DonePaymentScreen extends StatelessWidget {
                   height: 20.h,
                 ),
                 //linear done
-                LinearProgress(
-                  value: 1,
-                ),
+                if(isFood==false)...[
+                  LinearProgress(
+                    value: 1,
+                  ),
+                ],
+
                 SizedBox(
                   height: getHeightSize(context) / 4,
                 ),

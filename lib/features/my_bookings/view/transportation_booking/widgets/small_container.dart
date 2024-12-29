@@ -3,9 +3,9 @@ import '../../../../../../core/exports.dart';
 import 'custom_booking_transportation_body.dart';
 
 class CustomBookingTransportationContainerSmall extends StatelessWidget {
-  CustomBookingTransportationContainerSmall({super.key,required this.transportationBookingModel});
+  CustomBookingTransportationContainerSmall({super.key,required this.transportationBookingModel,required this.isDetails});
   TransportationBookingModel? transportationBookingModel;
-
+bool isDetails=true;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,18 +50,21 @@ class CustomBookingTransportationContainerSmall extends StatelessWidget {
                         Text(transportationBookingModel?.title.toString()??"",overflow: TextOverflow.ellipsis,style: getSemiBoldStyle(fontSize: 14.sp),maxLines: 2,),
                         SizedBox(height: 20.h,),
                         //row
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('${transportationBookingModel?.seatsNum.toString()??""}'+""+AppTranslations.seats,style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
-                              // Spacer(),
-                              SizedBox(width: 10.w,),
+                        if(isDetails)...[
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('${transportationBookingModel?.seatsNum.toString()??""}'+""+AppTranslations.seats,style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
+                                // Spacer(),
+                                SizedBox(width: 10.w,),
 
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(AppTranslations.morning+" "+'${transportationBookingModel?.time.toString()??""}',style: getBoldStyle(fontSize: 14.sp,color: AppColors.primary),),
-                              ),
-                            ]),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(AppTranslations.morning+" "+'${transportationBookingModel?.time.toString()??""}',style: getBoldStyle(fontSize: 14.sp,color: AppColors.primary),),
+                                ),
+                              ]),
+                        ],
+
                         SizedBox(height: 2.h,),
                         //if there is description
                         transportationBookingModel?.discription==null?SizedBox():

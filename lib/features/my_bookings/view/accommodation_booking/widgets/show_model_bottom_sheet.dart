@@ -20,6 +20,7 @@ void showModelBottomSheetRatting(context) {
       isScrollControlled: true,
       backgroundColor: AppColors.white,
       builder: (context) {
+        var cubit=context.read<MyBookingsCubit>();
         return BlocBuilder<MyBookingsCubit, MyBookingsState>(
           builder: (BuildContext context, state) {
             return Padding(
@@ -75,9 +76,10 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: 5,
+                                    rating: cubit.rates[0 ],
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
+                                      cubit.changeRating(rating,0);
                                       //   => setState(() => this.rating = rating
                                     }),
                               ],
@@ -93,9 +95,11 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: 5,
+                                    rating: cubit.rates[1 ],
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
+                                      cubit.changeRating(rating,1);
+
                                       //   => setState(() => this.rating = rating
                                     }),
                               ],
@@ -111,9 +115,11 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: 1,
+                                    rating: cubit.rates[2 ],
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
+                                      cubit.changeRating(rating,2);
+
                                       //   => setState(() => this.rating = rating
                                     }),
                               ],
@@ -129,9 +135,11 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: 3,
+                                    rating: cubit.rates[3 ],
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
+                                      cubit.changeRating(rating,3);
+
                                       //   => setState(() => this.rating = rating
                                     }),
                               ],

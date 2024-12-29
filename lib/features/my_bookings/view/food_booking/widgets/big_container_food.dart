@@ -41,7 +41,7 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
             children: [
               //custom container
 
-            CustomBookingFoodContainerSmall(foodModel: FoodModel(title: "title", rate: 4, date: "date", price: "price", numOfBooking: "numOfBooking"),),
+            CustomBookingFoodContainerSmall(foodModel: FoodModel(title: "title", rate: 4, date: "date", price: "price", numOfBooking: "numOfBooking",numofnights: "numofnights",),),
             //Row
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +59,7 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
                         SizedBox(height: 5.h,),
                         CustomContainerWithShadow(reduis: 7,isShadow: false,color: foodModel?.status==true?AppColors.green.withOpacity(.12):AppColors.red.withOpacity(.12),width: 100.w,child:Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 7),
-                          child: Center(child: Text(foodModel?.status==true?AppTranslations.bookingSuccess:AppTranslations.cancelBooking,style: getMediumStyle(fontSize: 14.sp,color: foodModel?.status==true?AppColors.green:AppColors.red),maxLines: 1,)),
+                          child: Center(child: Text(foodModel.status==true?AppTranslations.bookingSuccess:AppTranslations.cancelBooking,style: getMediumStyle(fontSize: 14.sp,color: foodModel?.status==true?AppColors.green:AppColors.red),maxLines: 1,)),
                         ) ,) ,
                         SizedBox(height: 5.h,),
 

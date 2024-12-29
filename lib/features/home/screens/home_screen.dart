@@ -25,11 +25,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 fit: BoxFit.cover,
                 height: getHeightSize(context) * 0.3,
                 width: getWidthSize(context),
-              )),
+              )
+          ),
           SizedBox(
               height: getHeightSize(context),
               width: getWidthSize(context),
-              child: const HomeBody())
+              child: const HomeBody()
+          )
         ],
       ),
     );

@@ -6,8 +6,9 @@ import '../../../../../../core/exports.dart';
 import 'custom_booking_transportation_body.dart';
 
 class CustomBookingTransportationContainerBig extends StatelessWidget {
-  CustomBookingTransportationContainerBig({super.key, required this.ispaid});
+  CustomBookingTransportationContainerBig({super.key, required this.ispaid,required this.isDetails});
   bool ispaid = true;
+  bool isDetails = true;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,7 +17,7 @@ class CustomBookingTransportationContainerBig extends StatelessWidget {
           child: Column(
             children: [
               //custom container small
-              CustomBookingTransportationContainerSmall(transportationBookingModel: TransportationBookingModel(title: "title",  isFavorite: false ,image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", seatsNum: "43", time: '7:00',),),
+              CustomBookingTransportationContainerSmall(isDetails: isDetails,transportationBookingModel: TransportationBookingModel(title: "title",  isFavorite: false ,image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", seatsNum: "43", time: '7:00',),),
               //Row under container
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
