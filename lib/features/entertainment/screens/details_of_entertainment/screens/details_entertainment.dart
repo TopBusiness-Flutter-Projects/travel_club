@@ -4,6 +4,7 @@ import '../../../../accommodation/view/widgets/details_widgets/container_in_cent
 import '../../../../accommodation/view/widgets/details_widgets/custom_appbar_row.dart';
 import '../../../../accommodation/view/widgets/details_widgets/custom_swiper.dart';
 import '../../../cubit/entertainment_cubit.dart';
+import '../widgets/container_in_center.dart';
 
 class DetailsEntertainment extends StatelessWidget {
   const DetailsEntertainment({super.key});
@@ -31,7 +32,8 @@ class DetailsEntertainment extends StatelessWidget {
               // Container under the Swiper
               ContainerUnderSwiperEntertainment(),
               // Centered container in the middle of the image
-              ContainerInCenter()
+           //   ContainerInCenter()
+              ContainerInCenterEntertainment()
             ],
           ),
         ),

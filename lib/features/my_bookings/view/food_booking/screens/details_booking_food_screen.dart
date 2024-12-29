@@ -41,7 +41,7 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.h,),
-              CustomBookingFoodContainerBig(foodModel: FoodModel(numofnights: "4 ليالي ",price:"5000",title:"nono",date: "13/12/2002",rate: 0,numOfBooking: "48721728" ,status: false),),                //text
+              CustomBookingFoodContainerBig(foodModel: FoodModel(numofnights: "4 ليالي ",price:"5000",title:"nono",date: "13/12/2002",rate: 0,numOfBooking: "48721728" ,status: true),),                //text
 
                 //from and to date
 

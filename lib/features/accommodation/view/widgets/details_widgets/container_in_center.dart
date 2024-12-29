@@ -3,6 +3,7 @@ import 'package:flutter_rating/flutter_rating.dart';
 import '../../../../../core/exports.dart';
 import '../../../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../../cubit/accomendation_cubit.dart';
+import 'custom_rating_incenter.dart';
 
 class ContainerInCenter extends StatelessWidget {
    ContainerInCenter({super.key});
@@ -38,8 +39,11 @@ class ContainerInCenter extends StatelessWidget {
                  );
                }).toList(),
              ),
-             CustomContainerCompanies(),
+           //  CustomContainerCompanies()
+             CustomRatingIncenter()
            ],
+
+
          ),
        ),
      );

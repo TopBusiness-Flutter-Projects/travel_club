@@ -54,7 +54,7 @@ bool isDetails=true;
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('${transportationBookingModel?.seatsNum.toString()??""}'+""+AppTranslations.seats,style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
+                                Text('${transportationBookingModel?.seatsNum.toString()??""}'+""+AppTranslations.seats,style: getMediumStyle(fontSize: 12.sp,color: AppColors.lbny),),
                                 // Spacer(),
                                 SizedBox(width: 10.w,),
 
