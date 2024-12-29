@@ -36,7 +36,7 @@ class DetailsAccommendation extends StatelessWidget {
                     right: 16.0,
                     child: CustomRow(),
                   ),
-
+                  
                   // Container under the Swiper
                   ContainerUnderSwiper(),
                   // Centered container in the middle of the image
