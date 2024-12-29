@@ -71,7 +71,8 @@ class CustomOffersContainer extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(20.r),
                 child: Image.network(
-                  "https://lotel.efaculty.tech/storage/cities/85531735112807.webp",
+                  "https://media.istockphoto.com/id/1859856017/fi/valokuva/nopea-internet-yhteys-nopeustestaa-verkon-kaistanleveystekniikka-mies-joka-k%C3%A4ytt%C3%A4%C3%A4-nopeaa.jpg?s=1024x1024&w=is&k=20&c=ffjK54jdpR-8egYRmNMGzFqWEh42B9HSAEO1_waKD0U=",
+                  // "https://lotel.efaculty.tech/storage/cities/85531735112807.webp",
                   fit: BoxFit.cover,
                   width: isHome
                       ? getWidthSize(context) * 0.8
@@ -93,7 +94,7 @@ class CustomOffersContainer extends StatelessWidget {
                             fit: FlexFit.tight,
                             child: AutoSizeText(
                               maxLines: 1,
-                                 "استمتع بخصم شم النسيم",
+                              "استمتع بخصم شم النسيم",
                               style: getMediumStyle(fontSize: 14.sp),
                             ),
                           ),
@@ -107,10 +108,10 @@ class CustomOffersContainer extends StatelessWidget {
                       AutoSizeText(
                         // AppTranslations.newOffers +
                         //     " " +
-                            // AppTranslations.newOffers +
-                            // " " +
-                            // AppTranslations.newOffers +
-                            "تمتع بخصم ٥٠ ٪ علي جميع عروض السفر",
+                        // AppTranslations.newOffers +
+                        // " " +
+                        // AppTranslations.newOffers +
+                        "تمتع بخصم ٥٠ ٪ علي جميع عروض السفر",
                         maxLines: 2,
                         style: getRegularStyle(
                             color: AppColors.grey, fontSize: 14.sp),

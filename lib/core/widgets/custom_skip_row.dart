@@ -15,7 +15,7 @@ class CustomSkipRow extends StatelessWidget {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       CircleAvatar(
         backgroundColor: AppColors.white,
-        radius: getHeightSize(context) * 0.04,
+        radius: getHeightSize(context) * 0.035,
         child: Padding(
           padding: EdgeInsets.all(4.h),
           child: Image.asset(
@@ -39,7 +39,7 @@ class CustomSkipRow extends StatelessWidget {
                     ),
                     Text(
                       AppTranslations.skip,
-                      style: getUnderLine(),
+                      style: getUnderLine(fontSize: 14.sp),
                     ),
                     SizedBox(
                       width: 3.w,
@@ -47,6 +47,7 @@ class CustomSkipRow extends StatelessWidget {
                     Icon(
                       Icons.arrow_forward_ios,
                       color: AppColors.secondPrimary,
+                      size: 14.sp,
                     )
                   ],
                 )),

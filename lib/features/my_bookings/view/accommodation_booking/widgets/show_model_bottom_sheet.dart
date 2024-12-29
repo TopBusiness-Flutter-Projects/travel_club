@@ -76,7 +76,7 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: cubit.rates[0 ],
+                                    rating: cubit.rates[0 ],size: 14.sp,
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
                                       cubit.changeRating(rating,0);
@@ -95,7 +95,7 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: cubit.rates[1 ],
+                                    rating: cubit.rates[1 ],size: 14.sp,
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
                                       cubit.changeRating(rating,1);
@@ -115,7 +115,7 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: cubit.rates[2 ],
+                                    rating: cubit.rates[2 ],size: 14.sp,
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
                                       cubit.changeRating(rating,2);
@@ -137,6 +137,7 @@ void showModelBottomSheetRatting(context) {
                                 StarRating(
                                     rating: cubit.rates[3 ],
                                     allowHalfRating: false,
+                                    size: 14.sp,
                                     onRatingChanged: (rating) {
                                       cubit.changeRating(rating,3);
 

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/custom_skip_row.dart';
 import 'package:travel_club/features/auth/view/widgets/custom_forward.dart';
@@ -33,11 +34,18 @@ class CustomOnBoardingBody extends StatelessWidget {
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(height: getHeightSize(context) * 0.05),
+                    SizedBox(height: getHeightSize(context) * 0.08),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.w),
                       child: CustomSkipRow(
-                          onTap: onTap, backgroundColor: AppColors.white),
+                          onTap: () async {
+                            Navigator.pushReplacementNamed(
+                                context, Routes.loginRoute);
+                            SharedPreferences pref =
+                                await SharedPreferences.getInstance();
+                            pref.setBool('onBoarding', true);
+                          },
+                          backgroundColor: AppColors.white),
                     ),
                     Spacer(),
                     Padding(

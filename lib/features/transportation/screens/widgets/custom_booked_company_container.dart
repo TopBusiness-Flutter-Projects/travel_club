@@ -34,7 +34,7 @@ class CustomBookedCompanyContainer extends StatelessWidget {
                 //  width: getWidthSize(context) * 0.3,
                   child: StarRating(
                       rating: 4,
-                      allowHalfRating: false,
+                      allowHalfRating: false, size: 14.sp,
                       emptyIcon: CupertinoIcons.star_fill,
                       filledIcon: CupertinoIcons.star_fill,
                       

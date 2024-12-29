@@ -41,7 +41,7 @@ class RatingWidgetFood extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   StarRating(
-                                      rating: 4,
+                                      rating: 4, size: 14.sp,
                                       allowHalfRating: false,
                                       onRatingChanged: (rating){
                                         //   => setState(() => this.rating = rating

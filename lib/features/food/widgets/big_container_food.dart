@@ -36,7 +36,7 @@ int index;
 
                      children: [
                        StarRating(
-                           rating: 5,
+                           rating: 5, size: 14.sp,
                            allowHalfRating: false,
                            onRatingChanged: (rating){
                              //   => setState(() => this.rating = rating
