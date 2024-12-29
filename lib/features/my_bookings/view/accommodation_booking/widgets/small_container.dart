@@ -14,7 +14,6 @@ class CustomBookingAccommodationContainerSmall extends StatefulWidget {
 
 class _CustomBookingAccommodationContainerSmallState extends State<CustomBookingAccommodationContainerSmall> {
   double rating = 1; // Default rating
-
   @override
   Widget build(BuildContext context) {
     return Padding(
