@@ -23,7 +23,7 @@ class PaymentProcessScreen extends StatelessWidget {
             child: CustomButton(
               title:AppTranslations.payNow,
               onTap: (){
-Navigator.pushNamed(context, Routes.donePayment );
+Navigator.pushNamed(context, Routes.donePayment,arguments: false);
             },),
           )
         ],

@@ -39,9 +39,10 @@ return BlocBuilder<MyBookingsCubit,MyBookingsState>(builder: (BuildContext conte
         itemBuilder: (BuildContext context, int index) {
           return    GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, Routes.detailsBooking);
+                // Navigator.pushNamed(context, Routes.detailsBooking);
+                 Navigator.pushNamed(context, Routes.detailsbookingTransportation);
               },
-              child: CustomBookingTransportationContainerBig(ispaid: true,));
+              child: CustomBookingTransportationContainerBig(ispaid: true,isDetails: true,));
         },),
       SizedBox(height: 100.h,)
     ],),

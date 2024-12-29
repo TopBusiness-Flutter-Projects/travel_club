@@ -57,8 +57,11 @@ class _BookingbodyState extends State<Bookingbody> {
 
                if(cubit.categories[cubit.selectedIndex] == AppTranslations.transportation)
                 TransportationBookingBody(),
-              if(cubit.categories[cubit.selectedIndex] ==AppTranslations.foodBookings)
-                FoodBookingBody()
+              if(cubit.categories[cubit.selectedIndex] ==AppTranslations.foodBookings)...[
+                FoodBookingBody(),
+                SizedBox(height: 90.h,)
+
+              ]
 
             ],
           ),

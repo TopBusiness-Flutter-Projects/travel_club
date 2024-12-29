@@ -8,6 +8,9 @@ class MyBookingsCubit extends Cubit<MyBookingsState> {
   MyBookingsRepoImpl api;
   int selectedIndex = 0;
   double rating = 0; // Default rating
+  List<double> rates = [
+    3,3,3,3
+  ];
 
   List<String>categories = [
     AppTranslations.accommodationBookings,
@@ -20,8 +23,8 @@ class MyBookingsCubit extends Cubit<MyBookingsState> {
     emit(IndexChanged());
   }
 
-  void changeRating(double newRating) {
-    rating = newRating;
+  void changeRating(double newRating , int index) {
+    rates[index] = newRating;
     emit(ChangeRating()); // Emit an event to notify listeners
   }
 }

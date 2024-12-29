@@ -48,9 +48,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CustomBackButton(
-                                onTap: Navigator.of(context).pop,
-                              ),
+                              const CustomBackButton(),
                               Text(
                                 AppTranslations.map,
                                 style: getSemiBoldStyle(

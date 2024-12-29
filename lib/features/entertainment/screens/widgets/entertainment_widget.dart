@@ -46,7 +46,7 @@ class EntertainmentWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text("jbsdj",style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.white),),
+                Text("ركوب الجمال",style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.white),),
                 Image.asset(ImageAssets.container,width: 62.w,height: 18.h,color: AppColors.primary,),
                 SizedBox(height: 10.h,)
               ],),
