@@ -1,3 +1,5 @@
+import 'package:travel_club/features/location/screens/position_map.dart';
+
 import '../../../../../core/exports.dart';
 import '../../../cubit/entertainment_cubit.dart';
 import 'custom_contact_container.dart';
@@ -45,27 +47,7 @@ class AboutWidget extends StatelessWidget {
           ContactButtonsScreen(),
           SizedBox(height: 10.h),
           //map
-          Text(
-            AppTranslations.locationOnMap,
-            style: getMediumStyle(
-              fontSize: 14.sp,
-            ),
-          ),
-          SizedBox(height: 10.h),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColors.red,
-              borderRadius: BorderRadius.all(
-                Radius.circular(30.r),
-              ),
-            ),
-            child: Image.asset(
-              ImageAssets.map,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          ),
+        PositionMap(lat: 30.1234567, long: 29.24),
           SizedBox(height: 30.h),
         ],),
     );

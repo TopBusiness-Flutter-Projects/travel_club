@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:travel_club/features/location/screens/position_map.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../../entertainment/screens/details_of_entertainment/widgets/toggle_container.dart';
@@ -150,58 +151,7 @@ class ContainerUnderSwiper  extends StatelessWidget {
                        },
                      ),
                    ),
-                   Text(
-                     "الموقع علي الخريطة",
-                     style: getMediumStyle(
-                       fontSize: 14.sp,
-                     ),
-                   ),
-                   SizedBox(height: 10.h),
-                   //map
-                   ClipRRect(
-                     borderRadius: BorderRadius.all(
-                       Radius.circular(10.r),
-                     ),
-                     child: Container(
-                       width: double.infinity,
-                       height: getHeightSize(context) * 0.3,
-                       decoration: BoxDecoration(
-                         color: AppColors.red,
-                         borderRadius: BorderRadius.all(
-                           Radius.circular(10.r),
-                         ),
-                       ),
-                       child: Stack(
-                         children: [
-                           SizedBox(
-                               width: double.infinity,
-                               height: getHeightSize(context) * 0.3,
-                               child: TransportationMap()),
-                           PositionedDirectional(
-                             bottom: 10.0,
-                             end: 10.0,
-                             child: Container(
-                               width: getWidthSize(context) * 0.7,
-                               decoration: BoxDecoration(
-                                 color: AppColors.white,
-                                 borderRadius: BorderRadius.circular(10.r),
-                               ),
-                               // alignment: Alignment.center,
-                               child: Padding(
-                                 padding: const EdgeInsets.all(8.0),
-                                 child: Text(
-                                   "٢٠ شارع الملك الصالح / الح / العين السخنه /مصر",
-                                   style: getMediumStyle(
-                                     fontSize: 14.sp,
-                                   ),
-                                 ),
-                               ),
-                             ),
-                           ),
-                         ],
-                       ),
-                     ),
-                   ),
+                  PositionMap(lat: 30.245, long: 30.21),
                    SizedBox(height: 60.h),
                  ],
                ),

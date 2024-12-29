@@ -30,7 +30,7 @@ class _PositionMapState extends State<PositionMap> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "الموقع علي الخريطة",
+              AppTranslations.locationOnMap,
               style: getMediumStyle(
                 fontSize: 14.sp,
               ),
