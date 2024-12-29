@@ -41,7 +41,7 @@ class CustomBookingFoodContainerSmall extends StatelessWidget {
                         children: [
                           StarRating(
                               rating: foodModel?.rate?.toDouble() ?? 1,
-                              allowHalfRating: false,
+                              allowHalfRating: false, size: 14.sp,
                               onRatingChanged: (rating) {
                                 //   => setState(() => this.rating = rating
                               }),

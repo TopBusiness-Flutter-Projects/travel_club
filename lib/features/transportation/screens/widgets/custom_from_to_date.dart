@@ -21,7 +21,8 @@ class CustomFromToDate extends StatelessWidget {
               ? Padding(
                   padding: EdgeInsets.all(18.h),
                   child: DatePickerField(
-                    selectedDate: cubit.singleDate!,
+                    selectedDate: cubit.singleDate,
+                    isSingle: true,
                     onTap: () {
                       cubit.onSelectedDateSingle(context: context);
                     },
@@ -65,9 +66,14 @@ class CustomFromToDate extends StatelessWidget {
 
 class DatePickerField extends StatefulWidget {
   final String selectedDate;
+  final bool isSingle;
   final void Function()? onTap;
 
-  const DatePickerField({super.key, required this.selectedDate, this.onTap});
+  const DatePickerField(
+      {super.key,
+      required this.selectedDate,
+      this.onTap,
+      this.isSingle = false});
 
   @override
   _DatePickerFieldState createState() => _DatePickerFieldState();
@@ -95,7 +101,9 @@ class _DatePickerFieldState extends State<DatePickerField> {
     return InkWell(
       onTap: widget.onTap, // Call the date picker on tap
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: widget.isSingle
+            ? MainAxisAlignment.spaceEvenly
+            : MainAxisAlignment.center,
         children: [
           Text(
             widget.selectedDate,

@@ -58,7 +58,7 @@ class _CustomBookingAccommodationContainerSmallState extends State<CustomBooking
                         children: [
                           StarRating(
                               rating: widget.hotelsModel?.rate.toDouble()??1,
-                              allowHalfRating: false,
+                              allowHalfRating: false, size: 14.sp,
                               // onRatingChanged: (rating){
                               //   setState(() {
                               //     this.rating = rating;

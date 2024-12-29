@@ -347,7 +347,7 @@ class CenterWidgetBooking extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         StarRating(
-                            rating: 4,
+                            rating: 4, size: 14.sp,
                             allowHalfRating: false,
                             onRatingChanged: (rating) {
                               //   => setState(() => this.rating = rating

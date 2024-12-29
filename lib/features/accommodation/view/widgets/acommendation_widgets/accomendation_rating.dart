@@ -97,7 +97,7 @@ class _CustomWidgetRatingState extends State<CustomWidgetRating> {
                         children: [
                           StarRating(
                               rating: widget.hotelsModel?.rate.toDouble()??1,
-                              allowHalfRating: false,
+                              allowHalfRating: false, size: 14.sp,
                               onRatingChanged: (rating){
                                 //   => setState(() => this.rating = rating
                               }),

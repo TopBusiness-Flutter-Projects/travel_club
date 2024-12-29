@@ -75,7 +75,7 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: 5,
+                                    rating: 5, size: 14.sp,
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
                                       //   => setState(() => this.rating = rating
@@ -93,7 +93,7 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: 5,
+                                    rating: 5, size: 14.sp,
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
                                       //   => setState(() => this.rating = rating
@@ -111,7 +111,7 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: 1,
+                                    rating: 1, size: 14.sp,
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
                                       //   => setState(() => this.rating = rating
@@ -129,7 +129,7 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: 3,
+                                    rating: 3, size: 14.sp,
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
                                       //   => setState(() => this.rating = rating

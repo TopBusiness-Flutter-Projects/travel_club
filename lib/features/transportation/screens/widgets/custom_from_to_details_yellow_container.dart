@@ -1,4 +1,3 @@
-
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 
@@ -14,8 +13,7 @@ class CustomFromToDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.yellow,
-          borderRadius: BorderRadius.circular(20.r)),
+          color: AppColors.yellow, borderRadius: BorderRadius.circular(20.r)),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Row(children: [

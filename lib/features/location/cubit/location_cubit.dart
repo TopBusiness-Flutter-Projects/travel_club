@@ -147,6 +147,7 @@ class LocationCubit extends Cubit<LocationState> {
 
   GoogleMapController? mapControllerTransportation;
   GoogleMapController? mapControllerAccommodation;
+  GoogleMapController? mapControllerPosition;
   Future<void> updateCameraposition() async {
     if (mapControllerTransportation != null && currentLocation != null) {
       mapControllerTransportation!.animateCamera(
@@ -170,6 +171,7 @@ class LocationCubit extends Cubit<LocationState> {
   String address = " address ";
   String address2 = " address ";
   Future<void> getAddressFromLatLng(double latitude, double longitude) async {
+    address = "Loading...";
     try {
       List<Placemark> placemarks =
           await placemarkFromCoordinates(latitude, longitude);

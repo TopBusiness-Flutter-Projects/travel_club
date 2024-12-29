@@ -31,7 +31,7 @@ class CustomContainerFood extends StatelessWidget {
                         Row(
                           children: [
                             StarRating(
-                                rating: 4,
+                                rating: 4, size: 14.sp,
                                 allowHalfRating: false,
                                 onRatingChanged: (rating){
                                   //   => setState(() => this.rating = rating

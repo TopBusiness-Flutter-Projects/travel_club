@@ -29,7 +29,7 @@ class CustomCompanyContainer extends StatelessWidget {
                         height: 80.w,
                       ),
                     ),
-                    SizedBox(width: 8.w),
+                    SizedBox(width: 12.w),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,17 +41,18 @@ class CustomCompanyContainer extends StatelessWidget {
                           ),
                           SizedBox(height: 10.h),
                           Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 StarRating(
                                     rating: 4,
                                     allowHalfRating: false,
+                                    size: 14.sp,
                                     emptyIcon: CupertinoIcons.star_fill,
                                     filledIcon: CupertinoIcons.star_fill,
                                     onRatingChanged: (rating) {
                                       //   => setState(() => this.rating = rating
                                     }),
-                                SizedBox(width: 1.w),
+                                SizedBox(width: 8.w),
                                 Flexible(
                                   child: AutoSizeText(
                                     "200" + AppTranslations.personRateCompany,
