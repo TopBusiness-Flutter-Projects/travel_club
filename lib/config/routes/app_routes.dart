@@ -22,6 +22,7 @@ import '../../features/accommodation/view/booking_accommodation/screens/done_pay
 import '../../features/accommodation/view/booking_accommodation/screens/payment_process_screen.dart';
 import '../../features/accommodation/view/booking_accommodation/screens/second_booking_accommodation_screen.dart';
 import '../../features/accommodation/view/screens/accomendation_screen.dart';
+import '../../features/accommodation/view/screens/details_accomendation old.dart';
 import '../../features/accommodation/view/screens/hotels_screen.dart';
 import '../../features/auth/view/screens/apply_screen.dart';
 import '../../features/auth/view/screens/forget_pass_screen.dart';
@@ -35,6 +36,7 @@ import '../../features/food/screens/details_of_food/screens/book_table_screen.da
 import '../../features/food/screens/details_of_food/screens/details_food_screen.dart';
 import '../../features/food/screens/food_screen.dart';
 import '../../features/my_account/screens/change_lang.dart';
+import '../../features/my_bookings/view/transportation_booking/screens/details_transportaion.dart';
 import '../../features/notification/screens/notification_screen.dart';
 import '../../features/my_account/screens/privacy_screen.dart';
 import '../../features/my_account/screens/profile_info.dart';
@@ -86,6 +88,7 @@ class Routes {
   static const String tripDetailsSecondRoute = '/tripDetailsSecondRoute';
   static const String offers = '/offers';
   static const String bags = '/bags';
+  static const String detailsbookingTransportation = '/detailsbookingTransportation';
 }
 
 class AppRoutes {
@@ -99,6 +102,12 @@ class AppRoutes {
       case Routes.onboardingPageScreenRoute:
         return PageTransition(
           child: const OnBoardinScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );case Routes.detailsbookingTransportation:
+        return PageTransition(
+          child: const DetailsBookingTransportaion(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

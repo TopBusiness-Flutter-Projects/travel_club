@@ -17,10 +17,15 @@ final  void Function()? onTap;
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(15.r), // Circular with rounded corners
         ),
-        child: Icon(
-          Icons.arrow_back_ios, // Icon similar to the image
-          color: Colors.grey, // Match the color of the arrow
-          size: 18.sp, // Adjust size as needed
+        child: Center(
+          child: Padding(
+            padding:  EdgeInsetsDirectional.only(start: 8.w),
+            child: Icon(
+              Icons.arrow_back_ios, // Icon similar to the image
+              color: Colors.grey, // Match the color of the arrow
+                   //     size: 18.sp, // Adjust size as needed
+            ),
+          ),
         ),
       ),
     );

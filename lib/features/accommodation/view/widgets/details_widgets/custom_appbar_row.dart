@@ -13,7 +13,7 @@ class CustomRow extends StatelessWidget {
         children: [
          CustomBackButton(),
           Spacer(),
-          Expanded(child: Text(AppTranslations.details,style: getMediumStyle(color: AppColors.blue,fontSize: 16.sp),)),
+          Expanded(child: Text(AppTranslations.details,style: getMediumStyle(color: AppColors.white,fontSize: 16.sp),)),
           Container(
               width: 44.w, // Adjust size as needed
               height: 44.h,
