@@ -6,7 +6,8 @@ import 'custom_rooms_widget.dart';
 import 'custom_rounded_button.dart';
 
 class CustomContainerBooking extends StatelessWidget {
-  const CustomContainerBooking({super.key});
+   CustomContainerBooking({super.key, this.widgetBottom});
+  Widget? widgetBottom;
   @override
   Widget build(BuildContext context) {
     var cubit=context.read<AccomendationCubit>();
@@ -19,7 +20,6 @@ class CustomContainerBooking extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   Text("غرفه عادية ب سرير فردي",style: getBoldStyle(fontSize: 16.sp,color:AppColors.primary),),
                   SizedBox(height: 10.h,),
 
@@ -47,23 +47,8 @@ class CustomContainerBooking extends StatelessWidget {
                   ),
 
                   Divider(color: AppColors.lightBlue1,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("السعر ل ٤ ليالي",style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
-                          Text("5000 جنيه مصري",style: getSemiBoldStyle(fontSize: 16.sp,color: AppColors.primary),),
-                          Text(AppTranslations.withoutTax,style: getRegularStyle(fontSize: 12.sp,color:AppColors.grey ),),
-                        ],),
-                      CustomRoundedButton(
-                        isBooking: true,icon:cubit.isAdded==true? Icons.add:Icons.remove,title:cubit.isAdded==true? "اضف":"احذف",onTap: (){
+                  widgetBottom!
 
-                          cubit.addedOrRemove();
-                          print("is added"+cubit.isAdded.toString()??"");
-                 //       Navigator.pushNamed(context, Routes.secondBookingAccommodation);
-                      },)                          ],)
                 ],
               ),
             )

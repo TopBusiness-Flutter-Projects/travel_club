@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_copun_widget.dart';
+import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_rounded_button.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/linear_progress.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/payment_widget.dart';
 import '../../../../transportation/cubit/transportation_cubit.dart';
@@ -27,6 +28,7 @@ class _SecondAccommodationBookingState extends State<SecondAccommodationBooking>
   }
   @override
   Widget build(BuildContext context) {
+    var cubit=context.read<AccomendationCubit>();
     return BlocBuilder<AccomendationCubit,AccomendationState>(builder: (BuildContext context, state) {
       return CustomScreen(appbarTitle: AppTranslations.booking,
         body:
@@ -57,7 +59,7 @@ class _SecondAccommodationBookingState extends State<SecondAccommodationBooking>
                 //custom contanier
                 SizedBox(height: 20.h,),
 
-                CustomContainerBooking(),
+                CustomContainerBooking(widgetBottom: SizedBox(),),
                 SizedBox(height: 10.h,),
 //payment
                 Text(AppTranslations.paymentDetails,style: getMediumStyle(fontSize: 14.sp),),

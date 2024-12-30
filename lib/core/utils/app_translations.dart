@@ -174,5 +174,7 @@ class AppTranslations {
   static String get numberOfPhoneContact => 'number_of_phone_contact'.tr();
   static String get numberOfAttendees => 'number_of_attendees'.tr();
   static String get selectBookingDate => 'select_booking_date'.tr();
+  static String get yourChoose => 'your_choose'.tr();
+  static String get theNumber => 'number'.tr();
   static String get personWhoRatedRestaurant => 'person_who_rated_restaurant'.tr();
 }
