@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,8 +7,6 @@ import 'package:travel_club/core/exports.dart';
 import '../../cubit/account_cubit.dart';
 import '../../cubit/account_state.dart';
 
-
-
 class LanguageSelectionScreen extends StatefulWidget {
   @override
   _LanguageSelectionScreenState createState() =>
@@ -15,26 +14,36 @@ class LanguageSelectionScreen extends StatefulWidget {
 }
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
-
   @override
   Widget build(BuildContext context) {
-  return BlocBuilder<AccountCubit, AccountState>(builder: (BuildContext context, state) {
-    return Column(
-    children: [
-      buildLanguageOption(
-        title: 'اللغه العربيه',
-        value: 'Arabic',
-      ),
-      SizedBox(height: 16),
-      buildLanguageOption(
-        title: 'English',
-        value: 'English',
-      ),
-    ],
-  ); },);
+    return BlocBuilder<AccountCubit, AccountState>(
+      builder: (BuildContext context, state) {
+        return Column(
+          children: [
+            buildLanguageOption(
+              isSelected:  EasyLocalization.of(context)!
+                                              .locale
+                                              .languageCode ==
+                                          'ar' ,
+              title: 'اللغه العربيه',
+              value: 'Arabic',
+            ),
+            SizedBox(height: 16),
+            buildLanguageOption(
+              isSelected:  EasyLocalization.of(context)!
+                                              .locale
+                                              .languageCode !=
+                                          'ar' ,
+              title: 'English',
+              value: 'English',
+            ),
+          ],
+        );
+      },
+    );
   }
 
-  Widget buildLanguageOption({required String title, required String value}) {
+  Widget buildLanguageOption({required String title, required String value , required bool isSelected}) {
     var cubit = context.read<AccountCubit>();
     return BlocBuilder<AccountCubit, AccountState>(
       builder: (BuildContext context, state) {
@@ -53,20 +62,26 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           child: ListTile(
             leading: GestureDetector(
               onTap: () {
-                 cubit.changeLanguage(value); // Call your cubit's method to update language
+                cubit.changeLanguage(context,
+                    value); // Call your cubit's method to update language
               },
-              child: Icon(cubit.selectedLanguage == value
+              child: Icon(
+                isSelected
                     ? Icons.check_circle // Checkmark icon when selected
-                    : Icons.radio_button_unchecked, // Unchecked icon when not selected
-                color: cubit.selectedLanguage == value ? AppColors.primary : AppColors.grey,
+                    : Icons
+                        .radio_button_unchecked, // Unchecked icon when not selected
+                color: isSelected
+                    ? AppColors.primary
+                    : AppColors.grey,
                 size: 24.sp,
               ),
             ),
             title: Text(
               title,
-              style:getMediumStyle(fontSize: 14.sp),
+              style: getMediumStyle(fontSize: 14.sp),
             ),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16.sp, color: Colors.grey),
+            trailing:
+                Icon(Icons.arrow_forward_ios, size: 16.sp, color: Colors.grey),
           ),
         );
       },

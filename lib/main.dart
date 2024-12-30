@@ -6,15 +6,12 @@ import 'package:travel_club/injector.dart' as injector;
 import 'app.dart';
 import 'app_bloc_observer.dart';
 import 'core/utils/restart_app_class.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
-
   await injector.setup();
   Bloc.observer = AppBlocObserver();
-
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('ar', ''), Locale('en', '')],
@@ -26,7 +23,6 @@ void main() async {
     ),
   );
 }
-
 class MyAppWithScreenUtil extends StatelessWidget {
   const MyAppWithScreenUtil({Key? key}) : super(key: key);
   @override
