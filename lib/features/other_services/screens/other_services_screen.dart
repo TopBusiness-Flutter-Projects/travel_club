@@ -27,8 +27,7 @@ class _OtherServicesScreenState extends State<OtherServicesScreen> {
                         title: "سوبر ماركت",
                         image: AppIcons.others,
                         onTap: () {
-                          Navigator.pushNamed(
-                              context, Routes.detailsOtherServices);
+                          Navigator.pushNamed(context, Routes.subServicesRoute);
                         },
                       ),
                     ))),

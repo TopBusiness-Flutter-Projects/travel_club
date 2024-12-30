@@ -41,7 +41,7 @@ class _TransportationSearchResultScreenState
                         Navigator.pushNamed(
                             context, Routes.tripDetailsfirstRoute);
                       },
-                      child: CustomSearchResultContainer()),
+                      child: CustomSearchResultContainer( isOneWay: index % 2 == 0,)),
                   separatorBuilder: (context, index) => SizedBox(height: 20.h),
                   itemCount: 5),
             )
