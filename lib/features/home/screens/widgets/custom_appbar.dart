@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 
 class CustomHomeAppbar extends StatelessWidget {
@@ -26,7 +27,8 @@ if(isHome==true)...[
     Expanded(
     child:
     Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    Text(AppTranslations.welcome,
+    Text('welcome'.tr(),
+    // Text(AppTranslations.welcome,
     style: getMediumStyle(fontSize: 14.sp, color: AppColors.grey)),
     Text(title!,
     style: getSemiBoldStyle(color: AppColors.blue, fontSize: 18.sp))

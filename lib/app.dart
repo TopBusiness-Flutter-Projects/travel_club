@@ -89,13 +89,13 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         child: GetMaterialApp(
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
+          localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
           theme: appTheme(),
           themeMode: ThemeMode.light,
           darkTheme: ThemeData.light(),
           // standard dark theme
-          localizationsDelegates: context.localizationDelegates,
           debugShowCheckedModeBanner: false,
           title: AppStrings.appName,
           onGenerateRoute: AppRoutes.onGenerateRoute,

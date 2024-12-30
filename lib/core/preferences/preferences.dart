@@ -2,6 +2,7 @@ import 'dart:convert';
 
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel_club/core/utils/app_strings.dart';
 
 import '../models/login_model.dart';
 
@@ -46,4 +47,13 @@ class Preferences {
     return userModel;
   }
 
+  Future<String> getSavedLang() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString(AppStrings.locale) ?? 'ar';
+  }
+
+  Future<void> savedLang(String local) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString(AppStrings.locale, local);
+  }
 }
