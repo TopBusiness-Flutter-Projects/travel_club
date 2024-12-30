@@ -1,15 +1,20 @@
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/widgets/custom_button.dart';
 
 class CustomScreen extends StatelessWidget {
   const CustomScreen({
     super.key,
     required this.body,
     this.appbarTitle,
+    this.isBooking,
     this.appBarOnPresses,
+    this.onTapp
   });
   final Widget body;
   final String? appbarTitle;
+  final bool? isBooking;
   final void Function()? appBarOnPresses;
+  final void Function()? onTapp;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +41,17 @@ class CustomScreen extends StatelessWidget {
         ),
         Expanded(child:body)
       ]),
+
+      bottomNavigationBar:isBooking == true? CustomContainerWithShadow(
+        height: 74.h,
+          child:
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+        Text("5000",style: getSemiBoldStyle(fontSize: 16.sp),),
+
+        CustomButton(title: AppTranslations.bookNow,width: 179.w,onTap: onTapp,)
+        ],)):null,
     );
   }
 }
