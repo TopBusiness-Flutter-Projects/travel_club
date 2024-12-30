@@ -1,4 +1,4 @@
-package com.topbusiness.travel_club
+package com.topbusiness.travelclub
 
 import io.flutter.embedding.android.FlutterActivity
 
