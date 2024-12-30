@@ -38,7 +38,7 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                            horizontal: 20, vertical: 2),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -63,6 +63,8 @@ class _MainScreenState extends State<MainScreen> {
                                               ? AppColors.primary
                                               : AppColors.grey,
                                           fontSize: 12.sp)),
+                                  if(cubit.currentpage == 0)
+                                  SvgPicture.asset(AppIcons.choosenNav,width: 40.w,)
                                 ],
                               ),
                             ),
@@ -87,6 +89,8 @@ class _MainScreenState extends State<MainScreen> {
                                               ? AppColors.primary
                                               : AppColors.grey,
                                           fontSize: 12.sp)),
+                                  if(cubit.currentpage == 1)
+                                    SvgPicture.asset(AppIcons.choosenNav,width: 40.w,)
                                 ],
                               ),
                             ),
@@ -111,6 +115,8 @@ class _MainScreenState extends State<MainScreen> {
                                               ? AppColors.primary
                                               : AppColors.grey,
                                           fontSize: 12.sp)),
+                                  if(cubit.currentpage == 2)
+                                    SvgPicture.asset(AppIcons.choosenNav,width: 40.w,)
                                 ],
                               ),
                             ),
@@ -135,6 +141,8 @@ class _MainScreenState extends State<MainScreen> {
                                               ? AppColors.primary
                                               : AppColors.grey,
                                           fontSize: 12.sp)),
+                                  if(cubit.currentpage == 3)
+                                    SvgPicture.asset(AppIcons.choosenNav,width: 40.w,)
                                 ],
                               ),
                             ),

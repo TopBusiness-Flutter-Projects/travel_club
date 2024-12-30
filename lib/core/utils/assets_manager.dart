@@ -49,6 +49,7 @@ class AppIcons {
   static const String order = '$iconsPath/order.svg';
   static const String map = '$iconsPath/map.svg';
   static const String menu = '$iconsPath/menu.svg';
+  static const String choosenNav = '$iconsPath/choosen.svg';
   static const String forward = '$iconsPath/forward.svg';
   static const String correct = '$iconsPath/correct.svg';
   static const String notification = '$iconsPath/notification.svg';
