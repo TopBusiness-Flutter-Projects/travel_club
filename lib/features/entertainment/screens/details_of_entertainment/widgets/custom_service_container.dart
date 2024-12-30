@@ -10,26 +10,31 @@ class CustomServiceContainer extends StatelessWidget {
  return BlocBuilder<EntertainmentCubit, EntertainmentState>(builder: (BuildContext context, state) {    return Padding(
    padding: const EdgeInsets.all(8.0),
    child: CustomContainerWithShadow(child:
-   Padding(
-     padding: const EdgeInsets.all(20.0),
-     child: Row(
-       children: [
-         Text(
-           "تاجير يخت كامل",
-           style: getSemiBoldStyle(
-             fontSize: 14.sp,
-             color: AppColors.secondPrimary,
+   InkWell(
+     onTap: (){
+       Navigator.pushNamed(context, Routes.bookTableEntermaint);
+     },
+     child: Padding(
+       padding: const EdgeInsets.all(20.0),
+       child: Row(
+         children: [
+           Text(
+             "تاجير يخت كامل",
+             style: getSemiBoldStyle(
+               fontSize: 14.sp,
+               color: AppColors.secondPrimary,
+             ),
            ),
-         ),
-         Spacer(),
-         Text(
-           "200"+" "+AppTranslations.currency,
-           style: getSemiBoldStyle(
-             fontSize: 14.sp,
-             color: AppColors.green,
+           Spacer(),
+           Text(
+             "200"+" "+AppTranslations.currency,
+             style: getSemiBoldStyle(
+               fontSize: 14.sp,
+               color: AppColors.green,
+             ),
            ),
-         ),
-       ],
+         ],
+       ),
      ),
    ),),
  ); },);

@@ -2,6 +2,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_container_booking.dart';
+import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_member_widget.dart';
 
 import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
@@ -23,8 +24,11 @@ class _AccommodationBookingState extends State<AccommodationBooking> {
   }
   @override
   Widget build(BuildContext context) {
+    var cubit=context.read<AccomendationCubit>();
    return BlocBuilder<AccomendationCubit,AccomendationState>(builder: (BuildContext context, state) {
-     return CustomScreen(appbarTitle: AppTranslations.booking,
+     return CustomScreen(onTapp: (){
+       Navigator.pushNamed(context, Routes.bestChoosenScreen);
+     },isBooking: true,appbarTitle: AppTranslations.booking,
        body:
        Padding(
          padding: const EdgeInsets.all(8.0),
@@ -36,6 +40,9 @@ class _AccommodationBookingState extends State<AccommodationBooking> {
              //text
              Text(AppTranslations.selectGoingAndReturn,style: getMediumStyle(fontSize: 14.sp),),
              SizedBox(height: 20.h,),
+//custom member
+             CustomMemberWidget(),
+SizedBox(height: 10.h,),
 //from and to date
              CustomFromToDate(),
              SizedBox(height: 20.h,),
@@ -49,9 +56,10 @@ class _AccommodationBookingState extends State<AccommodationBooking> {
                    return CustomContainerBooking();
                  },
                ),
-             )
+             ),
            ],
          ),
+
        ),
      );
    },);

@@ -27,7 +27,7 @@ if(isHome==true)...[
     Expanded(
     child:
     Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    Text('welcome'.tr(),
+    Text(AppTranslations.hi,
     // Text(AppTranslations.welcome,
     style: getMediumStyle(fontSize: 14.sp, color: AppColors.grey)),
     Text(title!,
@@ -41,8 +41,6 @@ if(isHome==true)...[
         style: getSemiBoldStyle(color: AppColors.blue, fontSize: 18.sp)),
   ),
         ],
-
-
         SizedBox(
           width: getWidthSize(context) * 0.05,
         ),

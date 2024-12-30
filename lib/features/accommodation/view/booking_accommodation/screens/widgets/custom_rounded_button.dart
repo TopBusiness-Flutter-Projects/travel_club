@@ -4,11 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
 
 class CustomRoundedButton extends StatelessWidget {
-   CustomRoundedButton({super.key, this.onTap,this.title,this.width,this.height});
+   CustomRoundedButton({super.key, this.onTap,this.title,this.width,this.height,this.isBooking,this.icon});
   void Function()? onTap;
   String ?title;
   double? width;
   double? height;
+  bool ?isBooking;
+  IconData ?icon;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -23,7 +25,27 @@ class CustomRoundedButton extends StatelessWidget {
             width: 2, // Border width
           ),
         ),
-        child: Center(
+        child:isBooking==true?Center(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+            Center(child: Icon(icon??Icons.add,color: AppColors.primary,)),
+            SizedBox(width: 5.w,),
+            Center(
+              child: Text(
+                title ??  AppTranslations.bookNow,
+                style: TextStyle(
+                  color: AppColors.primary, // Text color
+                  fontSize: 14.sp, // Text size
+                  fontWeight: FontWeight.w600, // Font weight
+                ),
+              ),
+            )
+            ],
+          ),
+        ) :Center(
           child: Text(
          title ??  AppTranslations.bookNow,
             style: TextStyle(

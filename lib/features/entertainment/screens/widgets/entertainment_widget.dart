@@ -18,7 +18,9 @@ class EntertainmentWidget extends StatelessWidget {
         //  width: 165.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.r),
-          image: DecorationImage(image: AssetImage(ImageAssets.gml), fit: BoxFit.cover),
+          image: DecorationImage(
+              image: AssetImage(ImageAssets.gml), fit: BoxFit.cover
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
@@ -39,7 +41,6 @@ class EntertainmentWidget extends StatelessWidget {
                 Colors.black.withOpacity(0.8),
               ],
             ),
-
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
