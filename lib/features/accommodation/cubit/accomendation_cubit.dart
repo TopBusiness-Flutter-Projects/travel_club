@@ -12,6 +12,29 @@ class AccomendationCubit extends Cubit<AccomendationState> {
   AccomendationCubit(this.api) : super(DetailsAccomendationPngInitial()) {
     getmarker();
   }
+  int ?counter=1;
+  void minusCounter(){
+    if(counter!>1){
+      counter=counter!-1;
+      emit(MinusLoaded());
+
+    }
+  }
+  void plusCounter(){
+
+      counter=counter!+1;
+      emit(PlusLoaded());
+  }
+  //is added
+  bool ?isAdded=true;
+  void addedOrRemove(){
+    print("nono");
+    // isAdded != (isAdded);
+    isAdded = !(isAdded ?? true);
+
+    print("is added"+isAdded.toString()??"");
+    emit(IsAddedChange());
+  }
   DetailsAccomendationRepoImpl? api;
   int currentIndex = 0;
 

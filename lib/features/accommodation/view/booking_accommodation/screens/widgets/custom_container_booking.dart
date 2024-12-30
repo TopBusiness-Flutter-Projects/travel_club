@@ -9,6 +9,7 @@ class CustomContainerBooking extends StatelessWidget {
   const CustomContainerBooking({super.key});
   @override
   Widget build(BuildContext context) {
+    var cubit=context.read<AccomendationCubit>();
     return BlocBuilder<AccomendationCubit,AccomendationState>(builder: (BuildContext context, state) {
       return  Padding(
         padding: const EdgeInsets.all(8.0),
@@ -56,8 +57,12 @@ class CustomContainerBooking extends StatelessWidget {
                           Text("5000 جنيه مصري",style: getSemiBoldStyle(fontSize: 16.sp,color: AppColors.primary),),
                           Text(AppTranslations.withoutTax,style: getRegularStyle(fontSize: 12.sp,color:AppColors.grey ),),
                         ],),
-                      CustomRoundedButton(onTap: (){
-                        Navigator.pushNamed(context, Routes.secondBookingAccommodation);
+                      CustomRoundedButton(
+                        isBooking: true,icon:cubit.isAdded==true? Icons.add:Icons.remove,title:cubit.isAdded==true? "اضف":"احذف",onTap: (){
+
+                          cubit.addedOrRemove();
+                          print("is added"+cubit.isAdded.toString()??"");
+                 //       Navigator.pushNamed(context, Routes.secondBookingAccommodation);
                       },)                          ],)
                 ],
               ),
