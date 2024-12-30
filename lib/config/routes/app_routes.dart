@@ -29,6 +29,7 @@ import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
 import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
+import '../../features/entertainment/screens/details_of_entertainment/screens/book_table.dart';
 import '../../features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
 import '../../features/entertainment/screens/entertainment_companies.dart';
 import '../../features/entertainment/screens/entertainment_screen.dart';
@@ -79,6 +80,7 @@ class Routes {
       '/secondBookingAccommodation';
   static const String detailsFoodRoute = '/detailsFoodRoute';
   static const String bookTable = '/bookTable';
+  static const String bookTableEntermaint = '/bookTableEntermaint';
   static const String transportationMenuRoute = '/transportationMenuRoute';
   static const String transportationBookingDetailsRoute =
       '/transportationBookingDetailsRoute';
@@ -105,7 +107,15 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );case Routes.detailsbookingTransportation:
+        );
+        case Routes.bookTableEntermaint:
+        return PageTransition(
+          child: const BookTableEntermaint(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.detailsbookingTransportation:
         return PageTransition(
           child: const DetailsBookingTransportaion(),
           type: PageTransitionType.fade,

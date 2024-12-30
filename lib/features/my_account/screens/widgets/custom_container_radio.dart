@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,9 +54,13 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           child: ListTile(
             leading: GestureDetector(
               onTap: () {
-                 cubit.changeLanguage(value); // Call your cubit's method to update language
+                debugPrint("nono");
+                print(value);
+                 cubit.changeLanguage(value);
+                 context.setLocale(getLocaleFromLanguageValue(value));// Call your cubit's method to update language
               },
-              child: Icon(cubit.selectedLanguage == value
+              child: Icon(
+                cubit.selectedLanguage == value
                     ? Icons.check_circle // Checkmark icon when selected
                     : Icons.radio_button_unchecked, // Unchecked icon when not selected
                 color: cubit.selectedLanguage == value ? AppColors.primary : AppColors.grey,
@@ -71,5 +76,15 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
         );
       },
     );
+  }
+  Locale getLocaleFromLanguageValue(String value) {
+    switch (value) {
+      case 'English':
+        return Locale('en', 'US');
+      case 'Arabic':
+        return Locale('ar', 'EG');
+      default:
+        return Locale('en', 'US');
+    }
   }
 }

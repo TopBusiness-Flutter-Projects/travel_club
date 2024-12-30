@@ -36,6 +36,20 @@ class _AccommodationBookingState extends State<AccommodationBooking> {
              //text
              Text(AppTranslations.selectGoingAndReturn,style: getMediumStyle(fontSize: 14.sp),),
              SizedBox(height: 20.h,),
+Row(
+  children: [
+    Text(AppTranslations.numberOfMembers),
+    IconButton(
+      icon: Icon(Icons.remove),
+      onPressed: (){},
+    ),
+    Text('', style: TextStyle(fontSize: 24)),
+    IconButton(
+      icon: Icon(Icons.add),
+      onPressed: (){},
+    ),
+  ],
+),
 //from and to date
              CustomFromToDate(),
              SizedBox(height: 20.h,),
