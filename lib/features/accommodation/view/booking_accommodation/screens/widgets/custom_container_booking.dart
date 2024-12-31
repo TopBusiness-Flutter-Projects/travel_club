@@ -61,14 +61,14 @@ class CustomContainerBooking extends StatelessWidget {
                     //
                     // ),
                   ),
-
                  // Divider(color: AppColors.lightBlue1,),
-                  widgetBottom!
+                  widgetBottom??Container(),
 
                 ],
               ),
             )
         ),
+        //Container()
       );
     },);
   }

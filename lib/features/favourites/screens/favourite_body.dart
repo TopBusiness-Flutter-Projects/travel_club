@@ -65,7 +65,7 @@ class _FavouritebodyState extends State<Favouritebody> {
                 Expanded(
                     child: ListView.builder(
                         itemCount: 10,
-                        itemBuilder: (context, index) => CustomCompanyContainer())),
+                        itemBuilder: (context, index) => CustomCompanyContainer(isFavouriteScreen: true,))),
               ],
               if(cubit.categories[cubit.selectedIndex] ==AppTranslations.food)...[
               //  FoodBookingBody()

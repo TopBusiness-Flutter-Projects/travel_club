@@ -16,13 +16,14 @@ class CustomSearchResultContainer extends StatelessWidget {
           child: Padding(
               padding: const EdgeInsets.all(8.0),
               child:
-                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Container(
                   decoration: BoxDecoration(
                     color: AppColors.lightWhite,
                     shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(
-                        15), // Circular with rounded corners
+                    borderRadius: BorderRadius.circular(15), // Circular with rounded corners
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -37,14 +38,16 @@ class CustomSearchResultContainer extends StatelessWidget {
                 ),
                 Expanded(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          // crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Flexible(
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
