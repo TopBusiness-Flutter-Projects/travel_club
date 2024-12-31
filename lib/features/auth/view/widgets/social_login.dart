@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/auth/cubit/cubit.dart';
 
 class SocialLoginRow extends StatelessWidget {
+  const SocialLoginRow({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -47,24 +48,29 @@ class SocialLoginRow extends StatelessWidget {
             SizedBox(width: 16.w), // Space between the containers
 
             // Google Container
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: AppColors.greyborder),
-              ),
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    AppIcons.google, // Add your Google logo here
-                    width: 20,
-                    height: 20,
-                  ),
-                  SizedBox(width: 8),
-                  Text(AppTranslations.google,
-                      style: getRegularStyle(fontSize: 14.sp)),
-                ],
+            InkWell(
+              onTap: () {
+                 BlocProvider.of<LoginCubit>(context).signInWithGoogle();
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: AppColors.greyborder),
+                ),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      AppIcons.google, // Add your Google logo here
+                      width: 20,
+                      height: 20,
+                    ),
+                    SizedBox(width: 8),
+                    Text(AppTranslations.google,
+                        style: getRegularStyle(fontSize: 14.sp)),
+                  ],
+                ),
               ),
             ),
           ],

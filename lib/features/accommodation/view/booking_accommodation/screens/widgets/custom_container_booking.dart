@@ -14,7 +14,10 @@ class CustomContainerBooking extends StatelessWidget {
     return BlocBuilder<AccomendationCubit,AccomendationState>(builder: (BuildContext context, state) {
       return  Padding(
         padding: const EdgeInsets.all(8.0),
-        child: CustomContainerWithShadow(
+        child:
+        CustomContainerWithShadow(
+          // width:  400.h,
+          //   height: 500.h,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -29,7 +32,7 @@ class CustomContainerBooking extends StatelessWidget {
                       children: [
                         SvgPicture.asset(AppIcons.correct),
                         SizedBox(width: 5.w,),
-                        Text(AppTranslations.cancelFree+"  "+context.read<TransportationCubit>().toDate.toString()??"",style: getRegularStyle(fontSize: 14.sp),),
+                        Text(AppTranslations.cancelFree+"  "+context.read<TransportationCubit>().toDate.toString()??"",style: getRegularStyle(fontSize: 14.sp,color: AppColors.green),),
                       ],
                     ),
                   ),
@@ -37,16 +40,29 @@ class CustomContainerBooking extends StatelessWidget {
                   //custom rooms widget
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: StaggeredGrid.count(
-                      crossAxisCount: 2,
-                      children: List.generate(6, (index) =>
-                          CustomRoomsWidget()
-                      ),
+                    child: Wrap(
+                      spacing: 10.w,
+                      runSpacing: 10.h,
 
-                    ),
+                      children: List.generate(6, (index) =>
+                          // Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
+                         SizedBox(
+                             width: getWidthSize(context)*0.3,
+                             child: CustomRoomsWidget())
+                      ),
+                    )
+
+                    // StaggeredGrid.count(
+                    //   crossAxisCount: 2,
+                    //   children: List.generate(6, (index) =>
+                    //       Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
+                    //       // CustomRoomsWidget()
+                    //   ),
+                    //
+                    // ),
                   ),
 
-                  Divider(color: AppColors.lightBlue1,),
+                 // Divider(color: AppColors.lightBlue1,),
                   widgetBottom!
 
                 ],

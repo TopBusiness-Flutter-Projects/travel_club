@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "762370307959",
+    "project_id": "travelclup-e8728",
+    "storage_bucket": "travelclup-e8728.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762370307959:android:098cb3a66d7283587e5372",
+        "android_client_info": {
+          "package_name": "com.topbusiness.travelclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762370307959-9e3molrdgm5tafas44lbem0d0q016lvm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.topbusiness.travelclub",
+            "certificate_hash": "a9c035d17673b8d60de7b7bd233d475293d04dfc"
+          }
+        },
+        {
+          "client_id": "762370307959-gc3b1rek5g9gckeruf5cl42brmbdjbeb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.topbusiness.travelclub",
+            "certificate_hash": "4651ce0f26426d5555218578e60a5d21e1a00d1a"
+          }
+        },
+        {
+          "client_id": "762370307959-dkpqipchrmoc6673gpjv9lb30k58olge.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2P9BAG1THla6JwpSfM_iCaYloMtufMBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762370307959-dkpqipchrmoc6673gpjv9lb30k58olge.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

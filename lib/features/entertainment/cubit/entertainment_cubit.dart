@@ -11,7 +11,7 @@ class EntertainmentCubit extends Cubit<EntertainmentState> {
   bool isServiceSelected = false;
   int currentIndex = 0;
 
-
+  bool ?isFavoriteTrue=false;
   final List<String> imageUrls = [
     'https://th.bing.com/th/id/OIP.FtudhIBH-HYhxMpS4TU-sAHaE8?rs=1&pid=ImgDetMain', // Replace with your image URLs
     'https://th.bing.com/th/id/OIP.FtudhIBH-HYhxMpS4TU-sAHaE8?rs=1&pid=ImgDetMain', // Replace with your image URLs
