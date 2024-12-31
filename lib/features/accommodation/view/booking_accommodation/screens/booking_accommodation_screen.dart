@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_container_booking.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_member_widget.dart';
+import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_rounded_button.dart';
 
+import '../../../../../core/widgets/custom_button.dart';
 import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/accomendation_cubit.dart';
@@ -26,9 +28,11 @@ class _AccommodationBookingState extends State<AccommodationBooking> {
   Widget build(BuildContext context) {
     var cubit=context.read<AccomendationCubit>();
    return BlocBuilder<AccomendationCubit,AccomendationState>(builder: (BuildContext context, state) {
-     return CustomScreen(onTapp: (){
-       Navigator.pushNamed(context, Routes.bestChoosenScreen);
-     },isBooking: true,appbarTitle: AppTranslations.booking,
+     return CustomScreen(
+     //   onTapp: (){
+     //   Navigator.pushNamed(context, Routes.bestChoosenScreen);
+     // },
+       isBooking: true,appbarTitle: AppTranslations.booking,
        body:
        Padding(
          padding: const EdgeInsets.all(8.0),
@@ -53,7 +57,23 @@ SizedBox(height: 10.h,),
                  shrinkWrap: true,
                  itemCount: 4,
                  itemBuilder: (BuildContext context, int index) {
-                   return CustomContainerBooking();
+                   return CustomContainerBooking(widgetBottom:  Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     children: [
+                       Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           Text("السعر ل ٤ ليالي",style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
+                           Text("5000 جنيه مصري",style: getSemiBoldStyle(fontSize: 16.sp,color: AppColors.primary),),
+                           Text(AppTranslations.withoutTax,style: getRegularStyle(fontSize: 12.sp,color:AppColors.grey ),),
+                         ],),
+                       CustomRoundedButton(
+                         isBooking: true,icon:cubit.isAdded==true? Icons.add:Icons.remove,title:cubit.isAdded==true? "اضف":"احذف",onTap: (){
+
+                         cubit.addedOrRemove();
+                         print("is added"+cubit.isAdded.toString()??"");
+                         //       Navigator.pushNamed(context, Routes.secondBookingAccommodation);
+                       },)                          ],),);
                  },
                ),
              ),
@@ -61,6 +81,18 @@ SizedBox(height: 10.h,),
          ),
 
        ),
+       widget: CustomContainerWithShadow(
+           height: 74.h,
+           child:
+           Row(
+             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+             children: [
+               Text("5000",style: getSemiBoldStyle(fontSize: 16.sp),),
+
+               CustomButton(title: AppTranslations.bookNow,width: 179.w,onTap: (){
+                 Navigator.pushNamed(context, Routes.bestChoosenScreen);
+               },)
+             ],)),
      );
    },);
   }
