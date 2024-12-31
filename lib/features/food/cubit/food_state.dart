@@ -6,3 +6,5 @@ sealed class FoodState {}
 final class FoodInitial extends FoodState {}
 final class ChangeIndex extends FoodState {}
 final class ChangeFavourite extends FoodState {}
+final class ChangeCount extends FoodState {}
+final class DateChangedState extends FoodState {}
