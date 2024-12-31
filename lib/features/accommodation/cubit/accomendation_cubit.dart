@@ -97,8 +97,9 @@ class AccomendationCubit extends Cubit<AccomendationState> {
     for (int i = 0; i <= starsFilters.length!; i++) {
       starsFilters[i].isChecked = false;
       Facilities[i].isChecked = false;
-      emit(ChangeIndex());
+
     }
+    emit(ChangeIndex());
   }
 
   bool isSelectedHotel = false;

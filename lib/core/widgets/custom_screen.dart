@@ -8,13 +8,15 @@ class CustomScreen extends StatelessWidget {
     this.appbarTitle,
     this.isBooking,
     this.appBarOnPresses,
-    this.onTapp
+    this.widget
   });
   final Widget body;
+  final Widget ?widget;
   final String? appbarTitle;
   final bool? isBooking;
   final void Function()? appBarOnPresses;
-  final void Function()? onTapp;
+  // final void Function()? onTapp;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,16 +44,7 @@ class CustomScreen extends StatelessWidget {
         Expanded(child:body)
       ]),
 
-      bottomNavigationBar:isBooking == true? CustomContainerWithShadow(
-        height: 74.h,
-          child:
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-        Text("5000",style: getSemiBoldStyle(fontSize: 16.sp),),
-
-        CustomButton(title: AppTranslations.bookNow,width: 179.w,onTap: onTapp,)
-        ],)):null,
+      bottomNavigationBar:isBooking == true? widget:null,
     );
   }
 }

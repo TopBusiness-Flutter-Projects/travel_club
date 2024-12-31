@@ -118,6 +118,7 @@
   "price_for": "السعر ل",
   "ticket": "تذكرة",
   "book_now": "أحجز الان",
+  "your_choose": "اختيارك",
 
   "": "",
   "checkin_time": "وقت التسليم",
@@ -141,7 +142,7 @@
   "book_appointment": "موعد الحجز ",
   "members": " افراد",
   "call_phone": "هاتف التواصل",
-  "name_owner": "اسم صاحب الحجز",
+  "c": "اسم صاحب الحجز",
   "personal_data": "البيانات الشخصية",
   "change_language": "تغيير اللغه",
   "contact_us": "تواصل معنا",
@@ -176,6 +177,7 @@
   "number_of_attendees": "عدد الحضور",
   "number_of_phone_contact": "رقم هاتف للتواصل",
   "done_booking": "تم الحجز",
+  "number": "العدد",
 
 
   "lasss": ""
