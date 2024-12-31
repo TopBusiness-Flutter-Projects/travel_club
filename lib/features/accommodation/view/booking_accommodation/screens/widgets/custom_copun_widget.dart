@@ -14,7 +14,7 @@ class CustomCopunWidget extends StatelessWidget {
           suffixIcon:
           Padding(
             padding: const EdgeInsets.all(4.0),
-            child: TextButton( onPressed: () {  }, child: Text(AppTranslations.applay,style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.primary),),),
+            child: TextButton( onPressed: () {}, child: Text(AppTranslations.applay,style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.primary),),),
           ),),
       ),);
   }

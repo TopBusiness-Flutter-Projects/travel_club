@@ -20,6 +20,18 @@ class AccomendationCubit extends Cubit<AccomendationState> {
 
     }
   }
+  //check privacy
+  bool isChecked = false; // حالة ال checkbox
+void checkPrivacy() {
+  isChecked = !isChecked;
+  emit(ChangePrivacy());
+}
+  //change choice
+  bool ?choice=false;
+  void changeChoice(){
+    choice = !(choice ?? true);
+    emit(ChangeChoice());
+  }
   void plusCounter(){
 
       counter=counter!+1;

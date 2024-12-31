@@ -10,7 +10,8 @@ class FavouritesCubit extends Cubit<FavouritesState> {
   List<String>categories=[
     AppTranslations.accommodation,
     AppTranslations.transportation,
-    AppTranslations.food
+    AppTranslations.food,
+    AppTranslations.entertainment
   ];
   void changeContainer(int index){
     selectedIndex=index;
