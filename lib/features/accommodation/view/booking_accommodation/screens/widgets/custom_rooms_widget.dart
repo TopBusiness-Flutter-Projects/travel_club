@@ -8,6 +8,7 @@ class CustomRoomsWidget extends StatelessWidget {
     return  Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
+         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(AppIcons.bookingHotel),
           SizedBox(width: 5.w,),

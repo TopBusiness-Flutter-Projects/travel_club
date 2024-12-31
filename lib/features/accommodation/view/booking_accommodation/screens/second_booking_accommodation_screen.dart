@@ -1,4 +1,5 @@
 
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
@@ -50,16 +51,43 @@ class _SecondAccommodationBookingState extends State<SecondAccommodationBooking>
                 CustomFromToDate(),
                 SizedBox(height: 20.h,),
                 //custom widget rating hotel
+                Text("${AppTranslations.numberOfMembers} : "+cubit.counter.toString()??"",style: getMediumStyle(fontSize: 14.sp),),
+
                 CustomWidgetRating(hotelsModel: HotelsModel(title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 ,isFavorite: false,
                     image:   "https://lotel.efaculty.tech/storage/cities/38461735112771.webp",
                    ),),
                 SizedBox(height: 20.h,),
             //prefer hotel
-                Text(AppTranslations.chooseTheBestOption,style: getMediumStyle(fontSize: 14.sp),),
+                Text(AppTranslations.rooms,style: getMediumStyle(fontSize: 14.sp),),
                 //custom contanier
                 SizedBox(height: 20.h,),
+                // CustomContainerBooking(
+                //   widgetBottom: SizedBox(),
+                // ),
+                SizedBox(
+                  height: 300.h,
+                  child: Swiper(
+                    itemCount: 3,  // Define the number of items in the swiper
+                    itemBuilder: (BuildContext context, int index) {
+                      // Return a CustomContainerBooking for each item
+                      return
+                      //   Container(
+                      //   child : Text('Item dsas'),
+                      // );
+                        SizedBox(
+                          // height: 600.h,
+                          // width: getWidthSize(context),
+                          child: CustomContainerBooking(
+                          widgetBottom: SizedBox(),
+                                                ),
+                        );
+                    },
+                    pagination: SwiperPagination(),  // Optional pagination
+                  //  control: SwiperControl(),  // Optional arrows for control
+                  ),
+                ),
 
-                CustomContainerBooking(widgetBottom: SizedBox(),),
+             //   CustomContainerBooking(widgetBottom: SizedBox(),),
                 SizedBox(height: 10.h,),
 //payment
                 Text(AppTranslations.paymentDetails,style: getMediumStyle(fontSize: 14.sp),),
@@ -70,7 +98,8 @@ class _SecondAccommodationBookingState extends State<SecondAccommodationBooking>
                 Text(AppTranslations.areYouHaveACoupon,style: getMediumStyle(fontSize: 14.sp),),
                 SizedBox(height: 10.h,),
 
-                CustomCopunWidget(),
+                 CustomCopunWidget(),
+                CustomCheckboxWithText(),
 //button
 
 CustomButton(title: AppTranslations.completePayment,onTap: (){
@@ -85,3 +114,44 @@ CustomButton(title: AppTranslations.completePayment,onTap: (){
   }
 }
 
+
+class CustomCheckboxWithText extends StatefulWidget {
+  @override
+  _CustomCheckboxWithTextState createState() => _CustomCheckboxWithTextState();
+}
+
+class _CustomCheckboxWithTextState extends State<CustomCheckboxWithText> {
+
+  @override
+  Widget build(BuildContext context) {
+    var cubit=context.read<AccomendationCubit>();
+  return BlocBuilder<AccomendationCubit,AccomendationState>(builder: (BuildContext context, state) {   return Row(
+    children: [
+      Checkbox(
+        activeColor: AppColors.primary,
+        value: cubit.isChecked,
+        onChanged: (bool? value) {
+          // setState(() {
+          //   isChecked = value ?? false;
+          // });
+          cubit.checkPrivacy();
+        },
+      ),
+      Center(
+        child: RichText(
+          text: TextSpan(
+            style: TextStyle(fontSize: 16.0, color: Colors.black), // الأسلوب الافتراضي للنص
+            children: <TextSpan>[
+              TextSpan(text:  AppTranslations.youAgree,style: getMediumStyle(fontSize: 14.sp)), // جزء أول عادي
+              TextSpan(
+                text: '${AppTranslations.terms}', // جزء مؤكد
+                style: getMediumStyle(fontSize: 14.sp,color: AppColors.primary), // تغيير الأسلوب ليكون غامق
+              ),
+            ],
+          ),
+        ),
+      ) // نص يمكنك تغييره حسب الحاجة
+    ],
+  ); },);
+  }
+}
