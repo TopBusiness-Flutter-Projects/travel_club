@@ -11,3 +11,6 @@ final class SetMarkersState extends AccomendationState {}
 final class MinusLoaded extends AccomendationState {}
 final class PlusLoaded extends AccomendationState {}
 final class IsAddedChange extends AccomendationState {}
+final class ChangeChoice extends AccomendationState {}
+final class ChangePrivacy extends AccomendationState {}
+

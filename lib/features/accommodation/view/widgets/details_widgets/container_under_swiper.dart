@@ -93,8 +93,8 @@ class ContainerUnderSwiper  extends StatelessWidget {
                                mainAxisAlignment: MainAxisAlignment.center,
                                children: [
                                  Icon(
-                                   CupertinoIcons.square_arrow_left,
-                                   color: AppColors.green,
+                                   CupertinoIcons.square_arrow_right,
+                                   color: AppColors.red,
                                    size: getWidthSize(context) / 8,
                                  ),
                                  SizedBox(
@@ -112,7 +112,7 @@ class ContainerUnderSwiper  extends StatelessWidget {
                                      Text(
                                        "12:00 - 20:00",
                                        style: getMediumStyle(
-                                           color: AppColors.red,
+                                           color: AppColors.grey,
                                            fontSize: 14.sp),
                                      ),
                                    ],
@@ -120,7 +120,7 @@ class ContainerUnderSwiper  extends StatelessWidget {
                                ]),
                          )
                        ]),
-
+SizedBox(height: 20.h,),
                    Text(
                     AppTranslations.whatItOffers,
                      style: getMediumStyle(

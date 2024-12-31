@@ -33,6 +33,7 @@
   "donot_have_an_account": "لا تمتلك حساب ؟",
   "create_an_account_now": "انشاء حساب الان",
   "google": "جوجل",
+  "name_owner": "اسم صاحب الحجز",
   "facebook": "فيسبوك",
   "full_name": "الاسم كاملا",
   "write_full_name": " ادخل الاسم كاملا",
@@ -119,6 +120,10 @@
   "ticket": "تذكرة",
   "book_now": "أحجز الان",
   "your_choose": "اختيارك",
+  "choose_done": "تم التغيير",
+  "rooms": "الغرف",
+  "you_agree": "أنت موافق على",
+  "": "الشروط والأحكام",
 
   "": "",
   "checkin_time": "وقت التسليم",

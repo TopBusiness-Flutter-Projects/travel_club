@@ -149,6 +149,7 @@ class AppTranslations {
   static String get proplemTitle => 'problem_title'.tr();
   static String get message => 'message'.tr();
   static String get send => 'send'.tr();
+  static String get chooseDone => 'choose_done'.tr();
   static String get whoUs => 'who_us'.tr();
   static String get whoUsOffer => 'who_we_offer'.tr();
   static String get privacy => 'privacy'.tr();
@@ -176,5 +177,7 @@ class AppTranslations {
   static String get selectBookingDate => 'select_booking_date'.tr();
   static String get yourChoose => 'your_choose'.tr();
   static String get theNumber => 'number'.tr();
+  static String get rooms => 'rooms'.tr();
+  static String get youAgree => 'you_agree'.tr();
   static String get personWhoRatedRestaurant => 'person_who_rated_restaurant'.tr();
 }
