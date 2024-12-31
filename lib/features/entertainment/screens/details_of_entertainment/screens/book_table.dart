@@ -44,7 +44,6 @@ class BookTableEntermaint extends StatelessWidget {
               ),
               CustomTextField(hintText: "01000000000",),
               CustomButton(title: AppTranslations.bookTable)
-        
         ]),
       ),
     ));
