@@ -1,4 +1,5 @@
 
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
@@ -51,11 +52,32 @@ class _DetailsBookingState extends State<DetailsBooking> {
 
                 SizedBox(height: 20.h,),
                 //prefer hotel
-                Text(AppTranslations.chooseTheBestOption,style: getMediumStyle(fontSize: 14.sp),),
+                Text(AppTranslations.rooms,style: getMediumStyle(fontSize: 14.sp),),
                 //custom contanier
                 SizedBox(height: 20.h,),
-
-                CustomContainerBooking(),
+                SizedBox(
+                  height: 300.h,
+                  child: Swiper(
+                    itemCount: 3,  // Define the number of items in the swiper
+                    itemBuilder: (BuildContext context, int index) {
+                      // Return a CustomContainerBooking for each item
+                      return
+                        //   Container(
+                        //   child : Text('Item dsas'),
+                        // );
+                        SizedBox(
+                          // height: 600.h,
+                          // width: getWidthSize(context),
+                          child: CustomContainerBooking(
+                            widgetBottom: SizedBox(),
+                          ),
+                        );
+                    },
+                    pagination: SwiperPagination(),  // Optional pagination
+                    //  control: SwiperControl(),  // Optional arrows for control
+                  ),
+                ),
+               // CustomContainerBooking(),
                 SizedBox(height: 10.h,),
 //payment
                 SizedBox(height: 20.h,),

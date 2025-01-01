@@ -42,7 +42,7 @@ class ContainerUnderSwiperFood  extends StatelessWidget {
                 ListView.separated(
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
-                  itemCount: 5, itemBuilder: (BuildContext context, int index) {
+                  itemCount: 1, itemBuilder: (BuildContext context, int index) {
                   return CustomMenueContainer();
                 }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10.h); },),
               ]

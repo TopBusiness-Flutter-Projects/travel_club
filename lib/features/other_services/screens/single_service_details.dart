@@ -3,6 +3,7 @@ import 'package:travel_club/features/accommodation/view/widgets/details_widgets/
 import 'package:travel_club/features/entertainment/screens/details_of_entertainment/widgets/container_in_center.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_cubit.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_state.dart';
+import 'package:travel_club/features/other_services/screens/widgets/custom_in_center_others.dart';
 import 'package:travel_club/features/other_services/screens/widgets/custom_under_swiper.dart';
 import '../../../../../core/exports.dart';
 class ServiceDetailsScreen extends StatelessWidget {
@@ -33,7 +34,8 @@ class ServiceDetailsScreen extends StatelessWidget {
                   ContainerUnderSwiperOtherService(),
                   // Centered container in the middle of the image
                   //   ContainerInCenter()
-                  ContainerInCenterEntertainment()
+                  // ContainerInCenterEntertainment()
+                  ContainerInCenterOthers()
                 ],
               ),
             ),
