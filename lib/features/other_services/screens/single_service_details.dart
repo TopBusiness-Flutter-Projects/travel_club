@@ -1,6 +1,5 @@
 import 'package:travel_club/features/accommodation/view/widgets/details_widgets/custom_appbar_row.dart';
 import 'package:travel_club/features/accommodation/view/widgets/details_widgets/custom_swiper.dart';
-import 'package:travel_club/features/entertainment/screens/details_of_entertainment/widgets/container_in_center.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_cubit.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_state.dart';
 import 'package:travel_club/features/other_services/screens/widgets/custom_in_center_others.dart';
