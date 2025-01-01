@@ -42,7 +42,7 @@ return BlocBuilder<MyBookingsCubit,MyBookingsState>(builder: (BuildContext conte
                 // Navigator.pushNamed(context, Routes.detailsBooking);
                  Navigator.pushNamed(context, Routes.detailsbookingTransportation);
               },
-              child: CustomBookingTransportationContainerBig(ispaid: true,isDetails: true,));
+              child: CustomBookingTransportationContainerBig(ispaid: index%2==0,isDetails: true,));
         },),
       SizedBox(height: 100.h,)
     ],),
