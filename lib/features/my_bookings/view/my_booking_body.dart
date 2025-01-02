@@ -5,6 +5,7 @@ import '../../home/screens/widgets/custom_appbar.dart';
 import '../cubit/my_bookings_cubit.dart';
 import '../cubit/my_bookings_state.dart';
 import 'accommodation_booking/screens/custom_booking_accommodation_body.dart';
+import 'entertainment_booking/screens/custom_booking_food.dart';
 import 'food_booking/screens/custom_booking_food.dart';
 
 
@@ -37,7 +38,7 @@ class _BookingbodyState extends State<Bookingbody> {
                   child: SizedBox(
                   height: 54.h, // Fixed height for the ListView
                   child: ListView.separated(
-                  itemCount: 3,
+                  itemCount: cubit.categories.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                   return CustomBookingSection(index: index,);
@@ -59,6 +60,11 @@ class _BookingbodyState extends State<Bookingbody> {
                 TransportationBookingBody(),
               if(cubit.categories[cubit.selectedIndex] ==AppTranslations.foodBookings)...[
                 FoodBookingBody(),
+                SizedBox(height: 90.h,)
+
+              ],
+              if(cubit.categories[cubit.selectedIndex] ==AppTranslations.entertainment)...[
+                EntertainmentBookingBody(),
                 SizedBox(height: 90.h,)
 
               ]

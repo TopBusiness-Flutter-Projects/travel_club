@@ -1,22 +1,22 @@
 //big conatiner
 
-import 'package:travel_club/features/my_bookings/view/food_booking/widgets/small_container_food.dart';
+import 'package:travel_club/features/my_bookings/view/entertainment_booking/widgets/small_container_entertainment.dart';
 
 import '../../../../../../core/exports.dart';
 import '../../../cubit/my_bookings_cubit.dart';
 import '../../../cubit/my_bookings_state.dart';
 
-class FoodModel {
+class EntertainmentModel {
   String? title;
-  int? rate;
-  String? date;
-  String? price;
-  String? numofnights;
-  bool? status;
-  String? numOfBooking;
+  final int? rate;
+  final String? date;
+  final String? price;
+  final String? numofnights;
+  final bool? status;
+  final String? numOfBooking;
   void Function()? onTap;
 
-  FoodModel({
+  EntertainmentModel({
     this.numofnights,
     this.onTap,
     this.title,
@@ -28,9 +28,9 @@ class FoodModel {
   });
 }
 //big conatiner
-class CustomBookingFoodContainerBig extends StatelessWidget {
-  CustomBookingFoodContainerBig({super.key, required this.foodModel});
-  final FoodModel foodModel;
+class CustomBookingEntertainmentContainerBig extends StatelessWidget {
+  CustomBookingEntertainmentContainerBig({super.key, required this.foodModel});
+  final EntertainmentModel foodModel;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MyBookingsCubit, MyBookingsState>(
@@ -42,7 +42,7 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
             children: [
               //custom container
 
-            CustomBookingFoodContainerSmall(foodModel: FoodModel(title: "title", rate: 4, date: "date", price: "price", numOfBooking: "numOfBooking",numofnights: "numofnights",),),
+            CustomBookingFoodContainerSmall(foodModel: EntertainmentModel(title: "title", rate: 4, date: "date", price: "price", numOfBooking: "numOfBooking",numofnights: "numofnights",),),
             //Row
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
