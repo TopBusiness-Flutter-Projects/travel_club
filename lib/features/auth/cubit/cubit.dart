@@ -9,7 +9,7 @@ import 'package:travel_club/core/remote/service.dart';
 import '../../../core/exports.dart';
 import '../data/login_repo_impl.dart';
 import 'state.dart';
-
+//ya29.a0ARW5m75XCuAi6zuyPKuHI-Y0anNF2A8jgdJjEw21BRvMneo1dz6YmaGSj-2mx2p264ym5XLZ9HjevPHjvbY7qSeJ8gC4Ckg7SBcCmCF10B69q8wuMsA9nw5woRRfydexChhj-k8slstayN-1wYjtQc5UIHFH7a-cRUauVxJ0UwaCgYKAW4SARMSFQHGX2MiiiHA8cakZ1f7WtPCKv-CBg0177
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this.api) : super(LoginStateInitial());
   LoginRepoImpl api;
@@ -91,6 +91,7 @@ Future<UserCredential?> signInWithGoogle() async {
     // Retrieve authentication tokens
     final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
     print("Access Token retrieved: ${googleAuth.accessToken != null}");
+    print("Access Token retrieved: ${googleAuth.accessToken.toString()}");
     print("ID Token retrieved: ${googleAuth.idToken != null}");
 
     // Validate tokens
