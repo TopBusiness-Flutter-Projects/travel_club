@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
-
 import '../../../../../../config/routes/app_routes.dart';
-import '../widgets/big_container_food.dart';
+import '../widgets/big_container_entertainment.dart';
 
 
 
 
 //body
-class FoodBookingBody extends StatelessWidget {
-  FoodBookingBody({super.key});
+class EntertainmentBookingBody extends StatelessWidget {
+  EntertainmentBookingBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +20,9 @@ class FoodBookingBody extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return    GestureDetector(
               onTap: (){
-
-                Navigator.pushNamed(context, Routes.detailsBookingFood);
+                Navigator.pushNamed(context, Routes.detailsBookingEntertainment);
               },
-              child: CustomBookingFoodContainerBig(foodModel: FoodModel(numofnights: "4 ليالي ",price:"5000",title:"nono",date: "13/12/2002",rate: 0,numOfBooking: "48721728" ,status:true),));
+              child: CustomBookingEntertainmentContainerBig(foodModel: EntertainmentModel(numofnights: "4 ليالي ",price:"5000",title:"nono",date: "13/12/2002",rate: 0,numOfBooking: "48721728" ,status:true),));
         },),
     );  }
 }

@@ -5,3 +5,4 @@ sealed class EntertainmentState {}
 
 final class EntertainmentInitial extends EntertainmentState {}
 final class ChangeIndex extends EntertainmentState {}
+final class DateChangedState extends EntertainmentState {}

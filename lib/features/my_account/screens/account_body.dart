@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:travel_club/core/exports.dart';
@@ -71,13 +70,12 @@ Expanded(
       }
       await Share.share(url);
     },),
-    CustomRowProfile(title: AppTranslations.logout,),
+    CustomRowProfile(title: AppTranslations.logout,onTap: (){Navigator.pushNamed(context, Routes.loginRoute);},),
     SizedBox(height: 100.h,),
     //  SizedBox(height: 100.h,),
   ],
   ),
 )
-
               ],
             ),
           ),

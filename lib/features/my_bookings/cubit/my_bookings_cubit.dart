@@ -15,7 +15,9 @@ class MyBookingsCubit extends Cubit<MyBookingsState> {
   List<String>categories = [
     AppTranslations.accommodationBookings,
     AppTranslations.transportation,
-    AppTranslations.foodBookings
+    AppTranslations.foodBookings,
+    AppTranslations.entertainment,
+
   ];
 
   void changeContainer(int index) {

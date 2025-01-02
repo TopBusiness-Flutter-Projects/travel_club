@@ -15,6 +15,7 @@ class TransportationCubit extends Cubit<TransportationState> {
   }
 
   ///// from and to cities
+ bool isFavoriteTrue = false;
   List<String> cities = ['القاهرة', 'اسيوط'];
   String? bookingFromvalue;
   String? bookingTovalue;

@@ -1,13 +1,12 @@
 //small conatiner
 import 'package:flutter_rating/flutter_rating.dart';
-import 'package:travel_club/features/my_bookings/view/food_booking/widgets/big_container_food.dart';
 
 import '../../../../../../core/exports.dart';
-import '../../../../accommodation/view/widgets/acommendation_widgets/accomendation_rating.dart';
+import 'big_container_entertainment.dart';
 
 class CustomBookingFoodContainerSmall extends StatelessWidget {
   CustomBookingFoodContainerSmall({super.key, required this.foodModel});
-  FoodModel foodModel;
+  EntertainmentModel? foodModel;
 
   @override
   Widget build(BuildContext context) {

@@ -32,7 +32,7 @@ class ContainerUnderSwiperEntertainment  extends StatelessWidget {
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //togle
-              //  SizedBox(height: 30.h,),
+                SizedBox(height: 30.h,),
                 ToggleButtonScreen(),
                 if(cubit.isServiceSelected==true)
                   AboutWidget()
@@ -46,7 +46,6 @@ class ContainerUnderSwiperEntertainment  extends StatelessWidget {
                           }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10.h); },),
                   SizedBox(height: 100.h,)
                 ]
-
               ],
             ),
           ),
