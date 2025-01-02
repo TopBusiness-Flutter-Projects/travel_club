@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:travel_club/core/remote/service.dart';
 
 import '../../../core/exports.dart';
@@ -12,7 +15,8 @@ class LoginCubit extends Cubit<LoginState> {
   LoginRepoImpl api;
   //login
   late TextEditingController phoneController = TextEditingController();
-  late TextEditingController phoneControllerForgetPass = TextEditingController();
+  late TextEditingController phoneControllerForgetPass =
+      TextEditingController();
   late TextEditingController passwordControllerLogin = TextEditingController();
   GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
   //forget pass
@@ -26,7 +30,8 @@ class LoginCubit extends Cubit<LoginState> {
   //otp screen
   int secondsRemaining = 60;
   late Timer timer;
-  final TextEditingController pinController = TextEditingController(); // Controller for PIN input
+  final TextEditingController pinController =
+      TextEditingController(); // Controller for PIN input
 //start time
   void startTimer() {
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -36,22 +41,128 @@ class LoginCubit extends Cubit<LoginState> {
       // } else {
       //   resetPin();
       // }
-      if(secondsRemaining > 0){
+      if (secondsRemaining > 0) {
         secondsRemaining--;
         emit(StartTimer());
       }
-
     });
   }
+
 //reset pin
   void resetPin() {
-    if(secondsRemaining==0){
+    if (secondsRemaining == 0) {
       timer.cancel();
       secondsRemaining = 60; // Reset the timer
       pinController.clear(); // 45Clear the PIN input// Stop the timer
       emit(ResetPin());
       startTimer(); // Restart the timer
     }
+  }
 
+  // Sign in with google
+  String userGmail = '';
+  String userPhoto = '';
+  String userName = '';
+  String? accessToken = '';
+Future<UserCredential?> signInWithGoogle() async {
+  await signOutFromGmail();
+  print("Starting Google Sign-In process...");
+
+  try {
+    final GoogleSignIn _googleSignIn = GoogleSignIn(
+      scopes: [
+        'email',
+        'https://www.googleapis.com/auth/userinfo.profile',
+        'openid',
+      ],
+    );
+
+    // Trigger Google Sign-In
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    print("Google Sign-In successful: ${googleUser != null}");
+
+    // Handle user cancellation
+    if (googleUser == null) {
+      print("Google Sign-In was cancelled by the user.");
+      emit(FailureSignInWithGoogleState(error: 'Sign-in cancelled by user'));
+      return null;
+    }
+
+    // Retrieve authentication tokens
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    print("Access Token retrieved: ${googleAuth.accessToken != null}");
+    print("ID Token retrieved: ${googleAuth.idToken != null}");
+
+    // Validate tokens
+    if (googleAuth.accessToken == null || googleAuth.idToken == null) {
+      print("Missing required authentication tokens.");
+      emit(FailureSignInWithGoogleState(error: 'Missing authentication tokens'));
+      throw Exception('Missing Google authentication tokens.');
+    }
+
+    // Create Firebase credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Store the access token locally if needed
+    accessToken = googleAuth.accessToken;
+
+    // Emit success state for Google Sign-In
+    emit(SuccessSignInWithGoogleState());
+    print("Firebase credential created successfully. Signing in...");
+
+    try {
+      // Sign in to Firebase with additional error handling
+      final UserCredential userCredential = 
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      
+      print("Firebase Sign-In successful. User ID: ${userCredential.user?.uid}");
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      print("Firebase Auth Exception: ${e.code} - ${e.message}");
+      emit(FailureSignInWithGoogleState(
+        error: _getFirebaseErrorMessage(e.code),
+      ));
+      return null;
+    }
+
+  } on PlatformException catch (e) {
+    print("Platform Exception during Google Sign-In: ${e.code}, ${e.message}");
+    emit(FailureSignInWithGoogleState(error: e.message));
+  } catch (e) {
+    print("Unexpected error during Google Sign-In: $e");
+    emit(FailureSignInWithGoogleState(error: e.toString()));
+  }
+
+  return null;
+}
+
+// Helper function to provide user-friendly error messages
+String _getFirebaseErrorMessage(String code) {
+  switch (code) {
+    case 'account-exists-with-different-credential':
+      return 'An account already exists with the same email address but different sign-in credentials.';
+    case 'invalid-credential':
+      return 'The credential data is malformed or has expired.';
+    case 'operation-not-allowed':
+      return 'Google sign-in is not enabled for this project.';
+    case 'user-disabled':
+      return 'This user account has been disabled.';
+    case 'user-not-found':
+      return 'No user found for this credential.';
+    default:
+      return 'An unknown error occurred during sign-in.';
+  }
+}
+
+  Future<GoogleSignInAccount?> signOutFromGmail() async {
+    emit(LoadingSignOutGoogleState());
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signOut();
+
+    emit(SuccessSignOutGoogleState());
+
+    return googleUser;
   }
 }
