@@ -5,7 +5,6 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/assets_manager.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../../../core/utils/dialogs.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -36,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen>
     if (prefs.getBool('onBoarding') != null) {
       // TODO
       if (prefs.getString('user') == null) {
-        Navigator.pushReplacementNamed(context, Routes.loginRoute);
+        Navigator.pushReplacementNamed(context, Routes.mainRoute);
       } else {
         Navigator.pushNamedAndRemoveUntil(
           context,
