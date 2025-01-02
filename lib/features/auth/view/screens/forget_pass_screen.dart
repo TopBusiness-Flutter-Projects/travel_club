@@ -49,11 +49,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     controller: cubit.phoneControllerForgetPass,
                     enabled: true,
                     title: AppTranslations.phone,
-                    hintText: AppTranslations.writePhone,
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SvgPicture.asset(AppIcons.phone),
-                    ),
+                    isPhoneNumber: true,
+                    //hintText: AppTranslations.writePhone,
+                    // suffixIcon: Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: SvgPicture.asset(AppIcons.phone),
+                    // ),
                     validator: (value) {
                       // Check if the input matches a valid phone number format
                       final phoneRegex = RegExp(
