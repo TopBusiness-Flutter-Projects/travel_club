@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
     if (prefs.getBool('onBoarding') != null) {
       // TODO
       if (prefs.getString('user') == null) {
-        Navigator.pushReplacementNamed(context, Routes.mainRoute);
+        Navigator.pushReplacementNamed(context, Routes.loginRoute);
       } else {
         Navigator.pushNamedAndRemoveUntil(
           context,

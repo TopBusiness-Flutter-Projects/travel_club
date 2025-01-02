@@ -59,12 +59,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       CustomTextField(
                         controller: cubit.phoneController,
                         enabled: true,
+                        isPhoneNumber: true,
+                     //   isPhoneNumber: true,
                         title: AppTranslations.phone,
                         hintText: AppTranslations.writePhone,
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SvgPicture.asset(AppIcons.phone),
-                        ),
+                        // suffixIcon: Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: SvgPicture.asset(AppIcons.phone),
+                        // ),
                         validator: (value) {
                           // Check if the input matches a valid phone number format
                           final phoneRegex = RegExp(
@@ -81,6 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: cubit.passwordControllerLogin,
                         enabled: true,
                         isPassword: true,
+
                         title: AppTranslations.pass,
                         hintText: AppTranslations.writePass,
                       ),
