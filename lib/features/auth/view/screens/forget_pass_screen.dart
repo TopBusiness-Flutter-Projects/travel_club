@@ -27,8 +27,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     return BlocBuilder<LoginCubit,LoginState>(builder: (BuildContext context, state) {  return SafeArea(
       child: Scaffold(
           backgroundColor: AppColors.white,
-          body:
-          Padding(
+          body: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Form(
               key:cubit. formKeyForgetPass,
@@ -49,11 +48,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     controller: cubit.phoneControllerForgetPass,
                     enabled: true,
                     title: AppTranslations.phone,
-                    hintText: AppTranslations.writePhone,
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SvgPicture.asset(AppIcons.phone),
-                    ),
+                    isPhoneNumber: true,
+                    //hintText: AppTranslations.writePhone,
+                    // suffixIcon: Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: SvgPicture.asset(AppIcons.phone),
+                    // ),
                     validator: (value) {
                       // Check if the input matches a valid phone number format
                       final phoneRegex = RegExp(

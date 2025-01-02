@@ -179,5 +179,6 @@ class AppTranslations {
   static String get theNumber => 'number'.tr();
   static String get rooms => 'rooms'.tr();
   static String get youAgree => 'you_agree'.tr();
+  static String get theTotal => 'the_total'.tr();
   static String get personWhoRatedRestaurant => 'person_who_rated_restaurant'.tr();
 }

@@ -24,10 +24,13 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
       return CustomScreen(
           appbarTitle: AppTranslations.tripDetails,
           body: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(

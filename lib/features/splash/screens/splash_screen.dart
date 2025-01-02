@@ -5,7 +5,6 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/assets_manager.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../../../core/utils/dialogs.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

@@ -71,7 +71,7 @@ class CustomBagContainer extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(20.r),
                 child: Image.network(
-                  "https://lotel.efaculty.tech/storage/cities/35691735112791.webp",
+                  "https://media.istockphoto.com/id/1859856017/fi/valokuva/nopea-internet-yhteys-nopeustestaa-verkon-kaistanleveystekniikka-mies-joka-k%C3%A4ytt%C3%A4%C3%A4-nopeaa.jpg?s=1024x1024&w=is&k=20&c=ffjK54jdpR-8egYRmNMGzFqWEh42B9HSAEO1_waKD0U=",
                   fit: BoxFit.cover,
                   width: isHome
                       ? getWidthSize(context) * 0.55

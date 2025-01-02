@@ -19,7 +19,11 @@ class BestChoosenScreen extends StatelessWidget {
            Row(
              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
              children: [
-               Text(AppTranslations.skip,style: getSemiBoldStyle(fontSize: 16.sp),),
+               GestureDetector(
+              onTap:(){
+                Navigator.pushNamed(context, Routes.secondBookingAccommodation);
+             },
+                   child: Text(AppTranslations.skip,style: getSemiBoldStyle(fontSize: 16.sp),)),
 
                CustomButton(title: AppTranslations.next,width: 179.w,onTap: (){
                  Navigator.pushNamed(context, Routes.secondBookingAccommodation);

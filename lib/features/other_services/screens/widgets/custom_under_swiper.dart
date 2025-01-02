@@ -32,7 +32,7 @@ class ContainerUnderSwiperOtherService  extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.start,
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              
+              SizedBox(height: 30.h,),
            
                   ServiceAboutWidget()
                
