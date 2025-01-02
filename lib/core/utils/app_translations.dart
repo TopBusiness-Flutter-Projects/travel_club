@@ -181,4 +181,6 @@ class AppTranslations {
   static String get youAgree => 'you_agree'.tr();
   static String get theTotal => 'the_total'.tr();
   static String get personWhoRatedRestaurant => 'person_who_rated_restaurant'.tr();
+  static String get loading => 'loading'.tr();
+  static String get error => 'error'.tr();
 }

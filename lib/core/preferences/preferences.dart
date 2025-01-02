@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/utils/app_strings.dart';
+import 'package:travel_club/features/auth/data/login_model.dart';
 
-import '../models/login_model.dart';
 
 class Preferences {
   static final Preferences instance = Preferences._internal();
@@ -55,5 +55,15 @@ class Preferences {
   Future<void> savedLang(String local) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString(AppStrings.locale, local);
+  }
+   // Notification token
+  Future<String?> getNotificationToken() async{
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      return  preferences.getString('notificationToken');
+  }
+
+  Future<dynamic> setNotificationToken({required String value}) async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return   preferences.setString('notificationToken', value);
   }
 }
