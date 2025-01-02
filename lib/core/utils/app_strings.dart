@@ -1,8 +1,9 @@
 
-export 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AppStrings {
-  
+export 'package:flutter_screenutil/flutter_screenutil.dart';
+late SharedPreferences prefs;
+class AppStrings {  
   static const String appName = 'Traverl Club';
   static const String fontFamily = 'NotoSansArabic';
   static const String noRouteFound = 'No Route Found';
@@ -13,4 +14,6 @@ class AppStrings {
    static const String englishCode = 'en';
   static const String arabicCode = 'ar';
   // static const String googleApiKey = '';
+ static bool isLogged =prefs.getBool("ISLOGGED")?? false;
 }
+

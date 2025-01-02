@@ -1,17 +1,21 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/config/routes/app_routes.dart';
+import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/injector.dart' as injector;
+
 import 'app.dart';
 import 'app_bloc_observer.dart';
 import 'core/utils/restart_app_class.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 // import 'firebase_options.dart';
 // the navigator key added to material app
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -145,6 +149,7 @@ void main() async {
           sound: true,
         );
   }
+  prefs = await SharedPreferences.getInstance();
   getToken();
   await EasyLocalization.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
@@ -192,7 +197,7 @@ getToken() async {
   String? token = await messaging.getToken();
   print("token =  $token");
   // messaging.deleteToken();
-//  Preferences.instance.setNotificationToken(value: token ?? '');
+  Preferences.instance.setNotificationToken(value: token ?? '');
   return token;
 }
 

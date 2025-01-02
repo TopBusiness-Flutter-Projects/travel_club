@@ -1,6 +1,10 @@
+import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:flutter_svg/svg.dart';
+import 'package:intl_phone_field/countries.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:intl_phone_field/intl_phone_field.dart'as intl;
+import 'package:intl_phone_field/intl_phone_field.dart' as intl;
 
 class CustomTextField extends StatefulWidget {
   final String? labelText;
@@ -23,28 +27,28 @@ class CustomTextField extends StatefulWidget {
   final bool isPhoneNumber;
   final void Function(String, String)? onPhoneChanged;
 // إضافة المتغير
-  const CustomTextField({
-    super.key,
-    this.labelText,
-    this.hintText,
-    this.prefixIcon,
-    this.validator,
-    this.suffixIcon,
-    this.keyboardType = TextInputType.text,
-    this.isMessage = false,
-    this.controller,
-    this.initialValue,
-    this.onChanged,
-    this.onTap,
-    this.isPassword = false,
-    this.onSubmitted,
-    this.borderRadius,
-    this.enabled = true,
-    this.ischange = false,
-    this.title,
-    this.isPhoneNumber = false,  
-    this.onPhoneChanged// إضافة المتغير
-  });
+  const CustomTextField(
+      {super.key,
+      this.labelText,
+      this.hintText,
+      this.prefixIcon,
+      this.validator,
+      this.suffixIcon,
+      this.keyboardType = TextInputType.text,
+      this.isMessage = false,
+      this.controller,
+      this.initialValue,
+      this.onChanged,
+      this.onTap,
+      this.isPassword = false,
+      this.onSubmitted,
+      this.borderRadius,
+      this.enabled = true,
+      this.ischange = false,
+      this.title,
+      this.isPhoneNumber = false,
+      this.onPhoneChanged // إضافة المتغير
+      });
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -76,19 +80,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.title != null)
-            ...[
-              Text(
-                widget.title!,
-                style: getMediumStyle(color: AppColors.secondPrimary, fontSize: 14.sp),
-              ),
-              SizedBox(height: 1.h),
-            ],
+          if (widget.title != null) ...[
+            Text(
+              widget.title!,
+              style: getMediumStyle(
+                  color: AppColors.secondPrimary, fontSize: 14.sp),
+            ),
+            SizedBox(height: 1.h),
+          ],
           // إذا كان هو حقل رقم الهاتف
           if (widget.isPhoneNumber)
             _buildPhoneField(context)
           else
-          // إذا لم يكن حقل رقم الهاتف، استخدم الحقل العادي
+            // إذا لم يكن حقل رقم الهاتف، استخدم الحقل العادي
             _buildRegularField(context),
         ],
       ),
@@ -99,91 +103,104 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget _buildPhoneField(BuildContext context) {
     return Directionality(
       textDirection:
-      //trans.EasyLocalization.of(context)!.locale.languageCode == 'en'?
-      TextDirection.ltr,
+          //trans.EasyLocalization.of(context)!.locale.languageCode == 'en'?
+          TextDirection.ltr,
       // TextDirection.rtl,
 
       //     ? TextAlign.right
       //     : TextAlign.left, TextDirection.ltr,
       child: intl.IntlPhoneField(
         controller: widget.controller,
-        decoration:InputDecoration(
+        decoration: InputDecoration(
           filled: true,
-          fillColor: widget.enabled! ? AppColors.lightWhite2 : AppColors.gray.withOpacity(0.5),
+          fillColor: widget.enabled!
+              ? AppColors.lightWhite2
+              : AppColors.gray.withOpacity(0.5),
           labelText: widget.labelText,
           labelStyle: getRegularStyle(
             fontHeight: 1.5,
             color: myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
           ),
           // prefixIcon: widget.prefixIcon,
-       //    hintText: widget.hintText,
+          //    hintText: widget.hintText,
 
-         // prefixText: widget.hintText,
-         // prefixStyle: TextStyle(color: AppColors.white) ,
-         //suffixText: widget.hintText,
-         // alignLabelWithHint: true,
+          // prefixText: widget.hintText,
+          // prefixStyle: TextStyle(color: AppColors.white) ,
+          //suffixText: widget.hintText,
+          // alignLabelWithHint: true,
           hintTextDirection: TextDirection.ltr,
           alignLabelWithHint: true,
-          hintStyle: getRegularStyle(color: AppColors.secondPrimary, fontSize: 14.sp),
-          prefixIconColor: myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
-          suffixIconColor: myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
+          hintStyle:
+              getRegularStyle(color: AppColors.secondPrimary, fontSize: 14.sp),
+          prefixIconColor:
+              myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
+          suffixIconColor:
+              myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
           suffixIcon: widget.ischange
               ? InkWell(
-            onTap: () {
-              setState(() {
-                showPassword = !showPassword;
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(11.0),
-              child: Text(
-                AppTranslations.change,
-                style: getUnderLine(fontSize: 14.sp, color: AppColors.primary),
-              ),
-            ),
-          )
+                  onTap: () {
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Text(
+                      AppTranslations.change,
+                      style: getUnderLine(
+                          fontSize: 14.sp, color: AppColors.primary),
+                    ),
+                  ),
+                )
               : widget.isPassword
-              ? InkWell(
-            onTap: () {
-              setState(() {
-                showPassword = !showPassword;
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(11.0),
-              child: SvgPicture.asset(AppIcons.key),
-            ),
-          )
-              : widget.suffixIcon,
-          contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                  ? InkWell(
+                      onTap: () {
+                        setState(() {
+                          showPassword = !showPassword;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(11.0),
+                        child: SvgPicture.asset(AppIcons.key),
+                      ),
+                    )
+                  : widget.suffixIcon,
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
           errorStyle: getRegularStyle(color: AppColors.red),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.lightWhite, width: 0),
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
           ),
           disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.gray, width: 1.5),
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.primary, width: 1.5),
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.red, width: 1.5),
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.red, width: 1.5),
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
           ),
         ),
-     //   languageCode: 'ar',
-     //    initialCountryCode: 'EG', // Change to Egypt or desired default
+
+        //   languageCode: 'ar',
+        //    initialCountryCode: 'EG', // Change to Egypt or desired default
         // countries: const ['EG', 'SA', 'AE'], // Add relevant country codes
         //  dropdownIcon: const Icon(Icons.arrow_drop_down, color: Colors.grey),
         flagsButtonPadding: const EdgeInsets.only(left: 10),
-        dropdownTextStyle: TextStyle(fontSize: getWidthSize(context)/ 24),
+        dropdownTextStyle: TextStyle(fontSize: getWidthSize(context) / 24),
         // textAlign: TextAlign.left,
         dropdownIconPosition: intl.IconPosition.trailing,
         onChanged: (phone) {
@@ -207,7 +224,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         focusNode: myFocusNode,
-        style: getBoldStyle(),
+        style: getBoldStyle(fontSize: 13.sp),
         onChanged: widget.onChanged,
         validator: widget.validator,
         keyboardType: widget.keyboardType,
@@ -218,7 +235,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
         obscureText: widget.isPassword ? !showPassword : false,
         decoration: InputDecoration(
           filled: true,
-          fillColor: widget.enabled! ? AppColors.lightWhite2 : AppColors.gray.withOpacity(0.5),
+          fillColor: widget.enabled!
+              ? AppColors.lightWhite2
+              : AppColors.gray.withOpacity(0.5),
           labelText: widget.labelText,
           labelStyle: getRegularStyle(
             fontHeight: 1.5,
@@ -226,59 +245,143 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
           prefixIcon: widget.prefixIcon,
           hintText: widget.hintText,
-          hintStyle: getRegularStyle(color: AppColors.secondPrimary, fontSize: 14.sp),
-          prefixIconColor: myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
-          suffixIconColor: myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
+          hintStyle:
+              getRegularStyle(color: AppColors.secondPrimary, fontSize: 14.sp),
+          prefixIconColor:
+              myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
+          suffixIconColor:
+              myFocusNode.hasFocus ? AppColors.primary : AppColors.gray,
           suffixIcon: widget.ischange
               ? InkWell(
-            onTap: () {
-              setState(() {
-                showPassword = !showPassword;
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(11.0),
-              child: Text(
-                AppTranslations.change,
-                style: getUnderLine(fontSize: 14.sp, color: AppColors.primary),
-              ),
-            ),
-          )
+                  onTap: () {
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(11.0),
+                    child: Text(
+                      AppTranslations.change,
+                      style: getUnderLine(
+                          fontSize: 14.sp, color: AppColors.primary),
+                    ),
+                  ),
+                )
               : widget.isPassword
-              ? InkWell(
-            onTap: () {
-              setState(() {
-                showPassword = !showPassword;
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(11.0),
-              child: SvgPicture.asset(AppIcons.key),
-            ),
-          )
-              : widget.suffixIcon,
-          contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                  ? InkWell(
+                      onTap: () {
+                        setState(() {
+                          showPassword = !showPassword;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(11.0),
+                        child: SvgPicture.asset(AppIcons.key),
+                      ),
+                    )
+                  : widget.suffixIcon,
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
           errorStyle: getRegularStyle(color: AppColors.red),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.lightWhite, width: 0),
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
           ),
           disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.gray, width: 1.5),
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.primary, width: 1.5),
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.red, width: 1.5),
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.red, width: 1.5),
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.borderRadius ?? 30.r)),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomPhoneFormField extends StatelessWidget {
+  const CustomPhoneFormField({
+    super.key,
+    this.onCountryChanged,
+    this.onChanged,
+    this.controller,
+    this.enabled = true,
+  });
+
+  final void Function(Country)? onCountryChanged;
+  final void Function(PhoneNumber)? onChanged;
+  final TextEditingController? controller;
+  final bool? enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 3.0.w),
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: IntlPhoneField(
+          controller: controller,
+          showCountryFlag: true,
+          dropdownTextStyle: getBoldStyle(fontSize: 13.sp),
+
+          validator: (value) {
+            if (value == null || value.toString().length < 11) {
+              return 'enter your phone';
+            }
+            return null;
+          },
+          keyboardType: TextInputType.number,
+          disableLengthCheck: false,
+          showDropdownIcon: false,
+
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: enabled!
+                ? AppColors.lightWhite2
+                : AppColors.gray.withOpacity(0.5),
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+            errorStyle: getRegularStyle(color: AppColors.red, fontSize: 13.sp),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.lightWhite, width: 0),
+              borderRadius: BorderRadius.all(Radius.circular(30.r)),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.gray, width: 1.5),
+              borderRadius: BorderRadius.all(Radius.circular(30.r)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.primary, width: 1.5),
+              borderRadius: BorderRadius.all(Radius.circular(30.r)),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.red, width: 1.5),
+              borderRadius: BorderRadius.all(Radius.circular(30.r)),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.red, width: 1.5),
+              borderRadius: BorderRadius.all(Radius.circular(30.r)),
+            ),
+          ),
+          onCountryChanged: onCountryChanged,
+          style: getBoldStyle(fontSize: 13.sp),
+          initialCountryCode: 'EG', // Saudi Arabia country code
+          onChanged: onChanged,
         ),
       ),
     );

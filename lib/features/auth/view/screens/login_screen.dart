@@ -44,7 +44,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: CustomSkipRow(
                             onTap: () {
                               Navigator.pushNamed(context, Routes.mainRoute);
-                            }, backgroundColor: AppColors.yellow),
+                            },
+                            backgroundColor: AppColors.yellow),
                       ),
                       // CustomContainer(),
                       SizedBox(
@@ -56,34 +57,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 10.h,
                       ),
-                      CustomTextField(
+                      CustomPhoneFormField(
                         controller: cubit.phoneController,
-                        enabled: true,
-                        isPhoneNumber: true,
-                     //   isPhoneNumber: true,
-                        title: AppTranslations.phone,
-                        hintText: AppTranslations.writePhone,
-                        // suffixIcon: Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: SvgPicture.asset(AppIcons.phone),
-                        // ),
-                        validator: (value) {
-                          // Check if the input matches a valid phone number format
-                          final phoneRegex = RegExp(
-                              r'^(?:\+20|0)\d{10}$'); // Regex for Egyptian phone numbers
-                          if (value == null || value.isEmpty) {
-                            return AppTranslations.phoneNumberIsRequired;
-                          } else if (!phoneRegex.hasMatch(value)) {
-                            return AppTranslations.pleaseEnterValidPhoneNumber;
-                          }
-                          return null; // valid phone number
-                        },
+                          onCountryChanged: (v) {
+                    cubit.countryCode = '+${v.fullCountryCode}';
+                    print("Country changed to: ${v.name}");
+                  },
+                  onChanged: (phone) {
+                    print(phone.completeNumber);
+                  },
                       ),
                       CustomTextField(
                         controller: cubit.passwordControllerLogin,
                         enabled: true,
                         isPassword: true,
-
                         title: AppTranslations.pass,
                         hintText: AppTranslations.writePass,
                       ),
@@ -95,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           //forget pass
                           GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Navigator.pushNamed(context, Routes.forgetPass);
                             },
                             child: Text(
@@ -108,11 +95,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           CustomForward(
                             onTap: () {
-                              // if (cubit.formKeyLogin.currentState!.validate()) {
-                              //   Navigator.pushNamed(context, Routes.detailsAccomendation);
-                              // }
-                            //  Navigator.pushNamed(context, Routes.detailsAccomendation);
-Navigator.pushNamed(context, Routes.mainRoute);
+                              if (cubit.formKeyLogin.currentState!.validate()) {
+                                cubit.login(context);
+                              }
+                              //  Navigator.pushNamed(context, Routes.detailsAccomendation);
+// Navigator.pushNamed(context, Routes.mainRoute);
                             },
                           ),
                         ],
