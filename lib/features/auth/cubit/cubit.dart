@@ -271,4 +271,32 @@ class LoginCubit extends Cubit<LoginState> {
       }
     });
   }
+
+  logout(BuildContext context) async {
+    emit(LoadingLoginState());
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    final response = await api.logout();
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(FailureLoginState());
+    }, (r) {
+      print("code: ${r.status.toString()}");
+      if (r.status != 200 && r.status != 201) {
+      
+        Navigator.pop(context);
+        errorGetBar(r.msg!);
+      } else {
+        emit(SuccessLoginState());
+        Navigator.pop(context);
+        successGetBar(r.msg);
+        prefs.setBool("ISLOGGED", false);
+        Preferences.instance.clearUser();
+
+        ///
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.loginRoute, (route) => false);
+      }
+    });
+  }
 }
