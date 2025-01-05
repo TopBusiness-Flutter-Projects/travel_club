@@ -133,7 +133,8 @@
 "thank_you": "Thank you, your account has been successfully activated and you can use",
 "all_features": "All the features of our application now",  
 "account_activated":  "Your account was activated",
-
+"enter phone": "Enter the phone number registered with us and you will receive a password reset code",
+ "forget_password": "Forgot your password",
 "": "",
     "checkin_time": "Check-in time",
     "departure_time": "Departure time",

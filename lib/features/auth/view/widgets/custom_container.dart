@@ -1,38 +1,43 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:travel_club/features/auth/cubit/cubit.dart';
 
 import '../../../../core/exports.dart';
 
-class CustomContainer extends StatelessWidget {
-   CustomContainer({super.key});
+class CustomBackContainer extends StatelessWidget {
+  CustomBackContainer({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
       // width: 83.w,
       // height:36.h ,
       decoration: BoxDecoration(
-        color: AppColors.lightWhite,
-        borderRadius: BorderRadius.circular(18.r)
+          color: AppColors.lightWhite,
+          borderRadius: BorderRadius.circular(18.r)),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+           
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              //grey
+              Icon(
+                Icons.arrow_back_ios,
+                color: AppColors.grey,
+              ),
+              Text(
+                AppTranslations.back,
+                style: getSemiBoldStyle(color: AppColors.grey, fontSize: 14.sp),
+              ),
+            ],
+          ),
+        ),
       ),
-child: Padding(
-  padding: const EdgeInsets.all(10.0),
-  child: GestureDetector(
-    onTap: (){
-      Navigator.pop(context);
-
-    },
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-    //grey
-    Icon(Icons.arrow_back_ios,color: AppColors.grey,),
-        Text(AppTranslations.back,style: getSemiBoldStyle(color: AppColors.grey,fontSize: 14.sp),),
-
-      ],
-    ),
-  ),
-),
     );
   }
 }

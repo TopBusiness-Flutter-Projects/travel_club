@@ -71,7 +71,7 @@ class DioConsumer implements BaseApiConsumer {
         path,
         queryParameters: queryParameters,
          options: Options(headers: {
-          if (token != null)  'Authorization': 'Bearer $token',
+          if (token != null)  'Authorization':  token,
             'Connection': 'keep-alive',
             'Accept': '*/*',
             "Accept-Language" : lang
@@ -97,7 +97,7 @@ class DioConsumer implements BaseApiConsumer {
           data: formDataIsEnabled ? FormData.fromMap(body!) : body,
           queryParameters: queryParameters,
           options: Options(headers: {
-          if (token != null)  'Authorization': 'Bearer $token',
+          if (token != null)  'Authorization': token,
             'Connection': 'keep-alive',
             'Accept': '*/*',
             "Accept-Language" : lang
@@ -123,7 +123,7 @@ class DioConsumer implements BaseApiConsumer {
         data: body,
         queryParameters: queryParameters,
        options: Options(headers: {
-          if (token != null)  'Authorization': 'Bearer $token',
+          if (token != null)   'Authorization': token,
             'Connection': 'keep-alive',
             'Accept': '*/*',
             "Accept-Language" : lang
@@ -150,7 +150,7 @@ class DioConsumer implements BaseApiConsumer {
         data: formDataIsEnabled ? FormData.fromMap(body!) : body,
         queryParameters: queryParameters,
           options: Options(headers: {
-          if (token != null)  'Authorization': 'Bearer $token',
+          if (token != null)  'Authorization':  token,
             'Connection': 'keep-alive',
             'Accept': '*/*',
             "Accept-Language" : lang
@@ -177,7 +177,7 @@ class DioConsumer implements BaseApiConsumer {
         data: formDataIsEnabled ? FormData.fromMap(body!) : body,
         queryParameters: queryParameters,
           options: Options(headers: {
-          if (token != null)  'Authorization': 'Bearer $token',
+          if (token != null)  'Authorization':  token,
             'Connection': 'keep-alive',
             'Accept': '*/*',
             "Accept-Language" : lang

@@ -95,7 +95,8 @@ class Routes {
   static const String tripDetailsSecondRoute = '/tripDetailsSecondRoute';
   static const String offers = '/offers';
   static const String bags = '/bags';
-  static const String detailsBookingEntertainment = '/detailsBookingEntertainment';
+  static const String detailsBookingEntertainment =
+      '/detailsBookingEntertainment';
   static const String detailsbookingTransportation =
       '/detailsbookingTransportation';
 }
@@ -114,7 +115,8 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        ); case Routes.detailsBookingEntertainment:
+        );
+      case Routes.detailsBookingEntertainment:
         return PageTransition(
           child: const DetailsBookingEntertainment(),
           type: PageTransitionType.fade,
@@ -314,7 +316,7 @@ class AppRoutes {
             settings.arguments as bool; // Expect an int index here
         return PageTransition(
           child: OtpScreen(
-            isPasss: isPass,
+            isForget: isPass,
           ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,

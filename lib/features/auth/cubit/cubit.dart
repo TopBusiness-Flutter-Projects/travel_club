@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/core/remote/service.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
+import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 
 import '../../../core/exports.dart';
 import '../data/models/login_model.dart';
@@ -22,49 +23,18 @@ class LoginCubit extends Cubit<LoginState> {
   late TextEditingController phoneControllerForgetPass =
       TextEditingController();
   late TextEditingController passwordControllerLogin = TextEditingController();
-  GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
   //forget pass
-  GlobalKey<FormState> formKeyForgetPass = GlobalKey<FormState>();
-  GlobalKey<FormState> formKeyNewPass = GlobalKey<FormState>();
   //sign up
-  GlobalKey<FormState> formKeySignUp = GlobalKey<FormState>();
-  GlobalKey<FormState> formKeyPinCode = GlobalKey<FormState>();
+
   late TextEditingController nameController = TextEditingController();
   late TextEditingController phoneControllerSignUp = TextEditingController();
   late TextEditingController passwordControllerSignUp = TextEditingController();
   late TextEditingController confirmPasswordControllerSignUp =
       TextEditingController();
   //otp screen
-  int secondsRemaining = 60;
-  late Timer timer;
+
   final TextEditingController pinController =
       TextEditingController(); // Controller for PIN input
-//start time
-  void startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      // if (secondsRemaining > 0) {
-      //   secondsRemaining--;
-      //   emit(StartTimer());
-      // } else {
-      //   resetPin();
-      // }
-      if (secondsRemaining > 0) {
-        secondsRemaining--;
-        emit(StartTimer());
-      }
-    });
-  }
-
-//reset pin
-  void resetPin() {
-    if (secondsRemaining == 0) {
-      timer.cancel();
-      secondsRemaining = 60; // Reset the timer
-      pinController.clear(); // 45Clear the PIN input// Stop the timer
-      emit(ResetPin());
-      startTimer(); // Restart the timer
-    }
-  }
 
   // Sign in with google
   String userGmail = '';
@@ -199,6 +169,10 @@ class LoginCubit extends Cubit<LoginState> {
         errorGetBar(r.msg!);
       } else {
         loginModel = r;
+        phoneController.clear();
+        passwordControllerLogin.clear();
+        context.read<MainCubit>().changePage(0);
+
         emit(SuccessLoginState());
         Navigator.pop(context);
         successGetBar(r.msg);
@@ -232,11 +206,11 @@ class LoginCubit extends Cubit<LoginState> {
       if (r.status != 200 && r.status != 201) {
         errorGetBar(r.msg!);
       } else {
-        emit(SuccessLoginState());
+        emit(OTPSentState());
         successGetBar(r.msg);
-        isResend
-            ? resetPin()
-            : Navigator.pushNamed(context, Routes.otpScreen, arguments: false);
+        if (!isResend) {
+          Navigator.pushNamed(context, Routes.otpScreen, arguments: false);
+        }
       }
     });
   }
@@ -262,12 +236,104 @@ class LoginCubit extends Cubit<LoginState> {
         errorGetBar(r.msg!);
       } else {
         emit(SuccessLoginState());
+        phoneController.clear();
+        passwordControllerSignUp.clear();
+        confirmPasswordControllerSignUp.clear();
+        pinController.clear();
+        nameController.clear();
         successGetBar(r.msg);
         prefs.setBool("ISLOGGED", true);
         Preferences.instance.setUser(r);
 
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.apply, (route) => false);
+      }
+    });
+  }
+
+  forgetPassword(BuildContext context, {bool isResend = false}) async {
+    emit(LoadingLoginState());
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    final response = await api.forgetPassword(
+      phone: countryCode.replaceFirst('+', '') + phoneControllerForgetPass.text,
+    );
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(FailureLoginState());
+    }, (r) {
+      Navigator.pop(context);
+      print("code: ${r.status.toString()}");
+      if (r.status != 200 && r.status != 201) {
+        errorGetBar(r.msg!);
+      } else {
+        emit(OTPSentState());
+        successGetBar(r.msg);
+        if (!isResend) {
+          Navigator.pushNamed(context, Routes.otpScreen, arguments: true);
+        }
+      }
+    });
+  }
+
+  validateOtp(BuildContext context) async {
+    emit(LoadingLoginState());
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    final response = await api.validateOtp(
+        phone:
+            countryCode.replaceFirst('+', '') + phoneControllerForgetPass.text,
+        otp: pinController.text);
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(FailureLoginState());
+    }, (r) {
+      Navigator.pop(context);
+      print("code: ${r.status.toString()}");
+      if (r.status != 200 && r.status != 201) {
+        errorGetBar(r.msg!);
+      } else {
+        emit(SuccessLoginState());
+
+        successGetBar(r.msg);
+
+        Navigator.pushNamed(
+          context,
+          Routes.newPass,
+        );
+      }
+    });
+  }
+
+  resetPassword(BuildContext context) async {
+    emit(LoadingLoginState());
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    final response = await api.resetPassword(
+        phone:
+            countryCode.replaceFirst('+', '') + phoneControllerForgetPass.text,
+        password: passwordControllerSignUp.text,
+        passwordConfirmation: confirmPasswordControllerSignUp.text);
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(FailureLoginState());
+    }, (r) {
+      Navigator.pop(context);
+      print("code: ${r.status.toString()}");
+      if (r.status != 200 && r.status != 201) {
+        errorGetBar(r.msg!);
+      } else {
+        emit(SuccessLoginState());
+        phoneController.clear();
+        passwordControllerSignUp.clear();
+        confirmPasswordControllerSignUp.clear();
+        pinController.clear();
+        nameController.clear();
+        successGetBar(r.msg);
+        prefs.setBool("ISLOGGED", true);
+        Preferences.instance.setUser(r);
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.mainRoute, (route) => false);
       }
     });
   }
@@ -283,7 +349,6 @@ class LoginCubit extends Cubit<LoginState> {
     }, (r) {
       print("code: ${r.status.toString()}");
       if (r.status != 200 && r.status != 201) {
-      
         Navigator.pop(context);
         errorGetBar(r.msg!);
       } else {
@@ -292,8 +357,6 @@ class LoginCubit extends Cubit<LoginState> {
         successGetBar(r.msg);
         prefs.setBool("ISLOGGED", false);
         Preferences.instance.clearUser();
-
-        ///
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.loginRoute, (route) => false);
       }
