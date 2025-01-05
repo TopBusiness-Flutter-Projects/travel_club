@@ -19,6 +19,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+    GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<LoginCubit>();
@@ -30,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
             body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Form(
-                key: cubit.formKeyLogin,
+                key: formKeyLogin,
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           CustomForward(
                             onTap: () {
-                              if (cubit.formKeyLogin.currentState!.validate()) {
+                              if (formKeyLogin.currentState!.validate()) {
                                 cubit.login(context);
                               }
                             },

@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen>
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('onBoarding') != null) {
       // TODO
-      if (prefs.getString('user') != null && AppStrings.isLogged ) {
+      if (prefs.getString('user') != null && AppConst.isLogged) {
         Navigator.pushReplacementNamed(context, Routes.mainRoute);
       } else {
         Navigator.pushNamedAndRemoveUntil(

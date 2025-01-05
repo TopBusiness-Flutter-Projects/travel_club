@@ -13,26 +13,54 @@ import '../widgets/custom_title.dart';
 import '../widgets/pin_put.dart';
 
 class OtpScreen extends StatefulWidget {
-  OtpScreen({super.key, required this.isPasss});
-  bool isPasss;
+  OtpScreen({super.key, required this.isForget});
+  bool isForget;
   @override
   State<OtpScreen> createState() => _OtpScreenState();
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  int secondsRemaining = 60;
+  late Timer timer;
+  //start time
+  void startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (secondsRemaining > 0) {
+        secondsRemaining--;
+        setState(() {});
+      }
+    });
+  }
+
+  void disposeTimer() {
+    timer.cancel();
+  }
+
+//reset pin
+  void resetPin() {
+    if (secondsRemaining == 0) {
+      timer.cancel();
+      secondsRemaining = 60; // Reset the timer
+      context
+          .read<LoginCubit>()
+          .pinController
+          .clear(); // 45Clear the PIN input// Stop the timer
+
+      startTimer(); // Restart the timer
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    context.read<LoginCubit>().startTimer();
+
+    startTimer();
     //   startTimer();
   }
 
   @override
   void dispose() {
-    context
-        .read<LoginCubit>()
-        .timer
-        .cancel(); // Cancel the timer to avoid memory leaks
+    disposeTimer(); // Cancel the timer to avoid memory leaks
     context
         .read<LoginCubit>()
         .pinController
@@ -41,9 +69,20 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   @override
+  void deactivate() {
+    disposeTimer();
+    super.deactivate();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var cubit = context.read<LoginCubit>();
-    return BlocBuilder<LoginCubit, LoginState>(
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state is OTPSentState) {
+          resetPin();
+        }
+      },
       builder: (BuildContext context, state) {
         return SafeArea(
           child: Scaffold(
@@ -56,7 +95,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 children: [
                   SizedBox(height: 10.h),
                   // Custom container
-                  CustomContainer(),
+                  CustomBackContainer(),
                   SizedBox(height: 30.h),
                   // Custom title and description
                   CustomTitle(
@@ -79,7 +118,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       Row(
                         children: [
                           Text(
-                            "00:${cubit.secondsRemaining.toString().padLeft(2, '0')}",
+                            "00:${secondsRemaining.toString().padLeft(2, '0')}",
                             style: getMediumStyle(
                                 fontSize: 14.sp,
                                 color: AppColors.secondPrimary),
@@ -87,11 +126,14 @@ class _OtpScreenState extends State<OtpScreen> {
                           SizedBox(width: 5.w),
                           GestureDetector(
                             onTap: () {
-                              if (cubit.secondsRemaining == 0) {
-                                cubit.register(context, isResend: true);
+                              if (secondsRemaining == 0) {
+                                widget.isForget
+                                    ? cubit.forgetPassword(context,
+                                        isResend: true)
+                                    : cubit.register(context, isResend: true);
                               } else {
                                 errorGetBar(
-                                    "please wait ${cubit.secondsRemaining.toString()} seconds");
+                                    "please wait ${secondsRemaining.toString()} seconds");
                               }
                               // Reset timer and PIN when tapped
                             },
@@ -108,7 +150,9 @@ class _OtpScreenState extends State<OtpScreen> {
                       if (cubit.pinController.text.length > 5)
                         CustomForward(
                           onTap: () {
-                            cubit.checkOtp(context);
+                            widget.isForget
+                                ? cubit.validateOtp(context)
+                                : cubit.checkOtp(context);
                           },
                         ),
                     ],

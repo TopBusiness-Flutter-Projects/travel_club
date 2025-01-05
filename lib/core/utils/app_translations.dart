@@ -196,4 +196,6 @@ class AppTranslations {
   static String get thankYou => 'thank_you'.tr();
   static String get allFeatures => 'all_features'.tr();
   static String get accountActivated => 'account_activated'.tr();
+  static String get forgetPassword => 'forget_password'.tr();
+  static String get enterPhone => 'enter_phone'.tr();
 }

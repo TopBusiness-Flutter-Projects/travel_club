@@ -12,7 +12,6 @@ import '../widgets/custom_container.dart';
 import '../widgets/custom_forward.dart';
 import '../widgets/custom_title.dart';
 
-
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
 
@@ -21,69 +20,78 @@ class ForgetPasswordScreen extends StatefulWidget {
 }
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+  GlobalKey<FormState> formKeyForgetPass = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    var cubit=context.read<LoginCubit>();
-    return BlocBuilder<LoginCubit,LoginState>(builder: (BuildContext context, state) {  return SafeArea(
-      child: Scaffold(
-          backgroundColor: AppColors.white,
-          body: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Form(
-              key:cubit. formKeyForgetPass,
-              child: Column(
-
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(height: 10.h,),
-                  //custom container
-                  CustomContainer(),
-                  SizedBox(height: 30.h,),
-                  //custom title and description
-                  CustomTitle(title:"نسيت كلمه المرور",discreption: "ادخل رقم الهاتف المسجل لدينا وسوف يصلك رمز لاعاده تعين كلمه المرور",),
-                  SizedBox(height: 30.h,),
-                  //text field
-                  CustomTextField(
-                    controller: cubit.phoneControllerForgetPass,
-                    enabled: true,
-                    title: AppTranslations.phone,
-                    isPhoneNumber: true,
-                    //hintText: AppTranslations.writePhone,
-                    // suffixIcon: Padding(
-                    //   padding: const EdgeInsets.all(8.0),
-                    //   child: SvgPicture.asset(AppIcons.phone),
-                    // ),
-                    validator: (value) {
-                      // Check if the input matches a valid phone number format
-                      final phoneRegex = RegExp(
-                          r'^(?:\+20|0)\d{10}$'); // Regex for Egyptian phone numbers
-                      if (value == null || value.isEmpty) {
-                        return AppTranslations.phoneNumberIsRequired;
-                      } else if (!phoneRegex.hasMatch(value)) {
-                        return AppTranslations.pleaseEnterValidPhoneNumber;
-                      }
-                      return null; // valid phone number
-                    },
+    var cubit = context.read<LoginCubit>();
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (BuildContext context, state) {
+        return SafeArea(
+          child: Scaffold(
+              backgroundColor: AppColors.white,
+              body: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Form(
+                  key: formKeyForgetPass,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      //custom container
+                      CustomBackContainer(),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      //custom title and description
+                      CustomTitle(
+                        title: AppTranslations.forgetPassword,
+                        discreption: AppTranslations.enterPhone,
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      //text field
+                      CustomPhoneFormField(
+                        controller: cubit.phoneControllerForgetPass,
+                        initialValue: cubit.countryCode,
+                        title: AppTranslations.phone,
+                        onCountryChanged: (v) {
+                          cubit.countryCode = '+${v.fullCountryCode}';
+                          print("Country changed to: ${v.name}");
+                        },
+                        onChanged: (phone) {
+                          print(phone.completeNumber);
+                        },
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      //custom forward
+                      Center(
+                        child: CustomForward(
+                          onTap: () {
+                            cubit.forgetPassword(context);
+                          },
+                        ),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 30.h,),
-                  //custom forward
-                  Center(
-                    child: CustomForward(onTap: (){
-                      Navigator.pushNamed(context, Routes.newPass);
-                    },),
-                  )
-                ],),
-            ),
-          )
-        // Center(
-        //   child: ElevatedButton(
-        //       onPressed: () {
-        //         Navigator.pushReplacementNamed(context, Routes.mainRoute);
-        //       },
-        //       child: const Text('Nav To Main Screen')),
-        // ),
-      ),
-    ); },);
+                ),
+              )
+              // Center(
+              //   child: ElevatedButton(
+              //       onPressed: () {
+              //         Navigator.pushReplacementNamed(context, Routes.mainRoute);
+              //       },
+              //       child: const Text('Nav To Main Screen')),
+              // ),
+              ),
+        );
+      },
+    );
   }
 }

@@ -122,7 +122,8 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        ); case Routes.detailsBookingEntertainment:
+        );
+      case Routes.detailsBookingEntertainment:
         return PageTransition(
           child: const DetailsBookingEntertainment(),
           type: PageTransitionType.fade,
