@@ -6,5 +6,4 @@ import 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.api) : super(HomeInitial());
   HomeRepoImpl api;
-  TextEditingController searchController = TextEditingController();
 }

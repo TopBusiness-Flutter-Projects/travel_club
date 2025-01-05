@@ -1,7 +1,7 @@
+
 import '../../../../core/api/base_api_consumer.dart';
 
-class HomeRepoImpl {
+class SearchRepoImpl {
   final BaseApiConsumer api;
-  HomeRepoImpl(this.api);
-
+  SearchRepoImpl(this.api);
 }

@@ -130,7 +130,6 @@ class DioConsumer implements BaseApiConsumer {
     }
   }
 
-  @override
   Future<dynamic> newPost(String path,
       {bool formDataIsEnabled = false,
         Map<String, dynamic>? body,

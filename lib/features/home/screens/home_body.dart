@@ -1,5 +1,6 @@
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/custom_text_form_field.dart';
+import 'package:travel_club/features/home/screens/widgets/search_container.dart';
 
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
@@ -25,18 +26,24 @@ class HomeBody extends StatelessWidget {
             child: Column(
               children: [
                 const CustomCategorySection(), // search bar
+                SizedBox(height: 10.h,),
                 Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: getHorizontalPadding(context) / 2),
-                  child: CustomTextField(
-                    controller: cubit.searchController,
-                    hintText: AppTranslations.search,
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SvgPicture.asset(AppIcons.search),
-                    ),
-                  ),
+                  child:
+                  // CustomTextField(
+                  //   controller: cubit.searchController,
+                  //   hintText: AppTranslations.search,
+                  //   suffixIcon: Padding(
+                  //     padding: const EdgeInsets.all(8.0),
+                  //     child: SvgPicture.asset(AppIcons.search),
+                  //   ),
+                  // ),
+                  SearchContainer(onTap: (){
+                    Navigator.pushNamed(context, Routes.searchScreen);
+                  },)
                 ),
+                SizedBox(height: 10.h,),
                 const CustomOffersSection(),
                 SizedBox(height: getVerticalPadding(context)),
                 const CustomBagSection(),
