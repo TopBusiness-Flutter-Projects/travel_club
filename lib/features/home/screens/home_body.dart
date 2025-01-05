@@ -51,7 +51,6 @@ class _HomeBodyState extends State<HomeBody> {
                       Navigator.pushNamed(context, Routes.searchScreen);
                     },)
                   ),
-
                   SizedBox(height: 10.h,),
                   if ((cubit.homeModel.data!.suitcases!.isEmpty ) &&
                       (cubit.homeModel.data!.offers!.isEmpty )) ...[
