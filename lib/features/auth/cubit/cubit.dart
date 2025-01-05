@@ -51,7 +51,6 @@ class LoginCubit extends Cubit<LoginState> {
       }
     });
   }
-
 //reset pin
   void resetPin() {
     if (secondsRemaining == 0) {
@@ -62,7 +61,6 @@ class LoginCubit extends Cubit<LoginState> {
       startTimer(); // Restart the timer
     }
   }
-
   // Sign in with google
   String userGmail = '';
   String userPhoto = '';
@@ -146,7 +144,6 @@ class LoginCubit extends Cubit<LoginState> {
 
     return null;
   }
-
 // Helper function to provide user-friendly error messages
   String _getFirebaseErrorMessage(String code) {
     switch (code) {
@@ -164,7 +161,6 @@ class LoginCubit extends Cubit<LoginState> {
         return 'An unknown error occurred during sign-in.';
     }
   }
-
   Future<GoogleSignInAccount?> signOutFromGmail() async {
     emit(LoadingSignOutGoogleState());
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signOut();
@@ -173,12 +169,10 @@ class LoginCubit extends Cubit<LoginState> {
 
     return googleUser;
   }
-
   String countryCode = '+20';
   LoginModel loginModel = LoginModel();
   login(BuildContext context) async {
     emit(LoadingLoginState());
-
     AppWidget.createProgressDialog(context, AppTranslations.loading);
     final response = await api.login(
       phone: countryCode.replaceFirst('+2', '') + phoneController.text,
@@ -201,7 +195,6 @@ class LoginCubit extends Cubit<LoginState> {
         successGetBar(r.msg);
         prefs.setBool("ISLOGGED", true);
         Preferences.instance.setUser(r);
-
         ///
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.mainRoute, (route) => false);
