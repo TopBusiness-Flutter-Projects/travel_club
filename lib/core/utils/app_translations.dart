@@ -183,4 +183,16 @@ class AppTranslations {
   static String get personWhoRatedRestaurant => 'person_who_rated_restaurant'.tr();
   static String get loading => 'loading'.tr();
   static String get error => 'error'.tr();
+  static String get confirmPassword => 'confirm_password'.tr();
+  static String get enterPasswordAgain => 'enter_password_again'.tr();
+  static String get passLength => 'pass_length'.tr();
+  static String get passIsRequired => 'pass_required'.tr();
+  static String get passNotMatch => 'pass_not_match'.tr();
+  static String get codeSent => 'code_sent'.tr();
+  static String get sendAgain => 'send_again'.tr();
+  static String get activateAccount => 'activate_account'.tr();
+  static String get goHome => 'go_home'.tr();
+  static String get thankYou => 'thank_you'.tr();
+  static String get allFeatures => 'all_features'.tr();
+  static String get accountActivated => 'account_activated'.tr();
 }

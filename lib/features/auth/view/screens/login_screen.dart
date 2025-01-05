@@ -59,13 +59,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       CustomPhoneFormField(
                         controller: cubit.phoneController,
-                          onCountryChanged: (v) {
-                    cubit.countryCode = '+${v.fullCountryCode}';
-                    print("Country changed to: ${v.name}");
-                  },
-                  onChanged: (phone) {
-                    print(phone.completeNumber);
-                  },
+                        initialValue: cubit.countryCode,
+                        title: AppTranslations.phone,
+                        onCountryChanged: (v) {
+                          cubit.countryCode = '+${v.fullCountryCode}';
+                          print("Country changed to: ${v.name}");
+                        },
+                        onChanged: (phone) {
+                          print(phone.completeNumber);
+                        },
                       ),
                       CustomTextField(
                         controller: cubit.passwordControllerLogin,
@@ -98,8 +100,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (cubit.formKeyLogin.currentState!.validate()) {
                                 cubit.login(context);
                               }
-                              //  Navigator.pushNamed(context, Routes.detailsAccomendation);
-// Navigator.pushNamed(context, Routes.mainRoute);
                             },
                           ),
                         ],

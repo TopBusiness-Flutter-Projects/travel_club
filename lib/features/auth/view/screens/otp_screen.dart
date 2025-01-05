@@ -13,26 +13,30 @@ import '../widgets/custom_title.dart';
 import '../widgets/pin_put.dart';
 
 class OtpScreen extends StatefulWidget {
-   OtpScreen({super.key,required this.isPasss});
-bool isPasss;
+  OtpScreen({super.key, required this.isPasss});
+  bool isPasss;
   @override
   State<OtpScreen> createState() => _OtpScreenState();
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-
-
   @override
   void initState() {
     super.initState();
     context.read<LoginCubit>().startTimer();
- //   startTimer();
+    //   startTimer();
   }
 
   @override
   void dispose() {
-    context.read<LoginCubit>().timer.cancel(); // Cancel the timer to avoid memory leaks
-    context.read<LoginCubit>().pinController.dispose(); // Dispose of the controller
+    context
+        .read<LoginCubit>()
+        .timer
+        .cancel(); // Cancel the timer to avoid memory leaks
+    context
+        .read<LoginCubit>()
+        .pinController
+        .dispose(); // Dispose of the controller
     super.dispose();
   }
 
@@ -56,16 +60,15 @@ class _OtpScreenState extends State<OtpScreen> {
                   SizedBox(height: 30.h),
                   // Custom title and description
                   CustomTitle(
-                    title: "تفعيل حسابك",
-                    discreption:
-                    "تم ارسال كود التفعيل المكون من ٥ ارقام علي رقم الهاتف الخاص بك",
+                    title: AppTranslations.activateAccount,
+                    discreption: AppTranslations.codeSent,
                   ),
                   SizedBox(height: 30.h),
                   // PIN OTP
                   SizedBox(
                     height: 100.h,
                     width: double.infinity,
-                    child:PinInputScreen(),
+                    child: PinInputScreen(),
                   ),
                   SizedBox(height: 30.h),
                   // Custom forward
@@ -84,10 +87,16 @@ class _OtpScreenState extends State<OtpScreen> {
                           SizedBox(width: 5.w),
                           GestureDetector(
                             onTap: () {
-                           cubit.   resetPin(); // Reset timer and PIN when tapped
+                              if (cubit.secondsRemaining == 0) {
+                                cubit.register(context, isResend: true);
+                              } else {
+                                errorGetBar(
+                                    "please wait ${cubit.secondsRemaining.toString()} seconds");
+                              }
+                              // Reset timer and PIN when tapped
                             },
                             child: Text(
-                              "ارسال الكود مره اخري",
+                              AppTranslations.sendAgain,
                               style: getUnderLine(
                                   fontSize: 14.sp,
                                   color: AppColors.primary,
@@ -96,11 +105,12 @@ class _OtpScreenState extends State<OtpScreen> {
                           ),
                         ],
                       ),
-                      CustomForward(
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.apply);
-                        },
-                      ),
+                      if (cubit.pinController.text.length > 5)
+                        CustomForward(
+                          onTap: () {
+                            cubit.checkOtp(context);
+                          },
+                        ),
                     ],
                   ),
                 ],
