@@ -6,6 +6,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:travel_club/core/api/status_code.dart';
+import 'package:travel_club/core/preferences/preferences.dart';
+import 'package:travel_club/features/auth/data/models/login_model.dart';
 import '../../injector.dart';
 import '../error/exceptions.dart';
 import 'app_interceptors.dart';
@@ -17,7 +19,7 @@ class DioConsumer implements BaseApiConsumer {
 
   DioConsumer({required this.client}) {
     (client.httpClientAdapter as IOHttpClientAdapter)
-        .onHttpClientCreate = // Updated class name
+            .onHttpClientCreate = // Updated class name
         (HttpClient client) {
       client.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
@@ -45,15 +47,14 @@ class DioConsumer implements BaseApiConsumer {
         compact: true,
         maxWidth: 90,
         enabled: kDebugMode,
-        filter: (options, args){
+        filter: (options, args) {
           // don't print requests with uris containing '/posts'
-          if(options.path.contains('/posts')){
+          if (options.path.contains('/posts')) {
             return false;
           }
           // don't print responses with unit8 list data
           return !args.isResponse || !args.hasUint8ListData;
-        }
-    ));
+        }));
     // if (kDebugMode) {
     //   client.interceptors.add(serviceLocator<LogInterceptor>());
     // }
@@ -62,11 +63,19 @@ class DioConsumer implements BaseApiConsumer {
   @override
   Future<dynamic> get(String path,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
+          LoginModel loginModel = await Preferences.instance.getUserModel();
+    String lang =  await Preferences.instance.getSavedLang();
+    String? token = loginModel.data?.token;
     try {
       final response = await client.get(
         path,
         queryParameters: queryParameters,
-        options: options,
+         options: Options(headers: {
+          if (token != null)  'Authorization': 'Bearer $token',
+            'Connection': 'keep-alive',
+            'Accept': '*/*',
+            "Accept-Language" : lang
+          })
       );
       return _handleResponseAsJson(response);
     } on DioError catch (error) {
@@ -77,16 +86,23 @@ class DioConsumer implements BaseApiConsumer {
   @override
   Future<dynamic> post(String path,
       {Map<String, dynamic>? body,
-        bool formDataIsEnabled = false,
-        Map<String, dynamic>? queryParameters,
-        Options? options}) async {
+      bool formDataIsEnabled = false,
+      Map<String, dynamic>? queryParameters,
+      Options? options}) async {
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    String lang =  await Preferences.instance.getSavedLang();
+    String? token = loginModel.data?.token;
     try {
-      final response = await client.post(
-        path,
-        data: formDataIsEnabled ? FormData.fromMap(body!) : body,
-        queryParameters: queryParameters,
-        options: options,
-      );
+      final response = await client.post(path,
+          data: formDataIsEnabled ? FormData.fromMap(body!) : body,
+          queryParameters: queryParameters,
+          options: Options(headers: {
+          if (token != null)  'Authorization': 'Bearer $token',
+            'Connection': 'keep-alive',
+            'Accept': '*/*',
+            "Accept-Language" : lang
+          })
+          );
       return _handleResponseAsJson(response);
     } on DioError catch (error) {
       _handleDioError(error);
@@ -96,14 +112,22 @@ class DioConsumer implements BaseApiConsumer {
   @override
   Future<dynamic> put(String path,
       {Map<String, dynamic>? body,
-        Map<String, dynamic>? queryParameters,
-        Options? options}) async {
+      Map<String, dynamic>? queryParameters,
+      Options? options}) async {
+          LoginModel loginModel = await Preferences.instance.getUserModel();
+    String lang =  await Preferences.instance.getSavedLang();
+    String? token = loginModel.data?.token;
     try {
       final response = await client.put(
         path,
         data: body,
         queryParameters: queryParameters,
-        options: options,
+       options: Options(headers: {
+          if (token != null)  'Authorization': 'Bearer $token',
+            'Connection': 'keep-alive',
+            'Accept': '*/*',
+            "Accept-Language" : lang
+          })
       );
       return _handleResponseAsJson(response);
     } on DioError catch (error) {
@@ -114,15 +138,23 @@ class DioConsumer implements BaseApiConsumer {
   @override
   Future<dynamic> delete(String path,
       {bool formDataIsEnabled = false,
-        Map<String, dynamic>? body,
-        Map<String, dynamic>? queryParameters,
-        Options? options}) async {
+      Map<String, dynamic>? body,
+      Map<String, dynamic>? queryParameters,
+      Options? options}) async {
+          LoginModel loginModel = await Preferences.instance.getUserModel();
+    String lang =  await Preferences.instance.getSavedLang();
+    String? token = loginModel.data?.token;
     try {
       final response = await client.delete(
         path,
         data: formDataIsEnabled ? FormData.fromMap(body!) : body,
         queryParameters: queryParameters,
-        options: options,
+          options: Options(headers: {
+          if (token != null)  'Authorization': 'Bearer $token',
+            'Connection': 'keep-alive',
+            'Accept': '*/*',
+            "Accept-Language" : lang
+          })
       );
       return _handleResponseAsJson(response);
     } on DioError catch (error) {
@@ -133,15 +165,23 @@ class DioConsumer implements BaseApiConsumer {
   @override
   Future<dynamic> newPost(String path,
       {bool formDataIsEnabled = false,
-        Map<String, dynamic>? body,
-        Map<String, dynamic>? queryParameters,
-        Options? options}) async {
+      Map<String, dynamic>? body,
+      Map<String, dynamic>? queryParameters,
+      Options? options}) async {
+          LoginModel loginModel = await Preferences.instance.getUserModel();
+    String lang =  await Preferences.instance.getSavedLang();
+    String? token = loginModel.data?.token;
     try {
       final response = await client.post(
         path,
         data: formDataIsEnabled ? FormData.fromMap(body!) : body,
         queryParameters: queryParameters,
-        options: options,
+          options: Options(headers: {
+          if (token != null)  'Authorization': 'Bearer $token',
+            'Connection': 'keep-alive',
+            'Accept': '*/*',
+            "Accept-Language" : lang
+          })
       );
       return response;
     } on DioError catch (error) {
