@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/widgets/network_image.dart';
+
+import '../../cubit/home_cubit.dart';
+import '../../cubit/home_state.dart';
+import '../../data/models/home_model.dart';
 
 class CustomOffersSection extends StatelessWidget {
   const CustomOffersSection({
@@ -8,57 +13,67 @@ class CustomOffersSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<HomeCubit>();
+  return BlocBuilder<HomeCubit, HomeState>(builder: (BuildContext context, state) {
     return Column(
-      children: [
-        Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: getHorizontalPadding(context)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(AppTranslations.newOffers,
-                  style: getBoldStyle(fontSize: 16.sp)),
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, '/offers');
-                },
-                child: Text(
-                  AppTranslations.more,
-                  style:
-                      getUnderLine(color: AppColors.primary, fontSize: 14.sp),
-                ),
+    children: [
+      Padding(
+        padding:
+        EdgeInsets.symmetric(horizontal: getHorizontalPadding(context)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(AppTranslations.newOffers,
+                style: getBoldStyle(fontSize: 16.sp)),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, '/offers');
+              },
+              child: Text(
+                AppTranslations.more,
+                style:
+                getUnderLine(color: AppColors.primary, fontSize: 14.sp),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        SizedBox(
-          height: getHeightSize(context) * 0.01,
-        ),
-        SizedBox(
-            height: getHeightSize(context) * 0.34,
-            child: ListView.builder(
-              itemBuilder: (context, index) => CustomOffersContainer(
-                isLast: index == 2,
-              ),
-              itemCount: 3,
-              scrollDirection: Axis.horizontal,
-            ))
-      ],
-    );
+      ),
+      SizedBox(
+        height: getHeightSize(context) * 0.01,
+      ),
+
+      SizedBox(
+          height: getHeightSize(context) * 0.34,
+          child: ListView.builder(
+            itemBuilder: (context, index) => CustomOffersContainer(
+              isLast: index == 2,
+              offerModel:cubit.homeModel?.data?.offers?[index] ,
+            ),
+            itemCount: cubit.homeModel?.data?.offers?.length,
+            scrollDirection: Axis.horizontal,
+          ))
+    ],
+  );
+    },);
   }
 }
 
 class CustomOffersContainer extends StatelessWidget {
-  const CustomOffersContainer({
+   CustomOffersContainer({
     this.isLast = false,
     this.isHome = true,
+
+
+    this.offerModel,
     super.key,
+
   });
   final bool isLast;
   final bool isHome;
+  Offer? offerModel;
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return BlocBuilder<HomeCubit, HomeState>(builder: (BuildContext context, state) { return Padding(
       padding: EdgeInsetsDirectional.only(
           start: getHorizontalPadding(context),
           end: isLast ? getHorizontalPadding(context) : 0,
@@ -70,14 +85,14 @@ class CustomOffersContainer extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(20.r),
-                child: Image.network(
-                  "https://media.istockphoto.com/id/1859856017/fi/valokuva/nopea-internet-yhteys-nopeustestaa-verkon-kaistanleveystekniikka-mies-joka-k%C3%A4ytt%C3%A4%C3%A4-nopeaa.jpg?s=1024x1024&w=is&k=20&c=ffjK54jdpR-8egYRmNMGzFqWEh42B9HSAEO1_waKD0U=",
+                child: CustomNetworkImage(
+                  //"https://media.istockphoto.com/id/1859856017/fi/valokuva/nopea-internet-yhteys-nopeustestaa-verkon-kaistanleveystekniikka-mies-joka-k%C3%A4ytt%C3%A4%C3%A4-nopeaa.jpg?s=1024x1024&w=is&k=20&c=ffjK54jdpR-8egYRmNMGzFqWEh42B9HSAEO1_waKD0U=",
                   // "https://lotel.efaculty.tech/storage/cities/85531735112807.webp",
-                  fit: BoxFit.cover,
+                 // fit: BoxFit.cover,
                   width: isHome
                       ? getWidthSize(context) * 0.8
                       : getWidthSize(context),
-                  height: getHeightSize(context) * 0.2,
+                  height: getHeightSize(context) * 0.2, image: offerModel?.image??"",
                 ),
               ),
               Flexible(
@@ -94,7 +109,7 @@ class CustomOffersContainer extends StatelessWidget {
                             fit: FlexFit.tight,
                             child: AutoSizeText(
                               maxLines: 1,
-                              "استمتع بخصم شم النسيم",
+                              offerModel?.title??"",
                               style: getMediumStyle(fontSize: 14.sp),
                             ),
                           ),
@@ -111,7 +126,7 @@ class CustomOffersContainer extends StatelessWidget {
                         // AppTranslations.newOffers +
                         // " " +
                         // AppTranslations.newOffers +
-                        "تمتع بخصم ٥٠ ٪ علي جميع عروض السفر",
+                        offerModel?.description??""  ,
                         maxLines: 2,
                         style: getRegularStyle(
                             color: AppColors.grey, fontSize: 14.sp),
@@ -122,6 +137,6 @@ class CustomOffersContainer extends StatelessWidget {
               )
             ],
           )),
-    );
+    ); },);
   }
 }

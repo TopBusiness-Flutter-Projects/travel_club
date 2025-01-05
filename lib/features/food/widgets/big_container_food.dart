@@ -5,8 +5,9 @@ import 'package:travel_club/features/food/widgets/small_container_food.dart';
 import '../../../core/exports.dart';
 
 class BigContainerFood extends StatelessWidget {
-   BigContainerFood({super.key,this.index=0});
+   BigContainerFood({super.key,this.index=0,this.isFavouriteScreen});
 int index;
+bool ?isFavouriteScreen;
   @override
   Widget build(BuildContext context) {
    return BlocBuilder<FoodCubit,FoodState>(builder: (BuildContext context, state) {  return
@@ -22,7 +23,7 @@ int index;
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
                  //small container
-                 SmallContainerFood(index:index),
+                 SmallContainerFood(index:index,isFavouriteScreen: isFavouriteScreen),
                  //
                  SizedBox(height: 10.h,),
                  Padding(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travel_club/features/accommodation/view/screens/details_accomendation.dart';
 import 'package:travel_club/features/auth/view/screens/new_pass_screen.dart';
 import 'package:travel_club/features/home/screens/best_bags_screen.dart';
 import 'package:travel_club/features/home/screens/new_offers_screen.dart';
@@ -9,6 +8,7 @@ import 'package:travel_club/features/my_account/screens/contact_us.dart';
 import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/other_services/screens/other_services_screen.dart';
 import 'package:travel_club/features/other_services/screens/single_service_details.dart';
+import 'package:travel_club/features/search/screens/search_screen.dart';
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
 import 'package:travel_club/features/transportation/screens/booking_details_screen.dart';
 import 'package:travel_club/features/transportation/screens/search_result_screen%20.dart';
@@ -47,6 +47,7 @@ import '../../features/my_account/screens/profile_info.dart';
 import '../../features/my_bookings/view/accommodation_booking/screens/details_booking_screen.dart';
 import '../../features/my_bookings/view/food_booking/screens/details_booking_food_screen.dart';
 import '../../features/other_services/screens/sub_services.dart';
+import '../../features/search/screens/search_body.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -95,8 +96,8 @@ class Routes {
   static const String tripDetailsSecondRoute = '/tripDetailsSecondRoute';
   static const String offers = '/offers';
   static const String bags = '/bags';
-  static const String detailsBookingEntertainment =
-      '/detailsBookingEntertainment';
+  static const String searchScreen = '/searchScreen';
+  static const String detailsBookingEntertainment = '/detailsBookingEntertainment';
   static const String detailsbookingTransportation =
       '/detailsbookingTransportation';
 }
@@ -112,6 +113,12 @@ class AppRoutes {
       case Routes.onboardingPageScreenRoute:
         return PageTransition(
           child: const OnBoardinScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );   case Routes.searchScreen:
+        return PageTransition(
+          child: const SearchScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

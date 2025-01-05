@@ -25,7 +25,7 @@ class SmallContainerFood extends StatelessWidget {
                    borderRadius: BorderRadius.circular(20),
                    child: Image.network("https://th.bing.com/th/id/OIP.JBxw3Aka6WKjRmKaqg1P8wHaE8?w=1200&h=800&rs=1&pid=ImgDetMain",fit: BoxFit.cover,height: getHeightSize(context)*.2,width: double.infinity,)),
                // cubit.isFavorite==true?
-               isFavouriteScreen==true?
+               isFavouriteScreen==false?
                Positioned(
                    top: 4.h,
                    right: 6.w,
@@ -43,7 +43,8 @@ class SmallContainerFood extends StatelessWidget {
                        ),
                      ),
                    )
-               ):   Positioned(
+               ):
+               Positioned(
                    top: 4.h,
                    right: 6.w,
                    child: GestureDetector(
