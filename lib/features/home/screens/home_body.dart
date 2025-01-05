@@ -1,7 +1,5 @@
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/widgets/custom_text_form_field.dart';
 import 'package:travel_club/features/home/screens/widgets/search_container.dart';
-
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
 import 'widgets/custom_appbar.dart';
@@ -9,11 +7,22 @@ import 'widgets/custom_bag_section.dart';
 import 'widgets/custom_category_section.dart';
 import 'widgets/custom_offers_section.dart';
 
-class HomeBody extends StatelessWidget {
+class HomeBody extends StatefulWidget {
   const HomeBody({
     super.key,
   });
 
+  @override
+  State<HomeBody> createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends State<HomeBody> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    context.read<HomeCubit>().getHomeData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     HomeCubit cubit = context.read<HomeCubit>();
