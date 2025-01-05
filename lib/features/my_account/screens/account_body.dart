@@ -70,7 +70,8 @@ Expanded(
       }
       await Share.share(url);
     },),
-    CustomRowProfile(title: AppTranslations.logout,onTap: (){Navigator.pushNamed(context, Routes.loginRoute);},),
+    CustomRowProfile(title: AppTranslations.logout,onTap: (){
+      Navigator.pushNamed(context, Routes.loginRoute);},),
     SizedBox(height: 100.h,),
     //  SizedBox(height: 100.h,),
   ],

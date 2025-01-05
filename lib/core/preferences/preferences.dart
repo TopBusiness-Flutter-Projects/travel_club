@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/utils/app_strings.dart';
-import 'package:travel_club/features/auth/data/login_model.dart';
+import 'package:travel_club/features/auth/data/models/login_model.dart';
 
 
 class Preferences {
