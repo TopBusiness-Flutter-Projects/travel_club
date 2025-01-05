@@ -6,7 +6,7 @@ import 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.api) : super(HomeInitial());
   HomeRepoImpl api;
-  GetHomeModel?homeModel;
+  GetHomeModel homeModel = GetHomeModel();
   getHomeData() async {
     emit(LoadingHomeData());
     final res = await api.getHome();

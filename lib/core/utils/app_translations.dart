@@ -16,6 +16,7 @@ class AppTranslations {
   static String get phone => 'phone'.tr();
   static String get writePhone => 'write_phone'.tr();
   static String get pass => 'pass'.tr();
+  static String get commingSoon => 'comming_soon'.tr();
   static String get confirmNewPass => 'confirm_new_pass'.tr();
   static String get welcome => 'welcome'.tr();
   static String get morning => 'a_morning'.tr();

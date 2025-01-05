@@ -9,6 +9,7 @@ class BestBagsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<HomeCubit>();
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (BuildContext context, state) {
         return CustomScreen(
@@ -16,7 +17,7 @@ class BestBagsScreen extends StatelessWidget {
             body: ListView.separated(
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
-                return const CustomBagContainer(
+                return  CustomBagContainer(
                   isLast: true,
                   isHome: false,
                 );
@@ -26,7 +27,7 @@ class BestBagsScreen extends StatelessWidget {
                   height: getVerticalPadding(context) * 1,
                 );
               },
-              itemCount: 20,
+              itemCount: cubit.homeModel?.data?.suitcases?.length??0,
             ));
       },
     );

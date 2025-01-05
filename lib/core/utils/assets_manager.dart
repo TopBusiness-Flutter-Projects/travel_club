@@ -27,6 +27,7 @@ class ImageAssets {
   static const String about = '$imagePath/about_us.png';
   static const String seat = '$imagePath/seat.png';
   static const String gml = '$imagePath/gml.png';
+  static const String noOffers = '$imagePath/no_offers.png';
   static const String foodContainer = '$imagePath/food_conatiner.png';
 
   // icons

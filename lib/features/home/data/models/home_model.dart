@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../../../auth/data/models/login_model.dart';
+
 GetHomeModel getHomeModelFromJson(String str) => GetHomeModel.fromJson(json.decode(str));
 
 String getHomeModelToJson(GetHomeModel data) => json.encode(data.toJson());
@@ -34,7 +36,7 @@ class GetHomeModel {
 
 class Data {
   int? notifications;
-  dynamic user;
+  UserDataModel? user;
   List<Module>? modules;
   List<Offer>? offers;
   List<Suitcase>? suitcases;
