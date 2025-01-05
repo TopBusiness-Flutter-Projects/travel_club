@@ -323,7 +323,7 @@ class AppRoutes {
             settings.arguments as bool; // Expect an int index here
         return PageTransition(
           child: OtpScreen(
-            isPasss: isPass,
+            isForget: isPass,
           ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
