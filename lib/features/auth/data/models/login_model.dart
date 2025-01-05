@@ -10,7 +10,7 @@ String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
     String? msg;
-    Data? data;
+    UserDataModel? data;
     int? status;
 
     LoginModel({
@@ -21,7 +21,7 @@ class LoginModel {
 
     factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         msg: json["msg"],
-        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+        data: json["data"] == null ? null : UserDataModel.fromJson(json["data"]),
         status: json["status"],
     );
 
@@ -32,7 +32,7 @@ class LoginModel {
     };
 }
 
-class Data {
+class UserDataModel {
     int? id;
     String? name;
     int? phone;
@@ -42,7 +42,7 @@ class Data {
     int? points;
     String? token;
 
-    Data({
+    UserDataModel({
         this.id,
         this.name,
         this.phone,
@@ -53,7 +53,7 @@ class Data {
         this.token,
     });
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+    factory UserDataModel.fromJson(Map<String, dynamic> json) => UserDataModel(
         id: json["id"],
         name: json["name"],
         phone: json["phone"],
