@@ -11,7 +11,6 @@ String defaultPostModelToJson(DefaultPostModel data) => json.encode(data.toJson(
 class DefaultPostModel {
     String? msg;
     int? status;
-
     DefaultPostModel({
         this.msg,
         this.status,

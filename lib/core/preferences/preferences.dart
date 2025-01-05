@@ -31,9 +31,9 @@ class Preferences {
         'user', jsonEncode(LoginModel.fromJson(loginModel.toJson())));
     print(await getUserModel());
   }
- Future<void> clearShared()async{
+ Future<void> clearUser()async{
    SharedPreferences preferences = await SharedPreferences.getInstance();
-   preferences.clear();
+   preferences.remove('user');
  }
   Future<LoginModel> getUserModel() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -46,7 +46,10 @@ class Preferences {
     }
     return userModel;
   }
-
+ Future<void> clearShared()async{
+   SharedPreferences preferences = await SharedPreferences.getInstance();
+   preferences.clear();
+ }
   Future<String> getSavedLang() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString(AppStrings.locale) ?? 'ar';

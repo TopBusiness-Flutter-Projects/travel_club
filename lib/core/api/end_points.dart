@@ -3,5 +3,6 @@ class EndPoints {
   static const String loginUrl = '${baseUrl}login';
   static const String registerUrl = '${baseUrl}register';
   static const String checkOtpUrl = '${baseUrl}checkOtp';
+  static const String logoutUrl = '${baseUrl}logout';
   static const String homeUrl = '${baseUrl}home';
 }
