@@ -15,6 +15,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+   GlobalKey<FormState> formKeySignUp = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<LoginCubit>();
@@ -23,7 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         return SafeArea(
           child: Scaffold(
             body: Form(
-              key: cubit.formKeySignUp,
+              key: formKeySignUp,
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,7 +150,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Center(
                       child: CustomForward(
                         onTap: () {
-                          if (cubit.formKeySignUp.currentState!.validate()) {
+                          if (formKeySignUp.currentState!.validate()) {
                             cubit.register(context);
                           }
                         },

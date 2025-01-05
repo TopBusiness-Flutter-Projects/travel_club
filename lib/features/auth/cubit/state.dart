@@ -7,6 +7,7 @@ class ResetPin extends LoginState {}
 class LoadingLoginState extends LoginState {}
 class FailureLoginState extends LoginState {}
 class SuccessLoginState extends LoginState {}
+class OTPSentState extends LoginState {}
 class SuccessSignOutGoogleState extends LoginState {}
 class LoadingSignOutGoogleState extends LoginState {}
 class SuccessSignInWithGoogleState extends LoginState {}
