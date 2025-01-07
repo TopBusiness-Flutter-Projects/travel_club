@@ -4,14 +4,27 @@ import '../../cubit/accomendation_cubit.dart';
 import '../widgets/acommendation_widgets/accomendadation_container.dart';
 import '../widgets/acommendation_widgets/accomendation_rating.dart';
 
-class AccomendationScreen extends StatelessWidget {
+class AccomendationScreen extends StatefulWidget {
   const AccomendationScreen({super.key});
 
   @override
+  State<AccomendationScreen> createState() => _AccomendationScreenState();
+}
+
+class _AccomendationScreenState extends State<AccomendationScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    context.read<AccomendationCubit>().getPlaces();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+    var cubit=context.read<AccomendationCubit>();
  return BlocBuilder<AccomendationCubit, AccomendationState>(builder: (BuildContext context, state) {
    return CustomScreen (appbarTitle: AppTranslations.accommodation,
-   body:  Padding(
+   body:          cubit.placesModel.data==null?const Center(child: CircularProgressIndicator(),):
+   Padding(
      padding: const EdgeInsets.all(8.0),
      child: Column(
        // mainAxisSize: MainAxisSize.min,
@@ -24,14 +37,13 @@ class AccomendationScreen extends StatelessWidget {
                mainAxisSpacing: 0,
                crossAxisSpacing: 0,
                children: List.generate(
-                   4,
+                   cubit.placesModel.data?.length??0,
                        (index) => AcommendationContainer(
                      categoryModel: AcommndationModel(
-                       title: "فنادق",
-                       image: AppIcons.others,
+                       title: cubit.placesModel.data![index].name.toString()??"",
+                       image: cubit.placesModel.data![index].image.toString()??"",
                        onTap: () {
                          Navigator.pushNamed(context, Routes.hotelsScreen);
-
                        },
                      ),
                    ))),
