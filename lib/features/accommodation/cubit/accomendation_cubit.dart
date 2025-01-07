@@ -3,6 +3,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:travel_club/core/exports.dart';
 
+import '../data/models/facilities_model.dart';
+import '../data/models/places_model.dart';
 import '../data/repo/details_accomendation_repo_impl.dart';
 import '../view/widgets/hotels_widgets/custom_check_box.dart';
 
@@ -155,5 +157,31 @@ void checkPrivacy() {
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
         .buffer
         .asUint8List();
+  }
+  //get places
+  PlacesModel placesModel = PlacesModel();
+  getPlaces() async {
+    emit(PlacesLoading());
+    final res = await api?.getPlaces();
+    res?.fold((l) {
+      emit(PlacesError());
+    }, (r) {
+      placesModel = r;
+      // getUserData();
+      emit(PlacesLoaded());
+    });
+  }
+  //get facilities
+  FacilitiesModel facilitiesModel = FacilitiesModel();
+  getFacilities() async {
+    emit(FacilitiesLoading());
+    final res = await api?.getFacilities();
+    res?.fold((l) {
+      emit(FacilitiesError());
+    }, (r) {
+      facilitiesModel = r;
+      // getUserData();
+      emit(FacilitiesLoaded());
+    });
   }
 }

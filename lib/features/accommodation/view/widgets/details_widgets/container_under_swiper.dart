@@ -12,6 +12,7 @@ class ContainerUnderSwiper  extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<AccomendationCubit>();
   return BlocBuilder<AccomendationCubit, AccomendationState>(builder: (BuildContext context, state) {
      return     Positioned(
        bottom: 0,
@@ -119,7 +120,9 @@ class ContainerUnderSwiper  extends StatelessWidget {
                                  ),
                                ]),
                          )
-                       ]),
+                       ]
+                   ),
+
 SizedBox(height: 20.h,),
                    Text(
                     AppTranslations.whatItOffers,

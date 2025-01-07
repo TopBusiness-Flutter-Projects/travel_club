@@ -1,8 +1,10 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 
 late SharedPreferences prefs;
+late FlutterSecureStorage storage ;
 
 class AppStrings {
   static const String appName = 'Traverl Club';

@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-
 import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/error/exceptions.dart';

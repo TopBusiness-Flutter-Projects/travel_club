@@ -47,7 +47,8 @@ class _HomeBodyState extends State<HomeBody> {
                     padding: EdgeInsets.symmetric(
                         horizontal: getHorizontalPadding(context) / 2),
                     child:
-                    SearchContainer(onTap: (){
+                    SearchContainer(onTap:
+                        (){
                       Navigator.pushNamed(context, Routes.searchScreen);
                     },)
                   ),
@@ -69,7 +70,7 @@ class _HomeBodyState extends State<HomeBody> {
                     Text(AppTranslations.commingSoon.tr(),style: getBoldStyle(color: AppColors.primary,fontSize: 24.sp),)
                   ],
 
-                  if (cubit.homeModel.data?.suitcases?.isNotEmpty ?? false)
+                  if (cubit.homeModel.data?.offers?.isNotEmpty ?? false)
                     const CustomOffersSection(),
                   SizedBox(height: getVerticalPadding(context)),
                   if (cubit.homeModel.data?.suitcases?.isNotEmpty ?? false)

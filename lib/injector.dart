@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/api/base_api_consumer.dart';
@@ -113,7 +114,10 @@ serviceLocator.registerLazySingleton(() => SearchRepoImpl(serviceLocator()));
 
   ////////////////////////// SharedPref ////////////////////////
   final sharedPreferences = await SharedPreferences.getInstance();
+  final  storage = await FlutterSecureStorage();
+
   serviceLocator.registerLazySingleton(() => sharedPreferences);
+  serviceLocator.registerLazySingleton(() => storage);
   // Dio
   serviceLocator.registerLazySingleton(
     () => Dio(

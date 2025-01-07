@@ -7,19 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/config/routes/app_routes.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/injector.dart' as injector;
-
 import 'app.dart';
 import 'app_bloc_observer.dart';
 import 'core/utils/restart_app_class.dart';
-// import 'firebase_options.dart';
-// the navigator key added to material app
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-// this id for local notification
 int id = 0;
 String notificationId = "0";
 String notificationType = "";
@@ -124,10 +121,7 @@ void main() async {
     initializationSettings,
 // هنا بنقوله لما تضغط علي الاشعار حتعمل ايه
     onDidReceiveNotificationResponse: (NotificationResponse details) async {
-      // we can check a notification data and go to the notification screen or trip details screen or product details screen
-      // from details.payload it is = message.data = { "id": "2121", "type": "trip" }
       navigatorKey.currentState?.pushNamed(Routes.notificationScreen);
-
       print('dddddddddddddddddddddddd');
       print(details.payload.toString());
     },
@@ -149,7 +143,16 @@ void main() async {
           sound: true,
         );
   }
+  //secure stoarge
+
+  AndroidOptions _getAndroidOptions() => const AndroidOptions(
+    encryptedSharedPreferences: true,
+  );
+  IOSOptions _getIOSOptions() => IOSOptions(accessibility: KeychainAccessibility.first_unlock);
+
   prefs = await SharedPreferences.getInstance();
+  storage = await  FlutterSecureStorage(aOptions: _getAndroidOptions());;
+  // storage = await  FlutterSecureStorage(aOptions: _getIOSOptions());;
   getToken();
   await EasyLocalization.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
