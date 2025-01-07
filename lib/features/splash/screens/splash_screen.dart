@@ -1,10 +1,7 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:app_links/app_links.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/utils/assets_manager.dart';
-import '../../../../config/routes/app_routes.dart';
-import '../../../../core/utils/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -17,15 +14,11 @@ class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late Timer _timer;
 
-  _goNext() {
-    _getStoreUser();
-  }
-
-  _startDelay() async {
+  navigateToHome() async {
     _timer = Timer(
       const Duration(seconds: 3),
       () {
-        _goNext();
+        _getStoreUser();
       },
     );
   }
@@ -51,14 +44,47 @@ class _SplashScreenState extends State<SplashScreen>
     }
   }
 
+  late final AppLinks _appLinks;
+
   @override
   void initState() {
     super.initState();
-    // context.read<SplashCubit>().getAdsOfApp();
-
-    _startDelay();
+    _initializeAppLinks();
   }
 
+  Future<void> _initializeAppLinks() async {
+    _appLinks = AppLinks();
+
+    // Handle initial deep link
+    final initialLink = await _appLinks.getInitialLink();
+    if (initialLink != null) {
+      _handleDeepLink(initialLink);
+    } else {
+      navigateToHome();
+    }
+
+    // Listen for deep links
+    _appLinks.uriLinkStream.listen((Uri? uri) {
+      if (uri != null) {
+        _handleDeepLink(uri);
+      }
+    }, onError: (err) {
+      debugPrint('Error handling deep link: $err');
+    });
+  }
+  void _handleDeepLink(Uri initialDeepLink) {
+    print("the link is : ${initialDeepLink.toString()}");
+    if (initialDeepLink.toString().contains("transportation")) {
+      // Uri uri = Uri.parse(initialDeepLink.toString());
+      String id = initialDeepLink.queryParameters['id'] ?? "-1";
+      Navigator.pushReplacementNamed(
+        context, Routes.detailsbookingTransportation,
+        // arguments: id
+      );
+    } else {
+      Navigator.pushReplacementNamed(context, Routes.notificationScreen);
+    }
+  }
   @override
   void dispose() {
     _timer.cancel();
