@@ -4,6 +4,7 @@ import 'package:travel_club/features/favourites/cubit/favourites_state.dart';
 import '../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../food/widgets/big_container_food.dart';
 import '../../home/screens/widgets/custom_appbar.dart';
+import '../../my_account/screens/widgets/profile_not_loging.dart';
 import '../../transportation/screens/widgets/custom_company_container.dart';
 import '../cubit/favourites_cubit.dart';
 import 'custom_favourite_catogrey.dart';
@@ -23,7 +24,10 @@ class _FavouritebodyState extends State<Favouritebody> {
     FavouritesCubit cubit = context.read<FavouritesCubit>();
     return BlocBuilder<FavouritesCubit, FavouritesState>(
         builder: (context, state) {
-      return Column(children: [
+      return
+        AppConst.isLogged==false?ProfileNotLoging(title: AppTranslations.favorites,):
+        Column(
+            children: [
         SizedBox(height: getVerticalPadding(context) * 2),
         //app bar
         CustomHomeAppbar(isHome: false, title: AppTranslations.favorites,),
@@ -80,7 +84,7 @@ class _FavouritebodyState extends State<Favouritebody> {
 
                // Container()
               ],
-              if(cubit.categories[cubit.selectedIndex] ==     AppTranslations.entertainment)...[
+              if(cubit.categories[cubit.selectedIndex] == AppTranslations.entertainment)...[
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,

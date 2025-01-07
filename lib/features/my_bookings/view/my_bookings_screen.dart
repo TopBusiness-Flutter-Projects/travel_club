@@ -7,6 +7,7 @@ import 'package:travel_club/features/main_screen/cubit/state.dart';
 import '../../home/screens/home_body.dart';
 import '../../home/screens/widgets/custom_appbar.dart';
 import '../../home/screens/widgets/custom_category_section.dart';
+import '../../my_account/screens/widgets/profile_not_loging.dart';
 import '../cubit/my_bookings_cubit.dart';
 import '../cubit/my_bookings_state.dart';
 import 'my_booking_body.dart';
@@ -23,7 +24,10 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
     MyBookingsCubit cubit = context.read<MyBookingsCubit>();
     return BlocBuilder<MyBookingsCubit, MyBookingsState>(
       builder: (context, state) {
-        return SizedBox(
+        return
+          AppConst.isLogged==false?ProfileNotLoging(title: AppTranslations.myBookings,):
+
+              SizedBox(
           height: getHeightSize(context),
           width: getWidthSize(context),
           child: Stack(

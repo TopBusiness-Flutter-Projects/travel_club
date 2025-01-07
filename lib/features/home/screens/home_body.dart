@@ -28,14 +28,14 @@ class _HomeBodyState extends State<HomeBody> {
   Widget build(BuildContext context) {
     var cubit = context.read<HomeCubit>();
     return BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
-      return        cubit.homeModel.data==null?const Center(child: CircularProgressIndicator(),):
+      return        cubit.homeModel.data==null?const Center(child: CustomLoadingIndicator(),):
       RefreshIndicator(
         onRefresh: ()async{
           cubit.getHomeData();
         },
         child: Column(children: [
           SizedBox(height: getVerticalPadding(context) * 2),
-           CustomHomeAppbar(isHome: true, title: 'Guest',),
+           CustomHomeAppbar(isHome: true, title: AppConst.isLogged?AppTranslations.welcome:'Guest',),
           Expanded(
             child: SingleChildScrollView(
               child: Column(

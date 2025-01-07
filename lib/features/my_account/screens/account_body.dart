@@ -21,7 +21,7 @@ class Accountbody extends StatefulWidget {
 class _AccountbodyState extends State<Accountbody> {
   @override
   Widget build(BuildContext context) {
-    MyBookingsCubit cubit = context.read<MyBookingsCubit>();
+    AccountCubit cubit = context.read<AccountCubit>();
     return BlocBuilder<AccountCubit, AccountState>(builder: (context, state) {
       return Column(children: [
         SizedBox(height: getVerticalPadding(context) * 2),
@@ -38,20 +38,26 @@ class _AccountbodyState extends State<Accountbody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //custom container above list view
-                CustomContainerMyAccount(),
+                if(AppConst.isLogged==true)...[
+              CustomContainerMyAccount(),
+                ],
 //list view
+                SizedBox(height: 20.h,),
+
                 Expanded(
                   child: ListView(
                     shrinkWrap: true,
                     // crossAxisAlignment:   CrossAxisAlignment.start,
                     children: [
                       // SizedBox(height: 30.h,),
-                      CustomRowProfile(
-                        title: AppTranslations.personalData,
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.profileInfo);
-                        },
-                      ),
+                      if(AppConst.isLogged==true)...[
+                        CustomRowProfile(
+                          title: AppTranslations.personalData,
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.profileInfo);
+                          },
+                        ),      ],
+
                       CustomRowProfile(
                         title: AppTranslations.changeLang,
                         onTap: () {
@@ -93,7 +99,7 @@ class _AccountbodyState extends State<Accountbody> {
                         },
                       ),
                       CustomRowProfile(
-                        title: AppTranslations.logout,
+                        title:AppConst.isLogged? AppTranslations.logout:AppTranslations.login,
                         onTap: () {
                           context.read<LoginCubit>().logout(context);
                         },
