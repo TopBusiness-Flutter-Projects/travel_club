@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:easy_localization/easy_localization.dart' as trans;
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../../../config/routes/app_routes.dart';
-import '../../../core/utils/app_colors.dart';
-import '../../../core/utils/assets_manager.dart';
-import '../../../core/utils/get_size.dart';
 import '../cubit/onboarding_cubit.dart';
 import 'onboarding1.dart';
 import 'onboarding2.dart';

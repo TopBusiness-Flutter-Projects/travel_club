@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/utils/app_strings.dart';
 import 'package:travel_club/features/auth/data/models/login_model.dart';
@@ -12,6 +13,7 @@ class Preferences {
   Preferences._internal();
 
   factory Preferences() => instance;
+  final FlutterSecureStorage storage = FlutterSecureStorage();
 
 
   // Future<void> setFirstInstall() async {
@@ -25,27 +27,48 @@ class Preferences {
   //   return jsonData;
   // }
 
+  // Future<void> setUser(LoginModel loginModel) async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   preferences.setString(
+  //       'user', jsonEncode(LoginModel.fromJson(loginModel.toJson())));
+  //   print(await getUserModel());
+  // }
+  //
   Future<void> setUser(LoginModel loginModel) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString(
-        'user', jsonEncode(LoginModel.fromJson(loginModel.toJson())));
+    await storage.write(key: 'user', value: jsonEncode(loginModel.toJson()));
     print(await getUserModel());
   }
- Future<void> clearUser()async{
-   SharedPreferences preferences = await SharedPreferences.getInstance();
-   preferences.remove('user');
- }
+
   Future<LoginModel> getUserModel() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    String? jsonData = preferences.getString('user');
+    String? jsonData = await storage.read(key: 'user');
     LoginModel userModel;
+
     if (jsonData != null) {
-      userModel = LoginModel.fromJson(jsonDecode(jsonData));
+       userModel= LoginModel.fromJson(jsonDecode(jsonData));
     } else {
       userModel = LoginModel();
     }
     return userModel;
   }
+  //
+ // Future<void> clearUser()async{
+ //   SharedPreferences preferences = await SharedPreferences.getInstance();
+ //   preferences.remove('user');
+ // }
+  Future<void> clearUser() async {
+    await storage.delete(key: 'user');
+  }
+  // Future<LoginModel> getUserModel() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   String? jsonData = preferences.getString('user');
+  //   LoginModel userModel;
+  //   if (jsonData != null) {
+  //     userModel = LoginModel.fromJson(jsonDecode(jsonData));
+  //   } else {
+  //     userModel = LoginModel();
+  //   }
+  //   return userModel;
+  // }
  Future<void> clearShared()async{
    SharedPreferences preferences = await SharedPreferences.getInstance();
    preferences.clear();
@@ -55,9 +78,12 @@ class Preferences {
     return preferences.getString(AppStrings.locale) ?? 'ar';
   }
 
+  // Future<void> savedLang(String local) async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   preferences.setString(AppStrings.locale, local);
+  // }
   Future<void> savedLang(String local) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString(AppStrings.locale, local);
+    await storage.write(key: AppStrings.locale, value: local);
   }
    // Notification token
   Future<String?> getNotificationToken() async{
