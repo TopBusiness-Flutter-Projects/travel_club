@@ -6,7 +6,6 @@ import 'package:travel_club/features/auth/cubit/cubit.dart';
 import 'package:travel_club/features/my_account/screens/widgets/custom_container.dart';
 import 'package:travel_club/features/my_account/screens/widgets/custom_row.dart';
 import '../../home/screens/widgets/custom_appbar.dart';
-import '../../my_bookings/cubit/my_bookings_cubit.dart';
 import '../cubit/account_cubit.dart';
 import '../cubit/account_state.dart';
 

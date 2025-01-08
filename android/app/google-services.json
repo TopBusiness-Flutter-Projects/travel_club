@@ -22,14 +22,6 @@
           }
         },
         {
-          "client_id": "762370307959-gc3b1rek5g9gckeruf5cl42brmbdjbeb.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.topbusiness.travelclub",
-            "certificate_hash": "4651ce0f26426d5555218578e60a5d21e1a00d1a"
-          }
-        },
-        {
           "client_id": "762370307959-dkpqipchrmoc6673gpjv9lb30k58olge.apps.googleusercontent.com",
           "client_type": 3
         }
