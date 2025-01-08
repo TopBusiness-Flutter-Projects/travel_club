@@ -1,21 +1,15 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-import '../utils/app_colors.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:travel_club/core/exports.dart';
 
-class ShowLoadingIndicator extends StatelessWidget {
-  const ShowLoadingIndicator({Key? key}) : super(key: key);
+
+class CustomLoadingIndicator extends StatelessWidget {
+  const CustomLoadingIndicator({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: MediaQuery.of(context).size.height/2-50),
-        Center(
-          child: CircularProgressIndicator(
-            color: AppColors.primary,
-          ),
-        ),
-      ],
-    );
+  Widget build(BuildContext context) {    return Center(
+    child: Platform.isIOS          ? const CupertinoActivityIndicator(animating: true, radius: 15)
+        : CircularProgressIndicator(color: AppColors.primary),    );
   }
 }

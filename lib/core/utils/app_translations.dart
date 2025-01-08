@@ -198,4 +198,5 @@ class AppTranslations {
   static String get accountActivated => 'account_activated'.tr();
   static String get forgetPassword => 'forget_password'.tr();
   static String get enterPhone => 'enter_phone'.tr();
+  static String get notLogin => 'not_login'.tr();
 }
