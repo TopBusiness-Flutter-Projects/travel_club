@@ -37,25 +37,26 @@ class _AccountbodyState extends State<Accountbody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //custom container above list view
-                if(AppConst.isLogged==true)...[
-              CustomContainerMyAccount(),
+                if (AppConst.isLogged) ...[
+                  CustomContainerMyAccount(),
+                  SizedBox(
+                    height: 20.h,
+                  ),
                 ],
 //list view
-                SizedBox(height: 20.h,),
 
                 Expanded(
                   child: ListView(
                     shrinkWrap: true,
                     // crossAxisAlignment:   CrossAxisAlignment.start,
                     children: [
-                      // SizedBox(height: 30.h,),
-                      if(AppConst.isLogged==true)...[
+                      if (AppConst.isLogged)
                         CustomRowProfile(
                           title: AppTranslations.personalData,
                           onTap: () {
                             Navigator.pushNamed(context, Routes.profileInfo);
                           },
-                        ),      ],
+                        ),
 
                       CustomRowProfile(
                         title: AppTranslations.changeLang,
@@ -63,18 +64,20 @@ class _AccountbodyState extends State<Accountbody> {
                           Navigator.pushNamed(context, Routes.changeLanguage);
                         },
                       ),
-                      CustomRowProfile(
-                        title: AppTranslations.points,
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.pointsRoute);
-                        },
-                      ),
-                      CustomRowProfile(
-                        title: AppTranslations.promoCode,
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.promoCodeRoute);
-                        },
-                      ),
+                      if (AppConst.isLogged)
+                        CustomRowProfile(
+                          title: AppTranslations.points,
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.pointsRoute);
+                          },
+                        ),
+                      if (AppConst.isLogged)
+                        CustomRowProfile(
+                          title: AppTranslations.promoCode,
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.promoCodeRoute);
+                          },
+                        ),
                       CustomRowProfile(
                         title: AppTranslations.contactUs,
                         onTap: () {
@@ -110,9 +113,14 @@ class _AccountbodyState extends State<Accountbody> {
                         },
                       ),
                       CustomRowProfile(
-                        title:AppConst.isLogged? AppTranslations.logout:AppTranslations.login,
+                        title: AppConst.isLogged
+                            ? AppTranslations.logout
+                            : AppTranslations.login,
                         onTap: () {
-                          context.read<LoginCubit>().logout(context);
+                          AppConst.isLogged
+                              ? context.read<LoginCubit>().logout(context)
+                              : Navigator.pushNamedAndRemoveUntil(
+                                  context, Routes.loginRoute, (route) => false);
                         },
                       ),
                       SizedBox(
