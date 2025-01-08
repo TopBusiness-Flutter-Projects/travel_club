@@ -213,4 +213,5 @@ class AppTranslations {
   static String get copied => 'copied'.tr();
 
   static String get notLogin => 'not_login'.tr();
+  static String get guest => 'guest'.tr();
 }
