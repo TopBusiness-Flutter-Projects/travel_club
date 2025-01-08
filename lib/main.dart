@@ -16,6 +16,7 @@ import 'package:travel_club/injector.dart' as injector;
 import 'app.dart';
 import 'app_bloc_observer.dart';
 import 'core/utils/restart_app_class.dart';
+import 'firebase_options.dart';
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 int id = 0;
 String notificationId = "0";
@@ -37,7 +38,7 @@ void main() async {
   /// Firebase Message settings //////
 
   await Firebase.initializeApp(
-    // options: DefaultFirebaseOptions.currentPlatform,
+     options: DefaultFirebaseOptions.currentPlatform,
   );
   RemoteMessage? initialMessage =
       await FirebaseMessaging.instance.getInitialMessage();

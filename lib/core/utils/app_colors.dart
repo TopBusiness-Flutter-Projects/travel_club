@@ -11,7 +11,7 @@ class AppColors {
   static Color lightWhite = HexColor('#F2F5F7');
   static Color lightWhite2 = HexColor('#F6FAFB');
   static Color lightBlue1 = HexColor('#E1EDF2');
-  static Color  lightBlue2= HexColor('#D2E1E8');
+  static Color lightBlue2 = HexColor('#D2E1E8');
   static Color samawy = HexColor('#B1C9D3');
   static Color grey = HexColor('#7B9AA7');
   static Color grey1 = HexColor('#B6C8D2');
@@ -19,6 +19,7 @@ class AppColors {
   static Color yellow = HexColor('#FFCC23');
   static Color blue = HexColor('#003B64');
   static Color onboarding3 = HexColor('#A2CCCA');
+  static Color promocodeBackground = HexColor('#F6F7F9');
   static Color white = Colors.white;
 
   // static Color red = HexColor('#FF0000');

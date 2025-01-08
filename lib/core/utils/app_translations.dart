@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:easy_localization/easy_localization.dart';
 
 class AppTranslations {
@@ -198,5 +200,17 @@ class AppTranslations {
   static String get accountActivated => 'account_activated'.tr();
   static String get forgetPassword => 'forget_password'.tr();
   static String get enterPhone => 'enter_phone'.tr();
+  static String get promoCode => 'promo_code'.tr();
+  static String get points => 'points'.tr();
+  static String get promoCodeDesc => 'promo_code_desc'.tr();
+  static String get copyCode => 'copy_code'.tr();
+  static String get share => 'share'.tr();
+  static String get myPoints => 'my_points'.tr();
+  static String get withdraw => 'withdraw'.tr();
+  static String get point => 'point'.tr();
+  static String get pound => 'pound'.tr();
+  static String get lastTransactions => 'last_transactions'.tr();
+  static String get copied => 'copied'.tr();
+
   static String get notLogin => 'not_login'.tr();
 }
