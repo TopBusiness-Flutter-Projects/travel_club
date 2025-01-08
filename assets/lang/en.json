@@ -191,7 +191,19 @@
     "number_of_attendees": "number of attendees",
     "number_of_phone_contact": "contact phone number",
     "done_booking": "Booked",
+    "promo_code": "Promo Code",
+    "points": "Points",
+    "promo_code_desc": "You can share your code with your friends so that you can get points to use in the application",
+"copy_code": "Copy the code",
+"share": "Share",
+"my_points": "My points",
+"withdraw": "Withdraw",
+"point": "Points",
+"pound": "Pound",
+"last_transactions": "Last transactions",
+"copied": "Copied",
     "not_login": "You Aren’t Login?",
+    "guest":"Guest",
 
     "lasss": ""
 }

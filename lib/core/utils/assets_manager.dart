@@ -30,6 +30,8 @@ class ImageAssets {
   static const String noOffers = '$imagePath/no_offers.png';
   static const String profileNotLogin = '$imagePath/profile_not_login.png';
   static const String foodContainer = '$imagePath/food_conatiner.png';
+  static const String pointsBackground = '$imagePath/points_background.png';
+  static const String promoCode = '$imagePath/promo_code.png';
 
   // icons
   static const String phoneIcon = '$iconsPath/phone.svg';

@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('onBoarding') != null) {
       // TODO
-      if (prefs.getString('user') != null && AppConst.isLogged) {
+      if (AppConst.isLogged) {
         Navigator.pushReplacementNamed(context, Routes.mainRoute);
       } else {
         Navigator.pushNamedAndRemoveUntil(
@@ -72,6 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
       debugPrint('Error handling deep link: $err');
     });
   }
+
   void _handleDeepLink(Uri initialDeepLink) {
     print("the link is : ${initialDeepLink.toString()}");
     if (initialDeepLink.toString().contains("transportation")) {
@@ -82,9 +83,10 @@ class _SplashScreenState extends State<SplashScreen>
         // arguments: id
       );
     } else {
-      Navigator.pushReplacementNamed(context, Routes.notificationScreen);
+      Navigator.pushReplacementNamed(context, Routes.mainRoute);
     }
   }
+
   @override
   void dispose() {
     _timer.cancel();

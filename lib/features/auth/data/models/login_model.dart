@@ -35,11 +35,12 @@ class LoginModel {
 class UserDataModel {
     int? id;
     String? name;
-    int? phone;
+    dynamic phone;
     String? image;
     String? googleImage;
     String? code;
-    int? points;
+    dynamic points;
+    dynamic notifications;
     String? token;
 
     UserDataModel({
@@ -50,6 +51,7 @@ class UserDataModel {
         this.googleImage,
         this.code,
         this.points,
+        this.notifications,
         this.token,
     });
 
@@ -61,6 +63,7 @@ class UserDataModel {
         googleImage: json["google_image"],
         code: json["code"],
         points: json["points"],
+        notifications: json["notifications"],
         token: json["token"],
     );
 
@@ -72,6 +75,7 @@ class UserDataModel {
         "google_image": googleImage,
         "code": code,
         "points": points,
+        "notifications": notifications,
         "token": token,
     };
 }
