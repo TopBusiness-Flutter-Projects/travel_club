@@ -75,7 +75,9 @@ class _AccountbodyState extends State<Accountbody> {
                         CustomRowProfile(
                           title: AppTranslations.promoCode,
                           onTap: () {
-                            Navigator.pushNamed(context, Routes.promoCodeRoute);
+                            if (cubit.loginModel.data?.code != null) {
+                              Navigator.pushNamed(context, Routes.promoCodeRoute, arguments: cubit.loginModel.data?.code! );
+                            }
                           },
                         ),
                       CustomRowProfile(

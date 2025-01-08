@@ -454,8 +454,9 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.promoCodeRoute:
+      String  code =  settings.arguments as String;
         return PageTransition(
-          child: const PromoCodeScreen(),
+          child:  PromoCodeScreen(code: code,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

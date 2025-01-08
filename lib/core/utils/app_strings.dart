@@ -17,6 +17,7 @@ class AppStrings {
   static const String locale = 'locale';
   static const String englishCode = 'en';
   static const String arabicCode = 'ar';
+  static const String inviteLink = 'https://travelclub.page.link/invite';
   // static const String googleApiKey = '';
 }
 

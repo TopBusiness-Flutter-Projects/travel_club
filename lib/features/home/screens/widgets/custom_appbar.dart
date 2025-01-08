@@ -5,9 +5,9 @@ import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
 import '../../../my_account/cubit/account_state.dart';
 
 class CustomHomeAppbar extends StatefulWidget {
-  CustomHomeAppbar({super.key, required this.isHome, required this.title});
-  bool isHome;
-  String? title;
+  const CustomHomeAppbar({super.key,  this.isHome = false,  this.title});
+ final  bool isHome;
+ final String? title;
 
   @override
   State<CustomHomeAppbar> createState() => _CustomHomeAppbarState();

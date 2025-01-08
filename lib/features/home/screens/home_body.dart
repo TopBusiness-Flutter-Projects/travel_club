@@ -24,64 +24,81 @@ class _HomeBodyState extends State<HomeBody> {
     context.read<HomeCubit>().getHomeData();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<HomeCubit>();
     return BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
-      return        cubit.homeModel.data==null?const Center(child: CustomLoadingIndicator(),):
-      RefreshIndicator(
-        onRefresh: ()async{
-          cubit.getHomeData();
-        },
-        child: Column(children: [
-          SizedBox(height: getVerticalPadding(context) * 2),
-           CustomHomeAppbar(isHome: true, title: AppConst.isLogged?AppTranslations.welcome:'Guest',),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const CustomCategorySection(), // search bar
-                  SizedBox(height: 10.h,),
-                  //search container
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: getHorizontalPadding(context) / 2),
-                    child:
-                    SearchContainer(onTap:
-                        (){
-                      Navigator.pushNamed(context, Routes.searchScreen);
-                    },)
-                  ),
-                  SizedBox(height: 10.h,),
-                  if ((cubit.homeModel.data!.suitcases!.isEmpty ) &&
-                      (cubit.homeModel.data!.offers!.isEmpty )) ...[
-                        SizedBox(height: 30.h,),
-                        Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(child: Image.asset(ImageAssets.noOffers,width: 150.w,)),
-                            ],
-                          ),
+      return cubit.homeModel.data == null
+          ? const Center(
+              child: CustomLoadingIndicator(),
+            )
+          : RefreshIndicator(
+              onRefresh: () async {
+                cubit.getHomeData();
+              },
+              child: Column(children: [
+                SizedBox(height: getVerticalPadding(context) * 2),
+                const CustomHomeAppbar(
+                  isHome: true,
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const CustomCategorySection(), // search bar
+                        SizedBox(
+                          height: 10.h,
                         ),
-                    SizedBox(height: 30.h,),
+                        //search container
+                        Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getHorizontalPadding(context) / 2),
+                            child: SearchContainer()),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        if ((cubit.homeModel.data!.suitcases!.isEmpty) &&
+                            (cubit.homeModel.data!.offers!.isEmpty)) ...[
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(
+                                    child: Image.asset(
+                                  ImageAssets.noOffers,
+                                  width: 150.w,
+                                )),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          Text(
+                            AppTranslations.commingSoon.tr(),
+                            style: getBoldStyle(
+                                color: AppColors.primary, fontSize: 24.sp),
+                          )
+                        ],
 
-                    Text(AppTranslations.commingSoon.tr(),style: getBoldStyle(color: AppColors.primary,fontSize: 24.sp),)
-                  ],
-
-                  if (cubit.homeModel.data?.offers?.isNotEmpty ?? false)
-                    const CustomOffersSection(),
-                  SizedBox(height: getVerticalPadding(context)),
-                  if (cubit.homeModel.data?.suitcases?.isNotEmpty ?? false)
-                  const CustomBagSection(),
-                  SizedBox(height: getHeightSize(context) * 0.13),
-                ],
-              ),
-            ),
-          ),
-        ]),
-      );
+                        if (cubit.homeModel.data?.offers?.isNotEmpty ?? false)
+                          const CustomOffersSection(),
+                        SizedBox(height: getVerticalPadding(context)),
+                        if (cubit.homeModel.data?.suitcases?.isNotEmpty ??
+                            false)
+                          const CustomBagSection(),
+                        SizedBox(height: getHeightSize(context) * 0.13),
+                      ],
+                    ),
+                  ),
+                ),
+              ]),
+            );
     });
   }
 }

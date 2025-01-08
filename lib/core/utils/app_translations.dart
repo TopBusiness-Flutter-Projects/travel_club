@@ -211,7 +211,13 @@ class AppTranslations {
   static String get pound => 'pound'.tr();
   static String get lastTransactions => 'last_transactions'.tr();
   static String get copied => 'copied'.tr();
-
   static String get notLogin => 'not_login'.tr();
   static String get guest => 'guest'.tr();
+  static String get downloadApp => 'download_app'.tr();
+  static String get useCode => 'use_code'.tr();
+  static String get forgetPoints => 'for_get_points'.tr();
+  static String get backToEnterCode => 'back_to_enter_code'.tr();
+  static String get finishWithoutCode => 'finish_without_code'.tr();
+  static String get areYouSure => 'are_you_sure'.tr();
+  static String get enterCode => 'enter_code'.tr();
 }
