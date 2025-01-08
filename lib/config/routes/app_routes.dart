@@ -5,6 +5,8 @@ import 'package:travel_club/features/home/screens/new_offers_screen.dart';
 import 'package:travel_club/features/main_screen/screens/main_screen.dart';
 import 'package:travel_club/features/my_account/screens/about_us.dart';
 import 'package:travel_club/features/my_account/screens/contact_us.dart';
+import 'package:travel_club/features/my_account/screens/points.dart';
+import 'package:travel_club/features/my_account/screens/promo_code.dart';
 import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/other_services/screens/other_services_screen.dart';
 import 'package:travel_club/features/other_services/screens/single_service_details.dart';
@@ -100,6 +102,9 @@ class Routes {
   static const String detailsBookingEntertainment = '/detailsBookingEntertainment';
   static const String detailsbookingTransportation =
       '/detailsbookingTransportation';
+        static const String pointsRoute = '/pointsRoute';
+        static const String promoCodeRoute = '/promocodeRoute';
+
 }
 
 class AppRoutes {
@@ -437,6 +442,20 @@ class AppRoutes {
       case Routes.bags:
         return PageTransition(
           child: const BestBagsScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.pointsRoute:
+        return PageTransition(
+          child: const PointsScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.promoCodeRoute:
+        return PageTransition(
+          child: const PromoCodeScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

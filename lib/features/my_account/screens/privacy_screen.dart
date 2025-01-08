@@ -4,7 +4,6 @@ import '../cubit/account_state.dart';
 
 class PrivacyScreen extends StatelessWidget {
   const PrivacyScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountCubit, AccountState>(builder: (BuildContext context, state) {

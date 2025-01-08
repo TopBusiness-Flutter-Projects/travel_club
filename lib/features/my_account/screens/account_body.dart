@@ -59,6 +59,18 @@ class _AccountbodyState extends State<Accountbody> {
                         },
                       ),
                       CustomRowProfile(
+                        title: AppTranslations.points,
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.pointsRoute);
+                        },
+                      ),
+                      CustomRowProfile(
+                        title: AppTranslations.promoCode,
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.promoCodeRoute);
+                        },
+                      ),
+                      CustomRowProfile(
                         title: AppTranslations.contactUs,
                         onTap: () {
                           Navigator.pushNamed(context, Routes.contact);
