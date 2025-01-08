@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/core/utils/restart_app_class.dart';
+import 'package:travel_club/features/auth/data/models/login_model.dart';
 import '../data/repo/account_repo_impl.dart';
 import 'account_state.dart';
 
@@ -27,8 +28,21 @@ class AccountCubit extends Cubit<AccountState> {
 
     Preferences.instance.getSavedLang();
     HotRestartController.performHotRestart(context);
+//get user data
 
     // Navigator.pushNamedAndRemoveUntil(
     //     context, Routes.initialRoute, (route) => false);
+  }
+  LoginModel loginModel = LoginModel();
+  getUserData() async {
+    emit(GetAccountLoading());
+    final res = await api.getUserData();
+    res.fold((l) {
+      emit(GetAccountError());
+    }, (r) {
+      loginModel = r;
+      // getUserData();
+      emit(GetAccountSuccess());
+    });
   }
 }

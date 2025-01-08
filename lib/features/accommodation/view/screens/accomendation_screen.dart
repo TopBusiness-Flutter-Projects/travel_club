@@ -30,6 +30,7 @@ class _AccomendationScreenState extends State<AccomendationScreen> {
        // mainAxisSize: MainAxisSize.min,
        crossAxisAlignment: CrossAxisAlignment.start,
        children: [
+         20.verticalSpace,
          Padding(
            padding: EdgeInsets.symmetric(vertical: 10.h),
            child: StaggeredGrid.count(

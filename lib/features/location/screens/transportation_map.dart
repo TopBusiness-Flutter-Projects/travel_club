@@ -25,7 +25,7 @@ class _TransportationMapState extends State<TransportationMap> {
     return BlocBuilder<LocationCubit, LocationState>(
       builder: (context, state) {
         return cubit.currentLocation == null
-            ? const Center(child: ShowLoadingIndicator())
+            ? const Center(child: CustomLoadingIndicator())
             : GoogleMap(
                 zoomGesturesEnabled: true,
                 zoomControlsEnabled: true,

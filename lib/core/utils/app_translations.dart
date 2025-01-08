@@ -212,4 +212,5 @@ class AppTranslations {
   static String get lastTransactions => 'last_transactions'.tr();
   static String get copied => 'copied'.tr();
 
+  static String get notLogin => 'not_login'.tr();
 }
