@@ -220,4 +220,10 @@ class AppTranslations {
   static String get finishWithoutCode => 'finish_without_code'.tr();
   static String get areYouSure => 'are_you_sure'.tr();
   static String get enterCode => 'enter_code'.tr();
+  static String get changeImage => 'change_image'.tr();
+  static String get changePassword => 'change_password'.tr();
+  static String get currentPassword => 'current_password'.tr();
+  static String get newPassword => 'new_password'.tr();
+  static String get lostConnection => 'lost_connection'.tr();
+  static String get someThingWrong => 'some_thins_went_wrong'.tr();
 }

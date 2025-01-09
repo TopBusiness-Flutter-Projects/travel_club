@@ -71,6 +71,7 @@ class LoginCubit extends Cubit<LoginState> {
       print("Access Token retrieved: ${googleAuth.accessToken != null}");
       print("Access Token retrieved: ${googleAuth.accessToken.toString()}");
       print("ID Token retrieved: ${googleAuth.idToken != null}");
+      print("ID Token retrieved: ${googleAuth.idToken.toString()}");
 
       // Validate tokens
       if (googleAuth.accessToken == null || googleAuth.idToken == null) {
@@ -244,9 +245,7 @@ class LoginCubit extends Cubit<LoginState> {
         successGetBar(r.msg);
         prefs.setBool("ISLOGGED", true);
         Preferences.instance.setUser(r);
-context
-                                                    .read<MainCubit>()
-                                                    .changePage(0);
+context.read<MainCubit>() .changePage(0);
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.apply, (route) => false);
       }
@@ -358,6 +357,7 @@ context
         Navigator.pop(context);
         successGetBar(r.msg);
         prefs.setBool("ISLOGGED", false);
+        AppConst.isLogged = false;
         Preferences.instance.clearUser();
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.loginRoute, (route) => false);

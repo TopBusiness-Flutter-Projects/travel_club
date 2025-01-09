@@ -1,16 +1,22 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/app_colors.dart';
+import 'package:travel_club/features/home/cubit/home_cubit.dart';
+import 'package:travel_club/features/home/cubit/home_state.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 import 'package:travel_club/features/main_screen/cubit/state.dart';
+import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
+
+import 'check_internet_widget.dart';
 
 class MainScreen extends StatefulWidget {
-   MainScreen({super.key,this.index});
-  int ?index;
+  MainScreen({super.key, this.index});
+  int? index;
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -25,7 +31,17 @@ class _MainScreenState extends State<MainScreen> {
         return Scaffold(
           body: Stack(
             children: [
-              cubit.screens[cubit.currentpage],
+              BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+                return CheckInternetWidget(
+                  whenResumed: () {
+                     context.read<HomeCubit>().getHomeData();
+                      context.read<AccountCubit>().getUserData();
+                  },
+                  child: state is ErrorGetHomeData
+                      ? const CustomHomeErrorWidget()
+                      : cubit.screens[cubit.currentpage],
+                );
+              }),
               Positioned(
                   bottom: 0,
                   child: Container(
@@ -64,8 +80,11 @@ class _MainScreenState extends State<MainScreen> {
                                               ? AppColors.primary
                                               : AppColors.grey,
                                           fontSize: 12.sp)),
-                                  if(cubit.currentpage == 0)
-                                  SvgPicture.asset(AppIcons.choosenNav,width: 40.w,)
+                                  if (cubit.currentpage == 0)
+                                    SvgPicture.asset(
+                                      AppIcons.choosenNav,
+                                      width: 40.w,
+                                    )
                                 ],
                               ),
                             ),
@@ -90,8 +109,11 @@ class _MainScreenState extends State<MainScreen> {
                                               ? AppColors.primary
                                               : AppColors.grey,
                                           fontSize: 12.sp)),
-                                  if(cubit.currentpage == 1)
-                                    SvgPicture.asset(AppIcons.choosenNav,width: 40.w,)
+                                  if (cubit.currentpage == 1)
+                                    SvgPicture.asset(
+                                      AppIcons.choosenNav,
+                                      width: 40.w,
+                                    )
                                 ],
                               ),
                             ),
@@ -116,8 +138,11 @@ class _MainScreenState extends State<MainScreen> {
                                               ? AppColors.primary
                                               : AppColors.grey,
                                           fontSize: 12.sp)),
-                                  if(cubit.currentpage == 2)
-                                    SvgPicture.asset(AppIcons.choosenNav,width: 40.w,)
+                                  if (cubit.currentpage == 2)
+                                    SvgPicture.asset(
+                                      AppIcons.choosenNav,
+                                      width: 40.w,
+                                    )
                                 ],
                               ),
                             ),
@@ -142,8 +167,11 @@ class _MainScreenState extends State<MainScreen> {
                                               ? AppColors.primary
                                               : AppColors.grey,
                                           fontSize: 12.sp)),
-                                  if(cubit.currentpage == 3)
-                                    SvgPicture.asset(AppIcons.choosenNav,width: 40.w,)
+                                  if (cubit.currentpage == 3)
+                                    SvgPicture.asset(
+                                      AppIcons.choosenNav,
+                                      width: 40.w,
+                                    )
                                 ],
                               ),
                             ),

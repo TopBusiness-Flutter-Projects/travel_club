@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/widgets/network_image.dart';
 import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
 
 import '../../../my_account/cubit/account_state.dart';
 
 class CustomHomeAppbar extends StatefulWidget {
-  const CustomHomeAppbar({super.key,  this.isHome = false,  this.title});
- final  bool isHome;
- final String? title;
+  const CustomHomeAppbar({super.key, this.isHome = false, this.title});
+  final bool isHome;
+  final String? title;
 
   @override
   State<CustomHomeAppbar> createState() => _CustomHomeAppbarState();
@@ -32,12 +33,24 @@ class _CustomHomeAppbarState extends State<CustomHomeAppbar> {
               vertical: getVerticalPadding(context)),
           child: Row(children: [
             if (widget.isHome == true) ...[
-              CircleAvatar(
-                  backgroundColor: AppColors.primary,
-                  radius: getWidthSize(context) * 0.07,
-                  child: Image.asset(ImageAssets.profile,
-                      color: AppColors.white,
-                      width: getWidthSize(context) * 0.1)),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: AppConst.isLogged
+                    ? CustomNetworkImage(
+                        height: 60.w,
+                        width: 60.w,
+                        image: cubit.loginModel.data?.image ?? '',
+                        isUser: true,
+                      )
+                    : CircleAvatar(
+                        backgroundColor: AppColors.primary,
+                        radius: 30.w,
+                        child: Image.asset(
+                          ImageAssets.profile,
+                          color: AppColors.white,
+                        ),
+                      ),
+              ),
               SizedBox(
                 width: getWidthSize(context) * 0.05,
               ),

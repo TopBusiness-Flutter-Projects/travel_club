@@ -211,5 +211,12 @@
 "finish_without_code": "Skip",
 "are_you_sure" : "You canback to use the code to earn your welcome points",
 "enter_code":"Enter code",
+"change_image" : "Change profile picture",
+"change_password" : "Change password",
+"current_password" : "Current password",
+"new_password" : "New password",
+"some_thins_went_wrong" : "Some thing went wrong !!",
+"lost_connection" : "Lost internet connections !!",
+
     "lasss": ""
 }

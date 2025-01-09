@@ -14,6 +14,8 @@ class AccountCubit extends Cubit<AccountState> {
   late TextEditingController nameController = TextEditingController();
   late TextEditingController phoneController = TextEditingController();
   late TextEditingController passController = TextEditingController();
+  late TextEditingController newpassController = TextEditingController();
+  late TextEditingController confirmPassController = TextEditingController();
   String? selectedLanguage = 'Arabic';
   void changeLanguage(BuildContext context, String newLanguage) {
     selectedLanguage = newLanguage; // Update the selected language
@@ -25,24 +27,28 @@ class AccountCubit extends Cubit<AccountState> {
       Preferences.instance.savedLang(AppStrings.englishCode);
     }
     emit(AccountLanguageChanged()); // Emit a new state to notify the UI
-
     Preferences.instance.getSavedLang();
     HotRestartController.performHotRestart(context);
-//get user data
-
-    // Navigator.pushNamedAndRemoveUntil(
-    //     context, Routes.initialRoute, (route) => false);
   }
+
   LoginModel loginModel = LoginModel();
   getUserData() async {
-    emit(GetAccountLoading());
-    final res = await api.getUserData();
-    res.fold((l) {
-      emit(GetAccountError());
-    }, (r) {
-      loginModel = r;
-      // getUserData();
-      emit(GetAccountSuccess());
-    });
+    if (AppConst.isLogged) {
+      emit(GetAccountLoading());
+      final res = await api.getUserData();
+      res.fold((l) {
+        emit(GetAccountError());
+      }, (r) {
+        loginModel = r;
+        if (r.data != null) {
+          nameController.text = loginModel.data!.name!;
+          phoneController.text = loginModel.data!.phone.toString();
+        } else {
+          prefs.setBool("ISLOGGED", false);
+          AppConst.isLogged = false;
+        }
+        emit(GetAccountSuccess());
+      });
+    }
   }
 }

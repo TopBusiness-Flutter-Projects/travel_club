@@ -18,7 +18,9 @@ class CustomNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(image,
+    return Image.network(
+        // "https://www.programaenlinea.net/wp-content/uploads/2019/04/testing-1.jpg",
+        image,
         fit: BoxFit.cover,
         height: height,
         width: width,
@@ -31,7 +33,7 @@ class CustomNetworkImage extends StatelessWidget {
           );
         },
         errorBuilder: (context, error, stackTrace) => Image.asset(
-              isUser ? ImageAssets.profileDefault : ImageAssets.logoImage,
+              isUser ? ImageAssets.profile : ImageAssets.logoImage,
               height: height,
               width: width,
               fit: BoxFit.cover,

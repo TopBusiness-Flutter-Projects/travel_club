@@ -7,6 +7,7 @@ import 'package:travel_club/features/my_account/screens/about_us.dart';
 import 'package:travel_club/features/my_account/screens/contact_us.dart';
 import 'package:travel_club/features/my_account/screens/points.dart';
 import 'package:travel_club/features/my_account/screens/promo_code.dart';
+import 'package:travel_club/features/my_account/screens/update_password.dart';
 import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/other_services/screens/other_services_screen.dart';
 import 'package:travel_club/features/other_services/screens/single_service_details.dart';
@@ -99,12 +100,13 @@ class Routes {
   static const String offers = '/offers';
   static const String bags = '/bags';
   static const String searchScreen = '/searchScreen';
-  static const String detailsBookingEntertainment = '/detailsBookingEntertainment';
+  static const String detailsBookingEntertainment =
+      '/detailsBookingEntertainment';
   static const String detailsbookingTransportation =
       '/detailsbookingTransportation';
-        static const String pointsRoute = '/pointsRoute';
-        static const String promoCodeRoute = '/promocodeRoute';
-
+  static const String pointsRoute = '/pointsRoute';
+  static const String promoCodeRoute = '/promocodeRoute';
+  static const String updatePassword = '/updatePassword';
 }
 
 class AppRoutes {
@@ -121,7 +123,8 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );   case Routes.searchScreen:
+        );
+      case Routes.searchScreen:
         return PageTransition(
           child: const SearchScreen(),
           type: PageTransitionType.fade,
@@ -453,10 +456,19 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-      case Routes.promoCodeRoute:
-      String  code =  settings.arguments as String;
+      case Routes.updatePassword:
         return PageTransition(
-          child:  PromoCodeScreen(code: code,),
+          child: const UpdatePassword(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.promoCodeRoute:
+        String code = settings.arguments as String;
+        return PageTransition(
+          child: PromoCodeScreen(
+            code: code,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

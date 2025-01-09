@@ -225,6 +225,13 @@
 "finish_without_code": "تخطي",
 "are_you_sure" :"يمكنك العودة لاستخدام الكود الترويجي لكسب نقاطك الترحيبية ",
 "enter_code" : "ادخل الكود",
+"change_image" : "تغيير صورة البروفايل",
+"change_password" : "تغيير كلمة المرور",
+"current_password" : "كلمة المرور الحالية",
+"new_password" : "كلمة المرور الجديدة",
+"some_thins_went_wrong" :"حدث خطأ ما !!",
+"lost_connection" : "تعذر الإتصال بالإنترنت !!",
+
   "lasss": ""
 }
 
