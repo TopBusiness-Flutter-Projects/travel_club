@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-import 'app_colors.dart';
+import 'package:travel_club/core/exports.dart';
 
 createProgressDialog(BuildContext context, String msg) {
   showDialog(
@@ -11,9 +9,7 @@ createProgressDialog(BuildContext context, String msg) {
         backgroundColor: AppColors.white,
         content: Row(
           children: [
-            CircularProgressIndicator(
-              color: AppColors.primary,
-            ),
+            CustomLoadingIndicator(),
             SizedBox(
               width: 16.0,
             ),

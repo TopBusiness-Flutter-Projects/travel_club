@@ -12,13 +12,11 @@ class LoginModel {
     String? msg;
     UserDataModel? data;
     int? status;
-
     LoginModel({
         this.msg,
         this.data,
         this.status,
     });
-
     factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         msg: json["msg"],
         data: json["data"] == null ? null : UserDataModel.fromJson(json["data"]),
@@ -31,7 +29,6 @@ class LoginModel {
         "status": status,
     };
 }
-
 class UserDataModel {
     int? id;
     String? name;

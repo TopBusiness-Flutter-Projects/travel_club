@@ -27,9 +27,7 @@ class CustomNetworkImage extends StatelessWidget {
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) return child;
           return Center(
-            child: CircularProgressIndicator(
-              color: AppColors.primary,
-            ),
+            child: CustomLoadingIndicator(),
           );
         },
         errorBuilder: (context, error, stackTrace) => Image.asset(

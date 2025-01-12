@@ -217,6 +217,9 @@
 "new_password" : "New password",
 "some_thins_went_wrong" : "Some thing went wrong !!",
 "lost_connection" : "Lost internet connections !!",
+"exit":"Exit",
+"app_close":"The app will be closed.",
+"are_you_sure_close":"Are you sure to exit?",
 
     "lasss": ""
 }

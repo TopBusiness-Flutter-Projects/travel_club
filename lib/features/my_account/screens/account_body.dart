@@ -51,7 +51,7 @@ class _AccountbodyState extends State<Accountbody> {
                     // crossAxisAlignment:   CrossAxisAlignment.start,
                     children: [
                       if (AppConst.isLogged && cubit.loginModel.data != null)
-                        if ((cubit.loginModel.data!.isGoogle ?? false) == false)
+                        if (!cubit.loginModel.data!.isGoogle!)
                           CustomRowProfile(
                             title: AppTranslations.personalData,
                             onTap: () {
@@ -96,7 +96,7 @@ class _AccountbodyState extends State<Accountbody> {
                         },
                       ),
                       CustomRowProfile(
-                        title: AppTranslations.PrivacyAndSecurity,
+                        title: AppTranslations.privacyAndSecurity,
                         onTap: () {
                           Navigator.pushNamed(context, Routes.privacyRoute);
                         },

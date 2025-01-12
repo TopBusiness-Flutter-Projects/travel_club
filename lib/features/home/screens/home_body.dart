@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/home/screens/widgets/search_container.dart';
+import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
 import 'widgets/custom_appbar.dart';
@@ -20,8 +21,9 @@ class HomeBody extends StatefulWidget {
 class _HomeBodyState extends State<HomeBody> {
   @override
   void initState() {
-    // TODO: implement initState
-    context.read<HomeCubit>().getHomeData();
+    if (context.read<HomeCubit>().homeModel.data == null) {
+        context.read<HomeCubit>().getHomeData();
+    }
     super.initState();
   }
 
@@ -36,6 +38,7 @@ class _HomeBodyState extends State<HomeBody> {
           : RefreshIndicator(
               onRefresh: () async {
                 cubit.getHomeData();
+                context.read<AccountCubit>().getUserData();
               },
               child: Column(children: [
                 SizedBox(height: getVerticalPadding(context) * 2),
@@ -44,6 +47,7 @@ class _HomeBodyState extends State<HomeBody> {
                 ),
                 Expanded(
                   child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     child: Column(
                       children: [
                         const CustomCategorySection(), // search bar
@@ -54,7 +58,7 @@ class _HomeBodyState extends State<HomeBody> {
                         Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: getHorizontalPadding(context) / 2),
-                            child: SearchContainer()),
+                            child: const SearchContainer()),
                         SizedBox(
                           height: 10.h,
                         ),

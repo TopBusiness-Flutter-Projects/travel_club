@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: CustomSkipRow(
                             onTap: () {
-                              Navigator.pushNamed(context, Routes.mainRoute);
+                              Navigator.pushNamedAndRemoveUntil(context, Routes.mainRoute , (route) => false,);
                             },
                             backgroundColor: AppColors.yellow),
                       ),

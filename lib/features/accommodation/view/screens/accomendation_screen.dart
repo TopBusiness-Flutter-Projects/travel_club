@@ -23,7 +23,7 @@ class _AccomendationScreenState extends State<AccomendationScreen> {
     var cubit=context.read<AccomendationCubit>();
  return BlocBuilder<AccomendationCubit, AccomendationState>(builder: (BuildContext context, state) {
    return CustomScreen (appbarTitle: AppTranslations.accommodation,
-   body:          cubit.placesModel.data==null?const Center(child: CircularProgressIndicator(),):
+   body:          cubit.placesModel.data==null?const Center(child: CustomLoadingIndicator(),):
    Padding(
      padding: const EdgeInsets.all(8.0),
      child: Column(

@@ -44,8 +44,8 @@ class AccountCubit extends Cubit<AccountState> {
           nameController.text = loginModel.data!.name!;
           phoneController.text = loginModel.data!.phone.toString();
         } else {
-          prefs.setBool("ISLOGGED", false);
-          AppConst.isLogged = false;
+          prefs.setBool("ISLOGGED", false);    
+           Preferences.instance.clearUser();    
         }
         emit(GetAccountSuccess());
       });

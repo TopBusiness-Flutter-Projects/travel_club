@@ -60,7 +60,7 @@ dependencies:
   firebase_core: ^2.24.2
   firebase_auth: ^4.15.3
   firebase_messaging: ^14.4.0
-  
+  awesome_dialog: ^3.2.1
   google_sign_in: ^6.2.1
   app_links: ^6.3.3
 

@@ -2,10 +2,8 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
-import 'package:travel_club/core/remote/service.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 
@@ -41,7 +39,7 @@ class LoginCubit extends Cubit<LoginState> {
   String userPhoto = '';
   String userName = '';
   String? accessToken = '';
-  Future<UserCredential?> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle(BuildContext context,) async {
     await signOutFromGmail();
     print("Starting Google Sign-In process...");
 
@@ -72,7 +70,9 @@ class LoginCubit extends Cubit<LoginState> {
       print("Access Token retrieved: ${googleAuth.accessToken.toString()}");
       print("ID Token retrieved: ${googleAuth.idToken != null}");
       print("ID Token retrieved: ${googleAuth.idToken.toString()}");
-
+      if (googleAuth.accessToken != null) {
+        loginWithGoogle(context, accessToken: googleAuth.accessToken.toString());
+      }
       // Validate tokens
       if (googleAuth.accessToken == null || googleAuth.idToken == null) {
         print("Missing required authentication tokens.");
@@ -155,7 +155,7 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoadingLoginState());
     AppWidget.createProgressDialog(context, AppTranslations.loading);
     final response = await api.login(
-      phone: countryCode.replaceFirst('+', '') + phoneController.text,
+      phone: countryCode + phoneController.text,
       password: passwordControllerLogin.text,
     );
     response.fold((l) {
@@ -163,9 +163,8 @@ class LoginCubit extends Cubit<LoginState> {
       errorGetBar(AppTranslations.error);
       emit(FailureLoginState());
     }, (r) {
-      print("code: ${r.status.toString()}");
+      debugPrint("code: ${r.status.toString()}");
       if (r.status != 200 && r.status != 201) {
-        signOutFromGmail();
         Navigator.pop(context);
         errorGetBar(r.msg!);
       } else {
@@ -180,20 +179,51 @@ class LoginCubit extends Cubit<LoginState> {
         prefs.setBool("ISLOGGED", true);
         Preferences.instance.setUser(r);
 
-        ///
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.mainRoute, (route) => false);
       }
     });
   }
 
-  // login
+  // login google
+  loginWithGoogle(BuildContext context, {required String accessToken}) async {
+    emit(LoadingLoginState());
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    final response = await api.loginWithGoogle(accessToken: accessToken);
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(FailureLoginState());
+    }, (r) {
+      debugPrint("code: ${r.status.toString()}");
+      if (r.status != 200 && r.status != 201) {
+        Navigator.pop(context);
+        errorGetBar(r.msg!);
+      } else {
+        loginModel = r;
+        phoneController.clear();
+        passwordControllerLogin.clear();
+        context.read<MainCubit>().changePage(0);
+
+        emit(SuccessLoginState());
+        Navigator.pop(context);
+        successGetBar(r.msg);
+        prefs.setBool("ISLOGGED", true);
+        Preferences.instance.setUser(r);
+
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.mainRoute, (route) => false);
+      }
+    });
+  }
+
+  // register
   register(BuildContext context, {bool isResend = false}) async {
     emit(LoadingLoginState());
     AppWidget.createProgressDialog(context, AppTranslations.loading);
     final response = await api.register(
         isCheckOtp: false,
-        phone: countryCode.replaceFirst('+', '') + phoneController.text,
+        phone: countryCode + phoneController.text,
         password: passwordControllerSignUp.text,
         name: nameController.text,
         passwordConfirmation: confirmPasswordControllerSignUp.text);
@@ -222,7 +252,7 @@ class LoginCubit extends Cubit<LoginState> {
     final response = await api.register(
         isCheckOtp: true,
         otp: pinController.text,
-        phone: countryCode.replaceFirst('+', '') + phoneController.text,
+        phone: countryCode + phoneController.text,
         password: passwordControllerSignUp.text,
         name: nameController.text,
         passwordConfirmation: confirmPasswordControllerSignUp.text);
@@ -245,7 +275,7 @@ class LoginCubit extends Cubit<LoginState> {
         successGetBar(r.msg);
         prefs.setBool("ISLOGGED", true);
         Preferences.instance.setUser(r);
-context.read<MainCubit>() .changePage(0);
+        context.read<MainCubit>().changePage(0);
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.apply, (route) => false);
       }
@@ -256,7 +286,7 @@ context.read<MainCubit>() .changePage(0);
     emit(LoadingLoginState());
     AppWidget.createProgressDialog(context, AppTranslations.loading);
     final response = await api.forgetPassword(
-      phone: countryCode.replaceFirst('+', '') + phoneControllerForgetPass.text,
+      phone: countryCode + phoneControllerForgetPass.text,
     );
     response.fold((l) {
       Navigator.pop(context);
@@ -281,8 +311,7 @@ context.read<MainCubit>() .changePage(0);
     emit(LoadingLoginState());
     AppWidget.createProgressDialog(context, AppTranslations.loading);
     final response = await api.validateOtp(
-        phone:
-            countryCode.replaceFirst('+', '') + phoneControllerForgetPass.text,
+        phone: countryCode + phoneControllerForgetPass.text,
         otp: pinController.text);
     response.fold((l) {
       Navigator.pop(context);
@@ -310,8 +339,7 @@ context.read<MainCubit>() .changePage(0);
     emit(LoadingLoginState());
     AppWidget.createProgressDialog(context, AppTranslations.loading);
     final response = await api.resetPassword(
-        phone:
-            countryCode.replaceFirst('+', '') + phoneControllerForgetPass.text,
+        phone: countryCode + phoneControllerForgetPass.text,
         password: passwordControllerSignUp.text,
         passwordConfirmation: confirmPasswordControllerSignUp.text);
     response.fold((l) {
@@ -351,17 +379,21 @@ context.read<MainCubit>() .changePage(0);
       print("code: ${r.status.toString()}");
       if (r.status != 200 && r.status != 201) {
         Navigator.pop(context);
-        errorGetBar(r.msg!);
+        prefs.setBool("ISLOGGED", false);
+       
+        Preferences.instance.clearUser();
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.loginRoute, (route) => false);
       } else {
-        emit(SuccessLoginState());
         Navigator.pop(context);
         successGetBar(r.msg);
         prefs.setBool("ISLOGGED", false);
-        AppConst.isLogged = false;
+        
         Preferences.instance.clearUser();
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.loginRoute, (route) => false);
       }
+      emit(SuccessLoginState());
     });
   }
 }

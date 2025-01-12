@@ -231,7 +231,9 @@
 "new_password" : "كلمة المرور الجديدة",
 "some_thins_went_wrong" :"حدث خطأ ما !!",
 "lost_connection" : "تعذر الإتصال بالإنترنت !!",
-
+"exit":"خروج",
+"app_close":"سيتم إغلاق التطبيق.",
+"are_you_sure_close":"هل أنت متأكد من الخروج؟",
   "lasss": ""
 }
 

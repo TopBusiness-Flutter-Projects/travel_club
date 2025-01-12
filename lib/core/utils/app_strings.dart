@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 
 late SharedPreferences prefs;
-late FlutterSecureStorage storage ;
+late FlutterSecureStorage storage;
 
 class AppStrings {
   static const String appName = 'Traverl Club';
@@ -22,5 +22,6 @@ class AppStrings {
 }
 
 class AppConst {
-  static bool isLogged = prefs.getBool("ISLOGGED") ?? false;
+  // static bool isLogged = prefs.getBool("ISLOGGED") ?? false;
+    static bool get isLogged  =>  prefs.getBool("ISLOGGED") ?? false;
 }

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:easy_localization/easy_localization.dart';
 
 class AppTranslations {
@@ -47,7 +45,8 @@ class AppTranslations {
   static String get google => 'google'.tr();
   static String get facebook => 'facebook'.tr();
   static String get phoneNumberIsRequired => 'phone_number_is_required'.tr();
-  static String get pleaseEnterValidPhoneNumber => 'please_enter_a_valid_phone_number'.tr();
+  static String get pleaseEnterValidPhoneNumber =>
+      'please_enter_a_valid_phone_number'.tr();
   static String get mostPlaceRating => 'most_place_rating'.tr();
   static String get personRating => 'person_rating'.tr();
   static String get filter => 'filter'.tr();
@@ -74,8 +73,9 @@ class AppTranslations {
   static String get orderResults => 'order_results'.tr();
   static String get booking => 'booking'.tr();
   static String get detailsBooking => 'details_booking'.tr();
-  static String get ExperienceEvaluation => 'experience_evaluation'.tr();
-  static String get selectArrivalAndDeparture => 'select_arrival_and_departure'.tr();
+  static String get experienceEvaluation => 'experience_evaluation'.tr();
+  static String get selectArrivalAndDeparture =>
+      'select_arrival_and_departure'.tr();
   static String get from => 'from'.tr();
   static String get paymentHasBeenMade => 'payment_has_been_made'.tr();
   static String get to => 'to'.tr();
@@ -128,9 +128,11 @@ class AppTranslations {
   static String get ticket => 'ticket'.tr();
   static String get cancelBooking => 'cancel_booking'.tr();
   static String get sendRate => 'send_rate'.tr();
-  static String get howRateExperienceService => 'how_rate_experience_service'.tr();
+  static String get howRateExperienceService =>
+      'how_rate_experience_service'.tr();
   static String get howRateExperienceClean => 'how_rate_experience_clean'.tr();
-  static String get howRateExperienceRecommend => 'how_rate_experience_recommend'.tr();
+  static String get howRateExperienceRecommend =>
+      'how_rate_experience_recommend'.tr();
   static String get howRateExperienceFood => 'how_rate_experience_food'.tr();
   static String get writeComment => 'write_comment'.tr();
   static String get rateExperince => 'rate_experince'.tr();
@@ -144,7 +146,7 @@ class AppTranslations {
   static String get changeLang => 'change_language'.tr();
   static String get contactUs => 'contact_us'.tr();
   static String get aboutUs => 'about_us'.tr();
-  static String get PrivacyAndSecurity => 'privacy_and_security'.tr();
+  static String get privacyAndSecurity => 'privacy_and_security'.tr();
   static String get shareApp => 'share_app'.tr();
   static String get logout => 'logout'.tr();
   static String get change => 'change'.tr();
@@ -156,7 +158,7 @@ class AppTranslations {
   static String get whoUs => 'who_us'.tr();
   static String get whoUsOffer => 'who_we_offer'.tr();
   static String get privacy => 'privacy'.tr();
-  static String get ListOfCompanies => 'list_of_companies'.tr();
+  static String get listOfCompanies => 'list_of_companies'.tr();
   static String get cancellationPolicy => 'cancellation_policy'.tr();
   static String get notifications => 'notifications'.tr();
   static String get communication => 'communication'.tr();
@@ -183,7 +185,8 @@ class AppTranslations {
   static String get rooms => 'rooms'.tr();
   static String get youAgree => 'you_agree'.tr();
   static String get theTotal => 'the_total'.tr();
-  static String get personWhoRatedRestaurant => 'person_who_rated_restaurant'.tr();
+  static String get personWhoRatedRestaurant =>
+      'person_who_rated_restaurant'.tr();
   static String get loading => 'loading'.tr();
   static String get error => 'error'.tr();
   static String get confirmPassword => 'confirm_password'.tr();
@@ -226,4 +229,7 @@ class AppTranslations {
   static String get newPassword => 'new_password'.tr();
   static String get lostConnection => 'lost_connection'.tr();
   static String get someThingWrong => 'some_thins_went_wrong'.tr();
+  static String get areYouSureClose => 'are_you_sure_close'.tr();
+  static String get appClose => 'app_close'.tr();
+  static String get exit => 'exit'.tr();
 }
