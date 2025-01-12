@@ -32,6 +32,7 @@ class _CustomHomeAppbarState extends State<CustomHomeAppbar> {
               vertical: getVerticalPadding(context)),
           child: Row(children: [
             if (widget.isHome == true) ...[
+              Container(width: 20,height: 30,child: Text("nono",style: getBoldStyle(color: AppColors.green,fontSize: 20.sp),)),
               CircleAvatar(
                   backgroundColor: AppColors.primary,
                   radius: getWidthSize(context) * 0.07,
@@ -59,7 +60,8 @@ class _CustomHomeAppbarState extends State<CustomHomeAppbar> {
                               color: AppColors.blue, fontSize: 18.sp))
                     ]),
               ),
-            ] else ...[
+            ]
+            else ...[
               Expanded(
                 child: Text(widget.title!,
                     style: getSemiBoldStyle(

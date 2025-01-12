@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,8 +34,25 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 void main() async {
+
+
   WidgetsFlutterBinding.ensureInitialized();
-  
+  // final shorebirdCodePush = ShorebirdCodePush();
+  // ShorebirdCodePush.initialize();
+// Get the current patch version, or null if no patch is installed.
+//   final currentPatchversion = shorebirdCodePush.currentPatchVersion();
+
+// Check whether a patch is available to install.
+//   final isUpdateAvailable = await shorebirdCodePush.isNewPatchAvailableForDownload();
+//
+//   if (isUpdateAvailable) {
+//     // Download the patch.
+//     await shorebirdCodePush.downloadUpdate();
+//   }
+  // final updater = ShorebirdUpdater();
+  // await Shorebird.initialize();  // updater.readCurrentPatch().then((currentPatch) {
+  //   print('The current patch number is: ${currentPatch?.number}');
+  // });
   /// Firebase Message settings //////
 
   await Firebase.initializeApp(
