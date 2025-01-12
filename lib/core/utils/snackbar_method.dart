@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_club/core/widgets/show_loading_indicator.dart';
 
 import 'app_colors.dart';
 
@@ -12,9 +13,7 @@ snackBar(String? message,context, {Color? color}) {
           ? Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircularProgressIndicator(
-            color: AppColors.primary,
-          ),
+          CustomLoadingIndicator(),
         ],
       )
           : Text(

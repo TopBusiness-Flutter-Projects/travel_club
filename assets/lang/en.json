@@ -204,6 +204,22 @@
 "copied": "Copied",
     "not_login": "You Aren’t Login?",
     "guest":"Guest",
+    "download_app" : "Download the app from the link ",
+"use_code" : " and enter the code ",
+"for_get_points" : " during account creation to receive your welcome points!",
+"back_to_enter_code": "Back",
+"finish_without_code": "Skip",
+"are_you_sure" : "You canback to use the code to earn your welcome points",
+"enter_code":"Enter code",
+"change_image" : "Change profile picture",
+"change_password" : "Change password",
+"current_password" : "Current password",
+"new_password" : "New password",
+"some_thins_went_wrong" : "Some thing went wrong !!",
+"lost_connection" : "Lost internet connections !!",
+"exit":"Exit",
+"app_close":"The app will be closed.",
+"are_you_sure_close":"Are you sure to exit?",
 
     "lasss": ""
 }

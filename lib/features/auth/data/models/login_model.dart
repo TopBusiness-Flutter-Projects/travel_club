@@ -12,13 +12,11 @@ class LoginModel {
     String? msg;
     UserDataModel? data;
     int? status;
-
     LoginModel({
         this.msg,
         this.data,
         this.status,
     });
-
     factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         msg: json["msg"],
         data: json["data"] == null ? null : UserDataModel.fromJson(json["data"]),
@@ -31,12 +29,13 @@ class LoginModel {
         "status": status,
     };
 }
-
 class UserDataModel {
     int? id;
     String? name;
     dynamic phone;
+    String? email;
     String? image;
+    bool? isGoogle;
     String? googleImage;
     String? code;
     dynamic points;
@@ -47,7 +46,9 @@ class UserDataModel {
         this.id,
         this.name,
         this.phone,
+        this.email,
         this.image,
+        this.isGoogle,
         this.googleImage,
         this.code,
         this.points,
@@ -59,7 +60,9 @@ class UserDataModel {
         id: json["id"],
         name: json["name"],
         phone: json["phone"],
+        email: json["email"],
         image: json["image"],
+        isGoogle: json["is_google"],
         googleImage: json["google_image"],
         code: json["code"],
         points: json["points"],
@@ -71,7 +74,9 @@ class UserDataModel {
         "id": id,
         "name": name,
         "phone": phone,
+        "email": email,
         "image": image,
+        "is_google": isGoogle,
         "google_image": googleImage,
         "code": code,
         "points": points,

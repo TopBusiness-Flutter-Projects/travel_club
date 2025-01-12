@@ -32,14 +32,14 @@ class UploadImageCubit extends Cubit<UploadImageState> {
           ),
           actions: <Widget>[
             TextButton(
-              onPressed: () => pickFile(context),
+              onPressed: () => pickImage(context,isGallery: true),
               child: Text(
-                'file'.tr(),
+                'galery'.tr(),
                 style: getRegularStyle(),
               ),
             ),
             TextButton(
-              onPressed: () async => pickImageWithPermission(context),
+              onPressed: () async => pickImage(context,isGallery: false),
               child: Text(
                 "camera".tr(),
                 style: getRegularStyle(),

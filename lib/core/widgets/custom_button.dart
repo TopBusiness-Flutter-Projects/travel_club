@@ -10,11 +10,13 @@ class CustomButton extends StatelessWidget {
     super.key,
     this.onTap,
     required this.title,
-     this.color, this.width,
+     this.color, this.width, this.textColor, this.borderColor,
   });
   final void Function()? onTap;
   final String title;
   final Color? color;
+  final Color? borderColor;
+  final Color? textColor;
   final double? width;
   @override
   Widget build(BuildContext context) {
@@ -29,11 +31,12 @@ class CustomButton extends StatelessWidget {
           padding: EdgeInsets.all(getWidthSize(context) / 32),
           decoration: BoxDecoration(
             color:color ??AppColors.primary,
+            border: Border.all(color: borderColor ?? color??AppColors.primary),
             borderRadius: BorderRadius.circular(getWidthSize(context) / 12),
           ),
           child: Text(
             title,
-            style:getSemiBoldStyle(color: AppColors.white,fontSize: 14.sp)
+            style:getSemiBoldStyle(color: textColor?? AppColors.white,fontSize: 14.sp)
           ),
         ),
       ),

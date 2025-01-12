@@ -50,7 +50,7 @@ class SocialLoginRow extends StatelessWidget {
             // Google Container
             InkWell(
               onTap: () {
-                 BlocProvider.of<LoginCubit>(context).signInWithGoogle();
+                BlocProvider.of<LoginCubit>(context).signInWithGoogle(context);
               },
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
