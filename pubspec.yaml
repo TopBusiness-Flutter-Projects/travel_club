@@ -69,6 +69,7 @@ dependencies:
   localstorage: ^5.0.0
   flutter_secure_storage: ^9.2.3
   shorebird_code_push: ^1.1.6
+  syncfusion_flutter_pdfviewer: ^28.1.38
 
 dev_dependencies:
   flutter_test:

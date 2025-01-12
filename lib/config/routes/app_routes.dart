@@ -98,6 +98,7 @@ class Routes {
   static const String tripDetailsSecondRoute = '/tripDetailsSecondRoute';
   static const String offers = '/offers';
   static const String bags = '/bags';
+  static const String pdf = '/pdfviwer';
   static const String searchScreen = '/searchScreen';
   static const String detailsBookingEntertainment = '/detailsBookingEntertainment';
   static const String detailsbookingTransportation =
@@ -121,7 +122,15 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        );   case Routes.searchScreen:
+        );
+        // case Routes.pdf:
+        // return PageTransition(
+        //   child:  PdfViewerPage(baseUrl: 'https://nada.codaxhub.com//report/pdf/sale.report_saleorder/837',),
+        //   type: PageTransitionType.fade,
+        //   alignment: Alignment.center,
+        //   duration: const Duration(milliseconds: 200),
+        // );
+        case Routes.searchScreen:
         return PageTransition(
           child: const SearchScreen(),
           type: PageTransitionType.fade,
