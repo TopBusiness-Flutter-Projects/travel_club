@@ -6,11 +6,12 @@ import '../cubit/account_cubit.dart';
 import '../cubit/account_state.dart';
 
 class PromoCodeScreen extends StatelessWidget {
-  const PromoCodeScreen({super.key});
-
+  const PromoCodeScreen({super.key, required this.code});
+  final String code;
   @override
   Widget build(BuildContext context) {
-    String code = "156415415";
+    String sharedLink = '${AppTranslations.downloadApp}${AppStrings.inviteLink}${AppTranslations.useCode}$code${AppTranslations.forgetPoints}';
+
     return BlocBuilder<AccountCubit, AccountState>(
       builder: (BuildContext context, state) {
         return Scaffold(
@@ -88,7 +89,7 @@ class PromoCodeScreen extends StatelessWidget {
                           child: CustomButton(
                             title: AppTranslations.copyCode,
                             onTap: () {
-                              Clipboard.setData(ClipboardData(text: code));
+                              Clipboard.setData(ClipboardData(text: sharedLink));
                             },
                           ),
                         ),
@@ -99,7 +100,7 @@ class PromoCodeScreen extends StatelessWidget {
                             color: AppColors.yellow,
                             onTap: () async {
                               String url =
-                                  'https://travelclub.page.link/invite\n$code';
+                                 sharedLink;
                               await Share.share(url);
                             },
                           ),

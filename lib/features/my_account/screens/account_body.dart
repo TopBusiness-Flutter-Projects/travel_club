@@ -38,7 +38,7 @@ class _AccountbodyState extends State<Accountbody> {
               children: [
                 //custom container above list view
                 if (AppConst.isLogged) ...[
-                  CustomContainerMyAccount(),
+                  if (cubit.loginModel.data != null) CustomContainerMyAccount(),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -50,13 +50,14 @@ class _AccountbodyState extends State<Accountbody> {
                     shrinkWrap: true,
                     // crossAxisAlignment:   CrossAxisAlignment.start,
                     children: [
-                      if (AppConst.isLogged)
-                        CustomRowProfile(
-                          title: AppTranslations.personalData,
-                          onTap: () {
-                            Navigator.pushNamed(context, Routes.profileInfo);
-                          },
-                        ),
+                      if (AppConst.isLogged && cubit.loginModel.data != null)
+                        if (!cubit.loginModel.data!.isGoogle!)
+                          CustomRowProfile(
+                            title: AppTranslations.personalData,
+                            onTap: () {
+                              Navigator.pushNamed(context, Routes.profileInfo);
+                            },
+                          ),
 
                       CustomRowProfile(
                         title: AppTranslations.changeLang,
@@ -75,7 +76,11 @@ class _AccountbodyState extends State<Accountbody> {
                         CustomRowProfile(
                           title: AppTranslations.promoCode,
                           onTap: () {
-                            Navigator.pushNamed(context, Routes.promoCodeRoute);
+                            if (cubit.loginModel.data?.code != null) {
+                              Navigator.pushNamed(
+                                  context, Routes.promoCodeRoute,
+                                  arguments: cubit.loginModel.data?.code!);
+                            }
                           },
                         ),
                       CustomRowProfile(
@@ -91,7 +96,7 @@ class _AccountbodyState extends State<Accountbody> {
                         },
                       ),
                       CustomRowProfile(
-                        title: AppTranslations.PrivacyAndSecurity,
+                        title: AppTranslations.privacyAndSecurity,
                         onTap: () {
                           Navigator.pushNamed(context, Routes.privacyRoute);
                         },

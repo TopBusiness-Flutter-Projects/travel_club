@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 
 late SharedPreferences prefs;
-late FlutterSecureStorage storage ;
+late FlutterSecureStorage storage;
 
 class AppStrings {
   static const String appName = 'Traverl Club';
@@ -17,9 +17,11 @@ class AppStrings {
   static const String locale = 'locale';
   static const String englishCode = 'en';
   static const String arabicCode = 'ar';
+  static const String inviteLink = 'https://travelclub.page.link/invite';
   // static const String googleApiKey = '';
 }
 
 class AppConst {
-  static bool isLogged = prefs.getBool("ISLOGGED") ?? false;
+  // static bool isLogged = prefs.getBool("ISLOGGED") ?? false;
+    static bool get isLogged  =>  prefs.getBool("ISLOGGED") ?? false;
 }

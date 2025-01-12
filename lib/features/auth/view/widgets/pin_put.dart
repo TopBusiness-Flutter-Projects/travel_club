@@ -5,6 +5,8 @@ import 'package:travel_club/features/auth/cubit/state.dart';
 import '../../../../core/exports.dart';
 
 class PinInputScreen extends StatelessWidget {
+  const PinInputScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<LoginCubit>();

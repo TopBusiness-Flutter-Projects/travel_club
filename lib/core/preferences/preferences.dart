@@ -91,8 +91,8 @@ class Preferences {
       return  preferences.getString('notificationToken');
   }
 
-  Future<dynamic> setNotificationToken({required String value}) async{
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return   preferences.setString('notificationToken', value);
+  Future<dynamic> setNotificationToken({required String value}) {
+    // SharedPreferences preferences = await SharedPreferences.getInstance();
+    return   prefs.setString('notificationToken', value);
   }
 }

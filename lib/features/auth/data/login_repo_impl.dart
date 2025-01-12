@@ -38,6 +38,29 @@ class LoginRepoImpl {
       return Left(ServerFailure());
     }
   }
+/// Google login
+  Future<Either<Failure, LoginModel>> loginWithGoogle({
+    
+    required String accessToken,
+  }) async {
+    String? notificationToken =
+        await Preferences.instance.getNotificationToken();
+    String deviceType = Platform.isAndroid ? 'android' : 'ios';
+    try {
+      var response = await api.post(
+        EndPoints.loginGoogleUrl,
+        body: {
+          'device_type': deviceType,
+          'device_token': notificationToken ?? "device_token",          
+          'token': accessToken,
+        },
+      );
+
+      return Right(LoginModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 
   // register
   Future<Either<Failure, LoginModel>> register(

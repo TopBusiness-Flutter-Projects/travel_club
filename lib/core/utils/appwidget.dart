@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
+import 'package:travel_club/core/exports.dart';
 
 class AppWidget {
   static createProgressDialog(BuildContext context, String msg) {
@@ -8,23 +7,22 @@ class AppWidget {
         barrierDismissible: false,
         context: context,
         builder: (context) {
-          return AlertDialog(
-            backgroundColor: AppColors.white,
-            content: Row(
-              children: [
-                CircularProgressIndicator(
-                  color: AppColors.primary,
-                ),
-                const SizedBox(
-                  width: 16.0,
-                ),
-                Text(
-                  msg,
-                  style: TextStyle(color: AppColors.black, fontSize: 15.0),
-                )
-              ],
-            ),
-          );
+          return const CustomLoadingIndicator();
+          //  AlertDialog(
+          //   backgroundColor: AppColors.white,
+          //   content: Row(
+          //     children: [
+          //       CustomLoadingIndicator(),
+          //       const SizedBox(
+          //         width: 16.0,
+          //       ),
+          //       Text(
+          //         msg,
+          //         style: TextStyle(color: AppColors.black, fontSize: 15.0),
+          //       )
+          //     ],
+          //   ),
+          // );
         });
   }
 }

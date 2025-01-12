@@ -21,6 +21,7 @@ class CustomTextField extends StatefulWidget {
   final bool isMessage;
   final bool isPassword;
   final bool ischange;
+  final bool autoFocus;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -46,6 +47,7 @@ class CustomTextField extends StatefulWidget {
       this.enabled = true,
       this.ischange = false,
       this.title,
+      this .autoFocus =false,
       this.isPhoneNumber = false,
       this.onPhoneChanged // إضافة المتغير
       });
@@ -224,6 +226,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         focusNode: myFocusNode,
+        autofocus: widget. autoFocus,
         style: getBoldStyle(fontSize: 13.sp),
         onChanged: widget.onChanged,
         validator: widget.validator,

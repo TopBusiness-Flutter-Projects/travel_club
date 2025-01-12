@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:travel_club/features/custom_upload_image/cubit/upload_image_cubit.dart';
 import 'package:travel_club/features/favourites/cubit/favourites_cubit.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
@@ -49,7 +50,8 @@ class _MyAppState extends State<MyApp> {
         providers: [
           BlocProvider(
             create: (_) => injector.serviceLocator<SplashCubit>(),
-          ),  BlocProvider(
+          ),
+          BlocProvider(
             create: (_) => injector.serviceLocator<AccomendationCubit>(),
           ),
           BlocProvider(
@@ -60,7 +62,8 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<MainCubit>(),
-          ),  BlocProvider(
+          ),
+          BlocProvider(
             create: (_) => injector.serviceLocator<NotificationCubit>(),
           ),
           BlocProvider(
@@ -77,7 +80,8 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<MyBookingsCubit>(),
-          ),    BlocProvider(
+          ),
+          BlocProvider(
             create: (_) => injector.serviceLocator<OtherServicesCubit>(),
           ),
           BlocProvider(
@@ -85,16 +89,21 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<LocationCubit>(),
-          ),   BlocProvider(
+          ),
+          BlocProvider(
             create: (_) => injector.serviceLocator<EntertainmentCubit>(),
-          ), BlocProvider(
+          ),
+          BlocProvider(
             create: (_) => injector.serviceLocator<FoodCubit>(),
+          ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<UploadImageCubit>(),
           ),
         ],
         child: GetMaterialApp(
           localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
           theme: appTheme(),
           themeMode: ThemeMode.light,
           darkTheme: ThemeData.light(),
@@ -102,7 +111,6 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           title: AppStrings.appName,
           onGenerateRoute: AppRoutes.onGenerateRoute,
-        )
-    );
+        ));
   }
 }
