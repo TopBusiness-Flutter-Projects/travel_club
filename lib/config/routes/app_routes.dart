@@ -230,8 +230,9 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsAccomendation:
+        int ?id = settings.arguments as int;
         return PageTransition(
-          child: const DetailsAccommendation(),
+          child:  DetailsAccommendation(id:id),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -297,8 +298,10 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.hotelsScreen:
+        HotelsScreenArguments? arguments= settings.arguments as HotelsScreenArguments;
+
         return PageTransition(
-          child: const HotelsScreen(),
+          child:  HotelsScreen(arguments: arguments ,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

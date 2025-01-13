@@ -21,5 +21,15 @@ final class PlacesError extends AccomendationState {}
 final class FacilitiesLoaded extends AccomendationState {}
 final class FacilitiesLoading extends AccomendationState {}
 final class FacilitiesError extends AccomendationState {}
+//lodges
+final class LoadgesLoaded extends AccomendationState {}
+final class LoadgesLoading extends AccomendationState {}
+final class LoadgesError extends AccomendationState {}
+
+final class SetSelectedFilter extends AccomendationState {}
+//get  lodges details
+final class LodgesDetailsLoaded extends AccomendationState {}
+final class LodgesDetailsLoading extends AccomendationState {}
+final class LodgesDetailsError extends AccomendationState {}
 
 

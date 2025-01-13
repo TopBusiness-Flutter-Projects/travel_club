@@ -76,7 +76,8 @@ class _HomeBodyState extends State<HomeBody> {
                                     child: Image.asset(
                                   ImageAssets.noOffers,
                                   width: 150.w,
-                                )),
+                                )
+                                ),
                               ],
                             ),
                           ),
