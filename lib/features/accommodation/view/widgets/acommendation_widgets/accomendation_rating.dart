@@ -3,6 +3,7 @@ import 'package:flutter_rating/flutter_rating.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../cubit/accomendation_cubit.dart';
+import '../../../data/models/getlodges_model.dart';
 
 class HotelsModel {
   final String title;
@@ -27,7 +28,7 @@ class HotelsModel {
 
 class CustomWidgetRating extends StatefulWidget {
   const CustomWidgetRating({super.key, required this.hotelsModel});
-  final HotelsModel? hotelsModel;
+  final LodgeModel? hotelsModel;
 
   @override
   State<CustomWidgetRating> createState() => _CustomWidgetRatingState();
@@ -57,25 +58,25 @@ class _CustomWidgetRatingState extends State<CustomWidgetRating> {
                         borderRadius: BorderRadius.circular(20.r),
                         image: DecorationImage(
                             image: NetworkImage(
-                                widget.hotelsModel?.image.toString()??""),
+                                widget.hotelsModel!.media.toString()??""),
                             fit: BoxFit.cover)),
                   ),
-                  widget.hotelsModel?.isFavorite==true?
+                  widget.hotelsModel?.isFav==true?
                   Positioned(
                       top: 4.h,
                       right: 6.w,
                       child: GestureDetector(
                         onTap: (){
                           setState(() {
-                            widget.hotelsModel!.isFavoriteTrue = !(widget.hotelsModel!.isFavoriteTrue ?? false);
+                            // widget.hotelsModel!.isFavoriteTrue = !(widget.hotelsModel!.isFavoriteTrue ?? false);
                           });
 
                         },
                         child: CircleAvatar(
-                          backgroundColor:  widget.hotelsModel?.isFavoriteTrue==true?AppColors.red: AppColors.lightWhite,
+                          backgroundColor:  widget.hotelsModel?.isFav??false ?AppColors.red: AppColors.lightWhite,
                           child: Icon(
                             CupertinoIcons.heart,
-                            color:  widget.hotelsModel?.isFavoriteTrue==true?AppColors.white: AppColors.secondPrimary,
+                            color:  widget.hotelsModel?.isFav??false?AppColors.white: AppColors.secondPrimary,
                             size: 25.sp,
                           ),
                         ),
@@ -93,7 +94,7 @@ class _CustomWidgetRatingState extends State<CustomWidgetRating> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SizedBox(height: 10.h,),
-                      Text(widget.hotelsModel?.title.toString()??"",overflow: TextOverflow.ellipsis,style: getSemiBoldStyle(fontSize: 14.sp),maxLines: 2,),
+                      Text(widget.hotelsModel?.name.toString()??"",overflow: TextOverflow.ellipsis,style: getSemiBoldStyle(fontSize: 14.sp),maxLines: 2,),
 
                   //    SizedBox(height:10 .h,),
                       Row(
@@ -106,9 +107,9 @@ class _CustomWidgetRatingState extends State<CustomWidgetRating> {
                               }),
                         ],
                       ),
-                   //   SizedBox(height: 2.h,),
-                      widget.hotelsModel?.discription==null?SizedBox():
-                      Text(widget.hotelsModel?.discription.toString()??"",style: getMediumStyle(fontSize: 12.sp,color: AppColors.black),),
+                     SizedBox(height: 2.h,),
+                      widget.hotelsModel?.users==null?SizedBox():
+                      Text('${widget.hotelsModel?.users.toString()??""}'+" "+AppTranslations.personRating,style: getMediumStyle(fontSize: 12.sp,color: AppColors.black),),
                     ],
                   ),
                 ),

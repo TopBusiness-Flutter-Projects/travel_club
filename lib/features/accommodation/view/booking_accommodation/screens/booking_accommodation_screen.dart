@@ -4,16 +4,11 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_container_booking.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_member_widget.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_rounded_button.dart';
-
-import '../../../../../core/widgets/custom_button.dart';
 import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/accomendation_cubit.dart';
-
-
 class AccommodationBooking extends StatefulWidget {
   const AccommodationBooking({super.key});
-
   @override
   State<AccommodationBooking> createState() => _AccommodationBookingState();
 }
@@ -22,6 +17,7 @@ class _AccommodationBookingState extends State<AccommodationBooking> {
   void initState() {
     // TODO: implement initState
     context.read<TransportationCubit>().goOnly=false;
+ //   context.read<AccomendationCubit>().getRoomsLodges(context: context);
     super.initState();
   }
   @override
@@ -45,12 +41,23 @@ class _AccommodationBookingState extends State<AccommodationBooking> {
              Text(AppTranslations.selectGoingAndReturn,style: getMediumStyle(fontSize: 14.sp),),
              SizedBox(height: 20.h,),
 //custom member
-             CustomMemberWidget(),
+             const CustomMemberWidget(),
 SizedBox(height: 10.h,),
 //from and to date
-             CustomFromToDate(),
+             const CustomFromToDate(),
              SizedBox(height: 20.h,),
-             Text(AppTranslations.chooseTheBestOption,style: getMediumStyle(fontSize: 14.sp),),
+             Row(
+               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+               children: [
+                 Text(AppTranslations.chooseTheBestOption,style: getMediumStyle(fontSize: 14.sp),),
+                 SizedBox(
+                   width: 179.w,
+                   child: CustomButton(title: AppTranslations.sendResult,width: 179.w,onTap: (){
+                    cubit.getRoomsLodges(context: context);
+                   },),
+                 )
+               ],
+             ),
              //custom contanier
              Expanded(
                child: ListView.builder(

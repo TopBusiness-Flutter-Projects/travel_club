@@ -1,8 +1,8 @@
 import 'dart:ui' as ui;
-import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/accommodation/data/models/getlodges_room.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
 
 import '../data/models/facilities_model.dart';
@@ -71,6 +71,8 @@ class AccomendationCubit extends Cubit<AccomendationState> {
   ];
   //filter results
   //starsFilters
+  List<int> stars =[];
+
   List<StarsFilter> starsFilters = [
     StarsFilter(text: AppTranslations.oneStar, isChecked: false),
     StarsFilter(text: AppTranslations.twoStars, isChecked: false),
@@ -91,13 +93,13 @@ class AccomendationCubit extends Cubit<AccomendationState> {
   }
 
   //facilitoes
-  List<StarsFilter> Facilities = [
-    StarsFilter(text: "جراج خاص", isChecked: false),
-    StarsFilter(text: "جراج خاص", isChecked: false),
-    StarsFilter(text: "جراج خاص", isChecked: false),
-    StarsFilter(text: "جراج خاص", isChecked: false),
-    StarsFilter(text: "جراج خاص", isChecked: false),
-  ];
+  // List<StarsFilter> Facilities = [
+  //   StarsFilter(text: "جراج خاص", isChecked: false),
+  //   StarsFilter(text: "جراج خاص", isChecked: false),
+  //   StarsFilter(text: "جراج خاص", isChecked: false),
+  //   StarsFilter(text: "جراج خاص", isChecked: false),
+  //   StarsFilter(text: "جراج خاص", isChecked: false),
+  // ];
   //current index stars
   int? currentIndexCheckbox;
   //curent index facilitoes
@@ -116,42 +118,44 @@ class AccomendationCubit extends Cubit<AccomendationState> {
   }
 
   //remove filter
-  void removeFilter() {
-    // currentIndexCheckbox=-1;
-    // currentIndexFacilities = -1;
-    for (int i = 0; i <= starsFilters.length!; i++) {
-      starsFilters[i].isChecked = false;
-      Facilities[i].isChecked = false;
-    }
-    emit(ChangeIndex());
-  }
+  // void removeFilter() {
+  //   // currentIndexCheckbox=-1;
+  //   // currentIndexFacilities = -1;
+  //   for (int i = 0; i <= starsFilters.length; i++) {
+  //     starsFilters[i].isChecked = false;
+  //     Facilities[i].isChecked = false;
+  //   }
+  //   emit(ChangeIndex());
+  // }
 
-  bool isSelectedHotel = false;
+  LodgeModel? selectedLodge ;
   Set<Marker> hotelsMarkers = const <Marker>{};
   Uint8List? markerIcon;
   Uint8List? markerIconSelected;
-  setMarkers() {
-    hotelsMarkers = {
-      Marker(
-        markerId: const MarkerId('currentLocation'),
-        // infoWindow: const InfoWindow(title: 'currentLocation'),
-        onTap: () {
-          isSelectedHotel = !isSelectedHotel;
+  setMarkers(List <LodgeModel> lodges ) {
 
-          emit(SetMarkersState());
-          setMarkers();
-        },
-        icon: (markerIcon != null && markerIconSelected != null)
-            ? isSelectedHotel
-                ? BitmapDescriptor.bytes(markerIconSelected!)
-                : BitmapDescriptor.bytes(markerIcon!)
-            : BitmapDescriptor.defaultMarker,
-        position: LatLng(
-          0.0,
-          0.0,
+    hotelsMarkers = lodges.map((e) =>
+        Marker(
+          markerId:  MarkerId(e.id!.toString()),
+          // infoWindow: const InfoWindow(title: 'currentLocation'),
+          onTap: () {
+            selectedLodge = e;
+
+
+            emit(SetMarkersState());
+            setMarkers(lodges);
+          },
+          icon: (markerIcon != null && markerIconSelected != null )
+              ? selectedLodge?.id == e.id
+              ? BitmapDescriptor.bytes(markerIconSelected!)
+              : BitmapDescriptor.bytes(markerIcon!)
+              : BitmapDescriptor.defaultMarker,
+          position: LatLng(
+            e.latitude ?? 0.0,
+            e.longitude ?? 0.0,
+          ),
         ),
-      ),
-    };
+    ).toSet();
     emit(SetMarkersState());
   }
 
@@ -221,10 +225,20 @@ String? getFilterValue() {
   }
   return filterValue;
 }
-
+  LodgeModel defaultLodge = LodgeModel(
+    id: 0,
+    name: "",
+    latitude: 0.0,
+    longitude: 0.0,
+    placeId: 0,
+    media: "dd",
+    rate: 0,
+    users: 0,
+    isFav: false,
+  );
   //getLodges
   GetLodgesModel lodgesModel = GetLodgesModel();
-  getLodges({int? id, required BuildContext context}) async {
+  getLodges({ required int id, required BuildContext context}) async {
     emit(LoadgesLoading());
     double? lat, long;
     if (selectedFilter?.text == "nearestDistance") {
@@ -234,17 +248,41 @@ String? getFilterValue() {
       lat = context.read<LocationCubit>().currentLocation?.latitude;
       long = context.read<LocationCubit>().currentLocation?.longitude;
     }
+    List<int> stars =[];
+    for (int i = 0; i < starsFilters.length; i++) {
+      if (starsFilters[i].isChecked) {
+        stars.add(i+1);
+      }
+    }
+    //facilities
+    List<int> selectedFacilities =[];
+    if (facilitiesModel.data != null) {
+      for (int i = 0; i < facilitiesModel.data!.length; i++) {
+        if (facilitiesModel.data?[i].isChecked??false) {
+          selectedFacilities.add(facilitiesModel.data?[i].id??0);
+        }
+      }
+    }
+
+
     final res = await api?.getLodges(
       placeId: id,
       lat:lat,
       long: long,
       filter:getFilterValue(),
+      stars: stars, facilities: selectedFacilities
     );
     res?.fold((l) {
       emit(LoadgesError());
     }, (r) {
       lodgesModel = r;
-      // getUserData();
+      setMarkers(r.data ?? []);
+      if (r.data != null && r.data!.isNotEmpty) {
+        selectedLodge = r.data!.first;
+      }
+
+
+
       emit(LoadgesLoaded());
     });
   }
@@ -261,4 +299,25 @@ String? getFilterValue() {
       emit(LodgesDetailsLoaded());
     });
   }
+GetLodgesRooms lodgesRoomsModel = GetLodgesRooms();
+  getRoomsLodges({int? id, required BuildContext context}) async {
+    final res = await api?.getRoomsLodges(lodgeId: id);
+    emit(LodgesRoomLoading());
+    res?.fold((l) {
+      emit(LodgesRoomError());
+    }, (r) {
+      lodgesRoomsModel = r;
+      // getUserData();
+      emit(LodgesRoomLoaded());
+    });
+  }
+  // stars
+  //
+  // addRemoveToListStars(int index,bool isAdd){
+  //   isAdd?stars.add(index+1):stars.remove(index+1);
+  //   print (stars);
+  //   emit(ChangeSelcetedStars());
+  // }
+
+
 }

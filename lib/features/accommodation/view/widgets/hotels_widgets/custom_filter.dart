@@ -7,9 +7,9 @@ import '../show_model_bottom_sheet.dart';
 import '../show_order_bottom.dart';
 
 class CustomFilterBar extends StatelessWidget {
-   CustomFilterBar({super.key, required this.mapWidget, this.id});
+   CustomFilterBar({super.key, required this.mapWidget,  this.id});
   final Widget mapWidget ;
-  int? id;
+  final int? id;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class CustomFilterBar extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (BuildContext context) {
-        return FilterBottomSheet();
+        return FilterBottomSheet(id: id!,);
       },
     );
 
