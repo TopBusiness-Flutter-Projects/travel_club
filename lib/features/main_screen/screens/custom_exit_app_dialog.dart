@@ -3,17 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:travel_club/core/exports.dart';
 
 Future<void> showExitDialog(BuildContext context) async {
-   AwesomeDialog(
+  AwesomeDialog(
     context: context,
-                     
-        
-            // dialogType: DialogType.noHeader, // Change to CUSTOM to use custom header
-  customHeader: Image.asset(
-    ImageAssets.logoImage,
-    height: 50.h,
-    width: 50.h,
-  ),
-
+    // dialogType: DialogType.noHeader, // Change to CUSTOM to use custom header
+    customHeader: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Image.asset(
+        ImageAssets.logoImage,
+        // height: 50.h,
+        // width: 50.h,
+      ),
+    ),
     animType: AnimType.topSlide,
     padding: EdgeInsets.all(10.w),
     title: AppTranslations.areYouSureClose,

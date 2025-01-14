@@ -63,12 +63,14 @@ dependencies:
   awesome_dialog: ^3.2.1
   google_sign_in: ^6.2.1
   app_links: ^6.3.3
-
   intl_phone_number_input: ^0.7.4
   intl_phone_field: ^3.2.0
   localstorage: ^5.0.0
   flutter_secure_storage: ^9.2.3
   connectivity_plus: ^5.0.2
+  audioplayers: 
+  vibration: ^1.8.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -99,6 +101,8 @@ flutter:
     - assets/lang/
     - assets/images/
     - assets/icons/
+    - assets/sounds/success.mp3
+    - shorebird.yaml
 
 
   fonts:
