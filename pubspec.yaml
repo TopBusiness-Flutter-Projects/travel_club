@@ -69,6 +69,8 @@ dependencies:
   localstorage: ^5.0.0
   flutter_secure_storage: ^9.2.3
   connectivity_plus: ^5.0.2
+  shorebird_code_push: ^1.1.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -99,6 +101,7 @@ flutter:
     - assets/lang/
     - assets/images/
     - assets/icons/
+    - shorebird.yaml
 
 
   fonts:

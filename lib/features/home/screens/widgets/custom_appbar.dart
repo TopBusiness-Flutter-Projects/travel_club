@@ -33,6 +33,7 @@ class _CustomHomeAppbarState extends State<CustomHomeAppbar> {
               vertical: getVerticalPadding(context)),
           child: Row(children: [
             if (widget.isHome == true) ...[
+             // Text("nono"),
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
                 child: AppConst.isLogged

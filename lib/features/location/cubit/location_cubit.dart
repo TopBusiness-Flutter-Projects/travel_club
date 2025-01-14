@@ -192,4 +192,24 @@ class LocationCubit extends Cubit<LocationState> {
       emit(ErrorCurrentLocationAddressState());
     }
   }
+  //get current lat long location //check if it null or no
+  //
+  // loc.LocationData yourLocation (context){
+  //   if (currentLocation == null) {
+  //     getCurrentLocation(context);
+  //
+  //
+  //   }else {
+  //     return currentLocation!;
+  //   }
+  //
+  // }
+  bool isLocationNull(BuildContext context) {
+    if (currentLocation == null) {
+      checkAndRequestLocationPermission(context);
+      return true;
+        } else {
+      return false;
+    }
+  }
 }

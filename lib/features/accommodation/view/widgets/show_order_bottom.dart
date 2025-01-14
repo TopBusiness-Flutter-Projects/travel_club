@@ -6,6 +6,8 @@ import '../../cubit/accomendation_cubit.dart';
 import 'hotels_widgets/custom_check_box.dart';
 
 class OrderBottomSheet extends StatefulWidget {
+  const OrderBottomSheet({super.key, required this.id});
+ final int ?id;
   @override
   _OrderBottomSheetState createState() => _OrderBottomSheetState();
 }
@@ -36,22 +38,26 @@ class _OrderBottomSheetState extends State<OrderBottomSheet> {
 
             //rate
             GridView.builder(
-              itemCount: 5,
+              itemCount: cubit.ordersFilters.length,
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // Number of columns in the grid
                 mainAxisSpacing: 10, // Vertical spacing
                 crossAxisSpacing: 5, // Horizontal spacing
                 childAspectRatio: 3, // Aspect ratio for each grid item (adjust for appearance)
               )  , itemBuilder: (BuildContext context, int index) {
-              return CustomCheckBox(starsFilter: cubit.ordersFilters[index],);
+              return CustomOrderedCheckBox(starsFilter: cubit.ordersFilters[index],);
             },),
             SizedBox(height: 16.h),
 
 
             //row
-            CustomButton(title: AppTranslations.orderResults,onTap: (){},),
+            CustomButton(title: AppTranslations.orderResults,onTap: (){
+             // cubit.ordersFilters.firstWhere((e) => e.isChecked==true).isChecked=false;
+              cubit.getLodges(context: context,id:widget.id);
+              Navigator.pop(context);
+            },),
         //    Center(child: ElevatedButton(onPressed: (){}, child: Text(AppTranslations.results,style: getSemiBoldStyle(color: AppColors.white,fontSize: 12.sp),),style:ElevatedButton.styleFrom(backgroundColor: AppColors.primary,) ,)),
             SizedBox(height: 5.h,),
 

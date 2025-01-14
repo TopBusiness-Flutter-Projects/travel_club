@@ -1,9 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
 import 'package:travel_club/features/home/cubit/home_state.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
-
 import '../../../../core/widgets/network_image.dart';
 
 class CustomCategorySection extends StatefulWidget {

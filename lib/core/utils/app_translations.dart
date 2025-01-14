@@ -188,6 +188,7 @@ class AppTranslations {
   static String get personWhoRatedRestaurant =>
       'person_who_rated_restaurant'.tr();
   static String get loading => 'loading'.tr();
+  static String get noData => 'no_data'.tr();
   static String get error => 'error'.tr();
   static String get confirmPassword => 'confirm_password'.tr();
   static String get enterPasswordAgain => 'enter_password_again'.tr();

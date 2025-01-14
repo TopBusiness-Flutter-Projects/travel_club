@@ -1,13 +1,19 @@
 import 'package:travel_club/features/location/screens/accommodation_map.dart';
 
 import '../../../../core/exports.dart';
+import '../../../../core/widgets/no_data_widget.dart';
 import '../../cubit/accomendation_cubit.dart';
 import '../widgets/acommendation_widgets/accomendation_rating.dart';
 import '../widgets/hotels_widgets/custom_filter.dart';
-
+class HotelsScreenArguments {
+  HotelsScreenArguments({required this.id,required this.title});
+  final int? id;
+  final String title;
+}
 class HotelsScreen extends StatefulWidget {
-  const HotelsScreen({super.key});
-
+ const  HotelsScreen({super.key , required this.arguments});
+ final  HotelsScreenArguments? arguments;
+// String ?id;
   @override
   State<HotelsScreen> createState() => _HotelsScreenState();
 }
@@ -17,10 +23,10 @@ class _HotelsScreenState extends State<HotelsScreen> {
 
   @override
   void initState() {
+    context.read<AccomendationCubit>().getLodges(id: widget.arguments!.id,context: context);
     context.read<AccomendationCubit>().setMarkers();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccomendationCubit, AccomendationState>(
@@ -95,7 +101,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
                 ),
               ))
             : CustomScreen(
-                appbarTitle: "الفنادق ",
+                appbarTitle:widget.arguments!.title,
                 body: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -119,6 +125,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
                                 : AppTranslations.map,
                           ),
                         ),
+                        id:widget.arguments!.id
                       ),
                       SizedBox(
                         height: 20.h,
@@ -135,26 +142,28 @@ class _HotelsScreenState extends State<HotelsScreen> {
                       // onTap: (){
                       // Navigator.pushNamed(context, Routes.detailsAccomendation);
                       //  }
+                      cubit.lodgesModel.data==null?const Center(child: CustomLoadingIndicator(),):
+                      cubit.lodgesModel.data!.isEmpty?NoDataWidget( title: AppTranslations.noData,):
                       Expanded(
                         child: ListView.separated(
                             // physics: (),
                             shrinkWrap: true,
                             // scrollDirection: Axis.horizontal,
-                            itemCount: 6,
+                            itemCount:  cubit.lodgesModel.data?.length??0,
                             separatorBuilder: (context, index) => SizedBox(
                                   width: 10.w,
                                   height: 1.h,
                                 ),
                             itemBuilder: (context, index) => CustomWidgetRating(
                                   hotelsModel: HotelsModel(
-                                      title:
-                                          'مراسي ريزورت العين السخنه البحر الاحمر',
-                                      rate: 4,
-                                      discription: '٢٠٠ فرد قام بتقيم الفندق',
-                                      image:
-                                          "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-                                     ),
-                                )),
+                                    id: cubit.lodgesModel.data?[index].id,
+                                    isFavoriteTrue: cubit.lodgesModel.data?[index].isFav,
+                                      title: cubit.lodgesModel.data?[index].name.toString()??"",
+                                      rate:  cubit.lodgesModel.data?[index].rate??0,
+                                      discription: '${cubit.lodgesModel.data?[index].users.toString()}'+AppTranslations.personRating,
+                                      image: cubit.lodgesModel.data?[index].media.toString()??""),
+                                )
+                        ),
                       ),
                     ],
                   ),
