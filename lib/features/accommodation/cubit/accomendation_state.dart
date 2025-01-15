@@ -31,5 +31,10 @@ final class SetSelectedFilter extends AccomendationState {}
 final class LodgesDetailsLoaded extends AccomendationState {}
 final class LodgesDetailsLoading extends AccomendationState {}
 final class LodgesDetailsError extends AccomendationState {}
-
+//stars filter
+final class ChangeSelcetedStars extends AccomendationState {}
+// loadges rooms
+final class LodgesRoomLoaded extends AccomendationState {}
+final class LodgesRoomLoading extends AccomendationState {}
+final class LodgesRoomError extends AccomendationState {}
 

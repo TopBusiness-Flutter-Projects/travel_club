@@ -9,6 +9,7 @@ import '../cubit/location_state.dart';
 class AccomodationMap extends StatefulWidget {
   const AccomodationMap({super.key, required this.markers});
   final Set<Marker> markers;
+
   @override
   State<AccomodationMap> createState() => _AccomodationMapState();
 }
@@ -26,12 +27,14 @@ class _AccomodationMapState extends State<AccomodationMap> {
     return BlocBuilder<LocationCubit, LocationState>(
       builder: (context, state) {
         return GoogleMap(
-          mapType: MapType.normal,
+          mapType: MapType.terrain,
+
+
+          // zoomGesturesEnabled: true,
+          trafficEnabled: false,
+
           initialCameraPosition: CameraPosition(
-            target: LatLng(
-              cubit.currentLocation?.latitude ?? 0.0,
-              cubit.currentLocation?.longitude ?? 0.0,
-            ),
+            target: widget.markers.isNotEmpty ? widget.markers.first.position: const LatLng(0.0, 0.0),
             zoom: 12,
           ),
           onMapCreated: (GoogleMapController controller) {

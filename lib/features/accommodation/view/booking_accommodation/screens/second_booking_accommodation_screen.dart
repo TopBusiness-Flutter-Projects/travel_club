@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/custom_button.dart';
+import 'package:travel_club/features/accommodation/data/models/getlodges_model.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_copun_widget.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_rounded_button.dart';
 import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/linear_progress.dart';
@@ -53,9 +54,9 @@ class _SecondAccommodationBookingState extends State<SecondAccommodationBooking>
                 //custom widget rating hotel
                 Text("${AppTranslations.numberOfMembers} : "+cubit.counter.toString()??"",style: getMediumStyle(fontSize: 14.sp),),
 
-                CustomWidgetRating(hotelsModel: HotelsModel(title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 ,isFavorite: false,
-                    image:   "https://lotel.efaculty.tech/storage/cities/38461735112771.webp",
-                   ),),
+                CustomWidgetRating(hotelsModel:
+                LodgeModel()
+                  ,),
                 SizedBox(height: 20.h,),
             //prefer hotel
                 Text(AppTranslations.rooms,style: getMediumStyle(fontSize: 14.sp),),

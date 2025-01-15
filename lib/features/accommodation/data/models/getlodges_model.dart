@@ -10,7 +10,7 @@ String getLodgesModelToJson(GetLodgesModel data) => json.encode(data.toJson());
 
 class GetLodgesModel {
   String? msg;
-  List<Datum>? data;
+  List<LodgeModel>? data;
   int? status;
 
   GetLodgesModel({
@@ -21,7 +21,7 @@ class GetLodgesModel {
 
   factory GetLodgesModel.fromJson(Map<String, dynamic> json) => GetLodgesModel(
     msg: json["msg"],
-    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+    data: json["data"] == null ? [] : List<LodgeModel>.from(json["data"]!.map((x) => LodgeModel.fromJson(x))),
     status: json["status"],
   );
 
@@ -32,7 +32,7 @@ class GetLodgesModel {
   };
 }
 
-class Datum {
+class LodgeModel {
   int? id;
   String? name;
   double? latitude;
@@ -42,8 +42,9 @@ class Datum {
   dynamic rate;
   int? users;
   bool? isFav;
+  bool isSelected;
 
-  Datum({
+  LodgeModel({
     this.id,
     this.name,
     this.latitude,
@@ -53,9 +54,10 @@ class Datum {
     this.rate,
     this.users,
     this.isFav,
+    this.isSelected = false,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory LodgeModel.fromJson(Map<String, dynamic> json) => LodgeModel(
     id: json["id"],
     name: json["name"],
     latitude: json["latitude"]?.toDouble(),

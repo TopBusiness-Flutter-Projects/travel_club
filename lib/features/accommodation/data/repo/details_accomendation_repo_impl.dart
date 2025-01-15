@@ -1,6 +1,7 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:travel_club/features/accommodation/data/models/facilities_model.dart';
+import 'package:travel_club/features/accommodation/data/models/getlodges_room.dart';
 
 import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
@@ -42,7 +43,15 @@ class DetailsAccomendationRepoImpl {
     }
   }
 //get Lodges
-  Future<Either<Failure, GetLodgesModel>> getLodges({required int ?placeId,required double ?lat,required double ?long,required String ?filter}) async {
+  Future<Either<Failure, GetLodgesModel>> getLodges({required int placeId,
+     double ?lat,
+     double ?long,
+    String ?filter,
+    required List<int> stars,
+    required List<int> facilities
+
+  }) async {
+
     try {
       var response = await dio.get(
         EndPoints.getLodgesUrl,
@@ -50,7 +59,9 @@ class DetailsAccomendationRepoImpl {
           "place_id":placeId,
           if (lat != null )"lat":lat,
           if (long != null) "long":long,
-          if (filter != null)"filter":filter
+          if (filter != null)"filter":filter,
+          for (int i=0;i<stars.length;i++)  "stars[$i]":stars[i],
+          for (int i=0;i<facilities.length;i++)  "facility_id[$i]":facilities[i],
         },
         // options: Options(
         //   headers: {'Authorization': "Bearer ${user.data?.token ?? ''}"},
@@ -74,6 +85,25 @@ class DetailsAccomendationRepoImpl {
         // ),
       );
       return Right(GetLodgeDetail.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+//get LodgesRooms
+  Future<Either<Failure, GetLodgesRooms>> getRoomsLodges({required int ?lodgeId}) async {
+    try {
+      var response = await dio.get(
+        EndPoints.getLodgesRoomsUrl,
+        queryParameters: {
+          "lodge_id":"2",
+          "fromDay":"2024-02-11",
+          "toDay":"2024-02-13",
+        },
+        // options: Options(
+        //   headers: {'Authorization': "Bearer ${user.data?.token ?? ''}"},
+        // ),
+      );
+      return Right(GetLodgesRooms.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

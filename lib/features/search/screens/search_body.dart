@@ -3,6 +3,7 @@ import 'package:travel_club/features/accommodation/view/widgets/acommendation_wi
 import 'package:travel_club/features/search/cubit/search_cubit.dart';
 import 'package:travel_club/features/search/screens/widgets/custom_booking_sectoin.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
+import '../../accommodation/data/models/getlodges_model.dart';
 import '../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../food/widgets/big_container_food.dart';
 import '../../transportation/screens/widgets/custom_company_container.dart';
@@ -75,15 +76,7 @@ class _SearchbodyState extends State<Searchbody> {
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomWidgetRating(
-                      hotelsModel: HotelsModel(
-                        isFavorite: true,
-                        isFavoriteTrue: false,
-                        title: 'مراسي ريزورت العين السخنه البحر الاحمر',
-                        rate: 4,
-                        discription: '٢٠٠ فرد قام بتقيم الفندق',
-                        image:
-                            "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-                      ),
+                      hotelsModel:  LodgeModel()
                     ),
                   ),
                 )),

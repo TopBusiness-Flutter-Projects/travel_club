@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import '../../../../core/exports.dart';
-import '../../cubit/accomendation_cubit.dart';
-import '../widgets/acommendation_widgets/accomendadation_container.dart';
-import '../widgets/acommendation_widgets/accomendation_rating.dart';
+import 'package:travel_club/features/accommodation/cubit/accomendation_cubit.dart' show AccomendationCubit, AccomendationState;
+import 'package:travel_club/features/accommodation/view/widgets/acommendation_widgets/accomendadation_container.dart' show AcommendationContainer, AcommndationModel;
+import 'package:travel_club/features/accommodation/view/widgets/acommendation_widgets/accomendation_rating.dart';
 import 'hotels_screen.dart';
 
 class AccomendationScreen extends StatefulWidget {
@@ -11,7 +10,6 @@ class AccomendationScreen extends StatefulWidget {
   @override
   State<AccomendationScreen> createState() => _AccomendationScreenState();
 }
-
 class _AccomendationScreenState extends State<AccomendationScreen> {
   @override
   void initState() {
@@ -61,7 +59,8 @@ class _AccomendationScreenState extends State<AccomendationScreen> {
      width: 10.w,
      height: 1.h,
      ),
-     itemBuilder: (context, index) => CustomWidgetRating(hotelsModel: HotelsModel(title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 , discription: '٢٠٠ فرد قام بتقيم الفندق', image:   "https://lotel.efaculty.tech/storage/cities/38461735112771.webp"),)
+     itemBuilder: (context, index) => CustomWidgetRating(hotelsModel:
+   cubit.defaultLodge)
      ),
       ),
         // Expanded(child: AccomendationRating(hotelsModel: HotelsModel(title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 , discription: '٢٠٠ فرد قام بتقيم الفندق', image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),))

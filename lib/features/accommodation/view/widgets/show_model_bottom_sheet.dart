@@ -2,15 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:travel_club/core/exports.dart';
 import '../../../../core/widgets/center_bottom_sheet.dart';
 import '../../../../core/widgets/custom_button.dart';
+import '../../../../core/widgets/no_data_widget.dart';
 import '../../cubit/accomendation_cubit.dart';
 import 'hotels_widgets/custom_check_box.dart';
 
 class FilterBottomSheet extends StatefulWidget {
-  @override
+
+ const FilterBottomSheet({super.key, required this.id});
+final int id ;
+
+ @override
   _FilterBottomSheetState createState() => _FilterBottomSheetState();
 }
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    context.read<AccomendationCubit>().getFacilities();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var cubit= context.read<AccomendationCubit>();
@@ -59,8 +71,12 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             style:getSemiBoldStyle(fontSize: 14.sp),
           ),
           //facilities
+          cubit.facilitiesModel.data==null?
+          const Center(child: CustomLoadingIndicator(),)
+              :cubit.facilitiesModel.data!.isEmpty?
+          NoDataWidget(title: AppTranslations.noData,):
           GridView.builder(
-            itemCount: cubit.Facilities.length,
+            itemCount: cubit.facilitiesModel.data?.length,
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -69,12 +85,15 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               crossAxisSpacing: 5, // Horizontal spacing
               childAspectRatio: 3, // Aspect ratio for each grid item (adjust for appearance)
             )  , itemBuilder: (BuildContext context, int index) {
-            return CustomCheckBox(starsFilter:cubit.Facilities[index],);
+            return CustomFacilitesCheckbox(facilitiesFilter:cubit.facilitiesModel.data![index],);
           },),
           SizedBox(height: 5.h,),
           //row
           Row(children: [
-            Expanded(child: CustomButton(title: AppTranslations.results,onTap: (){},)),
+            Expanded(child: CustomButton(title: AppTranslations.results,onTap: (){
+              cubit.getLodges(id: widget.id, context: context);
+              Navigator.pop(context);
+            },)),
 
             // SizedBox(
             //   width: 255.w,
@@ -86,7 +105,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
                 onTap: (){
-                 cubit. removeFilter();
+                // cubit. removeFilter();
                 },
                   child: Text(AppTranslations.removeFilter,style: getSemiBoldStyle(color: AppColors.red,fontSize: 14.sp),)),
             )],),

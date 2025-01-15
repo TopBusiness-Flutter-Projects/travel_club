@@ -10,7 +10,7 @@ String facilitiesModelToJson(FacilitiesModel data) => json.encode(data.toJson())
 
 class FacilitiesModel {
   String? msg;
-  List<Datum>? data;
+  List<FacilityModel>? data;
   int? status;
 
   FacilitiesModel({
@@ -21,7 +21,7 @@ class FacilitiesModel {
 
   factory FacilitiesModel.fromJson(Map<String, dynamic> json) => FacilitiesModel(
     msg: json["msg"],
-    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+    data: json["data"] == null ? [] : List<FacilityModel>.from(json["data"]!.map((x) => FacilityModel.fromJson(x))),
     status: json["status"],
   );
 
@@ -30,26 +30,29 @@ class FacilitiesModel {
     "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
     "status": status,
   };
+
 }
 
-class Datum {
+class FacilityModel {
   int? id;
   String? name;
   String? image;
   int? type;
-
-  Datum({
+bool isChecked ;
+  FacilityModel({
     this.id,
     this.name,
     this.image,
     this.type,
+    this.isChecked = false,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory FacilityModel.fromJson(Map<String, dynamic> json) => FacilityModel(
     id: json["id"],
     name: json["name"],
     image: json["image"],
     type: json["type"],
+
   );
 
   Map<String, dynamic> toJson() => {
@@ -58,4 +61,7 @@ class Datum {
     "image": image,
     "type": type,
   };
-}
+
+  }
+
+

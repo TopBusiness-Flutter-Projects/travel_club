@@ -23,8 +23,8 @@ class _HotelsScreenState extends State<HotelsScreen> {
 
   @override
   void initState() {
-    context.read<AccomendationCubit>().getLodges(id: widget.arguments!.id,context: context);
-    context.read<AccomendationCubit>().setMarkers();
+    context.read<AccomendationCubit>().getLodges(id: widget.arguments!.id!,context: context);
+
     super.initState();
   }
   @override
@@ -87,13 +87,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CustomWidgetRating(
-                          hotelsModel: HotelsModel(
-                              title: 'مراسي ريزورت العين السخنه البحر الاحمر',
-                              rate: 4,
-                              discription: '٢٠٠ فرد قام بتقيم الفندق',
-                              image:
-                                  "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-                              ),
+                          hotelsModel: cubit.selectedLodge,
                         ),
                       )
                     ]),
@@ -155,13 +149,8 @@ class _HotelsScreenState extends State<HotelsScreen> {
                                   height: 1.h,
                                 ),
                             itemBuilder: (context, index) => CustomWidgetRating(
-                                  hotelsModel: HotelsModel(
-                                    id: cubit.lodgesModel.data?[index].id,
-                                    isFavoriteTrue: cubit.lodgesModel.data?[index].isFav,
-                                      title: cubit.lodgesModel.data?[index].name.toString()??"",
-                                      rate:  cubit.lodgesModel.data?[index].rate??0,
-                                      discription: '${cubit.lodgesModel.data?[index].users.toString()}'+AppTranslations.personRating,
-                                      image: cubit.lodgesModel.data?[index].media.toString()??""),
+                                  hotelsModel:
+                                      cubit.lodgesModel.data![index],
                                 )
                         ),
                       ),
