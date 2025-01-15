@@ -55,16 +55,16 @@ class _SecondAccommodationBookingState extends State<SecondAccommodationBooking>
                 Text("${AppTranslations.numberOfMembers} : "+cubit.counter.toString()??"",style: getMediumStyle(fontSize: 14.sp),),
 
                 CustomWidgetRating(hotelsModel:
-                LodgeModel()
+                cubit.defaultLodge
                   ,),
                 SizedBox(height: 20.h,),
             //prefer hotel
                 Text(AppTranslations.rooms,style: getMediumStyle(fontSize: 14.sp),),
                 //custom contanier
                 SizedBox(height: 20.h,),
-                // CustomContainerBooking(
-                //   widgetBottom: SizedBox(),
-                // ),
+                CustomContainerBooking(
+                  widgetBottom: SizedBox(),
+                ),
                 SizedBox(
                   height: 300.h,
                   child: Swiper(

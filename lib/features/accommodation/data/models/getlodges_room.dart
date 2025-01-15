@@ -10,7 +10,7 @@ String getLodgesRoomsToJson(GetLodgesRooms data) => json.encode(data.toJson());
 
 class GetLodgesRooms {
   String? msg;
-  List<LoadgyRoom>? data;
+  List<LodgyRoom>? data;
   int? status;
 
   GetLodgesRooms({
@@ -21,7 +21,7 @@ class GetLodgesRooms {
 
   factory GetLodgesRooms.fromJson(Map<String, dynamic> json) => GetLodgesRooms(
     msg: json["msg"],
-    data: json["data"] == null ? [] : List<LoadgyRoom>.from(json["data"]!.map((x) => LoadgyRoom.fromJson(x))),
+    data: json["data"] == null ? [] : List<LodgyRoom>.from(json["data"]!.map((x) => LodgyRoom.fromJson(x))),
     status: json["status"],
   );
 
@@ -32,47 +32,57 @@ class GetLodgesRooms {
   };
 }
 
-class LoadgyRoom {
+class LodgyRoom {
   int? id;
   String? name;
   int? beds;
+  int? totalPrice;
   int? price;
   int? lodgeId;
-  bool? canCancel;
+  DateTime? canCancel;
   String? type;
   List<Facility>? facilities;
+  LodgyRoom? recommend;
+  bool isSelectedRecommend;
 
-  LoadgyRoom({
+  LodgyRoom({
     this.id,
     this.name,
     this.beds,
+    this.totalPrice,
     this.price,
     this.lodgeId,
     this.canCancel,
     this.type,
     this.facilities,
+    this.recommend,
+    this.isSelectedRecommend =false,
   });
 
-  factory LoadgyRoom.fromJson(Map<String, dynamic> json) => LoadgyRoom(
+  factory LodgyRoom.fromJson(Map<String, dynamic> json) => LodgyRoom(
     id: json["id"],
     name: json["name"],
     beds: json["beds"],
+    totalPrice: json["totalPrice"],
     price: json["price"],
     lodgeId: json["lodge_id"],
-    canCancel: json["canCancel"],
+    canCancel: json["canCancel"] == null ? null : DateTime.parse(json["canCancel"]),
     type: json["type"],
     facilities: json["facilities"] == null ? [] : List<Facility>.from(json["facilities"]!.map((x) => Facility.fromJson(x))),
+    recommend: json["recommend"] == null ? null : LodgyRoom.fromJson(json["recommend"]),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
     "beds": beds,
+    "totalPrice": totalPrice,
     "price": price,
     "lodge_id": lodgeId,
-    "canCancel": canCancel,
+    "canCancel": "${canCancel!.year.toString().padLeft(4, '0')}-${canCancel!.month.toString().padLeft(2, '0')}-${canCancel!.day.toString().padLeft(2, '0')}",
     "type": type,
     "facilities": facilities == null ? [] : List<dynamic>.from(facilities!.map((x) => x.toJson())),
+    "recommend": recommend?.toJson(),
   };
 }
 
