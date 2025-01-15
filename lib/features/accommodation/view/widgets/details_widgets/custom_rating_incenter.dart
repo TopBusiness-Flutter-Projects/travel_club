@@ -4,10 +4,10 @@ import '../../../../../core/exports.dart';
 import '../../../cubit/accomendation_cubit.dart';
 
 class CustomRatingIncenter extends StatelessWidget {
-  const CustomRatingIncenter({super.key, required this.rating, required this.users});
+  const CustomRatingIncenter({super.key, required this.rating, required this.users, this.onPressed});
   final double rating;
   final String users;
-
+final  void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -65,9 +65,7 @@ class CustomRatingIncenter extends StatelessWidget {
               ),
               //     Spacer(),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.bookingAccomodation);
-                },
+                onPressed:onPressed,
                 child: Text(
                   AppTranslations.bookNow,
                   style:

@@ -1,18 +1,21 @@
+import 'package:travel_club/features/accommodation/data/models/getlodges_model.dart';
 import 'package:travel_club/features/location/screens/accommodation_map.dart';
 
 import '../../../../core/exports.dart';
 import '../../../../core/widgets/no_data_widget.dart';
 import '../../cubit/accomendation_cubit.dart';
-import '../widgets/acommendation_widgets/accomendation_rating.dart';
+import '../widgets/acommendation_widgets/custom_lodge_container.dart';
 import '../widgets/hotels_widgets/custom_filter.dart';
+
 class HotelsScreenArguments {
-  HotelsScreenArguments({required this.id,required this.title});
+  HotelsScreenArguments({required this.id, required this.title});
   final int? id;
   final String title;
 }
+
 class HotelsScreen extends StatefulWidget {
- const  HotelsScreen({super.key , required this.arguments});
- final  HotelsScreenArguments? arguments;
+  const HotelsScreen({super.key, required this.arguments});
+  final HotelsScreenArguments? arguments;
 // String ?id;
   @override
   State<HotelsScreen> createState() => _HotelsScreenState();
@@ -23,10 +26,14 @@ class _HotelsScreenState extends State<HotelsScreen> {
 
   @override
   void initState() {
-    context.read<AccomendationCubit>().getLodges(id: widget.arguments!.id!,context: context);
+    context.read<AccomendationCubit>().lodgesModel = GetLodgesModel();
+    context
+        .read<AccomendationCubit>()
+        .getLodges(id: widget.arguments!.id!, context: context);
 
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccomendationCubit, AccomendationState>(
@@ -39,13 +46,21 @@ class _HotelsScreenState extends State<HotelsScreen> {
                 width: MediaQuery.of(context).size.width,
                 child: Stack(
                   children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      child: AccomodationMap(
-                        markers: cubit.hotelsMarkers,
-                      ),
-                    ),
+                    cubit.lodgesModel.data == null
+                        ? const Center(
+                            child: CustomLoadingIndicator(),
+                          )
+                        : cubit.lodgesModel.data!.isEmpty
+                            ? NoDataWidget(
+                                title: AppTranslations.noData,
+                              )
+                            : SizedBox(
+                                height: MediaQuery.of(context).size.height,
+                                width: MediaQuery.of(context).size.width,
+                                child: AccomodationMap(
+                                  markers: cubit.hotelsMarkers,
+                                ),
+                              ),
                     Column(children: [
                       SizedBox(height: getVerticalPadding(context) * 2),
                       Padding(
@@ -84,18 +99,20 @@ class _HotelsScreenState extends State<HotelsScreen> {
                         ),
                       ),
                       Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CustomWidgetRating(
-                          hotelsModel: cubit.selectedLodge,
-                        ),
-                      )
+                      if (cubit.selectedLodge != null &&
+                          cubit.lodgesModel.data != null)
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomLodgeContainer(
+                            hotelsModel: cubit.selectedLodge,
+                          ),
+                        )
                     ]),
                   ],
                 ),
               ))
             : CustomScreen(
-                appbarTitle:widget.arguments!.title,
+                appbarTitle: widget.arguments!.title,
                 body: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -104,23 +121,23 @@ class _HotelsScreenState extends State<HotelsScreen> {
                     children: [
                       //filter row
                       CustomFilterBar(
-                        mapWidget: InkWell(
-                          onTap: () {
-                            setState(() {
-                              isMap = !isMap;
-                            });
-                          },
-                          child: BuildFilterItem(
-                            icon: isMap
-                                ? AppIcons.menu
-                                : AppIcons.map, // Flutter built-in icon for map
-                            label: isMap
-                                ? AppTranslations.menu
-                                : AppTranslations.map,
+                          mapWidget: InkWell(
+                            onTap: () {
+                              setState(() {
+                                isMap = !isMap;
+                              });
+                            },
+                            child: BuildFilterItem(
+                              icon: isMap
+                                  ? AppIcons.menu
+                                  : AppIcons
+                                      .map, // Flutter built-in icon for map
+                              label: isMap
+                                  ? AppTranslations.menu
+                                  : AppTranslations.map,
+                            ),
                           ),
-                        ),
-                        id:widget.arguments!.id
-                      ),
+                          id: widget.arguments!.id),
                       SizedBox(
                         height: 20.h,
                       ),
@@ -136,23 +153,31 @@ class _HotelsScreenState extends State<HotelsScreen> {
                       // onTap: (){
                       // Navigator.pushNamed(context, Routes.detailsAccomendation);
                       //  }
-                      cubit.lodgesModel.data==null?const Center(child: CustomLoadingIndicator(),):
-                      cubit.lodgesModel.data!.isEmpty?NoDataWidget( title: AppTranslations.noData,):
                       Expanded(
-                        child: ListView.separated(
-                            // physics: (),
-                            shrinkWrap: true,
-                            // scrollDirection: Axis.horizontal,
-                            itemCount:  cubit.lodgesModel.data?.length??0,
-                            separatorBuilder: (context, index) => SizedBox(
-                                  width: 10.w,
-                                  height: 1.h,
-                                ),
-                            itemBuilder: (context, index) => CustomWidgetRating(
-                                  hotelsModel:
-                                      cubit.lodgesModel.data![index],
-                                )
-                        ),
+                        child: cubit.lodgesModel.data == null
+                            ? const Center(
+                                child: CustomLoadingIndicator(),
+                              )
+                            : cubit.lodgesModel.data!.isEmpty
+                                ? NoDataWidget(
+                                    title: AppTranslations.noData,
+                                  )
+                                : ListView.separated(
+                                    // physics: (),
+                                    shrinkWrap: true,
+                                    // scrollDirection: Axis.horizontal,
+                                    itemCount:
+                                        cubit.lodgesModel.data?.length ?? 0,
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                          width: 10.w,
+                                          height: 1.h,
+                                        ),
+                                    itemBuilder: (context, index) =>
+                                        CustomLodgeContainer(
+                                          hotelsModel:
+                                              cubit.lodgesModel.data![index],
+                                        )),
                       ),
                     ],
                   ),

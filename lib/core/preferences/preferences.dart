@@ -6,7 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/utils/app_strings.dart';
 import 'package:travel_club/features/auth/data/models/login_model.dart';
 
-
+late SharedPreferences prefs;
+late FlutterSecureStorage storage;
 class Preferences {
   static final Preferences instance = Preferences._internal();
 
@@ -86,9 +87,9 @@ class Preferences {
     await storage.write(key: AppStrings.locale, value: local);
   }
    // Notification token
-  Future<String?> getNotificationToken() async{
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      return  preferences.getString('notificationToken');
+String? getNotificationToken() {
+      // SharedPreferences preferences = await SharedPreferences.getInstance();
+      return  prefs.getString('notificationToken');
   }
 
   Future<dynamic> setNotificationToken({required String value}) {

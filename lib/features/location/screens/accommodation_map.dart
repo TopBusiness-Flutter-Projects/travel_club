@@ -29,12 +29,16 @@ class _AccomodationMapState extends State<AccomodationMap> {
         return GoogleMap(
           mapType: MapType.terrain,
 
-
           // zoomGesturesEnabled: true,
           trafficEnabled: false,
 
           initialCameraPosition: CameraPosition(
-            target: widget.markers.isNotEmpty ? widget.markers.first.position: const LatLng(0.0, 0.0),
+            target: widget.markers.isNotEmpty
+                ? widget.markers.first.position
+                : LatLng(
+                    cubit.currentLocation?.latitude ?? 0.0,
+                    cubit.currentLocation?.longitude ?? 0.0,
+                  ),
             zoom: 12,
           ),
           onMapCreated: (GoogleMapController controller) {

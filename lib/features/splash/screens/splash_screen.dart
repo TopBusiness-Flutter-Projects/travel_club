@@ -183,6 +183,8 @@ import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:travel_club/core/exports.dart';
 
+import '../../../core/preferences/preferences.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -192,10 +194,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-  
   late final AppLinks _appLinks;
 
- 
   Future<void> navigateToHome() async {
     if (prefs.getBool('onBoarding') != null) {
       if (AppConst.isLogged) {
@@ -242,6 +242,10 @@ class _SplashScreenState extends State<SplashScreen>
         context,
         Routes.detailsbookingTransportation,
       );
+    } else if (initialDeepLink.toString().contains("lodge")) {
+      String id = initialDeepLink.queryParameters['id'] ?? "-1";
+      Navigator.pushReplacementNamed(context, Routes.detailsAccomendation,
+          arguments: int.parse(id));
     } else {
       Navigator.pushReplacementNamed(context, Routes.mainRoute);
     }
@@ -249,7 +253,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void dispose() {
-   
     super.dispose();
   }
 
@@ -257,7 +260,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return PulseRotateSplashScreen(
       onAnimationComplete: () {
-         _initializeAppLinks();
+        _initializeAppLinks();
       },
     );
   }

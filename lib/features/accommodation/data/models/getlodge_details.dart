@@ -44,7 +44,7 @@ class Data {
   List<Media>? media;
   List<Facility>? facilities;
   Rule? rule;
-  int? rate;
+  dynamic? rate;
   int? users;
   bool? isFav;
 
@@ -151,39 +151,36 @@ class Media {
 class Rule {
   int? id;
   int? lodgeId;
-  String? checkInFrom;
-  String? checkInTo;
-  String? checkOutFrom;
-  String? checkOutTo;
+  String? checkIn;
+  
+  
+  String? checkOut;
   String? rule;
 
   Rule({
     this.id,
     this.lodgeId,
-    this.checkInFrom,
-    this.checkInTo,
-    this.checkOutFrom,
-    this.checkOutTo,
+    this.checkIn,
+    this.checkOut,
+ 
+   
     this.rule,
   });
 
   factory Rule.fromJson(Map<String, dynamic> json) => Rule(
     id: json["id"],
     lodgeId: json["lodge_id"],
-    checkInFrom: json["check_in_from"],
-    checkInTo: json["check_in_to"],
-    checkOutFrom: json["check_out_from"],
-    checkOutTo: json["check_out_to"],
+    checkIn: json["check_in"],
+    checkOut: json["check_out"],
     rule: json["rule"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "lodge_id": lodgeId,
-    "check_in_from": checkInFrom,
-    "check_in_to": checkInTo,
-    "check_out_from": checkOutFrom,
-    "check_out_to": checkOutTo,
+    "check_in": checkIn,
+    "check_out": checkOut,
+    
     "rule": rule,
   };
 }

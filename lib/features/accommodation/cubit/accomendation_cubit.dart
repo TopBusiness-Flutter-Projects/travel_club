@@ -275,12 +275,12 @@ String? getFilterValue() {
     res?.fold((l) {
       emit(LoadgesError());
     }, (r) {
-      lodgesModel = r;
+     
       setMarkers(r.data ?? []);
       if (r.data != null && r.data!.isNotEmpty) {
         selectedLodge = r.data!.first;
       }
-
+ lodgesModel = r;
 
 
       emit(LoadgesLoaded());
@@ -294,8 +294,7 @@ String? getFilterValue() {
     res?.fold((l) {
       emit(LodgesDetailsError());
     }, (r) {
-      lodgesDetailsModel = r;
-      // getUserData();
+      lodgesDetailsModel = r;      
       emit(LodgesDetailsLoaded());
     });
   }

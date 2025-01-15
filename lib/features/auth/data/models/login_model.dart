@@ -41,6 +41,7 @@ class UserDataModel {
     dynamic points;
     dynamic notifications;
     String? token;
+    bool? isRegister;
 
     UserDataModel({
         this.id,
@@ -54,6 +55,7 @@ class UserDataModel {
         this.points,
         this.notifications,
         this.token,
+        this.isRegister,
     });
 
     factory UserDataModel.fromJson(Map<String, dynamic> json) => UserDataModel(
@@ -68,6 +70,7 @@ class UserDataModel {
         points: json["points"],
         notifications: json["notifications"],
         token: json["token"],
+        isRegister: json["is_register"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -82,5 +85,6 @@ class UserDataModel {
         "points": points,
         "notifications": notifications,
         "token": token,
+        "is_register": isRegister,
     };
 }

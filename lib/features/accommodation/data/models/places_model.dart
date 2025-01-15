@@ -10,7 +10,7 @@ String placesModelToJson(PlacesModel data) => json.encode(data.toJson());
 
 class PlacesModel {
   String? msg;
-  List<Datum>? data;
+  List<PlaceModel>? data;
   int? status;
 
   PlacesModel({
@@ -21,7 +21,7 @@ class PlacesModel {
 
   factory PlacesModel.fromJson(Map<String, dynamic> json) => PlacesModel(
     msg: json["msg"],
-    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+    data: json["data"] == null ? [] : List<PlaceModel>.from(json["data"]!.map((x) => PlaceModel.fromJson(x))),
     status: json["status"],
   );
 
@@ -32,14 +32,14 @@ class PlacesModel {
   };
 }
 
-class Datum {
+class PlaceModel {
   int? moduleId;
   int? moduleType;
   int? id;
   String? name;
   String? image;
 
-  Datum({
+  PlaceModel({
     this.moduleId,
     this.moduleType,
     this.id,
@@ -47,7 +47,7 @@ class Datum {
     this.image,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory PlaceModel.fromJson(Map<String, dynamic> json) => PlaceModel(
     moduleId: json["module_id"],
     moduleType: json["module_type"],
     id: json["id"],

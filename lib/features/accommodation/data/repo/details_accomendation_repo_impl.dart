@@ -19,9 +19,7 @@ class DetailsAccomendationRepoImpl {
     try {
       var response = await dio.get(
         EndPoints.placesUrl,
-        // options: Options(
-        //   headers: {'Authorization': "Bearer ${user.data?.token ?? ''}"},
-        // ),
+        
       );
       return Right(PlacesModel.fromJson(response));
     } on ServerException {
@@ -33,9 +31,7 @@ class DetailsAccomendationRepoImpl {
     try {
       var response = await dio.get(
         EndPoints.getFacilitiesUrl,
-        // options: Options(
-        //   headers: {'Authorization': "Bearer ${user.data?.token ?? ''}"},
-        // ),
+     
       );
       return Right(FacilitiesModel.fromJson(response));
     } on ServerException {
@@ -63,9 +59,7 @@ class DetailsAccomendationRepoImpl {
           for (int i=0;i<stars.length;i++)  "stars[$i]":stars[i],
           for (int i=0;i<facilities.length;i++)  "facility_id[$i]":facilities[i],
         },
-        // options: Options(
-        //   headers: {'Authorization': "Bearer ${user.data?.token ?? ''}"},
-        // ),
+      
       );
       return Right(GetLodgesModel.fromJson(response));
     } on ServerException {
@@ -78,11 +72,9 @@ class DetailsAccomendationRepoImpl {
       var response = await dio.get(
         EndPoints.getLodgesDetailsUrl,
         queryParameters: {
-          "lodge_id":"3",
+          "lodge_id":lodgeId,
         },
-        // options: Options(
-        //   headers: {'Authorization': "Bearer ${user.data?.token ?? ''}"},
-        // ),
+       
       );
       return Right(GetLodgeDetail.fromJson(response));
     } on ServerException {
@@ -99,9 +91,7 @@ class DetailsAccomendationRepoImpl {
           "fromDay":"2024-02-11",
           "toDay":"2024-02-13",
         },
-        // options: Options(
-        //   headers: {'Authorization': "Bearer ${user.data?.token ?? ''}"},
-        // ),
+       
       );
       return Right(GetLodgesRooms.fromJson(response));
     } on ServerException {

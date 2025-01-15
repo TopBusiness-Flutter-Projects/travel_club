@@ -1,10 +1,10 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel_club/core/preferences/preferences.dart';
 
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 
-late SharedPreferences prefs;
-late FlutterSecureStorage storage;
+
 
 class AppStrings {
   static const String appName = 'Traverl Club';
@@ -18,6 +18,9 @@ class AppStrings {
   static const String englishCode = 'en';
   static const String arabicCode = 'ar';
   static const String inviteLink = 'https://travelclub.page.link/invite';
+  static const String lodgeShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/lodge?id=';
+  static const String transportationShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/transportation?id=';
+
   // static const String googleApiKey = '';
 }
 

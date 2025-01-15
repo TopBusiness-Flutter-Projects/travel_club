@@ -1,5 +1,5 @@
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/features/accommodation/view/widgets/acommendation_widgets/accomendation_rating.dart';
+import 'package:travel_club/features/accommodation/view/widgets/acommendation_widgets/custom_lodge_container.dart';
 import 'package:travel_club/features/search/cubit/search_cubit.dart';
 import 'package:travel_club/features/search/screens/widgets/custom_booking_sectoin.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
@@ -75,9 +75,7 @@ class _SearchbodyState extends State<Searchbody> {
                   itemCount: 1,
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CustomWidgetRating(
-                      hotelsModel:  LodgeModel()
-                    ),
+                    child: CustomLodgeContainer(hotelsModel: LodgeModel()),
                   ),
                 )),
               ],
