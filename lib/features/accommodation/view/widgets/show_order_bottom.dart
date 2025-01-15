@@ -55,7 +55,7 @@ class _OrderBottomSheetState extends State<OrderBottomSheet> {
             //row
             CustomButton(title: AppTranslations.orderResults,onTap: (){
              // cubit.ordersFilters.firstWhere((e) => e.isChecked==true).isChecked=false;
-              cubit.getLodges(context: context,id:widget.id);
+              cubit.getLodges(context: context,id:widget.id!);
               Navigator.pop(context);
             },),
         //    Center(child: ElevatedButton(onPressed: (){}, child: Text(AppTranslations.results,style: getSemiBoldStyle(color: AppColors.white,fontSize: 12.sp),),style:ElevatedButton.styleFrom(backgroundColor: AppColors.primary,) ,)),

@@ -1,6 +1,7 @@
 import 'package:travel_club/features/accommodation/cubit/accomendation_cubit.dart';
 
 import '../../../../../core/exports.dart';
+import '../../../data/models/facilities_model.dart';
 
 class StarsFilter {
   final String text;
@@ -34,7 +35,8 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
               });
             },
             shape: RoundedRectangleBorder(              borderRadius:
-            BorderRadius.circular(5.r),           ),
+            BorderRadius.circular(5.r),
+            ),
             side: BorderSide(color: AppColors.secondPrimary.withOpacity(.5), width: 1.w),
             checkColor: AppColors.white,
             // Color of the tick
@@ -69,6 +71,7 @@ class CustomOrderedCheckBox extends StatefulWidget {
 }
 
 class _CustomOrderedCheckBoxState extends State<CustomOrderedCheckBox> {
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     var cubit= context.read<AccomendationCubit>();
@@ -85,6 +88,16 @@ class _CustomOrderedCheckBoxState extends State<CustomOrderedCheckBox> {
                   setState(() {
                     cubit.setSelectedFilter(widget.starsFilter) ;
                   });
+                  // setState(() {
+                  //   if (isSelected){
+                  //     cubit.addRemoveToListStars( int.parse( cubit.facilitiesModel!.data?[].id.toString()??""), false);
+                  //   }else{
+                  //     // was unselected   ADD TO LIST
+                  //     cubit.addRemoveToListStars( int.parse( cubit.stars), true);
+                  //   }
+                  //   isSelected = !isSelected;
+                  //
+                  // });
                 },
                 shape: RoundedRectangleBorder(              borderRadius:
                 BorderRadius.circular(5.r),
@@ -111,6 +124,74 @@ class _CustomOrderedCheckBoxState extends State<CustomOrderedCheckBox> {
           ],
         );
       }
+    );
+  }
+}
+// //custom facilities
+// class CustomCheckBox extends StatefulWidget {
+//   final StarsFilter starsFilter;
+//
+//   const CustomCheckBox({super.key, required this.starsFilter});
+//
+//   @override
+//   State<CustomCheckBox> createState() => _CustomCheckBoxState();
+// }
+//
+// class _CustomCheckBoxState extends State<CustomCheckBox> {
+//   @override
+//
+// }
+class CustomFacilitesCheckbox extends StatefulWidget {
+  final FacilityModel facilitiesFilter;
+  const CustomFacilitesCheckbox({super.key, required this.facilitiesFilter});
+
+  @override
+  State<CustomFacilitesCheckbox> createState() => _CustomFacilitesCheckboxState();
+}
+
+class _CustomFacilitesCheckboxState extends State<CustomFacilitesCheckbox> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start, // Align to the start of the row
+      children: [
+        SizedBox(
+          width: 30.w,
+          child: Checkbox(
+            value: widget.facilitiesFilter.isChecked,
+            onChanged: (bool? newValue) {
+              setState(() {
+                widget.facilitiesFilter.isChecked = newValue!;
+              });
+            },
+            shape: RoundedRectangleBorder(              borderRadius:
+            BorderRadius.circular(5.r),
+            ),
+            side: BorderSide(color: AppColors.secondPrimary.withOpacity(.5), width: 1.w),
+            checkColor: AppColors.white,
+            // Color of the tick
+            fillColor: MaterialStateProperty.resolveWith((states) {
+              if (states.contains(MaterialState.selected)) {
+                return AppColors.primary; // Primary color when checkbox is selected
+              } else {
+                return AppColors.white.withOpacity(0.6); // Less opacity when not selected
+              }
+            }),
+          ),
+        ),
+        Text(
+          widget.facilitiesFilter.name!,
+          style: getMediumStyle(fontSize: 14.sp),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.right,
+        ),
+      ],
     );
   }
 }

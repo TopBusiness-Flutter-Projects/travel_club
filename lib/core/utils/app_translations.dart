@@ -233,4 +233,5 @@ class AppTranslations {
   static String get areYouSureClose => 'are_you_sure_close'.tr();
   static String get appClose => 'app_close'.tr();
   static String get exit => 'exit'.tr();
+  static String get sendResult => 'sent_result'.tr();
 }
