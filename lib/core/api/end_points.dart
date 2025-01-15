@@ -12,4 +12,6 @@ class EndPoints {
   static const String placesUrl = '${baseUrl}getPlaces';
   static const String userDataUrl = '${baseUrl}userDate';
   static const String getFacilitiesUrl = '${baseUrl}getFacilities';
+  static const String getLodgesUrl = '${baseUrl}getLodges';
+  static const String getLodgesDetailsUrl = '${baseUrl}getLodgeDetail';
 }

@@ -3,6 +3,7 @@ import '../../../../core/exports.dart';
 import '../../cubit/accomendation_cubit.dart';
 import '../widgets/acommendation_widgets/accomendadation_container.dart';
 import '../widgets/acommendation_widgets/accomendation_rating.dart';
+import 'hotels_screen.dart';
 
 class AccomendationScreen extends StatefulWidget {
   const AccomendationScreen({super.key});
@@ -41,10 +42,10 @@ class _AccomendationScreenState extends State<AccomendationScreen> {
                    cubit.placesModel.data?.length??0,
                        (index) => AcommendationContainer(
                      categoryModel: AcommndationModel(
-                       title: cubit.placesModel.data![index].name.toString()??"",
-                       image: cubit.placesModel.data![index].image.toString()??"",
+                       title: cubit.placesModel.data![index].name.toString(),
+                       image: cubit.placesModel.data![index].image.toString(),
                        onTap: () {
-                         Navigator.pushNamed(context, Routes.hotelsScreen);
+                         Navigator.pushNamed(context, Routes.hotelsScreen,arguments:HotelsScreenArguments(id: cubit.placesModel.data![index].id, title: cubit.placesModel.data![index].name.toString()) );
                        },
                      ),
                    ))),

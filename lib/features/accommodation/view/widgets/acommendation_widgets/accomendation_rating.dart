@@ -9,6 +9,7 @@ class HotelsModel {
   final String? discription;
   final String image;
   final int rate;
+  final int? id;
   final bool? isFavorite;
   bool? isFavoriteTrue;
 
@@ -16,6 +17,7 @@ class HotelsModel {
   HotelsModel(
       {this.isFavoriteTrue = false,
       required this.title,
+      this.id ,
       required this.rate,
       this.isFavorite = true,
       this.discription,
@@ -38,7 +40,7 @@ class _CustomWidgetRatingState extends State<CustomWidgetRating> {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, Routes.detailsAccomendation);
+            Navigator.pushNamed(context, Routes.detailsAccomendation,arguments: widget.hotelsModel?.id);
           },
           child: CustomContainerWithShadow(
             height: getHeightSize(context)*0.23,
@@ -106,7 +108,7 @@ class _CustomWidgetRatingState extends State<CustomWidgetRating> {
                       ),
                    //   SizedBox(height: 2.h,),
                       widget.hotelsModel?.discription==null?SizedBox():
-                      Text(widget.hotelsModel?.discription.toString()??"",style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
+                      Text(widget.hotelsModel?.discription.toString()??"",style: getMediumStyle(fontSize: 12.sp,color: AppColors.black),),
                     ],
                   ),
                 ),

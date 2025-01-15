@@ -75,7 +75,7 @@ class _HomeBodyState extends State<HomeBody> {
                                 Center(
                                     child: Image.asset(
                                   ImageAssets.noOffers,
-                                  width: 120.w,
+                                  width: 150.w,
                                 )),
                               ],
                             ),
