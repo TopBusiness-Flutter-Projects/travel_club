@@ -76,8 +76,7 @@ class _HomeBodyState extends State<HomeBody> {
                                     child: Image.asset(
                                   ImageAssets.noOffers,
                                   width: 150.w,
-                                )
-                                ),
+                                )),
                               ],
                             ),
                           ),
@@ -85,9 +84,9 @@ class _HomeBodyState extends State<HomeBody> {
                             height: 30.h,
                           ),
                           Text(
-                            AppTranslations.commingSoon.tr(),
+                            AppTranslations.commingSoon,
                             style: getBoldStyle(
-                                color: AppColors.primary, fontSize: 24.sp),
+                                color: AppColors.primary, fontSize: 22.sp),
                           )
                         ],
 

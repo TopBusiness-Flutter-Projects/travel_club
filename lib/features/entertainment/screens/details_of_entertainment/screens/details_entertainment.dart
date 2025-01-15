@@ -18,7 +18,7 @@ class DetailsEntertainment extends StatelessWidget {
             alignment: Alignment.topCenter,
             children: [
               // Swiper for images
-              CustomSwiper(),
+              CustomSwiper(images: ["dds"],),
               // Custom row (back button, favorite, etc.)
               Positioned(
                 top: 16.0,

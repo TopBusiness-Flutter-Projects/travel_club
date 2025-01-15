@@ -96,6 +96,8 @@ class CustomCategoryContainer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomNetworkImage(
+                      withLogo: false,
+
                       height: getHeightSize(context) * 0.05,
                       image: categoryModel?.image ?? "",
                     ),

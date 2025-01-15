@@ -20,4 +20,5 @@ class HomeCubit extends Cubit<HomeState> {
       emit(SucessGetHomeData());
     });
   }
+
 }

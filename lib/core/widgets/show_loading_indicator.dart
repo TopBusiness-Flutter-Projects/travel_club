@@ -18,7 +18,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:travel_club/core/exports.dart';
 
 class CustomLoadingIndicator extends StatefulWidget {
-  const CustomLoadingIndicator({super.key});
+  const CustomLoadingIndicator({super.key,  this.withLogo = true});
+  final bool withLogo;
 
   @override
   State<CustomLoadingIndicator> createState() => _CustomLoadingIndicatorState();
@@ -45,7 +46,9 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return widget.withLogo?
+    
+     Stack(
       alignment: Alignment.center,
       children: [
         // Platform specific loading indicator in the background
@@ -72,6 +75,16 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator>
           ),
         ),
       ],
-    );
+    ):
+     Platform.isIOS
+            ? const CupertinoActivityIndicator(
+                animating: true,
+                radius: 30,
+              )
+            : CircularProgressIndicator(
+              color: AppColors.primary,
+              strokeWidth: 3, // Slightly increased thickness
+            )
+    ;
   }
 }
