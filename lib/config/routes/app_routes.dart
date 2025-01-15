@@ -230,7 +230,7 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsAccomendation:
-        int ?id = settings.arguments as int;
+        int id = settings.arguments as int;
         return PageTransition(
           child:  DetailsAccommendation(id:id),
           type: PageTransitionType.fade,

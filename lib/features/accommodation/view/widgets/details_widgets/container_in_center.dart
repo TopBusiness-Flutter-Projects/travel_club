@@ -6,8 +6,8 @@ import '../../../cubit/accomendation_cubit.dart';
 import 'custom_rating_incenter.dart';
 
 class ContainerInCenter extends StatelessWidget {
-   ContainerInCenter({super.key});
-
+   const ContainerInCenter({super.key, required this.imageUrls});
+final List <String> imageUrls ;
   @override
   Widget build(BuildContext context) {
     var cubit=context.read<AccomendationCubit>();
@@ -25,7 +25,7 @@ class ContainerInCenter extends StatelessWidget {
            children: [
              Row(
                mainAxisAlignment: MainAxisAlignment.center,
-               children: cubit.imageUrls.asMap().entries.map((entry) {
+               children: imageUrls.asMap().entries.map((entry) {
                  return Container(
                    width: 10.0,
                    height: 10.0,
@@ -40,7 +40,10 @@ class ContainerInCenter extends StatelessWidget {
                }).toList(),
              ),
            //  CustomContainerCompanies()
-             CustomRatingIncenter()
+             CustomRatingIncenter(
+              rating: 2,
+              users: "10",
+             )
            ],
 
 

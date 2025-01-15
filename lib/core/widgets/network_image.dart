@@ -7,30 +7,47 @@ class CustomNetworkImage extends StatelessWidget {
     super.key,
     required this.image,
     this.isUser = false,
+    this.isDetails = false,
     this.height,
     this.width,
+    this.fit,
+    this.withLogo = true,
   });
 
   final String image;
   final bool isUser;
+  final bool isDetails;
   final double? height;
   final double? width;
+  final BoxFit? fit;
+  final bool withLogo;
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(
+    return CachedNetworkImage(
         // "https://www.programaenlinea.net/wp-content/uploads/2019/04/testing-1.jpg",
-        image,
-        fit: BoxFit.cover,
+        imageUrl: image,
+        fit: fit ?? BoxFit.cover,
         height: height,
         width: width,
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) return child;
-          return Center(
-            child: CustomLoadingIndicator(),
-          );
+        memCacheHeight: 100,
+        memCacheWidth: 100,
+        imageBuilder: (context, imageProvider) {
+          return Image(image: imageProvider);
         },
-        errorBuilder: (context, error, stackTrace) => Image.asset(
+        placeholder: (context, url) => isDetails
+            ? Padding(
+                padding: EdgeInsets.only(top: getHeightSize(context) * 0.1),
+                child: CustomLoadingIndicator(
+                  withLogo: withLogo,
+                ),
+              )
+            : Center(
+                child: CustomLoadingIndicator(
+                  withLogo: withLogo,
+                ),
+              ),
+        errorWidget: (context, url, error) => Image.asset(
               isUser ? ImageAssets.profile : ImageAssets.logoImage,
               height: height,
               width: width,

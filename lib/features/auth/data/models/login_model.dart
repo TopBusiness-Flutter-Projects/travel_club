@@ -37,7 +37,7 @@ class UserDataModel {
     String? image;
     bool? isGoogle;
     String? googleImage;
-    String? code;
+    dynamic code;
     dynamic points;
     dynamic notifications;
     String? token;

@@ -9,7 +9,7 @@ import '../widgets/details_widgets/custom_swiper.dart';
 
 class DetailsAccommendation extends StatefulWidget {
   const DetailsAccommendation({super.key, required this.id});
-final int? id;
+final int id;
   @override
   State<DetailsAccommendation> createState() => _DetailsAccommendationState();
 }
@@ -17,7 +17,7 @@ final int? id;
 class _DetailsAccommendationState extends State<DetailsAccommendation> {
   @override
   void initState() {
-    // TODO: implement initState
+   
      context.read<AccomendationCubit>().getLodgesDetails(context: context,id: widget.id);
     super.initState();
   }
@@ -36,23 +36,29 @@ class _DetailsAccommendationState extends State<DetailsAccommendation> {
             body: SizedBox(
               height: getHeightSize(context),
               width: getWidthSize(context),
-              child: Stack(
+              child:
+              cubit.lodgesDetailsModel.data == null ? const Center(child: CustomLoadingIndicator(),) :
+              Stack(
                 alignment: Alignment.topCenter,
                 children: [
                   // Swiper for images
-                  CustomSwiper(),
+                   CustomSwiper(
+                    images:  cubit.lodgesDetailsModel.data!.media!.map((element) => element.image??"").toList(),
+                   ),
                   // Custom row (back button, favorite, etc.)
-                  Positioned(
+                  const Positioned(
                     top: 16.0,
                     left: 16.0,
                     right: 16.0,
                     child: CustomRow(),
                   ),
-
                   // Container under the Swiper
-                  ContainerUnderSwiper(),
+                  const ContainerUnderSwiper(),
                   // Centered container in the middle of the image
-                  ContainerInCenter()
+                  ContainerInCenter(
+                    imageUrls:
+                     cubit.lodgesDetailsModel.data!.media!.map((element) => element.image??"").toList() ,
+                  )
                 ],
               ),
             ),

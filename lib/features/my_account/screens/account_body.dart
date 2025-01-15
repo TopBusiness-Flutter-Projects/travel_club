@@ -79,7 +79,7 @@ class _AccountbodyState extends State<Accountbody> {
                             if (cubit.loginModel.data?.code != null) {
                               Navigator.pushNamed(
                                   context, Routes.promoCodeRoute,
-                                  arguments: cubit.loginModel.data?.code!);
+                                  arguments: cubit.loginModel.data?.code.toString());
                             }
                           },
                         ),
