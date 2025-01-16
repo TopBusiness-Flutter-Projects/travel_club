@@ -2,7 +2,7 @@
 import 'package:flutter_rating/flutter_rating.dart';
 
 import '../../../../../../core/exports.dart';
-import '../../../../accommodation/view/widgets/acommendation_widgets/custom_lodge_container.dart';
+import '../../../../residence module/view/widgets/residence/custom_lodge_container.dart';
 
 class CustomBookingAccommodationContainerSmall extends StatefulWidget {
   CustomBookingAccommodationContainerSmall({super.key,required this.hotelsModel});

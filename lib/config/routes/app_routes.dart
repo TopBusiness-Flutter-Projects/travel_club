@@ -21,14 +21,14 @@ import 'package:travel_club/features/transportation/screens/trip_details_first_s
 import 'package:travel_club/features/transportation/screens/trip_details_second_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../features/accommodation/view/booking_accommodation/screens/best_choosen.dart';
-import '../../features/accommodation/view/booking_accommodation/screens/booking_accommodation_screen.dart';
-import '../../features/accommodation/view/booking_accommodation/screens/done_payment.dart';
-import '../../features/accommodation/view/booking_accommodation/screens/payment_process_screen.dart';
-import '../../features/accommodation/view/booking_accommodation/screens/second_booking_accommodation_screen.dart';
-import '../../features/accommodation/view/screens/accomendation_screen.dart';
-import '../../features/accommodation/view/screens/details_accomendation old.dart';
-import '../../features/accommodation/view/screens/hotels_screen.dart';
+import '../../features/residence module/view/residence_booking/screens/best_choosen.dart';
+import '../../features/residence module/view/residence_booking/screens/booking_accommodation_screen.dart';
+import '../../features/residence module/view/residence_booking/screens/done_payment.dart';
+import '../../features/residence module/view/residence_booking/screens/payment_process_screen.dart';
+import '../../features/residence module/view/residence_booking/screens/second_booking_accommodation_screen.dart';
+import '../../features/residence module/view/screens/residence_screen.dart';
+import '../../features/residence module/view/screens/lodge_details.dart';
+import '../../features/residence module/view/screens/lodges_screen.dart';
 import '../../features/auth/view/screens/apply_screen.dart';
 import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
@@ -232,7 +232,7 @@ class AppRoutes {
       case Routes.detailsAccomendation:
         int id = settings.arguments as int;
         return PageTransition(
-          child:  DetailsAccommendation(id:id),
+          child: ResidenceDetails(id: id),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -298,10 +298,13 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.hotelsScreen:
-        HotelsScreenArguments? arguments= settings.arguments as HotelsScreenArguments;
+        LodgesScreenArguments? arguments =
+            settings.arguments as LodgesScreenArguments;
 
         return PageTransition(
-          child:  HotelsScreen(arguments: arguments ,),
+          child: LodgesScreen(
+            arguments: arguments,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

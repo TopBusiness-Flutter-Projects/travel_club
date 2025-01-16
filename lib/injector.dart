@@ -4,8 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/api/base_api_consumer.dart';
 import 'package:travel_club/core/api/dio_consumer.dart';
-import 'package:travel_club/features/accommodation/cubit/accomendation_cubit.dart';
-import 'package:travel_club/features/accommodation/data/repo/details_accomendation_repo_impl.dart';
+import 'package:travel_club/features/residence%20module/cubit/residence_cubit.dart';
+import 'package:travel_club/features/residence%20module/data/repo/residence_repo_impl.dart';
 import 'package:travel_club/features/auth/cubit/cubit.dart';
 import 'package:travel_club/features/auth/data/login_repo_impl.dart';
 import 'package:travel_club/features/favourites/cubit/favourites_cubit.dart';
@@ -64,11 +64,12 @@ Future<void> setup() async {
     () => AccountCubit(serviceLocator()),
   );
   serviceLocator.registerFactory(
-    () => AccomendationCubit(serviceLocator()),
+    () => ResidenceCubit(serviceLocator()),
   );
   serviceLocator.registerFactory(
     () => OtherServicesCubit(serviceLocator()),
-  ); serviceLocator.registerFactory(
+  );
+  serviceLocator.registerFactory(
     () => FoodCubit(serviceLocator()),
   );
   serviceLocator.registerFactory(
@@ -79,18 +80,21 @@ Future<void> setup() async {
   );
   serviceLocator.registerFactory(
     () => NotificationCubit(serviceLocator()),
-  );serviceLocator.registerFactory(
+  );
+  serviceLocator.registerFactory(
     () => SearchCubit(serviceLocator()),
-  );serviceLocator.registerFactory(
+  );
+  serviceLocator.registerFactory(
     () => EntertainmentCubit(serviceLocator()),
   );
 //!-------------------------Declare Repo---------------------------
   serviceLocator.registerLazySingleton(() => LoginRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => MainRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => HomeRepoImpl(serviceLocator()));
-  serviceLocator.registerLazySingleton(() => EntertainmentRepoImpl(serviceLocator()));
-  serviceLocator.registerLazySingleton(
-      () => DetailsAccomendationRepoImpl(serviceLocator()));
+  serviceLocator
+      .registerLazySingleton(() => EntertainmentRepoImpl(serviceLocator()));
+  serviceLocator
+      .registerLazySingleton(() => ResidenceRepoImpl(serviceLocator()));
   serviceLocator
       .registerLazySingleton(() => FavouritesRepoImpl(serviceLocator()));
   serviceLocator
@@ -102,9 +106,10 @@ Future<void> setup() async {
       .registerLazySingleton(() => TransportationRepoImpl(serviceLocator()));
   serviceLocator
       .registerLazySingleton(() => LocationRepoImpl(serviceLocator()));
-serviceLocator.registerLazySingleton(() => NotificationRepoImpl(serviceLocator()));
-serviceLocator.registerLazySingleton(() => FoodRepoImpl(serviceLocator()));
-serviceLocator.registerLazySingleton(() => SearchRepoImpl(serviceLocator()));
+  serviceLocator
+      .registerLazySingleton(() => NotificationRepoImpl(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => FoodRepoImpl(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => SearchRepoImpl(serviceLocator()));
 
 //!-------------------------Declare Interceptors---------------------------
 
@@ -114,7 +119,7 @@ serviceLocator.registerLazySingleton(() => SearchRepoImpl(serviceLocator()));
 
   ////////////////////////// SharedPref ////////////////////////
   final sharedPreferences = await SharedPreferences.getInstance();
-  final  storage = await FlutterSecureStorage();
+  final storage = await FlutterSecureStorage();
 
   serviceLocator.registerLazySingleton(() => sharedPreferences);
   serviceLocator.registerLazySingleton(() => storage);

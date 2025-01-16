@@ -3,7 +3,7 @@
 import 'package:travel_club/features/my_bookings/view/accommodation_booking/widgets/small_container.dart';
 
 import '../../../../../../core/exports.dart';
-import '../../../../accommodation/view/widgets/acommendation_widgets/custom_lodge_container.dart';
+import '../../../../residence module/view/widgets/residence/custom_lodge_container.dart';
 
 class CustomBookingAccommodationContainerBig extends StatelessWidget {
   const CustomBookingAccommodationContainerBig({super.key});

@@ -15,7 +15,7 @@ import 'config/routes/app_routes.dart';
 import 'config/themes/app_theme.dart';
 import 'core/utils/app_strings.dart';
 import 'package:travel_club/injector.dart' as injector;
-import 'features/accommodation/cubit/accomendation_cubit.dart';
+import 'features/residence module/cubit/residence_cubit.dart';
 import 'features/auth/cubit/cubit.dart';
 import 'features/entertainment/cubit/entertainment_cubit.dart';
 import 'features/food/cubit/food_cubit.dart';
@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
             create: (_) => injector.serviceLocator<SplashCubit>(),
           ),
           BlocProvider(
-            create: (_) => injector.serviceLocator<AccomendationCubit>(),
+            create: (_) => injector.serviceLocator<ResidenceCubit>(),
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<LoginCubit>(),
