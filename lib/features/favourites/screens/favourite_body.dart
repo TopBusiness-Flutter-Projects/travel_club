@@ -1,7 +1,7 @@
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/features/residence%20module/view/widgets/residence/custom_lodge_container.dart';
 import 'package:travel_club/features/favourites/cubit/favourites_state.dart';
-import '../../residence module/data/models/getlodges_model.dart';
+import 'package:travel_club/features/residence/data/models/getlodges_model.dart';
+import 'package:travel_club/features/residence/view/widgets/acommendation_widgets/accomendation_rating.dart';
 import '../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../food/widgets/big_container_food.dart';
 import '../../home/screens/widgets/custom_appbar.dart';

@@ -2,7 +2,8 @@
 import '../../../../../core/exports.dart';
 
 class CustomRow extends StatelessWidget {
-  const CustomRow({super.key});
+  const CustomRow({super.key, this.sharedLink});
+final   String? sharedLink;
 
   @override
   Widget build(BuildContext context) {

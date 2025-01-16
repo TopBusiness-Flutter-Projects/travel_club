@@ -1,12 +1,11 @@
 import 'package:flutter/services.dart';
-import 'package:travel_club/features/residence%20module/data/models/getlodge_details.dart';
-
+import 'package:travel_club/features/residence/data/models/getlodge_details.dart';
+import 'package:travel_club/features/residence/view/widgets/details_widgets/container_in_center.dart';
+import 'package:travel_club/features/residence/view/widgets/details_widgets/container_under_swiper.dart';
+import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_appbar_row.dart';
+import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_swiper.dart';
 import '../../../../core/exports.dart';
 import '../../cubit/residence_cubit.dart';
-import '../widgets/details/container_in_center.dart';
-import '../widgets/details/container_under_swiper.dart';
-import '../widgets/details/custom_appbar_row.dart';
-import '../widgets/details/custom_swiper.dart';
 
 class ResidenceDetails extends StatefulWidget {
   const ResidenceDetails({super.key, required this.id});

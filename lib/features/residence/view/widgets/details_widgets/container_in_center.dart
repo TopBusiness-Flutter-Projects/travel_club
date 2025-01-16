@@ -1,11 +1,15 @@
+import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 
 import '../../../../../core/exports.dart';
-import '../../../cubit/residence_cubit.dart';
 import 'custom_rating_incenter.dart';
 
 class ContainerInCenter extends StatelessWidget {
-   const ContainerInCenter({super.key, required this.imageUrls});
+   const ContainerInCenter({super.key, required this.imageUrls, required this.rating, required this.users, this.onPressed});
 final List <String> imageUrls ;
+  final double rating;
+  final String users;
+final  void Function()? onPressed;
+
   @override
   Widget build(BuildContext context) {
     var cubit=context.read<ResidenceCubit>();
@@ -39,8 +43,9 @@ final List <String> imageUrls ;
              ),
            //  CustomContainerCompanies()
              CustomRatingIncenter(
-              rating: 2,
-              users: "10",
+              rating: rating,
+              users: users,
+              onPressed: onPressed,
              )
            ],
 

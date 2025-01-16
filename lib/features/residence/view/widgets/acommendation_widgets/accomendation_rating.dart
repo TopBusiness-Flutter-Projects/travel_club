@@ -25,15 +25,15 @@ class HotelsModel {
       });
 }
 
-class CustomWidgetRating extends StatefulWidget {
-  const CustomWidgetRating({super.key, required this.hotelsModel});
+class CustomLodgeContainer extends StatefulWidget {
+  const CustomLodgeContainer({super.key, required this.hotelsModel});
   final LodgeModel? hotelsModel;
 
   @override
-  State<CustomWidgetRating> createState() => _CustomWidgetRatingState();
+  State<CustomLodgeContainer> createState() => _CustomLodgeContainerState();
 }
 
-class _CustomWidgetRatingState extends State<CustomWidgetRating> {
+class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
   @override
   Widget build(BuildContext context) {
     return Padding(

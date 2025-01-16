@@ -2,8 +2,9 @@ import 'dart:ui' as ui;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/features/residence%20module/data/models/getlodges_room.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
+import 'package:travel_club/features/residence/data/models/getlodges_room.dart';
+import 'package:travel_club/features/residence/view/widgets/hotels_widgets/custom_check_box.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 
 import '../data/models/facilities_model.dart';
@@ -11,7 +12,6 @@ import '../data/models/getlodge_details.dart';
 import '../data/models/getlodges_model.dart';
 import '../data/models/places_model.dart';
 import '../data/repo/residence_repo_impl.dart';
-import '../view/widgets/lodges/custom_check_box.dart';
 
 part 'residence_state.dart';
 

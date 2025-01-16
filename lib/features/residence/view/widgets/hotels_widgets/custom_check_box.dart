@@ -1,6 +1,6 @@
-import 'package:travel_club/features/accommodation/cubit/accomendation_cubit.dart';
 
 import '../../../../../core/exports.dart';
+import '../../../cubit/residence_cubit.dart';
 import '../../../data/models/facilities_model.dart';
 
 class StarsFilter {
@@ -74,8 +74,8 @@ class _CustomOrderedCheckBoxState extends State<CustomOrderedCheckBox> {
   bool isSelected = false;
   @override
   Widget build(BuildContext context) {
-    var cubit= context.read<AccomendationCubit>();
-    return BlocBuilder<AccomendationCubit, AccomendationState>(builder: (BuildContext context, state) {
+    var cubit= context.read<ResidenceCubit>();
+    return BlocBuilder<ResidenceCubit, ResidenceState>(builder: (BuildContext context, state) {
 
       return Row(
           mainAxisAlignment: MainAxisAlignment.start, // Align to the start of the row

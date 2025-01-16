@@ -1,8 +1,8 @@
 //small conatiner
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:travel_club/features/residence/view/widgets/acommendation_widgets/accomendation_rating.dart';
 
 import '../../../../../../core/exports.dart';
-import '../../../../residence module/view/widgets/residence/custom_lodge_container.dart';
 
 class CustomBookingAccommodationContainerSmall extends StatefulWidget {
   CustomBookingAccommodationContainerSmall({super.key,required this.hotelsModel});

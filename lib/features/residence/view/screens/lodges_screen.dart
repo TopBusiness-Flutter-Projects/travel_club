@@ -1,11 +1,11 @@
-import 'package:travel_club/features/residence%20module/data/models/getlodges_model.dart';
 import 'package:travel_club/features/location/screens/accommodation_map.dart';
+import 'package:travel_club/features/residence/data/models/getlodges_model.dart';
+import 'package:travel_club/features/residence/view/widgets/acommendation_widgets/accomendation_rating.dart';
+import 'package:travel_club/features/residence/view/widgets/hotels_widgets/custom_filter.dart';
 
 import '../../../../core/exports.dart';
 import '../../../../core/widgets/no_data_widget.dart';
 import '../../cubit/residence_cubit.dart';
-import '../widgets/residence/custom_lodge_container.dart';
-import '../widgets/lodges/custom_filter.dart';
 
 class LodgesScreenArguments {
   LodgesScreenArguments({required this.placeId, required this.title});

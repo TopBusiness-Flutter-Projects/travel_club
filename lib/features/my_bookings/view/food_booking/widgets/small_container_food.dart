@@ -3,7 +3,6 @@ import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/features/my_bookings/view/food_booking/widgets/big_container_food.dart';
 
 import '../../../../../../core/exports.dart';
-import '../../../../residence module/view/widgets/residence/custom_lodge_container.dart';
 
 class CustomBookingFoodContainerSmall extends StatelessWidget {
   CustomBookingFoodContainerSmall({super.key, required this.foodModel});

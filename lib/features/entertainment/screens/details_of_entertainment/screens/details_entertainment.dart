@@ -1,7 +1,7 @@
 import 'package:travel_club/features/entertainment/screens/details_of_entertainment/widgets/custom_under_swiper.dart';
+import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_appbar_row.dart';
+import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_swiper.dart';
 import '../../../../../core/exports.dart';
-import '../../../../residence module/view/widgets/details/custom_appbar_row.dart';
-import '../../../../residence module/view/widgets/details/custom_swiper.dart';
 import '../../../cubit/entertainment_cubit.dart';
 import '../widgets/container_in_center.dart';
 

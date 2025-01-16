@@ -1,8 +1,8 @@
-import 'package:travel_club/features/residence%20module/view/widgets/residence/custom_lodge_container.dart';
+import 'package:travel_club/features/residence/view/widgets/acommendation_widgets/accomendadation_container.dart';
+import 'package:travel_club/features/residence/view/widgets/acommendation_widgets/accomendation_rating.dart';
 
 import '../../../../core/exports.dart';
 import '../../cubit/residence_cubit.dart';
-import '../widgets/residence/accomendadation_container.dart';
 
 class AccomendationScreen extends StatefulWidget {
   const AccomendationScreen({super.key});
@@ -45,7 +45,7 @@ class _AccomendationScreenState extends State<AccomendationScreen> {
                             crossAxisSpacing: 0,
                             children: List.generate(
                                 cubit.placesModel.data?.length ?? 0,
-                                (index) => CustomPlaceContainer(
+                                (index) => AcommendationContainer(
                                       categoryModel:
                                           cubit.placesModel.data![index],
                                     ))),

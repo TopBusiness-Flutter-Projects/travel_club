@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:travel_club/features/residence%20module/data/models/facilities_model.dart';
-import 'package:travel_club/features/residence%20module/data/models/getlodges_room.dart';
 
 import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
+import '../models/facilities_model.dart';
 import '../models/getlodge_details.dart';
 import '../models/getlodges_model.dart';
+import '../models/getlodges_room.dart';
 import '../models/places_model.dart';
 
 class ResidenceRepoImpl {
