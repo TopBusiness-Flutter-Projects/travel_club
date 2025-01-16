@@ -147,7 +147,7 @@ class AppRoutes {
         );
       case Routes.bestChoosenScreen:
         return PageTransition(
-          child: const BestChoosenScreen(),
+          child: const BestChosenScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

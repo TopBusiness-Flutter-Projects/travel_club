@@ -34,7 +34,7 @@ class CustomMemberWidget extends StatelessWidget {
           SizedBox(width: 10.w,),
           GestureDetector(
             onTap: () {
-              cubit.  minusCounter();
+              cubit.minusCounter();
             },
             child: Container(
               width: 27.w, // Define the width for the button

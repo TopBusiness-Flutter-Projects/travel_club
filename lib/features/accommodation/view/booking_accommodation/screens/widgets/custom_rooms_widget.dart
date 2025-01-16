@@ -1,7 +1,9 @@
 import '../../../../../../core/exports.dart';
+import '../../../../data/models/getlodges_room.dart';
 
 class CustomRoomsWidget extends StatelessWidget {
-  const CustomRoomsWidget({super.key});
+  const CustomRoomsWidget({super.key,required this.facility});
+  final Facility facility;
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +12,9 @@ class CustomRoomsWidget extends StatelessWidget {
       child: Row(
          mainAxisSize: MainAxisSize.min,
         children: [
-          SvgPicture.asset(AppIcons.bookingHotel),
+          Image.network(facility.image??"",height: 40.h),
           SizedBox(width: 5.w,),
-          Text("data",style: getRegularStyle(fontSize: 14.sp),)
+          Text(facility.name.toString()??"",style: getRegularStyle(fontSize: 14.sp),)
         ],
       ),
     );
