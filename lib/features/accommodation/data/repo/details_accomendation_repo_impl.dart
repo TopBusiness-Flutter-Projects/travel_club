@@ -82,16 +82,16 @@ class DetailsAccomendationRepoImpl {
     }
   }
 //get LodgesRooms
-  Future<Either<Failure, GetLodgesRooms>> getRoomsLodges({required int ?lodgeId}) async {
+  Future<Either<Failure, GetLodgesRooms>> getRoomsLodges({required int ?lodgeId,required String ?fromDay,required String ?toDay,required int ?guest}) async {
     try {
       var response = await dio.get(
         EndPoints.getLodgesRoomsUrl,
         queryParameters: {
           "lodge_id":"2",
-          "fromDay":"2024-02-11",
-          "toDay":"2024-02-13",
+          "fromDay":fromDay,
+          "toDay":toDay,
+          "guest":guest
         },
-       
       );
       return Right(GetLodgesRooms.fromJson(response));
     } on ServerException {

@@ -1,12 +1,14 @@
 import '../../../../../../core/exports.dart';
 import '../../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../cubit/accomendation_cubit.dart';
-
+import '../../../../data/models/getlodges_room.dart';
 import 'custom_rooms_widget.dart';
 
 class CustomContainerBooking extends StatelessWidget {
-   CustomContainerBooking({super.key, this.widgetBottom});
+   CustomContainerBooking({super.key, this.widgetBottom,this.room});
   Widget? widgetBottom;
+  final LodgyRoom ?room;
+  // final bool? isRecommended;
   @override
   Widget build(BuildContext context) {
     var cubit=context.read<AccomendationCubit>();
@@ -22,9 +24,8 @@ class CustomContainerBooking extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("غرفه عادية ب سرير فردي",style: getBoldStyle(fontSize: 16.sp,color:AppColors.primary),),
+                  Text(room?.name.toString()??"",style: getBoldStyle(fontSize: 16.sp,color:AppColors.primary),),
                   SizedBox(height: 10.h,),
-
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -37,20 +38,19 @@ class CustomContainerBooking extends StatelessWidget {
                   ),
                   Divider(color: AppColors.lightBlue1,),
                   //custom rooms widget
+                  room?.facilities==null? Center(child: CustomLoadingIndicator(),):
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Wrap(
                       spacing: 10.w,
                       runSpacing: 10.h,
-
-                      children: List.generate(6, (index) =>
+                      children: List.generate(room?.facilities?.length??0, (index) =>
                           // Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
                          SizedBox(
                              width: getWidthSize(context)*0.3,
-                             child: CustomRoomsWidget())
+                             child: CustomRoomsWidget(facility: room!.facilities![index],))
                       ),
                     )
-
                     // StaggeredGrid.count(
                     //   crossAxisCount: 2,
                     //   children: List.generate(6, (index) =>

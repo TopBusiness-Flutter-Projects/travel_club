@@ -74,6 +74,28 @@ class _SecondAccommodationBookingState
                     style: getMediumStyle(fontSize: 14.sp),
                   ),
 
+                CustomWidgetRating(hotelsModel:
+                cubit.defaultLodge
+                  ,),
+                SizedBox(height: 20.h,),
+            //prefer hotel
+                Text(AppTranslations.rooms,style: getMediumStyle(fontSize: 14.sp),),
+                //custom contanier
+                SizedBox(height: 20.h,),
+                CustomContainerBooking(
+                  widgetBottom: SizedBox(),
+                ),
+                SizedBox(
+                  height: 300.h,
+                  child: Swiper(
+                    itemCount: 3,  // Define the number of items in the swiper
+                    itemBuilder: (BuildContext context, int index) {
+                      // Return a CustomContainerBooking for each item
+                      return
+                      //   Container(
+                      //   child : Text('Item dsas'),
+                      // );
+                        SizedBox(
                   CustomLodgeContainer(
                     hotelsModel: LodgeModel(),
                   ),

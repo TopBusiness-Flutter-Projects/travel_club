@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/accommodation/data/models/getlodges_room.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
+import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 
 import '../data/models/facilities_model.dart';
 import '../data/models/getlodge_details.dart';
@@ -18,6 +19,8 @@ class AccomendationCubit extends Cubit<AccomendationState> {
   AccomendationCubit(this.api) : super(DetailsAccomendationPngInitial()) {
     getmarker();
   }
+  bool isChosenChange=false;
+
   int? counter = 1;
   void minusCounter() {
     if (counter! > 1) {
@@ -44,16 +47,29 @@ class AccomendationCubit extends Cubit<AccomendationState> {
     counter = counter! + 1;
     emit(PlusLoaded());
   }
+List<LodgyRoom> selectedRooms =[];
+  double sum=0;
+  void addOrRemoveRoom(LodgyRoom room) {
+    // Toggle room in the selectedRooms list
+    if (selectedRooms.any((selectedRoom) => selectedRoom.id == room.id)) {
+      // Remove if the room with the same ID exists
+      selectedRooms.removeWhere((selectedRoom) => selectedRoom.id == room.id);
 
-  //is added
-  bool? isAdded = true;
-  void addedOrRemove() {
-    print("nono");
-    // isAdded != (isAdded);
-    isAdded = !(isAdded ?? true);
-
-    print("is added" + isAdded.toString() ?? "");
-    emit(IsAddedChange());
+    } else {
+      // Add the room if it doesn't exist
+      selectedRooms.add(room);
+    }
+// for(int i=0;i<=selectedRooms.length;i++){
+// sum += int.parse(selectedRooms[i].totalPrice.toString()??"");
+// }
+    sum = 0; // Reset the sum to avoid accumulation
+    for (var selectedRoom in selectedRooms) {
+      sum += double.tryParse(selectedRoom.totalPrice.toString() ?? "0") ?? 0;
+    }
+    // Log the current count of selected rooms
+    print("Selected rooms count: ${selectedRooms.length}");
+    print(" rooms price: ${sum}");
+    emit(PlusLoaded());
   }
 
   DetailsAccomendationRepoImpl? api;
@@ -300,13 +316,13 @@ String? getFilterValue() {
   }
 GetLodgesRooms lodgesRoomsModel = GetLodgesRooms();
   getRoomsLodges({int? id, required BuildContext context}) async {
-    final res = await api?.getRoomsLodges(lodgeId: id);
+    final res = await api?.getRoomsLodges(lodgeId: id, fromDay: context.read<TransportationCubit>().fromDate, toDay: context.read<TransportationCubit>().toDate, guest: counter);
     emit(LodgesRoomLoading());
     res?.fold((l) {
       emit(LodgesRoomError());
     }, (r) {
+      print("okkkkk send the result");
       lodgesRoomsModel = r;
-      // getUserData();
       emit(LodgesRoomLoaded());
     });
   }

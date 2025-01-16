@@ -234,4 +234,7 @@ class AppTranslations {
   static String get appClose => 'app_close'.tr();
   static String get exit => 'exit'.tr();
   static String get sendResult => 'sent_result'.tr();
+  static String get showHotels => 'show_hotels'.tr();
+  static String get add => 'add'.tr();
+  static String get remove => 'remove'.tr();
 }
