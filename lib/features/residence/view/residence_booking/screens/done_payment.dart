@@ -1,5 +1,5 @@
 import 'package:travel_club/core/widgets/custom_button.dart';
-import 'package:travel_club/features/residence%20module/view/residence_booking/widgets/linear_progress.dart';
+import 'package:travel_club/features/residence%20module/view/residence_booking/screens/widgets/linear_progress.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 
 import '../../../../../core/exports.dart';

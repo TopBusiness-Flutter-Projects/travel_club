@@ -1,6 +1,6 @@
 import 'package:travel_club/features/residence%20module/cubit/residence_cubit.dart';
-import 'package:travel_club/features/residence%20module/view/residence_booking/widgets/custom_container_booking.dart';
-import 'package:travel_club/features/residence%20module/view/residence_booking/widgets/custom_rounded_button.dart';
+import 'package:travel_club/features/residence%20module/view/residence_booking/screens/widgets/custom_container_booking.dart';
+import 'package:travel_club/features/residence%20module/view/residence_booking/screens/widgets/custom_rounded_button.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../../../core/widgets/custom_button.dart';

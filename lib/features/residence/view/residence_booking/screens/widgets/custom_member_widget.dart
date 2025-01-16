@@ -1,5 +1,5 @@
-import '../../../../../core/exports.dart';
-import '../../../cubit/residence_cubit.dart';
+import '../../../../../../core/exports.dart';
+import '../../../../cubit/residence_cubit.dart';
 
 class CustomMemberWidget extends StatelessWidget {
   const CustomMemberWidget({super.key});

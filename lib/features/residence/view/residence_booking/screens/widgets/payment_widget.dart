@@ -1,6 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 
-import '../../../../../core/exports.dart';
+import '../../../../../../core/exports.dart';
 
 class PaymentWidget extends StatelessWidget {
    const PaymentWidget({super.key,this.isDetailsBooking = false});
