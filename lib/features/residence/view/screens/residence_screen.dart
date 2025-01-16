@@ -44,10 +44,10 @@ class _AccomendationScreenState extends State<AccomendationScreen> {
                             mainAxisSpacing: 0,
                             crossAxisSpacing: 0,
                             children: List.generate(
-                                cubit.placesModel.data?.length ?? 0,
+                                cubit.placesModel.data?.places!.length ?? 0,
                                 (index) => AcommendationContainer(
                                       categoryModel:
-                                          cubit.placesModel.data![index],
+                                          cubit.placesModel.data!.places![index],
                                     ))),
                       ),
                       Text(

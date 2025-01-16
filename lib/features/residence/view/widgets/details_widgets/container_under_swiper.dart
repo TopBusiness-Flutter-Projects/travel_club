@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:travel_club/core/widgets/network_image.dart';
 import 'package:travel_club/features/location/screens/position_map.dart';
+import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 
 import '../../../../../core/exports.dart';
-import '../../../cubit/residence_cubit.dart';
 
 class ContainerUnderSwiper extends StatelessWidget {
   const ContainerUnderSwiper({super.key});
@@ -35,37 +36,6 @@ class ContainerUnderSwiper extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // SizedBox(
-                      //   height: getHeightSize(context) * 0.65,
-                      //   width: getWidthSize(context),
-                      //   child: CarouselSlider(
-                      //     items: cubit.lodgesDetailsModel.data!.media!
-                      //         .map((element) => element.image ?? "")
-                      //         .toList()
-                      //         .map((e) => CustomNetworkImage(
-                      //               isDetails: true,
-                      //               image: e,
-                      //               height: getHeightSize(context) * 0.65,
-                      //               width: getWidthSize(context),
-                      //             ))
-                      //         .toList(),
-                      //     options: CarouselOptions(
-                      //         onPageChanged: (index, reason) {
-                      //           // cubit.changeIndex(index);
-                      //         },
-                      //         clipBehavior: Clip.none,
-                      //         autoPlay: true,
-                      //         initialPage: 0,
-                      //         viewportFraction: 1,
-                      //         enableInfiniteScroll: true,
-                      //         reverse: false,
-                      //         autoPlayAnimationDuration:
-                      //             const Duration(seconds: 1),
-                      //         autoPlayCurve: Curves.linear,
-                      //         autoPlayInterval: const Duration(seconds: 5),
-                      //         scrollDirection: Axis.horizontal),
-                      //   ),
-                      // ),
                       SizedBox(
                         height: 7.h,
                       ),
@@ -78,115 +48,136 @@ class ContainerUnderSwiper extends StatelessWidget {
                       ),
                       SizedBox(height: 10.h),
                       Text(
-                        cubit.lodgesDetailsModel.data?.about ??"",
-                       style: getMediumStyle(
+                        cubit.lodgesDetailsModel.data?.about ?? "",
+                        style: getMediumStyle(
                           fontSize: 14.sp,
                           color: AppColors.grey,
                         ),
                       ),
                       SizedBox(height: 20.h),
-                      //curaption icon
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Flexible(
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      CupertinoIcons.square_arrow_right,
-                                      color: AppColors.green,
-                                      size: getWidthSize(context) / 8,
-                                    ),
-                                    SizedBox(
-                                      width: 5.w,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          AppTranslations.checkinTime,
-                                          style:
-                                              getMediumStyle(fontSize: 14.sp),
-                                        ),
-                                        Text(
-                                          "12:00 - 20:00",
-                                          style: getMediumStyle(
-                                              color: AppColors.grey,
-                                              fontSize: 14.sp),
-                                        ),
-                                      ],
-                                    ),
-                                  ]),
-                            ),
-                            Flexible(
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      CupertinoIcons.square_arrow_right,
-                                      color: AppColors.red,
-                                      size: getWidthSize(context) / 8,
-                                    ),
-                                    SizedBox(
-                                      width: 5.w,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          AppTranslations.departureTime,
-                                          style:
-                                              getMediumStyle(fontSize: 14.sp),
-                                        ),
-                                        Text(
-                                          "12:00 - 20:00",
-                                          style: getMediumStyle(
-                                              color: AppColors.grey,
-                                              fontSize: 14.sp),
-                                        ),
-                                      ],
-                                    ),
-                                  ]),
-                            )
-                          ]),
-
+                      if (cubit.lodgesDetailsModel.data!.rule != null)
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Flexible(
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        CupertinoIcons.square_arrow_right,
+                                        color: AppColors.green,
+                                        size: getWidthSize(context) / 8,
+                                      ),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            AppTranslations.checkinTime,
+                                            style:
+                                                getMediumStyle(fontSize: 14.sp),
+                                          ),
+                                          Text(
+                                            cubit.lodgesDetailsModel.data!.rule!
+                                                .checkIn
+                                                .toString(),
+                                            style: getMediumStyle(
+                                                color: AppColors.grey,
+                                                fontSize: 14.sp),
+                                          ),
+                                        ],
+                                      ),
+                                    ]),
+                              ),
+                              Flexible(
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        CupertinoIcons.square_arrow_left,
+                                        color: AppColors.red,
+                                        size: getWidthSize(context) / 8,
+                                      ),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            AppTranslations.departureTime,
+                                            style:
+                                                getMediumStyle(fontSize: 14.sp),
+                                          ),
+                                          Text(
+                                            cubit.lodgesDetailsModel.data!.rule!
+                                                .checkOut
+                                                .toString(),
+                                            style: getMediumStyle(
+                                                color: AppColors.grey,
+                                                fontSize: 14.sp),
+                                          ),
+                                        ],
+                                      ),
+                                    ]),
+                              )
+                            ]),
                       SizedBox(
                         height: 20.h,
                       ),
-                      Text(
-                        AppTranslations.whatItOffers,
-                        style: getMediumStyle(
-                          color: AppColors.secondPrimary,
-                          fontSize: 14.sp,
+                      if (cubit.lodgesDetailsModel.data!.facilities != null &&
+                          cubit.lodgesDetailsModel.data!.facilities!
+                              .isNotEmpty) ...[
+                        Text(
+                          AppTranslations.whatItOffers,
+                          style: getMediumStyle(
+                            color: AppColors.secondPrimary,
+                            fontSize: 14.sp,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 10.h),
-                      SizedBox(
-                        height: 80,
-                        child: ListView.builder(
-                          itemCount: 20,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0.w),
-                              child: Column(
-                                children: [
-                                  SvgPicture.asset(AppIcons.profile),
-                                  SizedBox(height: 10.h),
-                                  Text(
-                                    "حمام سباحة",
-                                    style: getMediumStyle(fontSize: 12.sp),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
+                        SizedBox(height: 10.h),
+                        SizedBox(
+                          height: 80,
+                          child: ListView.builder(
+                            itemCount: cubit
+                                .lodgesDetailsModel.data!.facilities!.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 10.0.w),
+                                child: Column(
+                                  children: [
+                                    CustomNetworkImage(
+                                        image: cubit.lodgesDetailsModel.data!
+                                                .facilities![index].image ??
+                                            "",
+                                        height: 25.h,
+                                        width: 25.h),
+                                    SizedBox(height: 10.h),
+                                    Text(
+                                      cubit.lodgesDetailsModel.data!
+                                              .facilities![index].name ??
+                                          "",
+                                      style: getMediumStyle(fontSize: 12.sp),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                      PositionMap(lat: 30.245, long: 30.21),
+                      ],
+                      if (cubit.lodgesDetailsModel.data!.latitude != null ||
+                          cubit.lodgesDetailsModel.data!.longitude != null)
+                        PositionMap(
+                          lat: cubit.lodgesDetailsModel.data!.latitude!,
+                          long: cubit.lodgesDetailsModel.data!.longitude!,
+                        ),
                       SizedBox(height: 60.h),
                     ],
                   ),
