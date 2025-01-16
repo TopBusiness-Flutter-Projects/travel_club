@@ -39,7 +39,9 @@ class LoginCubit extends Cubit<LoginState> {
   String userPhoto = '';
   String userName = '';
   String? accessToken = '';
-  Future<UserCredential?> signInWithGoogle(BuildContext context,) async {
+  Future<UserCredential?> signInWithGoogle(
+    BuildContext context,
+  ) async {
     await signOutFromGmail();
     print("Starting Google Sign-In process...");
 
@@ -71,7 +73,8 @@ class LoginCubit extends Cubit<LoginState> {
       print("ID Token retrieved: ${googleAuth.idToken != null}");
       print("ID Token retrieved: ${googleAuth.idToken.toString()}");
       if (googleAuth.accessToken != null) {
-        loginWithGoogle(context, accessToken: googleAuth.accessToken.toString());
+        loginWithGoogle(context,
+            accessToken: googleAuth.accessToken.toString());
       }
       // Validate tokens
       if (googleAuth.accessToken == null || googleAuth.idToken == null) {
@@ -210,9 +213,19 @@ class LoginCubit extends Cubit<LoginState> {
         successGetBar(r.msg);
         prefs.setBool("ISLOGGED", true);
         Preferences.instance.setUser(r);
-
-        Navigator.pushNamedAndRemoveUntil(
+        if (r.data?.isRegister != null) {
+          r.data?.isRegister??false ?
+            Navigator.pushNamedAndRemoveUntil(
+            context, Routes.apply, (route) => false)
+          :
+            Navigator.pushNamedAndRemoveUntil(
             context, Routes.mainRoute, (route) => false);
+        } else {
+            Navigator.pushNamedAndRemoveUntil(
+            context, Routes.mainRoute, (route) => false);
+        }
+
+      
       }
     });
   }
@@ -367,6 +380,32 @@ class LoginCubit extends Cubit<LoginState> {
     });
   }
 
+  acceptReferral(BuildContext context, {required String code}) async {
+    emit(LoadingLoginState());
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    final response = await api.acceptReferral(
+      code: code,
+    );
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(FailureLoginState());
+    }, (r) {
+      Navigator.pop(context);
+      print("code: ${r.status.toString()}");
+      if (r.status != 200 && r.status != 201) {
+        errorGetBar(r.msg!);
+      } else {
+        emit(SuccessLoginState());
+
+        successGetBar(r.msg);
+
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.mainRoute, (route) => false);
+      }
+    });
+  }
+
   logout(BuildContext context) async {
     emit(LoadingLoginState());
     AppWidget.createProgressDialog(context, AppTranslations.loading);
@@ -380,7 +419,7 @@ class LoginCubit extends Cubit<LoginState> {
       if (r.status != 200 && r.status != 201) {
         Navigator.pop(context);
         prefs.setBool("ISLOGGED", false);
-       
+
         Preferences.instance.clearUser();
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.loginRoute, (route) => false);
@@ -388,7 +427,7 @@ class LoginCubit extends Cubit<LoginState> {
         Navigator.pop(context);
         successGetBar(r.msg);
         prefs.setBool("ISLOGGED", false);
-        
+
         Preferences.instance.clearUser();
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.loginRoute, (route) => false);

@@ -132,6 +132,24 @@ class LoginRepoImpl {
       return Left(ServerFailure());
     }
   }
+  Future<Either<Failure, DefaultPostModel>> acceptReferral({
+  
+    required String code,
+  }) async {
+   
+    try {
+      var response = await api.post(
+        EndPoints.checkLoyaltyPointsUrl,
+        body: {
+        
+          'code': code,
+        },
+      );
+      return Right(DefaultPostModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
   Future<Either<Failure, DefaultPostModel>> validateOtp({
  
     required String phone,

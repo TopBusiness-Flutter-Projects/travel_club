@@ -14,7 +14,7 @@ class ApplyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<LoginCubit>();
-    late TextEditingController codeController = TextEditingController();
+    TextEditingController codeController = TextEditingController();
 
     return BlocBuilder<LoginCubit, LoginState>(
         builder: (BuildContext context, state) {
@@ -55,6 +55,7 @@ class ApplyScreen extends StatelessWidget {
               ),
               CustomTextField(
                 controller: codeController,
+                keyboardType: TextInputType.number,
                 title: AppTranslations.enterCode,
                 hintText: "",
               ),
@@ -119,7 +120,6 @@ class ApplyScreen extends StatelessWidget {
                                               textColor: AppColors.primary,
                                               borderColor: AppColors.primary,
                                               onTap: () {
-                                                
                                                 Navigator
                                                     .pushNamedAndRemoveUntil(
                                                         context,
@@ -143,7 +143,7 @@ class ApplyScreen extends StatelessWidget {
                           );
                         });
                   } else {
-                    // cubit.acceptReferral(context, code: code.text);
+                    cubit.acceptReferral(context, code: codeController.text);
                   }
                 },
               )

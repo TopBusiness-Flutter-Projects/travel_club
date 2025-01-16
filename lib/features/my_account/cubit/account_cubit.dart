@@ -39,16 +39,20 @@ class AccountCubit extends Cubit<AccountState> {
       res.fold((l) {
         emit(GetAccountError());
       }, (r) {
-        loginModel = r;
-        if (r.data != null) {
-          nameController.text = loginModel.data!.name!;
-          phoneController.text = loginModel.data!.phone.toString();
-        } else {
-          prefs.setBool("ISLOGGED", false);    
-           Preferences.instance.clearUser();    
+        if (r.status == 200 || r.status == 201) {
+          loginModel = r;
+          if (r.data != null) {
+            nameController.text = r.data!.name!;
+            phoneController.text = r.data!.phone.toString();
+          }
+        } else if (r.status == 401 || r.status == 407 || r.status == 403) {
+          prefs.setBool("ISLOGGED", false);
+          Preferences.instance.clearUser();
         }
+
         emit(GetAccountSuccess());
       });
     }
   }
 }
+// Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RyYXZlbC50b3BidXNpbmVzcy5lYmhhcmJvb2suY29tL2FwaS92MS9sb2dpbi9nb29nbGUiLCJpYXQiOjE3MzY2Nzk4NzMsImV4cCI6MTc2ODIxNTg3MywibmJmIjoxNzM2Njc5ODczLCJqdGkiOiJha21ja3VoWFhKTFdhamNlIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.uGiUcBdTaHcm_Wt1irBsXi6-FSp9Gf_n_uV505p43-M

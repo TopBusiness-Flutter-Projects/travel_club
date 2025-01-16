@@ -18,8 +18,20 @@ class _PositionMapState extends State<PositionMap> {
   @override
   void initState() {
     super.initState();
-    context.read<LocationCubit>().getAddressFromLatLng(widget.lat, widget.long);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        context
+            .read<LocationCubit>()
+            .getAddressFromLatLng(widget.lat, widget.long);
+      }
+    });
   }
+
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   context.read<LocationCubit>().mapControllerPosition?.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +56,7 @@ class _PositionMapState extends State<PositionMap> {
                 width: double.infinity,
                 height: getHeightSize(context) * 0.3,
                 decoration: BoxDecoration(
-                  color: AppColors.red,
+                  color: AppColors.transparent,
                   borderRadius: BorderRadius.all(
                     Radius.circular(10.r),
                   ),
@@ -63,7 +75,7 @@ class _PositionMapState extends State<PositionMap> {
                               widget.lat,
                               widget.long,
                             ),
-                            zoom: 12,
+                            zoom: 10,
                           ),
                           onMapCreated: (GoogleMapController controller) {
                             cubit.mapControllerPosition = controller;

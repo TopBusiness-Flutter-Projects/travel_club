@@ -1,6 +1,7 @@
+import 'package:travel_club/features/residence/view/residence_booking/screens/widgets/custom_rounded_button.dart';
+
 import '../../../../../core/exports.dart';
 import '../../../../../core/widgets/custom_button.dart';
-import '../../../../accommodation/view/booking_accommodation/screens/widgets/custom_rounded_button.dart';
 import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/cubit/transportation_state.dart';
 import '../../../../transportation/screens/trip_details_second_screen.dart';

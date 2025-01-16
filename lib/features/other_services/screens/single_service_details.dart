@@ -1,9 +1,9 @@
-import 'package:travel_club/features/accommodation/view/widgets/details_widgets/custom_appbar_row.dart';
-import 'package:travel_club/features/accommodation/view/widgets/details_widgets/custom_swiper.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_cubit.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_state.dart';
 import 'package:travel_club/features/other_services/screens/widgets/custom_in_center_others.dart';
 import 'package:travel_club/features/other_services/screens/widgets/custom_under_swiper.dart';
+import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_appbar_row.dart';
+import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_swiper.dart';
 import '../../../../../core/exports.dart';
 class ServiceDetailsScreen extends StatelessWidget {
   const ServiceDetailsScreen({super.key});
