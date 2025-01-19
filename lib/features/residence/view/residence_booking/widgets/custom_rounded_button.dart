@@ -4,13 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
 
 class CustomRoundedButton extends StatelessWidget {
-   CustomRoundedButton({super.key, this.onTap,this.title,this.width,this.height,this.isBooking,this.icon});
-  void Function()? onTap;
-  String ?title;
-  double? width;
-  double? height;
-  bool ?isBooking;
-  IconData ?icon;
+   const CustomRoundedButton({super.key, this.onTap,this.title,this.width,this.height,this.isBooking,this.icon});
+ final void Function()? onTap;
+ final String ?title;
+ final double? width;
+ final double? height;
+ final bool ?isBooking;
+ final IconData ?icon;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

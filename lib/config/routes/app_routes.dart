@@ -74,8 +74,8 @@ class Routes {
   static const String detailsBooking = '/detailsBooking';
   static const String compainiesEntertainment = '/compainiesEntertainment';
   static const String entertainmentScreen = '/entertainmentScreen';
-  static const String bookingAccomodation = '/bookingAccomodation';
-  static const String accomendation = '/accomendation';
+  static const String bookingResidenceRoute = '/bookingResidenceRoute';
+  static const String residenceRoute = '/residenceRoute';
   static const String foodScreen = '/foodScreen';
   static const String detailsBookingFood = '/detailsBookingFood';
   static const String detailsEntertainment = '/detailsEntertainment';
@@ -85,8 +85,7 @@ class Routes {
   static const String transportationRoute = '/transportationRoute';
   static const String subServicesRoute = '/subServicesRoute';
   static const String detailsOtherServices = '/detailsOtherServices';
-  static const String secondBookingAccommodation =
-      '/secondBookingAccommodation';
+  static const String secondBookingResidence = '/secondBookingResidence';
   static const String detailsFoodRoute = '/detailsFoodRoute';
   static const String bookTable = '/bookTable';
   static const String bookTableEntermaint = '/bookTableEntermaint';
@@ -311,17 +310,17 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
 
-      case Routes.accomendation:
+      case Routes.residenceRoute:
         return PageTransition(
-          child: const AccomendationScreen(),
+          child: const ResidenceScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-      case Routes.bookingAccomodation:
+      case Routes.bookingResidenceRoute:
         int lodgeId = settings.arguments as int;
         return PageTransition(
-          child: AccommodationBooking(lodgeId: lodgeId),
+          child: ResidenceBooking(lodgeId: lodgeId),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -399,9 +398,9 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
 
-      case Routes.secondBookingAccommodation:
+      case Routes.secondBookingResidence:
         return PageTransition(
-          child: const SecondAccommodationBooking(),
+          child: const SecondResidenceBooking(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

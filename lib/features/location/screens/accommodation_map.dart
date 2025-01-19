@@ -39,7 +39,7 @@ class _AccomodationMapState extends State<AccomodationMap> {
                     cubit.currentLocation?.latitude ?? 0.0,
                     cubit.currentLocation?.longitude ?? 0.0,
                   ),
-            zoom: 12,
+            zoom: 10,
           ),
           onMapCreated: (GoogleMapController controller) {
             cubit.mapControllerAccommodation = controller;

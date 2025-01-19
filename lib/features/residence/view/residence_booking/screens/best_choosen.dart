@@ -1,4 +1,3 @@
-
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
 
 import '../../../../../core/exports.dart';
@@ -27,29 +26,24 @@ class _BestChosenScreenState extends State<BestChosenScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, Routes.secondBookingAccommodation);
-                        },
-                        child: Text(
-                          AppTranslations.skip,
-                          style: getSemiBoldStyle(fontSize: 16.sp),
-                        )),
-                    if (cubit.isChosenChange) ...[
-                      Spacer(),
-                      //  isChosenChange?
-                      CustomButton(
-                        title: AppTranslations.next,
-                        width: 179.w,
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, Routes.secondBookingAccommodation);
-                        },
-                      )
-                    ]
-
-                    //:Container()
+                    cubit.changedRooms == 0
+                        ? CustomButton(
+                            isBordered: true,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, Routes.secondBookingResidence);
+                            },
+                            title: AppTranslations.skip,
+                            width: getWidthSize(context) / 2,
+                          )
+                        : CustomButton(
+                            title: AppTranslations.confirm,
+                            width: getWidthSize(context) / 2,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, Routes.secondBookingResidence);
+                            },
+                          )
                   ],
                 ),
               )),
@@ -59,16 +53,23 @@ class _BestChosenScreenState extends State<BestChosenScreen> {
             children: [
               Expanded(
                 // This should be directly inside a Column, Row, or Flex
-                child: ListView.builder(
+                child: ListView.separated(
                   shrinkWrap: true,
                   itemCount: cubit.selectedRooms.length,
+                  separatorBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: Divider(
+                      thickness: 2,
+                      color: AppColors.grey1,
+                    ),
+                  ),
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 10.h),
+                          // SizedBox(height: 5.h),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(AppTranslations.yourChoose,
@@ -88,14 +89,13 @@ class _BestChosenScreenState extends State<BestChosenScreen> {
                             Center(
                               child: CustomContainerBooking(
                                 room: cubit.selectedRooms[index].recommend,
-                                //   isRecommended: true,
                                 widgetBottom: GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      cubit.isChosenChange =
-                                          !cubit.isChosenChange;
-                                      print("nono");
-                                      print(cubit.isChosenChange.toString());
+                                      cubit.selectedRooms[index].recommend!
+                                              .isSelectedRecommend
+                                          ? cubit.changedRooms--
+                                          : cubit.changedRooms++;
                                     });
                                     cubit.selectedRooms[index].recommend!
                                             .isSelectedRecommend =
@@ -104,8 +104,10 @@ class _BestChosenScreenState extends State<BestChosenScreen> {
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: CustomRoundedButton(
+                                    child: CustomButton(
                                       width: double.infinity,
+                                      isBordered: cubit.selectedRooms[index]
+                                          .recommend!.isSelectedRecommend,
                                       title: cubit.selectedRooms[index]
                                               .recommend!.isSelectedRecommend
                                           ? AppTranslations.chooseDone

@@ -121,6 +121,7 @@ class AppTranslations {
   static String get yourSeat => 'your_seat'.tr();
   static String get tripDetails => 'trip_details'.tr();
   static String get next => 'next'.tr();
+  static String get confirm => 'confirm'.tr();
   static String get numberOfSeats => 'number_of_seats'.tr();
   static String get ticketPrice => 'ticket_price'.tr();
   static String get quantity => 'quantity'.tr();
@@ -237,4 +238,7 @@ class AppTranslations {
   static String get showHotels => 'show_hotels'.tr();
   static String get add => 'add'.tr();
   static String get remove => 'remove'.tr();
+  static String get gallery => 'gallery'.tr();
+  static String get camera => 'camera'.tr();
+  static String get selectImage => 'select_image'.tr();
 }
