@@ -27,13 +27,9 @@ class _LodgesScreenState extends State<LodgesScreen> {
   @override
   void initState() {
     context.read<ResidenceCubit>().lodgesModel = GetLodgesModel();
-    context
-        .read<ResidenceCubit>()
-        .getLodges(placeId: widget.arguments!.placeId, context: context);
-
+    context.read<ResidenceCubit>().getLodges(placeId: widget.arguments!.placeId, context: context);
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ResidenceCubit, ResidenceState>(

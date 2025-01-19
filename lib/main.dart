@@ -1,16 +1,10 @@
 import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:shorebird_code_push/shorebird_code_push.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travel_club/config/routes/app_routes.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/injector.dart' as injector;
@@ -136,8 +130,7 @@ void main() async {
     iOS: initializationSettingsIOS,
   );
 
-  await flutterLocalNotificationsPlugin.initialize(
-    initializationSettings,
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
 // هنا بنقوله لما تضغط علي الاشعار حتعمل ايه
     onDidReceiveNotificationResponse: (NotificationResponse details) async {
       navigatorKey.currentState?.pushNamed(Routes.notificationScreen);
@@ -147,8 +140,7 @@ void main() async {
   );
 
   if (Platform.isAndroid) {
-    flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
+    flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
   }
@@ -167,7 +159,9 @@ void main() async {
   AndroidOptions _getAndroidOptions() => const AndroidOptions(
     encryptedSharedPreferences: true,
   );
-  IOSOptions _getIOSOptions() => IOSOptions(accessibility: KeychainAccessibility.first_unlock);
+  IOSOptions _getIOSOptions() => IOSOptions(
+      accessibility: KeychainAccessibility.first_unlock
+  );
 
   prefs = await SharedPreferences.getInstance();
   storage = await  FlutterSecureStorage(aOptions: _getAndroidOptions());;
