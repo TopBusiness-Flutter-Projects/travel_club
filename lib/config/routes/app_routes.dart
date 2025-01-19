@@ -12,12 +12,12 @@ import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/other_services/screens/other_services_screen.dart';
 import 'package:travel_club/features/other_services/screens/single_service_details.dart';
 import 'package:travel_club/features/residence/view/residence_booking/screens/best_choosen.dart';
-import 'package:travel_club/features/residence/view/residence_booking/screens/booking_accommodation_screen.dart';
+import 'package:travel_club/features/residence/view/residence_booking/screens/residence_booking_screen.dart';
 import 'package:travel_club/features/residence/view/residence_booking/screens/done_payment.dart';
 import 'package:travel_club/features/residence/view/residence_booking/screens/payment_process_screen.dart';
-import 'package:travel_club/features/residence/view/residence_booking/screens/second_booking_accommodation_screen.dart';
+import 'package:travel_club/features/residence/view/residence_booking/screens/second_residence_booking_screen.dart';
 import 'package:travel_club/features/residence/view/screens/lodges_screen.dart';
-import 'package:travel_club/features/residence/view/screens/residence_details.dart';
+import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
 import 'package:travel_club/features/residence/view/screens/residence_screen.dart';
 import 'package:travel_club/features/search/screens/search_screen.dart';
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
@@ -79,7 +79,7 @@ class Routes {
   static const String foodScreen = '/foodScreen';
   static const String detailsBookingFood = '/detailsBookingFood';
   static const String detailsEntertainment = '/detailsEntertainment';
-  static const String detailsAccomendation = '/detailsAccomendation';
+  static const String lodgeDetailsRoute = '/lodgeDetails';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
   static const String otherServicesRoute = '/otherServicesRoute';
   static const String transportationRoute = '/transportationRoute';
@@ -229,10 +229,11 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-      case Routes.detailsAccomendation:
-        int id = settings.arguments as int;
+      case Routes.lodgeDetailsRoute:
+        LodgeDetailsArguments args =
+            settings.arguments as LodgeDetailsArguments;
         return PageTransition(
-          child: ResidenceDetails(id: id),
+          child: LodgeDetailsScreen(args: args),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -298,7 +299,7 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.hotelsScreen:
-        LodgesScreenArguments? arguments =
+        LodgesScreenArguments arguments =
             settings.arguments as LodgesScreenArguments;
 
         return PageTransition(
@@ -318,8 +319,9 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.bookingAccomodation:
+        int lodgeId = settings.arguments as int;
         return PageTransition(
-          child: const AccommodationBooking(),
+          child: AccommodationBooking(lodgeId: lodgeId),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

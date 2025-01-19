@@ -3,7 +3,7 @@ import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../cubit/residence_cubit.dart';
-import 'widgets/linear_progress.dart';
+import '../widgets/linear_progress.dart';
 
 class DonePaymentScreen extends StatelessWidget {
   DonePaymentScreen({super.key, this.isFood});

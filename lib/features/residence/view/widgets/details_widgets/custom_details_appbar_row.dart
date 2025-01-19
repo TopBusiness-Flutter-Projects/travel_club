@@ -2,11 +2,12 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../../../core/exports.dart';
 
-class CustomRow extends StatelessWidget {
-  const CustomRow({super.key, this.onTap, this.sharedLink , this.isFav = false});
+class CustomDetailsAppBar extends StatelessWidget {
+  const CustomDetailsAppBar(
+      {super.key, this.onTap, this.sharedLink, this.isFav = false});
   final void Function()? onTap;
   final String? sharedLink;
-  final bool isFav;  
+  final bool isFav;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +26,8 @@ class CustomRow extends StatelessWidget {
             style: getMediumStyle(color: AppColors.white, fontSize: 16.sp),
           )),
           InkWell(
-            onTap: ()async {
-              await Share.share(sharedLink??"");
+            onTap: () async {
+              await Share.share(sharedLink ?? "");
             },
             child: Container(
                 width: 44.w, // Adjust size as needed

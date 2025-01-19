@@ -15,7 +15,7 @@ class TransportationCubit extends Cubit<TransportationState> {
   }
 
   ///// from and to cities
- bool isFavoriteTrue = false;
+  bool isFavoriteTrue = false;
   List<String> cities = ['القاهرة', 'اسيوط'];
   String? bookingFromvalue;
   String? bookingTovalue;
@@ -31,10 +31,11 @@ class TransportationCubit extends Cubit<TransportationState> {
 
   ////// from and to dates
   DateTime selectedStartDate = DateTime.now();
-  DateTime selectedEndDate = DateTime.now();
+  DateTime selectedEndDate = DateTime.now().add(const Duration(days: 1));
   DateTime selectedDate = DateTime.now();
   String fromDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
-  String toDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
+  String toDate = DateFormat('yyyy-MM-dd', 'en')
+      .format(DateTime.now().add(const Duration(days: 1)));
   String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
   void onSelectedDate(
       {required bool isStartDate, required BuildContext context}) async {

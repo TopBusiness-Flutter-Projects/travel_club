@@ -1,6 +1,6 @@
 //small conatiner
 import 'package:flutter_rating/flutter_rating.dart';
-import 'package:travel_club/features/residence/view/widgets/acommendation_widgets/accomendation_rating.dart';
+import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
 
 import '../../../../../../core/exports.dart';
 

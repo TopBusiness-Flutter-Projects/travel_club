@@ -21,7 +21,6 @@ class AppColors {
   static Color onboarding3 = HexColor('#A2CCCA');
   static Color promocodeBackground = HexColor('#F6F7F9');
   static Color white = Colors.white;
-
   // static Color red = HexColor('#FF0000');
   static Color black = Colors.black;
   static Color blackLite = Colors.black12;
