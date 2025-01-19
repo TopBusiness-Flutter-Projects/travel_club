@@ -5,8 +5,8 @@ import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 
 import '../../../../../core/exports.dart';
 
-class ContainerUnderSwiper extends StatelessWidget {
-  const ContainerUnderSwiper({super.key});
+class LodgeDetailsBody extends StatelessWidget {
+  const LodgeDetailsBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,29 +66,32 @@ class ContainerUnderSwiper extends StatelessWidget {
                                       Icon(
                                         CupertinoIcons.square_arrow_right,
                                         color: AppColors.green,
-                                        size: getWidthSize(context) / 8,
+                                        size: getWidthSize(context) / 9,
                                       ),
                                       SizedBox(
                                         width: 5.w,
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            AppTranslations.checkinTime,
-                                            style:
-                                                getMediumStyle(fontSize: 14.sp),
-                                          ),
-                                          Text(
-                                            cubit.lodgesDetailsModel.data!.rule!
-                                                .checkIn
-                                                .toString(),
-                                            style: getMediumStyle(
-                                                color: AppColors.grey,
-                                                fontSize: 14.sp),
-                                          ),
-                                        ],
+                                      Flexible(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              AppTranslations.checkinTime,
+                                              style: getMediumStyle(
+                                                  fontSize: 14.sp),
+                                            ),
+                                            AutoSizeText(
+                                              cubit.lodgesDetailsModel.data!
+                                                  .rule!.checkIn
+                                                  .toString(),
+                                              maxLines: 2,
+                                              style: getMediumStyle(
+                                                  color: AppColors.grey,
+                                                  fontSize: 14.sp),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ]),
                               ),
@@ -99,29 +102,32 @@ class ContainerUnderSwiper extends StatelessWidget {
                                       Icon(
                                         CupertinoIcons.square_arrow_left,
                                         color: AppColors.red,
-                                        size: getWidthSize(context) / 8,
+                                        size: getWidthSize(context) / 9,
                                       ),
                                       SizedBox(
                                         width: 5.w,
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            AppTranslations.departureTime,
-                                            style:
-                                                getMediumStyle(fontSize: 14.sp),
-                                          ),
-                                          Text(
-                                            cubit.lodgesDetailsModel.data!.rule!
-                                                .checkOut
-                                                .toString(),
-                                            style: getMediumStyle(
-                                                color: AppColors.grey,
-                                                fontSize: 14.sp),
-                                          ),
-                                        ],
+                                      Flexible(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              AppTranslations.checkOut,
+                                              style: getMediumStyle(
+                                                  fontSize: 14.sp),
+                                            ),
+                                            AutoSizeText(
+                                              cubit.lodgesDetailsModel.data!
+                                                  .rule!.checkOut
+                                                  .toString(),
+                                              maxLines: 2,
+                                              style: getMediumStyle(
+                                                  color: AppColors.grey,
+                                                  fontSize: 14.sp),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ]),
                               )
@@ -172,7 +178,7 @@ class ContainerUnderSwiper extends StatelessWidget {
                           ),
                         ),
                       ],
-                      if (cubit.lodgesDetailsModel.data!.latitude != null ||
+                      if (cubit.lodgesDetailsModel.data!.latitude != null &&
                           cubit.lodgesDetailsModel.data!.longitude != null)
                         PositionMap(
                           lat: cubit.lodgesDetailsModel.data!.latitude!,

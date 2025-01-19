@@ -1,5 +1,5 @@
-import '../../../../../../core/exports.dart';
-import '../../../../data/models/getlodges_room.dart';
+import '../../../../../core/exports.dart';
+import '../../../data/models/rooms_model.dart';
 
 class CustomRoomsWidget extends StatelessWidget {
   const CustomRoomsWidget({super.key,required this.facility});

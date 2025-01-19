@@ -4,8 +4,8 @@ import 'package:travel_club/features/residence/view/screens/lodges_screen.dart';
 
 import '../../../../../core/exports.dart';
 
-class AcommendationContainer extends StatelessWidget {
-  const AcommendationContainer({
+class CustomPlaceContainer extends StatelessWidget {
+  const CustomPlaceContainer({
     super.key,
     required this.categoryModel,
   });
@@ -18,7 +18,8 @@ class AcommendationContainer extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(context, Routes.hotelsScreen,
               arguments: LodgesScreenArguments(
-                  placeId: categoryModel.id!, title: categoryModel.name.toString()));
+                  placeId: categoryModel.id!,
+                  title: categoryModel.name.toString()));
         },
         child: CustomContainerWithShadow(
           // width: getWidthSize(context) * 0.27,

@@ -5,9 +5,9 @@ import '../../../../core/api/end_points.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../models/facilities_model.dart';
-import '../models/getlodge_details.dart';
-import '../models/getlodges_model.dart';
-import '../models/getlodges_room.dart';
+import '../models/lodge_details_model.dart';
+import '../models/lodges_model.dart';
+import '../models/rooms_model.dart';
 import '../models/places_model.dart';
 
 class ResidenceRepoImpl {
@@ -65,8 +65,8 @@ class ResidenceRepoImpl {
   }
 
   //get details lodges
-  Future<Either<Failure, GetLodgeDetail>> getDetailsLodges(
-      {required int? lodgeId}) async {
+  Future<Either<Failure, GetLodgeDetailModel>> getDetailsLodges(
+      {required int lodgeId}) async {
     try {
       var response = await dio.get(
         EndPoints.getLodgesDetailsUrl,
@@ -74,7 +74,7 @@ class ResidenceRepoImpl {
           "lodge_id": lodgeId,
         },
       );
-      return Right(GetLodgeDetail.fromJson(response));
+      return Right(GetLodgeDetailModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }
@@ -82,15 +82,15 @@ class ResidenceRepoImpl {
 
 //get LodgesRooms
   Future<Either<Failure, GetLodgesRooms>> getRoomsLodges(
-      {required int? lodgeId,
-      required String? fromDay,
-      required String? toDay,
-      required int? guest}) async {
+      {required int lodgeId,
+      required String fromDay,
+      required String toDay,
+      required int guest}) async {
     try {
       var response = await dio.get(
         EndPoints.getLodgesRoomsUrl,
         queryParameters: {
-          "lodge_id": "2",
+          "lodge_id": lodgeId,
           "fromDay": fromDay,
           "toDay": toDay,
           "guest": guest

@@ -1,5 +1,5 @@
-import 'package:travel_club/features/residence/view/widgets/acommendation_widgets/accomendadation_container.dart';
-import 'package:travel_club/features/residence/view/widgets/acommendation_widgets/accomendation_rating.dart';
+import 'package:travel_club/features/residence/view/widgets/residence_widgets/place_container.dart';
+import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
 
 import '../../../../core/exports.dart';
 import '../../cubit/residence_cubit.dart';
@@ -45,30 +45,30 @@ class _AccomendationScreenState extends State<AccomendationScreen> {
                             crossAxisSpacing: 0,
                             children: List.generate(
                                 cubit.placesModel.data?.places!.length ?? 0,
-                                (index) => AcommendationContainer(
+                                (index) => CustomPlaceContainer(
                                       categoryModel:
                                           cubit.placesModel.data!.places![index],
                                     ))),
                       ),
+                      if (cubit.placesModel.data?.lodges != null)
+                      if (cubit.placesModel.data!.lodges!.isNotEmpty)
+                      ...[
                       Text(
                         AppTranslations.mostPlaceRating,
                         style: getMediumStyle(fontSize: 14.sp),
                       ),
                       Expanded(
                         child: ListView.separated(
-                            // physics: (),
                             shrinkWrap: true,
-                            // scrollDirection: Axis.horizontal,
-                            itemCount: 6,
+                            itemCount: cubit.placesModel.data!.lodges!.length ,
                             separatorBuilder: (context, index) => SizedBox(
                                   width: 10.w,
                                   height: 1.h,
                                 ),
                             itemBuilder: (context, index) =>
                                 CustomLodgeContainer(
-                                    hotelsModel: cubit.defaultLodge)),
-                      ),
-                      // Expanded(child: AccomendationRating(hotelsModel: HotelsModel(title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 , discription: '٢٠٠ فرد قام بتقيم الفندق', image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),))
+                                    hotelsModel:cubit.placesModel.data!.lodges![index] )),
+                      ),]
                     ],
                   ),
                 ),

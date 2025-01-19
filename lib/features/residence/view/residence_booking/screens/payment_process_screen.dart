@@ -2,7 +2,7 @@ import 'package:travel_club/core/widgets/custom_button.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../cubit/residence_cubit.dart';
-import 'widgets/linear_progress.dart';
+import '../widgets/linear_progress.dart';
 
 class PaymentProcessScreen extends StatelessWidget {
   const PaymentProcessScreen({super.key});

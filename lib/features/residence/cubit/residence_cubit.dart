@@ -1,30 +1,30 @@
+// ignore_for_file: avoid_print
+
 import 'dart:ui' as ui;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
-import 'package:travel_club/features/residence/data/models/getlodges_room.dart';
+import 'package:travel_club/features/residence/data/models/rooms_model.dart';
 import 'package:travel_club/features/residence/view/widgets/hotels_widgets/custom_check_box.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 
 import '../data/models/facilities_model.dart';
-import '../data/models/getlodge_details.dart';
-import '../data/models/getlodges_model.dart';
+import '../data/models/lodge_details_model.dart';
+import '../data/models/lodges_model.dart';
 import '../data/models/places_model.dart';
 import '../data/repo/residence_repo_impl.dart';
 
 part 'residence_state.dart';
 
 class ResidenceCubit extends Cubit<ResidenceState> {
-  ResidenceCubit(this.api) : super(ResidenceInitial()) {
-    getmarker();
-  }
+  ResidenceCubit(this.api) : super(ResidenceInitial());
   bool isChosenChange = false;
 
-  int? counter = 1;
+  int counter = 1;
   void minusCounter() {
-    if (counter! > 1) {
-      counter = counter! - 1;
+    if (counter > 1) {
+      counter = counter - 1;
       emit(MinusLoaded());
     }
   }
@@ -44,35 +44,28 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   }
 
   void plusCounter() {
-    counter = counter! + 1;
+    counter = counter + 1;
     emit(PlusLoaded());
   }
 
-  List<LodgyRoom> selectedRooms = [];
+  List<RoomModel> selectedRooms = [];
   double sum = 0;
-  void addOrRemoveRoom(LodgyRoom room) {
-    // Toggle room in the selectedRooms list
+  void addOrRemoveRoom(RoomModel room) {
     if (selectedRooms.any((selectedRoom) => selectedRoom.id == room.id)) {
-      // Remove if the room with the same ID exists
       selectedRooms.removeWhere((selectedRoom) => selectedRoom.id == room.id);
     } else {
-      // Add the room if it doesn't exist
       selectedRooms.add(room);
     }
-// for(int i=0;i<=selectedRooms.length;i++){
-// sum += int.parse(selectedRooms[i].totalPrice.toString()??"");
-// }
+
     sum = 0; // Reset the sum to avoid accumulation
     for (var selectedRoom in selectedRooms) {
-      sum += double.tryParse(selectedRoom.totalPrice.toString() ?? "0") ?? 0;
+      sum += double.tryParse(selectedRoom.totalPrice.toString()) ?? 0;
     }
-    // Log the current count of selected rooms
-    print("Selected rooms count: ${selectedRooms.length}");
-    print(" rooms price: ${sum}");
+
     emit(PlusLoaded());
   }
 
-  ResidenceRepoImpl? api;
+  ResidenceRepoImpl api;
   int currentIndex = 0;
 
   void changeIndex(int index) {
@@ -80,13 +73,6 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     emit(ChangeIndex());
   }
 
-  // final List<String> imageUrls = [
-  //   'https://th.bing.com/th/id/OIP.FtudhIBH-HYhxMpS4TU-sAHaE8?rs=1&pid=ImgDetMain', // Replace with your image URLs
-  //   'https://th.bing.com/th/id/OIP.FtudhIBH-HYhxMpS4TU-sAHaE8?rs=1&pid=ImgDetMain', // Replace with your image URLs
-  //   'https://th.bing.com/th/id/OIP.FtudhIBH-HYhxMpS4TU-sAHaE8?rs=1&pid=ImgDetMain', // Replace with your image URLs
-  // ];
-  //filter results
-  //starsFilters
   List<int> stars = [];
 
   List<StarsFilter> starsFilters = [
@@ -107,14 +93,6 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     emit(SetSelectedFilter());
   }
 
-  //facilitoes
-  // List<StarsFilter> Facilities = [
-  //   StarsFilter(text: "جراج خاص", isChecked: false),
-  //   StarsFilter(text: "جراج خاص", isChecked: false),
-  //   StarsFilter(text: "جراج خاص", isChecked: false),
-  //   StarsFilter(text: "جراج خاص", isChecked: false),
-  //   StarsFilter(text: "جراج خاص", isChecked: false),
-  // ];
   //current index stars
   int? currentIndexCheckbox;
   //curent index facilitoes
@@ -132,16 +110,13 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     emit(ChangeIndex());
   }
 
-  //remove filter
-  // void removeFilter() {
-  //   // currentIndexCheckbox=-1;
-  //   // currentIndexFacilities = -1;
-  //   for (int i = 0; i <= starsFilters.length; i++) {
-  //     starsFilters[i].isChecked = false;
-  //     Facilities[i].isChecked = false;
-  //   }
-  //   emit(ChangeIndex());
-  // }
+  // remove filter
+  void removeFilter() {
+    for (int i = 0; i <= starsFilters.length; i++) {
+      starsFilters[i].isChecked = false;
+    }
+    emit(ChangeIndex());
+  }
 
   LodgeModel? selectedLodge;
   Set<Marker> hotelsMarkers = const <Marker>{};
@@ -193,8 +168,8 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   PlacesModel placesModel = PlacesModel();
   getPlaces() async {
     emit(PlacesLoading());
-    final res = await api?.getPlaces();
-    res?.fold((l) {
+    final res = await api.getPlaces();
+    res.fold((l) {
       emit(PlacesError());
     }, (r) {
       placesModel = r;
@@ -207,12 +182,11 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   FacilitiesModel facilitiesModel = FacilitiesModel();
   getFacilities() async {
     emit(FacilitiesLoading());
-    final res = await api?.getFacilities();
-    res?.fold((l) {
+    final res = await api.getFacilities();
+    res.fold((l) {
       emit(FacilitiesError());
     }, (r) {
       facilitiesModel = r;
-      // getUserData();
       emit(FacilitiesLoaded());
     });
   }
@@ -281,14 +255,14 @@ class ResidenceCubit extends Cubit<ResidenceState> {
       }
     }
 
-    final res = await api?.getLodges(
+    final res = await api.getLodges(
         placeId: placeId,
         lat: lat,
         long: long,
         filter: getFilterValue(),
         stars: stars,
         facilities: selectedFacilities);
-    res?.fold((l) {
+    res.fold((l) {
       emit(LoadgesError());
     }, (r) {
       setMarkers(r.data ?? []);
@@ -301,12 +275,13 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     });
   }
 
-  GetLodgeDetail lodgesDetailsModel = GetLodgeDetail();
-  getLodgesDetails({int? id, required BuildContext context}) async {
-    final res = await api?.getDetailsLodges(lodgeId: id);
+  GetLodgeDetailModel lodgesDetailsModel = GetLodgeDetailModel();
+  getLodgesDetails(
+      {required int lodgeId, required BuildContext context}) async {
+    final res = await api.getDetailsLodges(lodgeId: lodgeId);
     emit(LodgesDetailsLoading());
 
-    res?.fold((l) {
+    res.fold((l) {
       emit(LodgesDetailsError());
     }, (r) {
       lodgesDetailsModel = r;
@@ -315,14 +290,14 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   }
 
   GetLodgesRooms lodgesRoomsModel = GetLodgesRooms();
-  getRoomsLodges({int? id, required BuildContext context}) async {
-    final res = await api?.getRoomsLodges(
-        lodgeId: id,
+  getRoomsLodges({required int lodgeId, required BuildContext context}) async {
+    final res = await api.getRoomsLodges(
+        lodgeId: lodgeId,
         fromDay: context.read<TransportationCubit>().fromDate,
         toDay: context.read<TransportationCubit>().toDate,
         guest: counter);
     emit(LodgesRoomLoading());
-    res?.fold((l) {
+    res.fold((l) {
       emit(LodgesRoomError());
     }, (r) {
       print("okkkkk send the result");
@@ -330,11 +305,4 @@ class ResidenceCubit extends Cubit<ResidenceState> {
       emit(LodgesRoomLoaded());
     });
   }
-  // stars
-  //
-  // addRemoveToListStars(int index,bool isAdd){
-  //   isAdd?stars.add(index+1):stars.remove(index+1);
-  //   print (stars);
-  //   emit(ChangeSelcetedStars());
-  // }
 }

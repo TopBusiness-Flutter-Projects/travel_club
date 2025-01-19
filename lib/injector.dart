@@ -6,6 +6,7 @@ import 'package:travel_club/core/api/base_api_consumer.dart';
 import 'package:travel_club/core/api/dio_consumer.dart';
 import 'package:travel_club/features/auth/cubit/cubit.dart';
 import 'package:travel_club/features/auth/data/login_repo_impl.dart';
+import 'package:travel_club/features/custom_upload_image/cubit/upload_image_cubit.dart';
 import 'package:travel_club/features/favourites/cubit/favourites_cubit.dart';
 import 'package:travel_club/features/favourites/data/repo/favourites_repo_impl.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
@@ -62,6 +63,9 @@ Future<void> setup() async {
   );
   serviceLocator.registerFactory(
     () => AccountCubit(serviceLocator()),
+  );
+  serviceLocator.registerFactory(
+    () => UploadImageCubit(),
   );
   serviceLocator.registerFactory(
     () => ResidenceCubit(serviceLocator()),

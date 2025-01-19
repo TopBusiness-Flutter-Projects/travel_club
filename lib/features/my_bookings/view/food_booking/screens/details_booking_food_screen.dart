@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_state.dart';
-import 'package:travel_club/features/residence/view/residence_booking/screens/widgets/custom_rounded_button.dart';
+import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_rounded_button.dart';
 import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/my_bookings_cubit.dart';

@@ -1,13 +1,13 @@
-import '../../../../../../core/exports.dart';
-import '../../../../../transportation/cubit/transportation_cubit.dart';
-import '../../../../cubit/residence_cubit.dart';
-import '../../../../data/models/getlodges_room.dart';
+import '../../../../../core/exports.dart';
+import '../../../../transportation/cubit/transportation_cubit.dart';
+import '../../../cubit/residence_cubit.dart';
+import '../../../data/models/rooms_model.dart';
 import 'custom_rooms_widget.dart';
 
 class CustomContainerBooking extends StatelessWidget {
   CustomContainerBooking({super.key, this.widgetBottom, this.room});
   Widget? widgetBottom;
-  final LodgyRoom? room;
+  final RoomModel? room;
   // final bool? isRecommended;
   @override
   Widget build(BuildContext context) {

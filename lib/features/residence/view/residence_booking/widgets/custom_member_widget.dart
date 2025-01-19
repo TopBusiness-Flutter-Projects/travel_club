@@ -1,5 +1,5 @@
-import '../../../../../../core/exports.dart';
-import '../../../../cubit/residence_cubit.dart';
+import '../../../../../core/exports.dart';
+import '../../../cubit/residence_cubit.dart';
 
 class CustomMemberWidget extends StatelessWidget {
   const CustomMemberWidget({super.key});
@@ -23,23 +23,22 @@ class CustomMemberWidget extends StatelessWidget {
                 cubit.plusCounter();
               },
               child: Container(
-                width: 27.w, // Define the width for the button
-                height: 27.h, // Define the height for the button
+                width: 27.w,
+                height: 27.w,
                 decoration: BoxDecoration(
-                  color: Colors.blue, // Set the container background to blue
-                  shape: BoxShape.circle, // Set the shape to circle
+                  color: AppColors.primary,
+                  shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Icons.add,
-                  color: Colors
-                      .white, // Set icon color to white for better contrast
+                  color: AppColors.white,
                 ),
               ),
             ),
             SizedBox(
               width: 10.w,
             ),
-            Text(cubit.counter.toString() ?? "",
+            Text(cubit.counter.toString(),
                 style: getRegularStyle(fontSize: 18.sp)),
             SizedBox(
               width: 10.w,
@@ -49,16 +48,16 @@ class CustomMemberWidget extends StatelessWidget {
                 cubit.minusCounter();
               },
               child: Container(
-                width: 27.w, // Define the width for the button
-                height: 27.h, // Define the height for the button
+                width: 27.w,
+                height: 27.w,
                 decoration: BoxDecoration(
-                  color: AppColors.grey, // Set the container background to blue
-                  shape: BoxShape.circle, // Set the shape to circle
+                  color:
+                      cubit.counter == 1 ? AppColors.grey : AppColors.primary,
+                  shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Icons.remove,
-                  color: Colors
-                      .white, // Set icon color to white for better contrast
+                  color: AppColors.white,
                 ),
               ),
             ),

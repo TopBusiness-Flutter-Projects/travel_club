@@ -73,6 +73,9 @@ class _MyAppState extends State<MyApp> {
             create: (_) => injector.serviceLocator<AccountCubit>(),
           ),
           BlocProvider(
+            create: (_) => injector.serviceLocator<UploadImageCubit>(),
+          ),
+          BlocProvider(
             create: (_) => injector.serviceLocator<HomeCubit>(),
           ),
           BlocProvider(

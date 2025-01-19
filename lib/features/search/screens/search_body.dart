@@ -1,13 +1,12 @@
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/features/residence/data/models/getlodges_model.dart';
-import 'package:travel_club/features/residence/view/widgets/acommendation_widgets/accomendation_rating.dart';
+import 'package:travel_club/features/residence/data/models/lodges_model.dart';
+import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
 import 'package:travel_club/features/search/cubit/search_cubit.dart';
 import 'package:travel_club/features/search/screens/widgets/custom_booking_sectoin.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
 import '../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../food/widgets/big_container_food.dart';
 import '../../transportation/screens/widgets/custom_company_container.dart';
-
 class Searchbody extends StatefulWidget {
   const Searchbody({
     super.key,
