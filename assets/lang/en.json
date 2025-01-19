@@ -10,6 +10,7 @@
     "confirm_new_pass": "Confirm new password",
     "write_new_pass": "Enter new password",
     "skip": "Skip",
+    "confirm": "Confirm",
     "sign_up": "New account",
     "onboarding1": "Come on, you can travel to all tourist places easier now",
     "onboarding2": "We have provided you with a group of the best restaurants and various foods everywhere",
@@ -135,7 +136,7 @@
 "account_activated":  "Your account was activated",
 "enter phone": "Enter the phone number registered with us and you will receive a password reset code",
  "forget_password": "Forgot your password",
-"": "",
+
     "checkin_time": "Check-in time",
     "departure_time": "Departure time",
     "select_seat": "Please select a seat",
@@ -220,6 +221,9 @@
 "exit":"Exit",
 "app_close":"The app will be closed.",
 "are_you_sure_close":"Are you sure to exit?",
-
+"select_image": "Select image",
+"camera": "Camera",
+"gallery": "Gallery",
+"" : "",
     "lasss": ""
 }

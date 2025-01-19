@@ -46,69 +46,67 @@ class LodgeRatesContainerWithPoints extends StatelessWidget {
                 ),
                 CustomContainerWithShadow(
                   height: getHeightSize(context) * 0.12,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      AutoSizeText(
-                        cubit.lodgesDetailsModel.data?.name ?? '',
-                        maxLines: 1,
-                        textAlign: TextAlign.center,
-                        style: getSemiBoldStyle(
-                          color: AppColors.secondPrimary,
-                          fontSize: 14.sp,
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  StarRating(
-                                    rating: cubit.lodgesDetailsModel.data?.rate
-                                        .toDouble(),
-                                    allowHalfRating: false,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              AutoSizeText(
-                                ' ${cubit.lodgesDetailsModel.data?.users}${AppTranslations.personRating}',
-                                style: getUnderLine(
-                                  color: AppColors.primary,
-                                  fontSize: 12.sp,
-                                ),
-                              )
-                            ],
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        AutoSizeText(
+                          cubit.lodgesDetailsModel.data?.name ?? '',
+                          maxLines: 1,
+                          textAlign: TextAlign.center,
+                          style: getSemiBoldStyle(
+                            color: AppColors.secondPrimary,
+                            fontSize: 14.sp,
                           ),
-                          //     Spacer(),
-                          ElevatedButton(
-                            onPressed: () {
-                              checkLoggingStates(
-                                context,
-                                () {
-                                  Navigator.pushNamed(
-                                      context, Routes.bookingAccomodation,
-                                      arguments:
-                                          cubit.lodgesDetailsModel.data?.id!);
-                                },
-                              );
-                            },
-                            child: Text(
-                              AppTranslations.bookNow,
-                              style: getSemiBoldStyle(
-                                  color: AppColors.white, fontSize: 14.sp),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    StarRating(
+                                      rating: cubit
+                                          .lodgesDetailsModel.data?.rate
+                                          .toDouble(),
+                                      allowHalfRating: false,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                AutoSizeText(
+                                  ' ${cubit.lodgesDetailsModel.data?.users}${AppTranslations.personRating}',
+                                  style: getUnderLine(
+                                    color: AppColors.primary,
+                                    fontSize: 12.sp,
+                                  ),
+                                )
+                              ],
                             ),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.primary),
-                          )
-                        ],
-                      )
-                    ],
+                            CustomSmallButton(
+                              title: AppTranslations.bookNow,
+                              onTap: () {
+                                checkLoggingStatus(
+                                  context,
+                                  () {
+                                    Navigator.pushNamed(
+                                        context, Routes.bookingResidenceRoute,
+                                        arguments:
+                                            cubit.lodgesDetailsModel.data?.id!);
+                                  },
+                                );
+                              },
+                              width: getWidthSize(context) / 2.5,
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],

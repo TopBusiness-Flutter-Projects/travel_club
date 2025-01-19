@@ -87,7 +87,7 @@ class _LodgeDetailsScreenState extends State<LodgeDetailsScreen> {
                           // Container under the Swiper
                           const LodgeDetailsBody(),
                           // Centered container in the middle of the image
-                          LodgeRatesContainerWithPoints(                              )
+                          LodgeRatesContainerWithPoints()
                         ],
                       ),
               ),
@@ -99,9 +99,12 @@ class _LodgeDetailsScreenState extends State<LodgeDetailsScreen> {
   }
 }
 
-checkLoggingStates(BuildContext context, void Function()? onPressed) async {
+checkLoggingStatus(BuildContext context, void Function()? onPressed) async {
+  print("AppConst.isLogged: ${AppConst.isLogged}");
   if (AppConst.isLogged) {
-    onPressed;
+    if (onPressed != null) {
+      onPressed();
+    }
   } else {
     await showExitDialog(context);
   }
@@ -110,7 +113,6 @@ checkLoggingStates(BuildContext context, void Function()? onPressed) async {
 Future<void> showExitDialog(BuildContext context) async {
   AwesomeDialog(
     context: context,
-    // dialogType: DialogType.noHeader, // Change to CUSTOM to use custom header
     customHeader: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Image.asset(

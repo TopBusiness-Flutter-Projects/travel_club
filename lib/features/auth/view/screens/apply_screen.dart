@@ -116,9 +116,8 @@ class ApplyScreen extends StatelessWidget {
                                           10.w.horizontalSpace,
                                           Expanded(
                                             child: CustomButton(
-                                              color: AppColors.white,
-                                              textColor: AppColors.primary,
-                                              borderColor: AppColors.primary,
+                                              isBordered: true,
+                                          
                                               onTap: () {
                                                 Navigator
                                                     .pushNamedAndRemoveUntil(

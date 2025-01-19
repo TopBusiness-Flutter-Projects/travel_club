@@ -11,7 +11,7 @@ class CustomNetworkImage extends StatelessWidget {
     this.height,
     this.width,
     this.fit,
-    this.withLogo = true,
+    this.withLogo = false,
     this.borderRadius,
   });
   final String image;
@@ -33,11 +33,7 @@ class CustomNetworkImage extends StatelessWidget {
           fit: fit ?? BoxFit.cover,
           height: height,
           width: width,
-          // memCacheHeight: 100,
-          // memCacheWidth: 100,
-          // imageBuilder: (context, imageProvider) {
-          //   return Image(image: imageProvider);
-          // },
+       
           placeholder: (context, url) => isDetails
               ? Padding(
                   padding: EdgeInsets.only(top: getHeightSize(context) * 0.1),
