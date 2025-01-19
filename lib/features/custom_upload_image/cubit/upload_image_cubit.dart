@@ -27,21 +27,21 @@ class UploadImageCubit extends Cubit<UploadImageState> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-            'choose'.tr(),
+            AppTranslations.selectImage,
             style: getMediumStyle(),
           ),
           actions: <Widget>[
             TextButton(
               onPressed: () => pickImage(context,isGallery: true),
               child: Text(
-                'galery'.tr(),
+                AppTranslations.gallery,
                 style: getRegularStyle(),
               ),
             ),
             TextButton(
               onPressed: () async => pickImage(context,isGallery: false),
               child: Text(
-                "camera".tr(),
+                AppTranslations.camera,
                 style: getRegularStyle(),
               ),
             ),

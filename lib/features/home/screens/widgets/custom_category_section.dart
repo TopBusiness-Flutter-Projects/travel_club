@@ -76,7 +76,7 @@ class CustomCategoryContainer extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
               if (categoryModel?.type == 0) {
-                Navigator.pushNamed(context, Routes.accomendation);
+                Navigator.pushNamed(context, Routes.residenceRoute);
               } else if (categoryModel?.type == 1) {
                 Navigator.pushNamed(context, Routes.transportationRoute);
               } else if (categoryModel?.type == 2) {
@@ -97,7 +97,6 @@ class CustomCategoryContainer extends StatelessWidget {
                   children: [
                     CustomNetworkImage(
                       withLogo: false,
-
                       height: getHeightSize(context) * 0.05,
                       image: categoryModel?.image ?? "",
                     ),

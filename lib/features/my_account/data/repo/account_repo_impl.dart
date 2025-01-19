@@ -10,13 +10,21 @@ class AccountRepoImpl {
   final BaseApiConsumer dio;
   AccountRepoImpl(this.dio);
   Future<Either<Failure, LoginModel>> getUserData() async {
-    // LoginModel user = await Preferences.instance.getUserModel();
     try {
       var response = await dio.get(
         EndPoints.userDataUrl,
-        // options: Options(
-        //   headers: {'Authorization': "Bearer ${user.data?.token ?? ''}"},
-        // ),
+        
+      );
+      return Right(LoginModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  Future<Either<Failure, LoginModel>> updateUserData( ) async {
+    try {
+      var response = await dio.post(
+        EndPoints.updateUserDataUrl,
+        
       );
       return Right(LoginModel.fromJson(response));
     } on ServerException {

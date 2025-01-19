@@ -7,14 +7,14 @@ import 'package:travel_club/features/residence/view/residence_booking/widgets/cu
 import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 
-class AccommodationBooking extends StatefulWidget {
-  const AccommodationBooking({super.key, required this.lodgeId});
+class ResidenceBooking extends StatefulWidget {
+  const ResidenceBooking({super.key, required this.lodgeId});
   final int lodgeId;
   @override
-  State<AccommodationBooking> createState() => _AccommodationBookingState();
+  State<ResidenceBooking> createState() => _ResidenceBookingState();
 }
 
-class _AccommodationBookingState extends State<AccommodationBooking> {
+class _ResidenceBookingState extends State<ResidenceBooking> {
   @override
   //
   bool isSend = false;

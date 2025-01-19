@@ -111,8 +111,9 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                         Row(
                           children: [
                             StarRating(
-                                rating:
-                                    widget.hotelsModel?.rate.toDouble() ?? 1,
+                                rating: double.parse(
+                                    (widget.hotelsModel.rate ?? 0.0)
+                                        .toString()),
                                 allowHalfRating: false,
                                 size: 14.sp,
                                 onRatingChanged: (rating) {

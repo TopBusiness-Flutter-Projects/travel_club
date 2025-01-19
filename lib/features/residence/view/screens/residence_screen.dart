@@ -4,14 +4,14 @@ import 'package:travel_club/features/residence/view/widgets/residence_widgets/ac
 import '../../../../core/exports.dart';
 import '../../cubit/residence_cubit.dart';
 
-class AccomendationScreen extends StatefulWidget {
-  const AccomendationScreen({super.key});
+class ResidenceScreen extends StatefulWidget {
+  const ResidenceScreen({super.key});
 
   @override
-  State<AccomendationScreen> createState() => _AccomendationScreenState();
+  State<ResidenceScreen> createState() => _ResidenceScreenState();
 }
 
-class _AccomendationScreenState extends State<AccomendationScreen> {
+class _ResidenceScreenState extends State<ResidenceScreen> {
   @override
   void initState() {
     // TODO: implement initState
@@ -46,29 +46,31 @@ class _AccomendationScreenState extends State<AccomendationScreen> {
                             children: List.generate(
                                 cubit.placesModel.data?.places!.length ?? 0,
                                 (index) => CustomPlaceContainer(
-                                      categoryModel:
-                                          cubit.placesModel.data!.places![index],
+                                      categoryModel: cubit
+                                          .placesModel.data!.places![index],
                                     ))),
                       ),
                       if (cubit.placesModel.data?.lodges != null)
-                      if (cubit.placesModel.data!.lodges!.isNotEmpty)
-                      ...[
-                      Text(
-                        AppTranslations.mostPlaceRating,
-                        style: getMediumStyle(fontSize: 14.sp),
-                      ),
-                      Expanded(
-                        child: ListView.separated(
-                            shrinkWrap: true,
-                            itemCount: cubit.placesModel.data!.lodges!.length ,
-                            separatorBuilder: (context, index) => SizedBox(
-                                  width: 10.w,
-                                  height: 1.h,
-                                ),
-                            itemBuilder: (context, index) =>
-                                CustomLodgeContainer(
-                                    hotelsModel:cubit.placesModel.data!.lodges![index] )),
-                      ),]
+                        if (cubit.placesModel.data!.lodges!.isNotEmpty) ...[
+                          Text(
+                            AppTranslations.mostPlaceRating,
+                            style: getMediumStyle(fontSize: 14.sp),
+                          ),
+                          Expanded(
+                            child: ListView.separated(
+                                shrinkWrap: true,
+                                itemCount:
+                                    cubit.placesModel.data!.lodges!.length,
+                                separatorBuilder: (context, index) => SizedBox(
+                                      width: 10.w,
+                                      height: 1.h,
+                                    ),
+                                itemBuilder: (context, index) =>
+                                    CustomLodgeContainer(
+                                        hotelsModel: cubit
+                                            .placesModel.data!.lodges![index])),
+                          ),
+                        ]
                     ],
                   ),
                 ),

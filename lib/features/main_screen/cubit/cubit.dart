@@ -22,4 +22,10 @@ class MainCubit extends Cubit<MainState> {
     currentpage = index;
     emit(ChangepageIndex());
   }
+   //check privacy
+  bool isChecked = false; // حالة ال checkbox
+  void checkPrivacy() {
+    isChecked = !isChecked;
+    emit(ChangePrivacyState());
+  }
 }

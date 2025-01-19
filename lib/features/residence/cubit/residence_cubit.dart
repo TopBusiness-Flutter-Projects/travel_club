@@ -19,8 +19,7 @@ part 'residence_state.dart';
 
 class ResidenceCubit extends Cubit<ResidenceState> {
   ResidenceCubit(this.api) : super(ResidenceInitial());
-  bool isChosenChange = false;
-
+  int changedRooms = 0;
   int counter = 1;
   void minusCounter() {
     if (counter > 1) {
@@ -29,12 +28,7 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     }
   }
 
-  //check privacy
-  bool isChecked = false; // حالة ال checkbox
-  void checkPrivacy() {
-    isChecked = !isChecked;
-    emit(ChangePrivacy());
-  }
+ 
 
   //change choice
   bool? choice = false;
@@ -119,11 +113,11 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   }
 
   LodgeModel? selectedLodge;
-  Set<Marker> hotelsMarkers = const <Marker>{};
+  Set<Marker> lodgesMarkers = const <Marker>{};
   Uint8List? markerIcon;
   Uint8List? markerIconSelected;
   setMarkers(List<LodgeModel> lodges) {
-    hotelsMarkers = lodges
+    lodgesMarkers = lodges
         .map(
           (e) => Marker(
             markerId: MarkerId(e.id!.toString()),
@@ -265,9 +259,9 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     res.fold((l) {
       emit(LoadgesError());
     }, (r) {
-      setMarkers(r.data ?? []);
       if (r.data != null && r.data!.isNotEmpty) {
         selectedLodge = r.data!.first;
+        setMarkers(r.data!);
       }
       lodgesModel = r;
 
@@ -305,4 +299,6 @@ class ResidenceCubit extends Cubit<ResidenceState> {
       emit(LodgesRoomLoaded());
     });
   }
+
+  bool isChangeAnyRoom = false;
 }
