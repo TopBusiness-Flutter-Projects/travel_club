@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/core/widgets/custom_text_form_field.dart';
 import 'package:travel_club/core/widgets/network_image.dart';
-import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/custom_rounded_button.dart';
 import 'package:travel_club/features/custom_upload_image/cubit/upload_image_cubit.dart';
 import 'package:travel_club/features/custom_upload_image/cubit/upload_image_state.dart';
+import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_rounded_button.dart';
 
 import '../../../core/exports.dart';
 import '../../../core/widgets/custom_screen.dart';

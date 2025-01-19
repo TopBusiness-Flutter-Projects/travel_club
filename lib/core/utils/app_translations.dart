@@ -171,7 +171,7 @@ class AppTranslations {
   static String get allRestaurants => 'all_restaurants'.tr();
   static String get grilled => 'grilled'.tr();
   static String get fishes => 'fishes'.tr();
-  static String get departureTime => 'departure_time'.tr();
+  static String get checkOut => 'departure_time'.tr();
   static String get checkinTime => 'checkin_time'.tr();
   static String get workingHours => 'working_hours'.tr();
   static String get bookTable => 'book_table'.tr();

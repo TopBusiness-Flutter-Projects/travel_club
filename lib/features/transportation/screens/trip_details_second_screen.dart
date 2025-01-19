@@ -2,8 +2,7 @@
 
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/convert_numbers_method.dart';
-import 'package:travel_club/core/widgets/custom_button.dart';
-import 'package:travel_club/features/accommodation/view/booking_accommodation/screens/widgets/linear_progress.dart';
+import 'package:travel_club/features/residence/view/residence_booking/widgets/linear_progress.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 

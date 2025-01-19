@@ -1,10 +1,11 @@
-import 'package:travel_club/features/accommodation/view/widgets/details_widgets/custom_appbar_row.dart';
-import 'package:travel_club/features/accommodation/view/widgets/details_widgets/custom_swiper.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_cubit.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_state.dart';
 import 'package:travel_club/features/other_services/screens/widgets/custom_in_center_others.dart';
 import 'package:travel_club/features/other_services/screens/widgets/custom_under_swiper.dart';
+import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_details_appbar_row.dart';
+import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_swiper.dart';
 import '../../../../../core/exports.dart';
+
 class ServiceDetailsScreen extends StatelessWidget {
   const ServiceDetailsScreen({super.key});
   @override
@@ -20,14 +21,16 @@ class ServiceDetailsScreen extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 children: [
                   // Swiper for images
-                             CustomSwiper(images: ["dds"],),
+                  CustomSwiper(
+                    images: ["dds"],
+                  ),
 
                   // Custom row (back button, favorite, etc.)
                   Positioned(
                     top: 16.0,
                     left: 16.0,
                     right: 16.0,
-                    child: CustomRow(),
+                    child: CustomDetailsAppBar(),
                   ),
 
                   // Container under the Swiper
