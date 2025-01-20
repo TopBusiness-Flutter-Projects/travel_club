@@ -6,7 +6,6 @@ import '../../cubit/residence_cubit.dart';
 
 class ResidenceScreen extends StatefulWidget {
   const ResidenceScreen({super.key});
-
   @override
   State<ResidenceScreen> createState() => _ResidenceScreenState();
 }
@@ -18,7 +17,6 @@ class _ResidenceScreenState extends State<ResidenceScreen> {
     context.read<ResidenceCubit>().getPlaces();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<ResidenceCubit>();
@@ -59,16 +57,12 @@ class _ResidenceScreenState extends State<ResidenceScreen> {
                           Expanded(
                             child: ListView.separated(
                                 shrinkWrap: true,
-                                itemCount:
-                                    cubit.placesModel.data!.lodges!.length,
+                                itemCount: cubit.placesModel.data!.lodges!.length,
                                 separatorBuilder: (context, index) => SizedBox(
                                       width: 10.w,
                                       height: 1.h,
                                     ),
-                                itemBuilder: (context, index) =>
-                                    CustomLodgeContainer(
-                                        hotelsModel: cubit
-                                            .placesModel.data!.lodges![index])),
+                                itemBuilder: (context, index) => CustomLodgeContainer(lodgesModel: cubit.placesModel.data!.lodges![index])),
                           ),
                         ]
                     ],

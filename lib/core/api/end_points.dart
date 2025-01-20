@@ -17,4 +17,5 @@ class EndPoints {
   static const String getLodgesUrl = '${baseUrl}getLodges';
   static const String getLodgesDetailsUrl = '${baseUrl}getLodgeDetail';
   static const String getLodgesRoomsUrl = '${baseUrl}getLodgesRooms';
+  static const String addRoomReservation = '${baseUrl}addRoomReservation';
 }

@@ -58,3 +58,9 @@ final class LodgesRoomLoaded extends ResidenceState {}
 final class LodgesRoomLoading extends ResidenceState {}
 
 final class LodgesRoomError extends ResidenceState {}
+//reservation
+final class ReservationLoaded extends ResidenceState {}
+
+final class ReservationLoading extends ResidenceState {}
+
+final class ReservationError extends ResidenceState {}

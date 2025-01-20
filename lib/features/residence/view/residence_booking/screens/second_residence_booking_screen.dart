@@ -22,6 +22,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
   @override
   void initState() {
     // TODO: implement initState
+    context.read<ResidenceCubit>().addRoomReservation(context);
     context.read<TransportationCubit>().goOnly = false;
     super.initState();
   }
@@ -68,7 +69,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                   ),
 
                   CustomLodgeContainer(
-                    hotelsModel: cubit.defaultLodge,
+                    lodgesModel: cubit.addRoomReservationModel.data!.lodge??cubit.defaultLodge,
                   ),
                   SizedBox(
                     height: 20.h,
@@ -82,9 +83,9 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  CustomContainerBooking(
-                    widgetBottom: SizedBox(),
-                  ),
+                  // CustomContainerBooking(
+                  //   widgetBottom: SizedBox(),
+                  // ),
                   SizedBox(
                     height: 300.h,
                     child: Swiper(

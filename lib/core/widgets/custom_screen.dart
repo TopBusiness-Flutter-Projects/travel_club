@@ -1,5 +1,4 @@
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/widgets/custom_button.dart';
 
 class CustomScreen extends StatelessWidget {
   const CustomScreen({

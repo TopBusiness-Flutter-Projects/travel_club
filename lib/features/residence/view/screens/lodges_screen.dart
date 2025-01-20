@@ -132,7 +132,7 @@ class MapUI extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomLodgeContainer(
-                    hotelsModel: cubit.selectedLodge!,
+                    lodgesModel: cubit.selectedLodge!,
                   ),
                 )
             ]),
@@ -197,7 +197,7 @@ class ListUI extends StatelessWidget {
                                 ),
                             itemBuilder: (context, index) =>
                                 CustomLodgeContainer(
-                                  hotelsModel: cubit.lodgesModel.data![index],
+                                  lodgesModel: cubit.lodgesModel.data![index],
                                 )),
               ),
             ],
