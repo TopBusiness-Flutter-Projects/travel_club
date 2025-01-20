@@ -40,7 +40,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   SizedBox(
                     height: 20.h,
                   ),
@@ -89,11 +89,12 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                   SizedBox(
                     height: 300.h,
                     child: Swiper(
-                      itemCount: 3, // Define the number of items in the swiper
+                      itemCount: cubit.addRoomReservationModel.data!.rooms!.length, // Define the number of items in the swiper
                       itemBuilder: (BuildContext context, int index) {
                         // Return a CustomContainerBooking for each item
                         return SizedBox(
                           child: CustomContainerBooking(
+                            room:  cubit.addRoomReservationModel.data!.rooms![index],
                             widgetBottom: SizedBox(),
                           ),
                         );
@@ -110,13 +111,13 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                     AppTranslations.paymentDetails,
                     style: getMediumStyle(fontSize: 14.sp),
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  PaymentWidget(),
-                  SizedBox(
-                    height: 20.h,
-                  ),
+                  SizedBox(height: 20.h,),
+                   PaymentWidget(
+                     price: cubit.addRoomReservationModel.data?.totalPrice.toString(),
+                     vat: cubit.addRoomReservationModel.data?.vat.toString(),
+                     totalPrice: cubit.addRoomReservationModel.data?.totalPriceAfterVat.toString(),
+                   ),
+                  SizedBox(height: 20.h,),
 //copun
                   Text(
                     AppTranslations.areYouHaveACoupon,
@@ -129,6 +130,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                   CustomCopunWidget(
                     amount: "50",
                   ),
+
                   CustomAcceptTerms(
                     terms: cubit.lodgesDetailsModel.data?.rule?.rule ?? "",
                   ),
