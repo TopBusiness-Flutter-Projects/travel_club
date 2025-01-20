@@ -74,7 +74,7 @@ class _SearchbodyState extends State<Searchbody> {
                   itemCount: 1,
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CustomLodgeContainer(hotelsModel: LodgeModel()),
+                    child: CustomLodgeContainer(lodgesModel: LodgeModel()),
                   ),
                 )),
               ],

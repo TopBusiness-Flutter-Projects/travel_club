@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/app_colors.dart';
 
-import '../../../../config/routes/app_routes.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 
 import '../../cubit/cubit.dart';

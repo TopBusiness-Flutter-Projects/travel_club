@@ -27,8 +27,8 @@ class HotelsModel {
 }
 
 class CustomLodgeContainer extends StatefulWidget {
-  const CustomLodgeContainer({super.key, required this.hotelsModel});
-  final LodgeModel hotelsModel;
+  const CustomLodgeContainer({super.key, required this.lodgesModel});
+  final LodgeModel lodgesModel;
 
   @override
   State<CustomLodgeContainer> createState() => _CustomLodgeContainerState();
@@ -43,7 +43,7 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
           onTap: () {
             Navigator.pushNamed(context, Routes.lodgeDetailsRoute,
                 arguments:
-                    LodgeDetailsArguments(lodgeId: widget.hotelsModel.id!));
+                    LodgeDetailsArguments(lodgeId: widget.lodgesModel.id!));
           },
           child: CustomContainerWithShadow(
             height: getHeightSize(context) * 0.17,
@@ -53,12 +53,12 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                 Stack(
                   children: [
                     CustomNetworkImage(
-                      image: widget.hotelsModel?.media ?? "",
+                      image: widget.lodgesModel?.media ?? "",
                       borderRadius: 20.r,
                       width: getWidthSize(context) * 0.3,
                       height: getHeightSize(context) * 0.17,
                     ),
-                    widget.hotelsModel?.isFav == true
+                    widget.lodgesModel?.isFav == true
                         ? Positioned(
                             top: 4.h,
                             right: 6.w,
@@ -70,12 +70,12 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                               },
                               child: CircleAvatar(
                                 backgroundColor:
-                                    widget.hotelsModel?.isFav ?? false
+                                    widget.lodgesModel?.isFav ?? false
                                         ? AppColors.red
                                         : AppColors.lightWhite,
                                 child: Icon(
                                   CupertinoIcons.heart,
-                                  color: widget.hotelsModel?.isFav ?? false
+                                  color: widget.lodgesModel?.isFav ?? false
                                       ? AppColors.white
                                       : AppColors.secondPrimary,
                                   size: 25.sp,
@@ -99,7 +99,7 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                           child: SizedBox(),
                         ),
                         Text(
-                          widget.hotelsModel?.name.toString() ?? "",
+                          widget.lodgesModel?.name.toString() ?? "",
                           overflow: TextOverflow.ellipsis,
                           style: getBoldStyle(fontSize: 14.sp),
                           maxLines: 2,
@@ -112,7 +112,7 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                           children: [
                             StarRating(
                                 rating: double.parse(
-                                    (widget.hotelsModel.rate ?? 0.0)
+                                    (widget.lodgesModel.rate ?? 0.0)
                                         .toString()),
                                 allowHalfRating: false,
                                 size: 14.sp,
@@ -125,10 +125,10 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                           flex: 1,
                           child: SizedBox(),
                         ),
-                        widget.hotelsModel?.users == null
+                        widget.lodgesModel?.users == null
                             ? SizedBox()
                             : Text(
-                                '${widget.hotelsModel?.users.toString() ?? ""}' +
+                                '${widget.lodgesModel?.users.toString() ?? ""}' +
                                     " " +
                                     AppTranslations.personRating,
                                 style: getMediumStyle(

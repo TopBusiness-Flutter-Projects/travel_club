@@ -27,13 +27,9 @@ class _LodgesScreenState extends State<LodgesScreen> {
   @override
   void initState() {
     context.read<ResidenceCubit>().lodgesModel = GetLodgesModel();
-    context
-        .read<ResidenceCubit>()
-        .getLodges(placeId: widget.arguments!.placeId, context: context);
-
+    context.read<ResidenceCubit>().getLodges(placeId: widget.arguments!.placeId, context: context);
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ResidenceCubit, ResidenceState>(
@@ -136,7 +132,7 @@ class MapUI extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomLodgeContainer(
-                    hotelsModel: cubit.selectedLodge!,
+                    lodgesModel: cubit.selectedLodge!,
                   ),
                 )
             ]),
@@ -201,7 +197,7 @@ class ListUI extends StatelessWidget {
                                 ),
                             itemBuilder: (context, index) =>
                                 CustomLodgeContainer(
-                                  hotelsModel: cubit.lodgesModel.data![index],
+                                  lodgesModel: cubit.lodgesModel.data![index],
                                 )),
               ),
             ],

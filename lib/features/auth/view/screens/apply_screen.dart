@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:travel_club/features/auth/cubit/cubit.dart';
 import 'package:travel_club/features/auth/cubit/state.dart';
 import 'package:travel_club/features/auth/view/widgets/custom_forward.dart';
-import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 
 import '../../../../core/exports.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
