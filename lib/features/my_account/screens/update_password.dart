@@ -31,7 +31,7 @@ class UpdatePassword extends StatelessWidget {
                         isPassword: true,
                         title: AppTranslations.currentPassword,
                         hintText: AppTranslations.writePass,
-                        controller: cubit.passController,
+                        controller: cubit.currentPassController,
                         validator: (v) {
                           if (v == null || v.isEmpty) {
                             return AppTranslations.passIsRequired;
@@ -78,7 +78,12 @@ class UpdatePassword extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: CustomButton(
                           title: AppTranslations.savedChanges,
-                          onTap: () {},
+                          onTap: () {
+                             if (formPass.currentState!.validate()) {
+                                cubit.updatePassword(context);
+                              }
+                            
+                          },
                         ),
                       ),
                       InkWell(

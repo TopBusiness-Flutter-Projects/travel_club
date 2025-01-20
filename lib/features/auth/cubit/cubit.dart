@@ -42,7 +42,7 @@ class LoginCubit extends Cubit<LoginState> {
   Future<UserCredential?> signInWithGoogle(
     BuildContext context,
   ) async {
-    await signOutFromGmail();
+  
     print("Starting Google Sign-In process...");
 
     try {

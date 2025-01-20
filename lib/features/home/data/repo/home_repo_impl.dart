@@ -15,9 +15,6 @@ class HomeRepoImpl {
     try {
       var response = await dio.get(
         EndPoints.homeUrl,
-        // options: Options(
-        //   headers: {'Authorization': "Bearer ${user.data?.token ?? ''}"},
-        // ),
       );
       return Right(GetHomeModel.fromJson(response));
     } on ServerException {
@@ -25,4 +22,24 @@ class HomeRepoImpl {
     }
   }
 
+  Future<Either<Failure, LoginModel>> checkCopoune({
+    required String amount,
+    required String code,
+    required int moduleId,
+  }) async {
+    try {
+      var response = await dio.post(
+        EndPoints.checkCouponUrl,
+        body: {
+          'code': code,
+          'module_id': moduleId,
+          'amount': amount,
+        },
+      );
+
+      return Right(LoginModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }
