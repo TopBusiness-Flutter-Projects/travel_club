@@ -3,8 +3,11 @@ import 'package:dotted_line/dotted_line.dart';
 import '../../../../../core/exports.dart';
 
 class PaymentWidget extends StatelessWidget {
-   const PaymentWidget({super.key,this.isDetailsBooking = false});
+   const PaymentWidget({super.key,this.isDetailsBooking = false,this.price ,this.vat ,this.totalPrice });
 final bool isDetailsBooking;
+final String ?price;
+final String? vat;
+final String ?totalPrice;
   @override
   Widget build(BuildContext context) {
     return                 CustomContainerWithShadow(child: Padding(
@@ -20,22 +23,22 @@ final bool isDetailsBooking;
                 padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 7),
                 child: Center(child: Text(AppTranslations.paymentHasBeenMade,style: getMediumStyle(fontSize: 14.sp,color: AppColors.green),maxLines: 1,)),
               ) ,) ,
-            ],),
+            ],
+          ),
      SizedBox(height: 15.h,),   ],
 
-          
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(AppTranslations.bookingPrice,style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
-              Text("5000${AppTranslations.currency}",style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.green)),
+              Text("${price}"+" "+"${AppTranslations.currency}",style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.green)),
             ],),
           SizedBox(height: 15.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(AppTranslations.bookingPrice,style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
-              Text("5000"+AppTranslations.currency,style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.green)),
+              Text(AppTranslations.vat,style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
+              Text("${vat}"+" "+"${AppTranslations.currency}",style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.green)),
             ],),
           SizedBox(height: 10.h,),
 
@@ -51,8 +54,8 @@ final bool isDetailsBooking;
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(AppTranslations.bookingPrice,style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
-              Text("5000"+AppTranslations.currency,style: getBoldStyle(fontSize: 14.sp,color: AppColors.green)),
+              Text(AppTranslations.totalPrice,style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
+              Text("${totalPrice}"+" "+"${AppTranslations.currency}",style: getBoldStyle(fontSize: 14.sp,color: AppColors.green)),
             ],),
         ],
       ),

@@ -45,7 +45,7 @@ class RoomModel {
   int? totalPrice;
   int? price;
   int? lodgeId;
-  DateTime? canCancel;
+  dynamic? canCancel;
   String? type;
   List<Facility>? facilities;
   RoomModel? recommend;
@@ -72,9 +72,7 @@ class RoomModel {
         totalPrice: json["totalPrice"],
         price: json["price"],
         lodgeId: json["lodge_id"],
-        canCancel: json["canCancel"] == null
-            ? null
-            : DateTime.parse(json["canCancel"]),
+        canCancel: json["canCancel"] ,
         type: json["type"],
         facilities: json["facilities"] == null
             ? []
@@ -92,8 +90,8 @@ class RoomModel {
         "totalPrice": totalPrice,
         "price": price,
         "lodge_id": lodgeId,
-        "canCancel":
-            "${canCancel!.year.toString().padLeft(4, '0')}-${canCancel!.month.toString().padLeft(2, '0')}-${canCancel!.day.toString().padLeft(2, '0')}",
+        "canCancel":canCancel,
+           // "${canCancel!.year.toString().padLeft(4, '0')}-${canCancel!.month.toString().padLeft(2, '0')}-${canCancel!.day.toString().padLeft(2, '0')}",
         "type": type,
         "facilities": facilities == null
             ? []
