@@ -43,9 +43,9 @@ class ReservationData {
   int? guest;
   LodgeModel? lodge;
   List<RoomModel>? rooms;
-  double? totalPrice;
-  double? vat;
-  double? totalPriceAfterVat;
+  dynamic totalPrice;
+  dynamic vat;
+  dynamic totalPriceAfterVat;
 
   ReservationData({
     this.id,
