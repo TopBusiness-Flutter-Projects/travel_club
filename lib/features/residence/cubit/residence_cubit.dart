@@ -9,6 +9,8 @@ import 'package:travel_club/features/residence/data/models/rooms_model.dart';
 import 'package:travel_club/features/residence/view/widgets/hotels_widgets/custom_check_box.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 
+import '../../../core/utils/appwidget.dart';
+import '../data/models/addRoomReservation_model.dart';
 import '../data/models/facilities_model.dart';
 import '../data/models/lodge_details_model.dart';
 import '../data/models/lodges_model.dart';
@@ -19,6 +21,8 @@ part 'residence_state.dart';
 
 class ResidenceCubit extends Cubit<ResidenceState> {
   ResidenceCubit(this.api) : super(ResidenceInitial());
+  ResidenceRepoImpl api;
+
   int changedRooms = 0;
   int counter = 1;
   void minusCounter() {
@@ -43,23 +47,55 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   }
 
   List<RoomModel> selectedRooms = [];
-  double sum = 0;
-  void addOrRemoveRoom(RoomModel room) {
-    if (selectedRooms.any((selectedRoom) => selectedRoom.id == room.id)) {
-      selectedRooms.removeWhere((selectedRoom) => selectedRoom.id == room.id);
-    } else {
-      selectedRooms.add(room);
-    }
 
+  double sum = 0;
+  void addOrRemoveRoom(RoomModel? room) {
+    if (selectedRooms.any((selectedRoom) => selectedRoom.id == room!.id)) {
+      selectedRooms.removeWhere((selectedRoom) => selectedRoom.id == room!.id);
+    } else {
+      selectedRooms.add(room!);
+    }
     sum = 0; // Reset the sum to avoid accumulation
     for (var selectedRoom in selectedRooms) {
       sum += double.tryParse(selectedRoom.totalPrice.toString()) ?? 0;
     }
-
     emit(PlusLoaded());
   }
+//post addRoomReservation
+  AddRoomReservationModel addRoomReservationModel = AddRoomReservationModel();
 
-  ResidenceRepoImpl api;
+  addRoomReservation(BuildContext context) async {
+    emit(ReservationLoading());
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+     List<int> selectedRoomsIds = [];
+    for (int i = 0; i < selectedRooms.length; i++) {
+      if(selectedRooms[i].recommend== null){
+        selectedRoomsIds.add(selectedRooms[i].id!);
+      }else if(selectedRooms[i].recommend!.isSelectedRecommend){
+        selectedRoomsIds.add(selectedRooms[i].recommend!.id!);
+      }else{
+        selectedRoomsIds.add(selectedRooms[i].id!);
+      }
+    }
+    final response = await api.addRoomReservation(fromDay: context.read<TransportationCubit>().fromDate, toDay: context.read<TransportationCubit>().toDate, guest: counter, rooms: selectedRoomsIds);
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(ReservationError());
+    }, (r) {
+      addRoomReservationModel=r;
+      Navigator.pop(context);
+      print("code: ${r.status.toString()}");
+      if (r.status != 200 && r.status != 201) {
+        errorGetBar(r.msg!);
+      } else {
+        Navigator.pushNamed(context, Routes.secondBookingResidence);
+        emit(ReservationLoaded());
+        successGetBar(r.msg);
+      }
+    });
+  }
+
   int currentIndex = 0;
 
   void changeIndex(int index) {

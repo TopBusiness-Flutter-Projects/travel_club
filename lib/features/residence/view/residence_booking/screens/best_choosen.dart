@@ -1,3 +1,4 @@
+import 'package:travel_club/features/residence/data/models/rooms_model.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
 
 import '../../../../../core/exports.dart';
@@ -26,24 +27,18 @@ class _BestChosenScreenState extends State<BestChosenScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    cubit.changedRooms == 0
-                        ? CustomButton(
-                            isBordered: true,
+                   CustomButton(
+                            isBordered:   cubit.changedRooms == 0
+                                ? true : false,
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, Routes.secondBookingResidence);
+                              cubit. addRoomReservation( context);
+
                             },
-                            title: AppTranslations.skip,
+                            title:   cubit.changedRooms == 0
+                                ? AppTranslations.skip : AppTranslations.confirm,
                             width: getWidthSize(context) / 2,
                           )
-                        : CustomButton(
-                            title: AppTranslations.confirm,
-                            width: getWidthSize(context) / 2,
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, Routes.secondBookingResidence);
-                            },
-                          )
+
                   ],
                 ),
               )),
@@ -97,10 +92,10 @@ class _BestChosenScreenState extends State<BestChosenScreen> {
                                           ? cubit.changedRooms--
                                           : cubit.changedRooms++;
                                     });
-                                    cubit.selectedRooms[index].recommend!
-                                            .isSelectedRecommend =
-                                        !cubit.selectedRooms[index].recommend!
-                                            .isSelectedRecommend;
+                                    cubit.selectedRooms[index].recommend!.isSelectedRecommend = !cubit.selectedRooms[index].recommend!.isSelectedRecommend;
+
+                                  //  cubit.addOrRemoveRoom( cubit.selectedRooms[index].recommend);
+                                    debugPrint(cubit.selectedRooms.length.toString());
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -131,3 +126,5 @@ class _BestChosenScreenState extends State<BestChosenScreen> {
     );
   }
 }
+
+// Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RyYXZlbC50b3BidXNpbmVzcy5lYmhhcmJvb2suY29tL2FwaS92MS9jaGVja090cCIsImlhdCI6MTczNzI5MDA5NSwiZXhwIjoxNzY4ODI2MDk1LCJuYmYiOjE3MzcyOTAwOTUsImp0aSI6ImIyR1JiUXJlc0tYc2lkWHgiLCJzdWIiOiIxMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyX2lkIjoxMiwiYXV0aF91dWlkIjoiMzc3ODdhNzMtNmVmYS00MDM5LWE2YzUtMDRlZDE3MzBhMjgxIn0.N4Cv45n3KTVopT_HesZubnjkbQhzXfLMR9foSMNX6J8

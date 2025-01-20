@@ -1,9 +1,10 @@
-import 'package:dartz/dartz.dart';
 
+import 'package:dartz/dartz.dart';
 import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
+import '../models/addRoomReservation_model.dart';
 import '../models/facilities_model.dart';
 import '../models/lodge_details_model.dart';
 import '../models/lodges_model.dart';
@@ -44,7 +45,8 @@ class ResidenceRepoImpl {
       double? long,
       String? filter,
       required List<int> stars,
-      required List<int> facilities}) async {
+      required List<int> facilities
+      }) async {
     try {
       var response = await dio.get(
         EndPoints.getLodgesUrl,
@@ -66,7 +68,8 @@ class ResidenceRepoImpl {
 
   //get details lodges
   Future<Either<Failure, GetLodgeDetailModel>> getDetailsLodges(
-      {required int lodgeId}) async {
+      {required int lodgeId})
+  async {
     try {
       var response = await dio.get(
         EndPoints.getLodgesDetailsUrl,
@@ -97,6 +100,33 @@ class ResidenceRepoImpl {
         },
       );
       return Right(GetLodgesRooms.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  //addRoomReservation
+
+  Future<Either<Failure, AddRoomReservationModel>> addRoomReservation({
+    required String fromDay,
+    required String toDay,
+    required int guest,
+    required List<int> rooms,
+
+  }) async {
+    try {
+      var response = await dio.post(
+        EndPoints.addRoomReservation,
+        body: {
+          'from':fromDay,// fromDay,
+          'to':toDay, //toDay,
+          "guest":guest,//guest,
+          "room_ids":rooms ,
+          // for (int i = 0; i < rooms.length; i++)
+          //   "room_ids[$i]": rooms[i],
+        },
+      );
+      print( "dddddddddddddddd ${response.toString()}");
+      return Right(AddRoomReservationModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

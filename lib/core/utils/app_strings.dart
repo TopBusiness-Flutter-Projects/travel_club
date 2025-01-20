@@ -1,5 +1,3 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
 
 export 'package:flutter_screenutil/flutter_screenutil.dart';

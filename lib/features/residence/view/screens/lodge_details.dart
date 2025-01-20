@@ -87,7 +87,7 @@ class _LodgeDetailsScreenState extends State<LodgeDetailsScreen> {
                           // Container under the Swiper
                           const LodgeDetailsBody(),
                           // Centered container in the middle of the image
-                          LodgeRatesContainerWithPoints()
+                          const LodgeRatesContainerWithPoints()
                         ],
                       ),
               ),

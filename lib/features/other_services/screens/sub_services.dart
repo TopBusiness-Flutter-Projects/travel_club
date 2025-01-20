@@ -1,7 +1,7 @@
 import '../../../core/exports.dart';
 import '../cubit/other_services_cubit.dart';
 import '../cubit/other_services_state.dart';
-import 'widgets/custom_nearst_others.dart';
+import 'package:travel_club/features/other_services/screens/widgets/custom_nearst_others.dart';
 
 class SubServicesScreen extends StatelessWidget {
   const SubServicesScreen({super.key});
