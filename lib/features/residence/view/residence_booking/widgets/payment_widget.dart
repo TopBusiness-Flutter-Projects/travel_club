@@ -10,7 +10,8 @@ final String? vat;
 final String ?totalPrice;
   @override
   Widget build(BuildContext context) {
-    return                 CustomContainerWithShadow(child: Padding(
+    return  CustomContainerWithShadow(
+        child: Padding(
       padding: const EdgeInsets.all(30.0),
       child: Column(
         children: [
@@ -25,8 +26,8 @@ final String ?totalPrice;
               ) ,) ,
             ],
           ),
-     SizedBox(height: 15.h,),   ],
-
+          SizedBox(height: 15.h,),   ],
+          //row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -34,6 +35,7 @@ final String ?totalPrice;
               Text("${price}"+" "+"${AppTranslations.currency}",style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.green)),
             ],),
           SizedBox(height: 15.h,),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

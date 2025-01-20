@@ -175,15 +175,12 @@ class LoginCubit extends Cubit<LoginState> {
         phoneController.clear();
         passwordControllerLogin.clear();
         context.read<MainCubit>().changePage(0);
-
         emit(SuccessLoginState());
         Navigator.pop(context);
         successGetBar(r.msg);
         prefs.setBool("ISLOGGED", true);
         Preferences.instance.setUser(r);
-
-        Navigator.pushNamedAndRemoveUntil(
-            context, Routes.mainRoute, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, Routes.mainRoute, (route) => false);
       }
     });
   }
@@ -224,8 +221,6 @@ class LoginCubit extends Cubit<LoginState> {
             Navigator.pushNamedAndRemoveUntil(
             context, Routes.mainRoute, (route) => false);
         }
-
-      
       }
     });
   }

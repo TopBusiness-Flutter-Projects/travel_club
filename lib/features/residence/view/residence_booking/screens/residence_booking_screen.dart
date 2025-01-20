@@ -85,6 +85,8 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                             setState(() {
                               isSend = true;
                             });
+                            context.read<ResidenceCubit>().sum = 0;
+                            context.read<ResidenceCubit>().selectedRooms = [];
                             print("send");
                             cubit.getRoomsLodges(
                                 context: context, lodgeId: widget.lodgeId);
@@ -111,8 +113,7 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return CustomContainerBooking(
-                                        room:
-                                            cubit.lodgesRoomsModel.data?[index],
+                                        room: cubit.lodgesRoomsModel.data?[index],
                                         widgetBottom: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -145,7 +146,8 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                                             ),
                                             CustomRoundedButton(
                                               isBooking: true,
-                                              icon: cubit.selectedRooms.any(
+
+                                                icon: cubit.selectedRooms.any(
                                                       (room) =>
                                                           room.id ==
                                                           cubit.lodgesRoomsModel
@@ -160,6 +162,8 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                                                   ? AppTranslations.remove
                                                   : AppTranslations.add,
                                               onTap: () {
+
+
                                                 cubit.addOrRemoveRoom(cubit
                                                     .lodgesRoomsModel
                                                     .data![index]);

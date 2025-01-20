@@ -65,10 +65,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         title: AppTranslations.phone,
                         onCountryChanged: (v) {
                           cubit.countryCode = '+${v.fullCountryCode}';
-                          print("Country changed to: ${v.name}");
+                         debugPrint("Country changed to: ${v.name}");
                         },
                         onChanged: (phone) {
-                          print(phone.completeNumber);
+                          debugPrint(phone.completeNumber);
                         },
                       ),
                       CustomTextField(

@@ -22,7 +22,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
   @override
   void initState() {
     // TODO: implement initState
-    context.read<ResidenceCubit>().addRoomReservation(context);
+    // context.read<ResidenceCubit>().addRoomReservation();
     context.read<TransportationCubit>().goOnly = false;
     super.initState();
   }
@@ -67,7 +67,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                     "${AppTranslations.numberOfMembers} : ${cubit.counter}",
                     style: getMediumStyle(fontSize: 14.sp),
                   ),
-
+               // cubit.addRoomReservationModel.data != null ?
                   CustomLodgeContainer(
                     lodgesModel: cubit.addRoomReservationModel.data!.lodge??cubit.defaultLodge,
                   ),
@@ -92,11 +92,9 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                       itemCount: cubit.addRoomReservationModel.data!.rooms!.length, // Define the number of items in the swiper
                       itemBuilder: (BuildContext context, int index) {
                         // Return a CustomContainerBooking for each item
-                        return SizedBox(
-                          child: CustomContainerBooking(
-                            room:  cubit.addRoomReservationModel.data!.rooms![index],
-                            widgetBottom: SizedBox(),
-                          ),
+                        return CustomContainerBooking(
+                          room:  cubit.addRoomReservationModel.data!.rooms![index],
+                          widgetBottom: SizedBox(),
                         );
                       },
                       pagination: SwiperPagination(),
