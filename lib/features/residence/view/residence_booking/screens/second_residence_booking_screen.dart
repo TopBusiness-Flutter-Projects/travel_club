@@ -8,7 +8,7 @@ import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/residence_cubit.dart';
 import '../widgets/custom_container_booking.dart';
-import '../../../../../core/widgets/custom_copun_widget.dart';
+import '../../../../payment/screens/widgets/custom_copun_widget.dart';
 import '../widgets/payment_widget.dart';
 
 class SecondResidenceBooking extends StatefulWidget {

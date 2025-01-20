@@ -1,8 +1,8 @@
-import 'package:travel_club/features/home/cubit/home_cubit.dart';
-import 'package:travel_club/features/home/cubit/home_state.dart';
 
-import '../exports.dart';
-import 'custom_text_form_field.dart';
+import '../../../../core/exports.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../cubit/payment_cubit.dart';
+import '../../cubit/payment_state.dart';
 
 class CustomCopunWidget extends StatefulWidget {
   const CustomCopunWidget({super.key, required this.amount});
@@ -15,16 +15,14 @@ class _CustomCopunWidgetState extends State<CustomCopunWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   @override
   void initState() {
-    // context.read<HomeCubit>().checkPromoCodeModel = CheckPromoCodeModel();
-     context.read<HomeCubit>().couponController.clear();
-
+    // context.read<PaymentCubit>().checkPromoCodeModel = CheckPromoCodeModel();
+     context.read<PaymentCubit>().couponController.clear();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
-    var cubit = context.read<HomeCubit>();
-    return BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+    var cubit = context.read<PaymentCubit>();
+    return BlocBuilder<PaymentCubit, PaymentState>(builder: (context, state) {
       return Form(
         key: _formKey,
         child: CustomContainerWithShadow(
