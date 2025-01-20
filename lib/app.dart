@@ -10,6 +10,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_cubit.dart';
 import 'package:travel_club/features/on_boarding/cubit/onboarding_cubit.dart';
+import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'config/routes/app_routes.dart';
@@ -101,6 +102,9 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<UploadImageCubit>(),
+          ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<PaymentCubit>(),
           ),
         ],
         child: GetMaterialApp(

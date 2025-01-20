@@ -22,6 +22,8 @@ import 'package:travel_club/features/my_bookings/data/repo/my_bookings_repo_impl
 import 'package:travel_club/features/on_boarding/cubit/onboarding_cubit.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_cubit.dart';
 import 'package:travel_club/features/other_services/data/repo/other_services_repo_impl.dart';
+import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
+import 'package:travel_club/features/payment/data/repo/payment_repo_impl.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/search/cubit/search_cubit.dart';
 import 'package:travel_club/features/splash/cubit/cubit.dart';
@@ -91,6 +93,9 @@ Future<void> setup() async {
   serviceLocator.registerFactory(
     () => EntertainmentCubit(serviceLocator()),
   );
+  serviceLocator.registerFactory(
+    () => PaymentCubit(serviceLocator()),
+  );
 //!-------------------------Declare Repo---------------------------
   serviceLocator.registerLazySingleton(() => LoginRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => MainRepoImpl(serviceLocator()));
@@ -114,6 +119,7 @@ Future<void> setup() async {
       .registerLazySingleton(() => NotificationRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => FoodRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => SearchRepoImpl(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => PaymentRepoImpl(serviceLocator()));
 
 //!-------------------------Declare Interceptors---------------------------
 

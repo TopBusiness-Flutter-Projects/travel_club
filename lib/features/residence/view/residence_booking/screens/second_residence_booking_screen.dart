@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/custom_terms_and_conditions.dart';
+import 'package:travel_club/features/payment/screens/widgets/custom_price_widget.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/linear_progress.dart';
 import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
 
@@ -9,7 +10,7 @@ import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/residence_cubit.dart';
 import '../widgets/custom_container_booking.dart';
 import '../../../../payment/screens/widgets/custom_copun_widget.dart';
-import '../widgets/payment_widget.dart';
+import '../../../../payment/screens/widgets/payment_widget.dart';
 
 class SecondResidenceBooking extends StatefulWidget {
   const SecondResidenceBooking({super.key});
@@ -69,7 +70,8 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                   ),
 
                   CustomLodgeContainer(
-                    lodgesModel: cubit.addRoomReservationModel.data!.lodge??cubit.defaultLodge,
+                    lodgesModel: cubit.addRoomReservationModel.data!.lodge ??
+                        cubit.defaultLodge,
                   ),
                   SizedBox(
                     height: 20.h,
@@ -89,12 +91,14 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                   SizedBox(
                     height: 300.h,
                     child: Swiper(
-                      itemCount: cubit.addRoomReservationModel.data!.rooms!.length, // Define the number of items in the swiper
+                      itemCount: cubit.addRoomReservationModel.data!.rooms!
+                          .length, // Define the number of items in the swiper
                       itemBuilder: (BuildContext context, int index) {
                         // Return a CustomContainerBooking for each item
                         return SizedBox(
                           child: CustomContainerBooking(
-                            room:  cubit.addRoomReservationModel.data!.rooms![index],
+                            room: cubit
+                                .addRoomReservationModel.data!.rooms![index],
                             widgetBottom: SizedBox(),
                           ),
                         );
@@ -106,42 +110,17 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                   SizedBox(
                     height: 10.h,
                   ),
-//payment
-                  Text(
-                    AppTranslations.paymentDetails,
-                    style: getMediumStyle(fontSize: 14.sp),
-                  ),
-                  SizedBox(height: 20.h,),
-                   PaymentWidget(
-                     price: cubit.addRoomReservationModel.data?.totalPrice.toString(),
-                     vat: cubit.addRoomReservationModel.data?.vat.toString(),
-                     totalPrice: cubit.addRoomReservationModel.data?.totalPriceAfterVat.toString(),
-                   ),
-                  SizedBox(height: 20.h,),
-//copun
-                  Text(
-                    AppTranslations.areYouHaveACoupon,
-                    style: getMediumStyle(fontSize: 14.sp),
-                  ),
-                  SizedBox(
-                    height: 10.h,
+                  // price and copounes
+                  CustomPricesWidget(
+                    totalPrice: cubit.addRoomReservationModel.data!.totalPrice
+                        .toString(),
+                    totalPriceAfterVat:
+                        cubit.addRoomReservationModel.data!.totalPriceAfterVat.toString(),
+                        vat:  cubit.addRoomReservationModel.data!.vat.toString(),
+                        terms: cubit.lodgesDetailsModel.data?.rule?.rule,
                   ),
 
-                  CustomCopunWidget(
-                    amount: "50",
-                  ),
-
-                  CustomAcceptTerms(
-                    terms: cubit.lodgesDetailsModel.data?.rule?.rule ?? "",
-                  ),
-   
-//button
-                  CustomButton(
-                    title: AppTranslations.completePayment,
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.payment);
-                    },
-                  )
+                
                 ],
               ),
             ),

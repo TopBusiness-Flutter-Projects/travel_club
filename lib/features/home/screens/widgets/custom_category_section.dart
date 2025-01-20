@@ -2,6 +2,7 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
 import 'package:travel_club/features/home/cubit/home_state.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
+import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
 import '../../../../core/widgets/network_image.dart';
 
 class CustomCategorySection extends StatefulWidget {
@@ -15,8 +16,7 @@ class CustomCategorySection extends StatefulWidget {
 
 class _CustomCategorySectionState extends State<CustomCategorySection> {
   @override
-  void initState() {
-    // TODO: implement initState
+  void initState() {    
     context.read<HomeCubit>().getHomeData();
     super.initState();
   }
@@ -75,6 +75,7 @@ class CustomCategoryContainer extends StatelessWidget {
               bottom: getHeightSize(context) * 0.01),
           child: GestureDetector(
             onTap: () {
+               context.read<PaymentCubit>().currentModuleId = categoryModel!.id!;
               if (categoryModel?.type == 0) {
                 Navigator.pushNamed(context, Routes.residenceRoute);
               } else if (categoryModel?.type == 1) {

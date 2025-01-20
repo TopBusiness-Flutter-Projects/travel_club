@@ -33,11 +33,11 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
           },
           onWebResourceError: (WebResourceError error) {},
           onUrlChange: (v) {
-            print(v.url.toString());
-            if (v.url.toString().toLowerCase().contains('api/payment/callback')) {
-              Navigator.pop(context);
-              Navigator.pop(context);
-              // context.read<PaymentCubit>().checkPayment(v.url!);
+            print("llllllllll"+v.url.toString());
+            // if (v.url.toString().toLowerCase().contains('api/payment/callback')) {
+            //   Navigator.pop(context);
+            //   Navigator.pop(context);
+            //   // context.read<PaymentCubit>().checkPayment(v.url!);
 
 
 
@@ -63,7 +63,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
 
           //   }
 
-            }
+            // }
           },
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {

@@ -1,17 +1,15 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:travel_club/features/auth/data/models/default_model.dart';
-import 'package:travel_club/features/auth/data/models/login_model.dart';
 
 import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
+import '../models/check_copoune_model.dart';
 
 class PaymentRepoImpl {
   final BaseApiConsumer dio;
   PaymentRepoImpl(this.dio);
-   Future<Either<Failure, LoginModel>> checkCopoune({
+   Future<Either<Failure, CheckCopouneModel>> checkCopoune({
     required String amount,
     required String code,
     required int moduleId,
@@ -26,7 +24,7 @@ class PaymentRepoImpl {
         },
       );
 
-      return Right(LoginModel.fromJson(response));
+      return Right(CheckCopouneModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }
