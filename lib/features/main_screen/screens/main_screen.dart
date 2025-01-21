@@ -1,16 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/utils/app_colors.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
 import 'package:travel_club/features/home/cubit/home_state.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 import 'package:travel_club/features/main_screen/cubit/state.dart';
-import 'package:travel_club/features/main_screen/screens/custom_exit_app_dialog.dart';
 import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
 
 import 'check_internet_widget.dart';
