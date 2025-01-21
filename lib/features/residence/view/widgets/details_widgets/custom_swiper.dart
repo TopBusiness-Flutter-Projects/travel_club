@@ -1,9 +1,3 @@
-// import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:card_swiper/card_swiper.dart';
-// import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
-
-// import '../../../../../core/exports.dart';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:photo_view/photo_view.dart';
@@ -11,79 +5,97 @@ import 'package:photo_view/photo_view_gallery.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 
-class CustomSwiper extends StatelessWidget {
-  const CustomSwiper({super.key, this.height, this.images});
+class SwiperWithAutoplay extends StatefulWidget {
   final double? height;
-  final List<String>? images;
+
+  final List<String> images;
+
+  const SwiperWithAutoplay({
+    super.key,
+    this.height,
+    required this.images,
+  });
+
+  @override
+  _SwiperWithAutoplayState createState() => _SwiperWithAutoplayState();
+}
+
+class _SwiperWithAutoplayState extends State<SwiperWithAutoplay> {
+  late SwiperController _swiperController;
+
+  @override
+  void initState() {
+    super.initState();
+    _swiperController = SwiperController();
+  }
+
+  @override
+  void dispose() {
+    _swiperController.stopAutoplay(); // Stop autoplay explicitly
+    _swiperController.dispose(); // Dispose the controller
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ResidenceCubit, ResidenceState>(
-      builder: (BuildContext context, state) {
-        var cubit = context.read<ResidenceCubit>();
-        return Positioned(
-          child: SizedBox(
-            height: height ?? getHeightSize(context) * 0.65,
-            width: getWidthSize(context),
-            child: Swiper(
-              onIndexChanged: (index) {
-                cubit.changeIndex(index);
-              },
-              itemCount: cubit.lodgesDetailsModel.data?.media?.length ?? 0,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                 onTap: () {
-              // Navigate to the full-screen image viewer
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FullScreenImageViewer(
-                    initialIndex: index,
-                    images: images ?? [],
-                  ),
-                ),
-              );
-            },
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        cubit.lodgesDetailsModel.data?.media?[index].image ??
-                            "",
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => SizedBox(
-                      height: 50.h,
-                      width: 50.h,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: getHeightSize(context) * 0.18,
-                          ),
-                          Center(
-                            child: CircularProgressIndicator(
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ],
-                      ),
+    var cubit = context.read<ResidenceCubit>();
+    return Positioned(
+      child: SizedBox(
+        height: widget.height ?? getHeightSize(context) * 0.6,
+        width: getWidthSize(context),
+        child: Swiper(
+          controller: _swiperController,
+          onIndexChanged: (index) {
+            cubit.changeIndex(index);
+          },
+          itemCount: widget.images.length,
+          itemBuilder: (BuildContext context, int index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FullScreenImageViewer(
+                      initialIndex: index,
+                      images: widget.images,
                     ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                 );
               },
-              layout: SwiperLayout.DEFAULT,
-              loop: true,
-              autoplayDelay: 8000,
-              autoplay: true,
-              pagination: SwiperPagination(
-                builder: DotSwiperPaginationBuilder(
-                  activeColor: Colors.white,
-                  color: Colors.white.withOpacity(.4),
+              child: CachedNetworkImage(
+                imageUrl: widget.images[index],
+                fit: BoxFit.cover,
+                placeholder: (context, url) => Padding(
+                  padding:
+                      EdgeInsets.only(bottom: getHeightSize(context) * 0.2),
+                  child: SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ),
                 ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
-              itemWidth: MediaQuery.of(context).size.width * 0.8,
-              itemHeight: 200.0,
+            );
+          },
+          layout: SwiperLayout.DEFAULT,
+          loop: true,
+          autoplayDelay: 8000,
+          autoplay: true,
+          pagination: SwiperPagination(
+            builder: DotSwiperPaginationBuilder(
+              activeColor: Colors.white,
+              color: Colors.white.withOpacity(.4),
             ),
           ),
-        );
-      },
+          itemWidth: MediaQuery.of(context).size.width * 0.8,
+          itemHeight: 200.0,
+        ),
+      ),
     );
   }
 }

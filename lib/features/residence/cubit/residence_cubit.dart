@@ -101,6 +101,7 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   void changeIndex(int index) {
     currentIndex = index;
     emit(ChangeIndex());
+    
   }
 
   List<int> stars = [];
@@ -131,13 +132,13 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   //change stars check
   void changeIndexCheckbox(int index) {
     currentIndexCheckbox = index;
-    emit(ChangeIndex());
+    emit(ChangeIndexCheckBoxState());
   }
 
   //change facilities check
   void changeIndexFacilities(int index) {
     currentIndexFacilities = index;
-    emit(ChangeIndex());
+    emit(ChangeIndexFacilitiesState());
   }
 
   // remove filter
@@ -145,7 +146,7 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     for (int i = 0; i <= starsFilters.length; i++) {
       starsFilters[i].isChecked = false;
     }
-    emit(ChangeIndex());
+    emit(RemoveFilterState());
   }
 
   LodgeModel? selectedLodge;

@@ -64,3 +64,6 @@ final class ReservationLoaded extends ResidenceState {}
 final class ReservationLoading extends ResidenceState {}
 
 final class ReservationError extends ResidenceState {}
+final class ChangeIndexCheckBoxState extends ResidenceState {}
+final class ChangeIndexFacilitiesState extends ResidenceState {}
+final class RemoveFilterState extends ResidenceState {}

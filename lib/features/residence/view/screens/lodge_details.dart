@@ -63,7 +63,7 @@ class _LodgeDetailsScreenState extends State<LodgeDetailsScreen> {
                         alignment: Alignment.topCenter,
                         children: [
                           // Swiper for images
-                          CustomSwiper(
+                          SwiperWithAutoplay(
                             images: cubit.lodgesDetailsModel.data!.media!
                                 .map((element) => element.image ?? "")
                                 .toList(),
