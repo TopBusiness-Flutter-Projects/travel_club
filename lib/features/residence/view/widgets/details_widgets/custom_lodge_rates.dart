@@ -92,7 +92,7 @@ class LodgeRatesContainerWithPoints extends StatelessWidget {
                               title: AppTranslations.bookNow,
                               onTap: () {
                                 checkLoggingStatus(
-                                  context,
+                                  context,onPressed: 
                                   () {
                                     Navigator.pushNamed(
                                         context, Routes.bookingResidenceRoute,
