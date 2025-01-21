@@ -7,6 +7,7 @@ import 'package:travel_club/features/residence/view/residence_booking/widgets/li
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 
+import '../../payment/screens/widgets/custom_price_widget.dart';
 import 'trip_details_first_screen copy.dart';
 import 'widgets/custom_from_to_details_yellow_container.dart';
 import 'widgets/custom_search_result_container.dart';
@@ -47,56 +48,22 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
                         ),
                         const CustomSearchResultContainer(),
                         const CustomSelectgedSeatWidget(),
+                        SizedBox(height: getVerticalPadding(context)),
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: getHorizontalPadding(context)),
-                          child: Padding(
-                            padding: EdgeInsets.all(10.h),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                //payment
-                                Text(
-                                  AppTranslations.paymentDetails,
-                                  style: getMediumStyle(fontSize: 14.sp),
-                                ),
-                                SizedBox(
-                                  height: 20.h,
-                                ),
-                                TransportationPaymentWidget(),
-                                SizedBox(
-                                  height: 20.h,
-                                ),
-                                //copun
-                                Text(
-                                  AppTranslations.areYouHaveACoupon,
-                                  style: getMediumStyle(fontSize: 14.sp),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                CustomCopunWidget(
-                                  amount: "40",
-                                ),
-                              ],
-                            ),
+
+                          child: CustomPricesWidget(
+                            totalPrice: "50",
+                            totalPriceAfterVat: "40",
+                            vat: "40",
+                            terms: "nono",
                           ),
                         ),
+
                       ]),
                 ),
               ),
-              BlocBuilder<TransportationCubit, TransportationState>(
-                  builder: (context, state) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getHorizontalPadding(context)),
-                  child: CustomButton(
-                      title: AppTranslations.completePayment,
-                      onTap: () {
-                     Navigator.pushNamed(context, Routes.payment);
-                      }),
-                );
-              }),
             ],
           ));
     });

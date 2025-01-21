@@ -123,7 +123,7 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "السعر ل ٤ ليالي",
+                                                '${AppTranslations.priceFor}'+" "+'${cubit.lodgesRoomsModel.data?[index].diff.toString()}',
                                                   style: getRegularStyle(
                                                       fontSize: 14.sp,
                                                       color: AppColors.grey),

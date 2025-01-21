@@ -37,10 +37,12 @@ import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
 import '../../features/entertainment/screens/details_of_entertainment/screens/book_table.dart';
 import '../../features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
+import '../../features/entertainment/screens/details_of_entertainment/screens/second_book_table.dart';
 import '../../features/entertainment/screens/entertainment_companies.dart';
 import '../../features/entertainment/screens/entertainment_screen.dart';
 import '../../features/food/screens/details_of_food/screens/book_table_screen.dart';
 import '../../features/food/screens/details_of_food/screens/details_food_screen.dart';
+import '../../features/food/screens/details_of_food/screens/second_book_table_screen.dart';
 import '../../features/food/screens/food_screen.dart';
 import '../../features/my_account/screens/change_lang.dart';
 import '../../features/my_bookings/view/entertainment_booking/screens/details_booking_food_screen.dart';
@@ -104,8 +106,10 @@ class Routes {
   static const String detailsbookingTransportation =
       '/detailsbookingTransportation';
   static const String pointsRoute = '/pointsRoute';
+  static const String secondBookingFood = '/secondBookingFood';
   static const String promoCodeRoute = '/promocodeRoute';
   static const String updatePassword = '/updatePassword';
+  static const String secondBookTableEntertainment = '/secondBookTableEntertainment';
 }
 
 class AppRoutes {
@@ -119,6 +123,19 @@ class AppRoutes {
       case Routes.onboardingPageScreenRoute:
         return PageTransition(
           child: const OnBoardinScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+        case Routes.secondBookingFood:
+        return PageTransition(
+          child: const SecondBookTableScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        ); case Routes.secondBookTableEntertainment:
+        return PageTransition(
+          child: const SecondBookTableEntermaint(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

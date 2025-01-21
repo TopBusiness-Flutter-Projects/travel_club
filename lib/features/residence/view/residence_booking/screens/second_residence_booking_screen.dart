@@ -106,14 +106,12 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                   ),
                   // price and copounes
                   CustomPricesWidget(
-                    totalPrice: cubit.addRoomReservationModel.data!.totalPrice
-                        .toString(),
-                    totalPriceAfterVat: cubit
-                        .addRoomReservationModel.data!.totalPriceAfterVat
-                        .toString(),
+                    totalPrice: cubit.addRoomReservationModel.data!.totalPrice.toString(),
+                    totalPriceAfterVat: cubit.addRoomReservationModel.data!.totalPriceAfterVat.toString(),
                     vat: cubit.addRoomReservationModel.data!.vat.toString(),
                     terms: cubit.lodgesDetailsModel.data?.rule?.rule,
                   ),
+                  SizedBox(height: 5.h,)
                 ],
               ),
             ),

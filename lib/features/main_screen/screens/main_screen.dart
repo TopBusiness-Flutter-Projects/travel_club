@@ -16,8 +16,8 @@ import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
 import 'check_internet_widget.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({super.key, this.index});
-  int? index;
+ const MainScreen({super.key, this.index});
+ final int? index;
   @override
   State<MainScreen> createState() => _MainScreenState();
 }

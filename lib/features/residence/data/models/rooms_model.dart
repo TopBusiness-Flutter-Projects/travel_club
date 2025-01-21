@@ -42,6 +42,7 @@ class RoomModel {
   int? id;
   String? name;
   int? beds;
+  int? diff;
   int? totalPrice;
   int? price;
   int? lodgeId;
@@ -62,6 +63,7 @@ class RoomModel {
     this.type,
     this.facilities,
     this.recommend,
+    this.diff,
     this.isSelectedRecommend = false,
   });
 
@@ -71,6 +73,7 @@ class RoomModel {
         beds: json["beds"],
         totalPrice: json["totalPrice"],
         price: json["price"],
+    diff: json["diff"],
         lodgeId: json["lodge_id"],
         canCancel: json["canCancel"] ,
         type: json["type"],
@@ -89,6 +92,7 @@ class RoomModel {
         "beds": beds,
         "totalPrice": totalPrice,
         "price": price,
+        "diff": diff,
         "lodge_id": lodgeId,
         "canCancel":canCancel,
            // "${canCancel!.year.toString().padLeft(4, '0')}-${canCancel!.month.toString().padLeft(2, '0')}-${canCancel!.day.toString().padLeft(2, '0')}",

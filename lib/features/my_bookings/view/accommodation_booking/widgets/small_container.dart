@@ -5,8 +5,8 @@ import 'package:travel_club/features/residence/view/widgets/residence_widgets/ac
 import '../../../../../../core/exports.dart';
 
 class CustomBookingAccommodationContainerSmall extends StatefulWidget {
-  CustomBookingAccommodationContainerSmall({super.key,required this.hotelsModel});
-  HotelsModel? hotelsModel;
+  const CustomBookingAccommodationContainerSmall({super.key,required this.hotelsModel});
+ final HotelsModel? hotelsModel;
 
   @override
   State<CustomBookingAccommodationContainerSmall> createState() => _CustomBookingAccommodationContainerSmallState();

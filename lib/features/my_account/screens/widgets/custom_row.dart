@@ -1,9 +1,9 @@
 import '../../../../core/exports.dart';
 
 class CustomRowProfile extends StatelessWidget {
-   CustomRowProfile({super.key,required this.title,this.onTap});
-String? title;
-void Function()? onTap;
+ const  CustomRowProfile({super.key,required this.title,this.onTap});
+ final String? title;
+final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return  Column(
