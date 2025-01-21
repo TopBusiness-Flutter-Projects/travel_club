@@ -243,4 +243,6 @@ class AppTranslations {
   static String get selectImage => 'select_image'.tr();
   static String get vat => 'vat'.tr();
   static String get afterDiscount => 'after_discount'.tr();
+  static String get reservationWillCanceled => 'reservation_will_canceled'.tr();
+  static String get complete => 'complete'.tr();
 }

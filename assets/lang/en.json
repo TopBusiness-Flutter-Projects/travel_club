@@ -225,6 +225,8 @@
 "camera": "Camera",
 "gallery": "Gallery",
 "after_discount" : "Price after discount",
+"reservation_will_canceled" : "Reservation will be canceled in case of incomplete payment process in 4 hours",
+"complete" : "Complete",
 "" : "",
     "lasss": ""
 }

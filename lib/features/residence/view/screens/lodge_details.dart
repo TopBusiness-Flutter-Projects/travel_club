@@ -99,35 +99,3 @@ class _LodgeDetailsScreenState extends State<LodgeDetailsScreen> {
   }
 }
 
-checkLoggingStatus(BuildContext context, void Function()? onPressed) async {
-  print("AppConst.isLogged: ${AppConst.isLogged}");
-  if (AppConst.isLogged) {
-    if (onPressed != null) {
-      onPressed();
-    }
-  } else {
-    await showExitDialog(context);
-  }
-}
-
-Future<void> showExitDialog(BuildContext context) async {
-  AwesomeDialog(
-    context: context,
-    customHeader: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Image.asset(
-        ImageAssets.logoImage,
-      ),
-    ),
-    animType: AnimType.topSlide,
-    padding: EdgeInsets.all(10.w),
-    title: AppTranslations.notLogin,
-    btnOkText: AppTranslations.login,
-    btnOkOnPress: () {
-      Navigator.pushNamedAndRemoveUntil(
-          context, Routes.loginRoute, (route) => false);
-    },
-    btnCancelOnPress: () {},
-    btnCancelText: AppTranslations.cancel,
-  ).show();
-}
