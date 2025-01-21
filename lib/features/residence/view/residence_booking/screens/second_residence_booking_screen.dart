@@ -13,7 +13,6 @@ import '../widgets/payment_widget.dart';
 
 class SecondResidenceBooking extends StatefulWidget {
   const SecondResidenceBooking({super.key});
-
   @override
   State<SecondResidenceBooking> createState() => _SecondResidenceBookingState();
 }
