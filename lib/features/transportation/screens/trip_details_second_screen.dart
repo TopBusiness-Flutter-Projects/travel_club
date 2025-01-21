@@ -30,6 +30,7 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
           appbarTitle: AppTranslations.tripDetails,
           body: Column(
             children: [
+              //
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
