@@ -47,9 +47,9 @@ class CustomOffersSection extends StatelessWidget {
           child: ListView.builder(
             itemBuilder: (context, index) => CustomOffersContainer(
               isLast: index == 2,
-              offerModel:cubit.homeModel?.data?.offers?[index] ,
+              offerModel:cubit.homeModel.data?.offers?[index] ,
             ),
-            itemCount: cubit.homeModel?.data?.offers?.length,
+            itemCount: cubit.homeModel.data?.offers?.length,
             scrollDirection: Axis.horizontal,
           ))
     ],

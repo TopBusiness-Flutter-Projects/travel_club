@@ -2,7 +2,6 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/my_bookings/view/transportation_booking/widgets/custom_booking_transportation_body.dart';
 import 'package:travel_club/features/my_bookings/view/widgets/custom_catogrey_booking.dart';
 import '../../home/screens/widgets/custom_appbar.dart';
-import '../../my_account/screens/widgets/profile_not_loging.dart';
 import '../cubit/my_bookings_cubit.dart';
 import '../cubit/my_bookings_state.dart';
 import 'accommodation_booking/screens/custom_booking_accommodation_body.dart';

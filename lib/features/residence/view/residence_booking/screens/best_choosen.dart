@@ -3,7 +3,6 @@ import 'package:travel_club/features/residence/view/residence_booking/widgets/cu
 
 import '../../../../../core/exports.dart';
 import '../../../cubit/residence_cubit.dart';
-import '../widgets/custom_rounded_button.dart';
 
 class BestChosenScreen extends StatefulWidget {
   const BestChosenScreen({super.key});

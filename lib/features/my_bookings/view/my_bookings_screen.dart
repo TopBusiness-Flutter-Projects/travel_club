@@ -1,12 +1,6 @@
-// ignore_for_file: deprecated_member_use
 
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/features/main_screen/cubit/cubit.dart';
-import 'package:travel_club/features/main_screen/cubit/state.dart';
 
-import '../../home/screens/home_body.dart';
-import '../../home/screens/widgets/custom_appbar.dart';
-import '../../home/screens/widgets/custom_category_section.dart';
 import '../../my_account/screens/widgets/profile_not_loging.dart';
 import '../cubit/my_bookings_cubit.dart';
 import '../cubit/my_bookings_state.dart';

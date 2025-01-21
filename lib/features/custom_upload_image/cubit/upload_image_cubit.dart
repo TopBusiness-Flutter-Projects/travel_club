@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:image_picker/image_picker.dart';
-import 'package:travel_club/core/exports.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:travel_club/core/exports.dart';
+
 import 'upload_image_state.dart';
 
 class UploadImageCubit extends Cubit<UploadImageState> {

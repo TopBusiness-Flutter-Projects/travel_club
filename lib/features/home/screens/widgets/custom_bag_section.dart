@@ -45,9 +45,9 @@ class CustomBagSection extends StatelessWidget {
           child: ListView.builder(
             itemBuilder: (context, index) =>
                 CustomBagContainer(
-                  suitcase: cubit.homeModel?.data?.suitcases?[index],
+                  suitcase: cubit.homeModel.data?.suitcases?[index],
                     isLast: index == 2),
-            itemCount: cubit.homeModel?.data?.suitcases?.length,
+            itemCount: cubit.homeModel.data?.suitcases?.length,
 
             scrollDirection: Axis.horizontal,
           ))

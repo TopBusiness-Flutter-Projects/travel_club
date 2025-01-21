@@ -2,7 +2,6 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/auth/cubit/cubit.dart';
 import 'package:travel_club/features/auth/cubit/state.dart';
 import 'package:travel_club/features/auth/view/widgets/custom_container.dart';
-import '../../../../core/widgets/custom_skip_row.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../widgets/custom_forward.dart';
 import '../widgets/custom_title.dart';

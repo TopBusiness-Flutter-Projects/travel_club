@@ -1,9 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
-import 'package:travel_club/core/utils/restart_app_class.dart';
-import 'package:travel_club/features/auth/data/models/login_model.dart';
 import '../data/models/check_copoune_model.dart';
 import '../data/repo/payment_repo_impl.dart';
 import 'payment_state.dart';

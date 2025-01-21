@@ -70,12 +70,12 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                               },
                               child: CircleAvatar(
                                 backgroundColor:
-                                    widget.lodgesModel?.isFav ?? false
+                                    widget.lodgesModel.isFav ?? false
                                         ? AppColors.red
                                         : AppColors.lightWhite,
                                 child: Icon(
                                   CupertinoIcons.heart,
-                                  color: widget.lodgesModel?.isFav ?? false
+                                  color: widget.lodgesModel.isFav ?? false
                                       ? AppColors.white
                                       : AppColors.secondPrimary,
                                   size: 25.sp,

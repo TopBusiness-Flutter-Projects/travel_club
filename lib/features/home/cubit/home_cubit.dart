@@ -1,7 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/utils/appwidget.dart';
-import 'package:travel_club/features/auth/data/models/login_model.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
 import '../data/repo/home_repo_impl.dart';
 import 'home_state.dart';
