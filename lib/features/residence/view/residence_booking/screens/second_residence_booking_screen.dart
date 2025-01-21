@@ -100,7 +100,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                           ),
                         );
                       },
-                      pagination: SwiperPagination(),
+                      pagination:const SwiperPagination(),
                     ),
                   ),
 
