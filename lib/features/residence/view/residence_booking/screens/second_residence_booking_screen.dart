@@ -14,7 +14,6 @@ import '../../../../payment/screens/widgets/payment_widget.dart';
 
 class SecondResidenceBooking extends StatefulWidget {
   const SecondResidenceBooking({super.key});
-
   @override
   State<SecondResidenceBooking> createState() => _SecondResidenceBookingState();
 }
@@ -23,7 +22,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
   @override
   void initState() {
     // TODO: implement initState
-    context.read<ResidenceCubit>().addRoomReservation(context);
+    // context.read<ResidenceCubit>().addRoomReservation();
     context.read<TransportationCubit>().goOnly = false;
     super.initState();
   }
@@ -68,7 +67,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                     "${AppTranslations.numberOfMembers} : ${cubit.counter}",
                     style: getMediumStyle(fontSize: 14.sp),
                   ),
-
+               // cubit.addRoomReservationModel.data != null ?
                   CustomLodgeContainer(
                     lodgesModel: cubit.addRoomReservationModel.data!.lodge ??
                         cubit.defaultLodge,

@@ -234,20 +234,21 @@
 "lost_connection" : "تعذر الإتصال بالإنترنت !!",
 "exit":"خروج",
 "app_close":"سيتم إغلاق التطبيق.",
-"are_you_sure_close":"هل أنت متأكد من الخروج؟", 
-"sent_result": "ارسال النتايج",
-"no_data": "لا توجد بيانات",
-"add": "اضف",
-"show_hotels": "اظهار الفنادق",
-"remove": "احذف",
-"select_image": "اختر صورة",
-"camera": "كاميرا",
-"gallery": "المعرض",
-"vat": "الضريبة",
- "after_discount" : "السعر بعد الخصم", 
- "" : "", 
-  "lasss": ""
 
+ "after_discount" : "السعر بعد الخصم", 
+
+"are_you_sure_close":"هل أنت متأكد من الخروج؟",
+  "sent_result": "ارسال النتايج",
+  "no_data": "لا توجد بيانات",
+  "add": "اضف",
+  "show_hotels": "اظهار الفنادق",
+  "remove": "احذف",
+  "select_image": "اختر صورة",
+  "camera": "كاميرا",
+  "gallery": "المعرض",
+  "" : "",
+  "lasss": "",
+  "vat": "الضريبة"
 }
 
 

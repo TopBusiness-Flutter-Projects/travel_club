@@ -69,10 +69,10 @@ context.read<LoginCubit>().signOutFromGmail();
                         title: AppTranslations.phone,
                         onCountryChanged: (v) {
                           cubit.countryCode = '+${v.fullCountryCode}';
-                          print("Country changed to: ${v.name}");
+                         debugPrint("Country changed to: ${v.name}");
                         },
                         onChanged: (phone) {
-                          print(phone.completeNumber);
+                          debugPrint(phone.completeNumber);
                         },
                       ),
                       CustomTextField(
