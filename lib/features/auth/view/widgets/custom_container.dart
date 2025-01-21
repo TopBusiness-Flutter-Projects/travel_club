@@ -1,5 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:travel_club/features/auth/cubit/cubit.dart';
 
 import '../../../../core/exports.dart';
 

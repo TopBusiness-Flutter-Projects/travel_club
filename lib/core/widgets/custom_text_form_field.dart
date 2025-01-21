@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';

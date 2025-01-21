@@ -86,18 +86,15 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                   //   widgetBottom: SizedBox(),
                   // ),
                   SizedBox(
-                    height: getHeightSize(context) * 0.4,
+                    height: getHeightSize(context) * 0.35,
                     child: Swiper(
                       itemCount: cubit.addRoomReservationModel.data!.rooms!
                           .length, // Define the number of items in the swiper
                       itemBuilder: (BuildContext context, int index) {
                         // Return a CustomContainerBooking for each item
-                        return Align(
-                          alignment: Alignment.topCenter,
-                          child: CustomContainerBooking(
-                            room: cubit
-                                .addRoomReservationModel.data!.rooms![index],
-                          ),
+                        return CustomContainerBooking(
+                          room: cubit
+                              .addRoomReservationModel.data!.rooms![index],
                         );
                       },
                       pagination: SwiperPagination(),

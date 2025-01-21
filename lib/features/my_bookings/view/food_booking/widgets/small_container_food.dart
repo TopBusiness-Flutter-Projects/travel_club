@@ -13,7 +13,7 @@ class CustomBookingFoodContainerSmall extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: GestureDetector(
-          onTap: foodModel?.onTap,
+          onTap: foodModel.onTap,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: CustomContainerWithShadow(
@@ -28,7 +28,7 @@ class CustomBookingFoodContainerSmall extends StatelessWidget {
                     children: [
                       // SizedBox(height: 10.h,),
                       Text(
-                        foodModel?.title.toString() ?? "",
+                        foodModel.title.toString() ?? "",
                         overflow: TextOverflow.ellipsis,
                         style: getSemiBoldStyle(fontSize: 14.sp),
                         maxLines: 2,
@@ -39,7 +39,7 @@ class CustomBookingFoodContainerSmall extends StatelessWidget {
                       Row(
                         children: [
                           StarRating(
-                              rating: foodModel?.rate?.toDouble() ?? 1,
+                              rating: foodModel.rate?.toDouble() ?? 1,
                               allowHalfRating: false, size: 14.sp,
                               onRatingChanged: (rating) {
                                 //   => setState(() => this.rating = rating

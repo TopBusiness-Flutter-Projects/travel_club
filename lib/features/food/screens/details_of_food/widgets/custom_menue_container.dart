@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:travel_club/features/entertainment/cubit/entertainment_cubit.dart';
 import 'package:travel_club/features/food/cubit/food_cubit.dart';
 
 import '../../../../../core/exports.dart';
