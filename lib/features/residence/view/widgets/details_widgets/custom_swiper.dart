@@ -7,9 +7,7 @@ import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 
 class SwiperWithAutoplay extends StatefulWidget {
   final double? height;
-
   final List<String> images;
-
   const SwiperWithAutoplay({
     super.key,
     this.height,
