@@ -23,15 +23,14 @@ class _MainScreenState extends State<MainScreen> {
     MainCubit cubit = context.read<MainCubit>();
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
-        return WillPopScope(
-          onWillPop: () async {
-            if (cubit.currentpage == 0) {
-              await showExitDialog(context);
-            } else {
-             await cubit.changePage(0);
-            }
+        return PopScope(
 
-            return false;
+          onPopInvoked: (bool value) async {
+            if (cubit.currentpage == 0) {
+        return      await showExitDialog(context);
+            } else {
+        return     await cubit.changePage(0);
+            }
           },
           child: Scaffold(
             body: Stack(

@@ -13,7 +13,7 @@ class FoodCubit extends Cubit<FoodState> {
   bool? isFavoriteTrue = false;
   void changeIndex(int index) {
     selectedIndex = index;
-    emit(ChangeIndex());
+    emit(ChangeIndexFood());
   }
 
   // void changeFavourite() {
@@ -31,7 +31,7 @@ class FoodCubit extends Cubit<FoodState> {
   bool isServiceSelected = false;
   void changeIndexService(bool index) {
     isServiceSelected = index;
-    emit(ChangeIndex());
+    emit(ChangeIndexFood());
   }
 
   final List<String> imageUrls = [
@@ -45,7 +45,7 @@ class FoodCubit extends Cubit<FoodState> {
 //
   void changeIndexMenue(int index) {
     selectedIndexMenue = index;
-    emit(ChangeIndex());
+    emit(ChangeIndexFood());
   }
 
   int itemsQty = 0;

@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:ui' as ui;
+import 'package:card_swiper/card_swiper.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:travel_club/core/exports.dart';
@@ -97,12 +98,26 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   }
 
   int currentIndex = 0;
-
+   SwiperController swiperController=SwiperController();
+bool isUtoPlay=true;
+  // void changeIndex(int index) {
+  //   currentIndex = index;
+  //
+  //   emit(ChangeIndexResidence());
+  // }
+  bool ?isPageActive;
   void changeIndex(int index) {
-    currentIndex = index;
-    emit(ChangeIndex());
-    
+    print("changeIndex");
+    print(isPageActive);
+    if (isPageActive==true) {
+      print("changeIndex nono");
+// تحقق من أن الصفحة نشطة قبل التحديث
+      currentIndex = index;
+      emit(ChangeIndexResidence());
+    }
   }
+
+
 
   List<int> stars = [];
 
@@ -261,6 +276,7 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   //getLodges
   GetLodgesModel lodgesModel = GetLodgesModel();
   getLodges({required int placeId, required BuildContext context}) async {
+
     emit(LoadgesLoading());
     double? lat, long;
     if (selectedFilter?.text == "nearestDistance") {

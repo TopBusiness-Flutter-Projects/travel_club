@@ -21,21 +21,26 @@ class SwiperWithAutoplay extends StatefulWidget {
 }
 
 class _SwiperWithAutoplayState extends State<SwiperWithAutoplay> {
-  late SwiperController _swiperController;
 
   @override
   void initState() {
     super.initState();
-    _swiperController = SwiperController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ModalRoute.of(context)?.addScopedWillPopCallback(() async {
+        context.read<ResidenceCubit>().swiperController.stopAutoplay();
+        return true;
+      });
+    });
+    context.read<ResidenceCubit>().swiperController = SwiperController();
   }
 
-  @override
-  void dispose() {
-    _swiperController.stopAutoplay(); // Stop autoplay explicitly
-    _swiperController.dispose(); // Dispose the controller
-    super.dispose();
-  }
 
+@override
+void dispose() {
+  context.read<ResidenceCubit>().isPageActive=false;
+  context.read<ResidenceCubit>().swiperController .dispose();
+  context.read<ResidenceCubit>().swiperController.stopAutoplay();
+}
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<ResidenceCubit>();
@@ -44,9 +49,9 @@ class _SwiperWithAutoplayState extends State<SwiperWithAutoplay> {
         height: widget.height ?? getHeightSize(context) * 0.6,
         width: getWidthSize(context),
         child: Swiper(
-          controller: _swiperController,
+          controller: cubit.swiperController,
           onIndexChanged: (index) {
-            cubit.changeIndex(index);
+          //  cubit.changeIndex(index);
           },
           itemCount: widget.images.length,
           itemBuilder: (BuildContext context, int index) {
@@ -84,9 +89,11 @@ class _SwiperWithAutoplayState extends State<SwiperWithAutoplay> {
           },
           layout: SwiperLayout.DEFAULT,
           loop: true,
-          autoplayDelay: 8000,
+          autoplayDelay: 6000,
           autoplay: true,
+
           pagination: SwiperPagination(
+            margin: EdgeInsets.only(bottom: getHeightSize(context) * 0.32) ,
             builder: DotSwiperPaginationBuilder(
               activeColor: Colors.white,
               color: Colors.white.withOpacity(.4),
