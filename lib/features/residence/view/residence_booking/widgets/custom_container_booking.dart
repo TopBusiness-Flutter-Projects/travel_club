@@ -17,12 +17,12 @@ class CustomContainerBooking extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: CustomContainerWithShadow(
-              // width:  400.h,
-              //   height: 500.h,
+             
               child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   room?.name.toString() ?? "",
@@ -32,7 +32,7 @@ class CustomContainerBooking extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                if( room?.facilities!.isNotEmpty??false)...[
+                if (room?.facilities!.isNotEmpty ?? false) ...[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -41,15 +41,13 @@ class CustomContainerBooking extends StatelessWidget {
                         SizedBox(
                           width: 5.w,
                         ),
-
-
                         Text(
                           AppTranslations.cancelFree +
-                              "  " +
-                              context
-                                  .read<TransportationCubit>()
-                                  .toDate
-                                  .toString() ??
+                                  "  " +
+                                  context
+                                      .read<TransportationCubit>()
+                                      .toDate
+                                      .toString() ??
                               "",
                           style: getRegularStyle(
                               fontSize: 14.sp, color: AppColors.green),
@@ -63,36 +61,37 @@ class CustomContainerBooking extends StatelessWidget {
                   color: AppColors.lightBlue1,
                 ),
                 //custom rooms widget
-               if(room?.facilities == null)
-                     Center(
-                        child: CustomLoadingIndicator(),
+                if (room?.facilities == null)
+                  Center(
+                    child: CustomLoadingIndicator(),
+                  )
+                else if (room?.facilities!.isNotEmpty ?? true) ...[
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Wrap(
+                        spacing: 10.w,
+                        runSpacing: 10.h,
+                        children: List.generate(
+                            12,
+                            // room?.facilities?.length ?? 0,
+                            (index) =>
+                                // Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
+                                SizedBox(
+                                    width: getWidthSize(context) * 0.3,
+                                    child: CustomRoomsWidget(
+                                      facility: room!.facilities![0],
+                                    ))),
                       )
-                     else if( room?.facilities!.isNotEmpty??true)...[
-                 Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: Wrap(
-                       spacing: 10.w,
-                       runSpacing: 10.h,
-                       children: List.generate(
-                           room?.facilities?.length ?? 0,
-                               (index) =>
-                           // Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
-                           SizedBox(
-                               width: getWidthSize(context) * 0.3,
-                               child: CustomRoomsWidget(
-                                 facility: room!.facilities![index],
-                               ))),
-                     )
-                   // StaggeredGrid.count(
-                   //   crossAxisCount: 2,
-                   //   children: List.generate(6, (index) =>
-                   //       Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
-                   //       // CustomRoomsWidget()
-                   //   ),
-                   //
-                   // ),
-                 )
-        ],
+                      // StaggeredGrid.count(
+                      //   crossAxisCount: 2,
+                      //   children: List.generate(6, (index) =>
+                      //       Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
+                      //       // CustomRoomsWidget()
+                      //   ),
+                      //
+                      // ),
+                      )
+                ],
 
                 // Divider(color: AppColors.lightBlue1,),
                 widgetBottom ?? Container(),

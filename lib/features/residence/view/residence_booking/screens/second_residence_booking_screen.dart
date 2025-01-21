@@ -21,10 +21,10 @@ class SecondResidenceBooking extends StatefulWidget {
 class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
   @override
   void initState() {
-
     context.read<TransportationCubit>().goOnly = false;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<ResidenceCubit>();
@@ -39,7 +39,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                       SizedBox(
+                  SizedBox(
                     height: 20.h,
                   ),
                   //center linear progress
@@ -65,9 +65,10 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                     "${AppTranslations.numberOfMembers} : ${cubit.counter}",
                     style: getMediumStyle(fontSize: 14.sp),
                   ),
-               // cubit.addRoomReservationModel.data != null ?
+                  // cubit.addRoomReservationModel.data != null ?
                   CustomLodgeContainer(
-                    lodgesModel: cubit.addRoomReservationModel.data!.lodge??cubit.defaultLodge,
+                    lodgesModel: cubit.addRoomReservationModel.data!.lodge ??
+                        cubit.defaultLodge,
                   ),
                   SizedBox(
                     height: 20.h,
@@ -85,14 +86,18 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                   //   widgetBottom: SizedBox(),
                   // ),
                   SizedBox(
-                    height: 300.h,
+                    height: getHeightSize(context) * 0.4,
                     child: Swiper(
-                      itemCount: cubit.addRoomReservationModel.data!.rooms!.length, // Define the number of items in the swiper
+                      itemCount: cubit.addRoomReservationModel.data!.rooms!
+                          .length, // Define the number of items in the swiper
                       itemBuilder: (BuildContext context, int index) {
                         // Return a CustomContainerBooking for each item
-                        return CustomContainerBooking(
-                          room:  cubit.addRoomReservationModel.data!.rooms![index],
-                          widgetBottom: SizedBox(),
+                        return Align(
+                          alignment: Alignment.topCenter,
+                          child: CustomContainerBooking(
+                            room: cubit
+                                .addRoomReservationModel.data!.rooms![index],
+                          ),
                         );
                       },
                       pagination: SwiperPagination(),
@@ -106,13 +111,12 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                   CustomPricesWidget(
                     totalPrice: cubit.addRoomReservationModel.data!.totalPrice
                         .toString(),
-                    totalPriceAfterVat:
-                        cubit.addRoomReservationModel.data!.totalPriceAfterVat.toString(),
-                        vat:  cubit.addRoomReservationModel.data!.vat.toString(),
-                        terms: cubit.lodgesDetailsModel.data?.rule?.rule,
+                    totalPriceAfterVat: cubit
+                        .addRoomReservationModel.data!.totalPriceAfterVat
+                        .toString(),
+                    vat: cubit.addRoomReservationModel.data!.vat.toString(),
+                    terms: cubit.lodgesDetailsModel.data?.rule?.rule,
                   ),
-
-                
                 ],
               ),
             ),
