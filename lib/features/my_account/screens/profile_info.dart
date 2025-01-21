@@ -12,11 +12,24 @@ import '../../../core/widgets/custom_screen.dart';
 import '../cubit/account_cubit.dart';
 import '../cubit/account_state.dart';
 
-class ProfileInfo extends StatelessWidget {
+class ProfileInfo extends StatefulWidget {
   const ProfileInfo({super.key});
 
   @override
+  State<ProfileInfo> createState() => _ProfileInfoState();
+}
+
+class _ProfileInfoState extends State<ProfileInfo> {
+  @override
+  void initState() {
+    context.read<UploadImageCubit>().profileImage = null;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formInfo = GlobalKey<FormState>();
+
     var cubit = context.read<AccountCubit>();
     var imageCubit = context.read<UploadImageCubit>();
 
@@ -26,7 +39,7 @@ class ProfileInfo extends StatelessWidget {
             appbarTitle: AppTranslations.personalData,
             body: SingleChildScrollView(
               child: Form(
-                key: cubit.formInfo,
+                key: formInfo,
                 child: Column(
                   children: [
                     SizedBox(
@@ -35,22 +48,38 @@ class ProfileInfo extends StatelessWidget {
                     //image
                     BlocBuilder<UploadImageCubit, UploadImageState>(
                         builder: (context, state) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(15.r),
-                        child: imageCubit.profileImage != null
-                            ? Image.file(
-                                File(imageCubit.profileImage!.path),
-                                width: 75.w,
-                                height: 75.h,
-                                fit: BoxFit.cover,
-                              )
-                            : CustomNetworkImage(
-                            image:  cubit.loginModel.data?.image ?? "",
-                              width: 75.w,
-                              height: 75.h,
-                              isUser: true,
-                              
+                      return Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15.r),
+                            child: imageCubit.profileImage != null
+                                ? Image.file(
+                                    File(imageCubit.profileImage!.path),
+                                    width: 105.w,
+                                    height: 105.w,
+                                    fit: BoxFit.cover,
+                                  )
+                                : CustomNetworkImage(
+                                    image: cubit.loginModel.data?.image ?? "",
+                                    width: 105.w,
+                                    height: 105.w,
+                                    isUser: true,
+                                  ),
+                          ),
+                          if (imageCubit.profileImage != null)
+                            Positioned(
+                              top: -15,
+                              right: -15,
+                              child: InkWell(
+                                child: Icon(Icons.delete,
+                                    size: 35.w, color: Colors.red),
+                                onTap: () {
+                                  imageCubit.removeImage();
+                                },
+                              ),
                             ),
+                        ],
                       );
                     }),
                     SizedBox(
@@ -102,12 +131,18 @@ class ProfileInfo extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: CustomButton(
                         title: AppTranslations.savedChanges,
-                        onTap: () {},
+                        onTap: () {
+                          if (formInfo.currentState!.validate()) {
+                            cubit.updateUserData(context,
+                                imagePath: imageCubit.profileImage?.path);
+                          }
+                        },
                       ),
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, Routes.updatePassword);
+                        Navigator.pushReplacementNamed(
+                            context, Routes.updatePassword);
                       },
                       child: Text(
                         AppTranslations.changePassword,

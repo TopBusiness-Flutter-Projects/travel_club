@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:travel_club/features/auth/data/models/default_model.dart';
 import 'package:travel_club/features/auth/data/models/login_model.dart';
 
 import '../../../../core/api/base_api_consumer.dart';
@@ -20,13 +22,36 @@ class AccountRepoImpl {
       return Left(ServerFailure());
     }
   }
-  Future<Either<Failure, LoginModel>> updateUserData( ) async {
+  Future<Either<Failure, LoginModel>> updateUserData( {required String name , String? imagePath} ) async {
     try {
       var response = await dio.post(
         EndPoints.updateUserDataUrl,
+        body: {
+          'name' : name,
+        if (imagePath != null)  'image' :  await MultipartFile.fromFile(imagePath)
+        },
+        formDataIsEnabled: true
+
         
       );
       return Right(LoginModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  Future<Either<Failure, DefaultPostModel>> updatepassword( {required String currentPassword , required String newPassword} ) async {
+    try {
+      var response = await dio.post(
+        EndPoints.updatePasswordUrl,
+        body: {
+          'current_password' : currentPassword,
+          'new_password' :  newPassword
+        },
+        formDataIsEnabled: true
+
+        
+      );
+      return Right(DefaultPostModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

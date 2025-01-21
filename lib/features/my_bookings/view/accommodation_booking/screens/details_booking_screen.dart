@@ -6,7 +6,7 @@ import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_state.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_rounded_button.dart';
-import 'package:travel_club/features/residence/view/residence_booking/widgets/payment_widget.dart';
+import 'package:travel_club/features/payment/screens/widgets/payment_widget.dart';
 import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/my_bookings_cubit.dart';
@@ -105,7 +105,7 @@ class _DetailsBookingState extends State<DetailsBooking> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  PaymentWidget(
+                  PaymentDetailsContainer(
                     isDetailsBooking: true,
                   ),
                   SizedBox(

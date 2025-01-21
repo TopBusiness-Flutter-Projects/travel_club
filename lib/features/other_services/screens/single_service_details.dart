@@ -21,7 +21,7 @@ class ServiceDetailsScreen extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 children: [
                   // Swiper for images
-                  CustomSwiper(
+                  SwiperWithAutoplay(
                     images: ["dds"],
                   ),
 

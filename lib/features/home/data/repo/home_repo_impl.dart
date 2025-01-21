@@ -15,14 +15,12 @@ class HomeRepoImpl {
     try {
       var response = await dio.get(
         EndPoints.homeUrl,
-        // options: Options(
-        //   headers: {'Authorization': "Bearer ${user.data?.token ?? ''}"},
-        // ),
       );
       return Right(GetHomeModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }
   }
+
 
 }

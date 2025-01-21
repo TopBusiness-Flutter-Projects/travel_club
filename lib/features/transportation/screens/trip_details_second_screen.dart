@@ -2,12 +2,12 @@
 
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/convert_numbers_method.dart';
+import 'package:travel_club/features/payment/screens/widgets/custom_copun_widget.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/linear_progress.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 
 import 'trip_details_first_screen copy.dart';
-import 'widgets/custom_copun_widget.dart';
 import 'widgets/custom_from_to_details_yellow_container.dart';
 import 'widgets/custom_search_result_container.dart';
 import 'widgets/payment_widget.dart';
@@ -75,8 +75,9 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
                                 SizedBox(
                                   height: 10.h,
                                 ),
-
-                                CustomTransportationCopunWidget(),
+                                CustomCopunWidget(
+                                  amount: "40",
+                                ),
                               ],
                             ),
                           ),

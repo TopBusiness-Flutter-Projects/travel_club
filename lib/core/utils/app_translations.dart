@@ -242,4 +242,5 @@ class AppTranslations {
   static String get camera => 'camera'.tr();
   static String get selectImage => 'select_image'.tr();
   static String get vat => 'vat'.tr();
+  static String get afterDiscount => 'after_discount'.tr();
 }

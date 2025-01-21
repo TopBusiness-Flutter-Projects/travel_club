@@ -20,7 +20,11 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
     GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
-
+ @override
+  void initState() {
+context.read<LoginCubit>().signOutFromGmail();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<LoginCubit>();
