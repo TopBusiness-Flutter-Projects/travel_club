@@ -15,24 +15,30 @@ class CustomContainerBooking extends StatelessWidget {
     return BlocBuilder<ResidenceCubit, ResidenceState>(
       builder: (BuildContext context, state) {
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.all(getHeightSize(context) * 0.01),
           child: CustomContainerWithShadow(
-             
+
               child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.only(
+              top: getHeightSize(context) * 0.01,
+              // bottom: 10.h,
+              left: 10.w,
+              right: 10.w,
+            ) ,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
+              // mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
+                AutoSizeText(
                   room?.name.toString() ?? "",
+                  maxLines: 1,
                   style:
                       getBoldStyle(fontSize: 16.sp, color: AppColors.primary),
                 ),
                 SizedBox(
-                  height: 10.h,
+                  height: getHeightSize(context) * 0.01,
                 ),
-                if (room?.facilities!.isNotEmpty ?? false) ...[
+                if ( room?.canCancel != null && room?.canCancel.toString() != "false") ...[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -44,11 +50,8 @@ class CustomContainerBooking extends StatelessWidget {
                         Text(
                           AppTranslations.cancelFree +
                                   "  " +
-                                  context
-                                      .read<TransportationCubit>()
-                                      .toDate
-                                      .toString() ??
-                              "",
+                                  room?.canCancel
+                          ,
                           style: getRegularStyle(
                               fontSize: 14.sp, color: AppColors.green),
                         ),
@@ -61,36 +64,40 @@ class CustomContainerBooking extends StatelessWidget {
                   color: AppColors.lightBlue1,
                 ),
                 //custom rooms widget
-                if (room?.facilities == null)
-                  Center(
-                    child: CustomLoadingIndicator(),
+
+                 if (room?.facilities!.isNotEmpty ?? true) ...[
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: getHeightSize(context) * 0.2
+                    ),
+                    child: SingleChildScrollView(
+                      child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Wrap(
+                            spacing: 10.w,
+                            runSpacing: 10.h,
+                            children: List.generate(
+                               14 ,
+                                // room?.facilities?.length ?? 0,
+                                (index) =>
+                                    // Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
+                                    SizedBox(
+                                        width: getWidthSize(context) * 0.3,
+                                        child: CustomRoomsWidget(
+                                          facility: room!.facilities![0],
+                                        ))),
+                          )
+                          // StaggeredGrid.count(
+                          //   crossAxisCount: 2,
+                          //   children: List.generate(6, (index) =>
+                          //       Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
+                          //       // CustomRoomsWidget()
+                          //   ),
+                          //
+                          // ),
+                          ),
+                    ),
                   )
-                else if (room?.facilities!.isNotEmpty ?? true) ...[
-                  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Wrap(
-                        spacing: 10.w,
-                        runSpacing: 10.h,
-                        children: List.generate(
-                            12,
-                            // room?.facilities?.length ?? 0,
-                            (index) =>
-                                // Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
-                                SizedBox(
-                                    width: getWidthSize(context) * 0.3,
-                                    child: CustomRoomsWidget(
-                                      facility: room!.facilities![0],
-                                    ))),
-                      )
-                      // StaggeredGrid.count(
-                      //   crossAxisCount: 2,
-                      //   children: List.generate(6, (index) =>
-                      //       Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
-                      //       // CustomRoomsWidget()
-                      //   ),
-                      //
-                      // ),
-                      )
                 ],
 
                 // Divider(color: AppColors.lightBlue1,),

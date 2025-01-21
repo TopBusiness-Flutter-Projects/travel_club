@@ -1,5 +1,4 @@
 
-import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/features/food/screens/details_of_food/widgets/rating_widget.dart';
 import 'package:travel_club/features/food/screens/details_of_food/widgets/sub_toggle_buttons.dart';
 import 'package:travel_club/features/food/screens/details_of_food/widgets/toggle_container.dart';
