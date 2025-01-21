@@ -1,6 +1,6 @@
-import 'package:travel_club/features/entertainment/screens/details_of_entertainment/widgets/custom_under_swiper.dart';
 import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_details_appbar_row.dart';
 import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_swiper.dart';
+
 import '../../../../../core/exports.dart';
 import '../../../cubit/food_cubit.dart';
 import '../widgets/centr_container_details_food.dart';
