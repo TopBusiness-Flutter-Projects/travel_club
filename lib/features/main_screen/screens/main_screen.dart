@@ -10,8 +10,8 @@ import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
 import 'check_internet_widget.dart';
 
 class MainScreen extends StatefulWidget {
- const MainScreen({super.key, this.index});
- final int? index;
+  const MainScreen({super.key, this.index});
+  final int? index;
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -24,15 +24,13 @@ class _MainScreenState extends State<MainScreen> {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return PopScope(
-
           onPopInvoked: (bool value) async {
             if (cubit.currentpage == 0) {
-        return      await showExitDialog(context);
+              return await showExitDialog(context);
             } else {
-
               await cubit.changePage(0);
 
-        return     await cubit.changePage(0);
+              return await cubit.changePage(0);
             }
           },
           child: Scaffold(
@@ -44,12 +42,13 @@ class _MainScreenState extends State<MainScreen> {
                       context.read<HomeCubit>().getHomeData();
                       context.read<AccountCubit>().getUserData();
                     },
-                    child: state is ErrorGetHomeData &&  context.read<HomeCubit>().homeModel.data == null
-                        ?  CustomErrorWidget(
-                          onTap: () {
-            context.read<HomeCubit>().getHomeData();
-          },
-                        )
+                    child: state is ErrorGetHomeData &&
+                            context.read<HomeCubit>().homeModel.data == null
+                        ? CustomErrorWidget(
+                            onTap: () {
+                              context.read<HomeCubit>().getHomeData();
+                            },
+                          )
                         : cubit.screens[cubit.currentpage],
                   );
                 }),

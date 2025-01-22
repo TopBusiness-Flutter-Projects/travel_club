@@ -96,7 +96,6 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                       height: 20.h,
                     ),
 
-                  
                     GestureDetector(
                       onHorizontalDragEnd: (details) {
                         setState(() {
@@ -131,7 +130,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                             .addRoomReservationModel.data!.rooms![currentIndex],
                       ),
                     ),
-  Padding(
+                    Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Row(
                         children: [
@@ -225,6 +224,8 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                           .toString(),
                       vat: cubit.addRoomReservationModel.data!.vat.toString(),
                       terms: cubit.lodgesDetailsModel.data?.rule?.rule,
+                      reservationId:
+                          cubit.addRoomReservationModel.data?.id ?? 0,
                     ),
                   ],
                 ),
