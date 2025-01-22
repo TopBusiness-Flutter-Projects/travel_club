@@ -91,8 +91,10 @@ class PaymentCubit extends Cubit<PaymentState> {
 
       if (r.status != 200 && r.status != 201) {
         Navigator.pop(context);
+          Navigator.pop(context);
         errorGetBar(r.msg??AppTranslations.error);
       } else {
+          Navigator.pop(context);
         if (r.data != null ) {
           checkPaymentStatusModel = r;
           if (r.data!.status!) {
