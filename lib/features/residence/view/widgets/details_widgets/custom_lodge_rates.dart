@@ -98,8 +98,8 @@ class LodgeRatesContainerWithPoints extends StatelessWidget {
                                         context, Routes.bookingResidenceRoute,
                                         arguments:
                                             cubit.lodgesDetailsModel.data?.id!);
-                                    cubit.swiperController.stopAutoplay();
-                                    cubit.swiperController.dispose();
+                                    // cubit.swiperController.stopAutoplay();
+                                    // cubit.swiperController.dispose();
                                   },
                                 );
                               },

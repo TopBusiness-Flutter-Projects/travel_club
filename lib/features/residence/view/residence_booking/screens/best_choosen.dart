@@ -31,13 +31,11 @@ class _BestChosenScreenState extends State<BestChosenScreen> {
                                 ? true : false,
                             onTap: () {
                               cubit. addRoomReservation( context);
-
                             },
                             title:   cubit.changedRooms == 0
                                 ? AppTranslations.skip : AppTranslations.confirm,
                             width: getWidthSize(context) / 2,
                           )
-
                   ],
                 ),
               )),

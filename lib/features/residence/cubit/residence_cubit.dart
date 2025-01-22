@@ -67,7 +67,6 @@ class ResidenceCubit extends Cubit<ResidenceState> {
 
   addRoomReservation(BuildContext context) async {
     emit(ReservationLoading());
-    AppWidget.createProgressDialog(context, AppTranslations.loading);
      List<int> selectedRoomsIds = [];
     for (int i = 0; i < selectedRooms.length; i++) {
       if(selectedRooms[i].recommend== null){
@@ -80,12 +79,12 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     }
     final response = await api.addRoomReservation(fromDay: context.read<TransportationCubit>().fromDate, toDay: context.read<TransportationCubit>().toDate, guest: counter, rooms: selectedRoomsIds);
     response.fold((l) {
-      Navigator.pop(context);
+     // Navigator.pop(context);
       errorGetBar(AppTranslations.error);
       emit(ReservationError());
     }, (r) {
       addRoomReservationModel=r;
-      Navigator.pop(context);
+    //  Navigator.pop(context);
       print("code: ${r.status.toString()}");
       if (r.status != 200 && r.status != 201) {
         errorGetBar(r.msg!);
@@ -99,22 +98,16 @@ class ResidenceCubit extends Cubit<ResidenceState> {
 
   int currentIndex = 0;
    SwiperController swiperController=SwiperController();
-bool isUtoPlay=true;
+// bool isUtoPlay=true;
   // void changeIndex(int index) {
   //   currentIndex = index;
   //
   //   emit(ChangeIndexResidence());
   // }
-  bool ?isPageActive;
   void changeIndex(int index) {
     print("changeIndex");
-    print(isPageActive);
-    if (isPageActive==true) {
-      print("changeIndex nono");
-// تحقق من أن الصفحة نشطة قبل التحديث
-      currentIndex = index;
-      emit(ChangeIndexResidence());
-    }
+    currentIndex = index;
+    emit(ChangeIndexResidence());
   }
 
 
@@ -338,20 +331,45 @@ bool isUtoPlay=true;
 
   GetLodgesRooms lodgesRoomsModel = GetLodgesRooms();
   getRoomsLodges({required int lodgeId, required BuildContext context}) async {
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    emit(LodgesRoomLoading());
     final res = await api.getRoomsLodges(
         lodgeId: lodgeId,
         fromDay: context.read<TransportationCubit>().fromDate,
         toDay: context.read<TransportationCubit>().toDate,
         guest: counter);
-    emit(LodgesRoomLoading());
     res.fold((l) {
+      Navigator.pop(context);
       emit(LodgesRoomError());
     }, (r) {
+      Navigator.pop(context);
       print("okkkkk send the result");
       lodgesRoomsModel = r;
       emit(LodgesRoomLoaded());
     });
   }
-
-  bool isChangeAnyRoom = false;
+  //check rooms id
+  getCheckDuplicateRecommendedRooms({ required BuildContext context}) async {
+    List<int> selectedRoomsIds = [];
+    for (int i = 0; i < selectedRooms.length; i++) {
+      selectedRoomsIds.add(selectedRooms[i].id!);
+    }
+    emit(LoadingCheckRoomIdState());
+    final res = await api.checkDuplicateRecommendedRooms(
+        fromDay: context.read<TransportationCubit>().fromDate,
+        toDay: context.read<TransportationCubit>().toDate, roomsId:selectedRoomsIds ,
+      );
+    res.fold((l) {
+      emit(ErrorCheckRoomIdState());
+    }, (r) {
+      print("okkkkk send the result iddd");
+     // lodgesRoomsModel = r;
+      if(r.data!=null){
+        selectedRooms = r.data!;
+      }
+      Navigator.pushNamed(context, Routes.bestChoosenScreen);
+      emit(LoadedCheckRoomIdState());
+    });
+  }
+ // bool isChangeAnyRoom = false;
 }
