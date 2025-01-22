@@ -1,21 +1,26 @@
 import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
+import 'package:travel_club/features/payment/data/models/check_payment_status_model.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../cubit/residence_cubit.dart';
 import '../widgets/linear_progress.dart';
 
 class DonePaymentScreen extends StatelessWidget {
-  DonePaymentScreen({super.key, this.isFood});
-  bool? isFood = false;
+  const DonePaymentScreen({
+    super.key, required this.paymentModel,
+  });
+ final PaymentModel  paymentModel;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ResidenceCubit, ResidenceState>(
       builder: (BuildContext context, state) {
         return CustomScreen(
-          appbarTitle: isFood == true
-              ? AppTranslations.doneBooking
-              : AppTranslations.paymentProcess,
+          appbarTitle: 
+          // isFood == true
+          //     ? AppTranslations.doneBooking
+          //     :
+               AppTranslations.paymentProcess,
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: Column(
@@ -26,11 +31,11 @@ class DonePaymentScreen extends StatelessWidget {
                   height: 20.h,
                 ),
                 //linear done
-                if (isFood == false) ...[
-                  LinearProgress(
-                    value: 1,
-                  ),
-                ],
+                // if (isFood == false) ...[
+                //   LinearProgress(
+                //     value: 1,
+                //   ),
+                // ],
 
                 SizedBox(
                   height: getHeightSize(context) / 4,

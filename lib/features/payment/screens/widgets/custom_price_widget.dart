@@ -1,4 +1,7 @@
+import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/core/widgets/custom_terms_and_conditions.dart';
+import 'package:travel_club/features/auth/data/models/login_model.dart';
+import 'package:travel_club/features/payment/data/models/check_copoune_model.dart';
 import 'package:travel_club/features/payment/screens/payment_screen.dart';
 import 'package:travel_club/features/payment/screens/widgets/custom_copun_widget.dart';
 import 'package:travel_club/features/payment/screens/widgets/payment_widget.dart';
@@ -14,17 +17,27 @@ class CustomPricesWidget extends StatefulWidget {
     this.vat,
     required this.totalPriceAfterVat,
     this.terms,
+    required this.reservationId,
   });
 
   final String? terms;
   final String? totalPrice;
   final String? vat;
   final String totalPriceAfterVat;
+  final int reservationId;
   @override
   State<CustomPricesWidget> createState() => _CustomPricesWidgetState();
 }
 
 class _CustomPricesWidgetState extends State<CustomPricesWidget> {
+  @override
+  void initState() {
+    context.read<PaymentCubit>().checkCopouneModel = CheckCopouneModel();
+    context.read<PaymentCubit>().couponController.clear();
+    print("eeeeeeeeee");
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<PaymentCubit>();
@@ -44,6 +57,7 @@ class _CustomPricesWidgetState extends State<CustomPricesWidget> {
             totalPrice: widget.totalPrice,
             vat: widget.vat,
             totalPriceAfterVat: widget.totalPriceAfterVat,
+            
           ),
           SizedBox(
             height: 20.h,
@@ -68,15 +82,21 @@ class _CustomPricesWidgetState extends State<CustomPricesWidget> {
 //button
           CustomButton(
             title: AppTranslations.completePayment,
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PaymentWebViewScreen(
-                        url:
-                            "https://accept.paymob.com/api/ecommerce/payment-links/unrestricted?token=LRR2K0txRzhsSC9BR3VVMHlmVEQyS1JLZz09X2FQSkZJaEhiYTErUWdFSDBjbXFScHc9PQ"),
-                  ));
-              // Navigator.pushNamed(context, Routes.payment);
+            onTap: () async {
+              LoginModel loginModel = await Preferences.instance.getUserModel();
+              String? token = loginModel.data?.token;
+              print(token);
+              cubit.getPaymentUrl(
+                context,
+                reservationId: widget.reservationId,
+              );
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => PaymentWebViewScreen(
+              //           url:
+              //               "https://accept.paymob.com/api/ecommerce/payment-links/unrestricted?token=LRR2K0txRzhsSC9BR3VVMHlmVEQyS1JLZz09X2FQSkZJaEhiYTErUWdFSDBjbXFScHc9PQ"),
+              //     ));
             },
           )
         ],

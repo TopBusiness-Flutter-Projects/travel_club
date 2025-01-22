@@ -11,6 +11,8 @@ class EndPoints {
   static const String validateOtpUrl = '${baseUrl}validateOtp';
   static const String homeUrl = '${baseUrl}home';
   static const String checkCouponUrl = '${baseUrl}checkCoupon';
+  static const String continueToPayUrl = '${baseUrl}continueToPay';
+  static const String checkPaymentUrl = '${baseUrl}checkPayment';
   static const String placesUrl = '${baseUrl}getPlaces';
   static const String userDataUrl = '${baseUrl}userDate';
   static const String updateUserDataUrl = '${baseUrl}updateProfile';
@@ -22,4 +24,5 @@ class EndPoints {
   static const String getCheckRoomsIdUrl = '${baseUrl}checkDuplicateRecommendedRooms';
 
   static const String addRoomReservation = '${baseUrl}addRoomReservation';
-}
+
+  }

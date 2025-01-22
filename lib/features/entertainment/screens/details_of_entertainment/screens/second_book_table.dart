@@ -94,6 +94,8 @@ class SecondBookTableEntermaint extends StatelessWidget {
                   totalPriceAfterVat: "40",
                   vat: "40",
                   terms: "nono",
+                  reservationId: 0,
+
                 ),
               ]),
         ),

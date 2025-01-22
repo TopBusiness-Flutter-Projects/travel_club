@@ -11,6 +11,7 @@ import 'package:travel_club/features/my_account/screens/update_password.dart';
 import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/other_services/screens/other_services_screen.dart';
 import 'package:travel_club/features/other_services/screens/single_service_details.dart';
+import 'package:travel_club/features/payment/data/models/check_payment_status_model.dart';
 import 'package:travel_club/features/residence/view/residence_booking/screens/best_choosen.dart';
 import 'package:travel_club/features/residence/view/residence_booking/screens/residence_booking_screen.dart';
 import 'package:travel_club/features/residence/view/residence_booking/screens/done_payment.dart';
@@ -63,7 +64,7 @@ class Routes {
   static const String forgetPass = '/forgetPass';
   static const String otpScreen = '/otpScreen';
   static const String apply = '/apply';
-  static const String donePayment = '/donePayment';
+  static const String doneBooking = '/donePayment';
   static const String payment = '/payment';
   static const String contact = '/contact';
   static const String bestChoosenScreen = '/bestChoosenScreen';
@@ -109,7 +110,8 @@ class Routes {
   static const String secondBookingFood = '/secondBookingFood';
   static const String promoCodeRoute = '/promocodeRoute';
   static const String updatePassword = '/updatePassword';
-  static const String secondBookTableEntertainment = '/secondBookTableEntertainment';
+  static const String secondBookTableEntertainment =
+      '/secondBookTableEntertainment';
 }
 
 class AppRoutes {
@@ -127,13 +129,14 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-        case Routes.secondBookingFood:
+      case Routes.secondBookingFood:
         return PageTransition(
           child: const SecondBookTableScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
-        ); case Routes.secondBookTableEntertainment:
+        );
+      case Routes.secondBookTableEntertainment:
         return PageTransition(
           child: const SecondBookTableEntermaint(),
           type: PageTransitionType.fade,
@@ -289,11 +292,12 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-      case Routes.donePayment:
-        bool isFood = settings.arguments as bool;
+
+      case Routes.doneBooking:
+        PaymentModel paymentModel = settings.arguments as PaymentModel;
         return PageTransition(
           child: DonePaymentScreen(
-            isFood: isFood,
+            paymentModel: paymentModel,
           ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,

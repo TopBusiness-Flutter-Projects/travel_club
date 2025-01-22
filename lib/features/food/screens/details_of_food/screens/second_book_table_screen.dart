@@ -53,6 +53,7 @@ class SecondBookTableScreen extends StatelessWidget {
                     totalPriceAfterVat: "40",
                     vat: "40",
                     terms: "nono",
+                    reservationId: 1,
                   ),
                   SizedBox(height: 5.h,)
                 ],

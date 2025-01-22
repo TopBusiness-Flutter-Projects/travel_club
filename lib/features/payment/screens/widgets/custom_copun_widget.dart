@@ -3,21 +3,17 @@ import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../cubit/payment_cubit.dart';
 import '../../cubit/payment_state.dart';
 import '../../data/models/check_copoune_model.dart';
+
 class CustomCopunWidget extends StatefulWidget {
   const CustomCopunWidget({super.key, required this.amount});
   final String amount;
   @override
-  State<CustomCopunWidget> createState() => _CustomCopunWidgetState();  
+  State<CustomCopunWidget> createState() => _CustomCopunWidgetState();
 }
+
 class _CustomCopunWidgetState extends State<CustomCopunWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  @override
-  void initState() {
-    context.read<PaymentCubit>().checkCopouneModel = CheckCopouneModel();
-    context.read<PaymentCubit>().couponController.clear();
-    print ("eeeeeeeeee");
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +35,7 @@ class _CustomCopunWidgetState extends State<CustomCopunWidget> {
               },
               onChanged: (v) {
                 if (cubit.checkCopouneModel.data != null) {
-                  cubit.makeModelNull();
+                  cubit.makeCopouneNull();
                 }
               },
               suffixIcon:
