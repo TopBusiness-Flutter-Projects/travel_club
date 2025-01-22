@@ -56,7 +56,7 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
                       children: [
                         Text(AppTranslations.numberBooking,style: getRegularStyle(color: AppColors.grey),),
                         SizedBox(height: 5.h,),
-                        Text(foodModel.numOfBooking.toString()??"",style: getMediumStyle(),),
+                        Text(foodModel.numOfBooking.toString(),style: getMediumStyle(),),
                         SizedBox(height: 5.h,),
                         CustomContainerWithShadow(reduis: 7,isShadow: false,color: foodModel.status==true?AppColors.green.withOpacity(.12):AppColors.red.withOpacity(.12),width: 100.w,child:Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 7),
@@ -84,7 +84,7 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
                         Text(AppTranslations.bookingPrice,style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
                         SizedBox(height: 10.h,),
 
-                        Text(foodModel.price.toString()??""+" "+AppTranslations.currency,style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.primary),),
+                        Text(foodModel.price.toString()+" "+AppTranslations.currency,style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.primary),),
                         SizedBox(height: 5.h,),
 
                       ]),

@@ -10,8 +10,8 @@ import '../../../../core/widgets/custom_button.dart';
 
 
 class ProfileNotLoging extends StatelessWidget {
-   ProfileNotLoging({super.key,this.title});
-String ?title;
+  const ProfileNotLoging({super.key,this.title});
+final String ?title;
   @override
   Widget build(BuildContext context) {
     return  Padding(

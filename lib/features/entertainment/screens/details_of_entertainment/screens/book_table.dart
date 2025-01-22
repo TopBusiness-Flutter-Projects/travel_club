@@ -22,7 +22,8 @@ class BookTableEntermaint extends StatelessWidget {
               SizedBox(height: 20.h,),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomContainerWithShadow(child:
+                child:
+                CustomContainerWithShadow(child:
                 InkWell(
                   onTap: (){
                     // Navigator.pushNamed(context, Routes.donePayment,
@@ -115,8 +116,11 @@ class BookTableEntermaint extends StatelessWidget {
                 child: Text(AppTranslations.numberOfPhoneContact,style: getMediumStyle(fontSize: 14.sp),),
               ),
               CustomTextField(hintText: "01000000000",),
-              CustomButton(title: AppTranslations.bookTable,onTap: (){ Navigator.pushNamed(context, Routes.donePayment,
-                  arguments: true);},)
+              CustomButton(title: AppTranslations.bookTable,onTap: (){
+                Navigator.pushNamed(
+                    context,Routes.secondBookTableEntertainment,
+                  arguments: true
+                );},)
             ]),
       ),
     )); },);

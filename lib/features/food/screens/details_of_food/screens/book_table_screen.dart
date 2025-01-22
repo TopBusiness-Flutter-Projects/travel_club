@@ -92,7 +92,7 @@ class BookTableScreen extends StatelessWidget {
                 child: CustomButton(
                     title: AppTranslations.bookTable,
                     onTap: () {
-                      Navigator.pushNamed(context, Routes.donePayment,
+                      Navigator.pushNamed(context, Routes.secondBookingFood,
                           arguments: true);
                     }),
               ),
@@ -105,11 +105,12 @@ class BookTableScreen extends StatelessWidget {
 class CustomMealContainer extends StatelessWidget {
   const CustomMealContainer({
     super.key,
+    this.isSecondBooking = false,
     required this.cubit,
   });
 
   final FoodCubit cubit;
-
+final bool isSecondBooking;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -143,8 +144,14 @@ class CustomMealContainer extends StatelessWidget {
                         fontSize: 13.sp, fontHeight: 1, color: AppColors.green),
                   ),
                   SizedBox(
-                    height: 5.h,
+                    height: 8.h,
                   ),
+                  isSecondBooking?
+                  AutoSizeText(
+                    "عدد"+" "+'${cubit.itemsQty}' ,
+                    maxLines: 2,
+                    style: getSemiBoldStyle(fontSize: 14.sp, fontHeight: 1),
+                  ):
                   Row(
                     children: [
                       GestureDetector(

@@ -5,7 +5,7 @@ abstract class ResidenceState {}
 
 final class ResidenceInitial extends ResidenceState {}
 
-final class ChangeIndex extends ResidenceState {}
+final class ChangeIndexResidence extends ResidenceState {}
 
 final class SetMarkersState extends ResidenceState {}
 

@@ -10,8 +10,8 @@ import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
 import 'check_internet_widget.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({super.key, this.index});
-  int? index;
+ const MainScreen({super.key, this.index});
+ final int? index;
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -23,15 +23,14 @@ class _MainScreenState extends State<MainScreen> {
     MainCubit cubit = context.read<MainCubit>();
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
-        return WillPopScope(
-          onWillPop: () async {
-            if (cubit.currentpage == 0) {
-              await showExitDialog(context);
-            } else {
-             await cubit.changePage(0);
-            }
+        return PopScope(
 
-            return false;
+          onPopInvoked: (bool value) async {
+            if (cubit.currentpage == 0) {
+        return      await showExitDialog(context);
+            } else {
+        return     await cubit.changePage(0);
+            }
           },
           child: Scaffold(
             body: Stack(
