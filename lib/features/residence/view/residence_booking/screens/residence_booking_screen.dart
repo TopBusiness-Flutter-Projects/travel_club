@@ -11,11 +11,13 @@ class ResidenceBooking extends StatefulWidget {
   const ResidenceBooking({super.key, required this.lodgeId});
   final int lodgeId;
   @override
+
   State<ResidenceBooking> createState() => _ResidenceBookingState();
 }
 
 class _ResidenceBookingState extends State<ResidenceBooking> {
   @override
+
   //
   bool isSend = false;
   void initState() {
@@ -87,6 +89,7 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                             });
                             context.read<ResidenceCubit>().sum = 0;
                             context.read<ResidenceCubit>().selectedRooms = [];
+                              context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
                             print("send");
                             cubit.getRoomsLodges(
                                 context: context, lodgeId: widget.lodgeId);
@@ -100,16 +103,18 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                 !isSend
                     ? Container()
                     : Expanded(
-                        child: cubit.lodgesRoomsModel.data == null
+                        child:
+                        cubit.lodgesRoomsModel.data == null
                             ? const Center(
-                                child: CustomLoadingIndicator(),
+                                child: SizedBox(),
                               )
-                            : cubit.lodgesRoomsModel.data!.isEmpty
+                            :
+                        cubit.lodgesRoomsModel.data?.isEmpty??false
                                 ? Center(child: Text(AppTranslations.noData))
                                 : ListView.builder(
                                     shrinkWrap: true,
                                     itemCount:
-                                        cubit.lodgesRoomsModel.data?.length,
+                                    cubit.lodgesRoomsModel.data?.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return CustomContainerBooking(
@@ -146,7 +151,6 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                                             ),
                                             CustomRoundedButton(
                                               isBooking: true,
-
                                                 icon: cubit.selectedRooms.any(
                                                       (room) =>
                                                           room.id ==
@@ -162,11 +166,10 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                                                   ? AppTranslations.remove
                                                   : AppTranslations.add,
                                               onTap: () {
-
-
                                                 cubit.addOrRemoveRoom(cubit
                                                     .lodgesRoomsModel
-                                                    .data![index]);
+                                                    .data![index]
+                                                );
                                                 //       Navigator.pushNamed(context, Routes.secondBookingAccommodation);
                                               },
                                             )
@@ -197,8 +200,9 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                             title: AppTranslations.bookNow,
                             width: 179.w,
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, Routes.bestChoosenScreen);
+                              debugPrint("nehal");
+                             cubit.getCheckDuplicateRecommendedRooms(context: context);
+                            // cubit.getCheckDuplicateRecommendedRooms(context: context);
                             },
                           )
                         ],

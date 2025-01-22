@@ -19,26 +19,6 @@ class SwiperWithAutoplay extends StatefulWidget {
 }
 
 class _SwiperWithAutoplayState extends State<SwiperWithAutoplay> {
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ModalRoute.of(context)?.addScopedWillPopCallback(() async {
-        context.read<ResidenceCubit>().swiperController.stopAutoplay();
-        return true;
-      });
-    });
-    context.read<ResidenceCubit>().swiperController = SwiperController();
-  }
-
-
-@override
-void dispose() {
-  context.read<ResidenceCubit>().isPageActive=false;
-  context.read<ResidenceCubit>().swiperController .dispose();
-  context.read<ResidenceCubit>().swiperController.stopAutoplay();
-}
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<ResidenceCubit>();

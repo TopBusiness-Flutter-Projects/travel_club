@@ -40,7 +40,8 @@ class ResidenceRepoImpl {
 
 //get Lodges
   Future<Either<Failure, GetLodgesModel>> getLodges(
-      {required int placeId,
+      {
+        required int placeId,
       double? lat,
       double? long,
       String? filter,
@@ -97,6 +98,32 @@ class ResidenceRepoImpl {
           "fromDay": fromDay,
           "toDay": toDay,
           "guest": guest
+        },
+      );
+      return Right(GetLodgesRooms.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  //get check of recommeneded  rooms
+
+//get LodgesRooms
+  Future<Either<Failure, GetLodgesRooms>> checkDuplicateRecommendedRooms(
+      {
+
+        required String fromDay,
+        required String toDay,
+        required List<int> roomsId,
+      }) async {
+    try {
+      var response = await dio.get(
+        EndPoints.getCheckRoomsIdUrl,
+        queryParameters: {
+          "from": fromDay,
+          "to": toDay,
+         // "room_ids":roomsId ,
+          for (int i = 0; i < roomsId.length; i++)
+            "room_ids[$i]": roomsId[i],
         },
       );
       return Right(GetLodgesRooms.fromJson(response));
