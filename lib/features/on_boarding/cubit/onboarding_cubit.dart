@@ -8,12 +8,10 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   PageController pageController = PageController(initialPage: 0);
   int numPages = 2;
   double currentPage = 0;
-
   changePages() {
     currentPage = pageController.page!;
     emit(ChangingPagesState());
   }
-
   onPageChanged(int page) {
     currentPage = page.toDouble();
     emit(ChangingPagesState());

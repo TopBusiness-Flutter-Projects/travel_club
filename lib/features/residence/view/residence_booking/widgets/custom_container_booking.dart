@@ -66,38 +66,31 @@ class CustomContainerBooking extends StatelessWidget {
                 //custom rooms widget
 
                  if (room?.facilities!.isNotEmpty ?? true) ...[
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: getHeightSize(context) * 0.2
-                    ),
-                    child: SingleChildScrollView(
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Wrap(
-                            spacing: 10.w,
-                            runSpacing: 10.h,
-                            children: List.generate(
-                               14 ,
-                                // room?.facilities?.length ?? 0,
-                                (index) =>
-                                    // Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
-                                    SizedBox(
-                                        width: getWidthSize(context) * 0.3,
-                                        child: CustomRoomsWidget(
-                                          facility: room!.facilities![0],
-                                        ))),
-                          )
-                          // StaggeredGrid.count(
-                          //   crossAxisCount: 2,
-                          //   children: List.generate(6, (index) =>
-                          //       Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
-                          //       // CustomRoomsWidget()
-                          //   ),
-                          //
-                          // ),
-                          ),
-                    ),
-                  )
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Wrap(
+                        spacing: 10.w,
+                        runSpacing: 10.h,
+                        children: List.generate(
+                           14 ,
+                            // room?.facilities?.length ?? 0,
+                            (index) =>
+                                // Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
+                                SizedBox(
+                                    width: getWidthSize(context) * 0.3,
+                                    child: CustomRoomsWidget(
+                                      facility: room!.facilities![0],
+                                    ))),
+                      )
+                      // StaggeredGrid.count(
+                      //   crossAxisCount: 2,
+                      //   children: List.generate(6, (index) =>
+                      //       Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
+                      //       // CustomRoomsWidget()
+                      //   ),
+                      //
+                      // ),
+                      )
                 ],
 
                 // Divider(color: AppColors.lightBlue1,),

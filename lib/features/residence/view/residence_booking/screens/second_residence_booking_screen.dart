@@ -1,4 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/custom_terms_and_conditions.dart';
 import 'package:travel_club/features/payment/screens/widgets/custom_price_widget.dart';
@@ -19,12 +20,16 @@ class SecondResidenceBooking extends StatefulWidget {
 }
 
 class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
+  PageController pageController = PageController(initialPage: 0);
+  int currentPage = 0;
+
   @override
   void initState() {
     context.read<TransportationCubit>().goOnly = false;
     super.initState();
   }
 
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<ResidenceCubit>();
@@ -90,24 +95,123 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                     SizedBox(
                       height: 20.h,
                     ),
-                    // CustomContainerBooking(
-                    //   widgetBottom: SizedBox(),
-                    // ),
-                    SizedBox(
-                      height: getHeightSize(context) * 0.35,
-                      child: Swiper(
-                        itemCount: cubit.addRoomReservationModel.data!.rooms!
-                            .length, // Define the number of items in the swiper
-                        itemBuilder: (BuildContext context, int index) {
-                          // Return a CustomContainerBooking for each item
-                          return CustomContainerBooking(
-                            room: cubit
-                                .addRoomReservationModel.data!.rooms![index],
-                          );
-                        },
-                        pagination: const SwiperPagination(),
+
+                  
+                    GestureDetector(
+                      onHorizontalDragEnd: (details) {
+                        setState(() {
+                          if (details.primaryVelocity != null) {
+                            bool isRtl = EasyLocalization.of(context)!
+                                    .locale
+                                    .languageCode ==
+                                'ar';
+
+                            if ((isRtl && details.primaryVelocity! > 0) ||
+                                (!isRtl && details.primaryVelocity! < 0)) {
+                              // Swiped left (next item for LTR, previous item for RTL)
+                              if (currentIndex <
+                                  cubit.addRoomReservationModel.data!.rooms!
+                                          .length -
+                                      1) {
+                                currentIndex++;
+                              }
+                            } else if ((isRtl &&
+                                    details.primaryVelocity! < 0) ||
+                                (!isRtl && details.primaryVelocity! > 0)) {
+                              // Swiped right (previous item for LTR, next item for RTL)
+                              if (currentIndex > 0) {
+                                currentIndex--;
+                              }
+                            }
+                          }
+                        });
+                      },
+                      child: CustomContainerBooking(
+                        room: cubit
+                            .addRoomReservationModel.data!.rooms![currentIndex],
                       ),
                     ),
+  Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                        children: [
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     setState(() {
+                          //       if (currentIndex > 0) {
+                          //         currentIndex--;
+                          //       }
+                          //     });
+                          //   },
+                          //   child: Icon(Icons.arrow_back_ios,
+                          //       color: currentIndex > 0
+                          //           ? AppColors.primary
+                          //           : (AppColors.primary).withOpacity(0.4)),
+                          // ),
+                          Flexible(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: cubit
+                                  .addRoomReservationModel.data!.rooms!
+                                  .map((element) => element.id ?? "")
+                                  .toList()
+                                  .asMap()
+                                  .entries
+                                  .map((entry) {
+                                return Container(
+                                  width: 10.0,
+                                  height: 10.0,
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: 8.0, horizontal: 4.0),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: currentIndex == entry.key
+                                          ? AppColors.primary
+                                          : (AppColors.primary)
+                                              .withOpacity(0.4)),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     setState(() {
+                          //       if (currentIndex <
+                          //           cubit.addRoomReservationModel.data!.rooms!
+                          //                   .length -
+                          //               1) {
+                          //         currentIndex++;
+                          //       }
+                          //     });
+                          //   },
+                          //   child: Icon(
+                          //     Icons.arrow_forward_ios,
+                          //     color: currentIndex <
+                          //             cubit.addRoomReservationModel.data!.rooms!
+                          //                     .length -
+                          //                 1
+                          //         ? AppColors.primary
+                          //         : (AppColors.primary).withOpacity(0.4),
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                    ),
+                    // SizedBox(
+                    //   height: getHeightSize(context) * 0.35,
+                    //   child: Swiper(
+                    //     itemCount: cubit.addRoomReservationModel.data!.rooms!
+                    //         .length, // Define the number of items in the swiper
+                    //     itemBuilder: (BuildContext context, int index) {
+                    //       // Return a CustomContainerBooking for each item
+                    //       return CustomContainerBooking(
+                    //         room: cubit
+                    //             .addRoomReservationModel.data!.rooms![index],
+                    //       );
+                    //     },
+                    //     pagination: const SwiperPagination(),
+                    //   ),
+                    // ),
 
                     SizedBox(
                       height: 10.h,

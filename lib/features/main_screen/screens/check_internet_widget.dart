@@ -111,11 +111,12 @@ class _CheckInternetWidgetState extends State<CheckInternetWidget> {
   }
 }
 
-class CustomHomeErrorWidget extends StatelessWidget {
-  const CustomHomeErrorWidget({
+class CustomErrorWidget extends StatelessWidget {
+  const CustomErrorWidget({
     super.key,
+    this.onTap,
   });
-
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -142,9 +143,7 @@ class CustomHomeErrorWidget extends StatelessWidget {
         ),
         10.h.verticalSpace,
         InkWell(
-          onTap: () {
-            context.read<HomeCubit>().getHomeData();
-          },
+          onTap: onTap,
           child: Icon(
             // Icons.error,
             CupertinoIcons.refresh_thin,
