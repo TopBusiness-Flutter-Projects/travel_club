@@ -59,6 +59,7 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
                             totalPriceAfterVat: "40",
                             vat: "40",
                             terms: "nono",
+                            reservationId: 14,
                           ),
                         ),
 

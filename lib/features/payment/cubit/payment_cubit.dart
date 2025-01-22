@@ -1,7 +1,10 @@
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
+import 'package:travel_club/features/payment/data/models/check_payment_status_model.dart';
+import 'package:travel_club/features/residence/view/residence_booking/screens/done_payment.dart';
 import '../data/models/check_copoune_model.dart';
 import '../data/repo/payment_repo_impl.dart';
+import '../screens/payment_screen.dart';
 import 'payment_state.dart';
 
 class PaymentCubit extends Cubit<PaymentState> {
@@ -33,9 +36,92 @@ class PaymentCubit extends Cubit<PaymentState> {
       }
     });
   }
-  makeModelNull(){
+
+  // GetPaymentUrlModel getPaymentUrlModel = GetPaymentUrlModel();
+  getPaymentUrl(BuildContext context, {required int reservationId}) async {
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+
+    emit(LoadingCheckCopouneState());
+
+    final response = await api.getPaymentUrl(
+        reservationId: reservationId,
+        code: checkCopouneModel.data == null ? "" : couponController.text,
+        moduleId: currentModuleId);
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(FailureCheckCopouneState());
+    }, (r) {
+      debugPrint("code: ${r.status.toString()}");
+      Navigator.pop(context);
+      if (r.status != 200 && r.status != 201) {
+        errorGetBar(r.msg!);
+      } else {
+        if (r.data?.paymentUrl != null) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PaymentWebViewScreen(
+                  url: "${r.data!.paymentUrl}",
+                  reservationid: reservationId,
+                ),
+              ));
+        }
+        emit(SuccessCheckCopouneState());
+      }
+    });
+  }
+
+  CheckPaymentStatusModel checkPaymentStatusModel = CheckPaymentStatusModel();
+  checkPaymentStatus(BuildContext context, {required int reservationId}) async {
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+
+    emit(LoadingCheckCopouneState());
+
+    final response = await api.checkPaymentStatus(
+        reservationId: reservationId,
+        code: checkCopouneModel.data == null ? "" : couponController.text,
+        moduleId: currentModuleId);
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(FailureCheckCopouneState());
+    }, (r) {
+      debugPrint("code: ${r.status.toString()}");
+
+      if (r.status != 200 && r.status != 201) {
+        Navigator.pop(context);
+        errorGetBar(r.msg??AppTranslations.error);
+      } else {
+        if (r.data != null ) {
+          checkPaymentStatusModel = r;
+          if (r.data!.status!) {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DonePaymentScreen(
+                        paymentModel: r.data!,
+                      )),
+              (route) => false,
+            );
+          }
+          else{
+              Navigator.pop(context);
+        errorGetBar(r.msg ??AppTranslations.error );
+          }
+        }else{
+               Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+        }
+
+        emit(SuccessCheckCopouneState());
+      }
+    });
+  }
+
+  makeCopouneNull() {
     checkCopouneModel = CheckCopouneModel();
-     emit(SuccessCheckCopouneState());
+    emit(SuccessCheckCopouneState());
   }
 }
-// Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RyYXZlbC50b3BidXNpbmVzcy5lYmhhcmJvb2suY29tL2FwaS92MS9sb2dpbi9nb29nbGUiLCJpYXQiOjE3MzY2Nzk4NzMsImV4cCI6MTc2ODIxNTg3MywibmJmIjoxNzM2Njc5ODczLCJqdGkiOiJha21ja3VoWFhKTFdhamNlIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.uGiUcBdTaHcm_Wt1irBsXi6-FSp9Gf_n_uV505p43-M
+//Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RyYXZlbC50b3BidXNpbmVzcy5lYmhhcmJvb2suY29tL2FwaS92MS9sb2dpbi9nb29nbGUiLCJpYXQiOjE3MzczNjMyOTksImV4cCI6MTc2ODg5OTI5OSwibmJmIjoxNzM3MzYzMjk5LCJqdGkiOiI2NmZsdkpSOFl5Z0hXWkFvIiwic3ViIjoiOSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJhdXRoX3V1aWQiOiI0MzcxNDhhZi1lNDE3LTRiY2EtYjgzMy1kNzYwMmE4NjIxMmEifQ.kX0HZDF2a1SPf52Qc5CjNES91sNoD9GxbTtFhxPmaYU
