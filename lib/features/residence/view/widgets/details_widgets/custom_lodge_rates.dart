@@ -23,27 +23,27 @@ class LodgeRatesContainerWithPoints extends StatelessWidget {
             child: Column(
               //Swipprt Points
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: cubit.lodgesDetailsModel.data!.media!
-                      .map((element) => element.image ?? "")
-                      .toList()
-                      .asMap()
-                      .entries
-                      .map((entry) {
-                    return Container(
-                      width: 10.0,
-                      height: 10.0,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 4.0),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: cubit.currentIndex == entry.key
-                              ? AppColors.white
-                              : (AppColors.white).withOpacity(0.4)),
-                    );
-                  }).toList(),
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: cubit.lodgesDetailsModel.data!.media!
+                //       .map((element) => element.image ?? "")
+                //       .toList()
+                //       .asMap()
+                //       .entries
+                //       .map((entry) {
+                //     return Container(
+                //       width: 10.0,
+                //       height: 10.0,
+                //       margin: const EdgeInsets.symmetric(
+                //           vertical: 8.0, horizontal: 4.0),
+                //       decoration: BoxDecoration(
+                //           shape: BoxShape.circle,
+                //           color: cubit.currentIndex == entry.key
+                //               ? AppColors.white
+                //               : (AppColors.white).withOpacity(0.4)),
+                //     );
+                //   }).toList(),
+                // ),
                 CustomContainerWithShadow(
                   height: getHeightSize(context) * 0.12,
                   child: Padding(
@@ -98,6 +98,8 @@ class LodgeRatesContainerWithPoints extends StatelessWidget {
                                         context, Routes.bookingResidenceRoute,
                                         arguments:
                                             cubit.lodgesDetailsModel.data?.id!);
+                                    cubit.swiperController.stopAutoplay();
+                                    cubit.swiperController.dispose();
                                   },
                                 );
                               },

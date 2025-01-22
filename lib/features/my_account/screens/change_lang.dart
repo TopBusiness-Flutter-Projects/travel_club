@@ -1,5 +1,4 @@
 import 'package:travel_club/features/my_account/screens/widgets/custom_container_radio.dart';
-import 'package:travel_club/features/my_account/screens/widgets/custom_row.dart';
 
 import '../../../core/exports.dart';
 import '../cubit/account_cubit.dart';

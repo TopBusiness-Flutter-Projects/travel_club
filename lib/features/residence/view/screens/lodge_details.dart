@@ -25,13 +25,19 @@ class LodgeDetailsScreen extends StatefulWidget {
 class _LodgeDetailsScreenState extends State<LodgeDetailsScreen> {
   @override
   void initState() {
+  context.read<ResidenceCubit>().isPageActive=true;
     context.read<ResidenceCubit>().lodgesDetailsModel = GetLodgeDetailModel();
     context
         .read<ResidenceCubit>()
         .getLodgesDetails(context: context, lodgeId: widget.args.lodgeId);
     super.initState();
   }
-
+@override
+  void dispose() {
+  context.read<ResidenceCubit>().isPageActive=false;
+  context.read<ResidenceCubit>().swiperController .dispose();
+  context.read<ResidenceCubit>().swiperController.stopAutoplay();
+}
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<ResidenceCubit>();

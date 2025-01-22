@@ -28,7 +28,7 @@ class CustomBookingFoodContainerSmall extends StatelessWidget {
                     children: [
                       // SizedBox(height: 10.h,),
                       Text(
-                        foodModel.title.toString() ?? "",
+                        foodModel.title.toString() ,
                         overflow: TextOverflow.ellipsis,
                         style: getSemiBoldStyle(fontSize: 14.sp),
                         maxLines: 2,

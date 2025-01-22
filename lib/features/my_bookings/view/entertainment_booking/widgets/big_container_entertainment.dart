@@ -76,7 +76,7 @@ class CustomBookingEntertainmentContainerBig extends StatelessWidget {
                         Row(
                           children: [
                             SvgPicture.asset(AppIcons.calendar,color: AppColors.secondPrimary,),
-                            Text(foodModel.date.toString()??"",style: getRegularStyle(fontSize: 14.sp,),),
+                            Text(foodModel.date.toString(),style: getRegularStyle(fontSize: 14.sp,),),
                           ],
                         ),
                         SizedBox(height: 10.h,),
