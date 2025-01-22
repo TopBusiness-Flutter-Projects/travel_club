@@ -36,7 +36,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
             print(" url " + v.url.toString());
             if (v.url.toString().toLowerCase() ==
                 'https://accept.paymob.com/unifiedcheckout/payment-status') {
-              Navigator.pop(context);
+             
              
               context.read<PaymentCubit>().checkPaymentStatus(context, reservationId: widget.reservationid);
 
