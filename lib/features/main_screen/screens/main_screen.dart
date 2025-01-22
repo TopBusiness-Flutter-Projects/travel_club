@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
             if (cubit.currentpage == 0) {
               await showExitDialog(context);
             } else {
-             await cubit.changePage(0);
+              await cubit.changePage(0);
             }
 
             return false;
@@ -42,8 +42,12 @@ class _MainScreenState extends State<MainScreen> {
                       context.read<HomeCubit>().getHomeData();
                       context.read<AccountCubit>().getUserData();
                     },
-                    child: state is ErrorGetHomeData
-                        ? const CustomHomeErrorWidget()
+                    child: state is ErrorGetHomeData &&  context.read<HomeCubit>().homeModel.data == null
+                        ?  CustomErrorWidget(
+                          onTap: () {
+            context.read<HomeCubit>().getHomeData();
+          },
+                        )
                         : cubit.screens[cubit.currentpage],
                   );
                 }),

@@ -58,7 +58,7 @@ class _CustomPricesWidgetState extends State<CustomPricesWidget> {
           ),
 
           CustomCopunWidget(
-            amount: widget.totalPriceAfterVat!,
+            amount: widget.totalPriceAfterVat,
           ),
           if (widget.terms != null)
             CustomAcceptTerms(
