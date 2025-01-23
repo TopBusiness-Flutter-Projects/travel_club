@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/utils/appwidget.dart';
 import '../data/models/residence_reservation_details_model.dart';
 import '../data/models/residence_reservation_model.dart';
 import '../data/repo/my_reservations_repo_impl.dart';
@@ -38,6 +39,21 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   void changeRating(double newRating, int index) {
     rates[index] = newRating;
     emit(ChangeRating()); // Emit an event to notify listeners
+  }
+  //cancel reservation
+  cancelReservation(int id, BuildContext context)async{
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    emit(LoadingCancelReservation());
+    final res = await api.cancelReservation(moduleId: selectedIndex, reservationId: id);
+    res.fold((l) {
+      Navigator.pop(context);
+      emit(ErrorCancelReservation());
+    }, (r) {
+      Navigator.pop(context);
+
+      emit(LoadedCancelReservation());
+    }
+    );
   }
 
 
