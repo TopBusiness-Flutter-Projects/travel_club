@@ -3,7 +3,7 @@ import 'package:travel_club/core/exports.dart';
 import '../../my_account/screens/widgets/profile_not_loging.dart';
 import '../cubit/my_bookings_cubit.dart';
 import '../cubit/my_bookings_state.dart';
-import 'my_booking_body.dart';
+import 'my_reservations_body.dart';
 
 class MyReservationsScreen extends StatefulWidget {
   const MyReservationsScreen({super.key});

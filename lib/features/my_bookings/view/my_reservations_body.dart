@@ -1,6 +1,6 @@
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/my_bookings/view/transportation_booking/widgets/custom_booking_transportation_body.dart';
-import 'package:travel_club/features/my_bookings/view/widgets/custom_catogrey_booking.dart';
+import 'package:travel_club/features/my_bookings/view/widgets/custom_catogrey_reseration.dart';
 import '../../home/screens/widgets/custom_appbar.dart';
 import '../cubit/my_bookings_cubit.dart';
 import '../cubit/my_bookings_state.dart';
@@ -43,7 +43,7 @@ class _ReservationsBodyState extends State<ReservationsBody> {
                     itemCount: cubit.categories.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (BuildContext context, int index) {
-                      return CustomBookingSection(
+                      return CustomReservationSection(
                         index: index,
                       );
                     },

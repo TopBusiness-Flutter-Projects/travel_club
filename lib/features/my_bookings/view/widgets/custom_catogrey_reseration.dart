@@ -3,8 +3,8 @@ import 'package:travel_club/core/exports.dart';
 import '../../cubit/my_bookings_cubit.dart';
 import '../../cubit/my_bookings_state.dart';
 
-class CustomBookingSection extends StatelessWidget {
-  CustomBookingSection({super.key, this.index});
+class CustomReservationSection extends StatelessWidget {
+  CustomReservationSection({super.key, this.index});
   int? index;
   @override
   Widget build(BuildContext context) {

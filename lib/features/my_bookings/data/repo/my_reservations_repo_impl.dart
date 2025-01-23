@@ -12,9 +12,10 @@ class MyReservationsRepoImpl {
   Future<Either<Failure, GetMyResidenceReservationModel>>
       getMyResidenceReservation() async {
     try {
-      var response = await dio.get(
-        EndPoints.getMyReservationUrl,
-      );
+      var response =
+          await dio.get(EndPoints.getMyReservationUrl, queryParameters: {
+        "module_id": 1, 
+      });
       return Right(GetMyResidenceReservationModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
