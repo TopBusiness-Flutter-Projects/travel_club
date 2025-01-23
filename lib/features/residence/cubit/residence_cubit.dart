@@ -377,5 +377,11 @@ class ResidenceCubit extends Cubit<ResidenceState> {
       emit(LoadedCheckRoomIdState());
     });
   }
+  makeModelNull () {
+  sum = 0;
+   selectedRooms = [];
+   lodgesRoomsModel.data = null;
+   emit(PlusLoaded());
+  }
  // bool isChangeAnyRoom = false;
 }

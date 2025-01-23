@@ -18,15 +18,15 @@ class _HomeScreenState extends State<HomeScreen> {
       width: getWidthSize(context),
       child: Stack(
         children: [
-          // Positioned(
-          //     top: 0,
-          //     child: Image.asset(
-          //       ImageAssets.mask,
-          //       fit: BoxFit.cover,
-          //       height: getHeightSize(context) * 0.3,
-          //       width: getWidthSize(context),
-          //     )
-          // ),
+          Positioned(
+              top: 0,
+              child: Image.asset(
+                ImageAssets.mask,
+                fit: BoxFit.cover,
+                height: getHeightSize(context) * 0.3,
+                width: getWidthSize(context),
+              )
+          ),
           SizedBox(
               height: getHeightSize(context),
               width: getWidthSize(context),

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import '../data/repo/transportation_repo_impl.dart';
 import 'transportation_state.dart';
 
@@ -53,12 +54,16 @@ class TransportationCubit extends Cubit<TransportationState> {
           return;
         }
         selectedStartDate = picked;
+        context.read<ResidenceCubit>().
+        makeModelNull();
       } else {
         if (picked.isBefore(selectedStartDate)) {
           errorGetBar("تاريخ النهاية يجب أن يكون بعد تاريخ البداية");
           return;
         }
         selectedEndDate = picked;
+        context.read<ResidenceCubit>().
+        makeModelNull();
       }
       updateDateStrings();
       emit(DateChangedState());
