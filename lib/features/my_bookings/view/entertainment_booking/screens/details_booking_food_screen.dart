@@ -6,7 +6,7 @@ import 'package:travel_club/features/my_bookings/cubit/my_bookings_state.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_rounded_button.dart';
 import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../cubit/my_bookings_cubit.dart';
-import '../../accommodation_booking/widgets/show_model_bottom_sheet.dart';
+import '../../residence_booking/widgets/show_model_bottom_sheet.dart';
 import '../widgets/big_container_entertainment.dart';
 import '../widgets/member_details.dart';
 
@@ -29,7 +29,7 @@ class _DetailsBookingEntertainmentState
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MyBookingsCubit, MyBookingsState>(
+    return BlocBuilder<MyReservationsCubit, MyReservationsState>(
       builder: (BuildContext context, state) {
         return CustomScreen(
           appbarTitle: AppTranslations.detailsBooking,

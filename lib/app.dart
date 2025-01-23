@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
             create: (_) => injector.serviceLocator<FavouritesCubit>(),
           ),
           BlocProvider(
-            create: (_) => injector.serviceLocator<MyBookingsCubit>(),
+            create: (_) => injector.serviceLocator<MyReservationsCubit>(),
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<OtherServicesCubit>(),
