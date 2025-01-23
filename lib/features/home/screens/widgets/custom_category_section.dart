@@ -43,9 +43,7 @@ class _CustomCategorySectionState extends State<CustomCategorySection> {
                             1,
                   ),
                   itemCount:
-                      cubit.homeModel.data!.modules!.length < cubit.moduleslenth
-                          ? cubit.homeModel.data!.modules!.length
-                          : cubit.moduleslenth,
+                      cubit.homeModel.data!.modules!.length,
                   scrollDirection: Axis.horizontal,
                 ));
       },
