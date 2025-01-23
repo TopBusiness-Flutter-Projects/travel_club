@@ -26,5 +26,5 @@ class EndPoints {
   static const String getCheckRoomsIdUrl = '${baseUrl}checkDuplicateRecommendedRooms';
 
   static const String addRoomReservation = '${baseUrl}addRoomReservation';
-
+  static const String cancelReservation = '${baseUrl}cancelReservation';
   }
