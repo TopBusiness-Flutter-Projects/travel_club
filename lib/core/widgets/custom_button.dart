@@ -50,7 +50,7 @@ class CustomSmallButton extends StatelessWidget {
     required this.title,
     this.color,
     this.width,
-    this.fontSize,  
+    this.fontSize,
     this.isBordered = false,
   });
   final void Function()? onTap;
@@ -65,10 +65,10 @@ class CustomSmallButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(20.r),
       child: Container(
-        width: width,
+        // width: width,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(
-            // horizontal: getWidthSize(context) * 0.05,
+            horizontal: getWidthSize(context) * 0.05,
             vertical: getHeightSize(context) * 0.008),
         decoration: BoxDecoration(
           color: isBordered ? AppColors.white : color ?? AppColors.primary,
@@ -79,7 +79,7 @@ class CustomSmallButton extends StatelessWidget {
             maxLines: 1,
             style: getSemiBoldStyle(
                 color: isBordered ? AppColors.primary : AppColors.white,
-                fontSize: fontSize?? 14.sp)),
+                fontSize: fontSize ?? 14.sp)),
       ),
     );
   }

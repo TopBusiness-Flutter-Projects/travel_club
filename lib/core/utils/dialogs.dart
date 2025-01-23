@@ -190,7 +190,7 @@ checkGoToHome(
     titleTextStyle: getRegularStyle(fontSize: 16.sp),
 
     showCloseIcon: true,
-    btnOk: CustomSmallButton(
+    btnOk: CustomButton(
         title: AppTranslations.goHome,
         onTap: () {
           Navigator.pushNamedAndRemoveUntil(

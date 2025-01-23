@@ -62,11 +62,12 @@ class LodgeDetailsBody extends StatelessWidget {
                               Flexible(
                                 child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Icon(
                                         CupertinoIcons.square_arrow_right,
                                         color: AppColors.green,
-                                        size: getWidthSize(context) / 9,
+                                        size: 40.r,
                                       ),
                                       SizedBox(
                                         width: 5.w,
@@ -81,10 +82,9 @@ class LodgeDetailsBody extends StatelessWidget {
                                               style: getMediumStyle(
                                                   fontSize: 14.sp),
                                             ),
+                                            10.verticalSpace,
                                             AutoSizeText(
-                                              cubit.lodgesDetailsModel.data!
-                                                  .rule!.checkIn
-                                                  .toString(),
+                                              "${AppTranslations.from} ${cubit.lodgesDetailsModel.data!.rule!.checkIn.toString().replaceFirst("-", "\n${AppTranslations.to} ")}",
                                               maxLines: 2,
                                               style: getMediumStyle(
                                                   color: AppColors.grey,
@@ -98,11 +98,12 @@ class LodgeDetailsBody extends StatelessWidget {
                               Flexible(
                                 child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Icon(
                                         CupertinoIcons.square_arrow_left,
                                         color: AppColors.red,
-                                        size: getWidthSize(context) / 9,
+                                        size: 40.r,
                                       ),
                                       SizedBox(
                                         width: 5.w,
@@ -117,10 +118,9 @@ class LodgeDetailsBody extends StatelessWidget {
                                               style: getMediumStyle(
                                                   fontSize: 14.sp),
                                             ),
+                                            10.verticalSpace,
                                             AutoSizeText(
-                                              cubit.lodgesDetailsModel.data!
-                                                  .rule!.checkOut
-                                                  .toString(),
+                                              "${AppTranslations.from} ${cubit.lodgesDetailsModel.data!.rule!.checkOut.toString().replaceFirst("-", "\n${AppTranslations.to} ")}",
                                               maxLines: 2,
                                               style: getMediumStyle(
                                                   color: AppColors.grey,

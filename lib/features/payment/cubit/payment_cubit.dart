@@ -1,7 +1,7 @@
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/payment/data/models/check_payment_status_model.dart';
-import 'package:travel_club/features/residence/view/residence_booking/screens/done_payment.dart';
+import 'package:travel_club/features/payment/screens/done_payment.dart';
 import '../data/models/check_copoune_model.dart';
 import '../data/repo/payment_repo_impl.dart';
 import '../screens/payment_screen.dart';

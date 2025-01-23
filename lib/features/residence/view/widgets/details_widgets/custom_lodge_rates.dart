@@ -72,7 +72,7 @@ class LodgeRatesContainerWithPoints extends StatelessWidget {
                                       rating: cubit
                                           .lodgesDetailsModel.data?.rate
                                           .toDouble(),
-                                      allowHalfRating: false,
+                                      allowHalfRating: true,
                                     ),
                                   ],
                                 ),
@@ -92,8 +92,8 @@ class LodgeRatesContainerWithPoints extends StatelessWidget {
                               title: AppTranslations.bookNow,
                               onTap: () {
                                 checkLoggingStatus(
-                                  context,onPressed: 
-                                  () {
+                                  context,
+                                  onPressed: () {
                                     Navigator.pushNamed(
                                         context, Routes.bookingResidenceRoute,
                                         arguments:
