@@ -236,6 +236,7 @@ class _DetailsBookingState extends State<DetailsBooking> {
                     ),
 
 //button
+ cubit.getResidenceReservationDetailsModel.data!.process == 0 ? Container() :
                     Row(
                       children: [
                         Expanded(
