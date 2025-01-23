@@ -84,6 +84,7 @@ class AppTranslations {
   static String get bookNow => 'book_now'.tr();
   static String get withoutTax => 'without_tax'.tr();
   static String get selectGoingAndReturn => 'select_going_and_return'.tr();
+  static String get goingAndReturnDate => 'going_and_return_date'.tr();
   static String get selectGoing => 'select_going'.tr();
   static String get favoriteChoice => 'favorite_choice'.tr();
   static String get changeChoice => 'change_choice'.tr();

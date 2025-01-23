@@ -88,18 +88,19 @@ class _CustomPricesWidgetState extends State<CustomPricesWidget> {
               LoginModel loginModel = await Preferences.instance.getUserModel();
               String? token = loginModel.data?.token;
               print(token);
-              // cubit.getPaymentUrl(
-              //   context,
-              //   reservationId: widget.reservationId,
-              // );
-              Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DonePaymentScreen(
-                        paymentModel: PaymentModel(),
-                      )),
-              (route) => false,
-            );
+              cubit.getPaymentUrl(
+                context,
+                reservationId: widget.reservationId,
+              );
+              
+            //   Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => DonePaymentScreen(
+            //             paymentModel: PaymentModel(),
+            //           )),
+            //   (route) => false,
+            // );
             },
           )
         ],

@@ -22,3 +22,8 @@ String replaceToArabicDate(String input) {
   }
   return dateAr.toString();
 }
+String formatNumber(double num) {
+  // تحويل الرقم إلى نص مع إزالة الأصفار الزائدة
+  String formatted = num.toStringAsFixed(2).replaceAll(RegExp(r"\.?0*$"), '');
+  return formatted;
+}
