@@ -9,7 +9,6 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   MyReservationsCubit(this.api) : super(MyReservationInitial());
   MyReservationsRepoImpl api;
   int selectedIndex = 1;
-  int selectedIndex = 1;
 
   double rating = 0; // Default rating
   List<double> rates = [3, 3, 3, 3];
