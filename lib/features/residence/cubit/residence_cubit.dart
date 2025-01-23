@@ -354,14 +354,20 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     for (int i = 0; i < selectedRooms.length; i++) {
       selectedRoomsIds.add(selectedRooms[i].id!);
     }
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+
     emit(LoadingCheckRoomIdState());
     final res = await api.checkDuplicateRecommendedRooms(
         fromDay: context.read<TransportationCubit>().fromDate,
         toDay: context.read<TransportationCubit>().toDate, roomsId:selectedRoomsIds ,
       );
     res.fold((l) {
+      Navigator.pop(context);
+
       emit(ErrorCheckRoomIdState());
     }, (r) {
+      Navigator.pop(context);
+
       print("okkkkk send the result iddd");
      // lodgesRoomsModel = r;
       if(r.data!=null){

@@ -246,4 +246,6 @@ class AppTranslations {
   static String get afterDiscount => 'after_discount'.tr();
   static String get reservationWillCanceled => 'reservation_will_canceled'.tr();
   static String get complete => 'complete'.tr();
+  static String get nights => 'nights'.tr();
+  static String get pending => 'pending'.tr();
 }

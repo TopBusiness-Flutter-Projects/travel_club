@@ -3,10 +3,11 @@ import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
 
 import '../../../../../../core/exports.dart';
+import '../../../../residence/data/models/lodges_model.dart';
 
 class CustomBookingAccommodationContainerSmall extends StatefulWidget {
-  const CustomBookingAccommodationContainerSmall({super.key,required this.hotelsModel});
- final HotelsModel? hotelsModel;
+  const CustomBookingAccommodationContainerSmall({super.key,required this.lodgeModel});
+ final LodgeModel lodgeModel;
 
   @override
   State<CustomBookingAccommodationContainerSmall> createState() => _CustomBookingAccommodationContainerSmallState();
@@ -27,19 +28,21 @@ class _CustomBookingAccommodationContainerSmallState extends State<CustomBooking
               child: Row(children: [
 
                 //stack image and heart
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 100.h,
-                    width: 120.w,
-                    decoration: BoxDecoration(
-                        color: AppColors.white,
-
-                        borderRadius: BorderRadius.circular(20.r),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                widget.hotelsModel?.image.toString()??""),
-                            fit: BoxFit.cover)),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 100.h,
+                      width: 120.w,
+                      decoration: BoxDecoration(
+                          color: AppColors.white,
+                  
+                          borderRadius: BorderRadius.circular(20.r),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  widget.lodgeModel.media.toString()??""),
+                              fit: BoxFit.cover)),
+                    ),
                   ),
                 ),
 
@@ -52,12 +55,12 @@ class _CustomBookingAccommodationContainerSmallState extends State<CustomBooking
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // SizedBox(height: 10.h,),
-                      Text(widget.hotelsModel?.title.toString()??"",overflow: TextOverflow.ellipsis,style: getSemiBoldStyle(fontSize: 14.sp),maxLines: 2,),
+                      Text(widget.lodgeModel.name.toString(),overflow: TextOverflow.ellipsis,style: getSemiBoldStyle(fontSize: 14.sp),maxLines: 2,),
                       SizedBox(height: 20.h,),
                       Row(
                         children: [
                           StarRating(
-                              rating: widget.hotelsModel?.rate.toDouble()??1,
+                              rating: widget.lodgeModel.rate.toDouble()??1,
                               allowHalfRating: false, size: 14.sp,
                               // onRatingChanged: (rating){
                               //   setState(() {
@@ -75,8 +78,8 @@ class _CustomBookingAccommodationContainerSmallState extends State<CustomBooking
                         ],
                       ),
                       SizedBox(height: 2.h,),
-                      widget.hotelsModel?.discription==null?SizedBox():
-                      Text(widget.hotelsModel?.discription.toString()??"",style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
+                      // widget.lodgeModel.==null?SizedBox():
+                      // Text(widget.lodgeModel?.discription.toString()??"",style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
                     ],
                   ),
                 )

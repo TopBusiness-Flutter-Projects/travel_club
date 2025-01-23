@@ -4,23 +4,28 @@ import 'package:travel_club/features/my_bookings/view/residence_booking/widgets/
 import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
 
 import '../../../../../../core/exports.dart';
+import '../../../../residence/data/models/lodges_model.dart';
+import '../../../data/models/residence_reservation_model.dart';
 
 class CustomBookingAccommodationContainerBig extends StatelessWidget {
-  const CustomBookingAccommodationContainerBig({super.key});
-
+  const CustomBookingAccommodationContainerBig({super.key,this.residenceReservationModel});
+ final ResidenceReservationModel? residenceReservationModel;
   @override
   Widget build(BuildContext context) {
-    return Padding(
+
+    return
+
+      Padding(
       padding: const EdgeInsets.all(8.0),
       child: CustomContainerWithShadow(
           child: Column(
         children: [
           //custom container
-
-              CustomBookingAccommodationContainerSmall(hotelsModel: HotelsModel(title: "title", rate: 4, isFavorite: false ,image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",),),
+          if(residenceReservationModel?.lodge!=null)
+              CustomBookingAccommodationContainerSmall(lodgeModel:residenceReservationModel!.lodge!),
               //Row
-              Row(
 
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -30,14 +35,25 @@ class CustomBookingAccommodationContainerBig extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
 
                         children: [
-                          Text(AppTranslations.numberBooking,style: getRegularStyle(color: AppColors.grey),),
+                          if(residenceReservationModel?.process!=0)...[
+                            Text(AppTranslations.numberBooking,style: getRegularStyle(color: AppColors.grey),),
+                            SizedBox(height: 5.h,),
+                            Text(residenceReservationModel?.transactionId.toString()??"",style: getMediumStyle(),),
+                          ],
+
                           SizedBox(height: 5.h,),
-                          Text("6365467858",style: getMediumStyle(),),
-                          SizedBox(height: 5.h,),
-                          CustomContainerWithShadow(reduis: 7,isShadow: false,color: AppColors.green.withOpacity(.12),width: 100.w,child:Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 7),
-                            child: Center(child: Text(AppTranslations.bookingSuccess,style: getMediumStyle(fontSize: 14.sp,color: AppColors.green),maxLines: 1,)),
-                          ) ,) ,
+if(residenceReservationModel?.process!=2)...[
+  CustomContainerWithShadow(
+    reduis: 7,isShadow: false,color: residenceReservationModel?.process==0?AppColors.orange.withOpacity(.12): residenceReservationModel?.process==3?AppColors.red.withOpacity(.12): AppColors.green.withOpacity(.12),width: 100.w,child:Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 7),
+    child: Center(child: Text(
+      residenceReservationModel?.process==0?
+      AppTranslations.pending:
+      residenceReservationModel?.process==1?
+      AppTranslations.bookingSuccess:residenceReservationModel?.process==3? AppTranslations.cancelBooking: AppTranslations.bookingSuccess
+      ,style: getMediumStyle(fontSize: 14.sp,color: residenceReservationModel?.process==0?AppColors.orange:residenceReservationModel?.process==3?AppColors.red:AppColors.green),maxLines: 1,)),
+  ) ,) ,
+],
                           SizedBox(height: 5.h,),
 
                         ]),
@@ -51,15 +67,15 @@ class CustomBookingAccommodationContainerBig extends StatelessWidget {
                           Row(
                             children: [
                               SvgPicture.asset(AppIcons.calendar,color: AppColors.secondPrimary,),
-                              Text("٢٠ يناير ٢٠٢٢",style: getRegularStyle(fontSize: 14.sp,),),
+                              Text(residenceReservationModel?.from?.toString()??"",style: getRegularStyle(fontSize: 14.sp,),),
                             ],
                           ),
                           SizedBox(height: 10.h,),
 
-                          Text(AppTranslations.priceFor+" 4  ليالي ",style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
+                          Text(AppTranslations.priceFor+'${residenceReservationModel?.totalNights.toString()}'+' '+'${AppTranslations.nights}',style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
                           SizedBox(height: 10.h,),
 
-                          Text("5000"+" "+AppTranslations.currency,style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.primary),),
+                          Text('${residenceReservationModel?.totalPrice.toString()}'+" "+AppTranslations.currency,style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.primary),),
                           SizedBox(height: 5.h,),
 
                         ]),

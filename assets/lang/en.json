@@ -228,6 +228,9 @@
 "reservation_will_canceled" : "Reservation will be canceled in case of incomplete payment process in 4 hours",
 "complete" : "Complete",
 "going_and_return_date": "Going and return date",
+"nights" : "Nights",
+"pending" : "Not paid",
+"vat" : "VAT",
 "" : "",
     "lasss": ""
 }
