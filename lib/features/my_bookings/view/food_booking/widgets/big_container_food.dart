@@ -27,13 +27,14 @@ class FoodModel {
     this.numOfBooking,
   });
 }
+
 //big conatiner
 class CustomBookingFoodContainerBig extends StatelessWidget {
   CustomBookingFoodContainerBig({super.key, required this.foodModel});
   final FoodModel foodModel;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MyBookingsCubit, MyBookingsState>(
+    return BlocBuilder<MyReservationsCubit, MyReservationsState>(
       builder: (BuildContext context, state) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -42,58 +43,124 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
             children: [
               //custom container
 
-            CustomBookingFoodContainerSmall(foodModel: FoodModel(title: "title", rate: 4, date: "date", price: "price", numOfBooking: "numOfBooking",numofnights: "numofnights",),),
-            //Row
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(AppTranslations.numberBooking,style: getRegularStyle(color: AppColors.grey),),
-                        SizedBox(height: 5.h,),
-                        Text(foodModel.numOfBooking.toString(),style: getMediumStyle(),),
-                        SizedBox(height: 5.h,),
-                        CustomContainerWithShadow(reduis: 7,isShadow: false,color: foodModel.status==true?AppColors.green.withOpacity(.12):AppColors.red.withOpacity(.12),width: 100.w,child:Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 7),
-                          child: Center(child: Text(foodModel.status==true?AppTranslations.bookingSuccess:AppTranslations.cancelBooking,style: getMediumStyle(fontSize: 14.sp,color: foodModel.status==true?AppColors.green:AppColors.red),maxLines: 1,)),
-                        ) ,) ,
-                        SizedBox(height: 5.h,),
-
-                      ]),
+              CustomBookingFoodContainerSmall(
+                foodModel: FoodModel(
+                  title: "title",
+                  rate: 4,
+                  date: "date",
+                  price: "price",
+                  numOfBooking: "numOfBooking",
+                  numofnights: "numofnights",
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 5.h,),
-
-                        Row(
-                          children: [
-                            SvgPicture.asset(AppIcons.calendar,color: AppColors.secondPrimary,),
-                            Text(foodModel.toString()??"",style: getRegularStyle(fontSize: 14.sp,),),
-                          ],
-                        ),
-                        SizedBox(height: 10.h,),
-
-                        Text(AppTranslations.bookingPrice,style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
-                        SizedBox(height: 10.h,),
-
-                        Text(foodModel.price.toString()+" "+AppTranslations.currency,style: getSemiBoldStyle(fontSize: 14.sp,color: AppColors.primary),),
-                        SizedBox(height: 5.h,),
-
-                      ]),
-                )
-              ],),
-            //SizedBox
-            SizedBox(height: 5.h,)
-          ],
-        )),
-  ); },);
+              ),
+              //Row
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppTranslations.numberBooking,
+                            style: getRegularStyle(color: AppColors.grey),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Text(
+                            foodModel.numOfBooking.toString(),
+                            style: getMediumStyle(),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          CustomContainerWithShadow(
+                            reduis: 7,
+                            isShadow: false,
+                            color: foodModel.status == true
+                                ? AppColors.green.withOpacity(.12)
+                                : AppColors.red.withOpacity(.12),
+                            width: 100.w,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6.0, vertical: 7),
+                              child: Center(
+                                  child: Text(
+                                foodModel.status == true
+                                    ? AppTranslations.bookingSuccess
+                                    : AppTranslations.cancelBooking,
+                                style: getMediumStyle(
+                                    fontSize: 14.sp,
+                                    color: foodModel.status == true
+                                        ? AppColors.green
+                                        : AppColors.red),
+                                maxLines: 1,
+                              )),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                        ]),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                AppIcons.calendar,
+                                color: AppColors.secondPrimary,
+                              ),
+                              Text(
+                                foodModel.toString() ?? "",
+                                style: getRegularStyle(
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Text(
+                            AppTranslations.bookingPrice,
+                            style: getRegularStyle(
+                                fontSize: 14.sp, color: AppColors.grey),
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Text(
+                            foodModel.price.toString() +
+                                " " +
+                                AppTranslations.currency,
+                            style: getSemiBoldStyle(
+                                fontSize: 14.sp, color: AppColors.primary),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                        ]),
+                  )
+                ],
+              ),
+              //SizedBox
+              SizedBox(
+                height: 5.h,
+              )
+            ],
+          )),
+        );
+      },
+    );
   }
 }

@@ -15,6 +15,8 @@ class EndPoints {
   static const String checkPaymentUrl = '${baseUrl}checkPayment';
   static const String placesUrl = '${baseUrl}getPlaces';
   static const String userDataUrl = '${baseUrl}userDate';
+  static const String getMyReservationUrl = '${baseUrl}getMyReservation';
+  static const String getMyReservationDetailsUrl = '${baseUrl}getMyReservationDetails';
   static const String updateUserDataUrl = '${baseUrl}updateProfile';
   static const String updatePasswordUrl = '${baseUrl}updatePassword';
   static const String getFacilitiesUrl = '${baseUrl}getFacilities';

@@ -12,7 +12,7 @@ class MainCubit extends Cubit<MainState> {
   MainRepoImpl api;
   List<Widget> screens = [
     const HomeScreen(),
-    const MyBookingsScreen(),
+    const MyReservationsScreen(),
     const FavouritesScreen(),
     const AccountScreen()
   ];
@@ -29,6 +29,4 @@ class MainCubit extends Cubit<MainState> {
     isChecked = !isChecked;
     emit(ChangePrivacyState());
   }
-
- 
 }

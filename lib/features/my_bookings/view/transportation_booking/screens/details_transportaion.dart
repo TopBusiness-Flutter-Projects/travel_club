@@ -8,7 +8,7 @@ import '../../../../transportation/screens/trip_details_second_screen.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_details_yellow_container.dart';
 import '../../../../transportation/screens/widgets/custom_search_result_container.dart';
 import '../../../../transportation/screens/widgets/payment_widget.dart';
-import '../../accommodation_booking/widgets/show_model_bottom_sheet.dart';
+import '../../residence_booking/widgets/show_model_bottom_sheet.dart';
 import '../widgets/big_container.dart';
 
 class DetailsBookingTransportaion extends StatelessWidget {
