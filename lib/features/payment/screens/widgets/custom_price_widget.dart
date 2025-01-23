@@ -2,9 +2,11 @@ import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/core/widgets/custom_terms_and_conditions.dart';
 import 'package:travel_club/features/auth/data/models/login_model.dart';
 import 'package:travel_club/features/payment/data/models/check_copoune_model.dart';
+import 'package:travel_club/features/payment/data/models/check_payment_status_model.dart';
 import 'package:travel_club/features/payment/screens/payment_screen.dart';
 import 'package:travel_club/features/payment/screens/widgets/custom_copun_widget.dart';
 import 'package:travel_club/features/payment/screens/widgets/payment_widget.dart';
+import 'package:travel_club/features/payment/screens/done_payment.dart';
 
 import '../../../../core/exports.dart';
 import '../../cubit/payment_cubit.dart';
@@ -86,17 +88,18 @@ class _CustomPricesWidgetState extends State<CustomPricesWidget> {
               LoginModel loginModel = await Preferences.instance.getUserModel();
               String? token = loginModel.data?.token;
               print(token);
-              cubit.getPaymentUrl(
-                context,
-                reservationId: widget.reservationId,
-              );
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => PaymentWebViewScreen(
-              //           url:
-              //               "https://accept.paymob.com/api/ecommerce/payment-links/unrestricted?token=LRR2K0txRzhsSC9BR3VVMHlmVEQyS1JLZz09X2FQSkZJaEhiYTErUWdFSDBjbXFScHc9PQ"),
-              //     ));
+              // cubit.getPaymentUrl(
+              //   context,
+              //   reservationId: widget.reservationId,
+              // );
+              Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DonePaymentScreen(
+                        paymentModel: PaymentModel(),
+                      )),
+              (route) => false,
+            );
             },
           )
         ],

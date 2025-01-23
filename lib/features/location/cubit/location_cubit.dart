@@ -10,6 +10,7 @@ import 'package:travel_club/core/exports.dart';
 import 'dart:ui' as ui;
 import '../data/repo/location_repo_impl.dart';
 import 'location_state.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LocationCubit extends Cubit<LocationState> {
   LocationCubit(this.api) : super(LocationInitial()) {
@@ -212,4 +213,21 @@ class LocationCubit extends Cubit<LocationState> {
       return false;
     }
   }
+   void openGoogleMapsRoute(
+      double destinationLat, double destinationLng) async {
+String  url =
+        'https://www.google.com/maps/dir/?api=1&destination=$destinationLat,$destinationLng';
+    
+if (currentLocation != null) {
+    url =
+        'https://www.google.com/maps/dir/?api=1&origin=${currentLocation!.latitude ?? 0},${currentLocation!.longitude??0}&destination=$destinationLat,$destinationLng';
+   
+}
+    try {
+      launchUrl(Uri.parse(url));
+    } catch (e) {
+      errorGetBar("error from map");
+    }
+  }
+
 }
