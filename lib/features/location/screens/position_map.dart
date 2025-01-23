@@ -70,6 +70,10 @@ class _PositionMapState extends State<PositionMap> {
                           zoomGesturesEnabled: true,
                           zoomControlsEnabled: true,
                           mapType: MapType.normal,
+                          onTap: (argument) {
+                            print("sssssssssss");
+                            cubit.openGoogleMapsRoute(widget.lat, widget.long);
+                          },
                           initialCameraPosition: CameraPosition(
                             target: LatLng(
                               widget.lat,

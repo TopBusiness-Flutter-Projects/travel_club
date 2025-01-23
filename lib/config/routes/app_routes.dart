@@ -14,7 +14,7 @@ import 'package:travel_club/features/other_services/screens/single_service_detai
 import 'package:travel_club/features/payment/data/models/check_payment_status_model.dart';
 import 'package:travel_club/features/residence/view/residence_booking/screens/best_choosen.dart';
 import 'package:travel_club/features/residence/view/residence_booking/screens/residence_booking_screen.dart';
-import 'package:travel_club/features/residence/view/residence_booking/screens/done_payment.dart';
+import 'package:travel_club/features/payment/screens/done_payment.dart';
 import 'package:travel_club/features/residence/view/residence_booking/screens/payment_process_screen.dart';
 import 'package:travel_club/features/residence/view/residence_booking/screens/second_residence_booking_screen.dart';
 import 'package:travel_club/features/residence/view/screens/lodges_screen.dart';
