@@ -19,7 +19,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
     AppTranslations.entertainment,
     AppTranslations.otherServices,
   ];
-  GetMyResidenceReservationModel?residenceReservationModel;
+   GetMyResidenceReservationModel residenceReservationModel = GetMyResidenceReservationModel();
   getMyBookingReservation() async {
     emit(LoadingReservationBooking());
     final res = await api.getMyResidenceReservation();

@@ -40,7 +40,7 @@ class Data {
     int? guest;
     List<RoomModel>? rooms;
     dynamic totalPrice;
-    dynamic totalNights;
+  
     dynamic vat;
     dynamic totalPriceAfterVat;
 
@@ -53,7 +53,7 @@ class Data {
         this.guest,
         this.rooms,
         this.totalPrice,
-       this. totalNights,
+       
         this.vat,
         this.totalPriceAfterVat,
     });
@@ -67,7 +67,7 @@ class Data {
         guest: json["guest"],
         rooms: json["rooms"] == null ? [] : List<RoomModel>.from(json["rooms"]!.map((x) => RoomModel.fromJson(x))),
         totalPrice: json["total_price"],
-        totalNights: json["total_nights"],
+       
         vat: json["vat"],
         totalPriceAfterVat: json["total_price_after_vat"],
     );
@@ -81,7 +81,6 @@ class Data {
         "guest": guest,
         "rooms": rooms == null ? [] : List<dynamic>.from(rooms!.map((x) => x.toJson())),
         "total_price": totalPrice,
-        "total_nights": totalNights,
         "vat": vat,
         "total_price_after_vat": totalPriceAfterVat,
     };

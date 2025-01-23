@@ -2,7 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_state.dart';
 import 'package:travel_club/features/my_bookings/data/models/residence_reservation_details_model.dart';
-import 'package:travel_club/features/payment/screens/widgets/payment_widget.dart';
+import 'package:travel_club/features/my_bookings/data/models/residence_reservation_model.dart';
+import 'package:travel_club/features/payment/screens/widgets/custom_price_widget.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_rounded_button.dart';
 
@@ -12,19 +13,28 @@ import '../widgets/big_container.dart';
 import '../widgets/payment_widget.dart';
 import '../widgets/show_model_bottom_sheet.dart';
 
-class DetailsBooking extends StatefulWidget {
-  const DetailsBooking({super.key});
-
-  @override
-  State<DetailsBooking> createState() => _DetailsBookingState();
+class ResidenceDetailsBookingArguments {
+  
+  final ResidenceReservationModel residenceReservationModel;
+  ResidenceDetailsBookingArguments( {required this.residenceReservationModel});
 }
 
-class _DetailsBookingState extends State<DetailsBooking> {
+class ResidenceRessrvationDetails extends StatefulWidget {
+  const ResidenceRessrvationDetails({super.key, required this.arguments});
+  final ResidenceDetailsBookingArguments arguments;
+
+  @override
+  State<ResidenceRessrvationDetails> createState() =>
+      _ResidenceRessrvationDetailsState();
+}
+
+class _ResidenceRessrvationDetailsState
+    extends State<ResidenceRessrvationDetails> {
   @override
   void initState() {
     context
         .read<MyReservationsCubit>()
-        .getResidenceReservationDetails(reservationId: 66);
+        .getResidenceReservationDetails(reservationId: widget.arguments.residenceReservationModel.id!);
     context.read<MyReservationsCubit>().getResidenceReservationDetailsModel =
         GetResidenceReservationDetailsModel();
     super.initState();
@@ -48,7 +58,9 @@ class _DetailsBookingState extends State<DetailsBooking> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  const CustomBookingAccommodationContainerBig(),
+                   CustomBookingAccommodationContainerBig(
+                    residenceReservationModel: widget.arguments.residenceReservationModel ,
+                  ),
                   SizedBox(
                     height: 25.h,
                   ),
@@ -204,61 +216,73 @@ class _DetailsBookingState extends State<DetailsBooking> {
                     ),
 
 //payment
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    ReservationPaymentDetailsContainer(
-                      nightes: cubit
-                          .getResidenceReservationDetailsModel.data!.totalNights
-                          .toString(),
-                      totalPrice: cubit
-                          .getResidenceReservationDetailsModel.data!.totalPrice
-                          .toString(),
-                      // totalPriceAfterVat: (double.parse(cubit
-                      //             .getResidenceReservationDetailsModel
-                      //             .data!
-                      //             .totalPrice
-                      //             .toString()) +
-                      //         double.parse(cubit
-                      //             .getResidenceReservationDetailsModel.data!.vat
-                      //             .toString()))
-                      //     .toStringAsFixed(0),
-                      totalPriceAfterVat: cubit
-                          .getResidenceReservationDetailsModel
-                          .data!
-                          .totalPriceAfterVat
-                          .toString(),
-                      vat: cubit.getResidenceReservationDetailsModel.data!.vat
-                          .toString(),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
 
-//button
- cubit.getResidenceReservationDetailsModel.data!.process == 0 ? Container() :
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomButton(
-                            color: AppColors.red,
-                            title: AppTranslations.cancelBooking,
-                            onTap: () {
-                              Navigator.pushNamed(context, Routes.payment);
-                            },
+
+                    if (cubit.getResidenceReservationDetailsModel.data!
+                            .process ==
+                        0)
+                      CustomPricesWidget(
+                        totalPrice: cubit.getResidenceReservationDetailsModel
+                            .data!.totalPrice
+                            .toString(),
+                        totalPriceAfterVat: cubit
+                            .getResidenceReservationDetailsModel
+                            .data!
+                            .totalPriceAfterVat
+                            .toString(),
+                        vat: cubit.getResidenceReservationDetailsModel.data!.vat
+                            .toString(),
+                        // terms: cubit.getResidenceReservationDetailsModel.data?.lodge
+                        // ?.rule,
+                        reservationId: cubit
+                                .getResidenceReservationDetailsModel.data?.id ??
+                            0,
+                      )
+                    else ...[
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      ReservationPaymentDetailsContainer(
+                        nightes: widget.arguments.residenceReservationModel  
+                            .totalNights
+                            .toString(),
+                        totalPrice: cubit.getResidenceReservationDetailsModel
+                            .data!.totalPrice
+                            .toString(),
+                        totalPriceAfterVat: cubit
+                            .getResidenceReservationDetailsModel
+                            .data!
+                            .totalPriceAfterVat
+                            .toString(),
+                        vat: cubit.getResidenceReservationDetailsModel.data!.vat
+                            .toString(),
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomButton(
+                              color: AppColors.red,
+                              title: AppTranslations.cancelBooking,
+                              onTap: () {
+                                Navigator.pushNamed(context, Routes.payment);
+                              },
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 10.w), // Add spacing between buttons
-                        Expanded(
-                            child: CustomRoundedButton(
-                          title: AppTranslations.experienceEvaluation,
-                          onTap: () {
-                            showModelBottomSheetRatting(context);
-                            // Navigator.pushNamed(context, Routes.);
-                          },
-                        )),
-                      ],
-                    ),
+                          SizedBox(width: 10.w), // Add spacing between buttons
+                          Expanded(
+                              child: CustomRoundedButton(
+                            title: AppTranslations.experienceEvaluation,
+                            onTap: () {
+                              showModelBottomSheetRatting(context);
+                              // Navigator.pushNamed(context, Routes.);
+                            },
+                          )),
+                        ],
+                      )
+                    ],
                     SizedBox(
                       height: 40.h,
                     )

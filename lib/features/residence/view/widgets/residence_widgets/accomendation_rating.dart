@@ -43,6 +43,7 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
           onTap: () {
             Navigator.pushNamed(context, Routes.lodgeDetailsRoute,
                 arguments:
+                
                     LodgeDetailsArguments(lodgeId: widget.lodgesModel.id!));
           },
           child: CustomContainerWithShadow(
