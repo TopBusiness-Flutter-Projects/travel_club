@@ -13,14 +13,15 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
 
   double rating = 0; // Default rating
   List<double> rates = [3, 3, 3, 3];
-    List<String> categories = [
+  List<String> categories = [
     AppTranslations.accommodationBookings,
     AppTranslations.transportation,
     AppTranslations.foodBookings,
     AppTranslations.entertainment,
     AppTranslations.otherServices,
   ];
-   GetMyResidenceReservationModel residenceReservationModel = GetMyResidenceReservationModel();
+  GetMyResidenceReservationModel residenceReservationModel =
+      GetMyResidenceReservationModel();
   getMyBookingReservation() async {
     emit(LoadingReservationBooking());
     final res = await api.getMyResidenceReservation();
@@ -31,6 +32,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       emit(LoadedReservationBooking());
     });
   }
+
   void changeContainer(int index) {
     selectedIndex = index;
     emit(IndexChanged());
@@ -40,88 +42,47 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
     rates[index] = newRating;
     emit(ChangeRating()); // Emit an event to notify listeners
   }
+
   //cancel reservation
-  cancelReservation(int id, BuildContext context)async{
+  cancelReservation(BuildContext context, {required int reservationId}) async {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
     emit(LoadingCancelReservation());
-    final res = await api.cancelReservation(moduleId: selectedIndex, reservationId: id);
+    final res = await api.cancelReservation(
+        moduleId: selectedIndex, reservationId: reservationId);
     res.fold((l) {
       Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
       emit(ErrorCancelReservation());
     }, (r) {
       Navigator.pop(context);
 
+      if (r.data == false ) {
+        errorGetBar(r.msg ?? AppTranslations.error);
+      } else {
+        getResidenceReservationDetails(reservationId: reservationId);
+        Navigator.pop(context);
+        successGetBar(r.msg);
+      }
+
       emit(LoadedCancelReservation());
-    }
-    );
+    });
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/// reservation details
-  GetResidenceReservationDetailsModel getResidenceReservationDetailsModel = GetResidenceReservationDetailsModel();
-  getResidenceReservationDetails({required int reservationId,}) async {
+  /// reservation details
+  GetResidenceReservationDetailsModel getResidenceReservationDetailsModel =
+      GetResidenceReservationDetailsModel();
+  getResidenceReservationDetails({
+    required int reservationId,
+  }) async {
     emit(LoadingGetReservationDetailsState());
-    final res = await api.getResidenceReservationDetails(      
-      reservationId: reservationId ,
-      moduleId: 1
-    );
+    final res = await api.getResidenceReservationDetails(
+        reservationId: reservationId, moduleId: 1);
     res.fold((l) {
       emit(FailureGetReservationDetailsState());
     }, (r) {
       getResidenceReservationDetailsModel = r;
-      
+
       emit(SucessGetReservationDetailsState());
     });
   }
-
- 
-
-
-
-
-
-
-
 }

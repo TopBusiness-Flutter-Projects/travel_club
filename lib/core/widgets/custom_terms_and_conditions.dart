@@ -1,7 +1,7 @@
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/features/main_screen/cubit/cubit.dart';
-import 'package:travel_club/features/main_screen/cubit/state.dart';
-
+import 'package:flutter_html/flutter_html.dart';
+import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
+import 'package:travel_club/features/payment/cubit/payment_state.dart';
 import '../../features/auth/cubit/cubit.dart';
 import '../../features/auth/cubit/state.dart';
 
@@ -17,14 +17,14 @@ class CustomAcceptTerms extends StatefulWidget {
 class _CustomAcceptTermsState extends State<CustomAcceptTerms> {
   @override
   void initState() {
-    context.read<MainCubit>().isChecked = false;
+    context.read<PaymentCubit>().isChecked = false;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.read<MainCubit>();
-    return BlocBuilder<MainCubit, MainState>(
+    var cubit = context.read<PaymentCubit>();
+    return BlocBuilder<PaymentCubit, PaymentState>(
       builder: (BuildContext context, state) {
         return Row(
           children: [
@@ -60,7 +60,8 @@ class CustomTermsAndConditionsText extends StatelessWidget {
           showTermsBottomSheet(context, terms);
         },
         child: Center(
-            child: Text(AppTranslations.terms,
+            child: 
+            Text(AppTranslations.terms,
                 style: getMediumStyle(
                     fontSize: 12.sp, color: AppColors.primary))));
   }
@@ -105,15 +106,16 @@ void showTermsBottomSheet(BuildContext context, String terms) {
                     const SizedBox(height: 16),
                     Flexible(
                       child: SingleChildScrollView(
-                        child: Text(
-                            // "Once upon a time in a small village nestled in the mountains, there lived a young woman named Elara. She was known for her insatiable curiosity about the world beyond the peaks that surrounded her home. While others in her village were content with the simple rhythm of their lives, Elara often found herself daydreaming about the vast oceans, bustling cities, and ancient ruins she'd read about in the few books she could find.One crisp morning, as the sun began to rise and paint the sky with shades of gold and pink, Elara decided it was time to leave her village and explore the unknown. Armed with a small satchel of essentials and a map she had drawn herself based on stories from travelers, she set off on her journey."
-                            // "Once upon a time in a small village nestled in the mountains, there lived a young woman named Elara. She was known for her insatiable curiosity about the world beyond the peaks that surrounded her home. While others in her village were content with the simple rhythm of their lives, Elara often found herself daydreaming about the vast oceans, bustling cities, and ancient ruins she'd read about in the few books she could find.One crisp morning, as the sun began to rise and paint the sky with shades of gold and pink, Elara decided it was time to leave her village and explore the unknown. Armed with a small satchel of essentials and a map she had drawn herself based on stories from travelers, she set off on her journey."
-                            // "Once upon a time in a small village nestled in the mountains, there lived a young woman named Elara. She was known for her insatiable curiosity about the world beyond the peaks that surrounded her home. While others in her village were content with the simple rhythm of their lives, Elara often found herself daydreaming about the vast oceans, bustling cities, and ancient ruins she'd read about in the few books she could find.One crisp morning, as the sun began to rise and paint the sky with shades of gold and pink, Elara decided it was time to leave her village and explore the unknown. Armed with a small satchel of essentials and a map she had drawn herself based on stories from travelers, she set off on her journey."
-                            // "Once upon a time in a small village nestled in the mountains, there lived a young woman named Elara. She was known for her insatiable curiosity about the world beyond the peaks that surrounded her home. While others in her village were content with the simple rhythm of their lives, Elara often found herself daydreaming about the vast oceans, bustling cities, and ancient ruins she'd read about in the few books she could find.One crisp morning, as the sun began to rise and paint the sky with shades of gold and pink, Elara decided it was time to leave her village and explore the unknown. Armed with a small satchel of essentials and a map she had drawn herself based on stories from travelers, she set off on her journey."
-                             terms
-                            
-                           , style: getMediumStyle(
-                                fontSize: 14.sp, color: AppColors.secondPrimary)),
+                      child:  Html(
+                                    data: terms)
+                        // child: Text(
+                        //     // "Once upon a time in a small village nestled in the mountains, there lived a young woman named Elara. She was known for her insatiable curiosity about the world beyond the peaks that surrounded her home. While others in her village were content with the simple rhythm of their lives, Elara often found herself daydreaming about the vast oceans, bustling cities, and ancient ruins she'd read about in the few books she could find.One crisp morning, as the sun began to rise and paint the sky with shades of gold and pink, Elara decided it was time to leave her village and explore the unknown. Armed with a small satchel of essentials and a map she had drawn herself based on stories from travelers, she set off on her journey."
+                        //     // "Once upon a time in a small village nestled in the mountains, there lived a young woman named Elara. She was known for her insatiable curiosity about the world beyond the peaks that surrounded her home. While others in her village were content with the simple rhythm of their lives, Elara often found herself daydreaming about the vast oceans, bustling cities, and ancient ruins she'd read about in the few books she could find.One crisp morning, as the sun began to rise and paint the sky with shades of gold and pink, Elara decided it was time to leave her village and explore the unknown. Armed with a small satchel of essentials and a map she had drawn herself based on stories from travelers, she set off on her journey."
+                        //     // "Once upon a time in a small village nestled in the mountains, there lived a young woman named Elara. She was known for her insatiable curiosity about the world beyond the peaks that surrounded her home. While others in her village were content with the simple rhythm of their lives, Elara often found herself daydreaming about the vast oceans, bustling cities, and ancient ruins she'd read about in the few books she could find.One crisp morning, as the sun began to rise and paint the sky with shades of gold and pink, Elara decided it was time to leave her village and explore the unknown. Armed with a small satchel of essentials and a map she had drawn herself based on stories from travelers, she set off on her journey."
+                        //     // "Once upon a time in a small village nestled in the mountains, there lived a young woman named Elara. She was known for her insatiable curiosity about the world beyond the peaks that surrounded her home. While others in her village were content with the simple rhythm of their lives, Elara often found herself daydreaming about the vast oceans, bustling cities, and ancient ruins she'd read about in the few books she could find.One crisp morning, as the sun began to rise and paint the sky with shades of gold and pink, Elara decided it was time to leave her village and explore the unknown. Armed with a small satchel of essentials and a map she had drawn herself based on stories from travelers, she set off on her journey."
+                        //      terms                            
+                        //    , style: getMediumStyle(
+                        //         fontSize: 14.sp, color: AppColors.secondPrimary)),
                       ),
                     )
                   ],

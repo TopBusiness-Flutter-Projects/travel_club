@@ -14,9 +14,8 @@ import '../widgets/payment_widget.dart';
 import '../widgets/show_model_bottom_sheet.dart';
 
 class ResidenceDetailsBookingArguments {
-  
   final ResidenceReservationModel residenceReservationModel;
-  ResidenceDetailsBookingArguments( {required this.residenceReservationModel});
+  ResidenceDetailsBookingArguments({required this.residenceReservationModel});
 }
 
 class ResidenceRessrvationDetails extends StatefulWidget {
@@ -32,9 +31,8 @@ class _ResidenceRessrvationDetailsState
     extends State<ResidenceRessrvationDetails> {
   @override
   void initState() {
-    context
-        .read<MyReservationsCubit>()
-        .getResidenceReservationDetails(reservationId: widget.arguments.residenceReservationModel.id!);
+    context.read<MyReservationsCubit>().getResidenceReservationDetails(
+        reservationId: widget.arguments.residenceReservationModel.id!);
     context.read<MyReservationsCubit>().getResidenceReservationDetailsModel =
         GetResidenceReservationDetailsModel();
     super.initState();
@@ -58,8 +56,9 @@ class _ResidenceRessrvationDetailsState
                   SizedBox(
                     height: 20.h,
                   ),
-                   CustomBookingAccommodationContainerBig(
-                    residenceReservationModel: widget.arguments.residenceReservationModel ,
+                  CustomBookingAccommodationContainerBig(
+                    residenceReservationModel:
+                        widget.arguments.residenceReservationModel,
                   ),
                   SizedBox(
                     height: 25.h,
@@ -217,7 +216,6 @@ class _ResidenceRessrvationDetailsState
 
 //payment
 
-
                     if (cubit.getResidenceReservationDetailsModel.data!
                             .process ==
                         0)
@@ -243,8 +241,8 @@ class _ResidenceRessrvationDetailsState
                         height: 20.h,
                       ),
                       ReservationPaymentDetailsContainer(
-                        nightes: widget.arguments.residenceReservationModel  
-                            .totalNights
+                        nightes: widget
+                            .arguments.residenceReservationModel.totalNights
                             .toString(),
                         totalPrice: cubit.getResidenceReservationDetailsModel
                             .data!.totalPrice
@@ -260,29 +258,32 @@ class _ResidenceRessrvationDetailsState
                       SizedBox(
                         height: 20.h,
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CustomButton(
-                              color: AppColors.red,
-                              title: AppTranslations.cancelBooking,
-                              onTap: () {
-                                Navigator.pushNamed(context, Routes.payment);
-                              },
-                            ),
-                          ),
-                          SizedBox(width: 10.w), // Add spacing between buttons
-                          Expanded(
-                              child: CustomRoundedButton(
-                            title: AppTranslations.experienceEvaluation,
-                            onTap: () {
-                              showModelBottomSheetRatting(context);
-                              // Navigator.pushNamed(context, Routes.);
-                            },
-                          )),
-                        ],
-                      )
                     ],
+                    if (cubit.getResidenceReservationDetailsModel.data!
+                            .canCancel !=
+                        null)
+                      CustomButton(
+                        isBordered: true,
+                        title: AppTranslations.cancelBooking,
+                        onTap: () {
+                          cubit.cancelReservation(context,
+                              reservationId: widget
+                                  .arguments.residenceReservationModel.id!);
+                        },
+                      ),
+
+                    if (cubit.getResidenceReservationDetailsModel.data!
+                            .process ==
+                        2)
+                      CustomButton(
+                        isBordered: true,
+                        title: AppTranslations.experienceEvaluation,
+                        onTap: () {
+                          showModelBottomSheetRatting(context);
+                          // Navigator.pushNamed(context, Routes.);
+                        },
+                      ),
+
                     SizedBox(
                       height: 40.h,
                     )

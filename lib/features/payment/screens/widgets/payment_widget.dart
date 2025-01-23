@@ -1,4 +1,5 @@
 import 'package:dotted_line/dotted_line.dart';
+import 'package:travel_club/core/utils/convert_numbers_method.dart';
 import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
 import 'package:travel_club/features/payment/cubit/payment_state.dart';
 
@@ -7,12 +8,11 @@ import '../../../../core/exports.dart';
 class PaymentDetailsContainer extends StatelessWidget {
   const PaymentDetailsContainer(
       {super.key,
-      this.isDetailsBooking = false,
       this.totalPrice,
       this.vat,
       this.totalPriceAfterVat,
       this.afterDiscountPrice});
-  final bool isDetailsBooking;
+
   final String? totalPrice;
   final String? vat;
   final String? totalPriceAfterVat;
@@ -26,47 +26,17 @@ class PaymentDetailsContainer extends StatelessWidget {
         padding: const EdgeInsets.all(30.0),
         child: Column(
           children: [
-            if (isDetailsBooking) ...[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "${AppTranslations.priceFor}4 ليالي ",
-                    style: getMediumStyle(
-                        fontSize: 14.sp, color: AppColors.primary),
-                  ),
-                  CustomContainerWithShadow(
-                    reduis: 7,
-                    isShadow: false,
-                    color: AppColors.green.withOpacity(.12),
-                    width: 100.w,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 6.0, vertical: 7),
-                      child: Center(
-                          child: Text(
-                        AppTranslations.paymentHasBeenMade,
-                        style: getMediumStyle(
-                            fontSize: 14.sp, color: AppColors.green),
-                        maxLines: 1,
-                      )),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 15.h,
-              ),
-            ],
             CustomPriceRow(
-              price: totalPrice!,
+                            price: formatNumber(double.parse(totalPrice!)) ,
+
               title: AppTranslations.bookingPrice,
             ),
             SizedBox(
               height: 15.h,
             ),
             CustomPriceRow(
-              price: vat!,
+                            price: formatNumber(double.parse(vat!)) ,
+
               title: AppTranslations.vat,
             ),
             SizedBox(
@@ -83,7 +53,7 @@ class PaymentDetailsContainer extends StatelessWidget {
               height: 10.h,
             ),
             CustomPriceRow(
-              price: totalPriceAfterVat!,
+              price: formatNumber(double.parse(totalPriceAfterVat!)),
               title: AppTranslations.totalPrice,
               isLineOver: cubit.checkCopouneModel.data != null,
             ),
@@ -92,7 +62,8 @@ class PaymentDetailsContainer extends StatelessWidget {
                 height: 10.h,
               ),
               CustomPriceRow(
-                price: cubit.checkCopouneModel.data.toString(),
+                price: formatNumber(
+                    double.parse(cubit.checkCopouneModel.data.toString())),
                 title: AppTranslations.afterDiscount,
               ),
             ]

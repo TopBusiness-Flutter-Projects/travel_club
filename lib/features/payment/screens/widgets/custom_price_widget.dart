@@ -59,7 +59,6 @@ class _CustomPricesWidgetState extends State<CustomPricesWidget> {
             totalPrice: widget.totalPrice,
             vat: widget.vat,
             totalPriceAfterVat: widget.totalPriceAfterVat,
-            
           ),
           SizedBox(
             height: 20.h,
@@ -82,26 +81,30 @@ class _CustomPricesWidgetState extends State<CustomPricesWidget> {
             ),
 
 //button
-          CustomButton(
-            title: AppTranslations.completePayment,
-            onTap: () async {
-              LoginModel loginModel = await Preferences.instance.getUserModel();
-              String? token = loginModel.data?.token;
-              print(token);
-              cubit.getPaymentUrl(
-                context,
-                reservationId: widget.reservationId,
-              );
-              
-            //   Navigator.pushAndRemoveUntil(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => DonePaymentScreen(
-            //             paymentModel: PaymentModel(),
-            //           )),
-            //   (route) => false,
-            // );
-            },
+          Opacity(
+            opacity: widget.terms == null
+                ? 1
+                : cubit.isChecked
+                    ? 1
+                    : 0.4,
+            child: CustomButton(
+              title: AppTranslations.completePayment,
+              onTap: widget.terms == null
+                  ? () async {
+                      cubit.getPaymentUrl(
+                        context,
+                        reservationId: widget.reservationId,
+                      );
+                    }
+                  : cubit.isChecked
+                      ? () async {
+                          cubit.getPaymentUrl(
+                            context,
+                            reservationId: widget.reservationId,
+                          );
+                        }
+                      : null,
+            ),
           )
         ],
       );

@@ -60,8 +60,9 @@ class _ReservationsBodyState extends State<ReservationsBody> {
                  scrollDirection: Axis.horizontal,
                  itemBuilder: (BuildContext context, int index) {
                    return CustomReservationSection(
-                    // index: index,
-                     module: cubit.homeModel.data!.modules![index],
+
+                    // index: index,                   
+                     module: cubit.homeModel.data!.modules![index],                   
                    );
                  },
                  separatorBuilder: (BuildContext context, int index) {

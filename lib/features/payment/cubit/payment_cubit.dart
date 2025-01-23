@@ -125,5 +125,11 @@ class PaymentCubit extends Cubit<PaymentState> {
     checkCopouneModel = CheckCopouneModel();
     emit(SuccessCheckCopouneState());
   }
+    //check privacy
+  bool isChecked = false; 
+  void checkPrivacy() {
+    isChecked = !isChecked;
+    emit(ChangePrivacyState());
+  }
 }
 //Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RyYXZlbC50b3BidXNpbmVzcy5lYmhhcmJvb2suY29tL2FwaS92MS9sb2dpbi9nb29nbGUiLCJpYXQiOjE3MzczNjMyOTksImV4cCI6MTc2ODg5OTI5OSwibmJmIjoxNzM3MzYzMjk5LCJqdGkiOiI2NmZsdkpSOFl5Z0hXWkFvIiwic3ViIjoiOSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJhdXRoX3V1aWQiOiI0MzcxNDhhZi1lNDE3LTRiY2EtYjgzMy1kNzYwMmE4NjIxMmEifQ.kX0HZDF2a1SPf52Qc5CjNES91sNoD9GxbTtFhxPmaYU

@@ -29,8 +29,8 @@ class MyReservationsRepoImpl {
       var response =
           await dio.post(EndPoints.cancelReservation,
               queryParameters: {
-        "module_id": "1",
-        "reservation_id": "65",
+        "module_id": moduleId,
+        "reservation_id": reservationId,
       });
       return Right(CancelReservationModel.fromJson(response));
     } on ServerException {

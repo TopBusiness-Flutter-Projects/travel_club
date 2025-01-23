@@ -27,7 +27,7 @@ class ReservationPaymentDetailsContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${AppTranslations.priceFor}$nightes ليالي ",
+                "${AppTranslations.priceFor}$nightes ${AppTranslations.nights} ",
                 style:
                     getMediumStyle(fontSize: 14.sp, color: AppColors.primary),
               ),
