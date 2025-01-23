@@ -1,5 +1,7 @@
-abstract class MyBookingsState {}
+abstract class MyReservationsState {}
 
-class MyBookingsInitial extends MyBookingsState {}
-class IndexChanged extends MyBookingsState {}
-class ChangeRating extends MyBookingsState {}
+class MyReservationInitial extends MyReservationsState {}
+
+class IndexChanged extends MyReservationsState {}
+
+class ChangeRating extends MyReservationsState {}

@@ -30,7 +30,7 @@ class _DetailsBookingState extends State<DetailsBooking> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MyBookingsCubit, MyBookingsState>(
+    return BlocBuilder<MyReservationsCubit, MyReservationsState>(
       builder: (BuildContext context, state) {
         return CustomScreen(
           appbarTitle: AppTranslations.detailsBooking,

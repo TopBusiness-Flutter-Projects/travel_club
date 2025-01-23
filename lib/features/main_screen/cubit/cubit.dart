@@ -3,7 +3,7 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/favourites/screens/favourites_screen.dart';
 import 'package:travel_club/features/home/screens/home_screen.dart';
 import 'package:travel_club/features/my_account/screens/account_screen.dart';
-import '../../my_bookings/view/my_bookings_screen.dart';
+import '../../my_bookings/view/my_reservations_screen.dart';
 import '../data/repo/main_repo_impl.dart';
 import 'state.dart';
 
@@ -12,7 +12,7 @@ class MainCubit extends Cubit<MainState> {
   MainRepoImpl api;
   List<Widget> screens = [
     const HomeScreen(),
-    const MyBookingsScreen(),
+    const MyReservationsScreen(),
     const FavouritesScreen(),
     const AccountScreen()
   ];
@@ -29,6 +29,4 @@ class MainCubit extends Cubit<MainState> {
     isChecked = !isChecked;
     emit(ChangePrivacyState());
   }
-
- 
 }

@@ -8,9 +8,6 @@ import '../../../../../../core/widgets/center_bottom_sheet.dart';
 import '../../../cubit/my_bookings_cubit.dart';
 import '../../../cubit/my_bookings_state.dart';
 
-
-
-
 void showModelBottomSheetRatting(context) {
   showModalBottomSheet(
       context: context,
@@ -20,8 +17,8 @@ void showModelBottomSheetRatting(context) {
       isScrollControlled: true,
       backgroundColor: AppColors.white,
       builder: (context) {
-        var cubit=context.read<MyBookingsCubit>();
-        return BlocBuilder<MyBookingsCubit, MyBookingsState>(
+        var cubit = context.read<MyReservationsCubit>();
+        return BlocBuilder<MyReservationsCubit, MyReservationsState>(
           builder: (BuildContext context, state) {
             return Padding(
               padding: EdgeInsets.only(
@@ -76,10 +73,11 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: cubit.rates[0 ],size: 14.sp,
+                                    rating: cubit.rates[0],
+                                    size: 14.sp,
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
-                                      cubit.changeRating(rating,0);
+                                      cubit.changeRating(rating, 0);
                                       //   => setState(() => this.rating = rating
                                     }),
                               ],
@@ -95,10 +93,11 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: cubit.rates[1 ],size: 14.sp,
+                                    rating: cubit.rates[1],
+                                    size: 14.sp,
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
-                                      cubit.changeRating(rating,1);
+                                      cubit.changeRating(rating, 1);
 
                                       //   => setState(() => this.rating = rating
                                     }),
@@ -115,10 +114,11 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: cubit.rates[2 ],size: 14.sp,
+                                    rating: cubit.rates[2],
+                                    size: 14.sp,
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {
-                                      cubit.changeRating(rating,2);
+                                      cubit.changeRating(rating, 2);
 
                                       //   => setState(() => this.rating = rating
                                     }),
@@ -135,11 +135,11 @@ void showModelBottomSheetRatting(context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 StarRating(
-                                    rating: cubit.rates[3 ],
+                                    rating: cubit.rates[3],
                                     allowHalfRating: false,
                                     size: 14.sp,
                                     onRatingChanged: (rating) {
-                                      cubit.changeRating(rating,3);
+                                      cubit.changeRating(rating, 3);
 
                                       //   => setState(() => this.rating = rating
                                     }),
@@ -175,4 +175,3 @@ void showModelBottomSheetRatting(context) {
         );
       });
 }
-
