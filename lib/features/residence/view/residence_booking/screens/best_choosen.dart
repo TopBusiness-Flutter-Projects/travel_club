@@ -30,7 +30,7 @@ class _BestChosenScreenState extends State<BestChosenScreen> {
                             isBordered:   cubit.changedRooms == 0
                                 ? true : false,
                             onTap: () {
-                              cubit. addRoomReservation( context);
+                              cubit. addRoomReservation(context);
                             },
                             title:   cubit.changedRooms == 0
                                 ? AppTranslations.skip : AppTranslations.confirm,

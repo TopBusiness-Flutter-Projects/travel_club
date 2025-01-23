@@ -66,6 +66,7 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   AddRoomReservationModel addRoomReservationModel = AddRoomReservationModel();
 
   addRoomReservation(BuildContext context) async {
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
     emit(ReservationLoading());
      List<int> selectedRoomsIds = [];
     for (int i = 0; i < selectedRooms.length; i++) {
@@ -79,21 +80,23 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     }
     final response = await api.addRoomReservation(fromDay: context.read<TransportationCubit>().fromDate, toDay: context.read<TransportationCubit>().toDate, guest: counter, rooms: selectedRoomsIds);
     response.fold((l) {
-     // Navigator.pop(context);
+      Navigator.pop(context);
       errorGetBar(AppTranslations.error);
       emit(ReservationError());
     }, (r) {
       addRoomReservationModel=r;
-    //  Navigator.pop(context);
+      Navigator.pop(context);
       print("code: ${r.status.toString()}");
       if (r.status != 200 && r.status != 201) {
         errorGetBar(r.msg!);
-      } else {
+      }
+      else {
         Navigator.pushNamed(context, Routes.secondBookingResidence);
         emit(ReservationLoaded());
         successGetBar(r.msg);
       }
-    });
+    }
+    );
   }
 
   int currentIndex = 0;
