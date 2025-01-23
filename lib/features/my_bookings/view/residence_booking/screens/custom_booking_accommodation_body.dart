@@ -46,12 +46,15 @@ class _AccommodationBookingBodyState extends State<AccommodationBookingBody> {
         itemBuilder: (BuildContext context, int index) {
           return    GestureDetector(
               onTap: (){
+               // cubit.cancelReservation(2,context);
                 Navigator.pushNamed(context, Routes.detailsBooking);
               },
               child: CustomBookingAccommodationContainerBig(residenceReservationModel: cubit.residenceReservationModel?.data!.reservations?[index],));
-        },),
+        },
+      ),
     );
-      },);
+      },
+    );
     // TODO: implement build
   }
 }
