@@ -23,6 +23,11 @@ class LoginCubit extends Cubit<LoginState> {
   late TextEditingController passwordControllerLogin = TextEditingController();
   //forget pass
   //sign up
+  TextEditingController codeController = TextEditingController();
+  changeCode(String value) {
+    codeController.text = value;
+    emit(ChangeCodeState());
+  }
 
   late TextEditingController nameController = TextEditingController();
   late TextEditingController phoneControllerSignUp = TextEditingController();
