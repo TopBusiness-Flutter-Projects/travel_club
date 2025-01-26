@@ -250,4 +250,5 @@ class AppTranslations {
   static String get nights => 'nights'.tr();
   static String get pending => 'pending'.tr();
   static String get enterCodeToGetPoints => 'enter_code_to_get_points'.tr();
+  static String get pleaseSelectRoom => 'please_select_room'.tr();
 }

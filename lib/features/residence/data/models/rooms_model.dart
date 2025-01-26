@@ -43,8 +43,8 @@ class RoomModel {
   String? name;
   int? beds;
   int? diff;
-  int? totalPrice;
-  int? price;
+  dynamic totalPrice;
+  dynamic price;
   int? lodgeId;
   dynamic? canCancel;
   String? type;

@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/utils/convert_numbers_method.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_member_widget.dart';
@@ -11,7 +12,6 @@ class ResidenceBooking extends StatefulWidget {
   const ResidenceBooking({super.key, required this.lodgeId});
   final int lodgeId;
   @override
-
   State<ResidenceBooking> createState() => _ResidenceBookingState();
 }
 
@@ -88,9 +88,13 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                             });
                             context.read<ResidenceCubit>().sum = 0;
                             context.read<ResidenceCubit>().selectedRooms = [];
-                              context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
-                           debugPrint("send");
-                            cubit.getRoomsLodges(context: context, lodgeId: widget.lodgeId);
+                            context
+                                .read<ResidenceCubit>()
+                                .lodgesRoomsModel
+                                .data = null;
+                            debugPrint("send");
+                            cubit.getRoomsLodges(
+                                context: context, lodgeId: widget.lodgeId);
                           },
                         ),
                       ),
@@ -101,55 +105,63 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                 !isSend
                     ? Container()
                     : Expanded(
-                        child:
-                        cubit.lodgesRoomsModel.data == null
+                        child: cubit.lodgesRoomsModel.data == null
                             ? const Center(
                                 child: SizedBox(),
                               )
-                            :
-                        cubit.lodgesRoomsModel.data?.isEmpty??false
+                            : cubit.lodgesRoomsModel.data?.isEmpty ?? false
                                 ? Center(child: Text(AppTranslations.noData))
                                 : ListView.builder(
                                     shrinkWrap: true,
                                     itemCount:
-                                    cubit.lodgesRoomsModel.data?.length,
+                                        cubit.lodgesRoomsModel.data?.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return CustomContainerBooking(
-                                        room: cubit.lodgesRoomsModel.data?[index],
+                                        room:
+                                            cubit.lodgesRoomsModel.data?[index],
                                         widgetBottom: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                '${AppTranslations.priceFor}'+" "+'${cubit.lodgesRoomsModel.data?[index].diff.toString()}',
-                                                  style: getRegularStyle(
-                                                      fontSize: 14.sp,
-                                                      color: AppColors.grey),
-                                                ),
-                                                Text(
-                                                  '${cubit.lodgesRoomsModel.data?[index].totalPrice}' +
-                                                      " " +
-                                                      AppTranslations.currency,
-                                                  style: getSemiBoldStyle(
-                                                      fontSize: 16.sp,
-                                                      color: AppColors.primary),
-                                                ),
-                                                Text(
-                                                  AppTranslations.withoutTax,
-                                                  style: getRegularStyle(
-                                                      fontSize: 12.sp,
-                                                      color: AppColors.grey),
-                                                ),
-                                              ],
+                                            Flexible(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  AutoSizeText(
+                                                    '${AppTranslations.priceFor} ${cubit.lodgesRoomsModel.data?[index].diff.toString()} ${AppTranslations.nights}',
+                                                    maxLines: 1,
+                                                    style: getRegularStyle(
+                                                        fontSize: 14.sp,
+                                                        color: AppColors.grey),
+                                                  ),
+                                                  AutoSizeText(
+                                                    // '${cubit.lodgesRoomsModel.data?[index].totalPrice}' +
+                                                    '${formatNumber(double.parse(cubit.lodgesRoomsModel.data?[index].totalPrice.toString() ?? "0"))}'
+                                                            " " +
+                                                        AppTranslations
+                                                            .currency,
+                                                    maxLines: 1,
+                                                    style: getSemiBoldStyle(
+                                                        fontSize: 16.sp,
+                                                        color:
+                                                            AppColors.primary),
+                                                  ),
+                                                  AutoSizeText(
+                                                    AppTranslations.withoutTax,
+                                                    maxLines: 1,
+                                                    style: getRegularStyle(
+                                                        fontSize: 12.sp,
+                                                        color: AppColors.grey),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                             CustomRoundedButton(
                                               isBooking: true,
-                                                icon: cubit.selectedRooms.any(
+                                              // isBordered: true,
+                                              icon: cubit.selectedRooms.any(
                                                       (room) =>
                                                           room.id ==
                                                           cubit.lodgesRoomsModel
@@ -166,8 +178,7 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                                               onTap: () {
                                                 cubit.addOrRemoveRoom(cubit
                                                     .lodgesRoomsModel
-                                                    .data![index]
-                                                );
+                                                    .data![index]);
                                                 //       Navigator.pushNamed(context, Routes.secondBookingAccommodation);
                                               },
                                             )
@@ -198,9 +209,11 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                             title: AppTranslations.bookNow,
                             width: 179.w,
                             onTap: () {
-                              debugPrint("nehal");
-                             cubit.getCheckDuplicateRecommendedRooms(context: context);
-                            // cubit.getCheckDuplicateRecommendedRooms(context: context);
+                              cubit.isRoomsValid() == true
+                                  ? cubit.getCheckDuplicateRecommendedRooms(
+                                      context: context)
+                                  : errorGetBar(
+                                      AppTranslations.pleaseSelectRoom);
                             },
                           )
                         ],

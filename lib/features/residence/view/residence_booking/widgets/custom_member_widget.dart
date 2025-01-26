@@ -20,10 +20,8 @@ class CustomMemberWidget extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                // context.read<ResidenceCubit>().sum = 0;
-                // context.read<ResidenceCubit>().selectedRooms = [];
-                context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
-                cubit.plusCounter();
+               
+                cubit.changeCounter(true);
               },
               child: Container(
                 width: 27.w,
@@ -48,10 +46,8 @@ class CustomMemberWidget extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                cubit.minusCounter();
-                // context.read<ResidenceCubit>().sum = 0;
-                // context.read<ResidenceCubit>().selectedRooms = [];
-                context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
+                cubit.changeCounter(false);
+              
               },
               child: Container(
                 width: 27.w,
