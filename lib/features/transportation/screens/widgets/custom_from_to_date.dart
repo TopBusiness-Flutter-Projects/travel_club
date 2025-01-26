@@ -2,7 +2,6 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 
-import '../../../residence/cubit/residence_cubit.dart';
 
 class CustomFromToDate extends StatelessWidget {
   const CustomFromToDate({
