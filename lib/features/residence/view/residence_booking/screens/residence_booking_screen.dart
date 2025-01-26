@@ -22,9 +22,8 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
   bool isSend = false;
   void initState() {
     isSend = false;
-    context.read<ResidenceCubit>().sum = 0;
-    context.read<ResidenceCubit>().selectedRooms = [];
-    context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
+    context.read<ResidenceCubit>().makeModelNull();
+
     context.read<TransportationCubit>().goOnly = false;
     super.initState();
   }
@@ -81,7 +80,7 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                       child: SizedBox(
                         width: 179.w,
                         child: CustomButton(
-                          title: AppTranslations.showHotels,
+                          title: AppTranslations.showRooms,
                           width: 179.w,
                           onTap: () {
                             setState(() {
@@ -90,9 +89,8 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                             context.read<ResidenceCubit>().sum = 0;
                             context.read<ResidenceCubit>().selectedRooms = [];
                               context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
-                            print("send");
-                            cubit.getRoomsLodges(
-                                context: context, lodgeId: widget.lodgeId);
+                           debugPrint("send");
+                            cubit.getRoomsLodges(context: context, lodgeId: widget.lodgeId);
                           },
                         ),
                       ),

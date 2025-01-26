@@ -2,6 +2,8 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 
+import '../../../residence/cubit/residence_cubit.dart';
+
 class CustomFromToDate extends StatelessWidget {
   const CustomFromToDate({
     super.key,
@@ -24,6 +26,9 @@ class CustomFromToDate extends StatelessWidget {
                     selectedDate: cubit.singleDate,
                     isSingle: true,
                     onTap: () {
+                      context.read<ResidenceCubit>().sum = 0;
+                      context.read<ResidenceCubit>().selectedRooms = [];
+                      context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
                       cubit.onSelectedDateSingle(context: context);
                     },
                   ),
@@ -35,8 +40,10 @@ class CustomFromToDate extends StatelessWidget {
                       child: DatePickerField(
                         selectedDate: cubit.fromDate,
                         onTap: () {
-                          cubit.onSelectedDate(
-                              isStartDate: true, context: context);
+                          context.read<ResidenceCubit>().sum = 0;
+                          context.read<ResidenceCubit>().selectedRooms = [];
+                          context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
+                          cubit.onSelectedDate(isStartDate: true, context: context);
                         },
                       ),
                     ),
@@ -53,6 +60,9 @@ class CustomFromToDate extends StatelessWidget {
                       child: DatePickerField(
                         selectedDate: cubit.toDate!,
                         onTap: () {
+                          context.read<ResidenceCubit>().sum = 0;
+                          context.read<ResidenceCubit>().selectedRooms = [];
+                          context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
                           cubit.onSelectedDate(
                               isStartDate: false, context: context);
                         },
