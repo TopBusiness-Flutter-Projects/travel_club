@@ -4,6 +4,7 @@ class LoginStateInitial extends LoginState {}
 //otp screen
 class StartTimer extends LoginState {}
 class ResetPin extends LoginState {}
+class ChangeCodeState extends LoginState {}
 class LoadingLoginState extends LoginState {}
 class FailureLoginState extends LoginState {}
 class SuccessLoginState extends LoginState {}
