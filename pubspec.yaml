@@ -73,6 +73,8 @@ dependencies:
   photo_view: ^0.15.0
   webview_flutter: ^4.4.4
   url_launcher: ^6.3.1
+  flutter_html:
+  flutter_holo_date_picker: ^2.0.0
   
 dev_dependencies:
   flutter_test:

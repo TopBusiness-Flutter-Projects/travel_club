@@ -247,8 +247,10 @@
   "camera": "كاميرا",
   "gallery": "المعرض",
   "reservation_will_canceled" : "سوف يتم إلغاء الحجز في حالة عدم إستكمال عملية الدفع خلال 4 ساعات",
+  "going_and_return_date": "تاريخ الذهاب وتاريخ العودة",
 
   "complete" : "إستكمال",
+  "please_select_room" : "من فضلك اختر عدد غرف مناسب",
   "" : "",
   "lasss": "",
   "nights": "ليالي",

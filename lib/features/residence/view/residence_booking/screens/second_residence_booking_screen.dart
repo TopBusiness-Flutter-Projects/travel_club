@@ -20,8 +20,8 @@ class SecondResidenceBooking extends StatefulWidget {
 }
 
 class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
-  PageController pageController = PageController(initialPage: 0);
-  int currentPage = 0;
+  // PageController pageController = PageController(initialPage: 0);
+  // int currentPage = 0;
 
   @override
   void initState() {

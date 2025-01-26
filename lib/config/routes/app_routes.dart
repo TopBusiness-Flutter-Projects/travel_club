@@ -74,7 +74,7 @@ class Routes {
   static const String privacyRoute = '/privacyRoute';
   static const String hotelsScreen = '/hotelsScreen';
   static const String notificationScreen = '/notification';
-  static const String detailsBooking = '/detailsBooking';
+  static const String detailsReservationResidence = '/detailsBooking';
   static const String compainiesEntertainment = '/compainiesEntertainment';
   static const String entertainmentScreen = '/entertainmentScreen';
   static const String bookingResidenceRoute = '/bookingResidenceRoute';
@@ -285,9 +285,13 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-      case Routes.detailsBooking:
+      case Routes.detailsReservationResidence:
+        ResidenceDetailsBookingArguments args =
+            settings.arguments as ResidenceDetailsBookingArguments;
         return PageTransition(
-          child: const DetailsBooking(),
+          child: ResidenceRessrvationDetails(
+            arguments: args,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

@@ -81,7 +81,7 @@ class DonePaymentScreen extends StatelessWidget {
                     height: 40.h,
                   ),
                   //custom button
-                                  
+     
                   CustomButton(
                     width: getWidthSize(context) / 2,
                     title: AppTranslations.goToBookings,

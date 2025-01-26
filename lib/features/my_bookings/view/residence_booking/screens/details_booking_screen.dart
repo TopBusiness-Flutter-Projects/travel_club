@@ -1,37 +1,49 @@
-import 'package:card_swiper/card_swiper.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_state.dart';
+import 'package:travel_club/features/my_bookings/data/models/residence_reservation_details_model.dart';
+import 'package:travel_club/features/my_bookings/data/models/residence_reservation_model.dart';
+import 'package:travel_club/features/payment/screens/widgets/custom_price_widget.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_rounded_button.dart';
-import 'package:travel_club/features/payment/screens/widgets/payment_widget.dart';
-import '../../../../transportation/cubit/transportation_cubit.dart';
+
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/my_bookings_cubit.dart';
 import '../widgets/big_container.dart';
+import '../widgets/payment_widget.dart';
 import '../widgets/show_model_bottom_sheet.dart';
 
-class DetailsBooking extends StatefulWidget {
-  const DetailsBooking({super.key});
-
-  @override
-  State<DetailsBooking> createState() => _DetailsBookingState();
+class ResidenceDetailsBookingArguments {
+  final ResidenceReservationModel residenceReservationModel;
+  ResidenceDetailsBookingArguments({required this.residenceReservationModel});
 }
 
-class _DetailsBookingState extends State<DetailsBooking> {
+class ResidenceRessrvationDetails extends StatefulWidget {
+  const ResidenceRessrvationDetails({super.key, required this.arguments});
+  final ResidenceDetailsBookingArguments arguments;
+
+  @override
+  State<ResidenceRessrvationDetails> createState() =>
+      _ResidenceRessrvationDetailsState();
+}
+
+class _ResidenceRessrvationDetailsState
+    extends State<ResidenceRessrvationDetails> {
   @override
   void initState() {
-    // TODO: implement initState
-    context.read<TransportationCubit>().goOnly = false;
+    context.read<MyReservationsCubit>().getResidenceReservationDetails(
+        reservationId: widget.arguments.residenceReservationModel.id!);
+    context.read<MyReservationsCubit>().getResidenceReservationDetailsModel =
+        GetResidenceReservationDetailsModel();
     super.initState();
   }
 
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MyReservationsCubit, MyReservationsState>(
       builder: (BuildContext context, state) {
+        var cubit = context.read<MyReservationsCubit>();
         return CustomScreen(
           appbarTitle: AppTranslations.detailsBooking,
           body: Padding(
@@ -44,105 +56,238 @@ class _DetailsBookingState extends State<DetailsBooking> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  CustomBookingAccommodationContainerBig(),
+                  CustomBookingAccommodationContainerBig(
+                    residenceReservationModel:
+                        widget.arguments.residenceReservationModel,
+                  ),
                   SizedBox(
                     height: 25.h,
                   ),
-                  //text
-                  Text(
-                    AppTranslations.selectGoingAndReturn,
-                    style: getMediumStyle(fontSize: 14.sp),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  //from and to date
-                  CustomFromToDate(),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  //custom widget rating hotel
-
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  //prefer hotel
-                  Text(
-                    AppTranslations.rooms,
-                    style: getMediumStyle(fontSize: 14.sp),
-                  ),
-                  //custom contanier
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  SizedBox(
-                    height: 300.h,
-                    child: Swiper(
-                      itemCount: 3, // Define the number of items in the swiper
-                      itemBuilder: (BuildContext context, int index) {
-                        // Return a CustomContainerBooking for each item
-                        return
-                            //   Container(
-                            //   child : Text('Item dsas'),
-                            // );
-                            SizedBox(
-                          // height: 600.h,
-                          // width: getWidthSize(context),
-                          child: CustomContainerBooking(
-                            widgetBottom: SizedBox(),
-                          ),
-                        );
-                      },
-                      pagination: SwiperPagination(), // Optional pagination
-                      //  control: SwiperControl(),  // Optional arrows for control
-                    ),
-                  ),
-                  // CustomContainerBooking(),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-//payment
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  PaymentDetailsContainer(
-                    isDetailsBooking: true,
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-//copun
-
-                  SizedBox(
-                    height: 10.h,
-                  ),
-
-//button
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          color: AppColors.red,
-                          title: AppTranslations.cancelBooking,
-                          onTap: () {
-                            Navigator.pushNamed(context, Routes.payment);
-                          },
-                        ),
+                  if (cubit.getResidenceReservationDetailsModel.data == null)
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: getHeightSize(context) * 0.15),
+                      child: const Center(
+                        child: CustomLoadingIndicator(),
                       ),
-                      SizedBox(width: 10.w), // Add spacing between buttons
-                      Expanded(
-                          child: CustomRoundedButton(
+                    )
+                  else ...[
+                    //text
+                    Text(
+                      AppTranslations.goingAndReturnDate,
+                      style: getMediumStyle(fontSize: 14.sp),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    //from and to date
+                    Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.lightWhite2,
+                        borderRadius: BorderRadius.circular(30.r),
+                      ),
+                    ),
+                    CustomFromToDate(
+                      isGoOnly: false,
+                      isShowOnly: true,
+                      fromDate: cubit
+                          .getResidenceReservationDetailsModel.data!.from
+                          .toString(),
+                      toDate: cubit.getResidenceReservationDetailsModel.data!.to
+                          .toString(),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+
+                    //prefer hotel
+                    Text(
+                      AppTranslations.rooms,
+                      style: getMediumStyle(fontSize: 14.sp),
+                    ),
+                    //custom contanier
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    GestureDetector(
+                      onHorizontalDragEnd: (details) {
+                        setState(() {
+                          if (details.primaryVelocity != null) {
+                            bool isRtl = EasyLocalization.of(context)!
+                                    .locale
+                                    .languageCode ==
+                                'ar';
+
+                            if ((isRtl && details.primaryVelocity! > 0) ||
+                                (!isRtl && details.primaryVelocity! < 0)) {
+                              // Swiped left (next item for LTR, previous item for RTL)
+                              if (currentIndex <
+                                  cubit.getResidenceReservationDetailsModel
+                                          .data!.rooms!.length -
+                                      1) {
+                                currentIndex++;
+                              }
+                            } else if ((isRtl &&
+                                    details.primaryVelocity! < 0) ||
+                                (!isRtl && details.primaryVelocity! > 0)) {
+                              // Swiped right (previous item for LTR, next item for RTL)
+                              if (currentIndex > 0) {
+                                currentIndex--;
+                              }
+                            }
+                          }
+                        });
+                      },
+                      child: CustomContainerBooking(
+                        room: cubit.getResidenceReservationDetailsModel.data!
+                            .rooms![currentIndex],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: getVerticalPadding(context),
+                          horizontal: getHorizontalPadding(context)),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (currentIndex > 0) {
+                                  currentIndex--;
+                                }
+                              });
+                            },
+                            child: Icon(Icons.arrow_back_ios,
+                                color: currentIndex > 0
+                                    ? AppColors.primary
+                                    : (AppColors.primary).withOpacity(0.4)),
+                          ),
+                          Flexible(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: cubit
+                                  .getResidenceReservationDetailsModel
+                                  .data!
+                                  .rooms!
+                                  .map((element) => element.id ?? "")
+                                  .toList()
+                                  .asMap()
+                                  .entries
+                                  .map((entry) {
+                                return Container(
+                                  width: 10.0,
+                                  height: 10.0,
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: 8.0, horizontal: 4.0),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: currentIndex == entry.key
+                                          ? AppColors.primary
+                                          : (AppColors.primary)
+                                              .withOpacity(0.4)),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (currentIndex <
+                                    cubit.getResidenceReservationDetailsModel
+                                            .data!.rooms!.length -
+                                        1) {
+                                  currentIndex++;
+                                }
+                              });
+                            },
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              color: currentIndex <
+                                      cubit.getResidenceReservationDetailsModel
+                                              .data!.rooms!.length -
+                                          1
+                                  ? AppColors.primary
+                                  : (AppColors.primary).withOpacity(0.4),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+//payment
+
+                    if (cubit.getResidenceReservationDetailsModel.data!
+                            .process ==
+                        0)
+                      CustomPricesWidget(
+                        totalPrice: cubit.getResidenceReservationDetailsModel
+                            .data!.totalPrice
+                            .toString(),
+                        totalPriceAfterVat: cubit
+                            .getResidenceReservationDetailsModel
+                            .data!
+                            .totalPriceAfterVat
+                            .toString(),
+                        vat: cubit.getResidenceReservationDetailsModel.data!.vat
+                            .toString(),
+                        // terms: cubit.getResidenceReservationDetailsModel.data?.lodge
+                        // ?.rule,
+                        reservationId: cubit
+                                .getResidenceReservationDetailsModel.data?.id ??
+                            0,
+                      )
+                    else ...[
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      ReservationPaymentDetailsContainer(
+                        nightes: widget
+                            .arguments.residenceReservationModel.totalNights
+                            .toString(),
+                        totalPrice: cubit.getResidenceReservationDetailsModel
+                            .data!.totalPrice
+                            .toString(),
+                        totalPriceAfterVat: cubit
+                            .getResidenceReservationDetailsModel
+                            .data!
+                            .totalPriceAfterVat
+                            .toString(),
+                        vat: cubit.getResidenceReservationDetailsModel.data!.vat
+                            .toString(),
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                    ],
+                    if (cubit.getResidenceReservationDetailsModel.data!
+                            .canCancel !=
+                        null)
+                      CustomButton(
+                        isBordered: true,
+                        title: AppTranslations.cancelBooking,
+                        onTap: () {
+                          cubit.cancelReservation(context,
+                              reservationId: widget
+                                  .arguments.residenceReservationModel.id!);
+                        },
+                      ),
+
+                    if (cubit.getResidenceReservationDetailsModel.data!
+                            .process ==
+                        2)
+                      CustomButton(
+                        isBordered: true,
                         title: AppTranslations.experienceEvaluation,
                         onTap: () {
                           showModelBottomSheetRatting(context);
                           // Navigator.pushNamed(context, Routes.);
                         },
-                      )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 40.h,
-                  )
+                      ),
+
+                    SizedBox(
+                      height: 40.h,
+                    )
+                  ],
                 ],
               ),
             ),

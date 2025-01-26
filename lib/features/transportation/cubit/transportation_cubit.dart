@@ -3,6 +3,8 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import '../data/repo/transportation_repo_impl.dart';
 import 'transportation_state.dart';
+import 'package:flutter_holo_date_picker/date_picker.dart';
+import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
 
 class TransportationCubit extends Cubit<TransportationState> {
   TransportationCubit(this.api) : super(TransportationInitial());
@@ -38,32 +40,45 @@ class TransportationCubit extends Cubit<TransportationState> {
   String toDate = DateFormat('yyyy-MM-dd', 'en')
       .format(DateTime.now().add(const Duration(days: 1)));
   String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
+
   void onSelectedDate(
       {required bool isStartDate, required BuildContext context}) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(9999),
+    // final DateTime? picked = await showDatePicker(
+
+    // );
+    var picked = await DatePicker.showSimpleDatePicker(
+      context,
+      initialDate: isStartDate ? selectedStartDate : selectedEndDate,
+      firstDate: isStartDate
+          ? DateTime.now()
+          : selectedStartDate.add(Duration(days: 1)),
+      lastDate: isStartDate
+          ? selectedEndDate.subtract(Duration(days: 1))
+          : selectedStartDate.add(Duration(days: 365)),
+      // : DateTime(9999),
+      dateFormat: "dd/MMMM/yyyy",
+      backgroundColor: AppColors.primary,
+      textColor: AppColors.white,
+      itemTextStyle: getMediumStyle(color: AppColors.white),
+      locale: DateTimePickerLocale.en_us,
+      looping: false,
     );
 
     if (picked != null) {
       if (isStartDate) {
-        if (picked.isAfter(selectedEndDate)) {
-          errorGetBar("تاريخ البداية يجب أن يكون قبل تاريخ النهاية");
-          return;
-        }
+        // if (picked.isAfter(selectedEndDate)) {
+        //   errorGetBar("تاريخ البداية يجب أن يكون قبل تاريخ النهاية");
+        //   return;
+        // }
         selectedStartDate = picked;
-        context.read<ResidenceCubit>().
-        makeModelNull();
+        context.read<ResidenceCubit>().makeModelNull();
       } else {
-        if (picked.isBefore(selectedStartDate)) {
-          errorGetBar("تاريخ النهاية يجب أن يكون بعد تاريخ البداية");
-          return;
-        }
+        // if (picked.isBefore(selectedStartDate)) {
+        //   errorGetBar("تاريخ النهاية يجب أن يكون بعد تاريخ البداية");
+        //   return;
+        // }
         selectedEndDate = picked;
-        context.read<ResidenceCubit>().
-        makeModelNull();
+        context.read<ResidenceCubit>().makeModelNull();
       }
       updateDateStrings();
       emit(DateChangedState());

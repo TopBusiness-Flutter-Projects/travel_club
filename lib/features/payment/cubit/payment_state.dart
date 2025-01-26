@@ -8,5 +8,6 @@ class AccountLanguageChanged extends PaymentState {}
 class SuccessCheckCopouneState extends PaymentState {}
 class FailureCheckCopouneState extends PaymentState {}
 class LoadingCheckCopouneState extends PaymentState {}
+class ChangePrivacyState extends PaymentState {}
 
 

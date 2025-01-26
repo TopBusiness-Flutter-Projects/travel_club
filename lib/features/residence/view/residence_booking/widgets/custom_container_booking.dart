@@ -15,16 +15,15 @@ class CustomContainerBooking extends StatelessWidget {
     return BlocBuilder<ResidenceCubit, ResidenceState>(
       builder: (BuildContext context, state) {
         return Padding(
-          padding:  EdgeInsets.all(getHeightSize(context) * 0.01),
+          padding: EdgeInsets.all(getHeightSize(context) * 0.01),
           child: CustomContainerWithShadow(
-
               child: Padding(
             padding: EdgeInsets.only(
               top: getHeightSize(context) * 0.01,
-              // bottom: 10.h,
+              bottom: getHeightSize(context) * 0.01,
               left: 10.w,
               right: 10.w,
-            ) ,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               // mainAxisSize: MainAxisSize.min,
@@ -38,7 +37,8 @@ class CustomContainerBooking extends StatelessWidget {
                 SizedBox(
                   height: getHeightSize(context) * 0.01,
                 ),
-                if ( room?.canCancel != null && room?.canCancel.toString() != "false") ...[
+                if (room?.canCancel != null &&
+                    room?.canCancel.toString() != "false") ...[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -48,10 +48,7 @@ class CustomContainerBooking extends StatelessWidget {
                           width: 5.w,
                         ),
                         Text(
-                          AppTranslations.cancelFree +
-                                  "  " +
-                                  room?.canCancel
-                          ,
+                          AppTranslations.cancelFree + "  " + room?.canCancel,
                           style: getRegularStyle(
                               fontSize: 14.sp, color: AppColors.green),
                         ),
@@ -65,14 +62,14 @@ class CustomContainerBooking extends StatelessWidget {
                 ),
                 //custom rooms widget
 
-                 if (room?.facilities!.isNotEmpty ?? false) ...[
+                if (room?.facilities!.isNotEmpty ?? false) ...[
                   Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Wrap(
                         spacing: 10.w,
                         runSpacing: 10.h,
                         children: List.generate(
-                            room?.facilities?.length ?? 0 ,
+                            room?.facilities?.length ?? 0,
                             // room?.facilities?.length ?? 0,
                             (index) =>
                                 // Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
@@ -80,11 +77,8 @@ class CustomContainerBooking extends StatelessWidget {
                                     width: getWidthSize(context) * 0.3,
                                     child: CustomRoomsWidget(
                                       facility: room!.facilities![0],
-                                    ))
-                        ),
-                      )
-
-                      )
+                                    ))),
+                      ))
                 ],
 
                 // Divider(color: AppColors.lightBlue1,),

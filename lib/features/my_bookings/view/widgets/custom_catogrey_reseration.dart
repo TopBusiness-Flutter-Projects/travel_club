@@ -1,4 +1,5 @@
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
 
 import '../../../home/cubit/home_cubit.dart';
 import '../../../home/cubit/home_state.dart';
@@ -23,13 +24,13 @@ final  Module? module;
             if(module?.id==1){
                   cubit.getMyBookingReservation();
             }
+             context.read<PaymentCubit>().currentModuleId = module!.id!;
           },
           child: CustomContainerWithShadow(
             color: cubit.selectedIndex ==module!.id
                 ? AppColors.primary // Selected color
                 : AppColors.white, // Default color
             isShadow: false,
-
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: AutoSizeText(

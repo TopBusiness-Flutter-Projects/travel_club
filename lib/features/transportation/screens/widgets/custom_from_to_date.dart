@@ -2,12 +2,20 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 
-import '../../../residence/cubit/residence_cubit.dart';
 
 class CustomFromToDate extends StatelessWidget {
   const CustomFromToDate({
     super.key,
+    this.isGoOnly,
+    this.isShowOnly = false, this.toDate, this.fromDate, this.singleDate,
   });
+  final bool? isGoOnly; 
+  /////  when isShowOnly = true ////////       
+  final bool isShowOnly;
+  final String? toDate;
+  final String? fromDate;
+  final String? singleDate;
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +27,17 @@ class CustomFromToDate extends StatelessWidget {
             color: AppColors.lightWhite2,
             borderRadius: BorderRadius.circular(30.r),
           ),
-          child: cubit.goOnly
+          child: isGoOnly ?? cubit.goOnly
               ? Padding(
                   padding: EdgeInsets.all(18.h),
                   child: DatePickerField(
-                    selectedDate: cubit.singleDate,
+                    selectedDate: singleDate ?? cubit.singleDate,
                     isSingle: true,
                     onTap: () {
-                      context.read<ResidenceCubit>().sum = 0;
-                      context.read<ResidenceCubit>().selectedRooms = [];
-                      context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
-                      cubit.onSelectedDateSingle(context: context);
+                      if (isShowOnly) {
+                      } else {
+                        cubit.onSelectedDateSingle(context: context);
+                      }
                     },
                   ),
                 )
@@ -38,12 +46,13 @@ class CustomFromToDate extends StatelessWidget {
                   children: [
                     Expanded(
                       child: DatePickerField(
-                        selectedDate: cubit.fromDate,
+                        selectedDate: fromDate ?? cubit.fromDate,
                         onTap: () {
-                          context.read<ResidenceCubit>().sum = 0;
-                          context.read<ResidenceCubit>().selectedRooms = [];
-                          context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
-                          cubit.onSelectedDate(isStartDate: true, context: context);
+                          if (isShowOnly) {
+                          } else {
+                            cubit.onSelectedDate(
+                                isStartDate: true, context: context);
+                          }
                         },
                       ),
                     ),
@@ -58,13 +67,13 @@ class CustomFromToDate extends StatelessWidget {
                     ),
                     Expanded(
                       child: DatePickerField(
-                        selectedDate: cubit.toDate!,
+                        selectedDate: toDate ?? cubit.toDate,
                         onTap: () {
-                          context.read<ResidenceCubit>().sum = 0;
-                          context.read<ResidenceCubit>().selectedRooms = [];
-                          context.read<ResidenceCubit>().lodgesRoomsModel.data = null;
-                          cubit.onSelectedDate(
-                              isStartDate: false, context: context);
+                          if (isShowOnly) {
+                          } else {
+                            cubit.onSelectedDate(
+                                isStartDate: false, context: context);
+                          }
                         },
                       ),
                     ),

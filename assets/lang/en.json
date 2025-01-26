@@ -227,11 +227,14 @@
 "after_discount" : "Price after discount",
 "reservation_will_canceled" : "Reservation will be canceled in case of incomplete payment process in 4 hours",
 "complete" : "Complete",
+"going_and_return_date": "Going and return date",
 "nights" : "Nights",
 "pending" : "Not paid",
 "show_rooms" : "Show Rooms",
 "vat" : "VAT",
 "enter_code_to_get_points" : "Do you have a promo code? You can now enter it to earn your welcome points",
+"please_select_room" : "Please select the number of suitable rooms",
+
 "" : "",
     "lasss": ""
 }
