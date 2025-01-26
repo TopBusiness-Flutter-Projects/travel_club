@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:travel_club/features/auth/cubit/cubit.dart';
 import 'package:travel_club/features/auth/cubit/state.dart';
 import 'package:travel_club/features/auth/view/widgets/custom_forward.dart';
@@ -55,7 +56,7 @@ class ApplyScreen extends StatelessWidget {
               CustomTextField(
                 controller: codeController,
                 keyboardType: TextInputType.number,
-                title: AppTranslations.enterCode,
+               //title: AppTranslations.enterCode,
                 hintText: "",
               ),
               SizedBox(
@@ -64,84 +65,133 @@ class ApplyScreen extends StatelessWidget {
               CustomForward(
                 onTap: () {
                   if (codeController.text.isEmpty) {
-                    showDialog(
-                        context: context,
-                        barrierColor: AppColors.primary.withOpacity(0.1),
-                        builder: (_) {
-                          return BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Dialog(
-                              elevation: 0,
-                              backgroundColor: AppColors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16.0),
-                              ),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.85,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      margin: const EdgeInsets.only(
-                                          bottom: 15,
-                                          top: 35,
-                                          left: 15,
-                                          right: 15),
-                                      child: Text(
-                                        AppTranslations.areYouSure,
-                                        textAlign: TextAlign.center,
-                                        style: getMediumStyle(),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: getHeightSize(context) * 0.03,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 18.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: CustomButton(
-                                              onTap: () {
-                                                Navigator.pop(context, false);
-                                              },
-                                              title: AppTranslations
-                                                  .backToEnterCode,
-                                            ),
-                                          ),
-                                          10.w.horizontalSpace,
-                                          Expanded(
-                                            child: CustomButton(
-                                              isBordered: true,
-                                          
-                                              onTap: () {
-                                                Navigator
-                                                    .pushNamedAndRemoveUntil(
-                                                        context,
-                                                        Routes.mainRoute,
-                                                        (route) => false);
-                                              },
-                                              title: AppTranslations
-                                                  .finishWithoutCode,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: getHeightSize(context) * 0.01,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        });
-                  } else {
-                    cubit.acceptReferral(context, code: codeController.text);
+                    // showDialog(
+                    //     context: context,
+                    //     barrierColor: AppColors.primary.withOpacity(0.1),
+                    //     builder: (_) {
+                    //       return BackdropFilter(
+                    //         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    //         child: Dialog(
+                    //           elevation: 0,
+                    //           backgroundColor: AppColors.white,
+                    //           shape: RoundedRectangleBorder(
+                    //             borderRadius: BorderRadius.circular(16.0),
+                    //           ),
+                    //           child: SizedBox(
+                    //             width: MediaQuery.of(context).size.width * 0.85,
+                    //             child: Column(
+                    //               mainAxisSize: MainAxisSize.min,
+                    //               children: [
+                    //                 Container(
+                    //                   margin: const EdgeInsets.only(
+                    //                       bottom: 15,
+                    //                       top: 35,
+                    //                       left: 15,
+                    //                       right: 15),
+                    //                   child: Text(
+                    //                     AppTranslations.areYouSure,
+                    //                     textAlign: TextAlign.center,
+                    //                     style: getMediumStyle(),
+                    //                   ),
+                    //                 ),
+                    //                 SizedBox(
+                    //                   height: getHeightSize(context) * 0.03,
+                    //                 ),
+                    //                 Padding(
+                    //                   padding: const EdgeInsets.symmetric(
+                    //                       horizontal: 18.0),
+                    //                   child: Row(
+                    //                     mainAxisAlignment:
+                    //                         MainAxisAlignment.spaceBetween,
+                    //                     children: [
+                    //                       Expanded(
+                    //                         child: CustomButton(
+                    //                           onTap: () {
+                    //                             Navigator.pop(context, false);
+                    //                           },
+                    //                           title: AppTranslations
+                    //                               .backToEnterCode,
+                    //                         ),
+                    //                       ),
+                    //                       10.w.horizontalSpace,
+                    //                       Expanded(
+                    //                         child: CustomButton(
+                    //                           isBordered: true,
+                    //
+                    //                           onTap: () {
+                    //                             Navigator
+                    //                                 .pushNamedAndRemoveUntil(
+                    //                                     context,
+                    //                                     Routes.mainRoute,
+                    //                                     (route) => false);
+                    //                           },
+                    //                           title: AppTranslations
+                    //                               .finishWithoutCode,
+                    //                         ),
+                    //                       ),
+                    //                     ],
+                    //                   ),
+                    //                 ),
+                    //                 SizedBox(
+                    //                   height: getHeightSize(context) * 0.01,
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       );
+                    //     });
+                    AwesomeDialog(
+                      context: context,
+                      customHeader: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          ImageAssets.logoImage,
+                        ),
+                      ),
+                      animType: AnimType.topSlide,
+                      showCloseIcon: true,
+                      padding: EdgeInsets.all(10.w),
+                      title: AppTranslations.enterCodeToGetPoints,
+                      titleTextStyle: getRegularStyle(fontSize: 16.sp),
+
+                      // btnOkText: AppTranslations.login,
+                      // btnOkOnPress: () {
+                      //   Navigator.pushNamedAndRemoveUntil(
+                      //       context, Routes.loginRoute, (route) => false);
+                      // },
+                      btnCancelOnPress: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                                   context, Routes.mainRoute, (route) => false);
+                      },
+                      btnCancelText: AppTranslations.skip,
+                    ).show();
+                  }
+                  else {
+                    AwesomeDialog(
+                      context: context,
+                      customHeader: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          ImageAssets.logoImage,
+                        ),
+                      ),
+                      animType: AnimType.topSlide,
+                      showCloseIcon: true,
+                      padding: EdgeInsets.all(10.w),
+                      title: AppTranslations.enterCodeToGetPoints,
+                      titleTextStyle: getRegularStyle(fontSize: 16.sp),
+                      btnOkText: AppTranslations.next,
+                      btnOkOnPress: () {
+                        cubit.acceptReferral(context, code: codeController.text);
+                      },
+                      btnCancelOnPress: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, Routes.mainRoute, (route) => false);
+                      },
+                      btnCancelText: AppTranslations.skip,
+                    ).show();
+
                   }
                 },
               )
