@@ -184,20 +184,15 @@ import 'package:app_links/app_links.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
-
 import '../../../core/preferences/preferences.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
-
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
-
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late final AppLinks _appLinks;
-
   Future<void> navigateToHome() async {
     if (prefs.getBool('onBoarding') != null) {
       if (AppConst.isLogged) {
@@ -216,17 +211,14 @@ class _SplashScreenState extends State<SplashScreen>
       );
     }
   }
-
   Future<void> _initializeAppLinks() async {
     _appLinks = AppLinks();
-
     final initialLink = await _appLinks.getInitialLink();
     if (initialLink != null) {
       _handleDeepLink(initialLink);
     } else {
       navigateToHome();
     }
-
     _appLinks.uriLinkStream.listen((Uri? uri) {
       if (uri != null) {
         _handleDeepLink(uri);
@@ -255,12 +247,10 @@ class _SplashScreenState extends State<SplashScreen>
       Navigator.pushReplacementNamed(context, Routes.mainRoute);
     }
   }
-
   @override
   void dispose() {
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return PulseRotateSplashScreen(
@@ -271,10 +261,8 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 }
-
 class PulseRotateSplashScreen extends StatefulWidget {
   final VoidCallback onAnimationComplete;
-
   const PulseRotateSplashScreen({
     Key? key,
     required this.onAnimationComplete,

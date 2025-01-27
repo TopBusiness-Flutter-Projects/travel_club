@@ -73,9 +73,25 @@ class _ResidenceRessrvationDetailsState
                     )
                   else ...[
                     //text
-                    Text(
-                      AppTranslations.goingAndReturnDate,
-                      style: getMediumStyle(fontSize: 14.sp),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(end: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: AutoSizeText(
+                              AppTranslations.goingAndReturnDate,
+                              maxLines: 1,
+                              style: getMediumStyle(fontSize: 14.sp),
+                            ),
+                          ),
+                          AutoSizeText(
+                            "${AppTranslations.numberOfMembers} : ${cubit.getResidenceReservationDetailsModel.data!.guest}",
+                            maxLines: 1,
+                            style: getMediumStyle(fontSize: 14.sp),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 20.h,
@@ -230,8 +246,9 @@ class _ResidenceRessrvationDetailsState
                             .toString(),
                         vat: cubit.getResidenceReservationDetailsModel.data!.vat
                             .toString(),
-                        // terms: cubit.getResidenceReservationDetailsModel.data?.lodge
-                        // ?.rule,
+                        terms: widget
+                            .arguments.residenceReservationModel.lodge?.rules
+                            .toString(),
                         reservationId: cubit
                                 .getResidenceReservationDetailsModel.data?.id ??
                             0,
