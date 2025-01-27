@@ -61,23 +61,17 @@ class CustomContainerBooking extends StatelessWidget {
                   color: AppColors.lightBlue1,
                 ),
                 //custom rooms widget
-
                 if (room?.facilities!.isNotEmpty ?? false) ...[
                   Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Wrap(
-                        spacing: 10.w,
+                        spacing: 15.w,
                         runSpacing: 10.h,
                         children: List.generate(
                             room?.facilities?.length ?? 0,
-                            // room?.facilities?.length ?? 0,
-                            (index) =>
-                                // Text("dddd "+index.toString(),style: getRegularStyle(fontSize: 14.sp),),
-                                SizedBox(
-                                    width: getWidthSize(context) * 0.3,
-                                    child: CustomRoomsWidget(
-                                      facility: room!.facilities![0],
-                                    ))),
+                            (index) => CustomFacilityWidget(
+                                  facility: room!.facilities![index],
+                                )),
                       ))
                 ],
 

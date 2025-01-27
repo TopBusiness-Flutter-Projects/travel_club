@@ -92,7 +92,7 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                                 .read<ResidenceCubit>()
                                 .lodgesRoomsModel
                                 .data = null;
-                            debugPrint("send");
+
                             cubit.getRoomsLodges(
                                 context: context, lodgeId: widget.lodgeId);
                           },
@@ -201,13 +201,13 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(
-                            cubit.sum.toString(),
+                          AutoSizeText(
+                            formatNumber(double.parse(cubit.sum.toString())),
                             style: getSemiBoldStyle(fontSize: 16.sp),
                           ),
                           CustomButton(
                             title: AppTranslations.bookNow,
-                            width: 179.w,
+                            width: getWidthSize(context) * 0.35,
                             onTap: () {
                               cubit.isRoomsValid() == true
                                   ? cubit.getCheckDuplicateRecommendedRooms(
