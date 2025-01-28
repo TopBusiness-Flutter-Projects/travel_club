@@ -58,7 +58,7 @@ class _OrderBottomSheetState extends State<OrderBottomSheet> {
               cubit.getLodges(context: context,placeId:widget.id!);
               Navigator.pop(context);
             },),
-        //    Center(child: ElevatedButton(onPressed: (){}, child: Text(AppTranslations.results,style: getSemiBoldStyle(color: AppColors.white,fontSize: 12.sp),),style:ElevatedButton.styleFrom(backgroundColor: AppColors.primary,) ,)),
+        //    Center(child: ElevatedButt  on(onPressed: (){}, child: Text(AppTranslations.results,style: getSemiBoldStyle(color: AppColors.white,fontSize: 12.sp),),style:ElevatedButton.styleFrom(backgroundColor: AppColors.primary,) ,)),
             SizedBox(height: 5.h,),
 
           ],

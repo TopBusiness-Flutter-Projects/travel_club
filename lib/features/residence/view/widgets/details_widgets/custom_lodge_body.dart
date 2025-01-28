@@ -154,16 +154,16 @@ class LodgeDetailsBody extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (BuildContext context, int index) {
                               return Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 10.0.w),
+                                padding: EdgeInsets.symmetric(horizontal: 10.0.w),
                                 child: Column(
                                   children: [
                                     CustomNetworkImage(
                                         image: cubit.lodgesDetailsModel.data!
                                                 .facilities![index].image ??
                                             "",
-                                        height: 25.h,
-                                        width: 25.h),
+                                        height: 50.h,
+                                        width: 40.h
+                                    ),
                                     SizedBox(height: 10.h),
                                     Text(
                                       cubit.lodgesDetailsModel.data!
@@ -178,6 +178,7 @@ class LodgeDetailsBody extends StatelessWidget {
                           ),
                         ),
                       ],
+                      SizedBox(height: 12.h),
                       if (cubit.lodgesDetailsModel.data!.latitude != null &&
                           cubit.lodgesDetailsModel.data!.longitude != null)
                         PositionMap(

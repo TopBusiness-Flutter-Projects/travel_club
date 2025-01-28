@@ -24,7 +24,7 @@ class _TransportationMapState extends State<TransportationMap> {
     LocationCubit cubit = context.read<LocationCubit>();
     return BlocBuilder<LocationCubit, LocationState>(
       builder: (context, state) {
-        return cubit.currentLocation == null
+        return cubit.selectedLocation == null
             ? const Center(child: CustomLoadingIndicator())
             : GoogleMap(
                 zoomGesturesEnabled: true,
@@ -32,8 +32,8 @@ class _TransportationMapState extends State<TransportationMap> {
                 mapType: MapType.normal,
                 initialCameraPosition: CameraPosition(
                   target: LatLng(
-                    cubit.currentLocation?.latitude ?? 0.0,
-                    cubit.currentLocation?.longitude ?? 0.0,
+                    cubit.selectedLocation?.latitude ?? 0.0,
+                    cubit.selectedLocation?.longitude ?? 0.0,
                   ),
                   zoom: 12,
                 ),
@@ -41,6 +41,7 @@ class _TransportationMapState extends State<TransportationMap> {
                   cubit.mapControllerTransportation = controller;
                 },
                 markers: cubit.transportationMarkers,
+          onTap:(LatLng latLng) => cubit.updateTransportationCameraPosition(latLng),
               );
       },
     );

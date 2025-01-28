@@ -171,8 +171,15 @@ class ResidenceCubit extends Cubit<ResidenceState> {
 
   // remove filter
   void removeFilter() {
-    for (int i = 0; i <= starsFilters.length; i++) {
+
+    for (int i = 0; i < starsFilters.length; i++) {
+
       starsFilters[i].isChecked = false;
+    }
+    if(facilitiesModel.data!=null){
+      for (int i = 0; i < facilitiesModel.data!.length; i++) {
+        facilitiesModel.data![i].isChecked = false;
+      }
     }
     emit(RemoveFilterState());
   }
@@ -258,6 +265,22 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     StarsFilter(text: AppTranslations.nearest, isChecked: false),
     StarsFilter(text: AppTranslations.lowestPrice, isChecked: false),
   ];
+  removeAllFilters() {
+    // for (int i = 0; i < ordersFilters.length; i++) {
+    //
+    // }
+    selectedFilter = null;
+    for (int i = 0; i < starsFilters.length; i++) {
+
+      starsFilters[i].isChecked = false;
+    }
+    if(facilitiesModel.data!=null){
+      for (int i = 0; i < facilitiesModel.data!.length; i++) {
+        facilitiesModel.data![i].isChecked = false;
+      }
+    }
+    emit(RemoveAllFilters());
+  }
   String? getFilterValue() {
     String? filterValue;
 
@@ -290,6 +313,8 @@ class ResidenceCubit extends Cubit<ResidenceState> {
   GetLodgesModel lodgesModel = GetLodgesModel();
   getLodges({required int placeId, required BuildContext context}) async {
     emit(LoadgesLoading());
+    print("filter");
+    print(getFilterValue());
     double? lat, long;
     if (selectedFilter?.text == "nearestDistance") {
       if (context.read<LocationCubit>().isLocationNull(context)) {

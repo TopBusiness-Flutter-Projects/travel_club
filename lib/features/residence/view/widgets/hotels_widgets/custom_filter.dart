@@ -38,7 +38,6 @@ class CustomFilterBar extends StatelessWidget {
         return FilterBottomSheet(id: id!,);
       },
     );
-
             },
             child: BuildFilterItem(icon: AppIcons.filter, label: AppTranslations.filter),
           ),

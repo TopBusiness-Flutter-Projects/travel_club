@@ -56,13 +56,12 @@ class _ReservationsBodyState extends State<ReservationsBody> {
                height: 54.h, // Fixed height for the ListView
                child: ListView.separated(
                  itemCount:
-                 cubit.homeModel.data!.modules!.length,
+                 cubit.homeModel.data?.modules?.length??0,
                  scrollDirection: Axis.horizontal,
                  itemBuilder: (BuildContext context, int index) {
                    return CustomReservationSection(
-
                     // index: index,                   
-                     module: cubit.homeModel.data!.modules![index],                   
+                     module: cubit.homeModel.data?.modules?[index],
                    );
                  },
                  separatorBuilder: (BuildContext context, int index) {

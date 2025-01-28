@@ -19,8 +19,9 @@ final int id ;
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
   @override
   void initState() {
-    // TODO: implement initState
-    context.read<ResidenceCubit>().getFacilities();
+    if ( context.read<ResidenceCubit>().facilitiesModel.data==null){
+      context.read<ResidenceCubit>().getFacilities();
+    }
     super.initState();
   }
 
@@ -80,7 +81,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             itemCount: cubit.facilitiesModel.data?.length,
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, // Number of columns in the grid
               mainAxisSpacing: 5, // Vertical spacing
               crossAxisSpacing: 5, // Horizontal spacing
@@ -104,9 +105,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             SizedBox(width: 4.w,),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: InkWell(
+              child: GestureDetector(
                 onTap: (){
-                // cubit. removeFilter();
+                 cubit. removeFilter();
                 },
                   child: Text(AppTranslations.removeFilter,style: getSemiBoldStyle(color: AppColors.red,fontSize: 14.sp),)),
             )],),
