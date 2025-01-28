@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/location/cubit/location_cubit.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
+import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
+import 'package:travel_club/features/transportation/data/models/get_companyStations_model.dart';
 import '../data/repo/transportation_repo_impl.dart';
 import 'transportation_state.dart';
 import 'package:flutter_holo_date_picker/date_picker.dart';
@@ -19,16 +22,39 @@ class TransportationCubit extends Cubit<TransportationState> {
 
   ///// from and to cities
   bool isFavoriteTrue = false;
-  List<String> cities = ['القاهرة', 'اسيوط'];
-  String? bookingFromvalue;
-  String? bookingTovalue;
-  void changeFromValue(String value) {
-    bookingFromvalue = value;
-    emit(TransportationInitial());
-  }
 
-  void changeToValue(String value) {
-    bookingTovalue = value;
+  StationModel? selectedFromStation;
+  StationModel? selectedToStation;
+
+  void changeStationValue(StationModel value, bool isFrom) {
+    print("Selected Station ID: ${value.id}");
+    print("Current Selected From Station ID: ${selectedFromStation?.id}");
+    print("Current Selected To Station ID: ${selectedToStation?.id}");
+    if ((isFrom &&
+            selectedToStation != null &&
+            value.id == selectedToStation?.id) ||
+        (!isFrom &&
+            selectedFromStation != null &&
+            value.id == selectedFromStation?.id)) {
+      print("You cannot select the same station.");
+      errorGetBar(AppTranslations.youCanNotSelectSameStation);
+
+      // Reset the corresponding station
+      if (isFrom) {
+        selectedFromStation = null;
+      } else {
+        selectedToStation = null;
+      }
+    } else {
+      // Set the station based on isFrom
+      if (isFrom) {
+        selectedFromStation = value;
+      } else {
+        selectedToStation = value;
+      }
+    }
+
+    // Emit the updated state
     emit(TransportationInitial());
   }
 
@@ -85,11 +111,17 @@ class TransportationCubit extends Cubit<TransportationState> {
   }
 
   void onSelectedDateSingle({required BuildContext context}) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
+    var picked = await DatePicker.showSimpleDatePicker(
+      context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(9999),
+      dateFormat: "dd/MMMM/yyyy",
+      backgroundColor: AppColors.primary,
+      textColor: AppColors.white,
+      itemTextStyle: getMediumStyle(color: AppColors.white),
+      locale: DateTimePickerLocale.en_us,
+      looping: false,
     );
 
     if (picked != null) {
@@ -144,5 +176,50 @@ class TransportationCubit extends Cubit<TransportationState> {
     });
 
     return output;
+  }
+
+  //get Companies
+  GetCompaniesModel getCompaniesModel = GetCompaniesModel();
+  getCompanies(BuildContext context) async {
+    getCompaniesModel = GetCompaniesModel();
+    emit(GetCompaniesModelLoadingState());
+    final res = await api.getCompanies(
+      lat: (context.read<LocationCubit>().currentLocation?.latitude ?? 0.0)
+          .toString(),
+      long: (context.read<LocationCubit>().currentLocation?.longitude ?? 0.0)
+          .toString(),
+    );
+    res.fold((l) {
+      emit(GetCompaniesModelFailureState());
+    }, (r) {
+      getCompaniesModel = r;
+      emit(GetCompaniesModelSuccessState());
+    });
+  }
+
+  //get Company Stations
+  GetCompanyStationModel getCompanyStationsiesModel = GetCompanyStationModel();
+  getCompanyStations(BuildContext context, {required int companyId}) async {
+    getCompanyStationsiesModel = GetCompanyStationModel();
+    selectedFromStation = null;
+    selectedToStation = null;
+    emit(GetCompaniesModelLoadingState());
+    final res = await api.getCompanyStations(
+      lat: (context.read<LocationCubit>().currentLocation?.latitude ?? 0.0)
+          .toString(),
+      long: (context.read<LocationCubit>().currentLocation?.longitude ?? 0.0)
+          .toString(),
+      companyId: companyId,
+    );
+    res.fold((l) {
+      emit(GetCompaniesModelFailureState());
+    }, (r) {
+      if (r.data!.isNotEmpty) {
+        selectedFromStation = r.data!.first;
+        // selectedToStation = r.data!.last;
+      }
+      getCompanyStationsiesModel = r;
+      emit(GetCompaniesModelSuccessState());
+    });
   }
 }

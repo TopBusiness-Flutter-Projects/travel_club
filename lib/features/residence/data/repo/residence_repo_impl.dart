@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
@@ -40,14 +39,12 @@ class ResidenceRepoImpl {
 
 //get Lodges
   Future<Either<Failure, GetLodgesModel>> getLodges(
-      {
-        required int placeId,
+      {required int placeId,
       double? lat,
       double? long,
       String? filter,
       required List<int> stars,
-      required List<int> facilities
-      }) async {
+      required List<int> facilities}) async {
     try {
       var response = await dio.get(
         EndPoints.getLodgesUrl,
@@ -69,8 +66,7 @@ class ResidenceRepoImpl {
 
   //get details lodges
   Future<Either<Failure, GetLodgeDetailModel>> getDetailsLodges(
-      {required int lodgeId})
-  async {
+      {required int lodgeId}) async {
     try {
       var response = await dio.get(
         EndPoints.getLodgesDetailsUrl,
@@ -108,22 +104,19 @@ class ResidenceRepoImpl {
   //get check of recommeneded  rooms
 
 //get LodgesRooms
-  Future<Either<Failure, GetLodgesRooms>> checkDuplicateRecommendedRooms(
-      {
-
-        required String fromDay,
-        required String toDay,
-        required List<int> roomsId,
-      }) async {
+  Future<Either<Failure, GetLodgesRooms>> checkDuplicateRecommendedRooms({
+    required String fromDay,
+    required String toDay,
+    required List<int> roomsId,
+  }) async {
     try {
       var response = await dio.get(
         EndPoints.getCheckRoomsIdUrl,
         queryParameters: {
           "from": fromDay,
           "to": toDay,
-         // "room_ids":roomsId ,
-          for (int i = 0; i < roomsId.length; i++)
-            "room_ids[$i]": roomsId[i],
+          // "room_ids":roomsId ,
+          for (int i = 0; i < roomsId.length; i++) "room_ids[$i]": roomsId[i],
         },
       );
       return Right(GetLodgesRooms.fromJson(response));
@@ -138,21 +131,20 @@ class ResidenceRepoImpl {
     required String toDay,
     required int guest,
     required List<int> rooms,
-
   }) async {
     try {
       var response = await dio.post(
-        EndPoints.addRoomReservation,
+        EndPoints.addRoomReservationurl,
         body: {
-          'from':fromDay,// fromDay,
-          'to':toDay, //toDay,
-          "guest":guest,//guest,
-          "room_ids":rooms ,
+          'from': fromDay, // fromDay,
+          'to': toDay, //toDay,
+          "guest": guest, //guest,
+          "room_ids": rooms,
           // for (int i = 0; i < rooms.length; i++)
           //   "room_ids[$i]": rooms[i],
         },
       );
-      print( "dddddddddddddddd ${response.toString()}");
+      print("dddddddddddddddd ${response.toString()}");
       return Right(AddRoomReservationModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());

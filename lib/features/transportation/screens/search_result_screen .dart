@@ -1,15 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 
-import 'widgets/custom_booked_company_container.dart';
-import 'widgets/custom_from_to_date.dart';
 import 'widgets/custom_from_to_details_yellow_container.dart';
-import 'widgets/custom_from_to_section.dart';
-import 'widgets/custom_go_back_container.dart';
 import 'widgets/custom_search_result_container.dart';
 
 class TransportationSearchResultScreen extends StatefulWidget {
@@ -31,7 +26,12 @@ class _TransportationSearchResultScreenState
           body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Padding(
               padding: EdgeInsets.all(getHorizontalPadding(context)),
-              child: CustomFromToDetails(cubit: cubit),
+              child: CustomFromToDetails(
+                fromDate: cubit.goOnly ? cubit.singleDate : cubit.fromDate,
+                from: cubit.selectedFromStation!.name??'',
+                to: cubit.selectedToStation!.name??'',
+                toDate: cubit.goOnly ? null : cubit.toDate,
+              ),
             ),
             Expanded(
               child: ListView.separated(
@@ -41,7 +41,9 @@ class _TransportationSearchResultScreenState
                         Navigator.pushNamed(
                             context, Routes.tripDetailsfirstRoute);
                       },
-                      child: CustomSearchResultContainer( isOneWay: index % 2 == 0,)),
+                      child: CustomSearchResultContainer(
+                        isOneWay: index % 2 == 0,
+                      )),
                   separatorBuilder: (context, index) => SizedBox(height: 20.h),
                   itemCount: 5),
             )

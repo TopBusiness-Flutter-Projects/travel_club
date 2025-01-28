@@ -30,22 +30,24 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding:
                               EdgeInsets.all(getHorizontalPadding(context)),
-                          child: CustomFromToDetails(cubit: cubit),
+                          child: CustomFromToDetails(
+                            fromDate: "12/12/2021",
+                            from: "Cairo",
+                            to: "Alexandria",
+                          ),
                         ),
                         const CustomSearchResultContainer(),
                         const CustomSeatCatalogeWidget(),
                       ]),
                 ),
               ),
-              BlocBuilder<TransportationCubit, TransportationState>(
-                  builder: (context, state) {
-                return Padding(
+              Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: getHorizontalPadding(context)),
                   child: CustomButton(
@@ -61,8 +63,8 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
                         Navigator.pushNamed(
                             context, Routes.tripDetailsSecondRoute);
                       }),
-                );
-              }),
+                )
+             
             ],
           ));
     });

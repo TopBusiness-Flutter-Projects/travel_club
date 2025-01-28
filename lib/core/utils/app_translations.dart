@@ -251,4 +251,6 @@ class AppTranslations {
   static String get pending => 'pending'.tr();
   static String get enterCodeToGetPoints => 'enter_code_to_get_points'.tr();
   static String get pleaseSelectRoom => 'please_select_room'.tr();
+  static String get pleaseSelectFromToStations => 'please_select_from_to_stations'.tr();
+  static String get youCanNotSelectSameStation => 'you_can_not_select_same_station'.tr();
 }

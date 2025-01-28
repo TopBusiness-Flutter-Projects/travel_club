@@ -1,12 +1,17 @@
 import 'package:travel_club/core/exports.dart';
 
 class CustomDropdownButtonFormField extends StatelessWidget {
-  final List<String> items;
-  final String? value;
+  final List<DropdownMenuItem<String>> items;
+  final dynamic? value;
   final String? hint;
-  final ValueChanged<String?>? onChanged;
-  final FormFieldValidator<String>? validator;
-
+  final ValueChanged<dynamic>? onChanged;
+  final FormFieldValidator<dynamic>? validator;
+// items.map((String item) {
+//           return DropdownMenuItem<String>(
+//             value: item,
+//             child: Text(item),
+//           );
+//         }).toList()
   const CustomDropdownButtonFormField({
     super.key,
     required this.items,
@@ -20,7 +25,7 @@ class CustomDropdownButtonFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: DropdownButtonFormField<String>(
+      child: DropdownButtonFormField<dynamic>(
         icon: Container(),
         value: value,
         decoration: InputDecoration(
@@ -66,12 +71,7 @@ class CustomDropdownButtonFormField extends StatelessWidget {
           ),
         ),
         alignment: Alignment.bottomCenter,
-        items: items.map((String item) {
-          return DropdownMenuItem<String>(
-            value: item,
-            child: Text(item),
-          );
-        }).toList(),
+        items: items,
         onChanged: onChanged,
         validator: validator,
       ),

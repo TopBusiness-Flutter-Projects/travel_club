@@ -29,7 +29,11 @@ class DetailsBookingTransportaion extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.all(getHorizontalPadding(context)),
-                child: CustomFromToDetails(cubit: cubit),
+                child: CustomFromToDetails(
+                  fromDate: "12/12/2021",
+                  from: "Cairo",
+                  to: "Alexandria",
+                ),
               ),
               const CustomSearchResultContainer(),
               const CustomSelectgedSeatWidget(),
