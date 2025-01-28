@@ -3,7 +3,6 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
 import '../data/repo/home_repo_impl.dart';
 import 'home_state.dart';
-
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.api) : super(HomeInitial());
   HomeRepoImpl api;
@@ -16,8 +15,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(ErrorGetHomeData());
     }, (r) {
       homeModel = r;
-      homeModel.data!.modules = homeModel.data!.modules!.sublist(0, moduleslenth);
-      // getUserData();
+      homeModel.data!.modules = homeModel.data!.modules!.sublist(0, moduleslenth);    
       emit(SucessGetHomeData());
     });
   }

@@ -3,6 +3,7 @@ import 'package:travel_club/features/residence/data/models/lodges_model.dart';
 import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
 import 'package:travel_club/features/search/cubit/search_cubit.dart';
 import 'package:travel_club/features/search/screens/widgets/custom_booking_sectoin.dart';
+import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
 import '../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../food/widgets/big_container_food.dart';
@@ -85,7 +86,7 @@ class _SearchbodyState extends State<Searchbody> {
                     child: ListView.builder(
                         itemCount: 10,
                         itemBuilder: (context, index) => CustomCompanyContainer(
-                              isFavouriteScreen: false,
+                              companyModel: CompanyModel(),
                             ))),
               ],
               if (cubit.categories[cubit.selectedIndex] ==

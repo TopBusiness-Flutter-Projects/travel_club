@@ -1,12 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:dotted_border/dotted_border.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:dotted_line/dotted_line.dart';
-import 'package:travel_club/core/widgets/custom_button.dart';
-import 'package:travel_club/core/widgets/dropdown_button_form_field.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
+import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
 
 import 'widgets/custom_booked_company_container.dart';
 import 'widgets/custom_from_to_date.dart';
@@ -14,7 +11,9 @@ import 'widgets/custom_from_to_section.dart';
 import 'widgets/custom_go_back_container.dart';
 
 class TransportationBookingDetailsScreen extends StatefulWidget {
-  const TransportationBookingDetailsScreen({super.key});
+  const TransportationBookingDetailsScreen(
+      {super.key, required this.companyModel});
+  final CompanyModel companyModel;
   @override
   State<TransportationBookingDetailsScreen> createState() =>
       _TransportationBookingDetailsScreenState();
@@ -25,6 +24,10 @@ class _TransportationBookingDetailsScreenState
   @override
   void initState() {
     context.read<TransportationCubit>().goOnly = true;
+    context
+        .read<TransportationCubit>()
+        .getCompanyStations(context, companyId: widget.companyModel.id ?? 0);
+
     super.initState();
   }
 
@@ -41,7 +44,9 @@ class _TransportationBookingDetailsScreenState
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CustomBookedCompanyContainer(),
+                    CustomBookedCompanyContainer(
+                      companyModel: widget.companyModel,
+                    ),
                     SizedBox(
                       height: getVerticalPadding(context),
                     ),
@@ -49,7 +54,8 @@ class _TransportationBookingDetailsScreenState
                     SizedBox(
                       height: getVerticalPadding(context),
                     ),
-                    CustomFomToSection(),
+                    if (cubit.getCompanyStationsiesModel.data != null)
+                      CustomFomToSection(),
                     Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: getVerticalPadding(context)),
@@ -63,12 +69,29 @@ class _TransportationBookingDetailsScreenState
                     SizedBox(
                       height: getVerticalPadding(context),
                     ),
-                    CustomButton(
-                        title: AppTranslations.transportationResults,
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, Routes.transportationSearchResultRoute);
-                        })
+                    Opacity(
+                      opacity: cubit.selectedFromStation == null ||
+                              cubit.selectedToStation == null
+                          ? 0.4
+                          : 1,
+                      child: CustomButton(
+                          title: AppTranslations.transportationResults,
+                          onTap: () {
+                            if (cubit.selectedFromStation == null ||
+                                cubit.selectedToStation == null) {
+                              errorGetBar(
+                                  AppTranslations.pleaseSelectFromToStations);
+                              return;
+                            } else if (cubit.selectedFromStation ==
+                                cubit.selectedToStation) {
+                              errorGetBar(
+                                  AppTranslations.youCanNotSelectSameStation);
+                              return;
+                            }
+                            Navigator.pushNamed(context,
+                                Routes.transportationSearchResultRoute);
+                          }),
+                    )
                   ]),
             ),
           ));
