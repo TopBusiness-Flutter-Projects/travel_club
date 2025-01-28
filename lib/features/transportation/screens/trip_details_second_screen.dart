@@ -45,7 +45,11 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
                         Padding(
                           padding:
                               EdgeInsets.all(getHorizontalPadding(context)),
-                          child: CustomFromToDetails(cubit: cubit),
+                          child: CustomFromToDetails(
+                            fromDate: "12/12/2021",
+                            from: "Cairo",
+                            to: "Alexandria",
+                          ),
                         ),
                         const CustomSearchResultContainer(),
                         const CustomSelectgedSeatWidget(),
@@ -53,7 +57,6 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: getHorizontalPadding(context)),
-
                           child: CustomPricesWidget(
                             totalPrice: "50",
                             totalPriceAfterVat: "40",
@@ -62,7 +65,6 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
                             reservationId: 14,
                           ),
                         ),
-
                       ]),
                 ),
               ),

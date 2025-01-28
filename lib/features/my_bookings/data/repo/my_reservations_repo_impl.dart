@@ -23,12 +23,13 @@ class MyReservationsRepoImpl {
       return Left(ServerFailure());
     }
   }
+
   //cancel reservation
-  Future<Either<Failure, CancelReservationModel>> cancelReservation({required int moduleId,required int reservationId}) async {
+  Future<Either<Failure, CancelReservationModel>> cancelReservation(
+      {required int moduleId, required int reservationId}) async {
     try {
       var response =
-          await dio.post(EndPoints.cancelReservation,
-              queryParameters: {
+          await dio.post(EndPoints.cancelReservationurl, queryParameters: {
         "module_id": moduleId,
         "reservation_id": reservationId,
       });
