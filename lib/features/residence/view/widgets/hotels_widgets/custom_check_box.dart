@@ -88,19 +88,10 @@ class _CustomOrderedCheckBoxState extends State<CustomOrderedCheckBox> {
                   setState(() {
                     cubit.setSelectedFilter(widget.starsFilter) ;
                   });
-                  // setState(() {
-                  //   if (isSelected){
-                  //     cubit.addRemoveToListStars( int.parse( cubit.facilitiesModel!.data?[].id.toString()??""), false);
-                  //   }else{
-                  //     // was unselected   ADD TO LIST
-                  //     cubit.addRemoveToListStars( int.parse( cubit.stars), true);
-                  //   }
-                  //   isSelected = !isSelected;
-                  //
-                  // });
+
                 },
-                shape: RoundedRectangleBorder(              borderRadius:
-                BorderRadius.circular(5.r),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.r),
                 ),
                 side: BorderSide(color: AppColors.secondPrimary.withOpacity(.5), width: 1.w),
                 checkColor: AppColors.white,
@@ -144,7 +135,6 @@ class _CustomOrderedCheckBoxState extends State<CustomOrderedCheckBox> {
 class CustomFacilitesCheckbox extends StatefulWidget {
   final FacilityModel facilitiesFilter;
   const CustomFacilitesCheckbox({super.key, required this.facilitiesFilter});
-
   @override
   State<CustomFacilitesCheckbox> createState() => _CustomFacilitesCheckboxState();
 }
@@ -169,7 +159,8 @@ class _CustomFacilitesCheckboxState extends State<CustomFacilitesCheckbox> {
                 widget.facilitiesFilter.isChecked = newValue!;
               });
             },
-            shape: RoundedRectangleBorder(              borderRadius:
+            shape: RoundedRectangleBorder(
+              borderRadius:
             BorderRadius.circular(5.r),
             ),
             side: BorderSide(color: AppColors.secondPrimary.withOpacity(.5), width: 1.w),

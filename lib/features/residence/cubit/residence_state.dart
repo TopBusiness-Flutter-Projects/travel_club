@@ -73,3 +73,4 @@ final class ReservationError extends ResidenceState {}
 final class ChangeIndexCheckBoxState extends ResidenceState {}
 final class ChangeIndexFacilitiesState extends ResidenceState {}
 final class RemoveFilterState extends ResidenceState {}
+final class RemoveAllFilters extends ResidenceState {}

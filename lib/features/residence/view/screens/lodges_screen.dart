@@ -27,6 +27,7 @@ class _LodgesScreenState extends State<LodgesScreen> {
   @override
   void initState() {
     context.read<ResidenceCubit>().lodgesModel = GetLodgesModel();
+    context.read<ResidenceCubit>().removeAllFilters();
     context.read<ResidenceCubit>().getLodges(placeId: widget.arguments!.placeId, context: context);
     super.initState();
   }
@@ -59,7 +60,8 @@ class _LodgesScreenState extends State<LodgesScreen> {
                           isMap = !isMap;
                         });
                       },
-                      child: BuildFilterItem(
+                      child:
+                      BuildFilterItem(
                         icon: isMap
                             ? AppIcons.menu
                             : AppIcons.map, // Flutter built-in icon for map
