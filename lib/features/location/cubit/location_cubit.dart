@@ -23,6 +23,7 @@ class LocationCubit extends Cubit<LocationState> {
 
 //location section
   loc.LocationData? currentLocation;
+  loc.LocationData? selectedLocation;
   Future<void> checkAndRequestLocationPermission(BuildContext context) async {
     perm.PermissionStatus permissionStatus =
         await perm.Permission.location.status;
@@ -85,6 +86,7 @@ class LocationCubit extends Cubit<LocationState> {
     location.getLocation().then(
       (location) async {
         currentLocation = location;
+        selectedLocation = location;
         getAddressFromLatLng(
             location.latitude ?? 0.0, location.longitude ?? 0.0);
         setTransportationMarkers();
@@ -111,7 +113,7 @@ class LocationCubit extends Cubit<LocationState> {
           debugPrint("Moved: $distance meters");
         }
         currentLocation = newLocationData;
-        updateCameraposition();
+        // updateCameraPosition();
       }
     });
   }
@@ -119,13 +121,13 @@ class LocationCubit extends Cubit<LocationState> {
   setTransportationMarkers() {
     transportationMarkers = {
       Marker(
-        markerId: const MarkerId('currentLocation'),
+        markerId: const MarkerId('selectedLocation'),
         icon: markerIcon != null
             ? BitmapDescriptor.bytes(markerIcon!)
             : BitmapDescriptor.defaultMarker,
         position: LatLng(
-          currentLocation?.latitude ?? 0.0,
-          currentLocation?.longitude ?? 0.0,
+          selectedLocation?.latitude ?? 0.0,
+          selectedLocation?.longitude ?? 0.0,
         ),
       ),
     };
@@ -149,7 +151,7 @@ class LocationCubit extends Cubit<LocationState> {
   GoogleMapController? mapControllerTransportation;
   GoogleMapController? mapControllerAccommodation;
   GoogleMapController? mapControllerPosition;
-  Future<void> updateCameraposition() async {
+  Future<void> updateCameraPosition() async {
     if (mapControllerTransportation != null && currentLocation != null) {
       mapControllerTransportation!.animateCamera(
         CameraUpdate.newLatLng(
@@ -159,6 +161,19 @@ class LocationCubit extends Cubit<LocationState> {
           ),
         ),
       );
+    }
+  }
+  Future<void> updateTransportationCameraPosition(LatLng latLng) async {
+    if (mapControllerTransportation != null && currentLocation != null) {
+      mapControllerTransportation!.animateCamera(
+        CameraUpdate.newLatLng(
+          LatLng(
+          latLng.latitude,
+            latLng.longitude,
+          ),
+        ),
+      );
+      setTransportationMarkers();
     }
   }
 
@@ -214,7 +229,8 @@ class LocationCubit extends Cubit<LocationState> {
     }
   }
    void openGoogleMapsRoute(
-      double destinationLat, double destinationLng) async {
+      double destinationLat, double destinationLng) async
+   {
 String  url =
         'https://www.google.com/maps/dir/?api=1&destination=$destinationLat,$destinationLng';
     

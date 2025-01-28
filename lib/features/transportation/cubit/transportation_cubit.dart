@@ -22,7 +22,6 @@ class TransportationCubit extends Cubit<TransportationState> {
 
   ///// from and to cities
   bool isFavoriteTrue = false;
-
   StationModel? selectedFromStation;
   StationModel? selectedToStation;
 
@@ -33,8 +32,7 @@ class TransportationCubit extends Cubit<TransportationState> {
     if ((isFrom &&
             selectedToStation != null &&
             value.id == selectedToStation?.id) ||
-        (!isFrom &&
-            selectedFromStation != null &&
+        (!isFrom && selectedFromStation != null &&
             value.id == selectedFromStation?.id)) {
       print("You cannot select the same station.");
       errorGetBar(AppTranslations.youCanNotSelectSameStation);
@@ -186,15 +184,15 @@ class TransportationCubit extends Cubit<TransportationState> {
     final res = await api.getCompanies(
       lat: (context.read<LocationCubit>().currentLocation?.latitude ?? 0.0)
           .toString(),
-      long: (context.read<LocationCubit>().currentLocation?.longitude ?? 0.0)
-          .toString(),
+      long: (context.read<LocationCubit>().currentLocation?.longitude ?? 0.0).toString(),
     );
     res.fold((l) {
       emit(GetCompaniesModelFailureState());
     }, (r) {
       getCompaniesModel = r;
       emit(GetCompaniesModelSuccessState());
-    });
+    }
+    );
   }
 
   //get Company Stations
