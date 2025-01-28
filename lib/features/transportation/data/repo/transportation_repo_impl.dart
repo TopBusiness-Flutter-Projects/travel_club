@@ -1,4 +1,5 @@
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_companyStations_model.dart';
 
@@ -36,6 +37,35 @@ class TransportationRepoImpl {
         },
       );
       return Right(GetCompanyStationModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, GetAvailableBusesModel>> getAvailableBuses(
+      {
+        required isGoOnly,
+        required String returnDate,
+        required String departureDate,
+        required int fromCompanySituationId,
+        required int toCompanySituationId,
+      required int companyId}) async {
+    try {
+      var response = await dio.get(
+        EndPoints.getAvailableBusesUrl,
+        queryParameters: {
+         
+          "company_id": companyId,
+          "departure_date": departureDate,
+        if (!isGoOnly)  "return_date": returnDate, 
+          "from_company_situation_id": fromCompanySituationId,
+          "to_company_situation_id": toCompanySituationId,
+          "is_departure": isGoOnly ? 0 : 1, //0 if isgoOnly 1 if go and return 
+          
+
+        },
+      );
+      return Right(GetAvailableBusesModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

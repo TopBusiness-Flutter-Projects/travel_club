@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
+import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_companyStations_model.dart';
 import '../data/repo/transportation_repo_impl.dart';
@@ -13,10 +15,10 @@ class TransportationCubit extends Cubit<TransportationState> {
   TransportationCubit(this.api) : super(TransportationInitial());
   TransportationRepoImpl api;
 
-  bool goOnly = true; // isOnly send single date else send drom and to
+  bool isGoOnly = true; // isOnly send single date else send drom and to
 
   void changeGoOnly(bool value) {
-    goOnly = value;
+    isGoOnly = value;
     emit(TransportationInitial());
   }
 
@@ -29,28 +31,28 @@ class TransportationCubit extends Cubit<TransportationState> {
     print("Selected Station ID: ${value.id}");
     print("Current Selected From Station ID: ${selectedFromStation?.id}");
     print("Current Selected To Station ID: ${selectedToStation?.id}");
-    if ((isFrom &&
-            selectedToStation != null &&
-            value.id == selectedToStation?.id) ||
-        (!isFrom && selectedFromStation != null &&
-            value.id == selectedFromStation?.id)) {
-      print("You cannot select the same station.");
-      errorGetBar(AppTranslations.youCanNotSelectSameStation);
+    // if ((isFrom &&
+    //         selectedToStation != null &&
+    //         value.id == selectedToStation?.id) ||
+    //     (!isFrom && selectedFromStation != null &&
+    //         value.id == selectedFromStation?.id)) {
+    //   print("You cannot select the same station.");
+    //   errorGetBar(AppTranslations.youCanNotSelectSameStation);
 
-      // Reset the corresponding station
-      if (isFrom) {
-        selectedFromStation = null;
-      } else {
-        selectedToStation = null;
-      }
+    //   // Reset the corresponding station
+    //   if (isFrom) {
+    //     selectedFromStation = null;
+    //   } else {
+    //     selectedToStation = null;
+    //   }
+    // } else {
+    // Set the station based on isFrom
+    if (isFrom) {
+      selectedFromStation = value;
     } else {
-      // Set the station based on isFrom
-      if (isFrom) {
-        selectedFromStation = value;
-      } else {
-        selectedToStation = value;
-      }
+      selectedToStation = value;
     }
+    // }
 
     // Emit the updated state
     emit(TransportationInitial());
@@ -58,27 +60,26 @@ class TransportationCubit extends Cubit<TransportationState> {
 
   ////// from and to dates
   DateTime selectedStartDate = DateTime.now();
-  DateTime selectedEndDate = DateTime.now().add(const Duration(days: 2));
+  DateTime selectedEndDate = DateTime.now();
   DateTime selectedDate = DateTime.now();
   String fromDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
-  String toDate = DateFormat('yyyy-MM-dd', 'en')
-      .format(DateTime.now().add(const Duration(days: 2)));
+  String toDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
   String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
+
   void onSelectedDate(
       {required bool isStartDate, required BuildContext context}) async {
-    // final DateTime? picked = await showDatePicker(
-
-    // );
+    if (isStartDate && selectedEndDate.isBefore(DateTime.now())) {
+      selectedEndDate = DateTime.now().add(Duration(days: 1));
+    }
     var picked = await DatePicker.showSimpleDatePicker(
       context,
       initialDate: isStartDate ? selectedStartDate : selectedEndDate,
       firstDate: isStartDate
           ? DateTime.now()
-          : selectedStartDate.add(Duration(days: 1)),
+          : selectedStartDate, // Allow the end date to be the same as the start date
       lastDate: isStartDate
-          ? selectedEndDate.subtract(Duration(days: 1))
+          ? selectedEndDate // Allow the start date to be the same as the end date
           : selectedStartDate.add(Duration(days: 365)),
-      // : DateTime(9999),
       dateFormat: "dd/MMMM/yyyy",
       backgroundColor: AppColors.primary,
       textColor: AppColors.white,
@@ -89,17 +90,9 @@ class TransportationCubit extends Cubit<TransportationState> {
 
     if (picked != null) {
       if (isStartDate) {
-        // if (picked.isAfter(selectedEndDate)) {
-        //   errorGetBar("تاريخ البداية يجب أن يكون قبل تاريخ النهاية");
-        //   return;
-        // }
         selectedStartDate = picked;
         context.read<ResidenceCubit>().makeModelNull();
       } else {
-        // if (picked.isBefore(selectedStartDate)) {
-        //   errorGetBar("تاريخ النهاية يجب أن يكون بعد تاريخ البداية");
-        //   return;
-        // }
         selectedEndDate = picked;
         context.read<ResidenceCubit>().makeModelNull();
       }
@@ -182,17 +175,17 @@ class TransportationCubit extends Cubit<TransportationState> {
     getCompaniesModel = GetCompaniesModel();
     emit(GetCompaniesModelLoadingState());
     final res = await api.getCompanies(
-      lat: (context.read<LocationCubit>().currentLocation?.latitude ?? 0.0)
+      lat: (context.read<LocationCubit>().selectedLocation?.latitude ?? 0.0)
           .toString(),
-      long: (context.read<LocationCubit>().currentLocation?.longitude ?? 0.0).toString(),
+      long: (context.read<LocationCubit>().selectedLocation?.longitude ?? 0.0)
+          .toString(),
     );
     res.fold((l) {
       emit(GetCompaniesModelFailureState());
     }, (r) {
       getCompaniesModel = r;
       emit(GetCompaniesModelSuccessState());
-    }
-    );
+    });
   }
 
   //get Company Stations
@@ -203,9 +196,9 @@ class TransportationCubit extends Cubit<TransportationState> {
     selectedToStation = null;
     emit(GetCompaniesModelLoadingState());
     final res = await api.getCompanyStations(
-      lat: (context.read<LocationCubit>().currentLocation?.latitude ?? 0.0)
+      lat: (context.read<LocationCubit>().selectedLocation?.latitude ?? 0.0)
           .toString(),
-      long: (context.read<LocationCubit>().currentLocation?.longitude ?? 0.0)
+      long: (context.read<LocationCubit>().selectedLocation?.longitude ?? 0.0)
           .toString(),
       companyId: companyId,
     );
@@ -220,4 +213,52 @@ class TransportationCubit extends Cubit<TransportationState> {
       emit(GetCompaniesModelSuccessState());
     });
   }
+
+  //get Company Stations
+  GetAvailableBusesModel getAvailableBusesModel = GetAvailableBusesModel();
+  getAvailableBuses(BuildContext context, {required int companyId}) async {
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+
+    emit(GetCompaniesModelLoadingState());
+    final res = await api.getAvailableBuses(
+      isGoOnly: isGoOnly,
+      returnDate: toDate,
+      departureDate: isGoOnly ? singleDate : fromDate,
+      fromCompanySituationId: selectedFromStation!.id!,
+      toCompanySituationId: selectedToStation!.id!,
+      companyId: companyId,
+    );
+    res.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(GetCompaniesModelFailureState());
+    }, (r) {
+      Navigator.pop(context);
+      if (r.data!.isNotEmpty) {
+        getAvailableBusesModel = r;
+
+        for (var element in getAvailableBusesModel.data!) {
+          element.selectedGoTime = element.busTimeInDeparture?.first;
+          print("selectedGoTime: ${element.selectedGoTime?.fromTime}");
+          if (!isGoOnly) {
+            element.selectedReturnTime = element.busTimeInReturn?.first;
+            print(
+                "selectedReturnTime: ${element.selectedReturnTime?.fromTime}");
+          }
+        }
+        Navigator.pushNamed(context, Routes.transportationSearchResultRoute);
+      } else {
+        errorGetBar(AppTranslations.noBusesFound);
+      }
+      emit(GetCompaniesModelSuccessState());
+    });
+  }
+
+  int selectedFromStationTimeId = 0;
+  int selectedToStationTimeId = 0;
+  setStationTimeId(int id, bool isFrom) {
+    isFrom ? selectedFromStationTimeId = id : selectedToStationTimeId = id;
+    emit(TransportationInitial());
+  }
 }
+// "24.713599999999975","longitude":"46.66431367187498"

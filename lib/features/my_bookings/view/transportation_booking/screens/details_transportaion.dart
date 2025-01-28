@@ -6,7 +6,7 @@ import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/cubit/transportation_state.dart';
 import '../../../../transportation/screens/trip_details_second_screen.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_details_yellow_container.dart';
-import '../../../../transportation/screens/widgets/custom_search_result_container.dart';
+import '../../../../transportation/screens/widgets/custom_bus_container.dart';
 import '../../../../transportation/screens/widgets/payment_widget.dart';
 import '../../residence_booking/widgets/show_model_bottom_sheet.dart';
 import '../widgets/big_container.dart';
@@ -30,12 +30,15 @@ class DetailsBookingTransportaion extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(getHorizontalPadding(context)),
                 child: CustomFromToDetails(
-                  fromDate: "12/12/2021",
-                  from: "Cairo",
-                  to: "Alexandria",
+                  fromDate: cubit.isGoOnly ? cubit.singleDate : cubit.fromDate,
+                  from: cubit.selectedFromStation!.name ?? '',
+                  to: cubit.selectedToStation!.name ?? '',
+                  toDate: cubit.isGoOnly ? null : cubit.toDate,
                 ),
               ),
-              const CustomSearchResultContainer(),
+              CustomBusContainer(
+                busCompanyModel: cubit.getAvailableBusesModel.data![0],
+              ),
               const CustomSelectgedSeatWidget(),
               Padding(
                 padding: EdgeInsets.symmetric(

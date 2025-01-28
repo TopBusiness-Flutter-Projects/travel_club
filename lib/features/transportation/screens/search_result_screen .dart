@@ -5,7 +5,7 @@ import 'package:travel_club/features/transportation/cubit/transportation_cubit.d
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 
 import 'widgets/custom_from_to_details_yellow_container.dart';
-import 'widgets/custom_search_result_container.dart';
+import 'widgets/custom_bus_container.dart';
 
 class TransportationSearchResultScreen extends StatefulWidget {
   const TransportationSearchResultScreen({super.key});
@@ -27,10 +27,10 @@ class _TransportationSearchResultScreenState
             Padding(
               padding: EdgeInsets.all(getHorizontalPadding(context)),
               child: CustomFromToDetails(
-                fromDate: cubit.goOnly ? cubit.singleDate : cubit.fromDate,
-                from: cubit.selectedFromStation!.name??'',
-                to: cubit.selectedToStation!.name??'',
-                toDate: cubit.goOnly ? null : cubit.toDate,
+                fromDate: cubit.isGoOnly ? cubit.singleDate : cubit.fromDate,
+                from: cubit.selectedFromStation!.name ?? '',
+                to: cubit.selectedToStation!.name ?? '',
+                toDate: cubit.isGoOnly ? null : cubit.toDate,
               ),
             ),
             Expanded(
@@ -39,13 +39,16 @@ class _TransportationSearchResultScreenState
                   itemBuilder: (context, index) => InkWell(
                       onTap: () {
                         Navigator.pushNamed(
-                            context, Routes.tripDetailsfirstRoute);
+                            context, Routes.tripDetailsfirstRoute,
+                            arguments:
+                                cubit.getAvailableBusesModel.data![index]);
                       },
-                      child: CustomSearchResultContainer(
-                        isOneWay: index % 2 == 0,
+                      child: CustomEditableBusContainer(
+                        busCompanyModel:
+                            cubit.getAvailableBusesModel.data![index],
                       )),
                   separatorBuilder: (context, index) => SizedBox(height: 20.h),
-                  itemCount: 5),
+                  itemCount: cubit.getAvailableBusesModel.data!.length),
             )
           ]));
     });

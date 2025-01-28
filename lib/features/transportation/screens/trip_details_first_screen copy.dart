@@ -5,12 +5,15 @@ import 'package:travel_club/core/utils/convert_numbers_method.dart';
 import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
+import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
 
 import 'widgets/custom_from_to_details_yellow_container.dart';
-import 'widgets/custom_search_result_container.dart';
+import 'widgets/custom_bus_container.dart';
 
 class TripDetailsFirstScreen extends StatefulWidget {
-  const TripDetailsFirstScreen({super.key});
+  const TripDetailsFirstScreen({super.key, required this.busCompanyModel});
+  final BusCompanyModel busCompanyModel;
+
   @override
   State<TripDetailsFirstScreen> createState() => _TripDetailsFirstScreenState();
 }
@@ -37,34 +40,38 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
                           padding:
                               EdgeInsets.all(getHorizontalPadding(context)),
                           child: CustomFromToDetails(
-                            fromDate: "12/12/2021",
-                            from: "Cairo",
-                            to: "Alexandria",
+                            fromDate: cubit.isGoOnly
+                                ? cubit.singleDate
+                                : cubit.fromDate,
+                            from: cubit.selectedFromStation!.name ?? '',
+                            to: cubit.selectedToStation!.name ?? '',
+                            toDate: cubit.isGoOnly ? null : cubit.toDate,
                           ),
                         ),
-                        const CustomSearchResultContainer(),
+                        CustomBusContainer(
+                          busCompanyModel: widget.busCompanyModel,
+                        ),
                         const CustomSeatCatalogeWidget(),
                       ]),
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getHorizontalPadding(context)),
-                  child: CustomButton(
-                      title: replaceToArabicNumber(
-                              cubit.selectedSeats.length.toString()) +
-                          " - " +
-                          AppTranslations.next,
-                      onTap: () {
-                        if (cubit.selectedSeats.isEmpty) {
-                          errorGetBar(AppTranslations.selectSeat);
-                          return;
-                        }
-                        Navigator.pushNamed(
-                            context, Routes.tripDetailsSecondRoute);
-                      }),
-                )
-             
+                padding: EdgeInsets.symmetric(
+                    horizontal: getHorizontalPadding(context)),
+                child: CustomButton(
+                    title: replaceToArabicNumber(
+                            cubit.selectedSeats.length.toString()) +
+                        " - " +
+                        AppTranslations.next,
+                    onTap: () {
+                      if (cubit.selectedSeats.isEmpty) {
+                        errorGetBar(AppTranslations.selectSeat);
+                        return;
+                      }
+                      Navigator.pushNamed(
+                          context, Routes.tripDetailsSecondRoute);
+                    }),
+              )
             ],
           ));
     });

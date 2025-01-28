@@ -251,6 +251,13 @@
 
   "complete" : "إستكمال",
   "please_select_room" : "من فضلك اختر عدد غرف مناسب",
+  "select_time" : "اختر وقت الرحلة",
+  "select_going_time" : "اختر وقت الذهاب",
+  "select_return_time" : "اختر وقت العودة",
+ 
+  "no_buses_found" : "لم يتم العثور على أي حافلات",
+  "return" : "عودة",
+  "go" : "ذهاب",
   "" : "",
   "lasss": "",
   "nights": "ليالي",

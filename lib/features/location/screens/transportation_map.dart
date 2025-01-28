@@ -16,7 +16,7 @@ class _TransportationMapState extends State<TransportationMap> {
   @override
   void initState() {
     super.initState();
-    context.read<LocationCubit>().checkAndRequestLocationPermission(context);
+    context.read<LocationCubit>().checkAndRequestLocationPermission(context );
   }
 
   @override

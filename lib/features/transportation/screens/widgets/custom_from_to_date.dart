@@ -2,20 +2,21 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 
-
 class CustomFromToDate extends StatelessWidget {
   const CustomFromToDate({
     super.key,
     this.isGoOnly,
-    this.isShowOnly = false, this.toDate, this.fromDate, this.singleDate,
+    this.isShowOnly = false,
+    this.toDate,
+    this.fromDate,
+    this.singleDate,
   });
-  final bool? isGoOnly; 
-  /////  when isShowOnly = true ////////       
+  final bool? isGoOnly;
+  /////  when isShowOnly = true ////////
   final bool isShowOnly;
   final String? toDate;
   final String? fromDate;
   final String? singleDate;
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class CustomFromToDate extends StatelessWidget {
             color: AppColors.lightWhite2,
             borderRadius: BorderRadius.circular(30.r),
           ),
-          child: isGoOnly ?? cubit.goOnly
+          child: isGoOnly ?? cubit.isGoOnly
               ? Padding(
                   padding: EdgeInsets.all(18.h),
                   child: DatePickerField(

@@ -22,6 +22,7 @@ import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
 import 'package:travel_club/features/residence/view/screens/residence_screen.dart';
 import 'package:travel_club/features/search/screens/search_screen.dart';
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
+import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
 import 'package:travel_club/features/transportation/screens/booking_details_screen.dart';
 import 'package:travel_club/features/transportation/screens/search_result_screen%20.dart';
@@ -459,8 +460,10 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.tripDetailsfirstRoute:
+       
+      BusCompanyModel  busCompanyModel = settings.arguments as BusCompanyModel;
         return PageTransition(
-          child: const TripDetailsFirstScreen(),
+          child:  TripDetailsFirstScreen(busCompanyModel: busCompanyModel,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
