@@ -1,7 +1,7 @@
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
-import 'package:travel_club/features/transportation/data/models/get_companyStations_model.dart';
+import 'package:travel_club/features/transportation/data/models/get_stations_model.dart';
 
 class TransportationRepoImpl {
   final BaseApiConsumer dio;
@@ -49,6 +49,9 @@ class TransportationRepoImpl {
         required String departureDate,
         required int fromCompanySituationId,
         required int toCompanySituationId,
+        required int goCounter,
+        required int returnCounter,
+
       required int companyId}) async {
     try {
       var response = await dio.get(
@@ -60,6 +63,8 @@ class TransportationRepoImpl {
         if (!isGoOnly)  "return_date": returnDate, 
           "from_company_situation_id": fromCompanySituationId,
           "to_company_situation_id": toCompanySituationId,
+          "departure_guests": goCounter,
+         if (!isGoOnly)  "return_guests": returnCounter,
           "is_departure": isGoOnly ? 0 : 1, //0 if isgoOnly 1 if go and return 
           
 

@@ -28,7 +28,7 @@ import 'package:travel_club/features/transportation/screens/booking_details_scre
 import 'package:travel_club/features/transportation/screens/search_result_screen%20.dart';
 import 'package:travel_club/features/transportation/screens/transportation_map_screen.dart';
 import 'package:travel_club/features/transportation/screens/transportation_menu_screen.dart';
-import 'package:travel_club/features/transportation/screens/trip_details_first_screen%20copy.dart';
+import 'package:travel_club/features/transportation/screens/trip_details_first_screen.dart';
 import 'package:travel_club/features/transportation/screens/trip_details_second_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';

@@ -59,10 +59,8 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
                 padding: EdgeInsets.symmetric(
                     horizontal: getHorizontalPadding(context)),
                 child: CustomButton(
-                    title: replaceToArabicNumber(
-                            cubit.selectedSeats.length.toString()) +
-                        " - " +
-                        AppTranslations.next,
+                    title:
+                        "${replaceToArabicNumber(cubit.selectedSeats.length.toString())} - ${AppTranslations.next}",
                     onTap: () {
                       if (cubit.selectedSeats.isEmpty) {
                         errorGetBar(AppTranslations.selectSeat);
@@ -160,20 +158,32 @@ class CustomSeatCatalogeWidget extends StatelessWidget {
                 ),
                 Directionality(
                   textDirection: TextDirection.ltr,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: cubit.seatRowsCount,
-                      itemBuilder: (context, index) => CustomSeatsRow(
-                            columnNumber: index,
-                            seatType: index == cubit.seatRowsCount - 3 ||
-                                    index == 0 // الكرسي اللي قبل قبل الأخير
-                                ? SeatType.two
-                                : index ==
-                                        cubit.seatRowsCount - 1 // الكرسي الأخير
-                                    ? SeatType.five
-                                    : SeatType.four,
-                          )),
+                  child: StaggeredGrid.count(
+                    crossAxisCount: 4,
+                    mainAxisSpacing: 10.h,
+                    children: List.generate(
+                      40,
+                      (index) => CustomSeat(
+                        seatNumber: (index + 1).toString(),
+                        cubit: cubit,
+                      ),
+                    ),
+                  ),
+
+                  //  ListView.builder(
+                  //     shrinkWrap: true,
+                  //     physics: const NeverScrollableScrollPhysics(),
+                  //     itemCount: cubit.seatRowsCount,
+                  //     itemBuilder: (context, index) => CustomSeatsRow(
+                  //           columnNumber: index,
+                  //           seatType: index == cubit.seatRowsCount - 3 ||
+                  //                   index == 0 // الكرسي اللي قبل قبل الأخير
+                  //               ? SeatType.two
+                  //               : index ==
+                  //                       cubit.seatRowsCount - 1 // الكرسي الأخير
+                  //                   ? SeatType.five
+                  //                   : SeatType.four,
+                  //         )),
                 )
               ],
             ),

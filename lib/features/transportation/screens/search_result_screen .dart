@@ -6,6 +6,7 @@ import 'package:travel_club/features/transportation/cubit/transportation_state.d
 
 import 'widgets/custom_from_to_details_yellow_container.dart';
 import 'widgets/custom_bus_container.dart';
+import 'widgets/custom_tickets_widget.dart';
 
 class TransportationSearchResultScreen extends StatefulWidget {
   const TransportationSearchResultScreen({super.key});
@@ -24,8 +25,10 @@ class _TransportationSearchResultScreenState
       return CustomScreen(
           appbarTitle: AppTranslations.searchResults,
           body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            10.verticalSpace,
             Padding(
-              padding: EdgeInsets.all(getHorizontalPadding(context)),
+              padding: EdgeInsets.symmetric(
+                  horizontal: getHorizontalPadding(context)),
               child: CustomFromToDetails(
                 fromDate: cubit.isGoOnly ? cubit.singleDate : cubit.fromDate,
                 from: cubit.selectedFromStation!.name ?? '',
@@ -33,6 +36,22 @@ class _TransportationSearchResultScreenState
                 toDate: cubit.isGoOnly ? null : cubit.toDate,
               ),
             ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: getHorizontalPadding(context)),
+              child: const CustomTicketsWidget(
+                isClickable: false,
+              ),
+            ),
+            if (!cubit.isGoOnly)
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: getHorizontalPadding(context)),
+                child: const CustomTicketsWidget(
+                  isReturn: true,
+                  isClickable: false,
+                ),
+              ),
             Expanded(
               child: ListView.separated(
                   shrinkWrap: true,

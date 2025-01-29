@@ -5,7 +5,7 @@ import 'package:travel_club/features/location/cubit/location_cubit.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
-import 'package:travel_club/features/transportation/data/models/get_companyStations_model.dart';
+import 'package:travel_club/features/transportation/data/models/get_stations_model.dart';
 import '../data/repo/transportation_repo_impl.dart';
 import 'transportation_state.dart';
 import 'package:flutter_holo_date_picker/date_picker.dart';
@@ -20,6 +20,30 @@ class TransportationCubit extends Cubit<TransportationState> {
   void changeGoOnly(bool value) {
     isGoOnly = value;
     emit(TransportationInitial());
+  }
+
+  int goCounter = 1;
+  int returnCounter = 1;
+
+  void changeCounter({required bool isPlus ,required bool isReturn}) {
+    if (isReturn) {
+      if (isPlus) {
+        returnCounter = returnCounter + 1;
+      } else {
+        if (returnCounter > 1) {
+          returnCounter = returnCounter - 1;
+        }
+      }
+    } else {
+      if (isPlus) {
+        goCounter = goCounter + 1;
+      } else {
+        if (goCounter > 1) {
+          goCounter = goCounter - 1;
+        }
+      }
+    }
+    emit(ChangeCounterState());
   }
 
   ///// from and to cities
@@ -62,9 +86,9 @@ class TransportationCubit extends Cubit<TransportationState> {
   DateTime selectedStartDate = DateTime.now();
   DateTime selectedEndDate = DateTime.now();
   DateTime selectedDate = DateTime.now();
-  String fromDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
-  String toDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
-  String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
+  String fromDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
+  String toDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
+  String singleDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
 
   void onSelectedDate(
       {required bool isStartDate, required BuildContext context}) async {
@@ -124,12 +148,12 @@ class TransportationCubit extends Cubit<TransportationState> {
   }
 
   void updateDateStrings() {
-    fromDate = DateFormat('yyyy-MM-dd', 'en')
+    fromDate = DateFormat('dd-MM-yyyy', 'en')
         .format(selectedStartDate); // تاريخ اليوم كقيمة افتراضية
 
-    toDate = DateFormat('yyyy-MM-dd', 'en')
+    toDate = DateFormat('dd-MM-yyyy', 'en')
         .format(selectedEndDate); // تاريخ اليوم كقيمة افتراضية
-    singleDate = DateFormat('yyyy-MM-dd', 'en')
+    singleDate = DateFormat('dd-MM-yyyy', 'en')
         .format(selectedDate); // تاريخ اليوم كقيمة افتراضية
   }
 
@@ -226,6 +250,8 @@ class TransportationCubit extends Cubit<TransportationState> {
       departureDate: isGoOnly ? singleDate : fromDate,
       fromCompanySituationId: selectedFromStation!.id!,
       toCompanySituationId: selectedToStation!.id!,
+      goCounter: goCounter,
+      returnCounter: returnCounter,
       companyId: companyId,
     );
     res.fold((l) {

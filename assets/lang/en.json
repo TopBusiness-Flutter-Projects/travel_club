@@ -104,14 +104,21 @@
     "search_results": "Search Results",
     "seats": "Seat",
     "vehicle_number": "Vehicle Number",
-    "currency": "Egyptian Pound",
+    "currency": "Le",
+   
     "busy": "Busy",
     "available": "Available",
     "your_seat": "Your Seat",
     "trip_details": "Trip Details",
     "next": "Next",
     "number_of_seats": "Number of seats",
-    "number_of_members": "number of members",
+    "number_of_members": "Number of members",
+    "number_of_members_go" : "Number of members going",
+    "number_of_members_return" : "Number of members return",
+    "only_go_ticket": "one way ticket",
+"go_and_return_ticket": "round trip ticket",
+    
+
     "ticket_price": "ticket price",
     "quantity": "quantity",
     "total_price": "total price",

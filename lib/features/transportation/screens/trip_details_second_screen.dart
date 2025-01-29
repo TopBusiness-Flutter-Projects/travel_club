@@ -8,7 +8,7 @@ import 'package:travel_club/features/transportation/cubit/transportation_cubit.d
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 
 import '../../payment/screens/widgets/custom_price_widget.dart';
-import 'trip_details_first_screen copy.dart';
+import 'trip_details_first_screen.dart';
 import 'widgets/custom_from_to_details_yellow_container.dart';
 import 'widgets/custom_bus_container.dart';
 import 'widgets/payment_widget.dart';

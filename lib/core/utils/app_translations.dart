@@ -140,6 +140,8 @@ class AppTranslations {
   static String get rateExperince => 'rate_experince'.tr();
   static String get ticketsPrice => 'tickets_price'.tr();
   static String get numberOfMembers => 'number_of_members'.tr();
+  static String get numberOfMembersGo => 'number_of_members_go'.tr();
+  static String get numberOfMembersReturn => 'number_of_members_return'.tr();
   static String get bookAppointment => 'book_appointment'.tr();
   static String get members => 'members'.tr();
   static String get callPhone => 'call_phone'.tr();
@@ -259,4 +261,6 @@ class AppTranslations {
   static String get noBusesFound => 'no_buses_found'.tr();
   static String get go => 'go'.tr();
   static String get returnWord => 'return'.tr();
+  static String get goAndReturnTicket => 'go_and_return_ticket'.tr();
+  static String get onlyGoTicket => 'only_go_ticket'.tr();
 }
