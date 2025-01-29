@@ -23,7 +23,7 @@ class _TransportationBookingDetailsScreenState
     extends State<TransportationBookingDetailsScreen> {
   @override
   void initState() {
-    context.read<TransportationCubit>().goOnly = true;
+    context.read<TransportationCubit>().isGoOnly = true;
     context
         .read<TransportationCubit>()
         .getCompanyStations(context, companyId: widget.companyModel.id ?? 0);
@@ -60,7 +60,7 @@ class _TransportationBookingDetailsScreenState
                       padding: EdgeInsets.symmetric(
                           vertical: getVerticalPadding(context)),
                       child: Text(
-                          cubit.goOnly
+                          cubit.isGoOnly
                               ? AppTranslations.selectGoing
                               : AppTranslations.selectGoingAndReturn,
                           style: getMediumStyle(fontSize: 14.sp)),
@@ -71,7 +71,9 @@ class _TransportationBookingDetailsScreenState
                     ),
                     Opacity(
                       opacity: cubit.selectedFromStation == null ||
-                              cubit.selectedToStation == null
+                              cubit.selectedToStation == null ||
+                              cubit.selectedFromStation ==
+                                  cubit.selectedToStation
                           ? 0.4
                           : 1,
                       child: CustomButton(
@@ -88,8 +90,8 @@ class _TransportationBookingDetailsScreenState
                                   AppTranslations.youCanNotSelectSameStation);
                               return;
                             }
-                            Navigator.pushNamed(context,
-                                Routes.transportationSearchResultRoute);
+                            cubit.getAvailableBuses(context,
+                                companyId: widget.companyModel.id ?? 0);
                           }),
                     )
                   ]),

@@ -10,7 +10,7 @@ import 'package:travel_club/features/transportation/cubit/transportation_state.d
 import '../../payment/screens/widgets/custom_price_widget.dart';
 import 'trip_details_first_screen copy.dart';
 import 'widgets/custom_from_to_details_yellow_container.dart';
-import 'widgets/custom_search_result_container.dart';
+import 'widgets/custom_bus_container.dart';
 import 'widgets/payment_widget.dart';
 
 class TripDetailsSecondScreen extends StatefulWidget {
@@ -51,7 +51,9 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
                             to: "Alexandria",
                           ),
                         ),
-                        const CustomSearchResultContainer(),
+                         CustomBusContainer(
+                          busCompanyModel: cubit.getAvailableBusesModel.data![0],
+                         ),
                         const CustomSelectgedSeatWidget(),
                         SizedBox(height: getVerticalPadding(context)),
                         Padding(

@@ -253,4 +253,10 @@ class AppTranslations {
   static String get pleaseSelectRoom => 'please_select_room'.tr();
   static String get pleaseSelectFromToStations => 'please_select_from_to_stations'.tr();
   static String get youCanNotSelectSameStation => 'you_can_not_select_same_station'.tr();
+  static String get selectTime => 'select_time'.tr();
+  static String get selectGoingTime => 'select_going_time'.tr();
+  static String get selectReturnTime => 'select_return_time'.tr();
+  static String get noBusesFound => 'no_buses_found'.tr();
+  static String get go => 'go'.tr();
+  static String get returnWord => 'return'.tr();
 }

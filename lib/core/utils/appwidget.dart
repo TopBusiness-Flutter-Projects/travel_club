@@ -2,7 +2,7 @@
 import 'package:travel_club/core/exports.dart';
 
 class AppWidget {
-  static createProgressDialog(BuildContext context, String msg) {
+  static createProgressDialog(BuildContext context, String? msg) {
     showDialog(
         barrierDismissible: false,
         context: context,

@@ -24,7 +24,7 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
     isSend = false;
     context.read<ResidenceCubit>().makeModelNull();
 
-    context.read<TransportationCubit>().goOnly = false;
+    context.read<TransportationCubit>().isGoOnly = false;
     super.initState();
   }
 

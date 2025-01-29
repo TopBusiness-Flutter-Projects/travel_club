@@ -25,7 +25,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
 
   @override
   void initState() {
-    context.read<TransportationCubit>().goOnly = false;
+    context.read<TransportationCubit>().isGoOnly = false;
     super.initState();
   }
 

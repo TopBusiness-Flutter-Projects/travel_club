@@ -23,7 +23,7 @@ class _DetailsBookingEntertainmentState
   @override
   void initState() {
     // TODO: implement initState
-    context.read<TransportationCubit>().goOnly = false;
+    context.read<TransportationCubit>().isGoOnly = false;
     super.initState();
   }
 

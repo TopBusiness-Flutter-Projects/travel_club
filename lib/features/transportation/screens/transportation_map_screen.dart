@@ -2,6 +2,8 @@
 
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/custom_button.dart';
+import 'package:travel_club/features/location/cubit/location_cubit.dart';
+import 'package:travel_club/features/location/cubit/location_state.dart';
 import 'package:travel_club/features/location/screens/transportation_map.dart';
 
 class TransportationMapScreen extends StatefulWidget {
@@ -44,16 +46,30 @@ class _TransportationMapScreenState extends State<TransportationMapScreen> {
                     ]),
               ),
               Spacer(),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: getHorizontalPadding(context) * 2.5),
-                child: CustomButton(
-                    title: AppTranslations.transportationResults,
-                    onTap: () {
-                      Navigator.pushNamed(
-                          context, Routes.transportationMenuRoute);
-                    }),
-              ),
+              BlocBuilder<LocationCubit, LocationState>(
+                  builder: (context, state) {
+                LocationCubit cubit = context.read<LocationCubit>();
+
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getHorizontalPadding(context) * 2.8),
+                  child: Opacity(
+                    opacity: cubit.selectedLocation != null ? 1 : 0.5,
+                    child: CustomButton(
+                        title: AppTranslations.transportationResults,
+                        onTap: () {
+                          print(
+                              "Selected Location lat: ${cubit.selectedLocation?.latitude}");
+                          print(
+                              "Selected Location long: ${cubit.selectedLocation?.longitude}");
+                          if (cubit.selectedLocation != null) {
+                            Navigator.pushNamed(
+                                context, Routes.transportationMenuRoute);
+                          }
+                        }),
+                  ),
+                );
+              }),
             ]),
           ],
         ),

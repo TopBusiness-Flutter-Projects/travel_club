@@ -21,7 +21,7 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
   @override
   void initState() {
     // TODO: implement initState
-    context.read<TransportationCubit>().goOnly = false;
+    context.read<TransportationCubit>().isGoOnly = false;
     super.initState();
   }
 

@@ -236,7 +236,12 @@
 "please_select_room" : "Please select the number of suitable rooms",
 "please_select_from_to_stations" : "Please select from and to stations",
 "you_can_not_select_same_station" : "You can't select the same station",
-
+ "select-time" : "Select time",
+ "select_going_time" : "Select going time",
+ "select_return_time" : "Select return time",
+ "no_buses_found" : "No buses found",
+ "go" : "Go",
+  "return" : "Return",
 "" : "",
     "lasss": ""
 }

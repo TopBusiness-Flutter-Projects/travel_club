@@ -21,7 +21,7 @@ class CustomGoBackContainer extends StatelessWidget {
             },
             child: Container(
                 decoration: BoxDecoration(
-                  color: cubit.goOnly ? AppColors.primary : AppColors.white,
+                  color: cubit.isGoOnly ? AppColors.primary : AppColors.white,
                   borderRadius: BorderRadius.circular(20.r),
                 ),
                 child: Padding(
@@ -31,7 +31,7 @@ class CustomGoBackContainer extends StatelessWidget {
                       AppTranslations.goOnly,
                       style: getMediumStyle(
                           color:
-                              cubit.goOnly ? AppColors.white : AppColors.grey,
+                              cubit.isGoOnly ? AppColors.white : AppColors.grey,
                           fontSize: 14.sp),
                     ),
                   ),
@@ -48,7 +48,7 @@ class CustomGoBackContainer extends StatelessWidget {
             },
             child: Container(
                 decoration: BoxDecoration(
-                  color: !cubit.goOnly ? AppColors.primary : AppColors.white,
+                  color: !cubit.isGoOnly ? AppColors.primary : AppColors.white,
                   borderRadius: BorderRadius.circular(20.r),
                 ),
                 child: Padding(
@@ -57,8 +57,9 @@ class CustomGoBackContainer extends StatelessWidget {
                     child: Text(
                       AppTranslations.goAndBack,
                       style: getMediumStyle(
-                          color:
-                              !cubit.goOnly ? AppColors.white : AppColors.grey,
+                          color: !cubit.isGoOnly
+                              ? AppColors.white
+                              : AppColors.grey,
                           fontSize: 14.sp),
                     ),
                   ),

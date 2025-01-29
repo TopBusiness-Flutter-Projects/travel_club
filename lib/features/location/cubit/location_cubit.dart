@@ -23,6 +23,7 @@ class LocationCubit extends Cubit<LocationState> {
 
 //location section
   loc.LocationData? currentLocation;
+  bool isFirstTime = true;
   loc.LocationData? selectedLocation;
   Future<void> checkAndRequestLocationPermission(BuildContext context) async {
     perm.PermissionStatus permissionStatus =
@@ -86,7 +87,10 @@ class LocationCubit extends Cubit<LocationState> {
     location.getLocation().then(
       (location) async {
         currentLocation = location;
-        selectedLocation = location;
+        if (isFirstTime) {
+          selectedLocation = location;
+        }
+        isFirstTime = false;
         getAddressFromLatLng(
             location.latitude ?? 0.0, location.longitude ?? 0.0);
         setTransportationMarkers();
@@ -163,16 +167,23 @@ class LocationCubit extends Cubit<LocationState> {
       );
     }
   }
+
   Future<void> updateTransportationCameraPosition(LatLng latLng) async {
     if (mapControllerTransportation != null && currentLocation != null) {
       mapControllerTransportation!.animateCamera(
         CameraUpdate.newLatLng(
           LatLng(
-          latLng.latitude,
+            latLng.latitude,
             latLng.longitude,
           ),
         ),
       );
+      selectedLocation = loc.LocationData.fromMap({
+        "latitude": latLng.latitude,
+        "longitude": latLng.longitude,
+      });
+      print("latitude: ${selectedLocation?.latitude}");
+      print("longitude: ${selectedLocation?.longitude}");
       setTransportationMarkers();
     }
   }
@@ -208,6 +219,7 @@ class LocationCubit extends Cubit<LocationState> {
       emit(ErrorCurrentLocationAddressState());
     }
   }
+
   //get current lat long location //check if it null or no
   //
   // loc.LocationData yourLocation (context){
@@ -224,26 +236,23 @@ class LocationCubit extends Cubit<LocationState> {
     if (currentLocation == null) {
       checkAndRequestLocationPermission(context);
       return true;
-        } else {
+    } else {
       return false;
     }
   }
-   void openGoogleMapsRoute(
-      double destinationLat, double destinationLng) async
-   {
-String  url =
+
+  void openGoogleMapsRoute(double destinationLat, double destinationLng) async {
+    String url =
         'https://www.google.com/maps/dir/?api=1&destination=$destinationLat,$destinationLng';
-    
-if (currentLocation != null) {
-    url =
-        'https://www.google.com/maps/dir/?api=1&origin=${currentLocation!.latitude ?? 0},${currentLocation!.longitude??0}&destination=$destinationLat,$destinationLng';
-   
-}
+
+    if (currentLocation != null) {
+      url =
+          'https://www.google.com/maps/dir/?api=1&origin=${currentLocation!.latitude ?? 0},${currentLocation!.longitude ?? 0}&destination=$destinationLat,$destinationLng';
+    }
     try {
       launchUrl(Uri.parse(url));
     } catch (e) {
       errorGetBar("error from map");
     }
   }
-
 }
