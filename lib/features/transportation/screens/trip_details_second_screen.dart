@@ -1,20 +1,18 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/utils/convert_numbers_method.dart';
-import 'package:travel_club/features/payment/screens/widgets/custom_copun_widget.dart';
-import 'package:travel_club/features/residence/view/residence_booking/widgets/linear_progress.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
+import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
 
 import '../../payment/screens/widgets/custom_price_widget.dart';
 import 'trip_details_first_screen.dart';
-import 'widgets/custom_from_to_details_yellow_container.dart';
 import 'widgets/custom_bus_container.dart';
-import 'widgets/payment_widget.dart';
+import 'widgets/custom_from_to_details_yellow_container.dart';
 
 class TripDetailsSecondScreen extends StatefulWidget {
-  const TripDetailsSecondScreen({super.key});
+  const TripDetailsSecondScreen({super.key, required this.busCompanyModel});
+  final BusCompanyModel busCompanyModel;
   @override
   State<TripDetailsSecondScreen> createState() =>
       _TripDetailsSecondScreenState();
@@ -26,52 +24,72 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
     TransportationCubit cubit = context.read<TransportationCubit>();
     return BlocBuilder<TransportationCubit, TransportationState>(
         builder: (context, state) {
-      return CustomScreen(
-          appbarTitle: AppTranslations.tripDetails,
-          body: Column(
-            children: [
-              //
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: LinearProgress(
-                            value: 0.5,
+      return WillPopScope(
+        onWillPop: () async {
+          checkGoToHome(context);
+          return false;
+        },
+        child: CustomScreen(
+            appbarTitle: AppTranslations.tripDetails,
+            appBarOnPresses: () {
+              checkGoToHome(context);
+            },
+            body: Column(
+              children: [
+                //
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsets.all(getHorizontalPadding(context)),
+                            child: CustomFromToDetails(
+                              fromDate: cubit.isGoOnly
+                                  ? cubit.singleDate
+                                  : cubit.fromDate,
+                              from: cubit.selectedFromStation!.name ?? '',
+                              to: cubit.selectedToStation!.name ?? '',
+                              toDate: cubit.isGoOnly ? null : cubit.toDate,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsets.all(getHorizontalPadding(context)),
-                          child: CustomFromToDetails(
-                            fromDate: "12/12/2021",
-                            from: "Cairo",
-                            to: "Alexandria",
+                          CustomBusContainer(
+                            busCompanyModel: widget.busCompanyModel,
                           ),
-                        ),
-                         CustomBusContainer(
-                          busCompanyModel: cubit.getAvailableBusesModel.data![0],
-                         ),
-                        const CustomSelectgedSeatWidget(),
-                        SizedBox(height: getVerticalPadding(context)),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getHorizontalPadding(context)),
-                          child: CustomPricesWidget(
-                            totalPrice: "50",
-                            totalPriceAfterVat: "40",
-                            vat: "40",
-                            terms: "nono",
-                            reservationId: 14,
+                          CustomSelectgedSeatWidget(
+                            selectedGoSeats: cubit.addBusReservationModel.data
+                                    ?.departureReservedChairsNumber
+                                    ?.map((e) => e.number!)
+                                    .toList() ??
+                                [],
+                            selectedReturnSeats: cubit.addBusReservationModel
+                                    .data?.returnReservedChairsNumber
+                                    ?.map((e) => e.number!)
+                                    .toList() ??
+                                [],
+                            // isReturn: false,
                           ),
-                        ),
-                      ]),
+                          SizedBox(height: getVerticalPadding(context)),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getHorizontalPadding(context)),
+                            child: CustomPricesWidget(
+                              totalPrice:
+                                  "${cubit.addBusReservationModel.data?.totalPrice}",
+                              totalPriceAfterVat:
+                                  "${cubit.addBusReservationModel.data?.totalPriceAfterVat}",
+                              vat: "${cubit.addBusReservationModel.data?.vat}",
+                              // terms: "nono",
+                              reservationId: 14,
+                            ),
+                          ),
+                        ]),
+                  ),
                 ),
-              ),
-            ],
-          ));
+              ],
+            )),
+      );
     });
   }
 }
@@ -79,7 +97,13 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
 class CustomSelectgedSeatWidget extends StatelessWidget {
   const CustomSelectgedSeatWidget({
     super.key,
+    required this.selectedGoSeats,
+    required this.selectedReturnSeats,
+    this.isReturn,
   });
+  final List<int> selectedGoSeats;
+  final List<int> selectedReturnSeats;
+  final bool? isReturn;
 
   @override
   Widget build(BuildContext context) {
@@ -91,38 +115,82 @@ class CustomSelectgedSeatWidget extends StatelessWidget {
         child: CustomContainerWithShadow(
           child: Padding(
             padding: EdgeInsets.all(10.h),
-            child: Column(
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    AppTranslations.numberOfSeats,
-                    style: getBoldStyle(fontSize: 14.sp),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    // mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: AutoSizeText(
+                          isReturn ?? !cubit.isGoOnly
+                              ? AppTranslations.goSeats
+                              : AppTranslations.yourSeats,
+                          maxLines: 1,
+                          style: getBoldStyle(fontSize: 14.sp),
+                        ),
+                      ),
+                      StaggeredGrid.count(
+                        crossAxisCount: cubit.isGoOnly ? 4 : 2,
+                        children: List.generate(
+                            selectedGoSeats.length,
+                            (index) => CustomSeat(
+                                  seatNumber: selectedGoSeats[index].toString(),
+                                  isEditable: false,
+                                  cubit: cubit,
+                                )),
+                      ),
+                    ],
                   ),
                 ),
-                Row(
-                  children: [
-                    Flexible(
-                      child: Wrap(
-                        spacing: 5.w,
-                        direction: Axis.horizontal,
-                        runSpacing: 5.h,
-                        children: [
-                          ...List.from(cubit.selectedSeats..sort()).map((seat) {
-                            // return Text("data");
+                if (isReturn ?? !cubit.isGoOnly)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      SizedBox(
+                        height: 40.h,
+                        child: VerticalDivider(
+                          thickness: 1,
+                          width: 40.w,
 
-                            return CustomSeat(
-                              seatNumber: seat.toString(),
-                              isEditable: false,
-                              cubit: cubit,
-                            );
-                          }),
-                        ],
+                          color: Colors.grey, // Customize the color as needed
+                        ),
                       ),
+                    ],
+                  ),
+                if (isReturn ?? !cubit.isGoOnly)
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: AutoSizeText(
+                            AppTranslations.returnSeats,
+                            maxLines: 1,
+                            style: getBoldStyle(fontSize: 14.sp),
+                          ),
+                        ),
+                        StaggeredGrid.count(
+                          crossAxisCount: 2,
+                          children: List.generate(
+                              selectedReturnSeats.length,
+                              (index) => CustomSeat(
+                                    seatNumber:
+                                        selectedReturnSeats[index].toString(),
+                                    isEditable: false,
+                                    cubit: cubit,
+                                  )),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
               ],
             ),
           ),
@@ -131,3 +199,59 @@ class CustomSelectgedSeatWidget extends StatelessWidget {
     });
   }
 }
+
+// class CustomSelectgedSeatWidget extends StatelessWidget {
+//   const CustomSelectgedSeatWidget({
+//     super.key,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     TransportationCubit cubit = context.read<TransportationCubit>();
+//     return BlocBuilder<TransportationCubit, TransportationState>(
+//         builder: (context, state) {
+//       return Padding(
+//         padding: EdgeInsets.all(getHorizontalPadding(context)),
+//         child: CustomContainerWithShadow(
+//           child: Padding(
+//             padding: EdgeInsets.all(10.h),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Padding(
+//                   padding: const EdgeInsets.all(8.0),
+//                   child: Text(
+//                     AppTranslations.numberOfSeats,
+//                     style: getBoldStyle(fontSize: 14.sp),
+//                   ),
+//                 ),
+//                 Row(
+//                   children: [
+//                     Flexible(
+//                       child: Wrap(
+//                         spacing: 5.w,
+//                         direction: Axis.horizontal,
+//                         runSpacing: 5.h,
+//                         children: [
+//                           ...List.from(cubit.selectedSeats..sort()).map((seat) {
+                          
+
+//                             return CustomSeat(
+//                               seatNumber: seat.toString(),
+//                               isEditable: false,
+//                               cubit: cubit,
+//                             );
+//                           }),
+//                         ],
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       );
+//     });
+//   }
+// }

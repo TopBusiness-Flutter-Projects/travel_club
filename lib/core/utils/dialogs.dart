@@ -174,7 +174,7 @@ checkLoggingStatus(BuildContext context, {void Function()? onPressed}) async {
 
 /// check is Go Tohome
 checkGoToHome(
-  BuildContext context,
+  BuildContext context, { String ? message}
 ) async {
   await AwesomeDialog(
     context: context,

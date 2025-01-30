@@ -263,4 +263,11 @@ class AppTranslations {
   static String get returnWord => 'return'.tr();
   static String get goAndReturnTicket => 'go_and_return_ticket'.tr();
   static String get onlyGoTicket => 'only_go_ticket'.tr();
+  static String get goAndReturnTickets => 'go_and_return_tickets'.tr();
+  static String get returnTickets => 'return_tickets'.tr();
+  static String get goTickets => 'go_tickets'.tr();
+  static String get tickets => 'tickets'.tr();
+  static String get returnSeats => 'return_seats'.tr();
+  static String get goSeats => 'go_seats'.tr();
+  static String get yourSeats => 'your_seats'.tr();
 }

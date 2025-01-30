@@ -3,6 +3,7 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
+import 'package:travel_club/features/transportation/data/models/add_reservation_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_stations_model.dart';
@@ -24,6 +25,18 @@ class TransportationCubit extends Cubit<TransportationState> {
 
   int goCounter = 1;
   int returnCounter = 1;
+int goAndReturnDifference() {
+    int difference = returnCounter - goCounter;
+    return difference > 0 ? difference : -difference; // Ensure the result is positive
+}
+int getRoundTripsCounter() {
+  if (goCounter <= returnCounter) {
+    return goCounter;
+  } else {
+    return returnCounter;
+  }
+    
+}
 
   void changeCounter({required bool isPlus ,required bool isReturn}) {
     if (isReturn) {
@@ -275,6 +288,37 @@ class TransportationCubit extends Cubit<TransportationState> {
         Navigator.pushNamed(context, Routes.transportationSearchResultRoute);
       } else {
         errorGetBar(AppTranslations.noBusesFound);
+      }
+      emit(GetCompaniesModelSuccessState());
+    });
+  }
+
+  AddBusReservationModel addBusReservationModel = AddBusReservationModel();
+  addBusReservation(BuildContext context, {required int returnTimeId, required int goTimeId ,  required     BusCompanyModel  busCompanyModel }) async {
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+
+    emit(GetCompaniesModelLoadingState());
+    final res = await api.addBusReservation(
+      isGoOnly: isGoOnly,
+      returnDate: toDate,
+      departureDate: isGoOnly ? singleDate : fromDate,
+      goTimeId: goTimeId,
+      returnTimeId: returnTimeId,
+      goCounter: goCounter,
+      returnCounter: returnCounter,
+      
+    );
+    res.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(GetCompaniesModelFailureState());
+    }, (r) {
+      Navigator.pop(context);
+      if (r.data != null) {
+        addBusReservationModel = r;    
+        Navigator.pushNamed(context, Routes.tripDetailsSecondRoute, arguments: busCompanyModel);
+      } else {
+        errorGetBar(r.msg ?? AppTranslations.error);
       }
       emit(GetCompaniesModelSuccessState());
     });

@@ -39,7 +39,10 @@ class DetailsBookingTransportaion extends StatelessWidget {
               CustomBusContainer(
                 busCompanyModel: cubit.getAvailableBusesModel.data![0],
               ),
-              const CustomSelectgedSeatWidget(),
+              const CustomSelectgedSeatWidget(
+                selectedGoSeats: [],
+                selectedReturnSeats: [],
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: getHorizontalPadding(context)),

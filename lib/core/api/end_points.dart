@@ -38,6 +38,7 @@ class EndPoints {
   static const String getCompaniesUrl = '${baseUrl}getCompanies';
   static const String getCompanyStationUrl = '${baseUrl}getCompanyStation';
   static const String getAvailableBusesUrl = '${baseUrl}getAvailableBuses';
+  static const String addBusReservationUrl = '${baseUrl}addBusReservation';
   
    ////////////////////////////////////////////////////////////
   //////////////////    Reservation    ////////////////////////

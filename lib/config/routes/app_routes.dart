@@ -469,8 +469,10 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.tripDetailsSecondRoute:
+            BusCompanyModel  busCompanyModel = settings.arguments as BusCompanyModel;
+
         return PageTransition(
-          child: const TripDetailsSecondScreen(),
+          child: TripDetailsSecondScreen(busCompanyModel: busCompanyModel,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

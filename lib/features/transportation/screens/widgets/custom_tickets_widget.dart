@@ -5,16 +5,17 @@ import '../../../../../core/exports.dart';
 
 class CustomTicketsWidget extends StatelessWidget {
   const CustomTicketsWidget(
-      {super.key, this.isReturn = false, required this.isClickable});
+      {super.key, this.isReturn = false, required this.isClickable, this.topPadding});
   final bool isReturn;
   final bool isClickable;
+  final double? topPadding;
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<TransportationCubit>();
     return BlocBuilder<TransportationCubit, TransportationState>(
       builder: (BuildContext context, state) {
         return Padding(
-          padding: const EdgeInsets.only(top: 15.0),
+          padding:  EdgeInsets.only(top: topPadding ?? 15.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
