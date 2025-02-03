@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
+import 'package:travel_club/features/home/data/models/home_model.dart';
 import '../data/models/residence_reservation_details_model.dart';
 import '../data/models/residence_reservation_model.dart';
 import '../data/repo/my_reservations_repo_impl.dart';
@@ -9,17 +10,12 @@ import 'my_bookings_state.dart';
 class MyReservationsCubit extends Cubit<MyReservationsState> {
   MyReservationsCubit(this.api) : super(MyReservationInitial());
   MyReservationsRepoImpl api;
-  int selectedIndex = 1;
+  int selectedModuleId = 1;
+  ModuleModel? selectedModule;
 
   double rating = 0; // Default rating
   List<double> rates = [3, 3, 3, 3];
-  List<String> categories = [
-    AppTranslations.accommodationBookings,
-    AppTranslations.transportation,
-    AppTranslations.foodBookings,
-    AppTranslations.entertainment,
-    AppTranslations.otherServices,
-  ];
+ 
   GetMyResidenceReservationModel residenceReservationModel =
       GetMyResidenceReservationModel();
   getMyBookingReservation() async {
@@ -33,8 +29,8 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
     });
   }
 
-  void changeContainer(int index) {
-    selectedIndex = index;
+  void changeModule(int moduleId) {
+    selectedModuleId = moduleId;
     emit(IndexChanged());
   }
 
@@ -48,22 +44,20 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
     emit(LoadingCancelReservation());
     final res = await api.cancelReservation(
-        moduleId: selectedIndex, reservationId: reservationId);
+        moduleId: selectedModuleId, reservationId: reservationId);
     res.fold((l) {
       Navigator.pop(context);
       errorGetBar(AppTranslations.error);
       emit(ErrorCancelReservation());
     }, (r) {
       Navigator.pop(context);
-
-      if (r.data == false ) {
+      if (r.data == false) {
         errorGetBar(r.msg ?? AppTranslations.error);
       } else {
         getResidenceReservationDetails(reservationId: reservationId);
         Navigator.pop(context);
         successGetBar(r.msg);
       }
-
       emit(LoadedCancelReservation());
     });
   }
@@ -76,12 +70,11 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   }) async {
     emit(LoadingGetReservationDetailsState());
     final res = await api.getResidenceReservationDetails(
-        reservationId: reservationId, moduleId: 1);
+        reservationId: reservationId, moduleId:selectedModuleId );
     res.fold((l) {
       emit(FailureGetReservationDetailsState());
     }, (r) {
       getResidenceReservationDetailsModel = r;
-
       emit(SucessGetReservationDetailsState());
     });
   }

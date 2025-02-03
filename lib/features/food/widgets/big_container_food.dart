@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/features/food/cubit/food_cubit.dart';
 import 'package:travel_club/features/food/widgets/small_container_food.dart';
@@ -38,7 +39,8 @@ bool ?isFavouriteScreen;
                      children: [
                        StarRating(
                            rating: 5, size: 14.sp,
-                           allowHalfRating: false,
+                           allowHalfRating: false, emptyIcon: CupertinoIcons.star_fill,
+                      filledIcon: CupertinoIcons.star_fill,
                            onRatingChanged: (rating){
                              //   => setState(() => this.rating = rating
                            }),

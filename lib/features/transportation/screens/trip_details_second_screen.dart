@@ -36,7 +36,6 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
             },
             body: Column(
               children: [
-                //
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -81,7 +80,8 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
                                   "${cubit.addBusReservationModel.data?.totalPriceAfterVat}",
                               vat: "${cubit.addBusReservationModel.data?.vat}",
                               // terms: "nono",
-                              reservationId: 14,
+                              reservationId:
+                                  cubit.addBusReservationModel.data?.id ?? 0,
                             ),
                           ),
                         ]),
@@ -154,11 +154,11 @@ class CustomSelectgedSeatWidget extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: 40.h,
+                        width: getWidthSize(context) * 0.18,
                         child: VerticalDivider(
-                          thickness: 1,
-                          width: 40.w,
-
-                          color: Colors.grey, // Customize the color as needed
+                          thickness: 1, width: 40.w,
+                          color: Colors
+                              .transparent, // Customize the color as needed
                         ),
                       ),
                     ],

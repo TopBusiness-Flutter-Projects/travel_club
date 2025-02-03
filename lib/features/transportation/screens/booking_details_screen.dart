@@ -24,7 +24,7 @@ class _TransportationBookingDetailsScreenState
     extends State<TransportationBookingDetailsScreen> {
   @override
   void initState() {
-    context.read<TransportationCubit>().isGoOnly = true;
+    // context.read<TransportationCubit>().isGoOnly = true;
     context
         .read<TransportationCubit>()
         .getCompanyStations(context, companyId: widget.companyModel.id ?? 0);

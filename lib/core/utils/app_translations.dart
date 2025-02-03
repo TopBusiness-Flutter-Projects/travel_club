@@ -130,12 +130,24 @@ class AppTranslations {
   static String get ticket => 'ticket'.tr();
   static String get cancelBooking => 'cancel_booking'.tr();
   static String get sendRate => 'send_rate'.tr();
+  static String get howRateExperienceTheService =>
+      'how_rate_experience_the_service'.tr();
   static String get howRateExperienceService =>
       'how_rate_experience_service'.tr();
   static String get howRateExperienceClean => 'how_rate_experience_clean'.tr();
   static String get howRateExperienceRecommend =>
       'how_rate_experience_recommend'.tr();
+  static String get howRateExperiencePlace =>
+      'how_rate_experience_place_service'.tr();
   static String get howRateExperienceFood => 'how_rate_experience_food'.tr();
+  static String get howRateExperienceResidence =>
+      'how_rate_experience_residence'.tr();
+  static String get howRateExperienceTransportation =>
+      'how_rate_experience_transportation'.tr();
+  static String get howRateExperienceEntertainment =>
+      'how_rate_experience_entertainment'.tr();
+
+  static String get questionMark => 'questionMark'.tr();
   static String get writeComment => 'write_comment'.tr();
   static String get rateExperince => 'rate_experince'.tr();
   static String get ticketsPrice => 'tickets_price'.tr();
@@ -253,8 +265,10 @@ class AppTranslations {
   static String get pending => 'pending'.tr();
   static String get enterCodeToGetPoints => 'enter_code_to_get_points'.tr();
   static String get pleaseSelectRoom => 'please_select_room'.tr();
-  static String get pleaseSelectFromToStations => 'please_select_from_to_stations'.tr();
-  static String get youCanNotSelectSameStation => 'you_can_not_select_same_station'.tr();
+  static String get pleaseSelectFromToStations =>
+      'please_select_from_to_stations'.tr();
+  static String get youCanNotSelectSameStation =>
+      'you_can_not_select_same_station'.tr();
   static String get selectTime => 'select_time'.tr();
   static String get selectGoingTime => 'select_going_time'.tr();
   static String get selectReturnTime => 'select_return_time'.tr();

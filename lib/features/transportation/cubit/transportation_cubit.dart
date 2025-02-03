@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
+import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/transportation/data/models/add_reservation_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
@@ -25,20 +26,22 @@ class TransportationCubit extends Cubit<TransportationState> {
 
   int goCounter = 1;
   int returnCounter = 1;
-int goAndReturnDifference() {
+  int goAndReturnDifference() {
     int difference = returnCounter - goCounter;
-    return difference > 0 ? difference : -difference; // Ensure the result is positive
-}
-int getRoundTripsCounter() {
-  if (goCounter <= returnCounter) {
-    return goCounter;
-  } else {
-    return returnCounter;
+    return difference > 0
+        ? difference
+        : -difference; // Ensure the result is positive
   }
-    
-}
 
-  void changeCounter({required bool isPlus ,required bool isReturn}) {
+  int getRoundTripsCounter() {
+    if (goCounter <= returnCounter) {
+      return goCounter;
+    } else {
+      return returnCounter;
+    }
+  }
+
+  void changeCounter({required bool isPlus, required bool isReturn}) {
     if (isReturn) {
       if (isPlus) {
         returnCounter = returnCounter + 1;
@@ -95,28 +98,52 @@ int getRoundTripsCounter() {
     emit(TransportationInitial());
   }
 
-  ////// from and to dates
   DateTime selectedStartDate = DateTime.now();
+// Initialize end date to next day by default
   DateTime selectedEndDate = DateTime.now();
   DateTime selectedDate = DateTime.now();
   String fromDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
   String toDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
   String singleDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
 
+  setEndDatePlusOneDay() {
+    selectedEndDate = DateTime.now().add(Duration(days: 1));
+    toDate = DateFormat('dd-MM-yyyy', 'en').format(selectedEndDate);
+    selectedStartDate = DateTime.now();
+    fromDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
+
+    updateDateStrings();
+  }
+
   void onSelectedDate(
       {required bool isStartDate, required BuildContext context}) async {
     if (isStartDate && selectedEndDate.isBefore(DateTime.now())) {
       selectedEndDate = DateTime.now().add(Duration(days: 1));
     }
+    // module 1 residence user can't choose the same date
+    bool isModule1 = context.read<PaymentCubit>().currentModuleId == 1;
+    print("isModule1 $isModule1");
+
+    DateTime firstAllowedDate = isStartDate
+        ? DateTime.now()
+        : isModule1
+            ? selectedStartDate.add(Duration(days: 1)) // For module 1, next day
+            : selectedStartDate; // For other modules, same day allowed
+
+    DateTime lastAllowedDate = isStartDate
+        ? selectedStartDate.add(Duration(days: 365))
+        : selectedStartDate.add(Duration(days: 365));
+
+    // Ensure valid date range
+    if (isModule1 && lastAllowedDate.isBefore(firstAllowedDate)) {
+      lastAllowedDate = firstAllowedDate.add(Duration(days: 1));
+    }
+
     var picked = await DatePicker.showSimpleDatePicker(
       context,
       initialDate: isStartDate ? selectedStartDate : selectedEndDate,
-      firstDate: isStartDate
-          ? DateTime.now()
-          : selectedStartDate, // Allow the end date to be the same as the start date
-      lastDate: isStartDate
-          ? selectedEndDate // Allow the start date to be the same as the end date
-          : selectedStartDate.add(Duration(days: 365)),
+      firstDate: firstAllowedDate,
+      lastDate: lastAllowedDate,
       dateFormat: "dd/MMMM/yyyy",
       backgroundColor: AppColors.primary,
       textColor: AppColors.white,
@@ -128,6 +155,13 @@ int getRoundTripsCounter() {
     if (picked != null) {
       if (isStartDate) {
         selectedStartDate = picked;
+        // Only force next day for module 1
+        if (isModule1 && !selectedEndDate.isAfter(picked)) {
+          selectedEndDate = picked.add(Duration(days: 1));
+        } else if (!isModule1 && selectedEndDate.isBefore(picked)) {
+          // For other modules, just ensure end date isn't before start date
+          selectedEndDate = picked;
+        }
         context.read<ResidenceCubit>().makeModelNull();
       } else {
         selectedEndDate = picked;
@@ -141,7 +175,7 @@ int getRoundTripsCounter() {
   void onSelectedDateSingle({required BuildContext context}) async {
     var picked = await DatePicker.showSimpleDatePicker(
       context,
-      initialDate: DateTime.now(),
+      initialDate: selectedDate,
       firstDate: DateTime.now(),
       lastDate: DateTime(9999),
       dateFormat: "dd/MMMM/yyyy",
@@ -154,20 +188,15 @@ int getRoundTripsCounter() {
 
     if (picked != null) {
       selectedDate = picked;
-
       updateDateStrings();
       emit(DateChangedState());
     }
   }
 
   void updateDateStrings() {
-    fromDate = DateFormat('dd-MM-yyyy', 'en')
-        .format(selectedStartDate); // تاريخ اليوم كقيمة افتراضية
-
-    toDate = DateFormat('dd-MM-yyyy', 'en')
-        .format(selectedEndDate); // تاريخ اليوم كقيمة افتراضية
-    singleDate = DateFormat('dd-MM-yyyy', 'en')
-        .format(selectedDate); // تاريخ اليوم كقيمة افتراضية
+    fromDate = DateFormat('dd-MM-yyyy', 'en').format(selectedStartDate);
+    toDate = DateFormat('dd-MM-yyyy', 'en').format(selectedEndDate);
+    singleDate = DateFormat('dd-MM-yyyy', 'en').format(selectedDate);
   }
 
   // 13 >> 50 seats
@@ -294,7 +323,10 @@ int getRoundTripsCounter() {
   }
 
   AddBusReservationModel addBusReservationModel = AddBusReservationModel();
-  addBusReservation(BuildContext context, {required int returnTimeId, required int goTimeId ,  required     BusCompanyModel  busCompanyModel }) async {
+  addBusReservation(BuildContext context,
+      {required int returnTimeId,
+      required int goTimeId,
+      required BusCompanyModel busCompanyModel}) async {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
 
     emit(GetCompaniesModelLoadingState());
@@ -306,7 +338,6 @@ int getRoundTripsCounter() {
       returnTimeId: returnTimeId,
       goCounter: goCounter,
       returnCounter: returnCounter,
-      
     );
     res.fold((l) {
       Navigator.pop(context);
@@ -315,8 +346,9 @@ int getRoundTripsCounter() {
     }, (r) {
       Navigator.pop(context);
       if (r.data != null) {
-        addBusReservationModel = r;    
-        Navigator.pushNamed(context, Routes.tripDetailsSecondRoute, arguments: busCompanyModel);
+        addBusReservationModel = r;
+        Navigator.pushNamed(context, Routes.tripDetailsSecondRoute,
+            arguments: busCompanyModel);
       } else {
         errorGetBar(r.msg ?? AppTranslations.error);
       }

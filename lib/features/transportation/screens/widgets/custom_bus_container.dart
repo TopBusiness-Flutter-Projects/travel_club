@@ -244,7 +244,7 @@ class _CustomBusContainerState extends State<CustomBusContainer> {
                                                     ),
                                                   ),
                                                   AutoSizeText(
-                                                    "${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString()))).toString()} ${AppTranslations.currency}",
+                                                    "${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString())) - (double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString())) * 10 / 100).toString()} ${AppTranslations.currency}",
                                                     maxLines: 1,
                                                     textAlign: TextAlign.end,
                                                     style: getBoldStyle(
@@ -444,7 +444,7 @@ class _CustomEditableBusContainerState
                                           ),
                                         ),
                                         AutoSizeText(
-                                          "${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString()))).toString()} ${AppTranslations.currency}",
+                                          "${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString())) - (double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString())) * 10 / 100).toString()} ${AppTranslations.currency}",
                                           maxLines: 1,
                                           textAlign: TextAlign.end,
                                           style: getBoldStyle(

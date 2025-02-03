@@ -6,9 +6,10 @@ import 'package:travel_club/features/transportation/data/models/get_companies_mo
 
 class CustomBookedCompanyContainer extends StatelessWidget {
   const CustomBookedCompanyContainer({
-    super.key, required this.companyModel,
+    super.key,
+    required this.companyModel,
   });
-final CompanyModel companyModel;
+  final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {
     return CustomContainerWithShadow(
@@ -25,28 +26,25 @@ final CompanyModel companyModel;
               ),
               SizedBox(height: 8.h),
               AutoSizeText(
-                companyModel.name??"",
+                companyModel.name ?? "",
                 maxLines: 1,
                 style: getMediumStyle(fontSize: 13.sp),
               ),
               SizedBox(height: 8.h),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 SizedBox(
-              
                   child: StarRating(
-                        rating: double.parse(
-                                          (companyModel.rate ?? 0)
-                                              .toString()),
-                      allowHalfRating: false, size: 14.sp,
-                      emptyIcon: CupertinoIcons.star_fill,
-                      filledIcon: CupertinoIcons.star_fill,
-                    ),
+                    rating: double.parse((companyModel.rate ?? 0).toString()),
+                    allowHalfRating: false,
+                    size: 14.sp,
+                    emptyIcon: CupertinoIcons.star_fill,
+                    filledIcon: CupertinoIcons.star_fill,
+                  ),
                 ),
                 SizedBox(width: 8.w),
                 Flexible(
                   child: AutoSizeText(
-                                                          "${companyModel.users}${AppTranslations.personRateCompany}",
-
+                    "${companyModel.users}${AppTranslations.personRateCompany}",
                     maxLines: 2,
                     style:
                         getMediumStyle(fontSize: 13.sp, color: AppColors.grey),

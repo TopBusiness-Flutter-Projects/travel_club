@@ -33,6 +33,7 @@ class AddBusReservationModel {
 }
 
 class Data {
+  int ? id;
     dynamic totalPrice;
     dynamic vat;
     dynamic totalPriceAfterVat;
@@ -41,6 +42,7 @@ class Data {
 
     Data({
         this.totalPrice,
+        this.id,
         this.vat,
         this.totalPriceAfterVat,
         this.departureReservedChairsNumber,
@@ -48,6 +50,7 @@ class Data {
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
+        id: json["id"],
         totalPrice: json["total_price"],
         vat: json["vat"],
         totalPriceAfterVat: json["total_price_after_vat"],
@@ -56,6 +59,7 @@ class Data {
     );
 
     Map<String, dynamic> toJson() => {
+      "id": id,
         "total_price": totalPrice,
         "vat": vat,
         "total_price_after_vat": totalPriceAfterVat,

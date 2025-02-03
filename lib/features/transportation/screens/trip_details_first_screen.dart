@@ -72,11 +72,11 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
                                         CustomTicketDetailsWidget(
                                             title: AppTranslations.ticketPrice,
                                             value:
-                                                "${widget.busCompanyModel.selectedGoTime!.price!} ${AppTranslations.currency}"),
+                                                "${widget.busCompanyModel.selectedGoTime!.price!}"),
                                         CustomTicketDetailsWidget(
                                           title: AppTranslations.theTotal,
                                           value:
-                                              "${cubit.goCounter * widget.busCompanyModel.selectedGoTime!.price!} ${AppTranslations.currency}",
+                                              "${cubit.goCounter * widget.busCompanyModel.selectedGoTime!.price!}",
                                         )
                                       ],
                                     )
@@ -102,11 +102,11 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
                                                   title: AppTranslations
                                                       .ticketPrice,
                                                   value:
-                                                      "${cubit.goCounter < cubit.returnCounter ? widget.busCompanyModel.selectedReturnTime!.price! : widget.busCompanyModel.selectedGoTime!.price!} ${AppTranslations.currency}"),
+                                                      "${cubit.goCounter < cubit.returnCounter ? widget.busCompanyModel.selectedReturnTime!.price! : widget.busCompanyModel.selectedGoTime!.price!}"),
                                               CustomTicketDetailsWidget(
                                                 title: AppTranslations.theTotal,
                                                 value:
-                                                    "${cubit.goAndReturnDifference() * (cubit.goCounter < cubit.returnCounter ? widget.busCompanyModel.selectedReturnTime!.price! : widget.busCompanyModel.selectedGoTime!.price!)} ${AppTranslations.currency}",
+                                                    "${cubit.goAndReturnDifference() * (cubit.goCounter < cubit.returnCounter ? widget.busCompanyModel.selectedReturnTime!.price! : widget.busCompanyModel.selectedGoTime!.price!)}",
                                               )
                                             ],
                                           ),
@@ -138,12 +138,12 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
                                                 title:
                                                     AppTranslations.ticketPrice,
                                                 value:
-                                                    "${widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!} ${AppTranslations.currency}"),
+                                                    "${(widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) - (widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) * 10 / 100}"),
                                             4.horizontalSpace,
                                             CustomTicketDetailsWidget(
                                               title: AppTranslations.theTotal,
                                               value:
-                                                  "${cubit.getRoundTripsCounter() * (widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!)} ${AppTranslations.currency}",
+                                                  "${cubit.getRoundTripsCounter() * ((widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) - (widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) * 10 / 100)} ",
                                             )
                                           ],
                                         ),
@@ -163,13 +163,19 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
                 child: CustomButton(
                     title: AppTranslations.bookNow,
                     onTap: () {
-                      cubit.addBusReservation(context,
-                          returnTimeId:
-                              widget.busCompanyModel.selectedReturnTime?.id ??
+                      checkLoggingStatus(
+                        context,
+                        onPressed: () {
+                          cubit.addBusReservation(context,
+                              returnTimeId: widget
+                                      .busCompanyModel.selectedReturnTime?.id ??
                                   0,
-                          goTimeId:
-                              widget.busCompanyModel.selectedGoTime?.id ?? 0,
-                          busCompanyModel: widget.busCompanyModel);
+                              goTimeId:
+                                  widget.busCompanyModel.selectedGoTime?.id ??
+                                      0,
+                              busCompanyModel: widget.busCompanyModel);
+                        },
+                      );
                     }),
               )
               // Padding(
@@ -203,6 +209,7 @@ class CustomTicketDetailsWidget extends StatelessWidget {
   final String title;
   final String value;
   final bool isFirst;
+
   @override
   Widget build(BuildContext context) {
     return Flexible(
@@ -222,7 +229,8 @@ class CustomTicketDetailsWidget extends StatelessWidget {
             ),
             5.verticalSpace,
             AutoSizeText(
-              value,
+              formatNumber(double.parse(value)) +
+                  (!isFirst ? " ${AppTranslations.currency}" : ""),
               maxLines: 1,
               style: getMediumStyle(color: AppColors.black, fontSize: 12.sp),
             ),

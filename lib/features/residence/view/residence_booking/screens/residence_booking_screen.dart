@@ -16,15 +16,14 @@ class ResidenceBooking extends StatefulWidget {
 }
 
 class _ResidenceBookingState extends State<ResidenceBooking> {
-  @override
-
-  //
+  
   bool isSend = false;
+  @override
   void initState() {
     isSend = false;
     context.read<ResidenceCubit>().makeModelNull();
-
     context.read<TransportationCubit>().isGoOnly = false;
+    context.read<TransportationCubit>().setEndDatePlusOneDay();
     super.initState();
   }
 
