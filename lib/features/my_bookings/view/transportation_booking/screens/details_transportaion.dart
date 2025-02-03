@@ -1,3 +1,4 @@
+import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_rounded_button.dart';
 
 import '../../../../../core/exports.dart';
@@ -9,7 +10,7 @@ import '../../../../transportation/screens/widgets/custom_from_to_details_yellow
 import '../../../../transportation/screens/widgets/custom_bus_container.dart';
 import '../../../../transportation/screens/widgets/payment_widget.dart';
 import '../../widgets/show_rate_bottom_sheet.dart';
-import '../widgets/big_container.dart';
+import '../widgets/reserved_container.dart';
 
 class DetailsBookingTransportaion extends StatelessWidget {
   const DetailsBookingTransportaion({super.key});
@@ -23,8 +24,8 @@ class DetailsBookingTransportaion extends StatelessWidget {
           appbarTitle: AppTranslations.bookingDetails,
           body: ListView(
             children: [
-              CustomBookingTransportationContainerBig(
-                ispaid: true,
+              CustomTransportationReservedContainer(
+               transportationReservation: TransportationReservation(),
                 isDetails: false,
               ),
               Padding(

@@ -23,7 +23,7 @@ class CustomReservationSection extends StatelessWidget {
 
             cubit.changeModule(module!.id!);
             if (module?.id == 1) {
-              cubit.getMyBookingReservation();
+              cubit.getMyReservation();
             }
             context.read<PaymentCubit>().currentModuleId = module!.id!;
           },

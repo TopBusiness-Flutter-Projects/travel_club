@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
+import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
 import '../data/models/residence_reservation_details_model.dart';
 import '../data/models/residence_reservation_model.dart';
 import '../data/repo/my_reservations_repo_impl.dart';
@@ -15,16 +16,25 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
 
   double rating = 0; // Default rating
   List<double> rates = [3, 3, 3, 3];
- 
+
   GetMyResidenceReservationModel residenceReservationModel =
       GetMyResidenceReservationModel();
-  getMyBookingReservation() async {
+  GetMyTransportationReservationModel transportationReservationModel =
+      GetMyTransportationReservationModel();
+  getMyReservation() async {
     emit(LoadingReservationBooking());
-    final res = await api.getMyResidenceReservation();
+    final res = await api.getMyReservation(
+      moduleId: selectedModuleId,
+    );
     res.fold((l) {
       emit(ErrorReservationBooking());
     }, (r) {
-      residenceReservationModel = r;
+      if (selectedModuleId == 1) {
+        residenceReservationModel = r;
+      }
+      if (selectedModuleId == 2) {
+        transportationReservationModel = r;
+      }
       emit(LoadedReservationBooking());
     });
   }
@@ -70,7 +80,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   }) async {
     emit(LoadingGetReservationDetailsState());
     final res = await api.getResidenceReservationDetails(
-        reservationId: reservationId, moduleId:selectedModuleId );
+        reservationId: reservationId, moduleId: selectedModuleId);
     res.fold((l) {
       emit(FailureGetReservationDetailsState());
     }, (r) {

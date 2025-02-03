@@ -20,15 +20,13 @@ class ReservationsBody extends StatefulWidget {
 }
 
 class _ReservationsBodyState extends State<ReservationsBody> {
+  @override
   void initState() {
     if (context.read<HomeCubit>().homeModel.data == null) {
       context.read<HomeCubit>().getHomeData();
     }
-    if (context.read<MyReservationsCubit>().selectedModuleId == 1) {
-      context.read<MyReservationsCubit>().getMyBookingReservation();
-    } else if (context.read<MyReservationsCubit>().selectedModuleId == 2) {
-      //context.read<MyReservationsCubit>().getTransportationReservation();
-    }
+    context.read<MyReservationsCubit>().getMyReservation();
+
     super.initState();
   }
 
