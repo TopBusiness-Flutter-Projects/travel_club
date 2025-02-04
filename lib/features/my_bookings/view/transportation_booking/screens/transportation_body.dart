@@ -6,16 +6,14 @@ import '../../../../../../config/routes/app_routes.dart';
 
 import '../../../cubit/my_bookings_cubit.dart';
 import '../../../cubit/my_bookings_state.dart';
-import 'reserved_container.dart';
-
+import '../widgets/reserved_container.dart';
 
 //body
-class TransportationBookingBody extends StatelessWidget {
-  TransportationBookingBody({super.key});
+class TransportationReservedBody extends StatelessWidget {
+  const TransportationReservedBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return BlocBuilder<MyReservationsCubit, MyReservationsState>(
       builder: (BuildContext context, state) {
         return Expanded(
@@ -28,9 +26,7 @@ class TransportationBookingBody extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
                   return CustomTransportationReservedContainer(
-                    transportationReservation:TransportationReservation()
-                    ,
-                 
+                    transportationReservation: TransportationReservation(),
                     isDetails: true,
                   );
                 },

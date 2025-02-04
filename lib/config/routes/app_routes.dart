@@ -49,11 +49,11 @@ import '../../features/food/screens/details_of_food/screens/second_book_table_sc
 import '../../features/food/screens/food_screen.dart';
 import '../../features/my_account/screens/change_lang.dart';
 import '../../features/my_bookings/view/entertainment_booking/screens/details_booking_food_screen.dart';
-import '../../features/my_bookings/view/transportation_booking/screens/details_transportaion.dart';
+import '../../features/my_bookings/view/transportation_booking/screens/details_screen.dart';
 import '../../features/notification/screens/notification_screen.dart';
 import '../../features/my_account/screens/privacy_screen.dart';
 import '../../features/my_account/screens/profile_info.dart';
-import '../../features/my_bookings/view/residence_booking/screens/details_booking_screen.dart';
+import '../../features/my_bookings/view/residence_booking/screens/details_screen.dart';
 import '../../features/my_bookings/view/food_booking/screens/details_booking_food_screen.dart';
 import '../../features/other_services/screens/sub_services.dart';
 

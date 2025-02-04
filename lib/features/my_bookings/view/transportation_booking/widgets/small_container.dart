@@ -1,6 +1,6 @@
 //small conatiner
 import '../../../../../../core/exports.dart';
-import 'custom_booking_transportation_body.dart';
+import '../screens/transportation_body.dart';
 
 class CustomBookingTransportationContainerSmall extends StatelessWidget {
   const CustomBookingTransportationContainerSmall({super.key, this.isDetails =true});

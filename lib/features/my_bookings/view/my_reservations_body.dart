@@ -1,12 +1,12 @@
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
-import 'package:travel_club/features/my_bookings/view/transportation_booking/widgets/custom_booking_transportation_body.dart';
+import 'package:travel_club/features/my_bookings/view/transportation_booking/screens/transportation_body.dart';
 import 'package:travel_club/features/my_bookings/view/widgets/custom_catogrey_reseration.dart';
 import '../../home/cubit/home_state.dart';
 import '../../home/screens/widgets/custom_appbar.dart';
 import '../cubit/my_bookings_cubit.dart';
 import '../cubit/my_bookings_state.dart';
-import 'residence_booking/screens/custom_booking_accommodation_body.dart';
+import 'residence_booking/screens/residence_body.dart';
 import 'entertainment_booking/screens/custom_booking_food.dart';
 import 'food_booking/screens/custom_booking_food.dart';
 
@@ -73,13 +73,13 @@ class _ReservationsBodyState extends State<ReservationsBody> {
               ),
               //body ...
               if (cubit.selectedModuleId == 1) ...[
-                AccommodationBookingBody(),
+                ResidenceReservedBody(),
                 SizedBox(
                   height: 90.h,
                 )
               ],
 
-              if (cubit.selectedModuleId == 2) TransportationBookingBody(),
+              if (cubit.selectedModuleId == 2) TransportationReservedBody(),
               if (cubit.selectedModuleId == 3) ...[
                 FoodBookingBody(),
                 SizedBox(
