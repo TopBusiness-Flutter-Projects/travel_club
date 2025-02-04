@@ -64,7 +64,7 @@ class CustomRow extends StatelessWidget {
                 style: getRegularStyle(fontSize: 14.sp),
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: Icon(
                 Icons.arrow_forward,

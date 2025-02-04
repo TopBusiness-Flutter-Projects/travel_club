@@ -54,12 +54,12 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                 Stack(
                   children: [
                     CustomNetworkImage(
-                      image: widget.lodgesModel?.media ?? "",
+                      image: widget.lodgesModel.media ?? "",
                       borderRadius: 20.r,
                       width: getWidthSize(context) * 0.3,
                       height: getHeightSize(context) * 0.17,
                     ),
-                    widget.lodgesModel?.isFav == true
+                    widget.lodgesModel.isFav == true
                         ? Positioned(
                             top: 4.h,
                             right: 6.w,
@@ -100,7 +100,7 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                           child: SizedBox(),
                         ),
                         Text(
-                          widget.lodgesModel?.name.toString() ?? "",
+                          widget.lodgesModel.name.toString() ,
                           overflow: TextOverflow.ellipsis,
                           style: getBoldStyle(fontSize: 14.sp),
                           maxLines: 2,
@@ -126,10 +126,10 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                           flex: 1,
                           child: SizedBox(),
                         ),
-                        widget.lodgesModel?.users == null
+                        widget.lodgesModel.users == null
                             ? SizedBox()
                             : Text(
-                                '${widget.lodgesModel?.users.toString() ?? ""}' +
+                                '${widget.lodgesModel.users.toString() }' +
                                     " " +
                                     AppTranslations.personRating,
                                 style: getMediumStyle(

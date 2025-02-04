@@ -2,7 +2,6 @@ import 'package:travel_club/features/location/screens/position_map.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../cubit/entertainment_cubit.dart';
-import 'custom_contact_container.dart';
 
 class AboutWidget extends StatelessWidget {
   const AboutWidget({super.key});

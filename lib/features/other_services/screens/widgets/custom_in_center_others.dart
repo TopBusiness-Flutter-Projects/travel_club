@@ -1,4 +1,3 @@
-import 'package:flutter_rating/flutter_rating.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../entertainment/cubit/entertainment_cubit.dart';

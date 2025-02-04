@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
 import 'package:travel_club/features/location/cubit/location_state.dart';
 import 'package:travel_club/features/location/screens/transportation_map.dart';
@@ -45,7 +44,7 @@ class _TransportationMapScreenState extends State<TransportationMapScreen> {
                       ),
                     ]),
               ),
-              Spacer(),
+              const Spacer(),
               BlocBuilder<LocationCubit, LocationState>(
                   builder: (context, state) {
                 LocationCubit cubit = context.read<LocationCubit>();

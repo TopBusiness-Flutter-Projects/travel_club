@@ -2,7 +2,6 @@ import '../../../../core/exports.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../cubit/payment_cubit.dart';
 import '../../cubit/payment_state.dart';
-import '../../data/models/check_copoune_model.dart';
 
 class CustomCopunWidget extends StatefulWidget {
   const CustomCopunWidget({super.key, required this.amount});

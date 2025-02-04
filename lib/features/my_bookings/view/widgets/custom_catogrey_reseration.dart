@@ -5,7 +5,6 @@ import '../../../home/cubit/home_cubit.dart';
 import '../../../home/cubit/home_state.dart';
 import '../../../home/data/models/home_model.dart';
 import '../../cubit/my_bookings_cubit.dart';
-import '../../cubit/my_bookings_state.dart';
 
 class CustomReservationSection extends StatelessWidget {
   const CustomReservationSection({super.key, this.module});
@@ -22,9 +21,9 @@ class CustomReservationSection extends StatelessWidget {
             print("selected module ${cubit.selectedModule?.name}");
 
             cubit.changeModule(module!.id!);
-            if (module?.id == 1) {
-              cubit.getMyReservation();
-            }
+            // if (module?.id == 1) {
+            //   cubit.getMyReservation();
+            // }
             context.read<PaymentCubit>().currentModuleId = module!.id!;
           },
           child: CustomContainerWithShadow(

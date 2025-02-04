@@ -1,6 +1,4 @@
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/features/favourites/cubit/favourites_cubit.dart';
-import 'package:travel_club/features/favourites/cubit/favourites_state.dart';
 import 'package:travel_club/features/search/cubit/search_cubit.dart';
 
 
