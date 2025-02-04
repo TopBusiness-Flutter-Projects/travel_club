@@ -78,7 +78,7 @@ class DioConsumer implements BaseApiConsumer {
           })
       );
       return _handleResponseAsJson(response);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       _handleDioError(error);
     }
   }
@@ -130,7 +130,7 @@ class DioConsumer implements BaseApiConsumer {
           })
       );
       return _handleResponseAsJson(response);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       _handleDioError(error);
     }
   }
@@ -183,7 +183,7 @@ class DioConsumer implements BaseApiConsumer {
           })
       );
       return response;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       _handleDioError(error);
     }
   }

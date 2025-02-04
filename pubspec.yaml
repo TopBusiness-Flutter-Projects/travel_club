@@ -76,6 +76,7 @@ dependencies:
   flutter_html:
   flutter_holo_date_picker: ^2.0.0
   flutter_rating_bar: ^4.0.1
+  confetti:
   
 dev_dependencies:
   flutter_test:

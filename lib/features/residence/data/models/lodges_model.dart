@@ -46,7 +46,7 @@ class LodgeModel {
   int? placeId;
   String? media;
   dynamic rate;
-  dynamic? rules;
+  dynamic rules;
   int? users;
   bool? isFav;
   bool isSelected;

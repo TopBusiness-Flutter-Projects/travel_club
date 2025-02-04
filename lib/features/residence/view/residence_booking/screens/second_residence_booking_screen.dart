@@ -1,7 +1,5 @@
-import 'package:card_swiper/card_swiper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/widgets/custom_terms_and_conditions.dart';
 import 'package:travel_club/features/payment/screens/widgets/custom_price_widget.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/linear_progress.dart';
 import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
@@ -10,8 +8,7 @@ import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/residence_cubit.dart';
 import '../widgets/custom_container_booking.dart';
-import '../../../../payment/screens/widgets/custom_copun_widget.dart';
-import '../../../../payment/screens/widgets/payment_widget.dart';
+
 
 class SecondResidenceBooking extends StatefulWidget {
   const SecondResidenceBooking({super.key});

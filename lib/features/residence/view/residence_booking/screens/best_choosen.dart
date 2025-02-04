@@ -1,4 +1,3 @@
-import 'package:travel_club/features/residence/data/models/rooms_model.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
 
 import '../../../../../core/exports.dart';

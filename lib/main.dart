@@ -21,8 +21,7 @@ bool isWithNotification = false;
 FirebaseMessaging messaging = FirebaseMessaging.instance;
 // handling firebase background notification
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  print(
-      "Handling a background message: notificationn  ${message.notification?.title}");
+  print("Handling a background message: notificationn  ${message.notification?.title}");
 }
 /// flutter local notification
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =

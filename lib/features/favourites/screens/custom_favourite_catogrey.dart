@@ -16,7 +16,7 @@ class CustomBookingSectionFavourite extends StatelessWidget {
     return BlocBuilder<FavouritesCubit,FavouritesState >(builder: (BuildContext context, state) {
       return GestureDetector(
         onTap: () {
-          cubit.changeContainer(index!);
+       //   cubit.changeContainer(index!);
         },
         child: CustomContainerWithShadow(
           color: cubit.selectedIndex == index

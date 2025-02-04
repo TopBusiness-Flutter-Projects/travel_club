@@ -53,7 +53,7 @@ static const String cancelReservationurl = '${baseUrl}cancelReservation';
  static const String checkCouponTransportationUrl = '${baseUrl}checkTransportationCoupon';
   static const String continueToPayTransportationUrl = '${baseUrl}continueToPayTransportation';
    static const String checkPaymentTransportationUrl = '${baseUrl}checkPaymentTransportation';
-//   static const String getMyReservationUrl = '${baseUrl}getMyReservation';
+  static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
 //   static const String getMyReservationDetailsUrl =
 //       '${baseUrl}getMyReservationDetails';
 // static const String cancelReservationurl = '${baseUrl}cancelReservation';

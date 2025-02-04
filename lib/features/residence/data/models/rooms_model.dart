@@ -46,7 +46,7 @@ class RoomModel {
   dynamic totalPrice;
   dynamic price;
   int? lodgeId;
-  dynamic? canCancel;
+  dynamic canCancel;
   String? type;
   List<Facility>? facilities;
   RoomModel? recommend;
