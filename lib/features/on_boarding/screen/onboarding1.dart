@@ -1,12 +1,7 @@
-import 'package:flutter/material.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/utils/app_colors.dart';
 
-import '../../../core/utils/assets_manager.dart';
 
-import '../../../core/utils/get_size.dart';
 import '../cubit/onboarding_cubit.dart';
 import 'widgets/on_boarding_body.dart';
 

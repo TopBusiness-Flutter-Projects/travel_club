@@ -5,7 +5,6 @@ import 'package:travel_club/features/food/cubit/food_cubit.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
-import '../widgets/custom_conatiner_in_center.dart';
 
 class BookTableScreen extends StatelessWidget {
   const BookTableScreen({super.key});

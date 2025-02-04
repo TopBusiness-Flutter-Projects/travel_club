@@ -1,5 +1,4 @@
 import '../../../../../core/exports.dart';
-import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../cubit/residence_cubit.dart';
 import '../../../data/models/rooms_model.dart';
 import 'custom_rooms_widget.dart';

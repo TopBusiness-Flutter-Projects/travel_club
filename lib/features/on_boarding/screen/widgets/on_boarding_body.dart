@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/custom_skip_row.dart';

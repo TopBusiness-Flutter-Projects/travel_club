@@ -1,6 +1,4 @@
 
-import 'package:travel_club/features/entertainment/screens/details_of_entertainment/widgets/about_widget.dart';
-import 'package:travel_club/features/entertainment/screens/details_of_entertainment/widgets/toggle_container.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_cubit.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_state.dart';
 import '../../../../../../core/exports.dart';

@@ -57,7 +57,7 @@ final String ?totalPrice;
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(AppTranslations.totalPrice,style: getRegularStyle(fontSize: 14.sp,color: AppColors.grey),),
-              Text("${totalPrice}"+" "+"${AppTranslations.currency}",style: getBoldStyle(fontSize: 14.sp,color: AppColors.green)),
+              Text("$totalPrice ${AppTranslations.currency}",style: getBoldStyle(fontSize: 14.sp,color: AppColors.green)),
             ],),
         ],
       ),

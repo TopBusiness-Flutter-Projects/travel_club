@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
-import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
 
 import '../../../../../core/exports.dart';
 

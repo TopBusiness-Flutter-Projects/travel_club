@@ -4,7 +4,6 @@ import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
 import 'package:travel_club/features/payment/data/models/check_payment_status_model.dart';
 
 import '../../../core/exports.dart';
-import '../../residence/cubit/residence_cubit.dart';
 
 class DonePaymentScreen extends StatelessWidget {
   const DonePaymentScreen({

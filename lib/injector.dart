@@ -129,7 +129,7 @@ Future<void> setup() async {
 
   ////////////////////////// SharedPref ////////////////////////
   final sharedPreferences = await SharedPreferences.getInstance();
-  final storage = await FlutterSecureStorage();
+  final storage =  const FlutterSecureStorage();
 
   serviceLocator.registerLazySingleton(() => sharedPreferences);
   serviceLocator.registerLazySingleton(() => storage);

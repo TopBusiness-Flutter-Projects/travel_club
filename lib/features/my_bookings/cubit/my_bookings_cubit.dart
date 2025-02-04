@@ -42,6 +42,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
 
   void changeModule(int moduleId) {
     selectedModuleId = moduleId;
+    getMyReservation();
     emit(IndexChanged());
   }
 

@@ -7,12 +7,10 @@ import 'package:travel_club/features/residence/view/residence_booking/widgets/cu
 import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
 
 import '../../../../../core/exports.dart';
-import '../../../../../core/widgets/custom_button.dart';
 import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../../transportation/cubit/transportation_state.dart';
 import '../../../../transportation/screens/trip_details_second_screen.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_details_yellow_container.dart';
-import '../../../../transportation/screens/widgets/custom_bus_container.dart';
 import '../../../../transportation/screens/widgets/payment_widget.dart';
 import '../../widgets/show_rate_bottom_sheet.dart';
 import '../widgets/reserved_container.dart';

@@ -107,7 +107,7 @@ class TransportationCubit extends Cubit<TransportationState> {
   String singleDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
 
   setEndDatePlusOneDay() {
-    selectedEndDate = DateTime.now().add(Duration(days: 1));
+    selectedEndDate = DateTime.now().add(const Duration(days: 1));
     toDate = DateFormat('dd-MM-yyyy', 'en').format(selectedEndDate);
     selectedStartDate = DateTime.now();
     fromDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
@@ -118,7 +118,7 @@ class TransportationCubit extends Cubit<TransportationState> {
   void onSelectedDate(
       {required bool isStartDate, required BuildContext context}) async {
     if (isStartDate && selectedEndDate.isBefore(DateTime.now())) {
-      selectedEndDate = DateTime.now().add(Duration(days: 1));
+      selectedEndDate = DateTime.now().add(const Duration(days: 1));
     }
     // module 1 residence user can't choose the same date
     bool isModule1 = context.read<PaymentCubit>().currentModuleId == 1;
@@ -127,16 +127,16 @@ class TransportationCubit extends Cubit<TransportationState> {
     DateTime firstAllowedDate = isStartDate
         ? DateTime.now()
         : isModule1
-            ? selectedStartDate.add(Duration(days: 1)) // For module 1, next day
+            ? selectedStartDate.add(const Duration(days: 1)) // For module 1, next day
             : selectedStartDate; // For other modules, same day allowed
 
     DateTime lastAllowedDate = isStartDate
-        ? selectedStartDate.add(Duration(days: 365))
-        : selectedStartDate.add(Duration(days: 365));
+        ? selectedStartDate.add(const Duration(days: 365))
+        : selectedStartDate.add(const Duration(days: 365));
 
     // Ensure valid date range
     if (isModule1 && lastAllowedDate.isBefore(firstAllowedDate)) {
-      lastAllowedDate = firstAllowedDate.add(Duration(days: 1));
+      lastAllowedDate = firstAllowedDate.add(const Duration(days: 1));
     }
 
     var picked = await DatePicker.showSimpleDatePicker(
@@ -157,7 +157,7 @@ class TransportationCubit extends Cubit<TransportationState> {
         selectedStartDate = picked;
         // Only force next day for module 1
         if (isModule1 && !selectedEndDate.isAfter(picked)) {
-          selectedEndDate = picked.add(Duration(days: 1));
+          selectedEndDate = picked.add(const Duration(days: 1));
         } else if (!isModule1 && selectedEndDate.isBefore(picked)) {
           // For other modules, just ensure end date isn't before start date
           selectedEndDate = picked;

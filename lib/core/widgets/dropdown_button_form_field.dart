@@ -2,7 +2,7 @@ import 'package:travel_club/core/exports.dart';
 
 class CustomDropdownButtonFormField extends StatelessWidget {
   final List<DropdownMenuItem<String>> items;
-  final dynamic? value;
+  final dynamic value;
   final String? hint;
   final ValueChanged<dynamic>? onChanged;
   final FormFieldValidator<dynamic>? validator;

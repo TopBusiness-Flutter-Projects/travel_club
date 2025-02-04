@@ -186,7 +186,7 @@ import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
 import '../../../core/preferences/preferences.dart';
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -248,10 +248,6 @@ class _SplashScreenState extends State<SplashScreen>
     }
   }
   @override
-  void dispose() {
-    super.dispose();
-  }
-  @override
   Widget build(BuildContext context) {
     return PulseRotateSplashScreen(
       onAnimationComplete: () {
@@ -264,9 +260,9 @@ class _SplashScreenState extends State<SplashScreen>
 class PulseRotateSplashScreen extends StatefulWidget {
   final VoidCallback onAnimationComplete;
   const PulseRotateSplashScreen({
-    Key? key,
+    super.key,
     required this.onAnimationComplete,
-  }) : super(key: key);
+  });
 
   @override
   State<PulseRotateSplashScreen> createState() =>
