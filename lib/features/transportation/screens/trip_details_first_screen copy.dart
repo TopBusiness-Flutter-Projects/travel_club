@@ -6,7 +6,6 @@ import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
-
 import 'widgets/custom_from_to_details_yellow_container.dart';
 import 'widgets/custom_bus_container.dart';
 
@@ -99,8 +98,7 @@ class CustomSeatCatalogeWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.lightWhite,
                     shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(
-                        25.r), // Circular with rounded corners
+                    borderRadius: BorderRadius.circular(25.r), // Circular with rounded corners
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),

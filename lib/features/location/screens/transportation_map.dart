@@ -18,7 +18,6 @@ class _TransportationMapState extends State<TransportationMap> {
     super.initState();
     context.read<LocationCubit>().checkAndRequestLocationPermission(context );
   }
-
   @override
   Widget build(BuildContext context) {
     LocationCubit cubit = context.read<LocationCubit>();
