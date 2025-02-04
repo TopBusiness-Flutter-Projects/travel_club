@@ -11,7 +11,7 @@ import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/my_bookings_cubit.dart';
 import '../widgets/big_container.dart';
 import '../widgets/payment_widget.dart';
-import '../widgets/show_model_bottom_sheet.dart';
+import '../../widgets/show_rate_bottom_sheet.dart';
 
 class ResidenceDetailsBookingArguments {
   final ResidenceReservationModel residenceReservationModel;
@@ -296,7 +296,7 @@ class _ResidenceRessrvationDetailsState
                         isBordered: true,
                         title: AppTranslations.experienceEvaluation,
                         onTap: () {
-                          showModelBottomSheetRatting(context);
+                          showAddRateBottomSheet(context);
                           // Navigator.pushNamed(context, Routes.);
                         },
                       ),

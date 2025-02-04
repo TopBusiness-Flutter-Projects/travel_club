@@ -1,4 +1,5 @@
 //small conatiner
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
 
@@ -75,7 +76,8 @@ class _CustomBookingAccommodationContainerSmallState
                           children: [
                             StarRating(
                               rating: widget.lodgeModel.rate.toDouble() ?? 1,
-                              allowHalfRating: false,
+                              allowHalfRating: false, emptyIcon: CupertinoIcons.star_fill,
+                      filledIcon: CupertinoIcons.star_fill,
                               size: 14.sp,
                             ),
                           ],

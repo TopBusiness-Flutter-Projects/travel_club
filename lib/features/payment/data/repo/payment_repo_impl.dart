@@ -18,7 +18,11 @@ class PaymentRepoImpl {
   }) async {
     try {
       var response = await dio.post(
-        EndPoints.checkCouponUrl,
+        moduleId == 1?
+        EndPoints.checkCouponUrl
+        : moduleId == 2?
+       EndPoints. checkCouponTransportationUrl : ""
+        ,
         body: {
           'code': code,
           'module_id': moduleId,
@@ -39,7 +43,12 @@ class PaymentRepoImpl {
   }) async {
     try {
       var response = await dio.post(
-        EndPoints.continueToPayUrl,
+        moduleId == 1?
+        EndPoints.continueToPayUrl
+        : moduleId == 2?
+       EndPoints.continueToPayTransportationUrl : ""
+        
+        ,
         body: {
           if (code.isNotEmpty) 'code': code,
           if (code.isNotEmpty) 'module_id': moduleId,
@@ -60,7 +69,12 @@ class PaymentRepoImpl {
   }) async {
     try {
       var response = await dio.post(
-        EndPoints.checkPaymentUrl,
+        moduleId == 1?
+        EndPoints.checkPaymentUrl
+        : moduleId == 2?
+       EndPoints.checkPaymentTransportationUrl : ""
+
+        ,
         body: {
           if (code.isNotEmpty) 'code': code,
           if (code.isNotEmpty)  'module_id': moduleId,

@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:dotted_line/dotted_line.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/convert_numbers_method.dart';
 import 'package:travel_club/core/widgets/custom_button.dart';
@@ -9,11 +10,11 @@ import 'package:travel_club/features/transportation/data/models/get_available_bu
 
 import 'widgets/custom_from_to_details_yellow_container.dart';
 import 'widgets/custom_bus_container.dart';
+import 'widgets/custom_tickets_widget.dart';
 
 class TripDetailsFirstScreen extends StatefulWidget {
   const TripDetailsFirstScreen({super.key, required this.busCompanyModel});
   final BusCompanyModel busCompanyModel;
-
   @override
   State<TripDetailsFirstScreen> createState() => _TripDetailsFirstScreenState();
 }
@@ -51,7 +52,108 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
                         CustomBusContainer(
                           busCompanyModel: widget.busCompanyModel,
                         ),
-                        const CustomSeatCatalogeWidget(),
+                        15.verticalSpace,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: getHorizontalPadding(context)),
+                          child: CustomContainerWithShadow(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: cubit.isGoOnly
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CustomTicketDetailsWidget(
+                                          isFirst: true,
+                                          title: AppTranslations.tickets,
+                                          value: "${cubit.goCounter}",
+                                        ),
+                                        CustomTicketDetailsWidget(
+                                            title: AppTranslations.ticketPrice,
+                                            value:
+                                                "${widget.busCompanyModel.selectedGoTime!.price!}"),
+                                        CustomTicketDetailsWidget(
+                                          title: AppTranslations.theTotal,
+                                          value:
+                                              "${cubit.goCounter * widget.busCompanyModel.selectedGoTime!.price!}",
+                                        )
+                                      ],
+                                    )
+                                  : Column(
+                                      children: [
+                                        if (cubit.goCounter !=
+                                            cubit.returnCounter) ...[
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              CustomTicketDetailsWidget(
+                                                isFirst: true,
+                                                title: cubit.goCounter <
+                                                        cubit.returnCounter
+                                                    ? AppTranslations
+                                                        .returnTickets
+                                                    : AppTranslations.goTickets,
+                                                value:
+                                                    "${cubit.goAndReturnDifference()}",
+                                              ),
+                                              CustomTicketDetailsWidget(
+                                                  title: AppTranslations
+                                                      .ticketPrice,
+                                                  value:
+                                                      "${cubit.goCounter < cubit.returnCounter ? widget.busCompanyModel.selectedReturnTime!.price! : widget.busCompanyModel.selectedGoTime!.price!}"),
+                                              CustomTicketDetailsWidget(
+                                                title: AppTranslations.theTotal,
+                                                value:
+                                                    "${cubit.goAndReturnDifference() * (cubit.goCounter < cubit.returnCounter ? widget.busCompanyModel.selectedReturnTime!.price! : widget.busCompanyModel.selectedGoTime!.price!)}",
+                                              )
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 10.h),
+                                            child: DottedLine(
+                                              dashLength: 5,
+                                              dashGapLength: 4,
+                                              lineThickness: 1,
+                                              dashRadius: 2,
+                                              dashColor: AppColors.grey,
+                                            ),
+                                          )
+                                        ],
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            CustomTicketDetailsWidget(
+                                              isFirst: true,
+                                              title: AppTranslations
+                                                  .goAndReturnTickets,
+                                              value:
+                                                  "${cubit.getRoundTripsCounter()}",
+                                            ),
+                                            4.horizontalSpace,
+                                            CustomTicketDetailsWidget(
+                                                title:
+                                                    AppTranslations.ticketPrice,
+                                                value:
+                                                    "${(widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) - (widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) * 10 / 100}"),
+                                            4.horizontalSpace,
+                                            CustomTicketDetailsWidget(
+                                              title: AppTranslations.theTotal,
+                                              value:
+                                                  "${cubit.getRoundTripsCounter() * ((widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) - (widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) * 10 / 100)} ",
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                            ),
+                          ),
+                        ),
+
+                        // const CustomSeatCatalogeWidget(),
                       ]),
                 ),
               ),
@@ -59,22 +161,81 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
                 padding: EdgeInsets.symmetric(
                     horizontal: getHorizontalPadding(context)),
                 child: CustomButton(
-                    title: replaceToArabicNumber(
-                            cubit.selectedSeats.length.toString()) +
-                        " - " +
-                        AppTranslations.next,
+                    title: AppTranslations.bookNow,
                     onTap: () {
-                      if (cubit.selectedSeats.isEmpty) {
-                        errorGetBar(AppTranslations.selectSeat);
-                        return;
-                      }
-                      Navigator.pushNamed(
-                          context, Routes.tripDetailsSecondRoute);
+                      checkLoggingStatus(
+                        context,
+                        onPressed: () {
+                          cubit.addBusReservation(context,
+                              returnTimeId: widget
+                                      .busCompanyModel.selectedReturnTime?.id ??
+                                  0,
+                              goTimeId:
+                                  widget.busCompanyModel.selectedGoTime?.id ??
+                                      0,
+                              busCompanyModel: widget.busCompanyModel);
+                        },
+                      );
                     }),
               )
+              // Padding(
+              //   padding: EdgeInsets.symmetric(
+              //       horizontal: getHorizontalPadding(context)),
+              //   child: CustomButton(
+              //       title:
+              //           "${replaceToArabicNumber(cubit.selectedSeats.length.toString())} - ${AppTranslations.next}",
+              //       onTap: () {
+              //         if (cubit.selectedSeats.isEmpty) {
+              //           errorGetBar(AppTranslations.selectSeat);
+              //           return;
+              //         }
+              //         Navigator.pushNamed(
+              //             context, Routes.tripDetailsSecondRoute);
+              //       }),
+              // )
             ],
           ));
     });
+  }
+}
+
+class CustomTicketDetailsWidget extends StatelessWidget {
+  const CustomTicketDetailsWidget({
+    super.key,
+    required this.title,
+    required this.value,
+    this.isFirst = false,
+  });
+  final String title;
+  final String value;
+  final bool isFirst;
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      fit: FlexFit.tight,
+      child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AutoSizeText(
+              title,
+              textAlign: TextAlign.start,
+              maxLines: 1,
+              maxFontSize: 13.sp,
+              minFontSize: 10.sp,
+              style: getSemiBoldStyle(color: AppColors.grey, fontSize: 14.sp),
+            ),
+            5.verticalSpace,
+            AutoSizeText(
+              formatNumber(double.parse(value)) +
+                  (!isFirst ? " ${AppTranslations.currency}" : ""),
+              maxLines: 1,
+              style: getMediumStyle(color: AppColors.black, fontSize: 12.sp),
+            ),
+          ]),
+    );
   }
 }
 
@@ -160,20 +321,32 @@ class CustomSeatCatalogeWidget extends StatelessWidget {
                 ),
                 Directionality(
                   textDirection: TextDirection.ltr,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: cubit.seatRowsCount,
-                      itemBuilder: (context, index) => CustomSeatsRow(
-                            columnNumber: index,
-                            seatType: index == cubit.seatRowsCount - 3 ||
-                                    index == 0 // الكرسي اللي قبل قبل الأخير
-                                ? SeatType.two
-                                : index ==
-                                        cubit.seatRowsCount - 1 // الكرسي الأخير
-                                    ? SeatType.five
-                                    : SeatType.four,
-                          )),
+                  child: StaggeredGrid.count(
+                    crossAxisCount: 4,
+                    mainAxisSpacing: 10.h,
+                    children: List.generate(
+                      40,
+                      (index) => CustomSeat(
+                        seatNumber: (index + 1).toString(),
+                        cubit: cubit,
+                      ),
+                    ),
+                  ),
+
+                  //  ListView.builder(
+                  //     shrinkWrap: true,
+                  //     physics: const NeverScrollableScrollPhysics(),
+                  //     itemCount: cubit.seatRowsCount,
+                  //     itemBuilder: (context, index) => CustomSeatsRow(
+                  //           columnNumber: index,
+                  //           seatType: index == cubit.seatRowsCount - 3 ||
+                  //                   index == 0 // الكرسي اللي قبل قبل الأخير
+                  //               ? SeatType.two
+                  //               : index ==
+                  //                       cubit.seatRowsCount - 1 // الكرسي الأخير
+                  //                   ? SeatType.five
+                  //                   : SeatType.four,
+                  //         )),
                 )
               ],
             ),
