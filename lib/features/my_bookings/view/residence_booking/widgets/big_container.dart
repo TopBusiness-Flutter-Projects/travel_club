@@ -20,10 +20,10 @@ class CustomBookingAccommodationContainerBig extends StatelessWidget {
           child: Column(
         children: [
           //custom container
-          if (residenceReservationModel?.lodge != null)
+          if (residenceReservationModel.lodge != null)
             CustomBookingAccommodationContainerSmall(
                 goTolodgeDetails: goTolodgeDetails,
-                lodgeModel: residenceReservationModel!.lodge!),
+                lodgeModel: residenceReservationModel.lodge!),
           //Row
 
           Row(
@@ -35,7 +35,7 @@ class CustomBookingAccommodationContainerBig extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (residenceReservationModel?.process != 0) ...[
+                      if (residenceReservationModel.process != 0) ...[
                         Text(
                           AppTranslations.numberBooking,
                           style: getRegularStyle(color: AppColors.grey),
@@ -44,7 +44,7 @@ class CustomBookingAccommodationContainerBig extends StatelessWidget {
                           height: 5.h,
                         ),
                         Text(
-                          residenceReservationModel?.transactionId.toString() ??
+                          residenceReservationModel.transactionId.toString() ??
                               "",
                           style: getMediumStyle(),
                         ),
@@ -52,13 +52,13 @@ class CustomBookingAccommodationContainerBig extends StatelessWidget {
                       SizedBox(
                         height: 5.h,
                       ),
-                      if (residenceReservationModel?.process != 2) ...[
+                      if (residenceReservationModel.process != 2) ...[
                         CustomContainerWithShadow(
                           reduis: 7,
                           isShadow: false,
-                          color: residenceReservationModel?.process == 0
+                          color: residenceReservationModel.process == 0
                               ? AppColors.orange.withOpacity(.12)
-                              : residenceReservationModel?.process == 3
+                              : residenceReservationModel.process == 3
                                   ? AppColors.red.withOpacity(.12)
                                   : AppColors.green.withOpacity(.12),
                           width: 100.w,
@@ -67,18 +67,18 @@ class CustomBookingAccommodationContainerBig extends StatelessWidget {
                                 horizontal: 6.0, vertical: 7),
                             child: Center(
                                 child: Text(
-                              residenceReservationModel?.process == 0
+                              residenceReservationModel.process == 0
                                   ? AppTranslations.pending
-                                  : residenceReservationModel?.process == 1
+                                  : residenceReservationModel.process == 1
                                       ? AppTranslations.bookingSuccess
-                                      : residenceReservationModel?.process == 3
+                                      : residenceReservationModel.process == 3
                                           ? AppTranslations.cancelBooking
                                           : AppTranslations.bookingSuccess,
                               style: getMediumStyle(
                                   fontSize: 14.sp,
-                                  color: residenceReservationModel?.process == 0
+                                  color: residenceReservationModel.process == 0
                                       ? AppColors.orange
-                                      : residenceReservationModel?.process == 3
+                                      : residenceReservationModel.process == 3
                                           ? AppColors.red
                                           : AppColors.green),
                               maxLines: 1,

@@ -22,9 +22,9 @@ class CustomReservationSection extends StatelessWidget {
             print("selected module ${cubit.selectedModule?.name}");
 
             cubit.changeModule(module!.id!);
-            if (module?.id == 1) {
-              cubit.getMyReservation();
-            }
+            // if (module?.id == 1) {
+            //   cubit.getMyReservation();
+            // }
             context.read<PaymentCubit>().currentModuleId = module!.id!;
           },
           child: CustomContainerWithShadow(

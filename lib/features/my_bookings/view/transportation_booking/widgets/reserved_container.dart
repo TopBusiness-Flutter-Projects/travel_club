@@ -2,7 +2,6 @@
 
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
 import 'package:travel_club/features/my_bookings/view/transportation_booking/widgets/small_container.dart';
-
 import '../../../../../../core/exports.dart';
 
 class CustomTransportationReservedContainer extends StatelessWidget {
@@ -24,7 +23,7 @@ class CustomTransportationReservedContainer extends StatelessWidget {
           children: [
             //custom container small
             CustomBookingTransportationContainerSmall(
-              isDetails: isDetails,
+              isDetails: isDetails, transportationReservation: transportationReservation,
               
             ),
             //Row under container
@@ -45,39 +44,47 @@ class CustomTransportationReservedContainer extends StatelessWidget {
                           height: 5.h,
                         ),
                         Text(
-                          "6365467858",
+                          transportationReservation.id.toString(),
                           style: getMediumStyle(),
                         ),
                         SizedBox(
                           height: 5.h,
                         ),
-                        CustomContainerWithShadow(
-                          reduis: 7,
-                          isShadow: false,
-                          color:
-                          //  ispaid
-                          //     ? AppColors.green.withOpacity(.12)
-                          //     :
-                               AppColors.red.withOpacity(.12),
-                          width: 100.w,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 6.0, vertical: 7),
-                            child: Center(
-                                child: Text(
-                              // ispaid
-                              //     ? AppTranslations.bookingSuccess
-                              //     : 
-                                  AppTranslations.cancelBooking,
-                              style: getMediumStyle(
-                                  fontSize: 14.sp,
-                                  color:
-                                      // ispaid ? AppColors.green :
-                                       AppColors.red),
-                              maxLines: 1,
-                            )),
+                        if (transportationReservation.process != 2) ...[
+                          CustomContainerWithShadow(
+                            reduis: 7,
+                            isShadow: false,
+                            color: transportationReservation.process == 0
+                                ? AppColors.orange.withOpacity(.12)
+                                : transportationReservation.process == 3
+                                ? AppColors.red.withOpacity(.12)
+                                : AppColors.green.withOpacity(.12),
+                            width: 100.w,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6.0, vertical: 7),
+                              child: Center(
+                                  child: Text(
+                                    transportationReservation.process == 0
+                                        ? AppTranslations.pending
+                                        : transportationReservation.process == 1
+                                        ? AppTranslations.bookingSuccess
+                                        : transportationReservation.process == 3
+                                        ? AppTranslations.cancelBooking
+                                        : AppTranslations.bookingSuccess,
+                                    style: getMediumStyle(
+                                        fontSize: 14.sp,
+                                        color: transportationReservation.process == 0
+                                            ? AppColors.orange
+                                            : transportationReservation.process == 3
+                                            ? AppColors.red
+                                            : AppColors.green),
+                                    maxLines: 1,
+                                  )),
+                            ),
                           ),
-                        ),
+                        ],
+
                         SizedBox(
                           height: 5.h,
                         ),
@@ -98,7 +105,7 @@ class CustomTransportationReservedContainer extends StatelessWidget {
                               color: AppColors.secondPrimary,
                             ),
                             Text(
-                              "٢٠ يناير ٢٠٢٢",
+                              transportationReservation.departureDate??"" ,
                               style: getRegularStyle(
                                 fontSize: 14.sp,
                               ),
@@ -117,7 +124,7 @@ class CustomTransportationReservedContainer extends StatelessWidget {
                           height: 10.h,
                         ),
                         Text(
-                          "5000" + " " + AppTranslations.currency,
+                          transportationReservation.totalPrice + " " + AppTranslations.currency,
                           style: getSemiBoldStyle(
                               fontSize: 14.sp, color: AppColors.primary),
                         ),
