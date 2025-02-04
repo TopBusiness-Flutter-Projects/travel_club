@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_club/features/my_bookings/view/residence_booking/screens/details_booking_screen.dart';
+import 'package:travel_club/features/my_bookings/view/residence_booking/screens/details_screen.dart';
 
 import '../../../../../../config/routes/app_routes.dart';
 
@@ -10,15 +10,14 @@ import '../../../cubit/my_bookings_state.dart';
 import '../widgets/big_container.dart';
 
 //body
-class AccommodationBookingBody extends StatefulWidget {
-  AccommodationBookingBody({super.key});
+class ResidenceReservedBody extends StatefulWidget {
+  const ResidenceReservedBody({super.key});
 
   @override
-  State<AccommodationBookingBody> createState() =>
-      _AccommodationBookingBodyState();
+  State<ResidenceReservedBody> createState() => _ResidenceReservedBodyState();
 }
 
-class _AccommodationBookingBodyState extends State<AccommodationBookingBody> {
+class _ResidenceReservedBodyState extends State<ResidenceReservedBody> {
   @override
   void initState() {
     // TODO: implement initState
@@ -31,18 +30,16 @@ class _AccommodationBookingBodyState extends State<AccommodationBookingBody> {
     var cubit = context.read<MyReservationsCubit>();
     return BlocBuilder<MyReservationsCubit, MyReservationsState>(
       builder: (BuildContext context, state) {
-        return cubit.residenceReservationModel.data == null
-            ? Expanded(
-                child: Center(
+        return Expanded(
+          child: cubit.residenceReservationModel.data == null
+              ? Center(
                   child: CustomLoadingIndicator(),
-                ),
-              )
-            : cubit.residenceReservationModel.data!.reservations!.isEmpty
-                ? Center(
-                    child: Text('لا يوجد حجوزات'),
-                  )
-                : Expanded(
-                    child: ListView.builder(
+                )
+              : cubit.residenceReservationModel.data!.reservations!.isEmpty
+                  ? Center(
+                      child: Text('لا يوجد حجوزات'),
+                    )
+                  : ListView.builder(
                       shrinkWrap: true,
                       physics: BouncingScrollPhysics(),
                       itemCount: cubit
@@ -63,11 +60,11 @@ class _AccommodationBookingBodyState extends State<AccommodationBookingBody> {
                                   .residenceReservationModel
                                   .data!
                                   .reservations![index],
-                                  goTolodgeDetails: false ,
+                              goTolodgeDetails: false,
                             ));
                       },
                     ),
-                  );
+        );
       },
     );
     // TODO: implement build
