@@ -31,10 +31,11 @@ class _ResidenceRessrvationDetailsState
     extends State<ResidenceRessrvationDetails> {
   @override
   void initState() {
-    context.read<MyReservationsCubit>().getResidenceReservationDetails(
+context.read<MyReservationsCubit>().getResidenceReservationDetailsModel =
+        GetResidenceReservationDetailsModel();  
+          context.read<MyReservationsCubit>().getReservationDetails(
         reservationId: widget.arguments.residenceReservationModel.id!);
-    context.read<MyReservationsCubit>().getResidenceReservationDetailsModel =
-        GetResidenceReservationDetailsModel();
+    
     super.initState();
   }
 

@@ -135,7 +135,7 @@ class CustomSelectgedSeatWidget extends StatelessWidget {
                         ),
                       ),
                       StaggeredGrid.count(
-                        crossAxisCount: cubit.isGoOnly ? 4 : 2,
+                        crossAxisCount: isReturn ?? !cubit.isGoOnly ? 2 : 4,
                         children: List.generate(
                             selectedGoSeats.length,
                             (index) => CustomSeat(

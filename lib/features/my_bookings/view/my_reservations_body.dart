@@ -26,7 +26,6 @@ class _ReservationsBodyState extends State<ReservationsBody> {
       context.read<HomeCubit>().getHomeData();
     }
     context.read<MyReservationsCubit>().getMyReservation();
-
     super.initState();
   }
 

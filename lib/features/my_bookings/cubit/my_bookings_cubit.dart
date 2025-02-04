@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
+import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_details_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
 import '../data/models/residence_reservation_details_model.dart';
 import '../data/models/residence_reservation_model.dart';
@@ -64,7 +65,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       if (r.data == false) {
         errorGetBar(r.msg ?? AppTranslations.error);
       } else {
-        getResidenceReservationDetails(reservationId: reservationId);
+        getReservationDetails(reservationId: reservationId);
         Navigator.pop(context);
         successGetBar(r.msg);
       }
@@ -75,7 +76,10 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   /// reservation details
   GetResidenceReservationDetailsModel getResidenceReservationDetailsModel =
       GetResidenceReservationDetailsModel();
-  getResidenceReservationDetails({
+  GeTransportationReservationDetailsModel
+      getTransportationReservationDetailsModel =
+      GeTransportationReservationDetailsModel();
+  getReservationDetails({
     required int reservationId,
   }) async {
     emit(LoadingGetReservationDetailsState());
@@ -84,7 +88,12 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
     res.fold((l) {
       emit(FailureGetReservationDetailsState());
     }, (r) {
-      getResidenceReservationDetailsModel = r;
+      if (selectedModuleId == 1) {
+        getResidenceReservationDetailsModel = r;
+      }
+      if (selectedModuleId == 2) {
+        getTransportationReservationDetailsModel = r;
+      }
       emit(SucessGetReservationDetailsState());
     });
   }

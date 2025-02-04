@@ -10,8 +10,10 @@ class CustomBusContainer extends StatefulWidget {
   const CustomBusContainer({
     super.key,
     required this.busCompanyModel,
+    this.isReturn,
   });
   final BusCompanyModel busCompanyModel;
+  final bool? isReturn;
 
   @override
   State<CustomBusContainer> createState() => _CustomBusContainerState();
@@ -72,24 +74,8 @@ class _CustomBusContainerState extends State<CustomBusContainer> {
                                     ),
                                   ),
                                   Flexible(
-                                    child: cubit.isGoOnly
+                                    child: widget.isReturn ?? !cubit.isGoOnly
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                widget
-                                                        .busCompanyModel
-                                                        .selectedGoTime
-                                                        ?.fromTime ??
-                                                    "",
-                                                style: getBoldStyle(
-                                                    color: AppColors.primary,
-                                                    fontSize: 14.sp),
-                                              ),
-                                            ],
-                                          )
-                                        : Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
                                             children: [
@@ -157,6 +143,22 @@ class _CustomBusContainerState extends State<CustomBusContainer> {
                                                 ),
                                               ),
                                             ],
+                                          )
+                                        : Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                widget
+                                                        .busCompanyModel
+                                                        .selectedGoTime
+                                                        ?.fromTime ??
+                                                    "",
+                                                style: getBoldStyle(
+                                                    color: AppColors.primary,
+                                                    fontSize: 14.sp),
+                                              ),
+                                            ],
                                           ),
                                   ),
                                 ],
@@ -201,7 +203,8 @@ class _CustomBusContainerState extends State<CustomBusContainer> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
-                                                if (!cubit.isGoOnly)
+                                                if (widget.isReturn ??
+                                                    !cubit.isGoOnly)
                                                   Padding(
                                                     padding: const EdgeInsets
                                                         .symmetric(
@@ -228,7 +231,8 @@ class _CustomBusContainerState extends State<CustomBusContainer> {
                                               ],
                                             ),
                                             10.verticalSpace,
-                                            if (!cubit.isGoOnly)
+                                            if (widget.isReturn ??
+                                                !cubit.isGoOnly)
                                               Row(
                                                 mainAxisSize: MainAxisSize.min,
                                                 mainAxisAlignment:
