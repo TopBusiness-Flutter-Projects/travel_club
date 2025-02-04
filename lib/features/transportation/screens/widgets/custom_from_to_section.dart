@@ -2,7 +2,7 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/dropdown_button_form_field.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
-import 'package:travel_club/features/transportation/data/models/get_companyStations_model.dart';
+import 'package:travel_club/features/transportation/data/models/get_stations_model.dart';
 
 class CustomFomToSection extends StatelessWidget {
   const CustomFomToSection({

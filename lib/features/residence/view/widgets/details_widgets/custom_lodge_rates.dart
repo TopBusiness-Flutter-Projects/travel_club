@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
@@ -69,7 +70,8 @@ class LodgeRatesContainerWithPoints extends StatelessWidget {
                                 Row(
                                   children: [
                                     StarRating(
-                                      rating: cubit
+                                emptyIcon: CupertinoIcons.star_fill,
+                      filledIcon: CupertinoIcons.star_fill,       rating: cubit
                                           .lodgesDetailsModel.data?.rate
                                           .toDouble(),
                                       allowHalfRating: true,
@@ -98,8 +100,7 @@ class LodgeRatesContainerWithPoints extends StatelessWidget {
                                         context, Routes.bookingResidenceRoute,
                                         arguments:
                                             cubit.lodgesDetailsModel.data?.id!);
-                                    // cubit.swiperController.stopAutoplay();
-                                    // cubit.swiperController.dispose();
+                                    
                                   },
                                 );
                               },

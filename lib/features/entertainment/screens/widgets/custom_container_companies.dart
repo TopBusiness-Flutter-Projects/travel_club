@@ -70,7 +70,8 @@ class _CustomContainerCompaniesState extends State<CustomContainerCompanies> {
                        children: [
                          StarRating(
                              rating: 4, size: 14.sp,
-                             allowHalfRating: false,
+                             allowHalfRating: false, emptyIcon: CupertinoIcons.star_fill,
+                      filledIcon: CupertinoIcons.star_fill,
                              onRatingChanged: (rating){
                                //   => setState(() => this.rating = rating
                              }),

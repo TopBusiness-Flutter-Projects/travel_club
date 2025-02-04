@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 
 import '../../../../../core/exports.dart';
@@ -41,7 +42,8 @@ class RatingWidgetFood extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   StarRating(
-                                      rating: 4, size: 14.sp,
+                                      rating: 4, size: 14.sp, emptyIcon: CupertinoIcons.star_fill,
+                      filledIcon: CupertinoIcons.star_fill,
                                       allowHalfRating: false,
                                       onRatingChanged: (rating){
                                         //   => setState(() => this.rating = rating

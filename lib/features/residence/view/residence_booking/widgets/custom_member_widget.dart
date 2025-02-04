@@ -46,8 +46,7 @@ class CustomMemberWidget extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                cubit.changeCounter(false);
-              
+                cubit.changeCounter(false);              
               },
               child: Container(
                 width: 27.w,

@@ -1,4 +1,6 @@
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
+import 'package:travel_club/features/my_bookings/cubit/my_bookings_cubit.dart';
+import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
 import 'package:travel_club/features/payment/data/models/check_payment_status_model.dart';
 
 import '../../../core/exports.dart';
@@ -86,6 +88,7 @@ class DonePaymentScreen extends StatelessWidget {
                     width: getWidthSize(context) / 2,
                     title: AppTranslations.goToBookings,
                     onTap: () {
+                      context.read<MyReservationsCubit>().selectedModuleId =  context.read<PaymentCubit>().currentModuleId;
                       context.read<MainCubit>().changePage(1);
                       Navigator.pushNamedAndRemoveUntil(
                         context,

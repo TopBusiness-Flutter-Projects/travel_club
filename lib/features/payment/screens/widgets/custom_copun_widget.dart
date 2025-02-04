@@ -14,7 +14,6 @@ class CustomCopunWidget extends StatefulWidget {
 class _CustomCopunWidgetState extends State<CustomCopunWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
-
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<PaymentCubit>();
@@ -27,6 +26,7 @@ class _CustomCopunWidgetState extends State<CustomCopunWidget> {
             child: CustomTextField(
               hintText: AppTranslations.enterCoupon,
               controller: cubit.couponController,
+              
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return AppTranslations.enterCoupon;
@@ -34,6 +34,9 @@ class _CustomCopunWidgetState extends State<CustomCopunWidget> {
                 return null;
               },
               onChanged: (v) {
+                // if (v.length == 11) {
+                //   FocusManager.instance.primaryFocus?.unfocus();
+                // }
                 if (cubit.checkCopouneModel.data != null) {
                   cubit.makeCopouneNull();
                 }
@@ -45,9 +48,11 @@ class _CustomCopunWidgetState extends State<CustomCopunWidget> {
                           padding: const EdgeInsets.all(4.0),
                           child: TextButton(
                             onPressed: () {
+                              FocusManager.instance.primaryFocus?.unfocus();
                               if (!_formKey.currentState!.validate()) {
                                 return;
                               }
+
                               cubit.checkCopoune(context,
                                   amount: widget.amount);
                             },

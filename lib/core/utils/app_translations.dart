@@ -130,16 +130,30 @@ class AppTranslations {
   static String get ticket => 'ticket'.tr();
   static String get cancelBooking => 'cancel_booking'.tr();
   static String get sendRate => 'send_rate'.tr();
+  static String get howRateExperienceTheService =>
+      'how_rate_experience_the_service'.tr();
   static String get howRateExperienceService =>
       'how_rate_experience_service'.tr();
   static String get howRateExperienceClean => 'how_rate_experience_clean'.tr();
   static String get howRateExperienceRecommend =>
       'how_rate_experience_recommend'.tr();
+  static String get howRateExperiencePlace =>
+      'how_rate_experience_place_service'.tr();
   static String get howRateExperienceFood => 'how_rate_experience_food'.tr();
+  static String get howRateExperienceResidence =>
+      'how_rate_experience_residence'.tr();
+  static String get howRateExperienceTransportation =>
+      'how_rate_experience_transportation'.tr();
+  static String get howRateExperienceEntertainment =>
+      'how_rate_experience_entertainment'.tr();
+
+  static String get questionMark => 'questionMark'.tr();
   static String get writeComment => 'write_comment'.tr();
   static String get rateExperince => 'rate_experince'.tr();
   static String get ticketsPrice => 'tickets_price'.tr();
   static String get numberOfMembers => 'number_of_members'.tr();
+  static String get numberOfMembersGo => 'number_of_members_go'.tr();
+  static String get numberOfMembersReturn => 'number_of_members_return'.tr();
   static String get bookAppointment => 'book_appointment'.tr();
   static String get members => 'members'.tr();
   static String get callPhone => 'call_phone'.tr();
@@ -251,12 +265,23 @@ class AppTranslations {
   static String get pending => 'pending'.tr();
   static String get enterCodeToGetPoints => 'enter_code_to_get_points'.tr();
   static String get pleaseSelectRoom => 'please_select_room'.tr();
-  static String get pleaseSelectFromToStations => 'please_select_from_to_stations'.tr();
-  static String get youCanNotSelectSameStation => 'you_can_not_select_same_station'.tr();
+  static String get pleaseSelectFromToStations =>
+      'please_select_from_to_stations'.tr();
+  static String get youCanNotSelectSameStation =>
+      'you_can_not_select_same_station'.tr();
   static String get selectTime => 'select_time'.tr();
   static String get selectGoingTime => 'select_going_time'.tr();
   static String get selectReturnTime => 'select_return_time'.tr();
   static String get noBusesFound => 'no_buses_found'.tr();
   static String get go => 'go'.tr();
   static String get returnWord => 'return'.tr();
+  static String get goAndReturnTicket => 'go_and_return_ticket'.tr();
+  static String get onlyGoTicket => 'only_go_ticket'.tr();
+  static String get goAndReturnTickets => 'go_and_return_tickets'.tr();
+  static String get returnTickets => 'return_tickets'.tr();
+  static String get goTickets => 'go_tickets'.tr();
+  static String get tickets => 'tickets'.tr();
+  static String get returnSeats => 'return_seats'.tr();
+  static String get goSeats => 'go_seats'.tr();
+  static String get yourSeats => 'your_seats'.tr();
 }

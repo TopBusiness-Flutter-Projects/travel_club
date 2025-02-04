@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/convert_numbers_method.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
@@ -32,24 +34,6 @@ class _CustomBusContainerState extends State<CustomBusContainer> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Container(
-                      //   decoration: BoxDecoration(
-                      //     color: AppColors.lightWhite,
-                      //     shape: BoxShape.rectangle,
-                      //     borderRadius: BorderRadius.circular(
-                      //         15), // Circular with rounded corners
-                      //   ),
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     child: SvgPicture.asset(
-                      //       AppIcons.bus,
-                      //       height: 49.h,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   width: 10.w,
-                      // ),
                       Expanded(
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -177,41 +161,101 @@ class _CustomBusContainerState extends State<CustomBusContainer> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              Text(
-                                AppTranslations.vehicleNumber,
-                                style: getSemiBoldStyle(
-                                    color: AppColors.grey, fontSize: 16.sp),
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
+                              Divider(),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Flexible(
-                                    child: Text(
-                                      widget.busCompanyModel.plateNumber ?? "",
-                                      style: getMediumStyle(
-                                          color: AppColors.black,
-                                          fontSize: 14.sp),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Text(
-                                      cubit.isGoOnly
-                                          ? " ${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString())))} ${AppTranslations.currency}"
-                                          : " ${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString()))).toString()} ${AppTranslations.currency}",
-                                      style: getBoldStyle(
-                                          color: AppColors.green,
-                                          fontSize: 14.sp),
-                                    ),
-                                  ),
-                                ],
-                              )
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            AppTranslations.vehicleNumber,
+                                            style: getSemiBoldStyle(
+                                                color: AppColors.grey,
+                                                fontSize: 16.sp),
+                                          ),
+                                          10.verticalSpace,
+                                          AutoSizeText(
+                                            widget.busCompanyModel
+                                                    .plateNumber ??
+                                                "",
+                                            maxLines: 1,
+                                            style: getMediumStyle(
+                                                color: AppColors.black,
+                                                fontSize: 14.sp),
+                                          ),
+                                        ]),
+                                    Flexible(
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                if (!cubit.isGoOnly)
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: SvgPicture.asset(
+                                                      EasyLocalization.of(
+                                                                      context)!
+                                                                  .locale
+                                                                  .languageCode !=
+                                                              'ar'
+                                                          ? AppIcons.right
+                                                          : AppIcons.left,
+                                                      height: 17.sp,
+                                                    ),
+                                                  ),
+                                                AutoSizeText(
+                                                  "${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString())))} ${AppTranslations.currency}",
+                                                  maxLines: 1,
+                                                  textAlign: TextAlign.end,
+                                                  style: getBoldStyle(
+                                                      color: AppColors.green,
+                                                      fontSize: 13.sp),
+                                                ),
+                                              ],
+                                            ),
+                                            10.verticalSpace,
+                                            if (!cubit.isGoOnly)
+                                              Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: SvgPicture.asset(
+                                                      AppIcons.twoWays,
+                                                      height: 25.sp,
+                                                    ),
+                                                  ),
+                                                  AutoSizeText(
+                                                    "${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString())) - (double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString())) * 10 / 100).toString()} ${AppTranslations.currency}",
+                                                    maxLines: 1,
+                                                    textAlign: TextAlign.end,
+                                                    style: getBoldStyle(
+                                                        color: AppColors.green,
+                                                        fontSize: 13.sp),
+                                                  ),
+                                                ],
+                                              ),
+                                          ]),
+                                    )
+                                  ]),
                             ]),
                       )
                     ]))),
@@ -331,62 +375,87 @@ class _CustomEditableBusContainerState
                       ),
                     ],
                     10.verticalSpace,
-                    Row(children: [
-                      Flexible(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppTranslations.vehicleNumber,
+                                  style: getSemiBoldStyle(
+                                      color: AppColors.grey, fontSize: 16.sp),
+                                ),
+                                10.horizontalSpace,
+                                AutoSizeText(
+                                  widget.busCompanyModel.plateNumber ?? "",
+                                  maxLines: 1,
+                                  style: getMediumStyle(
+                                      color: AppColors.black, fontSize: 14.sp),
+                                ),
+                              ]),
+                          Flexible(
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Text(
-                                    AppTranslations.vehicleNumber,
-                                    style: getSemiBoldStyle(
-                                        color: AppColors.grey, fontSize: 16.sp),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      if (!cubit.isGoOnly)
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: Icon(
+                                            EasyLocalization.of(context)!
+                                                        .locale
+                                                        .languageCode !=
+                                                    'ar'
+                                                ? CupertinoIcons.arrow_right
+                                                : CupertinoIcons.arrow_left,
+                                            size: 25.sp,
+                                          ),
+                                        ),
+                                      AutoSizeText(
+                                        "${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString())))} ${AppTranslations.currency}",
+                                        maxLines: 1,
+                                        textAlign: TextAlign.end,
+                                        style: getBoldStyle(
+                                            color: AppColors.green,
+                                            fontSize: 13.sp),
+                                      ),
+                                    ],
                                   ),
-                                  10.horizontalSpace,
-                                  Flexible(
-                                    child: AutoSizeText(
-                                      cubit.isGoOnly
-                                          ? " ${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString())))} ${AppTranslations.currency}"
-                                          : " ${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString()))).toString()} ${AppTranslations.currency}",
-                                      maxLines: 1,
-                                      style: getBoldStyle(
-                                          color: AppColors.green,
-                                          fontSize: 13.sp),
+                                  10.verticalSpace,
+                                  if (!cubit.isGoOnly)
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: Icon(
+                                            CupertinoIcons
+                                                .arrow_right_arrow_left,
+                                            size: 25.sp,
+                                          ),
+                                        ),
+                                        AutoSizeText(
+                                          "${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString())) - (double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString())) * 10 / 100).toString()} ${AppTranslations.currency}",
+                                          maxLines: 1,
+                                          textAlign: TextAlign.end,
+                                          style: getBoldStyle(
+                                              color: AppColors.green,
+                                              fontSize: 13.sp),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Flexible(
-                                    child: AutoSizeText(
-                                      widget.busCompanyModel.plateNumber ?? "",
-                                      maxLines: 1,
-                                      style: getMediumStyle(
-                                          color: AppColors.black,
-                                          fontSize: 14.sp),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.only(
-                                        end: 10),
-                                    child: Icon(
-                                      Icons.arrow_forward_rounded,
-                                      size: 30,
-                                      color: AppColors.primary,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ]),
-                      )
-                    ]),
+                                ]),
+                          )
+                        ]),
                   ],
                 ))),
       );
@@ -426,3 +495,4 @@ class CustomTimeWidget extends StatelessWidget {
     );
   }
 }
+//

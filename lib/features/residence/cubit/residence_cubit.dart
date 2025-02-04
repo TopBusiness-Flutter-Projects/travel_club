@@ -26,12 +26,7 @@ class ResidenceCubit extends Cubit<ResidenceState> {
 
   int changedRooms = 0;
   int counter = 1;
-  void minusCounter() {
-    if (counter > 1) {
-      counter = counter - 1;
-      emit(MinusLoaded());
-    }
-  }
+ 
 
   void changeCounter(bool isPlus) {
     if (isPlus) {

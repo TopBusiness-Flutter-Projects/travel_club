@@ -86,6 +86,9 @@ class AppIcons {
   static const String point = '$iconsPath/point.svg';
   static const String location = '$iconsPath/location.svg';
   static const String addCircle = '$iconsPath/addCircle.svg';
+  static const String left = '$iconsPath/left.svg';
+  static const String right = '$iconsPath/right.svg';
+  static const String twoWays = '$iconsPath/two_ways.svg';
 
 
 }

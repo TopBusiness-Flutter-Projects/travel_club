@@ -16,7 +16,7 @@ class CustomCategorySection extends StatefulWidget {
 
 class _CustomCategorySectionState extends State<CustomCategorySection> {
   @override
-  void initState() {    
+  void initState() {
     context.read<HomeCubit>().getHomeData();
     super.initState();
   }
@@ -42,8 +42,7 @@ class _CustomCategorySectionState extends State<CustomCategorySection> {
                                 : cubit.moduleslenth) -
                             1,
                   ),
-                  itemCount:
-                      cubit.homeModel.data!.modules!.length,
+                  itemCount: cubit.homeModel.data!.modules!.length,
                   scrollDirection: Axis.horizontal,
                 ));
       },
@@ -58,7 +57,7 @@ class CustomCategoryContainer extends StatelessWidget {
     this.onTap,
     this.islast = false,
   });
-  final Module? categoryModel;
+  final ModuleModel? categoryModel;
   final bool islast;
   final void Function()? onTap;
   @override
@@ -73,7 +72,7 @@ class CustomCategoryContainer extends StatelessWidget {
               bottom: getHeightSize(context) * 0.01),
           child: GestureDetector(
             onTap: () {
-               context.read<PaymentCubit>().currentModuleId = categoryModel!.id!;
+              context.read<PaymentCubit>().currentModuleId = categoryModel!.id!;
               if (categoryModel?.type == 0) {
                 Navigator.pushNamed(context, Routes.residenceRoute);
               } else if (categoryModel?.type == 1) {
