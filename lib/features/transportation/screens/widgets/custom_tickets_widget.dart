@@ -27,7 +27,7 @@ class CustomTicketsWidget extends StatelessWidget {
                         : AppTranslations.numberOfMembersGo,
                 style: getMediumStyle(fontSize: 14.sp),
               ),
-              if (isClickable) Spacer(),
+              if (isClickable) const Spacer(),
               if (isClickable)
                 GestureDetector(
                   onTap: () {

@@ -159,12 +159,12 @@ void main() async {
   AndroidOptions _getAndroidOptions() => const AndroidOptions(
     encryptedSharedPreferences: true,
   );
-  IOSOptions _getIOSOptions() => IOSOptions(
+  IOSOptions _getIOSOptions() => const IOSOptions(
       accessibility: KeychainAccessibility.first_unlock
   );
 
   prefs = await SharedPreferences.getInstance();
-  storage = await  FlutterSecureStorage(aOptions: _getAndroidOptions());;
+  storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
   // storage = await  FlutterSecureStorage(aOptions: _getIOSOptions());;
   getToken();
   await EasyLocalization.ensureInitialized();
@@ -183,7 +183,7 @@ void main() async {
   );
 }
 class MyAppWithScreenUtil extends StatelessWidget {
-  const MyAppWithScreenUtil({Key? key}) : super(key: key);
+  const MyAppWithScreenUtil({super.key});
   @override
   Widget build(BuildContext context) {
     return Builder(

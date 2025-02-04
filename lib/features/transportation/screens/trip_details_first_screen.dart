@@ -3,13 +3,11 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/convert_numbers_method.dart';
-import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_state.dart';
 import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
 import 'widgets/custom_from_to_details_yellow_container.dart';
 import 'widgets/custom_bus_container.dart';
-import 'widgets/custom_tickets_widget.dart';
 
 class TripDetailsFirstScreen extends StatefulWidget {
   const TripDetailsFirstScreen({super.key, required this.busCompanyModel});
@@ -410,7 +408,7 @@ class CustomSeatsRow extends StatelessWidget {
                     )
                   : CustomSeat(
                       cubit: cubit,
-                      seatNumber: index > 2 ? '${rowIndex}' : '${rowIndex + 1}',
+                      seatNumber: index > 2 ? '$rowIndex' : '${rowIndex + 1}',
                       // seatNumber: index > 2 ? '${index}' : '${index + 1}',
                     );
             } else {

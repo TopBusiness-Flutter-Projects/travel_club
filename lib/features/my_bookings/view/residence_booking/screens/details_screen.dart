@@ -5,8 +5,6 @@ import 'package:travel_club/features/my_bookings/data/models/residence_reservati
 import 'package:travel_club/features/my_bookings/data/models/residence_reservation_model.dart';
 import 'package:travel_club/features/payment/screens/widgets/custom_price_widget.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
-import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_rounded_button.dart';
-
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/my_bookings_cubit.dart';
 import '../widgets/big_container.dart';
