@@ -284,7 +284,7 @@ class _ResidenceRessrvationDetailsState
                     if (cubit.getResidenceReservationDetailsModel.data!
                             .process ==
                         2)
-                      const RateReservationButton(),
+                       RateReservationButton( reservationId:  widget.arguments.residenceReservationModel.id??0  ,),
 
                     SizedBox(
                       height: 40.h,

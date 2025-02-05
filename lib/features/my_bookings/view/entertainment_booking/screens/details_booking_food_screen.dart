@@ -67,28 +67,28 @@ class _DetailsBookingEntertainmentState
                     height: 10.h,
                   ),
 //button
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          color: AppColors.red,
-                          title: AppTranslations.cancelBooking,
-                          onTap: () {
-                            Navigator.pushNamed(context, Routes.payment);
-                          },
-                        ),
-                      ),
-                      SizedBox(width: 10.w), // Add spacing between buttons
-                      Expanded(
-                          child: CustomRoundedButton(
-                        title: AppTranslations.experienceEvaluation,
-                        onTap: () {
-                          showAddRateBottomSheet(context);
-                          // Navigator.pushNamed(context, Routes.);
-                        },
-                      )),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: CustomButton(
+                  //         color: AppColors.red,
+                  //         title: AppTranslations.cancelBooking,
+                  //         onTap: () {
+                  //           Navigator.pushNamed(context, Routes.payment);
+                  //         },
+                  //       ),
+                  //     ),
+                  //     SizedBox(width: 10.w), // Add spacing between buttons
+                  //     Expanded(
+                  //         child: CustomRoundedButton(
+                  //       title: AppTranslations.experienceEvaluation,
+                  //       onTap: () {
+                  //         showAddRateBottomSheet(context);
+                  //         // Navigator.pushNamed(context, Routes.);
+                  //       },
+                  //     )),
+                  //   ],
+                  // ),
                   SizedBox(
                     height: 40.h,
                   )
