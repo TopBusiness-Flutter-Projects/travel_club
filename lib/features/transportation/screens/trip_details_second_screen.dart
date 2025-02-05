@@ -79,7 +79,7 @@ class _TripDetailsSecondScreenState extends State<TripDetailsSecondScreen> {
                               totalPriceAfterVat:
                                   "${cubit.addBusReservationModel.data?.totalPriceAfterVat}",
                               vat: "${cubit.addBusReservationModel.data?.vat}",
-                              // terms: "nono",
+                               terms: "${cubit.addBusReservationModel.data?.rule}",
                               reservationId:
                                   cubit.addBusReservationModel.data?.id ?? 0,
                             ),

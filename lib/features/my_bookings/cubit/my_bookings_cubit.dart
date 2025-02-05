@@ -18,6 +18,33 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   double rating = 0; // Default rating
   List<double> rates = [3, 3, 3, 3];
 
+
+/////// counter /////// 
+
+ int goAndReturnDifference( {required int goCounter,required int returnCounter}) {
+    int difference = returnCounter - goCounter;
+    return difference > 0
+        ? difference
+        : -difference; // Ensure the result is positive
+  }
+
+  int getRoundTripsCounter( {required int goCounter,required int returnCounter}) {
+    if (goCounter <= returnCounter) {
+      return goCounter;
+    } else {
+      return returnCounter;
+    }
+  }
+
+    
+
+
+
+
+
+
+
+
   GetMyResidenceReservationModel residenceReservationModel =
       GetMyResidenceReservationModel();
   GetMyTransportationReservationModel transportationReservationModel =

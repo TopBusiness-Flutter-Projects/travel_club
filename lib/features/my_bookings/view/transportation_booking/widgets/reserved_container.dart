@@ -6,29 +6,35 @@ import '../../../../../../core/exports.dart';
 
 class CustomTransportationReservedContainer extends StatelessWidget {
   const CustomTransportationReservedContainer(
-      {super.key,   this.isDetails = true, required this.transportationReservation});
-  
- final bool isDetails ;
- final TransportationReservation transportationReservation;
+      {super.key,
+      this.isDetails = true,
+      required this.transportationReservation});
+
+  final bool isDetails;
+  final TransportationReservation transportationReservation;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(9.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, Routes.detailsbookingTransportation);
+          Navigator.pushNamed(context, Routes.detailsbookingTransportation,
+              arguments: transportationReservation);
         },
         child: CustomContainerWithShadow(
             child: Column(
           children: [
             //custom container small
             CustomBookingTransportationContainerSmall(
-              isDetails: isDetails, transportationReservation: transportationReservation,
-              
+              isDetails: isDetails,
+              transportationReservation: transportationReservation,
             ),
             //Row under container
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  transportationReservation.transactionId != null
+                      ? CrossAxisAlignment.start
+                      : CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
@@ -36,20 +42,24 @@ class CustomTransportationReservedContainer extends StatelessWidget {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          AppTranslations.numberBooking,
-                          style: getRegularStyle(color: AppColors.grey),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Text(
-                          transportationReservation.id.toString(),
-                          style: getMediumStyle(),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
+                        if (transportationReservation.transactionId !=
+                            null) ...[
+                          Text(
+                            AppTranslations.numberBooking,
+                            style: getRegularStyle(
+                                color: AppColors.grey, fontSize: 16.sp),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Text(
+                            transportationReservation.transactionId.toString(),
+                            style: getMediumStyle(fontSize: 16.sp),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          )
+                        ],
                         if (transportationReservation.process != 2) ...[
                           CustomContainerWithShadow(
                             reduis: 7,
@@ -57,34 +67,34 @@ class CustomTransportationReservedContainer extends StatelessWidget {
                             color: transportationReservation.process == 0
                                 ? AppColors.orange.withOpacity(.12)
                                 : transportationReservation.process == 3
-                                ? AppColors.red.withOpacity(.12)
-                                : AppColors.green.withOpacity(.12),
-                            width: 100.w,
+                                    ? AppColors.red.withOpacity(.12)
+                                    : AppColors.green.withOpacity(.12),
+                            // width: 100.w,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 6.0, vertical: 7),
                               child: Center(
-                                  child: Text(
-                                    transportationReservation.process == 0
-                                        ? AppTranslations.pending
-                                        : transportationReservation.process == 1
+                                  child: AutoSizeText(
+                                transportationReservation.process == 0
+                                    ? AppTranslations.pending
+                                    : transportationReservation.process == 1
                                         ? AppTranslations.bookingSuccess
                                         : transportationReservation.process == 3
-                                        ? AppTranslations.cancelBooking
-                                        : AppTranslations.bookingSuccess,
-                                    style: getMediumStyle(
-                                        fontSize: 14.sp,
-                                        color: transportationReservation.process == 0
-                                            ? AppColors.orange
-                                            : transportationReservation.process == 3
+                                            ? AppTranslations.cancelBooking
+                                            : AppTranslations.bookingSuccess,
+                                style: getMediumStyle(
+                                    fontSize: 13.sp,
+                                    color: transportationReservation.process ==
+                                            0
+                                        ? AppColors.orange
+                                        : transportationReservation.process == 3
                                             ? AppColors.red
                                             : AppColors.green),
-                                    maxLines: 1,
-                                  )),
+                                maxLines: 1,
+                              )),
                             ),
                           ),
                         ],
-
                         SizedBox(
                           height: 5.h,
                         ),
@@ -105,7 +115,7 @@ class CustomTransportationReservedContainer extends StatelessWidget {
                               color: AppColors.secondPrimary,
                             ),
                             Text(
-                              transportationReservation.departureDate??"" ,
+                              transportationReservation.departureDate ?? "",
                               style: getRegularStyle(
                                 fontSize: 14.sp,
                               ),
@@ -116,7 +126,7 @@ class CustomTransportationReservedContainer extends StatelessWidget {
                           height: 10.h,
                         ),
                         Text(
-                          AppTranslations.ticketsPrice,
+                          AppTranslations.bookingPrice,
                           style: getRegularStyle(
                               fontSize: 14.sp, color: AppColors.grey),
                         ),
@@ -124,7 +134,9 @@ class CustomTransportationReservedContainer extends StatelessWidget {
                           height: 10.h,
                         ),
                         Text(
-                          transportationReservation.totalPrice + " " + AppTranslations.currency,
+                          transportationReservation.totalPrice +
+                              " " +
+                              AppTranslations.currency,
                           style: getSemiBoldStyle(
                               fontSize: 14.sp, color: AppColors.primary),
                         ),

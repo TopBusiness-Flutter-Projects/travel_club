@@ -20,6 +20,8 @@ class CustomPricesWidget extends StatefulWidget {
     required this.totalPriceAfterVat,
     this.terms,
     required this.reservationId,
+    this.ticketsWidget,
+    this.isPaid = false,
   });
 
   final String? terms;
@@ -27,6 +29,8 @@ class CustomPricesWidget extends StatefulWidget {
   final String? vat;
   final String totalPriceAfterVat;
   final int reservationId;
+  final Widget? ticketsWidget;
+  final bool isPaid;
   @override
   State<CustomPricesWidget> createState() => _CustomPricesWidgetState();
 }
@@ -55,57 +59,65 @@ class _CustomPricesWidgetState extends State<CustomPricesWidget> {
           SizedBox(
             height: 20.h,
           ),
+          widget.ticketsWidget ??
+              SizedBox(
+                height: 0,
+              ),
           PaymentDetailsContainer(
+            isTickets: widget.ticketsWidget != null,
             totalPrice: widget.totalPrice,
             vat: widget.vat,
             totalPriceAfterVat: widget.totalPriceAfterVat,
           ),
-          SizedBox(
-            height: 20.h,
-          ),
-//copun
-          Text(
-            AppTranslations.areYouHaveACoupon,
-            style: getMediumStyle(fontSize: 14.sp),
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-
-          CustomCopunWidget(
-            amount: widget.totalPriceAfterVat,
-          ),
-          if (widget.terms != null)
-            CustomAcceptTerms(
-              terms: widget.terms!,
+          if (!widget.isPaid) ...[
+            SizedBox(
+              height: 20.h,
             ),
+
+//copun
+            Text(
+              AppTranslations.areYouHaveACoupon,
+              style: getMediumStyle(fontSize: 14.sp),
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+
+            CustomCopunWidget(
+              amount: widget.totalPriceAfterVat,
+            ),
+            if (widget.terms != null)
+              CustomAcceptTerms(
+                terms: widget.terms!,
+              ),
 
 //button
-          Opacity(
-            opacity: widget.terms == null
-                ? 1
-                : cubit.isChecked
-                    ? 1
-                    : 0.4,
-            child: CustomButton(
-              title: AppTranslations.completePayment,
-              onTap: widget.terms == null
-                  ? () async {
-                      cubit.getPaymentUrl(
-                        context,
-                        reservationId: widget.reservationId,
-                      );
-                    }
+            Opacity(
+              opacity: widget.terms == null
+                  ? 1
                   : cubit.isChecked
-                      ? () async {
-                          cubit.getPaymentUrl(
-                            context,
-                            reservationId: widget.reservationId,
-                          );
-                        }
-                      : null,
-            ),
-          )
+                      ? 1
+                      : 0.4,
+              child: CustomButton(
+                title: AppTranslations.completePayment,
+                onTap: widget.terms == null
+                    ? () async {
+                        cubit.getPaymentUrl(
+                          context,
+                          reservationId: widget.reservationId,
+                        );
+                      }
+                    : cubit.isChecked
+                        ? () async {
+                            cubit.getPaymentUrl(
+                              context,
+                              reservationId: widget.reservationId,
+                            );
+                          }
+                        : null,
+              ),
+            )
+          ]
         ],
       );
     });

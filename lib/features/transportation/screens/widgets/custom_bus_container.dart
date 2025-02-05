@@ -205,20 +205,38 @@ class _CustomBusContainerState extends State<CustomBusContainer> {
                                               children: [
                                                 if (widget.isReturn ??
                                                     !cubit.isGoOnly)
+                                                  // Padding(
+                                                  //   padding: const EdgeInsets
+                                                  //       .symmetric(
+                                                  //       horizontal: 8.0),
+                                                  //   child: SvgPicture.asset(
+                                                  //     EasyLocalization.of(
+                                                  //                     context)!
+                                                  //                 .locale
+                                                  //                 .languageCode !=
+                                                  //             'ar'
+                                                  //         ?
+                                                  //          AppIcons.right
+                                                  //         : AppIcons.left,
+                                                  //     height: 17.sp,
+                                                  //   ),
+                                                  // ),
                                                   Padding(
                                                     padding: const EdgeInsets
                                                         .symmetric(
                                                         horizontal: 8.0),
-                                                    child: SvgPicture.asset(
-                                                      EasyLocalization.of(
-                                                                      context)!
-                                                                  .locale
-                                                                  .languageCode !=
-                                                              'ar'
-                                                          ? AppIcons.right
-                                                          : AppIcons.left,
-                                                      height: 17.sp,
-                                                    ),
+                                                    child: Icon(
+                                                        EasyLocalization.of(
+                                                                        context)!
+                                                                    .locale
+                                                                    .languageCode !=
+                                                                'ar'
+                                                            ? CupertinoIcons
+                                                                .arrow_right_circle
+                                                            : CupertinoIcons
+                                                                .arrow_left_circle,
+                                                        size: 30.sp,
+                                                        color: AppColors.grey),
                                                   ),
                                                 AutoSizeText(
                                                   "${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString())))} ${AppTranslations.currency}",
@@ -242,11 +260,22 @@ class _CustomBusContainerState extends State<CustomBusContainer> {
                                                     padding: const EdgeInsets
                                                         .symmetric(
                                                         horizontal: 8.0),
-                                                    child: SvgPicture.asset(
-                                                      AppIcons.twoWays,
-                                                      height: 25.sp,
+                                                    child: Icon(
+                                                      CupertinoIcons
+                                                          .arrow_right_arrow_left_circle,
+                                                      size: 30.sp,
+                                                      color: AppColors.grey,
                                                     ),
                                                   ),
+                                                  // Padding(
+                                                  //   padding: const EdgeInsets
+                                                  //       .symmetric(
+                                                  //       horizontal: 8.0),
+                                                  //   child: SvgPicture.asset(
+                                                  //     AppIcons.twoWays,
+                                                  //     height: 25.sp,
+                                                  //   ),
+                                                  // ),
                                                   AutoSizeText(
                                                     "${formatNumber((double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString())) - (double.parse((widget.busCompanyModel.selectedGoTime?.price ?? 0).toString()) + double.parse((widget.busCompanyModel.selectedReturnTime?.price ?? 0).toString())) * 10 / 100).toString()} ${AppTranslations.currency}",
                                                     maxLines: 1,
@@ -417,8 +446,8 @@ class _CustomEditableBusContainerState
                                                         .locale
                                                         .languageCode !=
                                                     'ar'
-                                                ? CupertinoIcons.arrow_right
-                                                : CupertinoIcons.arrow_left,
+                                                ? CupertinoIcons.arrow_right_circle
+                                                : CupertinoIcons.arrow_left_circle,
                                             size: 25.sp,
                                           ),
                                         ),
@@ -443,7 +472,7 @@ class _CustomEditableBusContainerState
                                               horizontal: 8.0),
                                           child: Icon(
                                             CupertinoIcons
-                                                .arrow_right_arrow_left,
+                                                .arrow_right_arrow_left_circle,
                                             size: 25.sp,
                                           ),
                                         ),

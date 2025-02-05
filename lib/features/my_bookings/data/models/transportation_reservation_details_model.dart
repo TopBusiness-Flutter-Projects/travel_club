@@ -47,11 +47,18 @@ class Data {
   String? returnDate;
   String? bus;
   int? chairs;
+  dynamic plateNumber;
   String? fromDepartureTime;
   String? fromReturnTime;
+  dynamic fromDepartureTimePrice;
+  dynamic fromReturnTimePrice;
   dynamic totalPrice;
   dynamic vat;
+  dynamic rule;
   dynamic totalPriceAfterVat;
+  dynamic canCancel;
+  int? returnGuests;
+  int? departureGuests;
   List<ReservedChairsNumber>? departureReservedChairsNumber;
   List<ReservedChairsNumber>? returnReservedChairsNumber;
 
@@ -64,13 +71,21 @@ class Data {
     this.returnDate,
     this.bus,
     this.chairs,
+
+    this.plateNumber,
     this.fromDepartureTime,
     this.fromReturnTime,
+    this.fromDepartureTimePrice,
+    this.fromReturnTimePrice,
     this.totalPrice,
-    this.vat,
+    this.vat, this.rule,
     this.totalPriceAfterVat,
+    this.returnGuests,
+    this.departureGuests,
+    this.canCancel,
     this.departureReservedChairsNumber,
     this.returnReservedChairsNumber,
+    
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -81,12 +96,18 @@ class Data {
         departureDate: json["departure_date"],
         returnDate: json["return_date"],
         bus: json["bus"],
-        chairs: json["chairs"],
+        chairs: json["chairs"],rule: json["rule"],
+        plateNumber: json["plate_number"],
         fromDepartureTime: json["from_departure_time"],
         fromReturnTime: json["from_return_time"],
+        fromDepartureTimePrice: json["from_departure_time_price"],
+        fromReturnTimePrice: json["from_return_time_price"],
         totalPrice: json["total_price"],
         vat: json["vat"],
         totalPriceAfterVat: json["total_price_after_vat"],
+        canCancel: json["canCancel"],
+        departureGuests: json["departure_guests"],
+        returnGuests: json["return_guests"],
         departureReservedChairsNumber:
             json["departureReservedChairsNumber"] == null
                 ? []
@@ -108,12 +129,19 @@ class Data {
         "departure_date": departureDate,
         "return_date": returnDate,
         "bus": bus,
-        "chairs": chairs,
+        "chairs": chairs, "rule": rule,
+        "plate_number": plateNumber,
         "from_departure_time": fromDepartureTime,
         "from_return_time": fromReturnTime,
+        "from_departure_time_price": fromDepartureTimePrice,
+        "from_return_time_price": fromReturnTimePrice,
         "total_price": totalPrice,
+
         "vat": vat,
         "total_price_after_vat": totalPriceAfterVat,
+        "canCancel": canCancel,
+        "return_guests": returnGuests,
+        "departure_guests": departureGuests,
         "departureReservedChairsNumber": departureReservedChairsNumber == null
             ? []
             : List<dynamic>.from(

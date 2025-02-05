@@ -1,22 +1,24 @@
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_cubit.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_state.dart';
-import 'package:travel_club/features/my_bookings/data/models/residence_reservation_details_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_details_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
+import 'package:travel_club/features/my_bookings/view/residence_booking/widgets/payment_widget.dart';
+import 'package:travel_club/features/payment/screens/widgets/custom_price_widget.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_rounded_button.dart';
 import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
+import 'package:travel_club/features/transportation/screens/widgets/custom_bus_container.dart';
 
 import '../../../../../core/exports.dart';
-import '../../../../transportation/cubit/transportation_cubit.dart';
-import '../../../../transportation/cubit/transportation_state.dart';
 import '../../../../transportation/screens/trip_details_second_screen.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_details_yellow_container.dart';
-import '../../../../transportation/screens/widgets/payment_widget.dart';
+import '../../widgets/transportation_tickets_prices_widget.dart';
 import '../../widgets/show_rate_bottom_sheet.dart';
 import '../widgets/reserved_container.dart';
 
 class DetailsBookingTransportaion extends StatefulWidget {
-  const DetailsBookingTransportaion({super.key});
+  const DetailsBookingTransportaion(
+      {super.key, required this.transportationReservation});
+  final TransportationReservation transportationReservation;
 
   @override
   State<DetailsBookingTransportaion> createState() =>
@@ -31,7 +33,8 @@ class _DetailsBookingTransportaionState
             .read<MyReservationsCubit>()
             .getTransportationReservationDetailsModel =
         GeTransportationReservationDetailsModel();
-    context.read<MyReservationsCubit>().getReservationDetails(reservationId: 8);
+    context.read<MyReservationsCubit>().getReservationDetails(
+        reservationId: widget.transportationReservation.id!);
     super.initState();
   }
 
@@ -45,8 +48,8 @@ class _DetailsBookingTransportaionState
           body: ListView(
             children: [
               CustomTransportationReservedContainer(
-                transportationReservation: TransportationReservation(),
-                isDetails: true,
+                transportationReservation: widget.transportationReservation,
+                isDetails: false,
               ),
               if (cubit.getTransportationReservationDetailsModel.data == null)
                 Padding(
@@ -85,21 +88,28 @@ class _DetailsBookingTransportaionState
                                 .data?.chairs ??
                             4,
                       ),
-                      plateNumber: "dasd",
+                      plateNumber: cubit
+                              .getTransportationReservationDetailsModel
+                              .data
+                              ?.plateNumber ??
+                          '',
                       selectedGoTime: BusTimeInDeparture(
                           fromTime: cubit
                                   .getTransportationReservationDetailsModel
                                   .data
                                   ?.fromDepartureTime ??
                               '',
-                          price: 50),
+                          price: cubit.getTransportationReservationDetailsModel
+                                  .data?.fromDepartureTimePrice ??
+                              "0"),
                       selectedReturnTime: BusTimeInDeparture(
                           fromTime: cubit
                                   .getTransportationReservationDetailsModel
                                   .data
                                   ?.fromReturnTime ??
                               '',
-                          price: 50)),
+                          price: cubit.getTransportationReservationDetailsModel
+                              .data?.fromReturnTimePrice)),
                 ),
                 CustomSelectgedSeatWidget(
                   isReturn: cubit.getTransportationReservationDetailsModel.data
@@ -123,60 +133,78 @@ class _DetailsBookingTransportaionState
                 Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: getHorizontalPadding(context)),
-                  child: Padding(
-                    padding: EdgeInsets.all(10.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //payment
-                        Text(
-                          AppTranslations.paymentDetails,
-                          style: getMediumStyle(fontSize: 14.sp),
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        TransportationPaymentWidget(),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-//button
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomButton(
-                                color: AppColors.red,
-                                title: AppTranslations.cancelBooking,
-                                onTap: () {
-                                  Navigator.pushNamed(context, Routes.payment);
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                                width: 10.w), // Add spacing between buttons
-                            Expanded(
-                                child: CustomRoundedButton(
-                              title: AppTranslations.experienceEvaluation,
-                              onTap: () {
-                                showAddRateBottomSheet(context);
-                              
-                              },
-                            )),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 40.h,
-                        )
-                        // CustomTransportationCopunWidget(),
-                      ],
+                  child: CustomPricesWidget(
+                    isPaid: widget.transportationReservation.process != 0,
+                    ticketsWidget: Padding(
+                      padding: EdgeInsets.only(bottom: 20.h),
+                      child: TransportationTicketspricesWidget(
+                        isReturn: cubit.getTransportationReservationDetailsModel
+                                .data?.returnDate !=
+                            null,
+                        goCounter: cubit
+                                .getTransportationReservationDetailsModel
+                                .data
+                                ?.departureGuests ??
+                            0,
+                        returnCounter: cubit
+                                .getTransportationReservationDetailsModel
+                                .data
+                                ?.returnGuests ??
+                            0,
+                        goPrice: double.parse((cubit
+                                    .getTransportationReservationDetailsModel
+                                    .data
+                                    ?.fromDepartureTimePrice ??
+                                0)
+                            .toString()),
+                        returnPrice: double.parse((cubit
+                                    .getTransportationReservationDetailsModel
+                                    .data
+                                    ?.fromReturnTimePrice ??
+                                0)
+                            .toString()),
+                      ),
                     ),
+
+                    totalPrice: cubit.getTransportationReservationDetailsModel
+                        .data!.totalPrice
+                        .toString(),
+                    totalPriceAfterVat: cubit
+                        .getTransportationReservationDetailsModel
+                        .data!
+                        .totalPriceAfterVat
+                        .toString(),
+                    vat: cubit
+                        .getTransportationReservationDetailsModel.data!.vat
+                        .toString(),
+                    terms: cubit
+                        .getTransportationReservationDetailsModel.data!.rule ,
+                    reservationId: widget.transportationReservation.id ?? 0,
                   ),
+                ),
+                if (cubit.getTransportationReservationDetailsModel.data!
+                        .canCancel !=
+                    null)
+                  CustomButton(
+                    isBordered: true,
+                    title: AppTranslations.cancelBooking,
+                    onTap: () {
+                      // cubit.cancelReservation(context,
+                      //     reservationId: widget
+                      //         .arguments.residenceReservationModel.id!);
+                    },
+                  ),
+                if (widget.transportationReservation.process == 2)
+                  CustomButton(
+                    isBordered: true,
+                    title: AppTranslations.experienceEvaluation,
+                    onTap: () {
+                      showAddRateBottomSheet(context);
+                    
+                    },
+                  ),
+                SizedBox(
+                  height: 40.h,
                 ),
               ]
             ],

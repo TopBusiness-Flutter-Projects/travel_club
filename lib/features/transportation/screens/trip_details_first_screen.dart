@@ -50,105 +50,7 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
                           busCompanyModel: widget.busCompanyModel,
                         ),
                         15.verticalSpace,
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getHorizontalPadding(context)),
-                          child: CustomContainerWithShadow(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: cubit.isGoOnly
-                                  ? Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        CustomTicketDetailsWidget(
-                                          isFirst: true,
-                                          title: AppTranslations.tickets,
-                                          value: "${cubit.goCounter}",
-                                        ),
-                                        CustomTicketDetailsWidget(
-                                            title: AppTranslations.ticketPrice,
-                                            value:
-                                                "${widget.busCompanyModel.selectedGoTime!.price!}"),
-                                        CustomTicketDetailsWidget(
-                                          title: AppTranslations.theTotal,
-                                          value:
-                                              "${cubit.goCounter * widget.busCompanyModel.selectedGoTime!.price!}",
-                                        )
-                                      ],
-                                    )
-                                  : Column(
-                                      children: [
-                                        if (cubit.goCounter !=
-                                            cubit.returnCounter) ...[
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              CustomTicketDetailsWidget(
-                                                isFirst: true,
-                                                title: cubit.goCounter <
-                                                        cubit.returnCounter
-                                                    ? AppTranslations
-                                                        .returnTickets
-                                                    : AppTranslations.goTickets,
-                                                value:
-                                                    "${cubit.goAndReturnDifference()}",
-                                              ),
-                                              CustomTicketDetailsWidget(
-                                                  title: AppTranslations
-                                                      .ticketPrice,
-                                                  value:
-                                                      "${cubit.goCounter < cubit.returnCounter ? widget.busCompanyModel.selectedReturnTime!.price! : widget.busCompanyModel.selectedGoTime!.price!}"),
-                                              CustomTicketDetailsWidget(
-                                                title: AppTranslations.theTotal,
-                                                value:
-                                                    "${cubit.goAndReturnDifference() * (cubit.goCounter < cubit.returnCounter ? widget.busCompanyModel.selectedReturnTime!.price! : widget.busCompanyModel.selectedGoTime!.price!)}",
-                                              )
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 10.h),
-                                            child: DottedLine(
-                                              dashLength: 5,
-                                              dashGapLength: 4,
-                                              lineThickness: 1,
-                                              dashRadius: 2,
-                                              dashColor: AppColors.grey,
-                                            ),
-                                          )
-                                        ],
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomTicketDetailsWidget(
-                                              isFirst: true,
-                                              title: AppTranslations
-                                                  .goAndReturnTickets,
-                                              value:
-                                                  "${cubit.getRoundTripsCounter()}",
-                                            ),
-                                            4.horizontalSpace,
-                                            CustomTicketDetailsWidget(
-                                                title:
-                                                    AppTranslations.ticketPrice,
-                                                value:
-                                                    "${(widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) - (widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) * 10 / 100}"),
-                                            4.horizontalSpace,
-                                            CustomTicketDetailsWidget(
-                                              title: AppTranslations.theTotal,
-                                              value:
-                                                  "${cubit.getRoundTripsCounter() * ((widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) - (widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) * 10 / 100)} ",
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                            ),
-                          ),
-                        ),
+                        CustomTicketsPricesWidget(cubit: cubit, widget: widget),
 
                         // const CustomSeatCatalogeWidget(),
                       ]),
@@ -193,6 +95,120 @@ class _TripDetailsFirstScreenState extends State<TripDetailsFirstScreen> {
             ],
           ));
     });
+  }
+}
+
+class CustomTicketsPricesWidget extends StatelessWidget {
+  const CustomTicketsPricesWidget({
+    super.key,
+    required this.cubit,
+    required this.widget,
+  });
+
+  final TransportationCubit cubit;
+  final TripDetailsFirstScreen widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: getHorizontalPadding(context)),
+      child: CustomContainerWithShadow(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: cubit.isGoOnly
+              ? Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomTicketDetailsWidget(
+                      isFirst: true,
+                      title: AppTranslations.tickets,
+                      value: "${cubit.goCounter}",
+                    ),
+                    CustomTicketDetailsWidget(
+                        title: AppTranslations.ticketPrice,
+                        value:
+                            "${widget.busCompanyModel.selectedGoTime!.price!}"),
+                    CustomTicketDetailsWidget(
+                      title: AppTranslations.theTotal,
+                      value:
+                          "${cubit.goCounter * widget.busCompanyModel.selectedGoTime!.price!}",
+                    )
+                  ],
+                )
+              : Column(
+                  children: [
+                    if (cubit.goCounter !=
+                        cubit.returnCounter) ...[
+                      Row(
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomTicketDetailsWidget(
+                            isFirst: true,
+                            title: cubit.goCounter <
+                                    cubit.returnCounter
+                                ? AppTranslations
+                                    .returnTickets
+                                : AppTranslations.goTickets,
+                            value:
+                                "${cubit.goAndReturnDifference()}",
+                          ),
+                          CustomTicketDetailsWidget(
+                              title: AppTranslations
+                                  .ticketPrice,
+                              value:
+                                  "${cubit.goCounter < cubit.returnCounter ? widget.busCompanyModel.selectedReturnTime!.price! : widget.busCompanyModel.selectedGoTime!.price!}"),
+                          CustomTicketDetailsWidget(
+                            title: AppTranslations.theTotal,
+                            value:
+                                "${cubit.goAndReturnDifference() * (cubit.goCounter < cubit.returnCounter ? widget.busCompanyModel.selectedReturnTime!.price! : widget.busCompanyModel.selectedGoTime!.price!)}",
+                          )
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h),
+                        child: DottedLine(
+                          dashLength: 5,
+                          dashGapLength: 4,
+                          lineThickness: 1,
+                          dashRadius: 2,
+                          dashColor: AppColors.grey,
+                        ),
+                      )
+                    ],
+                    Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomTicketDetailsWidget(
+                          isFirst: true,
+                          title: AppTranslations
+                              .goAndReturnTickets,
+                          value:
+                              "${cubit.getRoundTripsCounter()}",
+                        ),
+                        4.horizontalSpace,
+                        CustomTicketDetailsWidget(
+                            title:
+                                AppTranslations.ticketPrice,
+                            value:
+                                "${(widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) - (widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) * 10 / 100}"),
+                        4.horizontalSpace,
+                        CustomTicketDetailsWidget(
+                          title: AppTranslations.theTotal,
+                          value:
+                              "${cubit.getRoundTripsCounter() * ((widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) - (widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) * 10 / 100)} ",
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+        ),
+      ),
+    );
   }
 }
 
