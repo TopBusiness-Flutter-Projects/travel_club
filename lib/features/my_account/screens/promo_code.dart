@@ -10,7 +10,8 @@ class PromoCodeScreen extends StatelessWidget {
   final String code;
   @override
   Widget build(BuildContext context) {
-    String sharedLink = '${AppTranslations.downloadApp}${AppStrings.inviteLink}${AppTranslations.useCode}$code${AppTranslations.forgetPoints}';
+    String sharedLink =
+        '${AppTranslations.downloadApp}${AppStrings.inviteLink}${AppTranslations.useCode}$code${AppTranslations.forgetPoints}';
 
     return BlocBuilder<AccountCubit, AccountState>(
       builder: (BuildContext context, state) {
@@ -89,7 +90,8 @@ class PromoCodeScreen extends StatelessWidget {
                           child: CustomButton(
                             title: AppTranslations.copyCode,
                             onTap: () {
-                              Clipboard.setData(ClipboardData(text: sharedLink));
+                              Clipboard.setData(
+                                  ClipboardData(text: sharedLink));
                             },
                           ),
                         ),
@@ -99,8 +101,7 @@ class PromoCodeScreen extends StatelessWidget {
                             title: AppTranslations.share,
                             color: AppColors.yellow,
                             onTap: () async {
-                              String url =
-                                 sharedLink;
+                              String url = sharedLink;
                               await Share.share(url);
                             },
                           ),

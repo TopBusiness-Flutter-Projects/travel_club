@@ -8,13 +8,13 @@ class ReservationPaymentDetailsContainer extends StatelessWidget {
     required this.totalPrice,
     required this.vat,
     required this.totalPriceAfterVat,
-    required this.nightes,
+     this.nightes,
   });
 
   final String totalPrice;
   final String vat;
   final String totalPriceAfterVat;
-  final String nightes;
+  final String? nightes;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,7 @@ class ReservationPaymentDetailsContainer extends StatelessWidget {
       padding: const EdgeInsets.all(30.0),
       child: Column(
         children: [
+          if (nightes != null)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

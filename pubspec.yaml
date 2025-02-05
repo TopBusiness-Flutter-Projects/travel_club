@@ -109,6 +109,9 @@ flutter:
 
 
   fonts:
+    - family: Arab
+      fonts:     
+        - asset: assets/fonts/ArbFONTS-GE-SS-Two-Light_28.otf 
     - family: NotoSansArabic
       fonts:     
         - asset: assets/fonts/NotoSansArabic-Light.ttf 

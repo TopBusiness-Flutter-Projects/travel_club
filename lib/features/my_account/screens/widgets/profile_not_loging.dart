@@ -8,13 +8,12 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/widgets/custom_button.dart';
 
-
 class ProfileNotLoging extends StatelessWidget {
-  const ProfileNotLoging({super.key,this.title});
-final String ?title;
+  const ProfileNotLoging({super.key, this.title});
+  final String? title;
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -22,20 +21,41 @@ final String ?title;
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(  title!,style: TextStyle(color: AppColors.black,fontSize: 20.sp,fontWeight: FontWeight.w700),),
+            child: Text(
+              title!,
+              style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w700),
+            ),
           ),
-          SizedBox(height: 50.h,),
+          SizedBox(
+            height: 50.h,
+          ),
           Align(
-            alignment: Alignment.center,
-              child: Text(AppTranslations.notLogin,style: TextStyle(color: AppColors.black,fontSize: 18.sp,fontWeight: FontWeight.w600),)),
-SizedBox(height: 50.h,),
+              alignment: Alignment.center,
+              child: Text(
+                AppTranslations.notLogin,
+                style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w600),
+              )),
+          SizedBox(
+            height: 50.h,
+          ),
           Center(child: Image.asset(ImageAssets.profileNotLogin)),
-          SizedBox(height: 50.h,),
-          CustomButton(title: AppTranslations.login,onTap:
-    () {
-        Navigator.pushNamed(context, Routes.loginRoute);
-      },)
-        ],),
+          SizedBox(
+            height: 50.h,
+          ),
+          CustomButton(
+            title: AppTranslations.login,
+            onTap: () {
+              Navigator.pushNamed(context, Routes.loginRoute);
+            },
+          )
+        ],
+      ),
     );
   }
 }

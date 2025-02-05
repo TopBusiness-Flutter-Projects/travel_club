@@ -7,6 +7,7 @@ import 'package:travel_club/features/payment/screens/widgets/custom_price_widget
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 import '../../../cubit/my_bookings_cubit.dart';
+import '../../widgets/custom_buttons.dart';
 import '../widgets/big_container.dart';
 import '../widgets/payment_widget.dart';
 import '../../widgets/show_rate_bottom_sheet.dart';
@@ -29,10 +30,11 @@ class _ResidenceRessrvationDetailsState
     extends State<ResidenceRessrvationDetails> {
   @override
   void initState() {
-    context.read<MyReservationsCubit>().getResidenceReservationDetails(
-        reservationId: widget.arguments.residenceReservationModel.id!);
     context.read<MyReservationsCubit>().getResidenceReservationDetailsModel =
         GetResidenceReservationDetailsModel();
+    context.read<MyReservationsCubit>().getReservationDetails(
+        reservationId: widget.arguments.residenceReservationModel.id!);
+
     super.initState();
   }
 
@@ -277,27 +279,12 @@ class _ResidenceRessrvationDetailsState
                     if (cubit.getResidenceReservationDetailsModel.data!
                             .canCancel !=
                         null)
-                      CustomButton(
-                        isBordered: true,
-                        title: AppTranslations.cancelBooking,
-                        onTap: () {
-                          cubit.cancelReservation(context,
-                              reservationId: widget
-                                  .arguments.residenceReservationModel.id!);
-                        },
-                      ),
+                      CancelReservationButton(reservationid: widget.arguments.residenceReservationModel.id??0 ,),
 
                     if (cubit.getResidenceReservationDetailsModel.data!
                             .process ==
                         2)
-                      CustomButton(
-                        isBordered: true,
-                        title: AppTranslations.experienceEvaluation,
-                        onTap: () {
-                          showAddRateBottomSheet(context);
-                          // Navigator.pushNamed(context, Routes.);
-                        },
-                      ),
+                      const RateReservationButton(),
 
                     SizedBox(
                       height: 40.h,

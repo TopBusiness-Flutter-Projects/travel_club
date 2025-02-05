@@ -8,49 +8,58 @@ class CustomServiceContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- return BlocBuilder<EntertainmentCubit, EntertainmentState>(builder: (BuildContext context, state) {
-   return Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: CustomContainerWithShadow(child:
-   InkWell(
-     onTap: (){
-       // Navigator.pushNamed(context, Routes.bookTableEntermaint);
-     },
-     child: Padding(
-       padding: const EdgeInsets.all(20.0),
-       child: Row(
-         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-         crossAxisAlignment: CrossAxisAlignment.start,
-         children: [
-           Column(
-             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-             children: [
-               Text(
-                 "تاجير يخت كامل",
-                 style: getSemiBoldStyle(
-                   fontSize: 14.sp,
-                   color: AppColors.secondPrimary,
-                 ),
-               ),
-               SizedBox(height: 20.h,),
-               Text(
-                 "200"+" "+AppTranslations.currency,
-                 style: getSemiBoldStyle(
-                   fontSize: 14.sp,
-                   color: AppColors.green,
-                 ),
-               ),
-             ],
-           ),
-           SizedBox(child: CustomButton(title: AppTranslations.bookNow,width: 123.w,onTap: (){
-             Navigator.pushNamed(context, Routes.bookTableEntermaint);
-
-           })),
-
-         ],
-       ),
-     ),
-   ),),
- ); },);
+    return BlocBuilder<EntertainmentCubit, EntertainmentState>(
+      builder: (BuildContext context, state) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CustomContainerWithShadow(
+            child: InkWell(
+              onTap: () {
+                // Navigator.pushNamed(context, Routes.bookTableEntermaint);
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "تاجير يخت كامل",
+                          style: getSemiBoldStyle(
+                            fontSize: 14.sp,
+                            color: AppColors.secondPrimary,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Text(
+                          "200" + " " + AppTranslations.currency,
+                          style: getSemiBoldStyle(
+                            fontSize: 14.sp,
+                            color: AppColors.green,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                        child: CustomButton(
+                            title: AppTranslations.bookNow,
+                            width: 123.w,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, Routes.bookTableEntermaint);
+                            })),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

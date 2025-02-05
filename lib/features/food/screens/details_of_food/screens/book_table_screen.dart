@@ -45,21 +45,21 @@ class BookTableScreen extends StatelessWidget {
                           AppTranslations.selectBookingDate,
                           style: getMediumStyle(fontSize: 14.sp),
                         ),
-                    Container(
-          decoration: BoxDecoration(
-            color: AppColors.lightWhite2,
-            borderRadius: BorderRadius.circular(30.r),
-          ),
-          child:Padding(
-                  padding: EdgeInsets.all(18.h),
-                  child: DatePickerField(
-                    selectedDate: cubit.singleDate,
-                    isSingle: true,
-                    onTap: () {
-                      cubit.onSelectedDateSingle(context: context);
-                    },
-                  ),
-                )),
+                        Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.lightWhite2,
+                              borderRadius: BorderRadius.circular(30.r),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(18.h),
+                              child: DatePickerField(
+                                selectedDate: cubit.singleDate,
+                                isSingle: true,
+                                onTap: () {
+                                  cubit.onSelectedDateSingle(context: context);
+                                },
+                              ),
+                            )),
                         Text(
                           AppTranslations.numberOfAttendees,
                           style: getMediumStyle(fontSize: 14.sp),
@@ -109,7 +109,7 @@ class CustomMealContainer extends StatelessWidget {
   });
 
   final FoodCubit cubit;
-final bool isSecondBooking;
+  final bool isSecondBooking;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -145,43 +145,44 @@ final bool isSecondBooking;
                   SizedBox(
                     height: 8.h,
                   ),
-                  isSecondBooking?
-                  AutoSizeText(
-                    "عدد"+" "+'${cubit.itemsQty}' ,
-                    maxLines: 2,
-                    style: getSemiBoldStyle(fontSize: 14.sp, fontHeight: 1),
-                  ):
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          cubit.addOrRemoveMenuCart(true);
-                        },
-                        child: Icon(
-                          CupertinoIcons.add_circled,
-                          color: AppColors.primary,
-                          size: 20.sp,
-                        ),
-                      ),
-                      if (cubit.itemsQty > 0) ...[
-                        Text(
-                          " ${cubit.itemsQty} ",
-                          style: getSemiBoldStyle(
-                              fontSize: 14.sp, color: AppColors.primary),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            cubit.addOrRemoveMenuCart(false);
-                          },
-                          child: Icon(
-                            CupertinoIcons.minus_circled,
-                            color: AppColors.primary,
-                            size: 20.sp,
-                          ),
-                        ),
-                      ],
-                    ],
-                  )
+                  isSecondBooking
+                      ? AutoSizeText(
+                          "عدد" + " " + '${cubit.itemsQty}',
+                          maxLines: 2,
+                          style:
+                              getSemiBoldStyle(fontSize: 14.sp, fontHeight: 1),
+                        )
+                      : Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                cubit.addOrRemoveMenuCart(true);
+                              },
+                              child: Icon(
+                                CupertinoIcons.add_circled,
+                                color: AppColors.primary,
+                                size: 20.sp,
+                              ),
+                            ),
+                            if (cubit.itemsQty > 0) ...[
+                              Text(
+                                " ${cubit.itemsQty} ",
+                                style: getSemiBoldStyle(
+                                    fontSize: 14.sp, color: AppColors.primary),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  cubit.addOrRemoveMenuCart(false);
+                                },
+                                child: Icon(
+                                  CupertinoIcons.minus_circled,
+                                  color: AppColors.primary,
+                                  size: 20.sp,
+                                ),
+                              ),
+                            ],
+                          ],
+                        )
                 ],
               ),
             ),

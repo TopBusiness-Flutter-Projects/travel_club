@@ -41,10 +41,10 @@ void showAddRateBottomSheet(BuildContext context) {
         child: Column(
           children: [
             10.verticalSpace,
-      
+
             /// **Custom Drag Handle**
             const DragBottomSheet(),
-      
+
             30.verticalSpace,
             Flexible(
               child: SingleChildScrollView(
@@ -66,7 +66,7 @@ void showAddRateBottomSheet(BuildContext context) {
                       ],
                     ),
                     20.verticalSpace,
-      
+
                     /// **تقييم الأسئلة**
                     _buildRatingSection(
                         AppTranslations.howRateExperienceClean, cubit, 0),
@@ -79,7 +79,7 @@ void showAddRateBottomSheet(BuildContext context) {
                         cubit,
                         3,
                         allowHalfRating: true),
-      
+
                     20.verticalSpace,
                     Text(
                       AppTranslations.writeComment,

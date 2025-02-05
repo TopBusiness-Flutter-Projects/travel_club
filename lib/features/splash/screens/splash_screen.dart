@@ -232,10 +232,10 @@ class _SplashScreenState extends State<SplashScreen>
     print("the link is : ${initialDeepLink.toString()}");
     if (initialDeepLink.toString().contains("transportation")) {
       String id = initialDeepLink.queryParameters['id'] ?? "-1";
-      Navigator.pushReplacementNamed(
-        context,
-        Routes.detailsbookingTransportation,
-      );
+      // Navigator.pushReplacementNamed(
+      //   context,
+      //   Routes.detailsbookingTransportation,
+      // );
     } else if (initialDeepLink.toString().contains("lodge") &&
         initialDeepLink.queryParameters['id'] != null) {
       String? id = initialDeepLink.queryParameters['id'];

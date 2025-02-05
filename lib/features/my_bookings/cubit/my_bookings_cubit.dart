@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
+import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_details_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
 import '../data/models/residence_reservation_details_model.dart';
 import '../data/models/residence_reservation_model.dart';
@@ -17,22 +18,41 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   double rating = 0; // Default rating
   List<double> rates = [3, 3, 3, 3];
 
+/////// counter ///////
+
+  int goAndReturnDifference(
+      {required int goCounter, required int returnCounter}) {
+    int difference = returnCounter - goCounter;
+    return difference > 0
+        ? difference
+        : -difference; // Ensure the result is positive
+  }
+
+  int getRoundTripsCounter(
+      {required int goCounter, required int returnCounter}) {
+    if (goCounter <= returnCounter) {
+      return goCounter;
+    } else {
+      return returnCounter;
+    }
+  }
+
   GetMyResidenceReservationModel residenceReservationModel =
       GetMyResidenceReservationModel();
   GetMyTransportationReservationModel transportationReservationModel =
       GetMyTransportationReservationModel();
-  getMyReservation() async {
+  getMyReservation( {required int moduleId}) async {
     emit(LoadingReservationBooking());
     final res = await api.getMyReservation(
-      moduleId: selectedModuleId,
+      moduleId: moduleId,
     );
     res.fold((l) {
       emit(ErrorReservationBooking());
     }, (r) {
-      if (selectedModuleId == 1) {
+      if (moduleId == 1) {
         residenceReservationModel = r;
       }
-      if (selectedModuleId == 2) {
+      if (moduleId == 2) {
         transportationReservationModel = r;
       }
       emit(LoadedReservationBooking());
@@ -41,7 +61,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
 
   void changeModule(int moduleId) {
     selectedModuleId = moduleId;
-    getMyReservation();
+    getMyReservation(moduleId: moduleId);
     emit(IndexChanged());
   }
 
@@ -65,7 +85,15 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       if (r.data == false) {
         errorGetBar(r.msg ?? AppTranslations.error);
       } else {
-        getResidenceReservationDetails(reservationId: reservationId);
+        if (selectedModuleId == 1) {
+          residenceReservationModel = GetMyResidenceReservationModel();
+        }
+        if (selectedModuleId == 2) {
+          transportationReservationModel =
+              GetMyTransportationReservationModel();
+        }
+        getMyReservation(moduleId: selectedModuleId);
+        getReservationDetails(reservationId: reservationId);
         Navigator.pop(context);
         successGetBar(r.msg);
       }
@@ -76,7 +104,10 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   /// reservation details
   GetResidenceReservationDetailsModel getResidenceReservationDetailsModel =
       GetResidenceReservationDetailsModel();
-  getResidenceReservationDetails({
+  GeTransportationReservationDetailsModel
+      getTransportationReservationDetailsModel =
+      GeTransportationReservationDetailsModel();
+  getReservationDetails({
     required int reservationId,
   }) async {
     emit(LoadingGetReservationDetailsState());
@@ -85,7 +116,12 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
     res.fold((l) {
       emit(FailureGetReservationDetailsState());
     }, (r) {
-      getResidenceReservationDetailsModel = r;
+      if (selectedModuleId == 1) {
+        getResidenceReservationDetailsModel = r;
+      }
+      if (selectedModuleId == 2) {
+        getTransportationReservationDetailsModel = r;
+      }
       emit(SucessGetReservationDetailsState());
     });
   }
