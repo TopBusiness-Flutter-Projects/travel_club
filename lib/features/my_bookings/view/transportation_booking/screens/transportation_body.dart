@@ -14,32 +14,37 @@ class TransportationReservedBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit=context.read<MyReservationsCubit>();
+    var cubit = context.read<MyReservationsCubit>();
     return BlocBuilder<MyReservationsCubit, MyReservationsState>(
       builder: (BuildContext context, state) {
         return Expanded(
-            child:
-            cubit.transportationReservationModel.data == null
+            child: cubit.transportationReservationModel.data == null
                 ? Center(
-              child: CustomLoadingIndicator(),
-            )
-                : cubit.transportationReservationModel.data!.reservations!.isEmpty
-                ? Center(
-              child: Text('no_reservation'.tr()),
-            )
-                :
-            ListView.builder(
-              shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
-              itemCount:  cubit.transportationReservationModel.data!.reservations!.length,
-              itemBuilder: (BuildContext context, int index) {
-                return CustomTransportationReservedContainer(
-                  transportationReservation: cubit.transportationReservationModel.data!.reservations![index] ,
-                  isDetails: true,
-                );
-              },
-            )
-        );
+                    child: CustomLoadingIndicator(),
+                  )
+                : cubit.transportationReservationModel.data!.reservations!
+                        .isEmpty
+                    ? Center(
+                        child: Text('no_reservation'.tr()),
+                      )
+                    : Padding(
+                        padding: EdgeInsets.only(bottom: 90.h),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                          itemCount: cubit.transportationReservationModel.data!
+                              .reservations!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CustomTransportationReservedContainer(
+                              transportationReservation: cubit
+                                  .transportationReservationModel
+                                  .data!
+                                  .reservations![index],
+                              isDetails: true,
+                            );
+                          },
+                        ),
+                      ));
       },
     );
   }

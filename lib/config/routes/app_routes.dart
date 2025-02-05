@@ -8,6 +8,7 @@ import 'package:travel_club/features/my_account/screens/contact_us.dart';
 import 'package:travel_club/features/my_account/screens/points.dart';
 import 'package:travel_club/features/my_account/screens/promo_code.dart';
 import 'package:travel_club/features/my_account/screens/update_password.dart';
+import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
 import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/other_services/screens/other_services_screen.dart';
 import 'package:travel_club/features/other_services/screens/single_service_details.dart';
@@ -174,8 +175,9 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsbookingTransportation:
+        TransportationReservation transportationReservation = settings.arguments as TransportationReservation;
         return PageTransition(
-          child: const DetailsBookingTransportaion(),
+          child:  DetailsBookingTransportaion( transportationReservation: transportationReservation,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

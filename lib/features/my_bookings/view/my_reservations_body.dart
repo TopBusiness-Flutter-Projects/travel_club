@@ -25,8 +25,7 @@ class _ReservationsBodyState extends State<ReservationsBody> {
     if (context.read<HomeCubit>().homeModel.data == null) {
       context.read<HomeCubit>().getHomeData();
     }
-    context.read<MyReservationsCubit>().getMyReservation();
-
+    context.read<MyReservationsCubit>().getMyReservation(moduleId: context.read<MyReservationsCubit>().selectedModuleId );
     super.initState();
   }
 

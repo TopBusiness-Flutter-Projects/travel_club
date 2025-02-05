@@ -6,7 +6,8 @@ export 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppStrings {
   static const String appName = 'Traverl Club';
-  static const String fontFamily = 'NotoSansArabic';
+  static const String fontFamily = 'Arab';
+  // static const String fontFamily = 'NotoSansArabic';
   static const String noRouteFound = 'No Route Found';
   static const String contentType = 'Content-Type';
   static const String applicationJson = 'application/json';

@@ -26,16 +26,16 @@ class _BestChosenScreenState extends State<BestChosenScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                   CustomButton(
-                            isBordered:   cubit.changedRooms == 0
-                                ? true : false,
-                            onTap: () {
-                              cubit. addRoomReservation(context);
-                            },
-                            title:   cubit.changedRooms == 0
-                                ? AppTranslations.skip : AppTranslations.confirm,
-                            width: getWidthSize(context) / 2,
-                          )
+                    CustomButton(
+                      isBordered: cubit.changedRooms == 0 ? true : false,
+                      onTap: () {
+                        cubit.addRoomReservation(context);
+                      },
+                      title: cubit.changedRooms == 0
+                          ? AppTranslations.skip
+                          : AppTranslations.confirm,
+                      width: getWidthSize(context) / 2,
+                    )
                   ],
                 ),
               )),
@@ -89,10 +89,14 @@ class _BestChosenScreenState extends State<BestChosenScreen> {
                                           ? cubit.changedRooms--
                                           : cubit.changedRooms++;
                                     });
-                                    cubit.selectedRooms[index].recommend!.isSelectedRecommend = !cubit.selectedRooms[index].recommend!.isSelectedRecommend;
+                                    cubit.selectedRooms[index].recommend!
+                                            .isSelectedRecommend =
+                                        !cubit.selectedRooms[index].recommend!
+                                            .isSelectedRecommend;
 
-                                  //  cubit.addOrRemoveRoom( cubit.selectedRooms[index].recommend);
-                                    debugPrint(cubit.selectedRooms.length.toString());
+                                    //  cubit.addOrRemoveRoom( cubit.selectedRooms[index].recommend);
+                                    debugPrint(
+                                        cubit.selectedRooms.length.toString());
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),

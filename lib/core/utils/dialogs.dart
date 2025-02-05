@@ -133,8 +133,6 @@ loadingDialog({required bool isLoading, required Widget child}) {
 /*------------------------------  Bottom Sheet  ----------------------------*/
 /*----------------------------------------------------------------------------*/
 
-
-
 /*----------------------------------------------------------------------------*/
 /*------------------------------  Custom Dialogs  ----------------------------*/
 /*----------------------------------------------------------------------------*/
@@ -155,12 +153,10 @@ checkLoggingStatus(BuildContext context, {void Function()? onPressed}) async {
         ),
       ),
       animType: AnimType.topSlide,
-       showCloseIcon: true,
-
+      showCloseIcon: true,
       padding: EdgeInsets.all(10.w),
       title: AppTranslations.notLogin,
-          titleTextStyle: getRegularStyle(fontSize: 16.sp),
-
+      titleTextStyle: getRegularStyle(fontSize: 16.sp),
       btnOkText: AppTranslations.login,
       btnOkOnPress: () {
         Navigator.pushNamedAndRemoveUntil(
@@ -173,9 +169,7 @@ checkLoggingStatus(BuildContext context, {void Function()? onPressed}) async {
 }
 
 /// check is Go Tohome
-checkGoToHome(
-  BuildContext context, { String ? message}
-) async {
+checkGoToHome(BuildContext context, {String? message}) async {
   await AwesomeDialog(
     context: context,
     customHeader: Padding(
@@ -188,7 +182,6 @@ checkGoToHome(
     padding: EdgeInsets.all(10.w),
     title: AppTranslations.reservationWillCanceled,
     titleTextStyle: getRegularStyle(fontSize: 16.sp),
-
     showCloseIcon: true,
     btnOk: CustomButton(
         title: AppTranslations.goHome,
@@ -196,11 +189,10 @@ checkGoToHome(
           Navigator.pushNamedAndRemoveUntil(
               context, Routes.mainRoute, (route) => false);
         }),
-   
   ).show();
 }
 
- // Exit app
+// Exit app
 showExitDialog(BuildContext context) async {
   AwesomeDialog(
     context: context,
@@ -216,9 +208,8 @@ showExitDialog(BuildContext context) async {
     animType: AnimType.topSlide,
     padding: EdgeInsets.all(10.w),
     title: AppTranslations.areYouSureClose,
-        titleTextStyle: getRegularStyle(fontSize: 16.sp),
-            showCloseIcon: true,
-
+    titleTextStyle: getRegularStyle(fontSize: 16.sp),
+    showCloseIcon: true,
 
     btnOkText: AppTranslations.exit,
     btnOkOnPress: () {

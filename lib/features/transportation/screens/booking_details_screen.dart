@@ -70,7 +70,9 @@ class _TransportationBookingDetailsScreenState
                                 style: getMediumStyle(fontSize: 14.sp)),
                           ),
                           const CustomFromToDate(),
-                          const CustomTicketsWidget(isClickable: true,),
+                          const CustomTicketsWidget(
+                            isClickable: true,
+                          ),
                           if (!cubit.isGoOnly)
                             const CustomTicketsWidget(
                               isReturn: true,
