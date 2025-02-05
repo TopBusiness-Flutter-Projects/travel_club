@@ -68,12 +68,13 @@ class MyReservationsRepoImpl {
   }
   /// add rate
   Future<Either<Failure, CancelReservationModel>> addRate(
-      {required int moduleId, required int reservationId, required String comment, required List<double> rates}) async {
+      {required int moduleId, required int reservationId, required int id, required String comment, required List<double> rates}) async {
     try {
       var response =
-          await dio.post(EndPoints.cancelReservationurl, body: {
-        "module_id": moduleId,
-        "reservation_id": reservationId,
+          await dio.post(EndPoints.addRate, body: {
+        "module_id": moduleId.toString(),
+        "id": id.toString(),
+        "reservation_id": reservationId.toString(),
        if (comment.isNotEmpty)  "comment" : comment,
         "rates" :rates
       });

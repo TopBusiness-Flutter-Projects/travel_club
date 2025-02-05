@@ -18,13 +18,14 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   TextEditingController rateCommentController = TextEditingController();
   List<double> rates = [3, 3, 3, 3];
  
- addRate(BuildContext context ,{required int reservationId }) async {   
+ addRate(BuildContext context ,{required int reservationId ,required int id}) async {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
     emit(LoadingCancelReservation());
     final res = await api.addRate(
-        moduleId: selectedModuleId, reservationId: reservationId,
+        moduleId: selectedModuleId,
+        reservationId: reservationId,
         comment: rateCommentController.text,
-        rates: rates 
+        rates: rates, id: id
         );
     res.fold((l) {
       Navigator.pop(context);
