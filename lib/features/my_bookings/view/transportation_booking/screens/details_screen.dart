@@ -196,7 +196,9 @@ class _DetailsBookingTransportaionState
                   Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: getHorizontalPadding(context)),
-                      child: const RateReservationButton()),
+                      child: RateReservationButton(
+                        reservationId: widget.transportationReservation.id ?? 0,
+                      )),
                 SizedBox(
                   height: 40.h,
                 ),
