@@ -14,7 +14,6 @@ void showAddRateBottomSheet(BuildContext context , {required int reservationId,r
 
   // Create a ScrollController to handle scrolling
   final ScrollController scrollController = ScrollController();
-
   showModalBottomSheet(
     context: context,
     useSafeArea: true,
