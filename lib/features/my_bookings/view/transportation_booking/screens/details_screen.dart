@@ -3,6 +3,7 @@ import 'package:travel_club/features/my_bookings/cubit/my_bookings_state.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_details_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
 import 'package:travel_club/features/my_bookings/view/residence_booking/widgets/payment_widget.dart';
+import 'package:travel_club/features/my_bookings/view/widgets/custom_buttons.dart';
 import 'package:travel_club/features/payment/screens/widgets/custom_price_widget.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_rounded_button.dart';
 import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
@@ -165,7 +166,6 @@ class _DetailsBookingTransportaionState
                             .toString()),
                       ),
                     ),
-
                     totalPrice: cubit.getTransportationReservationDetailsModel
                         .data!.totalPrice
                         .toString(),
@@ -178,31 +178,25 @@ class _DetailsBookingTransportaionState
                         .getTransportationReservationDetailsModel.data!.vat
                         .toString(),
                     terms: cubit
-                        .getTransportationReservationDetailsModel.data!.rule ,
+                        .getTransportationReservationDetailsModel.data!.rule,
                     reservationId: widget.transportationReservation.id ?? 0,
                   ),
                 ),
                 if (cubit.getTransportationReservationDetailsModel.data!
                         .canCancel !=
                     null)
-                  CustomButton(
-                    isBordered: true,
-                    title: AppTranslations.cancelBooking,
-                    onTap: () {
-                      // cubit.cancelReservation(context,
-                      //     reservationId: widget
-                      //         .arguments.residenceReservationModel.id!);
-                    },
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getHorizontalPadding(context)),
+                    child: CancelReservationButton(
+                      reservationid: widget.transportationReservation.id ?? 0,
+                    ),
                   ),
-                if (widget.transportationReservation.process == 2)
-                  CustomButton(
-                    isBordered: true,
-                    title: AppTranslations.experienceEvaluation,
-                    onTap: () {
-                      showAddRateBottomSheet(context);
-                    
-                    },
-                  ),
+                if (widget.transportationReservation.process == 2) // completed
+                  Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: getHorizontalPadding(context)),
+                      child: const RateReservationButton()),
                 SizedBox(
                   height: 40.h,
                 ),

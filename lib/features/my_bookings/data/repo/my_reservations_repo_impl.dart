@@ -30,20 +30,6 @@ class MyReservationsRepoImpl {
     }
   }
 
-  //cancel reservation
-  Future<Either<Failure, CancelReservationModel>> cancelReservation(
-      {required int moduleId, required int reservationId}) async {
-    try {
-      var response =
-          await dio.post(EndPoints.cancelReservationurl, queryParameters: {
-        "module_id": moduleId,
-        "reservation_id": reservationId,
-      });
-      return Right(CancelReservationModel.fromJson(response));
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
 
   Future<Either<Failure, dynamic>> getResidenceReservationDetails(
       {required int reservationId, required int moduleId}) async {
@@ -60,6 +46,22 @@ class MyReservationsRepoImpl {
               ? Right(
                   GeTransportationReservationDetailsModel.fromJson(response))
               : Right(response);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  
+
+  //cancel reservation
+  Future<Either<Failure, CancelReservationModel>> cancelReservation(
+      {required int moduleId, required int reservationId}) async {
+    try {
+      var response =
+          await dio.post(EndPoints.cancelReservationurl, queryParameters: {
+        "module_id": moduleId,
+        "reservation_id": reservationId,
+      });
+      return Right(CancelReservationModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

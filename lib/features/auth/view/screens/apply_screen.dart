@@ -59,12 +59,12 @@ class _ApplyScreenState extends State<ApplyScreen> {
               CustomForward(
                 onTap: () {
                   AwesomeDialog(
-                    closeIcon: GestureDetector(
-                      onTap: (){
-                        Navigator.pop(context);
-                        cubit.codeController.clear();
-                      },
-                        child: Icon(Icons.close)),
+                      closeIcon: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                            cubit.codeController.clear();
+                          },
+                          child: Icon(Icons.close)),
                       showCloseIcon: true,
                       dialogBackgroundColor: AppColors.white,
                       context: context,
@@ -75,53 +75,54 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         ),
                       ),
                       animType: AnimType.topSlide,
-                   //   showCloseIcon: true,
-                      body: BlocBuilder<LoginCubit, LoginState>(builder: (BuildContext context, state) {
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              textAlign: TextAlign.center,
-                              AppTranslations.enterCodeToGetPoints,
-                              style: getRegularStyle(fontSize: 16.sp),
-                            ),
-                            CustomTextField(
-                              onChanged: (value) {
-                                cubit.changeCode(value);
-                              },
-                              controller:cubit. codeController,
-                              keyboardType: TextInputType.number,
-                              hintText: AppTranslations.enterCode,
-                            ),
-                            Row(
-                                children: [
-                                  Expanded(
-                                    child: CustomButton(
-                                      title: AppTranslations.skip,
-                                      isBordered: true,
-                                      onTap: () {
-                                        Navigator.pushNamedAndRemoveUntil(
-                                            context, Routes.mainRoute, (
-                                            route) => false);
-                                      },
-                                    ),
+                      //   showCloseIcon: true,
+                      body: BlocBuilder<LoginCubit, LoginState>(
+                        builder: (BuildContext context, state) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                textAlign: TextAlign.center,
+                                AppTranslations.enterCodeToGetPoints,
+                                style: getRegularStyle(fontSize: 16.sp),
+                              ),
+                              CustomTextField(
+                                onChanged: (value) {
+                                  cubit.changeCode(value);
+                                },
+                                controller: cubit.codeController,
+                                keyboardType: TextInputType.number,
+                                hintText: AppTranslations.enterCode,
+                              ),
+                              Row(children: [
+                                Expanded(
+                                  child: CustomButton(
+                                    title: AppTranslations.skip,
+                                    isBordered: true,
+                                    onTap: () {
+                                      Navigator.pushNamedAndRemoveUntil(context,
+                                          Routes.mainRoute, (route) => false);
+                                    },
                                   ),
-                                  SizedBox(width: 5.w,),
-                                  if(cubit.codeController.text.isNotEmpty)    Expanded(
+                                ),
+                                SizedBox(
+                                  width: 5.w,
+                                ),
+                                if (cubit.codeController.text.isNotEmpty)
+                                  Expanded(
                                     child: CustomButton(
                                       title: AppTranslations.next,
                                       onTap: () {
-                                        cubit.acceptReferral(
-                                            context, code: cubit.codeController.text);
+                                        cubit.acceptReferral(context,
+                                            code: cubit.codeController.text);
                                       },
                                     ),
                                   ),
-                                ])
-                          ],
-                        );
-                      },
-                      )
-                  ).show();
+                              ])
+                            ],
+                          );
+                        },
+                      )).show();
                 },
               )
             ],

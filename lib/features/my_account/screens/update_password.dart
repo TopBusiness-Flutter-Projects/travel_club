@@ -79,10 +79,9 @@ class UpdatePassword extends StatelessWidget {
                         child: CustomButton(
                           title: AppTranslations.savedChanges,
                           onTap: () {
-                             if (formPass.currentState!.validate()) {
-                                cubit.updatePassword(context);
-                              }
-                            
+                            if (formPass.currentState!.validate()) {
+                              cubit.updatePassword(context);
+                            }
                           },
                         ),
                       ),

@@ -16,7 +16,6 @@ class ResidenceBooking extends StatefulWidget {
 }
 
 class _ResidenceBookingState extends State<ResidenceBooking> {
-  
   bool isSend = false;
   @override
   void initState() {

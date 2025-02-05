@@ -111,15 +111,13 @@ class CustomTicketsPricesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: getHorizontalPadding(context)),
+      padding: EdgeInsets.symmetric(horizontal: getHorizontalPadding(context)),
       child: CustomContainerWithShadow(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: cubit.isGoOnly
               ? Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomTicketDetailsWidget(
                       isFirst: true,
@@ -139,25 +137,19 @@ class CustomTicketsPricesWidget extends StatelessWidget {
                 )
               : Column(
                   children: [
-                    if (cubit.goCounter !=
-                        cubit.returnCounter) ...[
+                    if (cubit.goCounter != cubit.returnCounter) ...[
                       Row(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomTicketDetailsWidget(
                             isFirst: true,
-                            title: cubit.goCounter <
-                                    cubit.returnCounter
-                                ? AppTranslations
-                                    .returnTickets
+                            title: cubit.goCounter < cubit.returnCounter
+                                ? AppTranslations.returnTickets
                                 : AppTranslations.goTickets,
-                            value:
-                                "${cubit.goAndReturnDifference()}",
+                            value: "${cubit.goAndReturnDifference()}",
                           ),
                           CustomTicketDetailsWidget(
-                              title: AppTranslations
-                                  .ticketPrice,
+                              title: AppTranslations.ticketPrice,
                               value:
                                   "${cubit.goCounter < cubit.returnCounter ? widget.busCompanyModel.selectedReturnTime!.price! : widget.busCompanyModel.selectedGoTime!.price!}"),
                           CustomTicketDetailsWidget(
@@ -168,8 +160,7 @@ class CustomTicketsPricesWidget extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.h),
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
                         child: DottedLine(
                           dashLength: 5,
                           dashGapLength: 4,
@@ -180,20 +171,16 @@ class CustomTicketsPricesWidget extends StatelessWidget {
                       )
                     ],
                     Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomTicketDetailsWidget(
                           isFirst: true,
-                          title: AppTranslations
-                              .goAndReturnTickets,
-                          value:
-                              "${cubit.getRoundTripsCounter()}",
+                          title: AppTranslations.goAndReturnTickets,
+                          value: "${cubit.getRoundTripsCounter()}",
                         ),
                         4.horizontalSpace,
                         CustomTicketDetailsWidget(
-                            title:
-                                AppTranslations.ticketPrice,
+                            title: AppTranslations.ticketPrice,
                             value:
                                 "${(widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) - (widget.busCompanyModel.selectedGoTime!.price! + widget.busCompanyModel.selectedReturnTime!.price!) * 10 / 100}"),
                         4.horizontalSpace,
@@ -273,7 +260,8 @@ class CustomSeatCatalogeWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.lightWhite,
                     shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(25.r), // Circular with rounded corners
+                    borderRadius: BorderRadius.circular(
+                        25.r), // Circular with rounded corners
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),

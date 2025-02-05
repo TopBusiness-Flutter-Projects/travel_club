@@ -18,17 +18,18 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   double rating = 0; // Default rating
   List<double> rates = [3, 3, 3, 3];
 
+/////// counter ///////
 
-/////// counter /////// 
-
- int goAndReturnDifference( {required int goCounter,required int returnCounter}) {
+  int goAndReturnDifference(
+      {required int goCounter, required int returnCounter}) {
     int difference = returnCounter - goCounter;
     return difference > 0
         ? difference
         : -difference; // Ensure the result is positive
   }
 
-  int getRoundTripsCounter( {required int goCounter,required int returnCounter}) {
+  int getRoundTripsCounter(
+      {required int goCounter, required int returnCounter}) {
     if (goCounter <= returnCounter) {
       return goCounter;
     } else {
@@ -36,31 +37,22 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
     }
   }
 
-    
-
-
-
-
-
-
-
-
   GetMyResidenceReservationModel residenceReservationModel =
       GetMyResidenceReservationModel();
   GetMyTransportationReservationModel transportationReservationModel =
       GetMyTransportationReservationModel();
-  getMyReservation() async {
+  getMyReservation( {required int moduleId}) async {
     emit(LoadingReservationBooking());
     final res = await api.getMyReservation(
-      moduleId: selectedModuleId,
+      moduleId: moduleId,
     );
     res.fold((l) {
       emit(ErrorReservationBooking());
     }, (r) {
-      if (selectedModuleId == 1) {
+      if (moduleId == 1) {
         residenceReservationModel = r;
       }
-      if (selectedModuleId == 2) {
+      if (moduleId == 2) {
         transportationReservationModel = r;
       }
       emit(LoadedReservationBooking());
@@ -69,7 +61,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
 
   void changeModule(int moduleId) {
     selectedModuleId = moduleId;
-    getMyReservation();
+    getMyReservation(moduleId: moduleId);
     emit(IndexChanged());
   }
 
@@ -93,6 +85,14 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       if (r.data == false) {
         errorGetBar(r.msg ?? AppTranslations.error);
       } else {
+        if (selectedModuleId == 1) {
+          residenceReservationModel = GetMyResidenceReservationModel();
+        }
+        if (selectedModuleId == 2) {
+          transportationReservationModel =
+              GetMyTransportationReservationModel();
+        }
+        getMyReservation(moduleId: selectedModuleId);
         getReservationDetails(reservationId: reservationId);
         Navigator.pop(context);
         successGetBar(r.msg);
