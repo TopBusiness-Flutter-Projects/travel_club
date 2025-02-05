@@ -15,9 +15,41 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   int selectedModuleId = 1;
   ModuleModel? selectedModule;
 
-  double rating = 0; // Default rating
+  TextEditingController rateCommentController = TextEditingController();
   List<double> rates = [3, 3, 3, 3];
-
+ 
+ addRate(BuildContext context ,{required int reservationId }) async {   
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    emit(LoadingCancelReservation());
+    final res = await api.addRate(
+        moduleId: selectedModuleId, reservationId: reservationId,
+        comment: rateCommentController.text,
+        rates: rates 
+        );
+    res.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(ErrorCancelReservation());
+    }, (r) {
+      Navigator.pop(context);
+      if (r.data == false) {
+        errorGetBar(r.msg ?? AppTranslations.error);
+      } else {
+        if (selectedModuleId == 1) {
+          residenceReservationModel = GetMyResidenceReservationModel();
+        }
+        if (selectedModuleId == 2) {
+          transportationReservationModel =
+              GetMyTransportationReservationModel();
+        }
+        getMyReservation(moduleId: selectedModuleId);
+        getReservationDetails(reservationId: reservationId);
+        Navigator.pop(context);
+        successGetBar(r.msg);
+      }
+      emit(LoadedCancelReservation());
+    });
+  }
 /////// counter ///////
 
   int goAndReturnDifference(
@@ -125,4 +157,5 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       emit(SucessGetReservationDetailsState());
     });
   }
+
 }

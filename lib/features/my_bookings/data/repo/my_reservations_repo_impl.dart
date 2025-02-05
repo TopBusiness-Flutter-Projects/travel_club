@@ -30,7 +30,7 @@ class MyReservationsRepoImpl {
     }
   }
 
-
+// reservation details
   Future<Either<Failure, dynamic>> getResidenceReservationDetails(
       {required int reservationId, required int moduleId}) async {
     try {
@@ -57,9 +57,25 @@ class MyReservationsRepoImpl {
       {required int moduleId, required int reservationId}) async {
     try {
       var response =
-          await dio.post(EndPoints.cancelReservationurl, queryParameters: {
+          await dio.post(EndPoints.cancelReservationurl, body: {
         "module_id": moduleId,
         "reservation_id": reservationId,
+      });
+      return Right(CancelReservationModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  /// add rate
+  Future<Either<Failure, CancelReservationModel>> addRate(
+      {required int moduleId, required int reservationId, required String comment, required List<double> rates}) async {
+    try {
+      var response =
+          await dio.post(EndPoints.cancelReservationurl, body: {
+        "module_id": moduleId,
+        "reservation_id": reservationId,
+       if (comment.isNotEmpty)  "comment" : comment,
+        "rates" :rates
       });
       return Right(CancelReservationModel.fromJson(response));
     } on ServerException {
