@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:travel_club/features/auth/data/models/default_model.dart';
 
 import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
@@ -22,6 +23,25 @@ class FavouritesRepoImpl {
           : moduleId == 2 // transportation
           ? Right(GetCompaniesModel.fromJson(response))
           : Right(response);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  //post
+  Future<Either<Failure, DefaultPostModel>> postFav({
+    required String moduleId,
+    required String id,
+  }) async {
+
+    try {
+      var response = await dio.post(
+        EndPoints.addOrRemoveFavUrl,
+        body: {
+          'id': id,
+          'module_id':moduleId,
+        },
+      );
+      return Right(DefaultPostModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

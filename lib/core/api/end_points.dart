@@ -16,6 +16,7 @@ class EndPoints {
   static const String userDataUrl = '${baseUrl}userDate';
   static const String updateUserDataUrl = '${baseUrl}updateProfile';
   static const String updatePasswordUrl = '${baseUrl}updatePassword';
+  static const String addOrRemoveFavUrl = '${baseUrl}addOrDeleteToFav';
   ////////////////////////////////////////////////////////////
   //////////////////      Home       /////////////////////////
   ////////////////////////////////////////////////////////////

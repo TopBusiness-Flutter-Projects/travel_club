@@ -4,6 +4,7 @@ import 'package:travel_club/core/widgets/network_image.dart';
 import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
 
 import '../../../../../core/exports.dart';
+import '../../../../../core/widgets/custom_fav_widget.dart';
 import '../../../data/models/lodges_model.dart';
 
 class HotelsModel {
@@ -63,26 +64,7 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                   Positioned(
                             top: 4.h,
                             right: 6.w,
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  // widget.hotelsModel!.isFavoriteTrue = !(widget.hotelsModel!.isFavoriteTrue ?? false);
-                                });
-                              },
-                              child: CircleAvatar(
-                                backgroundColor:
-                                    widget.isFavoriteTrue ?? false
-                                        ? AppColors.red
-                                        : AppColors.lightWhite,
-                                child: Icon(
-                                  CupertinoIcons.heart,
-                                  color: widget.isFavoriteTrue ?? false
-                                      ? AppColors.white
-                                      : AppColors.secondPrimary,
-                                  size: 25.sp,
-                                ),
-                              ),
-                            ))
+                            child:CustomFavWidget(isFav: widget.lodgesModel.isFav??false, id: widget.lodgesModel.id.toString(), ))
 
                   ],
                 ),

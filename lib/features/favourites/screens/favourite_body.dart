@@ -12,16 +12,16 @@ import '../../my_bookings/view/widgets/custom_catogrey_reseration.dart';
 import '../../transportation/screens/widgets/custom_company_container.dart';
 import '../cubit/favourites_cubit.dart';
 
-class Favouritebody extends StatefulWidget {
-  const Favouritebody({
+class FavouriteBody extends StatefulWidget {
+  const FavouriteBody({
     super.key,
   });
 
   @override
-  State<Favouritebody> createState() => _FavouritebodyState();
+  State<FavouriteBody> createState() => _FavouriteBodyState();
 }
 
-class _FavouritebodyState extends State<Favouritebody> {
+class _FavouriteBodyState extends State<FavouriteBody> {
   @override
   void initState() {
     // TODO: implement initState

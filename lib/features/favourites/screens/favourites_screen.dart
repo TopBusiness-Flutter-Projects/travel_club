@@ -34,7 +34,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
               SizedBox(
                   height: getHeightSize(context),
                   width: getWidthSize(context),
-                  child: const Favouritebody())
+                  child: const FavouriteBody())
             ],
           ),
         );
