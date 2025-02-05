@@ -27,9 +27,9 @@ class HotelsModel {
 }
 
 class CustomLodgeContainer extends StatefulWidget {
-  const CustomLodgeContainer({super.key, required this.lodgesModel});
+  const CustomLodgeContainer({super.key, required this.lodgesModel, this.isFavoriteTrue=false});
   final LodgeModel lodgesModel;
-
+final bool? isFavoriteTrue;
   @override
   State<CustomLodgeContainer> createState() => _CustomLodgeContainerState();
 }
@@ -48,7 +48,8 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
           },
           child: CustomContainerWithShadow(
             height: getHeightSize(context) * 0.17,
-            child: Row(
+            child:
+            Row(
               children: [
                 //stack image and heart
                 Stack(
@@ -59,8 +60,7 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                       width: getWidthSize(context) * 0.3,
                       height: getHeightSize(context) * 0.17,
                     ),
-                    widget.lodgesModel.isFav == true
-                        ? Positioned(
+                  Positioned(
                             top: 4.h,
                             right: 6.w,
                             child: GestureDetector(
@@ -71,19 +71,19 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                               },
                               child: CircleAvatar(
                                 backgroundColor:
-                                    widget.lodgesModel.isFav ?? false
+                                    widget.isFavoriteTrue ?? false
                                         ? AppColors.red
                                         : AppColors.lightWhite,
                                 child: Icon(
                                   CupertinoIcons.heart,
-                                  color: widget.lodgesModel.isFav ?? false
+                                  color: widget.isFavoriteTrue ?? false
                                       ? AppColors.white
                                       : AppColors.secondPrimary,
                                   size: 25.sp,
                                 ),
                               ),
                             ))
-                        : Container()
+
                   ],
                 ),
                 //  SizedBox(width: 5.w,),

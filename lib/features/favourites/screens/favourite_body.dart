@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/favourites/cubit/favourites_state.dart';
-import 'package:travel_club/features/residence/data/models/lodges_model.dart';
 import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
-import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
 import '../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../food/widgets/big_container_food.dart';
 import '../../home/cubit/home_cubit.dart';
@@ -13,7 +11,6 @@ import '../../my_account/screens/widgets/profile_not_loging.dart';
 import '../../my_bookings/view/widgets/custom_catogrey_reseration.dart';
 import '../../transportation/screens/widgets/custom_company_container.dart';
 import '../cubit/favourites_cubit.dart';
-import 'custom_favourite_catogrey.dart';
 
 class Favouritebody extends StatefulWidget {
   const Favouritebody({
@@ -93,11 +90,13 @@ class _FavouritebodyState extends State<Favouritebody> {
                               ? Center(
                             child: Text('no_data'.tr()),
                           )
-                              :ListView.builder(
+                              :
+                          ListView.builder(
                         itemCount:cubit.residenceFavouriteModel.data!.length,
                         itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: CustomLodgeContainer(
+                            isFavoriteTrue:true,
                             lodgesModel:cubit.residenceFavouriteModel.data![index],
                             // HotelsModel(isFavorite: true,isFavoriteTrue: true,title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 , discription: '٢٠٠ فرد قام بتقيم الفندق', image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
                             //   )
