@@ -2,17 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/network_image.dart';
+import 'package:travel_club/features/favourites/cubit/favourites_cubit.dart';
+import 'package:travel_club/features/favourites/cubit/favourites_state.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
 
+import '../../../../core/widgets/custom_fav_widget.dart';
 import '../../cubit/transportation_state.dart';
 
 class CustomCompanyContainer extends StatefulWidget {
   const CustomCompanyContainer({
     super.key,
     required this.companyModel,
+    this.isFavouriteScreen=false,
   });
   final CompanyModel companyModel;
+  final bool  isFavouriteScreen;
   @override
   State<CustomCompanyContainer> createState() => _CustomCompanyContainerState();
 }
@@ -21,7 +26,7 @@ class _CustomCompanyContainerState extends State<CustomCompanyContainer> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<TransportationCubit>();
-    return BlocBuilder<TransportationCubit, TransportationState>(
+    return BlocBuilder<FavouritesCubit, FavouritesState>(
       builder: (BuildContext context, state) {
         return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -29,7 +34,8 @@ class _CustomCompanyContainerState extends State<CustomCompanyContainer> {
               onTap: () {
                 Navigator.pushNamed(
                     context, Routes.transportationBookingDetailsRoute,
-                    arguments: widget.companyModel);
+                    arguments: widget.companyModel
+                );
               },
               child: CustomContainerWithShadow(
                   child: Padding(
@@ -59,31 +65,9 @@ class _CustomCompanyContainerState extends State<CustomCompanyContainer> {
                                     maxLines: 1,
                                     style: getMediumStyle(fontSize: 13.sp),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          // cubit.isFavoriteTrue = !(cubit.isFavoriteTrue ?? false);
-                                        });
-                                      },
-                                      child:
-                                          // Icon(CupertinoIcons.heart_fill,color: AppColors.red,size: 25,):
-                                          CircleAvatar(
-                                        backgroundColor:
-                                            cubit.isFavoriteTrue == true
-                                                ? AppColors.red
-                                                : AppColors.lightWhite,
-                                        child: Icon(
-                                          CupertinoIcons.heart,
-                                          color: cubit.isFavoriteTrue == true
-                                              ? AppColors.white
-                                              : AppColors.secondPrimary,
-                                          size: 25.sp,
-                                        ),
-                                      ),
-                                    ),
-                                  )
+                                   BlocBuilder<FavouritesCubit,FavouritesState>(builder: (BuildContext context, state) {
+                                    return  CustomFavWidget(isFav: widget.companyModel.isFavorite, id: widget.companyModel.id.toString(),isFavScreen: widget.isFavouriteScreen,);
+                                  },)
                                 ],
                               ),
                               SizedBox(height: 10.h),
@@ -114,7 +98,8 @@ class _CustomCompanyContainerState extends State<CustomCompanyContainer> {
                           ),
                         )
                       ]))),
-            ));
+            )
+        );
       },
     );
   }

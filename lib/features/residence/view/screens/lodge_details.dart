@@ -11,8 +11,9 @@ import '../../cubit/residence_cubit.dart';
 class LodgeDetailsArguments {
   final int lodgeId;
   final bool isDeeplink;
+  final bool isFav;
 
-  LodgeDetailsArguments({required this.lodgeId, this.isDeeplink = false});
+  LodgeDetailsArguments({required this.lodgeId, this.isDeeplink = false, this.isFav=false});
 }
 
 class LodgeDetailsScreen extends StatefulWidget {
@@ -27,9 +28,7 @@ class _LodgeDetailsScreenState extends State<LodgeDetailsScreen> {
   void initState() {
   // context.read<ResidenceCubit>().isPageActive=true;
     context.read<ResidenceCubit>().lodgesDetailsModel = GetLodgeDetailModel();
-    context
-        .read<ResidenceCubit>()
-        .getLodgesDetails(context: context, lodgeId: widget.args.lodgeId);
+    context.read<ResidenceCubit>().getLodgesDetails(context: context, lodgeId: widget.args.lodgeId);
     super.initState();
   }
 @override
@@ -80,9 +79,13 @@ class _LodgeDetailsScreenState extends State<LodgeDetailsScreen> {
                             left: 16.0,
                             right: 16.0,
                             child: CustomDetailsAppBar(
+                              isFav: cubit.lodgesDetailsModel.data?.isFav??false,
+                              lodgeId: widget.args.lodgeId.toString(),
                               sharedLink: AppStrings.lodgeShareLink +
                                   cubit.lodgesDetailsModel.data!.id.toString(),
                               onTap: () {
+                               // context.read<ResidenceCubit>().getPlaces();
+
                                 widget.args.isDeeplink
                                     ? Navigator.pushNamedAndRemoveUntil(context,
                                         Routes.mainRoute, (route) => false)

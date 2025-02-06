@@ -1,12 +1,14 @@
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../../core/exports.dart';
+import '../../../../../core/widgets/custom_fav_widget.dart';
 
 class CustomDetailsAppBar extends StatelessWidget {
   const CustomDetailsAppBar(
-      {super.key, this.onTap, this.sharedLink, this.isFav = false});
+      {super.key, this.onTap, this.sharedLink, this.isFav = false,this.lodgeId});
   final void Function()? onTap;
   final String? sharedLink;
+  final String? lodgeId;
   final bool isFav;
 
   @override
@@ -48,20 +50,9 @@ class CustomDetailsAppBar extends StatelessWidget {
           SizedBox(
             width: 8.w,
           ),
-          Container(
-              width: 44.w, // Adjust size as needed
-              height: 44.h,
-              decoration: BoxDecoration(
-                color: AppColors.lightWhite,
-                shape: BoxShape.rectangle,
-                borderRadius:
-                    BorderRadius.circular(15), // Circular with rounded corners
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SvgPicture.asset(AppIcons.favourites),
-              )),
-        ],
+       CustomFavWidget(isFav:isFav, id: lodgeId.toString(), )
+
+    ],
       ),
     );
   }

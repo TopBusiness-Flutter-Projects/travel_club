@@ -1,5 +1,6 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
+import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import '../../home/data/models/home_model.dart';
 import '../../payment/cubit/payment_cubit.dart';
 import '../../residence/data/models/lodges_model.dart';
@@ -49,25 +50,66 @@ getFavourite() async {
     emit(IndexChanged());
   }
 
-addAndRemoveFav({required   BuildContext context,required String id,required bool isFav})async{
+addAndRemoveFav({required   BuildContext context,required String id,required bool isFav ,required int selectedModuleIdd,bool favScreen=false})async{
   emit(LoadingReservationFavourite());
+  updateFavouritesInModels(context, isFav: isFav, id: id, selectedModuleIdd: selectedModuleIdd);
   final res = await api.postFav(moduleId: context.read<PaymentCubit>().currentModuleId.toString(), id: id,);
   res.fold((l) {
 
     emit(ErrorReservationFavourite());
     },
           (r) {
-           // getFavourite();
-         //   isFav = !isFav;
-          //  changeFavourite(isFav: isFav);
-            // DefaultPostModel=r;
-      emit(LoadedReservationFavourite());
+            if(favScreen)
+            getFavourite();
+
+            emit(LoadedReservationFavourite());
   });
     }
-changeFavourite({required bool isFav}) {
-    isFav = !isFav;
-  //  isFavourite=isFav;
-    emit(ChangeFavourite());
+// changeFavourite({required bool isFav}) {
+//     isFav = !isFav;
+//   //  isFavourite=isFav;
+//     emit(ChangeFavourite());
+//   }
+updateFavouritesInModels(BuildContext context,{required bool isFav,required String id, required int selectedModuleIdd})async{
+  if(selectedModuleIdd==1){
+
+if (context.read<ResidenceCubit>().placesModel.data != null) {
+
+
+    for(int i=0;i<context.read<ResidenceCubit>().placesModel.data!.lodges!.length;i++){
+      if(context.read<ResidenceCubit>().placesModel.data!.lodges![i].id.toString()==id){
+        context.read<ResidenceCubit>().placesModel.data!.lodges![i].isFav=isFav;
+      }
+    } }
+    if (context.read<ResidenceCubit>().lodgesModel.data != null) {
+
+    for(int i=0;i<context.read<ResidenceCubit>().lodgesModel.data!.length;i++){
+      if(context.read<ResidenceCubit>().lodgesModel.data![i].id.toString()==id){
+        context.read<ResidenceCubit>().lodgesModel.data![i].isFav=isFav;
+      }
+    }}
+for(int i=0;i<residenceFavouriteModel.data!.length;i++){
+  if(residenceFavouriteModel.data![i].id.toString()==id){
+    residenceFavouriteModel.data![i].isFav=isFav;
+  }
+}
+  }
+  if(selectedModuleIdd==2){
+
+if(context.read<TransportationCubit>().getCompaniesModel.data != null) {
+  for(int i=0;i<context.read<TransportationCubit>().getCompaniesModel.data!.length;i++){
+    if(context.read<TransportationCubit>().getCompaniesModel.data![i].id.toString()==id){
+      context.read<TransportationCubit>().getCompaniesModel.data![i].isFavorite=isFav;
+    }
   }
 
+}
+  for(int i=0;i<transportationFavouriteModel.data!.length;i++){
+      if(transportationFavouriteModel.data![i].id.toString()==id){
+        transportationFavouriteModel.data![i].isFavorite=isFav;
+      }
+    }
+  }
+  emit(LoadingReservationFavourite());
+}
 }
