@@ -16,6 +16,7 @@ class EndPoints {
   static const String userDataUrl = '${baseUrl}userDate';
   static const String updateUserDataUrl = '${baseUrl}updateProfile';
   static const String updatePasswordUrl = '${baseUrl}updatePassword';
+  static const String addOrRemoveFavUrl = '${baseUrl}addOrDeleteToFav';
   ////////////////////////////////////////////////////////////
   //////////////////      Home       /////////////////////////
   ////////////////////////////////////////////////////////////
@@ -50,9 +51,11 @@ class EndPoints {
   static const String getMyReservationDetailsUrl =
       '${baseUrl}getMyReservationDetails';
 static const String cancelReservationurl = '${baseUrl}cancelReservation';
+static const String addRate = '${baseUrl}AddRate';
  static const String checkCouponTransportationUrl = '${baseUrl}checkTransportationCoupon';
   static const String continueToPayTransportationUrl = '${baseUrl}continueToPayTransportation';
    static const String checkPaymentTransportationUrl = '${baseUrl}checkPaymentTransportation';
+  static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
   // static const String getMyReservationUrl = '${baseUrl}getMyReservation';
 //   static const String getMyReservationDetailsUrl =
 //       '${baseUrl}getMyReservationDetails';

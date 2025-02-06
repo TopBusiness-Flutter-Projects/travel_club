@@ -399,7 +399,7 @@ class AppRoutes {
         // final int index =
         // settings.arguments as int; // Expect an int
         return PageTransition(
-          child: MainScreen(),
+          child: const MainScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -448,7 +448,7 @@ class AppRoutes {
         );
       case Routes.payment:
         return PageTransition(
-          child: PaymentProcessScreen(),
+          child: const PaymentProcessScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

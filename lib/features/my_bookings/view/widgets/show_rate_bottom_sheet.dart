@@ -9,12 +9,11 @@ import '../../cubit/my_bookings_cubit.dart';
 import '../../cubit/my_bookings_state.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-void showAddRateBottomSheet(BuildContext context , {required int reservationId}) {
+void showAddRateBottomSheet(BuildContext context , {required int reservationId,required int id}) {
   context.read<MyReservationsCubit>().rateCommentController.clear();
 
   // Create a ScrollController to handle scrolling
   final ScrollController scrollController = ScrollController();
-
   showModalBottomSheet(
     context: context,
     useSafeArea: true,
@@ -155,7 +154,7 @@ void showAddRateBottomSheet(BuildContext context , {required int reservationId})
                         if (formKey.currentState!.validate()) {
                           print(
                               "cubit.selectedModuleId: ${cubit.selectedModuleId}");
-                          cubit.addRate(context , reservationId:reservationId );
+                          cubit.addRate(context , reservationId:reservationId, id: context.read<MyReservationsCubit>().getResidenceReservationDetailsModel.data?.lodgeId??0);
                         }
                       },
                     ),

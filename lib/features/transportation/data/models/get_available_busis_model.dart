@@ -102,7 +102,7 @@ class BusTimeInDeparture {
     String? toTime;
     String? fromDay;
     String? toDay;
-    dynamic? price;
+    dynamic price;
     String? fromStation;
     String? toStation;
    

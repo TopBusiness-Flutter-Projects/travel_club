@@ -9,7 +9,6 @@ class ContainerUnderSwiperOtherService  extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit=context.read<OtherServicesCubit>();
     return BlocBuilder<OtherServicesCubit, OtherServicesScreenState>(builder: (BuildContext context, state) {
       return     Positioned(
         bottom: 0,
@@ -27,14 +26,9 @@ class ContainerUnderSwiperOtherService  extends StatelessWidget {
             padding:  EdgeInsets.only(top:                  getHeightSize(context) * 0.05,
             ),
             child: ListView(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
               SizedBox(height: 30.h,),
-           
-                  ServiceAboutWidget()
-               
-
+                  const ServiceAboutWidget()
               ],
             ),
           ),

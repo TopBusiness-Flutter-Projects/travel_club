@@ -4,6 +4,7 @@ import 'package:travel_club/core/widgets/network_image.dart';
 import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
 
 import '../../../../../core/exports.dart';
+import '../../../../../core/widgets/custom_fav_widget.dart';
 import '../../../data/models/lodges_model.dart';
 
 class HotelsModel {
@@ -27,9 +28,9 @@ class HotelsModel {
 }
 
 class CustomLodgeContainer extends StatefulWidget {
-  const CustomLodgeContainer({super.key, required this.lodgesModel});
+  const CustomLodgeContainer({super.key, required this.lodgesModel, this.isFavoriteTrue=false});
   final LodgeModel lodgesModel;
-
+final bool? isFavoriteTrue;
   @override
   State<CustomLodgeContainer> createState() => _CustomLodgeContainerState();
 }
@@ -48,7 +49,8 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
           },
           child: CustomContainerWithShadow(
             height: getHeightSize(context) * 0.17,
-            child: Row(
+            child:
+            Row(
               children: [
                 //stack image and heart
                 Stack(
@@ -59,31 +61,11 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                       width: getWidthSize(context) * 0.3,
                       height: getHeightSize(context) * 0.17,
                     ),
-                    widget.lodgesModel.isFav == true
-                        ? Positioned(
+                  Positioned(
                             top: 4.h,
                             right: 6.w,
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  // widget.hotelsModel!.isFavoriteTrue = !(widget.hotelsModel!.isFavoriteTrue ?? false);
-                                });
-                              },
-                              child: CircleAvatar(
-                                backgroundColor:
-                                    widget.lodgesModel.isFav ?? false
-                                        ? AppColors.red
-                                        : AppColors.lightWhite,
-                                child: Icon(
-                                  CupertinoIcons.heart,
-                                  color: widget.lodgesModel.isFav ?? false
-                                      ? AppColors.white
-                                      : AppColors.secondPrimary,
-                                  size: 25.sp,
-                                ),
-                              ),
-                            ))
-                        : Container()
+                            child:CustomFavWidget(isFav: widget.lodgesModel.isFav??false, id: widget.lodgesModel.id.toString(), ))
+
                   ],
                 ),
                 //  SizedBox(width: 5.w,),

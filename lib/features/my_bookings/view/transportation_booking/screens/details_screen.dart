@@ -182,9 +182,7 @@ class _DetailsBookingTransportaionState
                     reservationId: widget.transportationReservation.id ?? 0,
                   ),
                 ),
-                if (cubit.getTransportationReservationDetailsModel.data!
-                        .canCancel !=
-                    null)
+                if (cubit.getTransportationReservationDetailsModel.data!.canCancel != null)
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: getHorizontalPadding(context)),
@@ -197,7 +195,8 @@ class _DetailsBookingTransportaionState
                       padding: EdgeInsets.symmetric(
                           horizontal: getHorizontalPadding(context)),
                       child: RateReservationButton(
-                        reservationId: widget.transportationReservation.id ?? 0,
+                        reservationId: widget.transportationReservation.id?? 0,
+                        id: context.read<MyReservationsCubit>().getTransportationReservationDetailsModel.data?.companyId?? 0,
                       )),
                 SizedBox(
                   height: 40.h,

@@ -47,6 +47,7 @@ class Data {
   String? returnDate;
   String? bus;
   int? chairs;
+  int? companyId;
   dynamic plateNumber;
   String? fromDepartureTime;
   String? fromReturnTime;
@@ -71,7 +72,7 @@ class Data {
     this.returnDate,
     this.bus,
     this.chairs,
-
+    this.companyId,
     this.plateNumber,
     this.fromDepartureTime,
     this.fromReturnTime,
@@ -85,7 +86,6 @@ class Data {
     this.canCancel,
     this.departureReservedChairsNumber,
     this.returnReservedChairsNumber,
-    
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -96,7 +96,9 @@ class Data {
         departureDate: json["departure_date"],
         returnDate: json["return_date"],
         bus: json["bus"],
-        chairs: json["chairs"],rule: json["rule"],
+        chairs: json["chairs"],
+    companyId: json["company_id"],
+    rule: json["rule"],
         plateNumber: json["plate_number"],
         fromDepartureTime: json["from_departure_time"],
         fromReturnTime: json["from_return_time"],
@@ -129,7 +131,9 @@ class Data {
         "departure_date": departureDate,
         "return_date": returnDate,
         "bus": bus,
-        "chairs": chairs, "rule": rule,
+        "chairs": chairs,
+    "company_id":companyId,
+    "rule": rule,
         "plate_number": plateNumber,
         "from_departure_time": fromDepartureTime,
         "from_return_time": fromReturnTime,

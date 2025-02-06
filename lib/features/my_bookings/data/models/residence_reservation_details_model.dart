@@ -37,10 +37,10 @@ class Data {
     dynamic to;
     dynamic canCancel;
     int? process;
+    int? lodgeId;
     int? guest;
     List<RoomModel>? rooms;
     dynamic totalPrice;
-  
     dynamic vat;
     dynamic totalPriceAfterVat;
 
@@ -53,7 +53,7 @@ class Data {
         this.guest,
         this.rooms,
         this.totalPrice,
-       
+       this.lodgeId,
         this.vat,
         this.totalPriceAfterVat,
     });
@@ -67,13 +67,15 @@ class Data {
         guest: json["guest"],
         rooms: json["rooms"] == null ? [] : List<RoomModel>.from(json["rooms"]!.map((x) => RoomModel.fromJson(x))),
         totalPrice: json["total_price"],
-       
+        lodgeId: json["lodge_id"],
+
         vat: json["vat"],
         totalPriceAfterVat: json["total_price_after_vat"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
+        "lodge_id": lodgeId,
         "from": "${from!.year.toString().padLeft(4, '0')}-${from!.month.toString().padLeft(2, '0')}-${from!.day.toString().padLeft(2, '0')}",
         "to": "${to!.year.toString().padLeft(4, '0')}-${to!.month.toString().padLeft(2, '0')}-${to!.day.toString().padLeft(2, '0')}",
         "canCancel": canCancel,

@@ -5,16 +5,17 @@ import 'show_rate_bottom_sheet.dart';
 
 class RateReservationButton extends StatelessWidget {
   const RateReservationButton({
-    super.key, required this.reservationId,
+    super.key, required this.reservationId,required this.id
   });
   final int reservationId;
+  final int id;
   @override
   Widget build(BuildContext context) {
     return CustomButton(
       isBordered: true,
       title: AppTranslations.experienceEvaluation,
       onTap: () {
-        showAddRateBottomSheet(context, reservationId: reservationId);
+        showAddRateBottomSheet(context, reservationId: reservationId, id: id);
       },
     );
   }
