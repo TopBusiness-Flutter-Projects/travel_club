@@ -73,7 +73,7 @@ class _CustomCompanyContainerState extends State<CustomCompanyContainer> {
                                             print( "iddd "+widget.companyModel.id.toString());
                                          //  widget.companyModel.isFavorite = state.oldFav;
                                            // print( "is fav new "+widget.isFav.toString());
-
+//
                                          });
                                        } }
                                      ,
