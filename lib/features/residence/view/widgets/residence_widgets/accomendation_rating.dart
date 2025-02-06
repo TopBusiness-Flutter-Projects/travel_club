@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/core/widgets/network_image.dart';
+import 'package:travel_club/features/favourites/cubit/favourites_cubit.dart';
+import 'package:travel_club/features/favourites/cubit/favourites_state.dart';
 import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
 
 import '../../../../../core/exports.dart';
@@ -28,9 +30,9 @@ class HotelsModel {
 }
 
 class CustomLodgeContainer extends StatefulWidget {
-  const CustomLodgeContainer({super.key, required this.lodgesModel, this.isFavoriteTrue=false});
+  const CustomLodgeContainer({super.key, required this.lodgesModel,this.isFavouriteScreen});
   final LodgeModel lodgesModel;
-final bool? isFavoriteTrue;
+final bool? isFavouriteScreen;
   @override
   State<CustomLodgeContainer> createState() => _CustomLodgeContainerState();
 }
@@ -38,14 +40,14 @@ final bool? isFavoriteTrue;
 class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return BlocBuilder<FavouritesCubit,FavouritesState>(builder: (BuildContext context, state) { return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: GestureDetector(
           onTap: () {
             Navigator.pushNamed(context, Routes.lodgeDetailsRoute,
                 arguments:
-                
-                    LodgeDetailsArguments(lodgeId: widget.lodgesModel.id!));
+
+                LodgeDetailsArguments(lodgeId: widget.lodgesModel.id!, isFav: widget.lodgesModel.isFav!));
           },
           child: CustomContainerWithShadow(
             height: getHeightSize(context) * 0.17,
@@ -61,11 +63,13 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                       width: getWidthSize(context) * 0.3,
                       height: getHeightSize(context) * 0.17,
                     ),
-                  Positioned(
-                            top: 4.h,
-                            right: 6.w,
-                            child:CustomFavWidget(isFav: widget.lodgesModel.isFav??false, id: widget.lodgesModel.id.toString(), ))
-
+                    Positioned(
+                        top: 4.h,
+                        right: 6.w,
+                        child:CustomFavWidget(
+                          isFavScreen: widget.isFavouriteScreen??false,
+                          isFav: widget.lodgesModel.isFav??false,
+                          id: widget.lodgesModel.id.toString(), ))
                   ],
                 ),
                 //  SizedBox(width: 5.w,),
@@ -111,12 +115,12 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
                         widget.lodgesModel.users == null
                             ? SizedBox()
                             : Text(
-                                '${widget.lodgesModel.users.toString() }' +
-                                    " " +
-                                    AppTranslations.personRating,
-                                style: getMediumStyle(
-                                    fontSize: 12.sp, color: AppColors.grey),
-                              ),
+                          '${widget.lodgesModel.users.toString() }' +
+                              " " +
+                              AppTranslations.personRating,
+                          style: getMediumStyle(
+                              fontSize: 12.sp, color: AppColors.grey),
+                        ),
                         Flexible(
                           flex: 2,
                           child: SizedBox(),
@@ -128,6 +132,6 @@ class _CustomLodgeContainerState extends State<CustomLodgeContainer> {
               ],
             ),
           ),
-        ));
+        )); },);
   }
 }

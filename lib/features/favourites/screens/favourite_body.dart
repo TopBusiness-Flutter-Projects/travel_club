@@ -96,7 +96,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                         itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: CustomLodgeContainer(
-                            isFavoriteTrue:true,
+                            isFavouriteScreen:true,
                             lodgesModel:cubit.residenceFavouriteModel.data![index],
                             // HotelsModel(isFavorite: true,isFavoriteTrue: true,title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 , discription: '٢٠٠ فرد قام بتقيم الفندق', image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
                             //   )
@@ -114,7 +114,8 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                             child: CustomLoadingIndicator(),
                           )
                               : cubit.transportationFavouriteModel.data!.isEmpty
-                              ? Center(
+                              ?
+                          Center(
                             child: Text('no_data'.tr()),
                           )
                               :
@@ -161,7 +162,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                   },
                                   child: CustomContainerCompanies(
                                     isDetails: true,
-                                    isFavouriteScreen: true,
+                                //    isFavouriteScreen: true,
                                   )),
                             );
                           },

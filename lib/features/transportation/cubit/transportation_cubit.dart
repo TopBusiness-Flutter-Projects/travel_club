@@ -102,15 +102,15 @@ class TransportationCubit extends Cubit<TransportationState> {
 // Initialize end date to next day by default
   DateTime selectedEndDate = DateTime.now();
   DateTime selectedDate = DateTime.now();
-  String fromDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
-  String toDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
-  String singleDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
+  String fromDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
+  String toDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
+  String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
 
   setEndDatePlusOneDay() {
     selectedEndDate = DateTime.now().add(const Duration(days: 1));
-    toDate = DateFormat('dd-MM-yyyy', 'en').format(selectedEndDate);
+    toDate = DateFormat('yyyy-MM-dd', 'en').format(selectedEndDate);
     selectedStartDate = DateTime.now();
-    fromDate = DateFormat('dd-MM-yyyy', 'en').format(DateTime.now());
+    fromDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
 
     updateDateStrings();
   }
@@ -194,9 +194,9 @@ class TransportationCubit extends Cubit<TransportationState> {
   }
 
   void updateDateStrings() {
-    fromDate = DateFormat('dd-MM-yyyy', 'en').format(selectedStartDate);
-    toDate = DateFormat('dd-MM-yyyy', 'en').format(selectedEndDate);
-    singleDate = DateFormat('dd-MM-yyyy', 'en').format(selectedDate);
+    fromDate = DateFormat('yyyy-MM-dd', 'en').format(selectedStartDate);
+    toDate = DateFormat('yyyy-MM-dd', 'en').format(selectedEndDate);
+    singleDate = DateFormat('yyyy-MM-dd', 'en').format(selectedDate);
   }
 
   // 13 >> 50 seats
@@ -238,7 +238,7 @@ class TransportationCubit extends Cubit<TransportationState> {
   //get Companies
   GetCompaniesModel getCompaniesModel = GetCompaniesModel();
   getCompanies(BuildContext context) async {
-    getCompaniesModel = GetCompaniesModel();
+    //getCompaniesModel = GetCompaniesModel();
     emit(GetCompaniesModelLoadingState());
     final res = await api.getCompanies(
       lat: (context.read<LocationCubit>().selectedLocation?.latitude ?? 0.0)
