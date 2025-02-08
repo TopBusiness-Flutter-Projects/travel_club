@@ -123,8 +123,11 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                               itemCount: cubit.transportationFavouriteModel.data!.length,
                               itemBuilder: (context, index) =>
                                   CustomCompanyContainer(
+                                    isFavouriteScreen: true,
                                     companyModel: cubit.transportationFavouriteModel.data![index],
-                                  ))),
+                                  )
+                          )
+                      ),
                     ],
                     if (cubit.categories[cubit.selectedIndex] ==
                         AppTranslations.food) ...[
