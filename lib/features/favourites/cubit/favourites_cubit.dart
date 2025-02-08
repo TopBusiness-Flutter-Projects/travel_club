@@ -33,7 +33,7 @@ getFavourite() async {
     emit(LoadingReservationFavourite());
     final res = await api.getFavourite(moduleId: selectedModuleId,);
     res.fold((l) {
-      emit(ErrorReservationFavourite());
+      emit(ErrorGetReservationFavourite());
     }, (r) {
       if (selectedModuleId == 1) {
         residenceFavouriteModel = r;
@@ -56,7 +56,7 @@ addAndRemoveFav({required   BuildContext context,required String id,required boo
   final res = await api.postFav(moduleId: context.read<PaymentCubit>().currentModuleId.toString(), id: id,);
   res.fold((l) {
 
-    emit(ErrorReservationFavourite());
+    emit(ErrorReservationFavourite(oldFav: isFav));
     },
           (r) {
             if(favScreen)

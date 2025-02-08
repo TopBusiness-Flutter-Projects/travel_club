@@ -65,7 +65,19 @@ class _CustomCompanyContainerState extends State<CustomCompanyContainer> {
                                     maxLines: 1,
                                     style: getMediumStyle(fontSize: 13.sp),
                                   ),
-                                   BlocBuilder<FavouritesCubit,FavouritesState>(builder: (BuildContext context, state) {
+                                   BlocConsumer<FavouritesCubit,FavouritesState>(
+                                     listener: (BuildContext context, FavouritesState state) {
+                                       print(state.toString());
+                                       if(state is ErrorReservationFavourite){
+                                         setState(() {
+                                            print( "iddd "+widget.companyModel.id.toString());
+                                         //  widget.companyModel.isFavorite = state.oldFav;
+                                           // print( "is fav new "+widget.isFav.toString());
+//
+                                         });
+                                       } }
+                                     ,
+                                     builder: (BuildContext context, state) {
                                     return  CustomFavWidget(isFav: widget.companyModel.isFavorite, id: widget.companyModel.id.toString(),isFavScreen: widget.isFavouriteScreen,);
                                   },)
                                 ],

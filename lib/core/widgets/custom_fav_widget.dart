@@ -51,9 +51,14 @@ class _CustomFavWidgetState extends State<CustomFavWidget> {
        ),
      );
    },
-     listener: (BuildContext context, FavouritesState state) { if(state is ErrorReservationFavourite){
+     listener: (BuildContext context, FavouritesState state) {
+       print(state.toString());
+       if(state is ErrorReservationFavourite){
      setState(() {
-       widget.isFav = !(widget.isFav);
+      //  print( "is fav "+widget.isFav.toString());
+      // widget.isFav =! widget.isFav;
+      //  print( "is fav new "+widget.isFav.toString());
+
      });
    } }
      ,);
