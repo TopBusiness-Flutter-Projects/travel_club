@@ -2,6 +2,7 @@ import 'package:travel_club/features/residence/view/widgets/details_widgets/cust
 import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_swiper.dart';
 
 import '../../../../../core/exports.dart';
+import '../../../../location/cubit/location_cubit.dart';
 import '../../../cubit/food_cubit.dart';
 import '../widgets/centr_container_details_food.dart';
 import '../widgets/custom_under_swiper.dart';
@@ -17,6 +18,7 @@ class _DetailsFoodState extends State<DetailsFood> {
   @override
   void initState() {
     // TODO: implement initState
+
     context.read<FoodCubit>().getRestaurantDetails(id: widget.id);
     super.initState();
   }
@@ -42,7 +44,7 @@ class _DetailsFoodState extends State<DetailsFood> {
                     top: 16.0,
                     left: 16.0,
                     right: 16.0,
-                    child: CustomDetailsAppBar(),
+                    child: CustomDetailsAppBar(isFav: cubit.getRestaurantDetailsModel?.data?.isFav??false,),
                   ),
                   // Container under the Swiper
                   ContainerUnderSwiperFood(),
