@@ -53,6 +53,8 @@ class EndPoints {
 static const String cancelReservationurl = '${baseUrl}cancelReservation';
 static const String addRate = '${baseUrl}AddRate';
 static const String getCategoryUrl = '${baseUrl}getCategoryRestaurants';
+static const String getMenuCategoryRestaurantsUrl = '${baseUrl}getMenuCategoryRestaurants';
+static const String getRestaurantMenuUrl = '${baseUrl}getRestaurantMenu';
 static const String getRestaurantUrl = '${baseUrl}getRestaurants';
 static const String getRestaurantDetails = '${baseUrl}getRestaurantDetails/';
  static const String checkCouponTransportationUrl = '${baseUrl}checkTransportationCoupon';
