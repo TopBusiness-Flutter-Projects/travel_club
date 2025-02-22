@@ -29,6 +29,7 @@ class CustomMenueContainer extends StatelessWidget {
                     height: 61.h,
                     width: 61.h,
                   ),
+                  10.horizontalSpace,
                   Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +60,7 @@ class CustomMenueContainer extends StatelessWidget {
                                   child: Icon(
                                     CupertinoIcons.add_circled,
                                     color: AppColors.primary,
-                                    size: 20.sp,
+                                    size: 30.sp,
                                   ),
                                 ),
                                 if (mealModel.userQty > 0) ...[
@@ -80,7 +81,7 @@ class CustomMenueContainer extends StatelessWidget {
                                     child: Icon(
                                       CupertinoIcons.minus_circled,
                                       color: AppColors.primary,
-                                      size: 20.sp,
+                                      size: 30.sp,
                                     ),
                                   ),
                                 ],
@@ -92,7 +93,7 @@ class CustomMenueContainer extends StatelessWidget {
                           height: 5.h,
                         ),
                         Text(
-                          "ربع دجاج صدر - طبق سلطة طحينة - ارز بسمتي",
+                          mealModel.description ?? "",
                           style: getRegularStyle(
                               fontSize: 12.sp, color: AppColors.grey),
                         ),
@@ -105,20 +106,23 @@ class CustomMenueContainer extends StatelessWidget {
                           children: [
                             Flexible(
                               child: Text(
-                                " 1000" + AppTranslations.currency,
+                                "${mealModel.priceAfterDiscount}" +
+                                    AppTranslations.currency,
                                 style: getSemiBoldStyle(
                                     fontSize: 13.sp, color: AppColors.green),
                               ),
                             ),
-                            Flexible(
-                              child: Text(
-                                "1520" + AppTranslations.currency,
-                                style: getThroughLine(
-                                  color: AppColors.grey,
-                                  fontSize: 13.sp,
+                            if (mealModel.discount != 0)
+                              Flexible(
+                                child: Text(
+                                  "${mealModel.price}" +
+                                      AppTranslations.currency,
+                                  style: getThroughLine(
+                                    color: AppColors.grey,
+                                    fontSize: 13.sp,
+                                  ),
                                 ),
                               ),
-                            ),
                           ],
                         ),
                       ],

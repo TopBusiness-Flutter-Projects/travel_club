@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/widgets/no_data_widget.dart';
 import 'package:travel_club/features/food/data/models/get_catogrey_model.dart';
+import 'package:travel_club/features/food/data/models/get_resturant_model.dart';
 
 import '../../../core/exports.dart';
 import '../cubit/food_cubit.dart';
@@ -52,16 +53,10 @@ class _FoodScreenState extends State<FoodScreen> {
                 shrinkWrap: true,
                 itemCount: cubit.getRestaurantModel?.data?.length??0, itemBuilder: (BuildContext context, int index) { return
                 BigContainerFood(
-                    onTap: (){
-                      print(cubit.getRestaurantModel?.data?[index].id.toString());
-                      Navigator.pushNamed(context, Routes.detailsFoodRoute,arguments: cubit.getRestaurantModel?.data?[index].id.toString());
-                      },
-                  isFavouriteScreen: cubit.getRestaurantModel?.data?[index].isFav??false,
-                  logo: cubit.getRestaurantModel?.data?[index].logo??"",
-                  name: cubit.getRestaurantModel?.data?[index].name??"" ,
-                  rate: cubit.getRestaurantModel?.data?[index].rate.toString()??"",
-                  users: cubit.getRestaurantModel?.data?[index].users.toString()??"",
-                ); }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 13.h,); },),
+                  resturantData: cubit.getRestaurantModel?.data?[index] ?? ResturantData(),
+                    
+                ); }, separatorBuilder: (BuildContext context, int index) {
+                   return SizedBox(height: 13.h,); },),
             ),
             SizedBox(height: 10.h,)
 

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/food/data/models/get_menu_meals_model.dart';
+import 'package:travel_club/features/location/cubit/location_cubit.dart';
 
 import '../data/models/get_catogrey_model.dart';
 import '../data/models/get_restaurant_details_model.dart';
@@ -24,9 +25,10 @@ class FoodCubit extends Cubit<FoodState> {
 
   /////get catogrey
   GetCategoryFoodModel categoryMenuModel = GetCategoryFoodModel();
-  getMenuCategory() async {
+  getMenuCategory({required String restaurantId}) async {
+    clearCart();
     emit(LoadingGetCatogery());
-    final res = await api.getMenuCategory();
+    final res = await api.getMenuCategory(restaurantId: restaurantId);
     res.fold((l) {
       emit(ErrorGetCatogery());
     }, (r) {
@@ -50,13 +52,13 @@ class FoodCubit extends Cubit<FoodState> {
       emit(ErrorGetCatogery());
     }, (r) {
       getMenuMealsModel = r;
-      for (var basketItem in cartItems) {
-        for (MealModel product in getMenuMealsModel.data!) {
-          if (product.id == basketItem.id) {
-            product.userQty = basketItem.userQty; //! Update quantity
-          }
-        }
-      }
+      // for (var basketItem in cartItems) {
+      //   for (MealModel product in getMenuMealsModel.data!) {
+      //     if (product.id == basketItem.id) {
+      //       product.userQty = basketItem.userQty; //! Update quantity
+      //     }
+      //   }
+      // }
 
       emit(LoadedGetCatogery());
     });
@@ -163,30 +165,6 @@ class FoodCubit extends Cubit<FoodState> {
         }
       }
     }
-
-    // // Sync with getFarmStoreModel
-    // if (getFarmStoreModel.data?.topSelling != null) {
-    //   for (var product in getFarmStoreModel.data!.topSelling!) {
-    //     final basketItem = cartItems.firstWhere(
-    //       (item) => item.id == product.id,
-    //       orElse: () => ProductModel(),
-    //     );
-    //     if (basketItem != null) {
-    //       product.userQty = basketItem.userQty;
-    //     }
-    //   }
-    // }
-
-    // // Sync with getProductModel
-    // if (getProductModel.data?.product != null) {
-    //   final basketItem = cartItems.firstWhere(
-    //     (item) => item.id == getProductModel.data!.product!.id,
-    //     orElse: () => ProductModel(),
-    //   );
-    //   if (basketItem != null) {
-    //     getProductModel.data!.product!.userQty = basketItem.userQty;
-    //   }
-    // }
   }
 
   void clearCart() {
@@ -199,7 +177,7 @@ class FoodCubit extends Cubit<FoodState> {
 
   CatogreyDataFood selectedIndex =
       CatogreyDataFood(id: 0, name: "all_foods".tr());
-  
+
   int selectedIndexFavourite = 0;
   bool? isFavoriteTrue = false;
   void changeIndex(CatogreyDataFood categoryDataFood) {
@@ -239,19 +217,6 @@ class FoodCubit extends Cubit<FoodState> {
     selectedIndexMenue = index;
     emit(ChangeIndexFood());
   }
-
-  int itemsQty = 0;
-
-  void addOrRemoveMenuCart(bool isAdd) {
-    if (isAdd) {
-      itemsQty++;
-    } else {
-      if (itemsQty > 0) {
-        itemsQty--;
-      }
-    }
-    emit(ChangeCount());
-  } // Change the count of items
 
   String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
   DateTime selectedDate = DateTime.now();
@@ -303,9 +268,8 @@ class FoodCubit extends Cubit<FoodState> {
     getRestaurantModel = null;
     emit(LoadingGetFood());
 
-    final res = await api.getRestuarnt(id: selectedIndex.id .toString());
+    final res = await api.getRestuarnt(id: selectedIndex.id.toString());
     res.fold((l) {
-
       emit(ErrorGetFood());
     }, (r) {
       if (r.status == 404) {
@@ -316,13 +280,15 @@ class FoodCubit extends Cubit<FoodState> {
     });
   }
 
-
-  GetRestaurantDetailsModel? getRestaurantDetailsModel ;
-  getRestaurantDetails({String ?id}) async {
-     getRestaurantDetailsModel = null;
+  GetRestaurantDetailsModel? getRestaurantDetailsModel;
+  getRestaurantDetails(BuildContext context, {required String id}) async {
+    getMenuMealsModel = GetMenuMealsModel();
+    categoryMenuModel = GetCategoryFoodModel();
+    clearCart();
+    getRestaurantDetailsModel = null;
     emit(LoadingGetFoodDetails());
-   
-    final res = await api.getRestaurantDetails(id: id .toString());
+
+    final res = await api.getRestaurantDetails(id: id);
     res.fold((l) {
       emit(ErrorGetFoodDetails());
     }, (r) {
@@ -331,13 +297,16 @@ class FoodCubit extends Cubit<FoodState> {
       }
 
       getRestaurantDetailsModel = r;
-      if(r.data!.hasMenu==1){
+      if (r.data!.hasMenu == 1) {
         selectedIndexMenue = 0;
-      }else{
+        getMenuCategory(restaurantId: id);
+      } else {
         selectedIndexMenue = 1;
       }
+      context.read<LocationCubit>().getAddressFromLatLng(
+          double.tryParse(r.data?.latitude.toString() ?? "") ?? 0,
+          double.tryParse(r.data?.longitude.toString() ?? "") ?? 0);
       emit(LoadedGetFoodDetails());
     });
   }
-
 }

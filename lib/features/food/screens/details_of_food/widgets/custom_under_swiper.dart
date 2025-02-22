@@ -41,34 +41,42 @@ class ContainerUnderSwiperFood extends StatelessWidget {
                   //sub
                   if (cubit.selectedIndexMenue == 0) ...[
                     SubToggleButtonsFood(),
-                    cubit.getMenuMealsModel.data == null
-                        ? Padding(
-                            padding: EdgeInsets.only(top: 50.h),
-                            child: CustomLoadingIndicator(),
+                    cubit.categoryMenuModel.data == null ||
+                            cubit.categoryMenuModel.data?.length == 0
+                        ? SizedBox(
+                            height: 0.h,
                           )
-                        : cubit.getMenuMealsModel.data?.isEmpty ?? true
-                            ? Center(
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 50.h),
-                                  child: NoDataWidget(title: "no_data".tr()),
-                                ),
+                        : cubit.getMenuMealsModel.data == null
+                            ? Padding(
+                                padding: EdgeInsets.only(top: 50.h),
+                                child: CustomLoadingIndicator(),
                               )
-                            : ListView.separated(
-                                shrinkWrap: true,
-                                physics: BouncingScrollPhysics(),
-                                itemCount:
-                                    cubit.getMenuMealsModel.data?.length ?? 0,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return CustomMenueContainer(
-                                    mealModel:
-                                        cubit.getMenuMealsModel.data![index],
-                                  );
-                                },
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return SizedBox(height: 10.h);
-                                },
-                              ),
+                            : cubit.getMenuMealsModel.data?.isEmpty ?? true
+                                ? Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 50.h),
+                                      child:
+                                          NoDataWidget(title: "no_data".tr()),
+                                    ),
+                                  )
+                                : ListView.separated(
+                                    shrinkWrap: true,
+                                    physics: BouncingScrollPhysics(),
+                                    itemCount:
+                                        cubit.getMenuMealsModel.data?.length ??
+                                            0,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return CustomMenueContainer(
+                                        mealModel: cubit
+                                            .getMenuMealsModel.data![index],
+                                      );
+                                    },
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return SizedBox(height: 10.h);
+                                    },
+                                  ),
                   ]
                   //about
                   else if (cubit.selectedIndexMenue == 1) ...[

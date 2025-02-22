@@ -12,12 +12,13 @@ import '../models/get_resturant_model.dart';
 class FoodRepoImpl {
   final BaseApiConsumer dio;
   FoodRepoImpl(this.dio);
-  Future<Either<Failure, GetCategoryFoodModel>> getMenuCategory() async {
+  Future<Either<Failure, GetCategoryFoodModel>> getMenuCategory(
+      {required String restaurantId}) async {
     try {
       var response = await dio.get(
         EndPoints.getMenuCategoryRestaurantsUrl,
         queryParameters: {
-          "restaurant_id": "1",
+          "restaurant_id": restaurantId,
         },
       );
       return Right(GetCategoryFoodModel.fromJson(response));
@@ -34,6 +35,7 @@ class FoodRepoImpl {
         EndPoints.getRestaurantMenuUrl,
         queryParameters: {
           "restaurant_menu_category_id": menuId,
+          "restaurant_id": "1",
         },
       );
       return Right(GetMenuMealsModel.fromJson(response));
@@ -57,7 +59,7 @@ class FoodRepoImpl {
       {required String id}) async {
     try {
       var response = await dio.get(EndPoints.getRestaurantUrl,
-          queryParameters: {if (id != "0") "restaurant_category_id=": id});
+          queryParameters: {if (id != "0") "restaurant_category_id": id});
 
       return Right(GetRestaurantModel.fromJson(response));
     } on ServerException {
