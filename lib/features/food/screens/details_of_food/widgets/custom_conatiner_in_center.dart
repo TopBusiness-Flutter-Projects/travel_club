@@ -1,6 +1,7 @@
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
+import 'package:travel_club/features/location/cubit/location_state.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../cubit/food_cubit.dart';
@@ -17,11 +18,8 @@ class CustomContainerFood extends StatefulWidget {
 class _CustomContainerFoodState extends State<CustomContainerFood> {
   @override
   void initState() {
-    // TODO: implement initState
-    // context.read<LocationCubit>().fetchPlaceName(
-    //     double.parse(context.read<FoodCubit>().getRestaurantDetailsModel?.data?.latitude.toString()??'0.0'),
-    //     double.parse(context.read<FoodCubit>().getRestaurantDetailsModel?.data?.longitude.toString()??'0.0')
-    // );
+    
+  
     super.initState();
   }
   @override
@@ -102,10 +100,14 @@ builder: (BuildContext context, state) {
                           children: [
                         SvgPicture.asset(AppIcons.location),
                         Flexible(
-                            child: Text(
-                            context.read<LocationCubit>().address??"",
-                              maxLines: 2,
-                              style: getRegularStyle(fontSize: 12.sp),
+                            child: BlocBuilder<LocationCubit, LocationState>(
+builder: (BuildContext context, state) {
+                                return Text(
+                                context.read<LocationCubit>().address??"",
+                                  maxLines: 2,
+                                  style: getRegularStyle(fontSize: 12.sp),
+                                );
+                              }
                             )),
                         SizedBox(
                           width: 5.w,
@@ -115,15 +117,22 @@ builder: (BuildContext context, state) {
                             : Flexible(
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
-                              child: CustomButton(
-                                title: 'حجز طاولة',
-                                onTap: () {
-                                  checkLoggingStatus(context,onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, Routes.bookTable);
-                                  });
+                              child: Opacity(
+                                opacity:cubit.cartItems.isNotEmpty? 1:0.5,
+                                child: CustomButton(
+                                  title: 'حجز طاولة',
+                                  onTap: () {
+                                    cubit.cartItems.isNotEmpty?
+                                    checkLoggingStatus(context,onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, Routes.bookTable);
+                                    }):
+                                    errorGetBar("add items to cart first")
+                                    ;
 
-                                },
+                                
+                                  },
+                                ),
                               ),
                             ))
                       ]),

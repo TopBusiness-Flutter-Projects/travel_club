@@ -1,4 +1,5 @@
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/food/data/models/get_resturant_model.dart';
 import 'package:travel_club/features/residence/data/models/lodges_model.dart';
 import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
 import 'package:travel_club/features/search/cubit/search_cubit.dart';
@@ -101,8 +102,7 @@ class _SearchbodyState extends State<Searchbody> {
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: BigContainerFood(
-                      index: 0,
-                      isFavouriteScreen: false,
+                      resturantData:  ResturantData()
                     ),
                   ),
                 ))

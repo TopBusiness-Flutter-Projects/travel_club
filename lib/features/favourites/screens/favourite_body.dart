@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/favourites/cubit/favourites_state.dart';
+import 'package:travel_club/features/food/data/models/get_resturant_model.dart';
 import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
 import '../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../food/widgets/big_container_food.dart';
@@ -141,7 +142,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                         itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: BigContainerFood(
-                            index: 0,
+                           resturantData:  ResturantData()
                           ),
                         ),
                       )
