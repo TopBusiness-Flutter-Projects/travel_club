@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 
+import '../data/models/get_catogrey_model.dart';
+import '../data/models/get_resturant_model.dart';
 import '../data/repo/food_repo_impl.dart';
 
 part 'food_state.dart';
@@ -85,13 +87,35 @@ class FoodCubit extends Cubit<FoodState> {
     singleDate = DateFormat('yyyy-MM-dd', 'en')
         .format(selectedDate); // تاريخ اليوم كقيمة افتراضية
   }
+//get catogrey
+  GetCatogreyFoodModel catogreyModel = GetCatogreyFoodModel();
+  getCatogeryData() async {
+    emit(LoadingGetCatogery());
+    final res = await api?.getCatogrey();
+    res?.fold((l) {
+      emit(ErrorGetCatogery());
+    }, (r) {
+      catogreyModel = r;
+      emit(LoadedGetCatogery());
+    });
+  }
 
+//get food
+  String ?catogreyId;
+  GetResturant? resturantModel ;
+  getResturant(String id) async {
+    emit(LoadingGetFood());
+    final res = await api?.getRestuarnt(id: id);
+    res?.fold((l) {
 
+      emit(ErrorGetFood());
+    }, (r) {
+      if(r.status=="404"){
 
-
-
-
-
-
-
+        emit(ErrorGetCatogery());
+      }
+      resturantModel = r;
+      emit(LoadedGetFood());
+    });
+  }
 }
