@@ -6,9 +6,13 @@ import 'package:travel_club/features/food/widgets/small_container_food.dart';
 import '../../../core/exports.dart';
 
 class BigContainerFood extends StatelessWidget {
-   BigContainerFood({super.key,this.index=0,this.isFavouriteScreen});
+   BigContainerFood({super.key,this.index=0,this.isFavouriteScreen,this.name,this.rate,this.users,this.logo});
 int index;
 bool ?isFavouriteScreen;
+String ?name;
+String ?rate;
+String ?users;
+String ?logo;
   @override
   Widget build(BuildContext context) {
    return BlocBuilder<FoodCubit,FoodState>(builder: (BuildContext context, state) {  return
@@ -29,7 +33,7 @@ bool ?isFavouriteScreen;
                  SizedBox(height: 10.h,),
                  Padding(
                    padding: const EdgeInsets.only(right: 8.0),
-                   child: Container(child: Text("مطعم صبحي كابر روض الفرج"),),
+                   child: Container(child: Text(name!),),
                  ),
                  Padding(
                    padding: const EdgeInsets.only(right: 8.0),
@@ -38,13 +42,13 @@ bool ?isFavouriteScreen;
 
                      children: [
                        StarRating(
-                           rating: 5, size: 14.sp,
+                           rating:double.tryParse(rate.toString())??0 , size: 14.sp,
                            allowHalfRating: false, emptyIcon: CupertinoIcons.star_fill,
                       filledIcon: CupertinoIcons.star_fill,
                            onRatingChanged: (rating){
                              //   => setState(() => this.rating = rating
                            }),
-                       Text("٢٠٠"+AppTranslations.personWhoRatedRestaurant,style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
+                       Text(users!+AppTranslations.personWhoRatedRestaurant,style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
                      ],
                    ),
                  ),
