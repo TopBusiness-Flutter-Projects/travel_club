@@ -25,13 +25,16 @@ class _ToggleButtonsFoodState extends State<ToggleButtonsFood> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                MenuButton(
-                  title: "قائمة الطعام",
-                  isSelected: cubit.selectedIndexMenue == 0,
-                  onTap: () {
-                    cubit.changeIndexMenue(0);
-                  },
-                ),
+               if( cubit.getRestaurantDetailsModel?.data?.hasMenu==1)...[
+                 MenuButton(
+                   title: "قائمة الطعام",
+                   isSelected: cubit.selectedIndexMenue == 0,
+                   onTap: () {
+                     cubit.changeIndexMenue(0);
+                   },
+                 ),
+               ],
+
                 MenuButton(
                   title: "عن المطعم",
                   isSelected: cubit.selectedIndexMenue == 1,

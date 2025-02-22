@@ -3,10 +3,11 @@ import 'package:flutter_rating/flutter_rating.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../cubit/food_cubit.dart';
+import '../../../data/models/get_restaurant_details_model.dart';
 
 class RatingWidgetFood extends StatelessWidget {
-  const RatingWidgetFood({super.key});
-
+  const RatingWidgetFood({super.key,required this.rates});
+  final Rate rates;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FoodCubit, FoodState>(builder: (BuildContext context, state) {
@@ -36,13 +37,14 @@ class RatingWidgetFood extends StatelessWidget {
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("احمد مختار",style: getSemiBoldStyle(fontSize: 14.sp),),
+                              Text(rates.name.toString()??"",style: getSemiBoldStyle(fontSize: 14.sp),),
                               //   Spacer(),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   StarRating(
-                                      rating: 4, size: 14.sp, emptyIcon: CupertinoIcons.star_fill,
+                                      rating: double.tryParse(rates.average.toString())??0,
+                                      size: 14.sp, emptyIcon: CupertinoIcons.star_fill,
                       filledIcon: CupertinoIcons.star_fill,
                                       allowHalfRating: false,
                                       onRatingChanged: (rating){
@@ -52,7 +54,9 @@ class RatingWidgetFood extends StatelessWidget {
                               ),
                             ]),
                         SizedBox(height: 10.h,),
-                        Text("المكان ممتاز والخدمه كان عاليه جدا والاكل جودته محترمه شكرا جدا شيف محمد",style: getRegularStyle(fontSize: 12.sp,color: AppColors.grey),),
+                        Text(
+                          rates.comment.toString()??"..."
+                          ,style: getRegularStyle(fontSize: 12.sp,color: AppColors.grey),),
                       ],
                     ),
                   ),

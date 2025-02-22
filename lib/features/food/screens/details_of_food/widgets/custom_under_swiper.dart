@@ -48,7 +48,7 @@ class ContainerUnderSwiperFood  extends StatelessWidget {
                 //about
                 else if(cubit.selectedIndexMenue==1)...[
                 SizedBox(height: 9.h,),
-                AboutWidgetFood(),
+                 AboutWidgetFood(lat: double.tryParse(cubit.getRestaurantDetailsModel?.data?.latitude.toString()??"")??0, long: double.tryParse(cubit.getRestaurantDetailsModel?.data?.latitude.toString()??"")??0,),
                 // ListView.separated(
                 //   shrinkWrap: true,
                 //   physics: BouncingScrollPhysics(),
@@ -63,8 +63,8 @@ class ContainerUnderSwiperFood  extends StatelessWidget {
                   ListView.separated(
                     physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 5, itemBuilder: (BuildContext context, int index) {
-                    return  RatingWidgetFood();
+                    itemCount: cubit.getRestaurantDetailsModel!.data!.rates?.length??0, itemBuilder: (BuildContext context, int index) {
+                    return  RatingWidgetFood(rates: cubit.getRestaurantDetailsModel!.data!.rates![index],);
                   }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10.h,); },),
                   SizedBox(height: 100.h,)
                 ]
