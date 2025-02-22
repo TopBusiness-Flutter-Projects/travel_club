@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/food/data/models/get_menu_meals_model.dart';
@@ -200,8 +199,7 @@ class FoodCubit extends Cubit<FoodState> {
 
   CatogreyDataFood selectedIndex =
       CatogreyDataFood(id: 0, name: "all_foods".tr());
-  FoodRepoImpl api;
-  CatogreyDataFood selectedIndex = CatogreyDataFood(id: 0, name: "all_foods".tr());
+  
   int selectedIndexFavourite = 0;
   bool? isFavoriteTrue = false;
   void changeIndex(CatogreyDataFood categoryDataFood) {
@@ -304,8 +302,7 @@ class FoodCubit extends Cubit<FoodState> {
   getRestaurant() async {
     getRestaurantModel = null;
     emit(LoadingGetFood());
-    final res = await api?.getRestuarnt(id: selectedIndex.id.toString());
-    res?.fold((l) {
+
     final res = await api.getRestuarnt(id: selectedIndex.id .toString());
     res.fold((l) {
 
@@ -319,15 +316,12 @@ class FoodCubit extends Cubit<FoodState> {
     });
   }
 
-  GetRestaurantDetailsModel? getRestaurantDetailsModel;
-  getRestaurantDetails({String? id}) async {
-    // getRestaurantDetailsModel = null;
+
   GetRestaurantDetailsModel? getRestaurantDetailsModel ;
   getRestaurantDetails({String ?id}) async {
      getRestaurantDetailsModel = null;
     emit(LoadingGetFoodDetails());
-    final res = await api?.getRestaurantDetails(id: id.toString());
-    res?.fold((l) {
+   
     final res = await api.getRestaurantDetails(id: id .toString());
     res.fold((l) {
       emit(ErrorGetFoodDetails());
