@@ -1,54 +1,9 @@
-import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/features/home/cubit/home_cubit.dart';
-import 'package:travel_club/features/home/cubit/home_state.dart';
-import 'package:travel_club/features/home/data/models/home_model.dart';
-import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
+import '../../../../core/exports.dart';
 import '../../../../core/widgets/network_image.dart';
-
-class CustomCategorySection extends StatefulWidget {
-  const CustomCategorySection({
-    super.key,
-  });
-
-  @override
-  State<CustomCategorySection> createState() => _CustomCategorySectionState();
-}
-
-class _CustomCategorySectionState extends State<CustomCategorySection> {
-  @override
-  void initState() {
-    context.read<HomeCubit>().getHomeData();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var cubit = context.read<HomeCubit>();
-    return BlocBuilder<HomeCubit, HomeState>(
-      builder: (BuildContext context, state) {
-        return cubit.homeModel.data!.modules == null
-            ? const SizedBox(
-                height: 1,
-              )
-            : SizedBox(
-                height: getHeightSize(context) * 0.15,
-                child: ListView.builder(
-                  itemBuilder: (context, index) =>
-                      CustomCategoryContainer(
-                    categoryModel: cubit.homeModel.data!.modules![index],
-                    islast: index ==
-                        (cubit.homeModel.data!.modules!.length <
-                                    cubit.moduleslenth ? cubit.homeModel.data!.modules!.length
-                                : cubit.moduleslenth) -
-                            1,
-                  ),
-                  itemCount: cubit.homeModel.data!.modules!.length,
-                  scrollDirection: Axis.horizontal,
-                ));
-      },
-    );
-  }
-}
+import '../../../payment/cubit/payment_cubit.dart';
+import '../../cubit/home_cubit.dart';
+import '../../cubit/home_state.dart';
+import '../../data/models/home_model.dart';
 
 class CustomCategoryContainer extends StatelessWidget {
   const CustomCategoryContainer({
@@ -72,9 +27,11 @@ class CustomCategoryContainer extends StatelessWidget {
               bottom: getHeightSize(context) * 0.01),
           child: GestureDetector(
             onTap: () {
+              cubit.changeContainer(categoryModel?.type ?? 0);
+
               context.read<PaymentCubit>().currentModuleId = categoryModel!.id!;
               if (categoryModel?.type == 0) {
-                Navigator.pushNamed(context, Routes.residenceRoute);
+
               } else if (categoryModel?.type == 1) {
                 Navigator.pushNamed(context, Routes.transportationRoute);
               } else if (categoryModel?.type == 2) {

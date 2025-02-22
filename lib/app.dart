@@ -22,7 +22,6 @@ import 'features/entertainment/cubit/entertainment_cubit.dart';
 import 'features/food/cubit/food_cubit.dart';
 import 'features/notification/cubit/notification_cubit.dart';
 import 'features/other_services/cubit/other_services_cubit.dart';
-import 'features/search/cubit/search_cubit.dart';
 import 'features/splash/cubit/cubit.dart';
 
 class MyApp extends StatefulWidget {
@@ -58,9 +57,7 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(
             create: (_) => injector.serviceLocator<LoginCubit>(),
           ),
-          BlocProvider(
-            create: (_) => injector.serviceLocator<SearchCubit>(),
-          ),
+
           BlocProvider(
             create: (_) => injector.serviceLocator<MainCubit>(),
           ),

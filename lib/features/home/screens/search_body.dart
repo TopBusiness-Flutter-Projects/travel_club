@@ -1,8 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/widgets/no_data_widget.dart';
+import 'package:travel_club/features/home/cubit/home_cubit.dart';
+import 'package:travel_club/features/home/cubit/home_state.dart';
 import 'package:travel_club/features/residence/data/models/lodges_model.dart';
 import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
-import 'package:travel_club/features/search/cubit/search_cubit.dart';
-import 'package:travel_club/features/search/screens/widgets/custom_booking_sectoin.dart';
+import 'package:travel_club/features/home/screens/widgets/custom_booking_sectoin.dart';
 import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
 import '../../entertainment/screens/widgets/custom_container_companies.dart';
@@ -19,8 +22,8 @@ class Searchbody extends StatefulWidget {
 class _SearchbodyState extends State<Searchbody> {
   @override
   Widget build(BuildContext context) {
-    SearchCubit cubit = context.read<SearchCubit>();
-    return BlocBuilder<SearchCubit, SearchState>(builder: (context, state) {
+    HomeCubit cubit = context.read<HomeCubit>();
+    return BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         SizedBox(height: getVerticalPadding(context) * 2),
         Padding(
@@ -38,6 +41,9 @@ class _SearchbodyState extends State<Searchbody> {
                     padding: const EdgeInsets.all(8.0),
                     child: SvgPicture.asset(AppIcons.search),
                   ),
+                    onChanged: (value) {
+                      cubit.onChangeSearch(value, context);
+                  },
                 ),
               ),
             ],
@@ -53,11 +59,11 @@ class _SearchbodyState extends State<Searchbody> {
                 child: SizedBox(
                   height: 54.h, // Fixed height for the ListView
                   child: ListView.separated(
-                    itemCount: cubit.categories.length,
+                    itemCount: cubit.homeModel.data?.modules?.length??0,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (BuildContext context, int index) {
                       return CustomBookingSectionSearch(
-                        index: index,
+                        index: index, categoryModel: cubit.homeModel.data!.modules![index],
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) {
@@ -66,31 +72,34 @@ class _SearchbodyState extends State<Searchbody> {
                   ),
                 ),
               ),
+            //  CustomCategorySection(),
               //body ...
-              if (cubit.categories[cubit.selectedIndex] ==
-                  AppTranslations.accommodation) ...[
+              if (cubit.selectedIndex == 0) ...[
                 // Container()
+
                 Expanded(
-                    child: ListView.builder(
-                  itemCount: 1,
+                    child:cubit.residenceFavouriteModel.data?.isEmpty??false?
+                    Center(child:NoDataWidget(title: "no_data".tr()),):
+                    ListView.builder(
+                  itemCount: cubit.residenceFavouriteModel.data?.length??0,
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CustomLodgeContainer(lodgesModel: LodgeModel()),
+                    child:
+                    CustomLodgeContainer(
+                      lodgesModel: cubit.residenceFavouriteModel.data?[index]??LodgeModel(),
+                    ),
                   ),
-                )),
+                )
+                ),
               ],
               // SizedBox(height: 30.h,)
-              if (cubit.categories[cubit.selectedIndex] ==
-                  AppTranslations.transportation) ...[
+              if (cubit.selectedIndex == 1) ...[
                 Expanded(
                     child: ListView.builder(
                         itemCount: 10,
-                        itemBuilder: (context, index) => CustomCompanyContainer(
-                              companyModel: CompanyModel(),
-                            ))),
+                        itemBuilder: (context, index) => CustomCompanyContainer(companyModel: cubit.transportationFavouriteModel.data?[index]??CompanyModel(),))),
               ],
-              if (cubit.categories[cubit.selectedIndex] ==
-                  AppTranslations.food) ...[
+              if (cubit.selectedIndex == 2) ...[
                 //  FoodBookingBody()
                 SizedBox(
                   height: 30.h,
@@ -102,6 +111,7 @@ class _SearchbodyState extends State<Searchbody> {
                     padding: const EdgeInsets.all(8.0),
                     child: BigContainerFood(
                       index: 0,
+
                       isFavouriteScreen: false,
                     ),
                   ),
@@ -109,8 +119,7 @@ class _SearchbodyState extends State<Searchbody> {
 
                 // Container()
               ],
-              if (cubit.categories[cubit.selectedIndex] ==
-                  AppTranslations.entertainment) ...[
+              if (cubit.selectedIndex == 3) ...[
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,

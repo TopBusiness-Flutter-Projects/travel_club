@@ -5,6 +5,9 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/preferences/preferences.dart';
 import '../../../auth/data/models/login_model.dart';
+import '../../../residence/data/models/lodges_model.dart';
+import '../../../transportation/data/models/get_companies_model.dart';
+import '../models/home_filter_model.dart';
 import '../models/home_model.dart';
 
 class HomeRepoImpl {
@@ -17,6 +20,24 @@ class HomeRepoImpl {
         EndPoints.homeUrl,
       );
       return Right(GetHomeModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  Future<Either<Failure, dynamic>> getHomeFilter({required String catId,required String searchText}) async {
+    try {
+      var response = await dio.get(
+        EndPoints.homeFilterUrl,
+        queryParameters: {
+          'module_id':catId,
+          'search':searchText,
+        },
+      );
+      return  catId.toString() == "1" // residence
+          ? Right(GetLodgesModel.fromJson(response))
+          : catId.toString() == "2" // transportation
+          ? Right(GetCompaniesModel.fromJson(response))
+          : Right(response);
     } on ServerException {
       return Left(ServerFailure());
     }

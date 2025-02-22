@@ -37,7 +37,7 @@ String ?logo;
                  SizedBox(height: 10.h,),
                  Padding(
                    padding: const EdgeInsets.only(right: 8.0),
-                   child: Container(child: Text(name!),),
+                   child: Container(child: Text(name??""),),
                  ),
                  Padding(
                    padding: const EdgeInsets.only(right: 8.0),
@@ -52,7 +52,7 @@ String ?logo;
                            onRatingChanged: (rating){
                              //   => setState(() => this.rating = rating
                            }),
-                       Text(users!+AppTranslations.personWhoRatedRestaurant,style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
+                       Text(users??""+AppTranslations.personWhoRatedRestaurant,style: getMediumStyle(fontSize: 12.sp,color: AppColors.grey),),
                      ],
                    ),
                  ),

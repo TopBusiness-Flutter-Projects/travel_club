@@ -78,7 +78,7 @@ class _CustomCompanyContainerState extends State<CustomCompanyContainer> {
                                        } }
                                      ,
                                      builder: (BuildContext context, state) {
-                                    return  CustomFavWidget(isFav: widget.companyModel.isFavorite, id: widget.companyModel.id.toString(),isFavScreen: widget.isFavouriteScreen,);
+                                    return  CustomFavWidget(isFav: widget.companyModel.isFavorite??false, id: widget.companyModel.id.toString(),isFavScreen: widget.isFavouriteScreen,);
                                   },)
                                 ],
                               ),
