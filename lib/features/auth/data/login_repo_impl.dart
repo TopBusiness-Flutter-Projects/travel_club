@@ -14,7 +14,6 @@ class LoginRepoImpl {
   final BaseApiConsumer api;
   LoginRepoImpl(this.api);
   // LOGIN
-
   Future<Either<Failure, LoginModel>> login({
     required String password,
     required String phone,
