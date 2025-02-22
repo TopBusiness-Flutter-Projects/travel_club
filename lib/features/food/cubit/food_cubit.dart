@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/food/data/models/get_menu_meals_model.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
@@ -217,28 +218,35 @@ class FoodCubit extends Cubit<FoodState> {
     selectedIndexMenue = index;
     emit(ChangeIndexFood());
   }
-
+   String countryCode = '+20';
+TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController numberController = TextEditingController();
   String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
   DateTime selectedDate = DateTime.now();
   void onSelectedDateSingle({required BuildContext context}) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+    var picked = await DatePicker.showSimpleDatePicker(
+      context,
+      initialDate: selectedDate,
+      firstDate: DateTime.now(),
       lastDate: DateTime(9999),
+      dateFormat: "dd/MMMM/yyyy",
+      backgroundColor: AppColors.primary,
+      textColor: AppColors.white,
+      itemTextStyle: getMediumStyle(color: AppColors.white),
+      locale: DateTimePickerLocale.en_us,
+      looping: false,
     );
 
     if (picked != null) {
       selectedDate = picked;
-
       updateDateStrings();
       emit(DateChangedState());
     }
   }
 
   void updateDateStrings() {
-    singleDate = DateFormat('yyyy-MM-dd', 'en')
-        .format(selectedDate); // تاريخ اليوم كقيمة افتراضية
+    singleDate = DateFormat('yyyy-MM-dd', 'en').format(selectedDate);
   }
 
 //get catogrey

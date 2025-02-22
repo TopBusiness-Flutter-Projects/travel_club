@@ -120,14 +120,14 @@ builder: (BuildContext context, state) {
                               child: Opacity(
                                 opacity:cubit.cartItems.isNotEmpty? 1:0.5,
                                 child: CustomButton(
-                                  title: 'حجز طاولة',
+                                  title: AppTranslations.bookTable,
                                   onTap: () {
                                     cubit.cartItems.isNotEmpty?
                                     checkLoggingStatus(context,onPressed: () {
                                       Navigator.pushNamed(
                                           context, Routes.bookTable);
                                     }):
-                                    errorGetBar("add items to cart first")
+                                    errorGetBar("add_items_first")
                                     ;
 
                                 

@@ -55,6 +55,7 @@ class AppTranslations {
   static String get menu => 'menu'.tr();
   static String get details => 'details'.tr();
   static String get about => 'about'.tr();
+  static String get addItems => 'add_items_first'.tr();
   static String get whatItOffers => 'what_it_offers'.tr();
   static String get locationOnMap => 'location_on_map'.tr();
   static String get rating => 'rating'.tr();
@@ -158,6 +159,7 @@ class AppTranslations {
   static String get members => 'members'.tr();
   static String get callPhone => 'call_phone'.tr();
   static String get nameOwner => 'name_owner'.tr();
+  static String get enter => 'enter'.tr();
   static String get personalData => 'personal_data'.tr();
   static String get changeLang => 'change_language'.tr();
   static String get contactUs => 'contact_us'.tr();

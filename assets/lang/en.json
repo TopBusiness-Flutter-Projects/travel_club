@@ -254,6 +254,8 @@
   "select_return_time": "Select return time",
   "no_buses_found": "No buses found",
   "go": "Go",
+  "enter": "Enter",
+  "add_items_first": "Add items first",
   "return": "Return",
   "your_seats": "Your seats",
   "go_seats": "Go seats",
