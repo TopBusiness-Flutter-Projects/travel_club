@@ -17,3 +17,4 @@ final class ErrorGetFood extends FoodState {}
 final class LoadingGetFoodDetails extends FoodState {}
 final class LoadedGetFoodDetails extends FoodState {}
 final class ErrorGetFoodDetails extends FoodState {}
+final class LoadingTheQuantityCount extends FoodState {}

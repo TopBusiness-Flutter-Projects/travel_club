@@ -247,6 +247,7 @@ class _SplashScreenState extends State<SplashScreen>
       Navigator.pushReplacementNamed(context, Routes.mainRoute);
     }
   }
+ 
   @override
   Widget build(BuildContext context) {
     return PulseRotateSplashScreen(

@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/core/widgets/custom_text_form_field.dart';
+import 'package:travel_club/core/widgets/network_image.dart';
 import 'package:travel_club/features/food/cubit/food_cubit.dart';
+import 'package:travel_club/features/food/data/models/get_menu_meals_model.dart';
+import 'package:travel_club/features/food/data/models/get_resturant_model.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
@@ -34,8 +37,8 @@ class BookTableScreen extends StatelessWidget {
                         StaggeredGrid.count(
                           crossAxisCount: 2,
                           children: List.generate(
-                            2,
-                            (index) => CustomMealContainer(cubit: cubit),
+                            cubit.cartItems.length,
+                            (index) => CustomMealContainer(mealModel: cubit.cartItems[index],),
                           ),
                         ),
                         SizedBox(
@@ -105,90 +108,103 @@ class CustomMealContainer extends StatelessWidget {
   const CustomMealContainer({
     super.key,
     this.isSecondBooking = false,
-    required this.cubit,
+    required this.mealModel,
   });
 
-  final FoodCubit cubit;
+  final MealModel mealModel;
+
+  
   final bool isSecondBooking;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: CustomContainerWithShadow(
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.r),
-              child: Image.network(
-                "https://picsum.photos/200/300",
-                height: 100.h,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+    return BlocBuilder<FoodCubit, FoodState>(
+      builder: (BuildContext context, state) {
+        var cubit = context.read<FoodCubit>();
+        return Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: CustomContainerWithShadow(
+            child: Column(
+              children: [
+                
+                CustomNetworkImage(image: mealModel.image ?? "",
+                borderRadius: 20.r,
+                 height: 100.h,
+                    width: double.infinity,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AutoSizeText(
+                        "${mealModel.title?? ""}" + "\n",
+                        maxLines: 2,
+                        style: getSemiBoldStyle(fontSize: 14.sp, fontHeight: 1),
+                      ),
+                      AutoSizeText(
+                        "${mealModel.priceAfterDiscount?? ""}" + " " + AppTranslations.currency,
+                        maxLines: 1,
+                        style: getSemiBoldStyle(
+                            fontSize: 13.sp, fontHeight: 1, color: AppColors.green),
+                      ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      isSecondBooking
+                          ? AutoSizeText(
+                              "عدد" + " " + '${mealModel.userQty }',
+                              maxLines: 2,
+                              style:
+                                  getSemiBoldStyle(fontSize: 14.sp, fontHeight: 1),
+                            )
+                          :  Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        cubit.addOrRemoveFromBasket(
+                                          context,
+                                          isAdd: true,
+                                          product: mealModel,
+                                        );
+                                      },
+                                      child: Icon(
+                                        CupertinoIcons.add_circled,
+                                        color: AppColors.primary,
+                                        size: 30.sp,
+                                      ),
+                                    ),
+                                    if (mealModel.userQty > 0) ...[
+                                      Text(
+                                        " ${mealModel.userQty} ",
+                                        style: getSemiBoldStyle(
+                                            fontSize: 14.sp,
+                                            color: AppColors.primary),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          cubit.addOrRemoveFromBasket(
+                                            context,
+                                            isAdd: false,
+                                            product: mealModel,
+                                          );
+                                        },
+                                        child: Icon(
+                                          CupertinoIcons.minus_circled,
+                                          color: AppColors.primary,
+                                          size: 30.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  ],
+                                )
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AutoSizeText(
-                    "وجبة الدجاج المحمر" + "\n",
-                    maxLines: 2,
-                    style: getSemiBoldStyle(fontSize: 14.sp, fontHeight: 1),
-                  ),
-                  AutoSizeText(
-                    " 1000" + AppTranslations.currency,
-                    maxLines: 1,
-                    style: getSemiBoldStyle(
-                        fontSize: 13.sp, fontHeight: 1, color: AppColors.green),
-                  ),
-                  SizedBox(
-                    height: 8.h,
-                  ),
-                  isSecondBooking
-                      ? AutoSizeText(
-                          "عدد" + " " + '${cubit.itemsQty}',
-                          maxLines: 2,
-                          style:
-                              getSemiBoldStyle(fontSize: 14.sp, fontHeight: 1),
-                        )
-                      : Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                cubit.addOrRemoveMenuCart(true);
-                              },
-                              child: Icon(
-                                CupertinoIcons.add_circled,
-                                color: AppColors.primary,
-                                size: 20.sp,
-                              ),
-                            ),
-                            if (cubit.itemsQty > 0) ...[
-                              Text(
-                                " ${cubit.itemsQty} ",
-                                style: getSemiBoldStyle(
-                                    fontSize: 14.sp, color: AppColors.primary),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  cubit.addOrRemoveMenuCart(false);
-                                },
-                                child: Icon(
-                                  CupertinoIcons.minus_circled,
-                                  color: AppColors.primary,
-                                  size: 20.sp,
-                                ),
-                              ),
-                            ],
-                          ],
-                        )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 }
