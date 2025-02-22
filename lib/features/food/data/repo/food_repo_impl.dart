@@ -16,6 +16,9 @@ class FoodRepoImpl {
     try {
       var response = await dio.get(
         EndPoints.getMenuCategoryRestaurantsUrl,
+        queryParameters: {
+          "restaurant_id": "1",
+        },
       );
       return Right(GetCategoryFoodModel.fromJson(response));
     } on ServerException {
@@ -31,7 +34,6 @@ class FoodRepoImpl {
         EndPoints.getRestaurantMenuUrl,
         queryParameters: {
           "restaurant_menu_category_id": menuId,
-          "restaurant_id": "1",
         },
       );
       return Right(GetMenuMealsModel.fromJson(response));
