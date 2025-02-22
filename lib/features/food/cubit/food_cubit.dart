@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 
 import '../data/models/get_catogrey_model.dart';
+import '../data/models/get_restaurant_details_model.dart';
 import '../data/models/get_resturant_model.dart';
 import '../data/repo/food_repo_impl.dart';
 
@@ -10,11 +11,12 @@ part 'food_state.dart';
 class FoodCubit extends Cubit<FoodState> {
   FoodCubit(this.api) : super(FoodInitial());
   FoodRepoImpl? api;
-  int selectedIndex = 0;
+  CatogreyDataFood selectedIndex = CatogreyDataFood(id: 0, name: "all_foods".tr());
   int selectedIndexFavourite = 0;
   bool? isFavoriteTrue = false;
-  void changeIndex(int index) {
-    selectedIndex = index;
+  void changeIndex(  CatogreyDataFood categoryDataFood) {
+    selectedIndex = categoryDataFood;
+    getRestaurant();
     emit(ChangeIndexFood());
   }
 
@@ -88,34 +90,58 @@ class FoodCubit extends Cubit<FoodState> {
         .format(selectedDate); // تاريخ اليوم كقيمة افتراضية
   }
 //get catogrey
-  GetCatogreyFoodModel catogreyModel = GetCatogreyFoodModel();
-  getCatogeryData() async {
+  GetCategoryFoodModel categoryModel = GetCategoryFoodModel();
+  getCategoryData() async {
     emit(LoadingGetCatogery());
     final res = await api?.getCatogrey();
     res?.fold((l) {
       emit(ErrorGetCatogery());
     }, (r) {
-      catogreyModel = r;
+      List<CatogreyDataFood> list = r.data ?? [];
+    //  list = list.reversed.toList();
+
+      //list.add(CatogreyDataFood(id: 0, name: "All".tr()));
+      list.insert(0,CatogreyDataFood(id: 0, name: "all_foods".tr()));
+   //  list = list.reversed.toList();
+      categoryModel.data = list;
+      getRestaurant();
       emit(LoadedGetCatogery());
     });
   }
 
 //get food
-  String ?catogreyId;
-  GetResturant? resturantModel ;
-  getResturant(String id) async {
+//   String ?catogreyId;
+  GetRestaurantModel? getRestaurantModel ;
+  getRestaurant() async {
+    getRestaurantModel = null;
     emit(LoadingGetFood());
-    final res = await api?.getRestuarnt(id: id);
+    final res = await api?.getRestuarnt(id: selectedIndex.id .toString());
     res?.fold((l) {
 
       emit(ErrorGetFood());
     }, (r) {
-      if(r.status=="404"){
+      if(r.status==404){
 
         emit(ErrorGetCatogery());
       }
-      resturantModel = r;
+      getRestaurantModel = r;
       emit(LoadedGetFood());
     });
+  }
+  GetRestaurantDetailsModel? getRestaurantDetailsModel ;
+  getRestaurantDetails({String ?id}) async {
+    // getRestaurantDetailsModel = null;
+    emit(LoadingGetFoodDetails());
+    final res = await api?.getRestaurantDetails(id: id .toString());
+    res?.fold((l) {
+      emit(ErrorGetFoodDetails());
+    }, (r) {
+      if(r.status==404){
+        emit(ErrorGetFoodDetails());
+      }
+      getRestaurantDetailsModel = r;
+      emit(LoadedGetFoodDetails());
+    }
+    );
   }
 }
