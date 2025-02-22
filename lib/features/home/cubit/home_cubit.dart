@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
+import '../../food/data/models/get_catogrey_model.dart';
+import '../../food/data/models/get_resturant_model.dart';
 import '../../residence/data/models/lodges_model.dart';
 import '../../transportation/data/models/get_companies_model.dart';
 import '../data/models/home_filter_model.dart';
@@ -26,6 +28,8 @@ class HomeCubit extends Cubit<HomeState> {
   }
   GetHomeFilter homeFilterModel = GetHomeFilter();
   GetLodgesModel residenceFavouriteModel = GetLodgesModel();
+  GetRestaurantModel? getRestaurantModel;
+
   GetCompaniesModel transportationFavouriteModel = GetCompaniesModel();
   getHomeFilterData({String ?text,BuildContext ?context}) async {
     print("selectedIndex $selectedIndex");
@@ -44,7 +48,10 @@ class HomeCubit extends Cubit<HomeState> {
       }
       else if (selectedId.toString() == "2") {
         transportationFavouriteModel = r;
-      }else{
+      }else if (selectedId.toString() == "3") {
+        getRestaurantModel = r;
+      }
+      else {
         homeFilterModel = r;
       }
      // homeFilterModel = r;

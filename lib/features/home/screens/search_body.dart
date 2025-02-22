@@ -9,6 +9,7 @@ import 'package:travel_club/features/home/screens/widgets/custom_booking_sectoin
 import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
 import '../../entertainment/screens/widgets/custom_container_companies.dart';
+import '../../food/data/models/get_resturant_model.dart';
 import '../../food/widgets/big_container_food.dart';
 import '../../transportation/screens/widgets/custom_company_container.dart';
 class Searchbody extends StatefulWidget {
@@ -110,9 +111,7 @@ class _SearchbodyState extends State<Searchbody> {
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: BigContainerFood(
-                      index: 0,
-
-                      isFavouriteScreen: false,
+                      resturantData: cubit.getRestaurantModel?.data?[index]??ResturantData(),
                     ),
                   ),
                 ))
