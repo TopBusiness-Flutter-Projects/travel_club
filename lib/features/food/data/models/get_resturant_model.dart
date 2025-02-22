@@ -4,22 +4,22 @@
 
 import 'dart:convert';
 
-GetResturant getResturantFromJson(String str) => GetResturant.fromJson(json.decode(str));
+GetRestaurantModel getResturantFromJson(String str) => GetRestaurantModel.fromJson(json.decode(str));
 
-String getResturantToJson(GetResturant data) => json.encode(data.toJson());
+String getResturantToJson(GetRestaurantModel data) => json.encode(data.toJson());
 
-class GetResturant {
+class GetRestaurantModel {
   String? msg;
   List<ResturantData>? data;
   int? status;
 
-  GetResturant({
+  GetRestaurantModel({
     this.msg,
     this.data,
     this.status,
   });
 
-  factory GetResturant.fromJson(Map<String, dynamic> json) => GetResturant(
+  factory GetRestaurantModel.fromJson(Map<String, dynamic> json) => GetRestaurantModel(
     msg: json["msg"],
     data: json["data"] == null ? [] : List<ResturantData>.from(json["data"]!.map((x) => ResturantData.fromJson(x))),
     status: json["status"],

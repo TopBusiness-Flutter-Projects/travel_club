@@ -6,10 +6,23 @@ import '../../../cubit/food_cubit.dart';
 import '../widgets/centr_container_details_food.dart';
 import '../widgets/custom_under_swiper.dart';
 
-class DetailsFood extends StatelessWidget {
-  const DetailsFood({super.key});
+class DetailsFood extends StatefulWidget {
+  const DetailsFood({super.key,required this.id});
+final String id;
+  @override
+  State<DetailsFood> createState() => _DetailsFoodState();
+}
+
+class _DetailsFoodState extends State<DetailsFood> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    context.read<FoodCubit>().getRestaurantDetails(id: widget.id);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+    var cubit= context.read<FoodCubit>();
     return BlocBuilder<FoodCubit, FoodState>(
       builder: (BuildContext context, state) {
         return SafeArea(
@@ -22,9 +35,8 @@ class DetailsFood extends StatelessWidget {
                 children: [
                   // Swiper for images
                   SwiperWithAutoplay(
-                    images: ["dds"],
+                    images: [cubit.getRestaurantDetailsModel?.data?.media??""]
                   ),
-
                   // Custom row (back button, favorite, etc.)
                   Positioned(
                     top: 16.0,

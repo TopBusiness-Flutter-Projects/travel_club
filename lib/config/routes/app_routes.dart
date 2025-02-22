@@ -183,8 +183,9 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsFoodRoute:
-        return PageTransition(
-          child: const DetailsFood(),
+    String id = settings.arguments as String;
+    return PageTransition(
+          child:  DetailsFood(id:id),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

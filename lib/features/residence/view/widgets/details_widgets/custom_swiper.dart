@@ -3,6 +3,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/widgets/network_image.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 
 class SwiperWithAutoplay extends StatefulWidget {
@@ -45,24 +46,7 @@ class _SwiperWithAutoplayState extends State<SwiperWithAutoplay> {
                   ),
                 );
               },
-              child: CachedNetworkImage(
-                imageUrl: widget.images[index],
-                fit: BoxFit.cover,
-                placeholder: (context, url) => Padding(
-                  padding:
-                      EdgeInsets.only(bottom: getHeightSize(context) * 0.2),
-                  child: SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.primary,
-                      ),
-                    ),
-                  ),
-                ),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
+              child: CustomNetworkImage(image: widget.images[index]),
             );
           },
           layout: SwiperLayout.DEFAULT,

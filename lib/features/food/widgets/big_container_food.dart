@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/features/food/cubit/food_cubit.dart';
@@ -6,19 +8,21 @@ import 'package:travel_club/features/food/widgets/small_container_food.dart';
 import '../../../core/exports.dart';
 
 class BigContainerFood extends StatelessWidget {
-   BigContainerFood({super.key,this.index=0,this.isFavouriteScreen,this.name,this.rate,this.users,this.logo});
+   BigContainerFood({super.key,this.index=0,this.isFavouriteScreen,this.name,this.onTap,this.rate,this.users,this.logo});
 int index;
 bool ?isFavouriteScreen;
 String ?name;
 String ?rate;
 String ?users;
 String ?logo;
+   void Function()? onTap;
   @override
   Widget build(BuildContext context) {
    return BlocBuilder<FoodCubit,FoodState>(builder: (BuildContext context, state) {  return
      InkWell(
-       onTap: (){
-         Navigator.pushNamed(context, Routes.detailsFoodRoute);
+       onTap: onTap??(){
+         print("no tap");
+        // Navigator.pushNamed(context, Routes.detailsFoodRoute,arguments: index);
        },
        child: CustomContainerWithShadow(
          color: AppColors.white,
