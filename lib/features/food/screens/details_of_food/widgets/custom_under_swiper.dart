@@ -1,8 +1,10 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/features/food/screens/details_of_food/widgets/rating_widget.dart';
 import 'package:travel_club/features/food/screens/details_of_food/widgets/sub_toggle_buttons.dart';
 import 'package:travel_club/features/food/screens/details_of_food/widgets/toggle_container.dart';
 import '../../../../../../core/exports.dart';
+import '../../../../../core/widgets/no_data_widget.dart';
 import '../../../cubit/food_cubit.dart';
 import 'about_widget.dart';
 import 'custom_menue_container.dart';
@@ -48,7 +50,9 @@ class ContainerUnderSwiperFood  extends StatelessWidget {
                 //about
                 else if(cubit.selectedIndexMenue==1)...[
                 SizedBox(height: 9.h,),
-                 AboutWidgetFood(lat: double.tryParse(cubit.getRestaurantDetailsModel?.data?.latitude.toString()??"")??0, long: double.tryParse(cubit.getRestaurantDetailsModel?.data?.latitude.toString()??"")??0,),
+                 AboutWidgetFood(
+                   lat: double.tryParse(cubit.getRestaurantDetailsModel?.data?.latitude.toString()??"")??0,
+                   long: double.tryParse(cubit.getRestaurantDetailsModel?.data?.latitude.toString()??"")??0,),
                 // ListView.separated(
                 //   shrinkWrap: true,
                 //   physics: BouncingScrollPhysics(),
@@ -60,6 +64,9 @@ class ContainerUnderSwiperFood  extends StatelessWidget {
                  // rating()
                 else...[
                   SizedBox(height: 9.h,),
+                  cubit.getRestaurantDetailsModel==null?Center(child: CustomLoadingIndicator(),):
+                  cubit.getRestaurantDetailsModel!.data!.rates?.isNotEmpty??false?
+                  Expanded(child: Center(child: NoDataWidget(title: "no_data".tr(),))):
                   ListView.separated(
                     physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
