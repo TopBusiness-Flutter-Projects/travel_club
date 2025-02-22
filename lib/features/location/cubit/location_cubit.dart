@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -255,4 +256,11 @@ class LocationCubit extends Cubit<LocationState> {
       errorGetBar("error from map");
     }
   }
+  //place name
+
+
+
+
 }
+
+
