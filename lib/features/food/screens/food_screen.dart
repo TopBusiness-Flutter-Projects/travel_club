@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/widgets/no_data_widget.dart';
+import 'package:travel_club/features/food/data/models/get_catogrey_model.dart';
 
 import '../../../core/exports.dart';
 import '../cubit/food_cubit.dart';
@@ -15,8 +16,9 @@ class _FoodScreenState extends State<FoodScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    context.read<FoodCubit>().getCatogeryData();
-    context.read<FoodCubit>().getResturant(context.read<FoodCubit>().catogreyModel.data?[0].id.toString()??"");
+    // CatogreyDataFood selectedIndex = CatogreyDataFood(id: 0, name: "all_foods".tr());
+    context.read<FoodCubit>().getCategoryData();
+    // context.read<FoodCubit>().getResturant();
     super.initState();
   }
   @override
@@ -27,8 +29,8 @@ class _FoodScreenState extends State<FoodScreen> {
       CustomScreen(appbarTitle: AppTranslations.food,body:
     RefreshIndicator(
       onRefresh: () {
-        print("refresh"+" "+cubit.catogreyId.toString());
-        return cubit.getResturant(cubit.catogreyId??cubit.catogreyModel.data?[0].id.toString()??"");
+        // print("refresh"+" "+cubit.catogreyId.toString());
+        return cubit.getRestaurant();
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -42,18 +44,23 @@ class _FoodScreenState extends State<FoodScreen> {
             SizedBox(height: 20.h,),
             Expanded(
               child:
-              state is LoadingGetFood?Center(child: CustomLoadingIndicator(),):
+              state is LoadingGetFood || cubit.getRestaurantModel==null?
+              Center(child: CustomLoadingIndicator(),):
 
-              cubit.resturantModel?.data!.isEmpty??true?Center(child: NoDataWidget(title: "no_data".tr()),):
+              cubit.getRestaurantModel?.data!.isEmpty??true?Center(child: NoDataWidget(title: "no_data".tr()),):
               ListView.separated(
                 shrinkWrap: true,
-                itemCount: cubit.resturantModel?.data?.length??0, itemBuilder: (BuildContext context, int index) { return
+                itemCount: cubit.getRestaurantModel?.data?.length??0, itemBuilder: (BuildContext context, int index) { return
                 BigContainerFood(
-                  isFavouriteScreen: cubit.resturantModel?.data?[index].isFav??false,
-                  logo: cubit.resturantModel?.data?[index].logo??"",
-                  name: cubit.resturantModel?.data?[index].name??"" ,
-                  rate: cubit.resturantModel?.data?[index].rate.toString()??"",
-                  users: cubit.resturantModel?.data?[index].users.toString()??"",
+                    onTap: (){
+                      print(cubit.getRestaurantModel?.data?[index].id.toString());
+                      Navigator.pushNamed(context, Routes.detailsFoodRoute,arguments: cubit.getRestaurantModel?.data?[index].id.toString());
+                      },
+                  isFavouriteScreen: cubit.getRestaurantModel?.data?[index].isFav??false,
+                  logo: cubit.getRestaurantModel?.data?[index].logo??"",
+                  name: cubit.getRestaurantModel?.data?[index].name??"" ,
+                  rate: cubit.getRestaurantModel?.data?[index].rate.toString()??"",
+                  users: cubit.getRestaurantModel?.data?[index].users.toString()??"",
                 ); }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 13.h,); },),
             ),
             SizedBox(height: 10.h,)
@@ -84,20 +91,18 @@ class _HomeScreenState extends State<HomeScreen> {
        child:
        // state is LoadingGetFood?Center(child: CustomLoadingIndicator(),):
        ListView.builder(
-         itemCount: cubit.catogreyModel.data?.length??0,
+         itemCount: cubit.categoryModel.data?.length??0,
          scrollDirection: Axis.horizontal,
          physics: BouncingScrollPhysics(),
            itemBuilder: (context, index) {
        return Padding(
            padding: const EdgeInsets.all(2.0),
            child: MenuButton(
-           title:cubit.catogreyModel.data?[index].name?.toString()??"",
-           isSelected: cubit.selectedIndex == 0,
+           title:cubit.categoryModel.data?[index].name?.toString()??"",
+           isSelected: cubit.selectedIndex.id == cubit.categoryModel.data?[index].id,
            onTap: (){
-             print("nono id");
-             cubit.catogreyId=cubit.catogreyModel.data?[index].id.toString()??"";
-             print(cubit.catogreyModel.data?[index].id.toString()??"" );
-             cubit.getResturant(cubit.catogreyModel.data?[index].id.toString()??"");
+             cubit.changeIndex(cubit.categoryModel.data?[index]??CatogreyDataFood());
+
             // cubit.catogreyModel.data?[index].id
             //  cubit.changeIndex(0);
            },

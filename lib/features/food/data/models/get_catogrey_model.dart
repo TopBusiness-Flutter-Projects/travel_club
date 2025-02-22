@@ -4,22 +4,22 @@
 
 import 'dart:convert';
 
-GetCatogreyFoodModel getCatogreyModelFromJson(String str) => GetCatogreyFoodModel.fromJson(json.decode(str));
+GetCategoryFoodModel getCatogreyModelFromJson(String str) => GetCategoryFoodModel.fromJson(json.decode(str));
 
-String getCatogreyModelToJson(GetCatogreyFoodModel data) => json.encode(data.toJson());
+String getCatogreyModelToJson(GetCategoryFoodModel data) => json.encode(data.toJson());
 
-class GetCatogreyFoodModel {
+class GetCategoryFoodModel {
   String? msg;
   List<CatogreyDataFood>? data;
   int? status;
 
-  GetCatogreyFoodModel({
+  GetCategoryFoodModel({
     this.msg,
     this.data,
     this.status,
   });
 
-  factory GetCatogreyFoodModel.fromJson(Map<String, dynamic> json) => GetCatogreyFoodModel(
+  factory GetCategoryFoodModel.fromJson(Map<String, dynamic> json) => GetCategoryFoodModel(
     msg: json["msg"],
     data: json["data"] == null ? [] : List<CatogreyDataFood>.from(json["data"]!.map((x) => CatogreyDataFood.fromJson(x))),
     status: json["status"],
