@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/no_data_widget.dart';
@@ -43,7 +44,12 @@ class _SearchbodyState extends State<Searchbody> {
                     child: SvgPicture.asset(AppIcons.search),
                   ),
                     onChanged: (value) {
-                      cubit.onChangeSearch(value, context);
+                      EasyDebounce.debounce(
+                          'home_reports-emplyee-debouncer',
+                          const Duration(seconds: 1),
+                              () async => await cubit.  getHomeFilterData( context:  context)
+                          ());
+
                   },
                 ),
               ),
