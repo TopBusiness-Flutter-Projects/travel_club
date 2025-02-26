@@ -35,7 +35,7 @@ class CustomFilterBar extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (BuildContext context) {
-        return FilterBottomSheet(id: id!,);
+        return FilterBottomSheet(id: id??0,);
       },
     );
             },

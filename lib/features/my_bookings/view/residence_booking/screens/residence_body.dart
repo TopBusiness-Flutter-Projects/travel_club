@@ -35,39 +35,41 @@ class _ResidenceReservedBodyState extends State<ResidenceReservedBody> {
                   ? Center(
                       child: Text('لا يوجد حجوزات'),
                     )
-                  : Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 90.h),
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: BouncingScrollPhysics(),
-                            itemCount: cubit.residenceReservationModel.data!
-                                .reservations!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(context,
-                                        Routes.detailsReservationResidence,
-                                        arguments:
-                                            ResidenceDetailsBookingArguments(
-                                                residenceReservationModel: cubit
-                                                    .residenceReservationModel
-                                                    .data!
-                                                    .reservations![index]));
-                                  },
-                                  child: CustomBookingAccommodationContainerBig(
-                                    residenceReservationModel: cubit
-                                        .residenceReservationModel
-                                        .data!
-                                        .reservations![index],
-                                    goTolodgeDetails: false,
-                                  ));
-                            },
+                  : SingleChildScrollView(
+                    child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 90.h),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: BouncingScrollPhysics(),
+                              itemCount: cubit.residenceReservationModel.data!
+                                  .reservations!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(context,
+                                          Routes.detailsReservationResidence,
+                                          arguments:
+                                              ResidenceDetailsBookingArguments(
+                                                  residenceReservationModel: cubit
+                                                      .residenceReservationModel
+                                                      .data!
+                                                      .reservations![index]));
+                                    },
+                                    child: CustomBookingAccommodationContainerBig(
+                                      residenceReservationModel: cubit
+                                          .residenceReservationModel
+                                          .data!
+                                          .reservations![index],
+                                      goTolodgeDetails: false,
+                                    ));
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                  ),
         );
       },
     );

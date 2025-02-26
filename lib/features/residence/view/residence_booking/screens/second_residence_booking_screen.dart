@@ -53,20 +53,20 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                       height: 20.h,
                     ),
                     //center linear progress
-                    LinearProgress(),
-                    SizedBox(
-                      height: 25.h,
-                    ),
-                    //text
-                    Text(
-                      AppTranslations.selectGoingAndReturn,
-                      style: getMediumStyle(fontSize: 14.sp),
-                    ),
+                     LinearProgress(),
+                    // SizedBox(
+                    //   height: 25.h,
+                    // ),
+                    // //text
+                    // Text(
+                    //   AppTranslations.selectGoingAndReturn,
+                    //   style: getMediumStyle(fontSize: 14.sp),
+                    // ),
                     SizedBox(
                       height: 20.h,
                     ),
                     //from and to date
-                    CustomFromToDate(),
+                    CustomFromToDate(isShowOnly: true,),
                     SizedBox(
                       height: 20.h,
                     ),
