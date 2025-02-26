@@ -101,27 +101,50 @@ class _SearchbodyState extends State<Searchbody> {
               ],
               // SizedBox(height: 30.h,)
               if (cubit.selectedIndex == 1) ...[
+
                 Expanded(
-                    child: ListView.builder(
-                        itemCount: 10,
+                    child:cubit.transportationFavouriteModel.data?.isEmpty??false?
+                    Center(child:NoDataWidget(title: "no_data".tr()),): ListView.builder(
+                        itemCount: cubit.transportationFavouriteModel.data?.length??0,
                         itemBuilder: (context, index) => CustomCompanyContainer(companyModel: cubit.transportationFavouriteModel.data?[index]??CompanyModel(),))),
               ],
               if (cubit.selectedIndex == 2) ...[
                 //  FoodBookingBody()
-                SizedBox(
-                  height: 30.h,
-                ),
+                // SizedBox(
+                //   height: 30.h,
+                // ),
+                // Expanded(
+                //     child: cubit.getRestaurantModel==null?
+                //     Center(child:CustomLoadingIndicator()):
+                //     cubit.getRestaurantModel.data==null?
+                //     Center(child:NoDataWidget(title: "no_data".tr()),):
+                //     cubit.getRestaurantModel.data?.isEmpty??false?
+                //     Center(child:NoDataWidget(title: "no_data".tr()),):
+                //     ListView.builder(
+                //   itemCount:  cubit.getRestaurantModel.data?.length??0,
+                //   itemBuilder: (context, index) => Padding(
+                //     padding: const EdgeInsets.all(8.0),
+                //     child: BigContainerFood(
+                //       resturantData: cubit.getRestaurantModel.data?[index]??ResturantData(),
+                //     ),
+                //   ),
+                // ))
+                SizedBox(height: 20.h,),
                 Expanded(
-                    child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: BigContainerFood(
-                      resturantData: cubit.getRestaurantModel?.data?[index]??ResturantData(),
-                    ),
-                  ),
-                ))
+                  child:
 
+
+
+                  cubit.getRestaurantModel?.data?.isEmpty??true?Center(child: NoDataWidget(title: "no_data".tr()),):
+                  ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: cubit.getRestaurantModel?.data?.length??0, itemBuilder: (BuildContext context, int index) { return
+                    BigContainerFood(
+                      resturantData: cubit.getRestaurantModel?.data?[index] ?? ResturantData(),
+
+                    ); }, separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(height: 13.h,); },),
+                ),
                 // Container()
               ],
               if (cubit.selectedIndex == 3) ...[

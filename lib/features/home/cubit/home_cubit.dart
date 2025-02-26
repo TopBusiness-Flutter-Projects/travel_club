@@ -28,7 +28,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
   GetHomeFilter homeFilterModel = GetHomeFilter();
   GetLodgesModel residenceFavouriteModel = GetLodgesModel();
-  GetRestaurantModel? getRestaurantModel;
+  GetRestaurantModel getRestaurantModel=GetRestaurantModel();
 
   GetCompaniesModel transportationFavouriteModel = GetCompaniesModel();
   getHomeFilterData({String ?text,BuildContext ?context}) async {
@@ -59,9 +59,11 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
   int selectedIndex=0;
-  void changeContainer(int index){
+  void changeContainer(int index,BuildContext context) {
     print("index $index");
     selectedIndex=index;
+    searchController.clear();
+    getHomeFilterData(context: context);
     emit(IndexChanged());
   }
 

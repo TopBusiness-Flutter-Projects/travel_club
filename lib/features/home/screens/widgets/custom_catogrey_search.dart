@@ -27,7 +27,7 @@ class CustomCategoryContainer extends StatelessWidget {
               bottom: getHeightSize(context) * 0.01),
           child: GestureDetector(
             onTap: () {
-              cubit.changeContainer(categoryModel?.type ?? 0);
+              cubit.changeContainer(categoryModel?.type ?? 0,context);
 
               context.read<PaymentCubit>().currentModuleId = categoryModel!.id!;
               if (categoryModel?.type == 0) {

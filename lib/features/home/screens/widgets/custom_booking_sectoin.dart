@@ -25,7 +25,7 @@ class CustomBookingSectionSearch extends StatelessWidget {
       return GestureDetector(
         onTap: () {
           print("change index ${categoryModel.type}");
-          cubit.changeContainer(categoryModel.type!);
+          cubit.changeContainer(categoryModel.type!,context);
         },
         child: CustomContainerWithShadow(
           color: cubit.selectedIndex ==
