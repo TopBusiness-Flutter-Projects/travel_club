@@ -212,42 +212,41 @@ class FoodCubit extends Cubit<FoodState> {
   ];
   int currentIndex = 0;
   int selectedIndexMenue = 0; // Default selected index is the first button
-
 //
+
   void changeIndexMenue(int index) {
     selectedIndexMenue = index;
     emit(ChangeIndexFood());
   }
-   String countryCode = '+20';
-TextEditingController nameController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController numberController = TextEditingController();
-  String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
-  DateTime selectedDate = DateTime.now();
-  void onSelectedDateSingle({required BuildContext context}) async {
-    var picked = await DatePicker.showSimpleDatePicker(
-      context,
-      initialDate: selectedDate,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(9999),
-      dateFormat: "dd/MMMM/yyyy",
-      backgroundColor: AppColors.primary,
-      textColor: AppColors.white,
-      itemTextStyle: getMediumStyle(color: AppColors.white),
-      locale: DateTimePickerLocale.en_us,
-      looping: false,
-    );
 
-    if (picked != null) {
-      selectedDate = picked;
-      updateDateStrings();
-      emit(DateChangedState());
-    }
-  }
-
-  void updateDateStrings() {
-    singleDate = DateFormat('yyyy-MM-dd', 'en').format(selectedDate);
-  }
+ String countryCode = '+20';
+ TextEditingController nameController = TextEditingController();
+ TextEditingController phoneController = TextEditingController();
+ TextEditingController numberController = TextEditingController();
+ String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
+ DateTime selectedDate = DateTime.now();
+ void onSelectedDateSingle({required BuildContext context}) async {
+   var picked = await DatePicker.showSimpleDatePicker(
+     context,
+     initialDate: selectedDate,
+     firstDate: DateTime.now(),
+     lastDate: DateTime(9999),
+     dateFormat: "dd/MMMM/yyyy",
+     backgroundColor: AppColors.primary,
+     textColor: AppColors.white,
+     itemTextStyle: getMediumStyle(color: AppColors.white),
+     locale: DateTimePickerLocale.en_us,
+     looping: false,
+   );
+   if (picked != null) {
+     selectedDate = picked;
+     updateDateStrings();
+     emit(DateChangedState());
+   }
+ }
+ void updateDateStrings() {
+   singleDate = DateFormat('yyyy-MM-dd', 'en').format(selectedDate);
+ }
 
 //get catogrey
   GetCategoryFoodModel categoryModel = GetCategoryFoodModel();

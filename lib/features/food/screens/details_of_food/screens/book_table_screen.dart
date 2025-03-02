@@ -61,7 +61,7 @@ class BookTableScreen extends StatelessWidget {
                             style: getMediumStyle(fontSize: 14.sp),
                           ),
                         ),
-                       
+                        
                         Container(
                             decoration: BoxDecoration(
                               color: AppColors.lightWhite2,
