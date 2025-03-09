@@ -3,6 +3,10 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/food/data/models/get_menu_meals_model.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
 
+import '../../../core/utils/appwidget.dart';
+import '../../auth/data/models/default_model.dart';
+import '../../residence/data/models/addRoomReservation_model.dart';
+import '../../residence/data/models/rooms_model.dart';
 import '../data/models/get_catogrey_model.dart';
 import '../data/models/get_restaurant_details_model.dart';
 import '../data/models/get_resturant_model.dart';
@@ -307,6 +311,52 @@ class FoodCubit extends Cubit<FoodState> {
           double.tryParse(r.data?.latitude.toString() ?? "") ?? 0,
           double.tryParse(r.data?.longitude.toString() ?? "") ?? 0);
       emit(LoadedGetFoodDetails());
+    });
+  }
+  AddRoomReservationModel addRoomReservationModel = AddRoomReservationModel();
+ // List<RoomModel> selectedRooms = [];
+  TextEditingController countUsers = TextEditingController();
+  TextEditingController nameUser = TextEditingController();
+  TextEditingController phoneUser = TextEditingController();
+  DefaultPostModel defaultPostModel = DefaultPostModel();
+
+  addRestaurantReservation(BuildContext context,String restaurantId) async {
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    emit(ReservationLoading());
+    // List<int> selectedRoomsIds = [];
+    // for (int i = 0; i < selectedRooms.length; i++) {
+    //   if (selectedRooms[i].recommend == null) {
+    //     selectedRoomsIds.add(selectedRooms[i].id!);
+    //   } else if (selectedRooms[i].recommend!.isSelectedRecommend) {
+    //     selectedRoomsIds.add(selectedRooms[i].recommend!.id!);
+    //   } else {
+    //     selectedRoomsIds.add(selectedRooms[i].id!);
+    //   }
+    // }
+    final response = await api.addRestaurantReservation(
+        restaurant_id: restaurantId,
+
+        user_name: nameUser.text, date: singleDate.toString(), client_count: countUsers.text, restaurant_menu_ids:cartItems.map((e) => e.id).toList(), counts: cartItems.map((e) => e.userQty).toList(), user_phone: phoneUser.text
+        // fromDay: context.read<TransportationCubit>().fromDate,
+        // toDay: context.read<TransportationCubit>().toDate,
+        // guest: counter,
+      //  rooms: selectedRoomsIds
+    );
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(ReservationError());
+    }, (r) {
+      defaultPostModel = r;
+      Navigator.pop(context);
+      print("code: ${r.status.toString()}");
+      if (r.status != 200 && r.status != 201) {
+        errorGetBar(r.msg!);
+      } else {
+        Navigator.pushNamed(context, Routes.secondBookingResidence);
+        emit(ReservationLoaded());
+        successGetBar(r.msg);
+      }
     });
   }
 }

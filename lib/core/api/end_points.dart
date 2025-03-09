@@ -62,7 +62,12 @@ static const String getRestaurantDetails = '${baseUrl}getRestaurantDetails/';
    static const String checkPaymentTransportationUrl = '${baseUrl}checkPaymentTransportation';
   static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
   static const String homeFilterUrl = '${baseUrl}homeFilter';
- //static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
+////////////////////////////////////////////////////////////
+//////////////////    restaurant    ////////////////////////
+////////////////////////////////////////////////////////////
+  static const String addRestaurantReservation = '${baseUrl}addRestaurantReservation';
+
+//static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
   // static const String getMyReservationUrl = '${baseUrl}getMyReservation';
 //   static const String getMyReservationDetailsUrl =
 //       '${baseUrl}getMyReservationDetails';

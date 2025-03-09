@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
+import 'package:travel_club/features/auth/data/models/default_model.dart';
 import 'package:travel_club/features/food/data/models/get_menu_meals_model.dart';
 
 import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
+import '../../../residence/data/models/addRoomReservation_model.dart';
 import '../models/get_catogrey_model.dart';
 import '../models/get_restaurant_details_model.dart';
 import '../models/get_resturant_model.dart';
@@ -78,4 +80,37 @@ class FoodRepoImpl {
       return Left(ServerFailure());
     }
   }
+  Future<Either<Failure, DefaultPostModel>> addRestaurantReservation({
+    required String restaurant_id,
+    required String user_name,
+    required String date,
+    required String user_phone,
+    required String client_count,
+    required List<int?> restaurant_menu_ids,
+    required List<int> counts,
+  }) async {
+    try {
+      var response = await dio.post(
+        EndPoints.addRestaurantReservation,
+        body: {
+          "restaurant_id":restaurant_id,
+          "user_name":user_name,
+          "client_count":client_count,
+          "user_phone":user_phone,
+          "date":date,
+          if(restaurant_menu_ids.isNotEmpty)
+            for (int i = 0; i < restaurant_menu_ids.length; i++)
+            "restaurant_menu_ids[$i]": restaurant_menu_ids[i],
+          if(counts.isNotEmpty)
+            for (int i = 0; i < counts.length; i++)
+            "counts[$i]": counts[i],
+        },
+      );
+      print("dddddddddddddddd ${response.toString()}");
+      return Right(DefaultPostModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }
+

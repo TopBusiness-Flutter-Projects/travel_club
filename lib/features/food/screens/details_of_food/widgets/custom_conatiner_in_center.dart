@@ -114,25 +114,24 @@ builder: (BuildContext context, state) {
                         ),
                         widget.isBooking == false
                             ? Flexible(child: Container())
-                            : Flexible(
+                           :
+      Flexible(
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
-                              child: Opacity(
-                                opacity:cubit.cartItems.isNotEmpty? 1:0.5,
-                                child: CustomButton(
-                                  title: 'حجز طاولة',
-                                  onTap: () {
-                                    cubit.cartItems.isNotEmpty?
-                                    checkLoggingStatus(context,onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, Routes.bookTable);
-                                    }):
-                                    errorGetBar("add items to cart first")
-                                    ;
+                              child: CustomButton(
+                                title: 'حجز طاولة',
+                                onTap: () {
+                                  //cubit.cartItems.isNotEmpty?
+                                  checkLoggingStatus(context,onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, Routes.bookTable,arguments: cubit.getRestaurantDetailsModel?.data?.id.toString());
+                                  })
+                                  // :
+                                  // errorGetBar("add items to cart first")
+                                  ;
 
-                                
-                                  },
-                                ),
+
+                                },
                               ),
                             ))
                       ]),

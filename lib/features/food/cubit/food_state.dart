@@ -18,3 +18,6 @@ final class LoadingGetFoodDetails extends FoodState {}
 final class LoadedGetFoodDetails extends FoodState {}
 final class ErrorGetFoodDetails extends FoodState {}
 final class LoadingTheQuantityCount extends FoodState {}
+final class ReservationLoading extends FoodState {}
+final class ReservationError extends FoodState {}
+final class ReservationLoaded extends FoodState {}
