@@ -11,7 +11,7 @@ import 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.api) : super(HomeInitial());
   HomeRepoImpl api;
-  int moduleslenth = 2;
+  int moduleslenth = 3;
   TextEditingController searchController = TextEditingController();
 
   GetHomeModel homeModel = GetHomeModel();
@@ -22,7 +22,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(ErrorGetHomeData());
     }, (r) {
       homeModel = r;
-      // homeModel.data!.modules = homeModel.data!.modules!.sublist(0, moduleslenth);
+       homeModel.data!.modules = homeModel.data!.modules!.sublist(0, moduleslenth);
       emit(SucessGetHomeData());
     });
   }
