@@ -1,6 +1,7 @@
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
+import '../../food/data/models/get_resturant_model.dart';
 import '../../home/data/models/home_model.dart';
 import '../../payment/cubit/payment_cubit.dart';
 import '../../residence/data/models/lodges_model.dart';
@@ -24,9 +25,9 @@ class FavouritesCubit extends Cubit<FavouritesState> {
   //   selectedIndex=index;
   //   emit(IndexChanged());
   // }
-  GetLodgesModel residenceFavouriteModel =
-  GetLodgesModel();
+  GetLodgesModel residenceFavouriteModel = GetLodgesModel();
   GetCompaniesModel transportationFavouriteModel = GetCompaniesModel();
+  GetRestaurantModel getRestaurantModel=GetRestaurantModel();
 
 
 getFavourite() async {
@@ -40,6 +41,8 @@ getFavourite() async {
       }
       if (selectedModuleId == 2) {
         transportationFavouriteModel = r;
+      }if (selectedModuleId == 3) {
+        getRestaurantModel = r;
       }
       emit(LoadedReservationFavourite());
     });

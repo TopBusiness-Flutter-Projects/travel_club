@@ -45,12 +45,12 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
 
               CustomBookingFoodContainerSmall(
                 foodModel: FoodModel(
-                  title: "title",
-                  rate: 4,
-                  date: "date",
-                  price: "price",
-                  numOfBooking: "numOfBooking",
-                  numofnights: "numofnights",
+                  title:foodModel.title,
+                  rate: foodModel.rate,
+                  date: foodModel.date,
+                  price: foodModel.price,
+                  numOfBooking:foodModel.numOfBooking,
+                  numofnights: foodModel.numofnights,
                 ),
               ),
               //Row
@@ -71,7 +71,7 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
                             height: 5.h,
                           ),
                           Text(
-                            foodModel.numOfBooking.toString(),
+                            foodModel.numOfBooking??"kkkk",
                             style: getMediumStyle(),
                           ),
                           SizedBox(
@@ -121,7 +121,7 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
                                 color: AppColors.secondPrimary,
                               ),
                               Text(
-                                foodModel.toString() ?? "",
+                                foodModel.date.toString() ?? "",
                                 style: getRegularStyle(
                                   fontSize: 14.sp,
                                 ),

@@ -130,19 +130,27 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                           )
                       ),
                     ],
-                    if (cubit.categories[cubit.selectedIndex] ==
-                        AppTranslations.food) ...[
+                    if (cubit.selectedModuleId == 3) ...[
                       //  FoodBookingBody()
                       SizedBox(
                         height: 30.h,
                       ),
                       Expanded(
-                          child: ListView.builder(
-                        itemCount: 10,
+                          child:
+                          cubit.getRestaurantModel.data == null
+                              ? Center(
+                            child: CustomLoadingIndicator(),
+                          )
+                              : cubit.getRestaurantModel.data!.isEmpty
+                              ? Center(
+                            child: Text('no_data'.tr()),
+                          ):
+                          ListView.builder(
+                        itemCount: cubit.getRestaurantModel.data!.length,
                         itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: BigContainerFood(
-                           resturantData:  ResturantData()
+                           resturantData:  cubit.getRestaurantModel.data![index],
                           ),
                         ),
                       )
