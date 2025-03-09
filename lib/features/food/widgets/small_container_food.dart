@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:travel_club/core/widgets/network_image.dart';
 import 'package:travel_club/features/food/data/models/get_resturant_model.dart';
 import '../../../core/exports.dart';
+import '../../../core/widgets/custom_fav_widget.dart';
 import '../cubit/food_cubit.dart';
 
 class SmallContainerFood extends StatelessWidget {
@@ -32,43 +33,51 @@ class SmallContainerFood extends StatelessWidget {
                         height: getHeightSize(context) * .2,
                         width: double.infinity),
                     // cubit.isFavorite==true?
-                    resturantData.isFav == false
-                        ? Positioned(
-                            top: 4.h,
-                            right: 6.w,
-                            child: GestureDetector(
-                              onTap: () {
-                                // cubit.changeFavourite(index!);
-                              },
-                              child: CircleAvatar(
-                                backgroundColor: cubit.isFavoriteTrue == true
-                                    ? AppColors.red
-                                    : AppColors.lightWhite,
-                                child: Icon(
-                                  CupertinoIcons.heart,
-                                  color: cubit.isFavoriteTrue == true
-                                      ? AppColors.white
-                                      : AppColors.secondPrimary,
-                                  size: 25.sp,
-                                ),
-                              ),
-                            ))
-                        : Positioned(
-                            top: 4.h,
-                            right: 6.w,
-                            child: GestureDetector(
-                              onTap: () {
-                                // cubit.changeFavourite(index!);
-                              },
-                              child: CircleAvatar(
-                                backgroundColor: AppColors.red,
-                                child: Icon(
-                                  CupertinoIcons.heart,
-                                  color: AppColors.white,
-                                  size: 25.sp,
-                                ),
-                              ),
-                            )),
+                    // resturantData.isFav == false
+                    //     ?
+                    // Positioned(
+                    //         top: 4.h,
+                    //         right: 6.w,
+                    //         child: GestureDetector(
+                    //           onTap: () {
+                    //              cubit.changeFavourite(index!);
+                    //           },
+                    //           child: CircleAvatar(
+                    //             backgroundColor: cubit.isFavoriteTrue == true
+                    //                 ? AppColors.red
+                    //                 : AppColors.lightWhite,
+                    //             child: Icon(
+                    //               CupertinoIcons.heart,
+                    //               color: cubit.isFavoriteTrue == true
+                    //                   ? AppColors.white
+                    //                   : AppColors.secondPrimary,
+                    //               size: 25.sp,
+                    //             ),
+                    //           ),
+                    //         ))
+                    //     : Positioned(
+                    //         top: 4.h,
+                    //         right: 6.w,
+                    //         child: GestureDetector(
+                    //           onTap: () {
+                    //             // cubit.changeFavourite(index!);
+                    //           },
+                    //           child: CircleAvatar(
+                    //             backgroundColor: AppColors.red,
+                    //             child: Icon(
+                    //               CupertinoIcons.heart,
+                    //               color: AppColors.white,
+                    //               size: 25.sp,
+                    //             ),
+                    //           ),
+                    //         )),
+                    Positioned(
+                        top: 4.h,
+                        right: 6.w,
+                        child:CustomFavWidget(
+                          isFavScreen:  resturantData.isFav??false,
+                          isFav: resturantData.isFav??false,
+                          id:resturantData.id.toString(), )),
                     //image in bottom
                     Positioned(
                         bottom: -20.h,

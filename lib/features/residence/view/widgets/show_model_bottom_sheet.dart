@@ -39,7 +39,6 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               //custom center bottomshhet
               DragBottomSheet(),
               SizedBox(height: 20.h),
-
               Text(
                 AppTranslations.resultsFilter,
                 style: getSemiBoldStyle(fontSize: 20.sp),
