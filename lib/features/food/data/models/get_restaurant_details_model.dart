@@ -12,32 +12,29 @@ class GetRestaurantDetailsModel {
   String? msg;
   Data? data;
   int? status;
-
   GetRestaurantDetailsModel({
     this.msg,
     this.data,
     this.status,
   });
-
   factory GetRestaurantDetailsModel.fromJson(Map<String, dynamic> json) => GetRestaurantDetailsModel(
     msg: json["msg"],
     data: json["data"] == null ? null : Data.fromJson(json["data"]),
     status: json["status"],
   );
-
   Map<String, dynamic> toJson() => {
     "msg": msg,
     "data": data?.toJson(),
     "status": status,
   };
 }
-
 class Data {
   int? id;
   String? name;
   double? latitude;
   double? longitude;
   int? hasMenu;
+  int? isOpen;
   String? about;
   Category? category;
   List<Rate>? rates;
@@ -53,6 +50,7 @@ class Data {
     this.latitude,
     this.longitude,
     this.hasMenu,
+    this.isOpen,
     this.about,
     this.category,
     this.rates,
@@ -69,6 +67,7 @@ class Data {
     latitude: json["latitude"]?.toDouble(),
     longitude: json["longitude"]?.toDouble(),
     hasMenu: json["has_menu"],
+    isOpen: json["is_open"],
     about: json["about"],
     category: json["category"] == null ? null : Category.fromJson(json["category"]),
     rates: json["rates"] == null ? [] : List<Rate>.from(json["rates"]!.map((x) => Rate.fromJson(x))),
@@ -85,6 +84,7 @@ class Data {
     "latitude": latitude,
     "longitude": longitude,
     "has_menu": hasMenu,
+    "is_open": isOpen,
     "about": about,
     "category": category?.toJson(),
     "rates": rates == null ? [] : List<dynamic>.from(rates!.map((x) => x.toJson())),
@@ -151,12 +151,16 @@ class Rate {
 class Time {
   int? id;
   String? day;
+  String? fromDay;
+  String? toDay;
   String? from;
   String? to;
 
   Time({
     this.id,
     this.day,
+    this.fromDay,
+    this.toDay,
     this.from,
     this.to,
   });
@@ -164,6 +168,8 @@ class Time {
   factory Time.fromJson(Map<String, dynamic> json) => Time(
     id: json["id"],
     day: json["day"],
+    fromDay: json["from_day"],
+    toDay: json["to_day"],
     from: json["from"],
     to: json["to"],
   );
@@ -171,6 +177,8 @@ class Time {
   Map<String, dynamic> toJson() => {
     "id": id,
     "day": day,
+    "from_day": fromDay,
+    "to_day": toDay,
     "from": from,
     "to": to,
   };

@@ -223,34 +223,35 @@ class FoodCubit extends Cubit<FoodState> {
     emit(ChangeIndexFood());
   }
 
- String countryCode = '+20';
- TextEditingController nameController = TextEditingController();
- TextEditingController phoneController = TextEditingController();
- TextEditingController numberController = TextEditingController();
- String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
- DateTime selectedDate = DateTime.now();
- void onSelectedDateSingle({required BuildContext context}) async {
-   var picked = await DatePicker.showSimpleDatePicker(
-     context,
-     initialDate: selectedDate,
-     firstDate: DateTime.now(),
-     lastDate: DateTime(9999),
-     dateFormat: "dd/MMMM/yyyy",
-     backgroundColor: AppColors.primary,
-     textColor: AppColors.white,
-     itemTextStyle: getMediumStyle(color: AppColors.white),
-     locale: DateTimePickerLocale.en_us,
-     looping: false,
-   );
-   if (picked != null) {
-     selectedDate = picked;
-     updateDateStrings();
-     emit(DateChangedState());
-   }
- }
- void updateDateStrings() {
-   singleDate = DateFormat('yyyy-MM-dd', 'en').format(selectedDate);
- }
+  String countryCode = '+20';
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController numberController = TextEditingController();
+  String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
+  DateTime selectedDate = DateTime.now();
+  void onSelectedDateSingle({required BuildContext context}) async {
+    var picked = await DatePicker.showSimpleDatePicker(
+      context,
+      initialDate: selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(9999),
+      dateFormat: "dd/MMMM/yyyy",
+      backgroundColor: AppColors.primary,
+      textColor: AppColors.white,
+      itemTextStyle: getMediumStyle(color: AppColors.white),
+      locale: DateTimePickerLocale.en_us,
+      looping: false,
+    );
+    if (picked != null) {
+      selectedDate = picked;
+      updateDateStrings();
+      emit(DateChangedState());
+    }
+  }
+
+  void updateDateStrings() {
+    singleDate = DateFormat('yyyy-MM-dd', 'en').format(selectedDate);
+  }
 
 //get catogrey
   GetCategoryFoodModel categoryModel = GetCategoryFoodModel();
@@ -305,29 +306,30 @@ class FoodCubit extends Cubit<FoodState> {
     }, (r) {
       if (r.status == 404) {
         emit(ErrorGetFoodDetails());
-      }
-
-      getRestaurantDetailsModel = r;
-      if (r.data!.hasMenu == 1) {
-        selectedIndexMenue = 0;
-        getMenuCategory(restaurantId: id);
       } else {
-        selectedIndexMenue = 1;
+        getRestaurantDetailsModel = r;
+        if (r.data!.hasMenu == 1) {
+          selectedIndexMenue = 0;
+          getMenuCategory(restaurantId: id);
+        } else {
+          selectedIndexMenue = 1;
+        }
+        context.read<LocationCubit>().getAddressFromLatLng(
+            double.tryParse(r.data?.latitude.toString() ?? "") ?? 0,
+            double.tryParse(r.data?.longitude.toString() ?? "") ?? 0);
+        emit(LoadedGetFoodDetails());
       }
-      context.read<LocationCubit>().getAddressFromLatLng(
-          double.tryParse(r.data?.latitude.toString() ?? "") ?? 0,
-          double.tryParse(r.data?.longitude.toString() ?? "") ?? 0);
-      emit(LoadedGetFoodDetails());
     });
   }
+
   AddRoomReservationModel addRoomReservationModel = AddRoomReservationModel();
- // List<RoomModel> selectedRooms = [];
+  // List<RoomModel> selectedRooms = [];
   TextEditingController countUsers = TextEditingController();
   TextEditingController nameUser = TextEditingController();
   TextEditingController phoneUser = TextEditingController();
   DefaultPostModel defaultPostModel = DefaultPostModel();
 
-  addRestaurantReservation(BuildContext context,String restaurantId) async {
+  addRestaurantReservation(BuildContext context, String restaurantId) async {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
     emit(ReservationLoading());
     // List<int> selectedRoomsIds = [];
@@ -342,13 +344,17 @@ class FoodCubit extends Cubit<FoodState> {
     // }
     final response = await api.addRestaurantReservation(
         restaurant_id: restaurantId,
-
-        user_name: nameUser.text, date: singleDate.toString(), client_count: countUsers.text, restaurant_menu_ids:cartItems.map((e) => e.id).toList(), counts: cartItems.map((e) => e.userQty).toList(), user_phone: phoneUser.text
+        user_name: nameUser.text,
+        date: singleDate.toString(),
+        client_count: countUsers.text,
+        restaurant_menu_ids: cartItems.map((e) => e.id).toList(),
+        counts: cartItems.map((e) => e.userQty).toList(),
+        user_phone: phoneUser.text
         // fromDay: context.read<TransportationCubit>().fromDate,
         // toDay: context.read<TransportationCubit>().toDate,
         // guest: counter,
-      //  rooms: selectedRoomsIds
-    );
+        //  rooms: selectedRoomsIds
+        );
     response.fold((l) {
       Navigator.pop(context);
       errorGetBar(AppTranslations.error);
