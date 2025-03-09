@@ -6,6 +6,7 @@ import 'package:travel_club/features/my_bookings/data/models/cancel_reservation.
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
 
 import '../../../../core/api/base_api_consumer.dart';
+import '../models/food_reservation_model.dart';
 import '../models/residence_reservation_details_model.dart';
 import '../models/residence_reservation_model.dart';
 import '../models/transportation_reservation_details_model.dart';
@@ -24,7 +25,7 @@ class MyReservationsRepoImpl {
           ? Right(GetMyResidenceReservationModel.fromJson(response))
           : moduleId == 2 // transportation
               ? Right(GetMyTransportationReservationModel.fromJson(response))
-              : Right(response);
+              :Right(GetMyFoodReservationModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

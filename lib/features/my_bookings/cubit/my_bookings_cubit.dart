@@ -4,6 +4,7 @@ import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_details_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
+import '../data/models/food_reservation_model.dart';
 import '../data/models/residence_reservation_details_model.dart';
 import '../data/models/residence_reservation_model.dart';
 import '../data/repo/my_reservations_repo_impl.dart';
@@ -70,8 +71,8 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
     }
   }
 
-  GetMyResidenceReservationModel residenceReservationModel =
-      GetMyResidenceReservationModel();
+  GetMyResidenceReservationModel residenceReservationModel = GetMyResidenceReservationModel();
+  GetMyFoodReservationModel foodReservationModel = GetMyFoodReservationModel();
   GetMyTransportationReservationModel transportationReservationModel =
       GetMyTransportationReservationModel();
   getMyReservation( {required int moduleId}) async {
@@ -87,6 +88,8 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       }
       if (moduleId == 2) {
         transportationReservationModel = r;
+      } if (moduleId == 3) {
+        foodReservationModel = r;
       }
       emit(LoadedReservationBooking());
     });
