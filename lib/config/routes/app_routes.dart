@@ -205,8 +205,9 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.bookTable:
+        String id = settings.arguments as String;
         return PageTransition(
-          child: const BookTableScreen(),
+          child:  BookTableScreen(id:id),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

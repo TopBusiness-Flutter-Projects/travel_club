@@ -404,7 +404,6 @@ class ResidenceCubit extends Cubit<ResidenceState> {
     );
     res.fold((l) {
       Navigator.pop(context);
-
       emit(ErrorCheckRoomIdState());
     }, (r) {
       Navigator.pop(context);

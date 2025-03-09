@@ -132,7 +132,8 @@ class _DatePickerFieldState extends State<DatePickerField> {
               color: AppColors.grey,
             ),
           ),
-          SizedBox(width: 8.w),
+         Spacer(),
+         // SizedBox(width: 8.w),
           SvgPicture.asset(
             AppIcons.calendar,
             width: 25.w,
