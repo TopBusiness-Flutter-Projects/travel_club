@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -25,6 +26,7 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final bool isPhoneNumber;
+  final List<TextInputFormatter>? inputFormatters;
   final void Function(String, String)? onPhoneChanged;
 // إضافة المتغير
   const CustomTextField(
@@ -46,9 +48,9 @@ class CustomTextField extends StatefulWidget {
       this.enabled = true,
       this.ischange = false,
       this.title,
-      this .autoFocus =false,
+      this.autoFocus = false,
       this.isPhoneNumber = false,
-      this.onPhoneChanged // إضافة المتغير
+      this.onPhoneChanged, this.inputFormatters // إضافة المتغير
       });
 
   @override
@@ -221,11 +223,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         enabled: widget.enabled,
         controller: widget.controller,
         onTap: widget.onTap,
+        inputFormatters: widget.inputFormatters,
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         focusNode: myFocusNode,
-        autofocus: widget. autoFocus,
+        autofocus: widget.autoFocus,
         style: getBoldStyle(fontSize: 13.sp),
         onChanged: widget.onChanged,
         validator: widget.validator,

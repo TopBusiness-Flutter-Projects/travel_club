@@ -119,7 +119,7 @@ builder: (BuildContext context, state) {
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: CustomButton(
-                                title: 'حجز طاولة',
+                                title: AppTranslations.bookTable,
                                 onTap: () {
                                   //cubit.cartItems.isNotEmpty?
                                   checkLoggingStatus(context,onPressed: () {
