@@ -1,28 +1,36 @@
-name: Build abo amer
+name: Build iOS IPA
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  build:
-    name: Build and analyse default scheme using xcodebuild command
+  build-ios:
     runs-on: macos-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set Default Scheme
-        run: |
-          scheme_list=$(xcodebuild -list -json | tr -d "\n")
-          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
-          echo $default | cat >default
-          echo Using default scheme: $default
-      - name: Build
-        env:
-          scheme: ${{ 'default' }}
-        run: |
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
-          file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Xcode
+      run: |
+        sudo xcode-select --switch /Applications/Xcode_14.2.app # Use the Xcode version you need
+        xcodebuild -version
+
+    - name: Install CocoaPods
+      run: |
+        cd ios
+        pod install
+
+    - name: Build IPA
+      run: |
+        cd ios
+        xcodebuild -workspace YourApp.xcworkspace -scheme YourApp -sdk iphoneos -configuration Release archive -archivePath $PWD/build/YourApp.xcarchive
+        xcodebuild -exportArchive -archivePath $PWD/build/YourApp.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath $PWD/build
+
+    - name: Upload IPA
+      uses: actions/upload-artifact@v3
+      with:
+        name: YourApp.ipa
+        path: ios/build/YourApp.ipa
