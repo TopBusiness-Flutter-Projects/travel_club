@@ -21,7 +21,11 @@ jobs:
     - name: Install CocoaPods
       run: |
         cd ios
-        pod install
+        if [ -f "Podfile" ]; then
+          pod install
+        else
+          echo "No Podfile found. Skipping pod install."
+        fi
 
     - name: Build IPA
       run: |
