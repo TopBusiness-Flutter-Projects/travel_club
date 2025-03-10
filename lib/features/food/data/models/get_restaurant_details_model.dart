@@ -36,6 +36,7 @@ class Data {
   int? hasMenu;
   int? isOpen;
   String? about;
+  String? rule;
   Category? category;
   List<Rate>? rates;
   List<Time>? times;
@@ -51,6 +52,7 @@ class Data {
     this.longitude,
     this.hasMenu,
     this.isOpen,
+    this.rule,
     this.about,
     this.category,
     this.rates,
@@ -68,6 +70,7 @@ class Data {
     longitude: json["longitude"]?.toDouble(),
     hasMenu: json["has_menu"],
     isOpen: json["is_open"],
+    rule: json["rule"],
     about: json["about"],
     category: json["category"] == null ? null : Category.fromJson(json["category"]),
     rates: json["rates"] == null ? [] : List<Rate>.from(json["rates"]!.map((x) => Rate.fromJson(x))),
@@ -85,6 +88,7 @@ class Data {
     "longitude": longitude,
     "has_menu": hasMenu,
     "is_open": isOpen,
+    "rule": rule,
     "about": about,
     "category": category?.toJson(),
     "rates": rates == null ? [] : List<dynamic>.from(rates!.map((x) => x.toJson())),
@@ -168,8 +172,8 @@ class Time {
   factory Time.fromJson(Map<String, dynamic> json) => Time(
     id: json["id"],
     day: json["day"],
-    fromDay: json["from_day"],
-    toDay: json["to_day"],
+    fromDay: json["fromDay"],
+    toDay: json["toDay"],
     from: json["from"],
     to: json["to"],
   );
@@ -177,8 +181,8 @@ class Time {
   Map<String, dynamic> toJson() => {
     "id": id,
     "day": day,
-    "from_day": fromDay,
-    "to_day": toDay,
+    "fromDay": fromDay,
+    "toDay": toDay,
     "from": from,
     "to": to,
   };

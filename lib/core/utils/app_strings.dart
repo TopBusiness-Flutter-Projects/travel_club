@@ -18,6 +18,7 @@ class AppStrings {
   static const String arabicCode = 'ar';
   static const String inviteLink = 'https://travelclub.page.link/invite';
   static const String lodgeShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/lodge?id=';
+  static const String restaurantShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/restaurant?id=';
   static const String transportationShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/transportation?id=';
 
   // static const String googleApiKey = '';

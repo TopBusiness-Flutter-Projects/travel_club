@@ -72,7 +72,7 @@ class AboutWidgetFood extends StatelessWidget {
                           0,
                       itemBuilder: (BuildContext context, int index) {
                         return Text(
-                          "${cubit.getRestaurantDetailsModel?.data?.times?[index].fromDay ?? ''} ${cubit.getRestaurantDetailsModel?.data?.times?[index].from.toString().substring(0, 5) ?? ''} - ${cubit.getRestaurantDetailsModel?.data?.times?[index].to.toString().substring(0, 5) ?? ''}",
+                        "${(cubit.getRestaurantDetailsModel?.data?.times?[index].fromDay ?? '').tr()} ${cubit.getRestaurantDetailsModel?.data?.times?[index].from.toString() ?? ''} - ${cubit.getRestaurantDetailsModel?.data?.times?[index].to.toString() ?? ''}",
                           style: getMediumStyle(
                               fontSize: 14.sp, color: AppColors.grey),
                         );

@@ -52,6 +52,8 @@ class _DetailsFoodState extends State<DetailsFood> {
                                     false,
                             lodgeId:
                                 "${cubit.getRestaurantDetailsModel?.data?.id}",
+                                sharedLink: AppStrings.restaurantShareLink +
+                                   widget.id,
                           ),
                         ),
                         // Container under the Swiper

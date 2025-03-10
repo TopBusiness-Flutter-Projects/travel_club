@@ -254,7 +254,7 @@
   "select_return_time": "Select return time",
   "no_buses_found": "No buses found",
   "go": "Go",
-  "enter": "Enter",
+  "enter": "Enter ",
   "add_items_first": "Add items first",
   "return": "Return",
   "your_seats": "Your seats",
@@ -264,6 +264,14 @@
   "no_working_hours": "No Working Hours",
   "opened": "Opened now",
   "closed": "Closed now",
+  "Sunday": "Sunday:",
+  "Monday": "Monday:",
+  "Tuesday": "Tuesday:",
+  "Wednesday": "Wednesday:",
+  "Thursday": "Thursday:",
+  "Friday": "Friday:",
+  "Saturday": "Saturday:",
+  "payment": "Payment",
   "": "",
   "lasss": ""
 }

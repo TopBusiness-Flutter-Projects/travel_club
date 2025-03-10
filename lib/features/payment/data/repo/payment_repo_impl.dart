@@ -21,7 +21,12 @@ class PaymentRepoImpl {
         moduleId == 1?
         EndPoints.checkCouponUrl
         : moduleId == 2?
-       EndPoints. checkCouponTransportationUrl : ""
+       EndPoints. checkCouponTransportationUrl :
+       moduleId ==3 ?
+        EndPoints.checkCouponRestaurantUrl
+       :
+       
+        ""
         ,
         body: {
           'code': code,
@@ -46,7 +51,12 @@ class PaymentRepoImpl {
         moduleId == 1?
         EndPoints.continueToPayUrl
         : moduleId == 2?
-       EndPoints.continueToPayTransportationUrl : ""
+       EndPoints.continueToPayTransportationUrl :
+       moduleId ==3 ?
+        EndPoints.continueToPayRestaurantUrl
+       :
+       
+        ""
         
         ,
         body: {
@@ -72,7 +82,10 @@ class PaymentRepoImpl {
         moduleId == 1?
         EndPoints.checkPaymentUrl
         : moduleId == 2?
-       EndPoints.checkPaymentTransportationUrl : ""
+       EndPoints.checkPaymentTransportationUrl :
+       moduleId ==3 ?
+        EndPoints.checkPaymentRestaurantUrl :
+       ""
 
         ,
         body: {
