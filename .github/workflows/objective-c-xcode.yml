@@ -15,7 +15,7 @@ jobs:
 
     - name: Set up Xcode
       run: |
-        sudo xcode-select --switch /Applications/Xcode_14.2.app # Use the Xcode version you need
+        sudo xcode-select --switch /Applications/Xcode_15.0.app # Use an available Xcode version
         xcodebuild -version
 
     - name: Install CocoaPods
