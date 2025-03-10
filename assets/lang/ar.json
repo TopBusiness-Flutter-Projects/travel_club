@@ -275,12 +275,10 @@
   "go_seats" : "مقاعد الذهاب",
   "return_seats" : "مقاعد العودة",
   "add_items_first" : "اضف العناصر اولا",
-  "" : "",
   "only_go_ticket" : "تذكرة ذهاب فقط",
   "go_and_return_ticket" : "تذكرة ذهاب وعودة",
   "number_of_members_go" : "عدد الأفراد في الذهاب",
   "number_of_members_return" : "عدد الأفراد في العودة",
-  "lasss": "",
   "nights": "ليالي",
   "pending": "لم يتم الدفع",
   "no_reservation": "لا يوجد حجوزات",
@@ -293,7 +291,7 @@
   "all_foods": "كل المطاعم",
   "opened": "مفتوح الان",
   "closed": "مغلق الان",
-  "-": "-",
+ 
   "--": "--"
   
 }
