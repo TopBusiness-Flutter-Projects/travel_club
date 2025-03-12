@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/food/data/models/add_reservation_model.dart';
 import 'package:travel_club/features/food/data/models/get_menu_meals_model.dart';
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
 
@@ -223,34 +224,35 @@ class FoodCubit extends Cubit<FoodState> {
     emit(ChangeIndexFood());
   }
 
- String countryCode = '+20';
- TextEditingController nameController = TextEditingController();
- TextEditingController phoneController = TextEditingController();
- TextEditingController numberController = TextEditingController();
- String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
- DateTime selectedDate = DateTime.now();
- void onSelectedDateSingle({required BuildContext context}) async {
-   var picked = await DatePicker.showSimpleDatePicker(
-     context,
-     initialDate: selectedDate,
-     firstDate: DateTime.now(),
-     lastDate: DateTime(9999),
-     dateFormat: "dd/MMMM/yyyy",
-     backgroundColor: AppColors.primary,
-     textColor: AppColors.white,
-     itemTextStyle: getMediumStyle(color: AppColors.white),
-     locale: DateTimePickerLocale.en_us,
-     looping: false,
-   );
-   if (picked != null) {
-     selectedDate = picked;
-     updateDateStrings();
-     emit(DateChangedState());
-   }
- }
- void updateDateStrings() {
-   singleDate = DateFormat('yyyy-MM-dd', 'en').format(selectedDate);
- }
+  String countryCode = '+20';
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController numberController = TextEditingController();
+  String singleDate = DateFormat('yyyy-MM-dd', 'en').format(DateTime.now());
+  DateTime selectedDate = DateTime.now();
+  void onSelectedDateSingle({required BuildContext context}) async {
+    var picked = await DatePicker.showSimpleDatePicker(
+      context,
+      initialDate: selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(9999),
+      dateFormat: "dd/MMMM/yyyy",
+      backgroundColor: AppColors.primary,
+      textColor: AppColors.white,
+      itemTextStyle: getMediumStyle(color: AppColors.white),
+      locale: DateTimePickerLocale.en_us,
+      looping: false,
+    );
+    if (picked != null) {
+      selectedDate = picked;
+      updateDateStrings();
+      emit(DateChangedState());
+    }
+  }
+
+  void updateDateStrings() {
+    singleDate = DateFormat('yyyy-MM-dd', 'en').format(selectedDate);
+  }
 
 //get catogrey
   GetCategoryFoodModel categoryModel = GetCategoryFoodModel();
@@ -305,62 +307,52 @@ class FoodCubit extends Cubit<FoodState> {
     }, (r) {
       if (r.status == 404) {
         emit(ErrorGetFoodDetails());
-      }
-
-      getRestaurantDetailsModel = r;
-      if (r.data!.hasMenu == 1) {
-        selectedIndexMenue = 0;
-        getMenuCategory(restaurantId: id);
       } else {
-        selectedIndexMenue = 1;
+        getRestaurantDetailsModel = r;
+        if (r.data!.hasMenu == 1) {
+          selectedIndexMenue = 0;
+          getMenuCategory(restaurantId: id);
+        } else {
+          selectedIndexMenue = 1;
+        }
+        context.read<LocationCubit>().getAddressFromLatLng(
+            double.tryParse(r.data?.latitude.toString() ?? "") ?? 0,
+            double.tryParse(r.data?.longitude.toString() ?? "") ?? 0);
+        emit(LoadedGetFoodDetails());
       }
-      context.read<LocationCubit>().getAddressFromLatLng(
-          double.tryParse(r.data?.latitude.toString() ?? "") ?? 0,
-          double.tryParse(r.data?.longitude.toString() ?? "") ?? 0);
-      emit(LoadedGetFoodDetails());
     });
   }
-  AddRoomReservationModel addRoomReservationModel = AddRoomReservationModel();
- // List<RoomModel> selectedRooms = [];
-  TextEditingController countUsers = TextEditingController();
-  TextEditingController nameUser = TextEditingController();
-  TextEditingController phoneUser = TextEditingController();
-  DefaultPostModel defaultPostModel = DefaultPostModel();
 
-  addRestaurantReservation(BuildContext context,String restaurantId) async {
+  AddFoodReservationModel addFoodReservationModel = AddFoodReservationModel();
+  // List<RoomModel> selectedRooms = [];
+  TextEditingController clientCountController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController userPhoneController = TextEditingController();
+
+  addRestaurantReservation(BuildContext context, String restaurantId) async {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
     emit(ReservationLoading());
-    // List<int> selectedRoomsIds = [];
-    // for (int i = 0; i < selectedRooms.length; i++) {
-    //   if (selectedRooms[i].recommend == null) {
-    //     selectedRoomsIds.add(selectedRooms[i].id!);
-    //   } else if (selectedRooms[i].recommend!.isSelectedRecommend) {
-    //     selectedRoomsIds.add(selectedRooms[i].recommend!.id!);
-    //   } else {
-    //     selectedRoomsIds.add(selectedRooms[i].id!);
-    //   }
-    // }
-    final response = await api.addRestaurantReservation(
-        restaurant_id: restaurantId,
 
-        user_name: nameUser.text, date: singleDate.toString(), client_count: countUsers.text, restaurant_menu_ids:cartItems.map((e) => e.id).toList(), counts: cartItems.map((e) => e.userQty).toList(), user_phone: phoneUser.text
-        // fromDay: context.read<TransportationCubit>().fromDate,
-        // toDay: context.read<TransportationCubit>().toDate,
-        // guest: counter,
-      //  rooms: selectedRoomsIds
-    );
+    final response = await api.addRestaurantReservation(
+        restaurantId: restaurantId,
+        userName: userNameController.text,
+        date: singleDate.toString(),
+        clientCount: clientCountController.text,
+        restaurantMenuIds: cartItems.map((e) => e.id).toList(),
+        counts: cartItems.map((e) => e.userQty).toList(),
+        userPhone: userPhoneController.text);
     response.fold((l) {
       Navigator.pop(context);
       errorGetBar(AppTranslations.error);
       emit(ReservationError());
     }, (r) {
-      defaultPostModel = r;
       Navigator.pop(context);
       print("code: ${r.status.toString()}");
       if (r.status != 200 && r.status != 201) {
-        errorGetBar(r.msg!);
+        errorGetBar(r.msg??"");
       } else {
-        Navigator.pushNamed(context, Routes.secondBookingResidence);
+        addFoodReservationModel = r;
+        Navigator.pushNamed(context, Routes.secondBookingFood);
         emit(ReservationLoaded());
         successGetBar(r.msg);
       }

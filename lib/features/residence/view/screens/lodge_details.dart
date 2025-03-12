@@ -85,7 +85,6 @@ class _LodgeDetailsScreenState extends State<LodgeDetailsScreen> {
                                   cubit.lodgesDetailsModel.data!.id.toString(),
                               onTap: () {
                                // context.read<ResidenceCubit>().getPlaces();
-
                                 widget.args.isDeeplink
                                     ? Navigator.pushNamedAndRemoveUntil(context,
                                         Routes.mainRoute, (route) => false)

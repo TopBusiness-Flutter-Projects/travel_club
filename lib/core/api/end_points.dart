@@ -58,8 +58,11 @@ static const String getRestaurantMenuUrl = '${baseUrl}getRestaurantMenu';
 static const String getRestaurantUrl = '${baseUrl}getRestaurants';
 static const String getRestaurantDetails = '${baseUrl}getRestaurantDetails/';
  static const String checkCouponTransportationUrl = '${baseUrl}checkTransportationCoupon';
+ static const String checkCouponRestaurantUrl = '${baseUrl}checkRestaurantCoupon';
   static const String continueToPayTransportationUrl = '${baseUrl}continueToPayTransportation';
+  static const String continueToPayRestaurantUrl = '${baseUrl}continueToPayRestaurant';
    static const String checkPaymentTransportationUrl = '${baseUrl}checkPaymentTransportation';
+   static const String checkPaymentRestaurantUrl = '${baseUrl}checkPaymentRestaurant';
   static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
   static const String homeFilterUrl = '${baseUrl}homeFilter';
 ////////////////////////////////////////////////////////////

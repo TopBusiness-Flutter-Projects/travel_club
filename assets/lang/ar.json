@@ -10,7 +10,7 @@
   "confirm_new_pass": "تاكيد كلمه المرور الجديدة",
   "write_new_pass": "ادخل كلمة المرور الجديدة",
   "skip": "تخطي",
-  "enter":"ادخل",
+  "enter":"ادخل ",
   "confirm": "تأكيد",
   "sign_up": "حساب جديد",
   "onboarding1": "هيا يمكنك السفر الان الي جميع الاماكن السياحيه بشكل اسهل",
@@ -275,12 +275,10 @@
   "go_seats" : "مقاعد الذهاب",
   "return_seats" : "مقاعد العودة",
   "add_items_first" : "اضف العناصر اولا",
-  "" : "",
   "only_go_ticket" : "تذكرة ذهاب فقط",
   "go_and_return_ticket" : "تذكرة ذهاب وعودة",
   "number_of_members_go" : "عدد الأفراد في الذهاب",
   "number_of_members_return" : "عدد الأفراد في العودة",
-  "lasss": "",
   "nights": "ليالي",
   "pending": "لم يتم الدفع",
   "no_reservation": "لا يوجد حجوزات",
@@ -290,7 +288,19 @@
   "you_can_not_select_same_station" :"لا يمكن اختيار نفس المحطة",
   "vat": "الضريبة",
   "no_working_hours": "لا يوجد ساعات عمل",
-  "all_foods": "كل المطاعم"
+  "all_foods": "كل المطاعم",
+  "opened": "مفتوح الان",
+  "closed": "مغلق الان",
+  "Sunday": "الاحد:",
+  "Monday": "الاثنين:",
+  "Tuesday": "الثلاثاء:",
+  "Wednesday": "الاربعاء:",
+  "Thursday": "الخميس:",
+  "Friday": "الجمعة:",
+  "Saturday": "السبت:",
+ "payment" : "الدفع",
+  "--": "--"
+  
 }
 
 

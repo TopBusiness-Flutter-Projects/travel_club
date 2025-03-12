@@ -43,7 +43,7 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
               checkGoToHome(context);
             },
             body: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -101,7 +101,6 @@ class _SecondResidenceBookingState extends State<SecondResidenceBooking> {
                                     .locale
                                     .languageCode ==
                                 'ar';
-
                             if ((isRtl && details.primaryVelocity! > 0) ||
                                 (!isRtl && details.primaryVelocity! < 0)) {
                               // Swiped left (next item for LTR, previous item for RTL)

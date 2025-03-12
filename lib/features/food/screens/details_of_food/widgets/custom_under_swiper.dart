@@ -49,7 +49,7 @@ class ContainerUnderSwiperFood extends StatelessWidget {
                         : cubit.getMenuMealsModel.data == null
                             ? Padding(
                                 padding: EdgeInsets.only(top: 50.h),
-                                child: CustomLoadingIndicator(),
+                                child: const CustomLoadingIndicator(),
                               )
                             : cubit.getMenuMealsModel.data?.isEmpty ?? true
                                 ? Center(
@@ -61,7 +61,7 @@ class ContainerUnderSwiperFood extends StatelessWidget {
                                   )
                                 : ListView.separated(
                                     shrinkWrap: true,
-                                    physics: BouncingScrollPhysics(),
+                                    physics: const BouncingScrollPhysics(),
                                     itemCount:
                                         cubit.getMenuMealsModel.data?.length ??
                                             0,
@@ -83,17 +83,8 @@ class ContainerUnderSwiperFood extends StatelessWidget {
                     SizedBox(
                       height: 9.h,
                     ),
-                    AboutWidgetFood(
-                      lat: double.tryParse(cubit
-                                  .getRestaurantDetailsModel?.data?.latitude
-                                  .toString() ??
-                              "") ??
-                          0,
-                      long: double.tryParse(cubit
-                                  .getRestaurantDetailsModel?.data?.latitude
-                                  .toString() ??
-                              "") ??
-                          0,
+                    const AboutWidgetFood(
+                   
                     ),
                     // ListView.separated(
                     //   shrinkWrap: true,
@@ -111,7 +102,7 @@ class ContainerUnderSwiperFood extends StatelessWidget {
                       height: 9.h,
                     ),
                     cubit.getRestaurantDetailsModel == null
-                        ? Center(
+                        ? const Center(
                             child: CustomLoadingIndicator(),
                           )
                         : cubit.getRestaurantDetailsModel!.data!.rates
@@ -123,7 +114,7 @@ class ContainerUnderSwiperFood extends StatelessWidget {
                                 title: "no_data".tr(),
                               )))
                             : ListView.separated(
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: cubit.getRestaurantDetailsModel!
                                         .data!.rates?.length ??

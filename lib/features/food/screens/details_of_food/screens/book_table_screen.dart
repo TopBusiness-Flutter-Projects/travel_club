@@ -10,10 +10,12 @@ import '../../../../../core/exports.dart';
 import '../../../../transportation/screens/widgets/custom_from_to_date.dart';
 
 class BookTableScreen extends StatelessWidget {
-   BookTableScreen({super.key, required this.id});
+  BookTableScreen({super.key, required this.id});
   String id;
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formKeyTable = GlobalKey<FormState>();
+
     return BlocBuilder<FoodCubit, FoodState>(
         builder: (BuildContext context, state) {
       var cubit = context.read<FoodCubit>();
@@ -21,103 +23,139 @@ class BookTableScreen extends StatelessWidget {
           appbarTitle: AppTranslations.bookTable,
           body: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "مطعم صبحي كابر روض الفرج",
-                            style: getSemiBoldStyle(fontSize: 14.sp),
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          StaggeredGrid.count(
-                            crossAxisCount: 2,
-                            children: List.generate(
-                              cubit.cartItems.length,
-                              (index) => CustomMealContainer(mealModel: cubit.cartItems[index],),
+            child: Form(
+              key: formKeyTable,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              cubit.getRestaurantDetailsModel?.data?.name ?? "",
+                              style: getSemiBoldStyle(fontSize: 14.sp),
                             ),
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          Text(
-                            AppTranslations.selectBookingDate,
-                            style: getMediumStyle(fontSize: 14.sp),
-                          ),
-                          SizedBox(height: getHeightSize(context)/90),
-                          Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 4.0.w),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  color: AppColors.lightWhite2,
-                                  borderRadius: BorderRadius.circular(30.r),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            StaggeredGrid.count(
+                              crossAxisCount: 2,
+                              children: List.generate(
+                                cubit.cartItems.length,
+                                (index) => CustomMealContainer(
+                                  mealModel: cubit.cartItems[index],
                                 ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(18.h),
-                                  child: DatePickerField(
-                                    selectedDate: cubit.singleDate,
-                                    isSingle: true,
-                                    onTap: () {
-                                      cubit.onSelectedDateSingle(context: context);
-                                    },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                AppTranslations.selectBookingDate,
+                                style: getMediumStyle(fontSize: 14.sp),
+                              ),
+                            ),
+                            SizedBox(height: getHeightSize(context) / 90),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 4.0.w),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.lightWhite2,
+                                    borderRadius: BorderRadius.circular(30.r),
                                   ),
-                                )),
-                          ),
-                          SizedBox(height: getHeightSize(context)/90),
-
-                          Text(
-                            AppTranslations.numberOfAttendees,
-                            style: getMediumStyle(fontSize: 14.sp),
-                          ),
-                          CustomTextField(
-                            controller: cubit.countUsers,
-                            hintText: "٤ اشخاص",
-                          ),
-                          SizedBox(height: getHeightSize(context)/90),
-
-                          Text(
-                            AppTranslations.nameOwner,
-                            style: getMediumStyle(fontSize: 14.sp),
-                          ),
-                          CustomTextField(
-                            controller: cubit.nameUser,
-                            hintText: "احمد مختار علي",
-                          ),
-                          SizedBox(height: getHeightSize(context)/90),
-
-                          Text(
-                            AppTranslations.numberOfPhoneContact,
-                            style: getMediumStyle(fontSize: 14.sp),
-                          ),
-                          CustomTextField(
-                            controller: cubit.phoneUser,
-
-                            hintText: "٠١١٢٦٠٥٣٤٥٢",
-                          ),
-                        ],
+                                  child: Padding(
+                                    padding: EdgeInsets.all(18.h),
+                                    child: DatePickerField(
+                                      selectedDate: cubit.singleDate,
+                                      isSingle: true,
+                                      onTap: () {
+                                        cubit.onSelectedDateSingle(
+                                            context: context);
+                                      },
+                                    ),
+                                  )),
+                            ),
+                            SizedBox(height: getHeightSize(context) / 90),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                AppTranslations.numberOfAttendees,
+                                style: getMediumStyle(fontSize: 14.sp),
+                              ),
+                            ),
+                            CustomTextField(
+                              controller: cubit.clientCountController,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              hintText: AppTranslations.enter +
+                                  AppTranslations.numberOfAttendees,
+                              validator: (p0) => p0!.isEmpty
+                                  ? AppTranslations.enter +
+                                      AppTranslations.numberOfAttendees
+                                  : null,
+                            ),
+                            SizedBox(height: getHeightSize(context) / 90),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                AppTranslations.nameOwner,
+                                style: getMediumStyle(fontSize: 14.sp),
+                              ),
+                            ),
+                            CustomTextField(
+                              controller: cubit.userNameController,
+                              keyboardType: TextInputType.text,
+                              validator: (p0) => p0!.isEmpty
+                                  ? AppTranslations.enter +
+                                      AppTranslations.nameOwner
+                                  : null,
+                              hintText: AppTranslations.enter +
+                                  AppTranslations.nameOwner,
+                            ),
+                            SizedBox(height: getHeightSize(context) / 90),
+                            // Text(
+                            //   AppTranslations.numberOfPhoneContact,
+                            //   style: getMediumStyle(fontSize: 14.sp),
+                            // ),
+                            CustomPhoneFormField(
+                              controller: cubit.userPhoneController,
+                              initialValue: cubit.countryCode,
+                              title: AppTranslations.numberOfPhoneContact,
+                              onCountryChanged: (v) {
+                                cubit.countryCode = '+${v.fullCountryCode}';
+                                debugPrint("Country changed to: ${v.name}");
+                              },
+                              onChanged: (phone) {
+                                debugPrint(phone.completeNumber);
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CustomButton(
-                      title: AppTranslations.bookTable,
-                      onTap: () {
-                        cubit.addRestaurantReservation(context, id);
-
-                        // Navigator.pushNamed(context, Routes.secondBookingFood,
-                        //     arguments: true);
-                      }),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: CustomButton(
+                        title: AppTranslations.bookTable,
+                        onTap: () {
+                          if (formKeyTable.currentState!.validate()) {
+                            cubit.addRestaurantReservation(context, id);
+                          }
+                        }),
+                  ),
+                ],
+              ),
             ),
           ));
     });
@@ -143,6 +181,7 @@ class CustomMealContainer extends StatelessWidget {
         padding: const EdgeInsets.all(3.0),
         child: CustomContainerWithShadow(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomNetworkImage(
                 image: mealModel.image ?? "",

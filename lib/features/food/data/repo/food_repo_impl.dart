@@ -7,6 +7,7 @@ import '../../../../core/api/end_points.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../residence/data/models/addRoomReservation_model.dart';
+import '../models/add_reservation_model.dart';
 import '../models/get_catogrey_model.dart';
 import '../models/get_restaurant_details_model.dart';
 import '../models/get_resturant_model.dart';
@@ -80,37 +81,36 @@ class FoodRepoImpl {
       return Left(ServerFailure());
     }
   }
-  Future<Either<Failure, DefaultPostModel>> addRestaurantReservation({
-    required String restaurant_id,
-    required String user_name,
+
+  Future<Either<Failure, AddFoodReservationModel>> addRestaurantReservation({
+    required String restaurantId,
+    required String userName,
     required String date,
-    required String user_phone,
-    required String client_count,
-    required List<int?> restaurant_menu_ids,
+    required String userPhone,
+    required String clientCount,
+    required List<int?> restaurantMenuIds,
     required List<int> counts,
   }) async {
     try {
       var response = await dio.post(
         EndPoints.addRestaurantReservation,
         body: {
-          "restaurant_id":restaurant_id,
-          "user_name":user_name,
-          "client_count":client_count,
-          "user_phone":user_phone,
-          "date":date,
-          if(restaurant_menu_ids.isNotEmpty)
-            for (int i = 0; i < restaurant_menu_ids.length; i++)
-            "restaurant_menu_ids[$i]": restaurant_menu_ids[i],
-          if(counts.isNotEmpty)
-            for (int i = 0; i < counts.length; i++)
-            "counts[$i]": counts[i],
+          "restaurant_id": restaurantId,
+          "user_name": userName,
+          "client_count": clientCount,
+          "user_phone": userPhone,
+          "date": date,
+          if (restaurantMenuIds.isNotEmpty)
+            for (int i = 0; i < restaurantMenuIds.length; i++)
+              "restaurant_menu_ids[$i]": restaurantMenuIds[i],
+          if (counts.isNotEmpty)
+            for (int i = 0; i < counts.length; i++) "counts[$i]": counts[i],
         },
       );
       print("dddddddddddddddd ${response.toString()}");
-      return Right(DefaultPostModel.fromJson(response));
+      return Right(AddFoodReservationModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }
   }
 }
-
