@@ -49,8 +49,7 @@ class _ResidenceReservedBodyState extends State<ResidenceReservedBody> {
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                     onTap: () {
-                                      Navigator.pushNamed(context,
-                                          Routes.detailsReservationResidence,
+                                      Navigator.pushNamed(context, Routes.detailsReservationResidence,
                                           arguments:
                                               ResidenceDetailsBookingArguments(
                                                   residenceReservationModel: cubit
