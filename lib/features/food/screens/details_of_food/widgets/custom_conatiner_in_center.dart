@@ -115,7 +115,7 @@ class _CustomContainerFoodState extends State<CustomContainerFood> {
                           ),
                         ],
                       ),
-                      Row(
+                      Row(                                                                                                                     
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SvgPicture.asset(AppIcons.location),

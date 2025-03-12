@@ -331,8 +331,9 @@ class FoodCubit extends Cubit<FoodState> {
 
   addRestaurantReservation(BuildContext context, String restaurantId) async {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
-    emit(ReservationLoading());
 
+    emit(ReservationLoading());
+    
     final response = await api.addRestaurantReservation(
         restaurantId: restaurantId,
         userName: userNameController.text,
