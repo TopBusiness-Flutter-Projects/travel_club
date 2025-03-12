@@ -13,9 +13,9 @@ class SecondBookTableScreen extends StatelessWidget {
       var cubit = context.read<FoodCubit>();
       return CustomScreen(
           appbarTitle: AppTranslations.bookTable,
-          body: 
-Padding(
-              padding: const EdgeInsets.all(12.0),            child: SingleChildScrollView(
+          body: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -40,11 +40,18 @@ Padding(
                     height: 20.h,
                   ),
                   CustomPricesWidget(
-                    totalPrice: cubit.addFoodReservationModel.data?.totalPrice.toString()??"0",
-                    totalPriceAfterVat:  cubit.addFoodReservationModel.data?.totalPriceAfterVat.toString()??"0",
-                    vat:  cubit.addFoodReservationModel.data?.vat.toString()??"0",
-                    terms:cubit.getRestaurantDetailsModel?.data?.rule??"",
-                    reservationId:  cubit.addFoodReservationModel.data?.reservationId??0,
+                    totalPrice: cubit.addFoodReservationModel.data?.totalPrice
+                            .toString() ??
+                        "0",
+                    totalPriceAfterVat: cubit
+                            .addFoodReservationModel.data?.totalPriceAfterVat
+                            .toString() ??
+                        "0",
+                    vat: cubit.addFoodReservationModel.data?.vat.toString() ??
+                        "0",
+                    terms: cubit.getRestaurantDetailsModel?.data?.rule ?? "",
+                    reservationId:
+                        cubit.addFoodReservationModel.data?.reservationId ?? 0,
                   ),
                   SizedBox(
                     height: 5.h,

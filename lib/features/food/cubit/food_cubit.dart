@@ -333,7 +333,7 @@ class FoodCubit extends Cubit<FoodState> {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
 
     emit(ReservationLoading());
-    
+
     final response = await api.addRestaurantReservation(
         restaurantId: restaurantId,
         userName: userNameController.text,
@@ -350,10 +350,13 @@ class FoodCubit extends Cubit<FoodState> {
       Navigator.pop(context);
       print("code: ${r.status.toString()}");
       if (r.status != 200 && r.status != 201) {
-        errorGetBar(r.msg??"");
+        errorGetBar(r.msg ?? "");
       } else {
         addFoodReservationModel = r;
+
         Navigator.pushNamed(context, Routes.secondBookingFood);
+        userPhoneController.clear();
+        userNameController.clear();
         emit(ReservationLoaded());
         successGetBar(r.msg);
       }

@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:travel_club/app.dart';
 
 import '../../../core/exports.dart';
 import '../cubit/account_cubit.dart';
@@ -89,9 +91,12 @@ class PromoCodeScreen extends StatelessWidget {
                         Flexible(
                           child: CustomButton(
                             title: AppTranslations.copyCode,
-                            onTap: () {
-                              Clipboard.setData(
+                            onTap: () async {
+                              await Clipboard.setData(
                                   ClipboardData(text: sharedLink));
+                              successGetBar("code_copied".tr());
+                         
+  
                             },
                           ),
                         ),
