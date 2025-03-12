@@ -83,7 +83,7 @@ class _ImageCustomState extends State<ImageCustom> {
                                             color: AppColors.primary),
                                         SizedBox(height: 10.h),
                                         Text(
-                                          'ارفع الصورة أو الملف'.tr(),
+                                          'raise_photo_or_file'.tr(),
                                           style: TextStyle(
                                             color: Colors.grey[600],
                                             fontSize: 14.sp,

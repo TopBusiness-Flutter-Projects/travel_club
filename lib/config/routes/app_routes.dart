@@ -153,13 +153,13 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-      case Routes.detailsBookingEntertainment:
-        return PageTransition(
-          child: const DetailsBookingEntertainment(),
-          type: PageTransitionType.fade,
-          alignment: Alignment.center,
-          duration: const Duration(milliseconds: 200),
-        );
+      // case Routes.detailsBookingEntertainment:
+      //   return PageTransition(
+      //     child: const DetailsBookingEntertainment(),
+      //     type: PageTransitionType.fade,
+      //     alignment: Alignment.center,
+      //     duration: const Duration(milliseconds: 200),
+      //   );
       case Routes.bookTableEntermaint:
         return PageTransition(
           child: const BookTableEntermaint(),
