@@ -39,6 +39,10 @@ class FoodReservationDetails {
   String? userPhone;
   String? userName;
   bool? isRated;
+    dynamic totalPrice;
+  dynamic vat;
+  dynamic rule;
+  dynamic totalPriceAfterVat;
 
   FoodReservationDetails({
     this.id,
@@ -47,6 +51,9 @@ class FoodReservationDetails {
     this.userPhone,
     this.userName,
     this.isRated,
+     this.totalPrice,
+    this.vat, this.rule,
+    this.totalPriceAfterVat,
   });
 
   factory FoodReservationDetails.fromJson(Map<String, dynamic> json) => FoodReservationDetails(
@@ -56,6 +63,11 @@ class FoodReservationDetails {
     userPhone: json["user_phone"],
     userName: json["user_name"],
     isRated: json["is_rated"],
+      rule: json["rule"],
+        totalPrice: json["total_price"],
+        vat: json["vat"],
+        totalPriceAfterVat: json["total_price_after_vat"],
+    
   );
 
   Map<String, dynamic> toJson() => {
@@ -65,5 +77,10 @@ class FoodReservationDetails {
     "user_phone": userPhone,
     "user_name": userName,
     "is_rated": isRated,
+    "rule": rule,
+           "total_price": totalPrice,
+
+        "vat": vat,
+        "total_price_after_vat": totalPriceAfterVat,
   };
 }
