@@ -29,7 +29,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
     if (context.read<HomeCubit>().homeModel.data == null) {
       context.read<HomeCubit>().getHomeData();
     }
-    context.read<FavouritesCubit>().getFavourite();
+    context.read<FavouritesCubit>().getFavourite(moduleId:  context.read<FavouritesCubit>().selectedModuleId);
     super.initState();
   }
   @override

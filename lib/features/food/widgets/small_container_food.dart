@@ -77,7 +77,9 @@ class SmallContainerFood extends StatelessWidget {
                         child:CustomFavWidget(
                           isFavScreen:  resturantData.isFav??false,
                           isFav: resturantData.isFav??false,
-                          id:resturantData.id.toString(), )),
+                          id:resturantData.id.toString(),
+                        )
+                    ),
                     //image in bottom
                     Positioned(
                         bottom: -20.h,
@@ -87,12 +89,14 @@ class SmallContainerFood extends StatelessWidget {
                           borderRadius: 20.r,
                           width: 57.w,
                           height: 57.w,
-                        ))
+                        )
+                    )
                     //:Container()
                   ],
                 ),
               ],
-            ));
+            )
+        );
       },
     );
   }

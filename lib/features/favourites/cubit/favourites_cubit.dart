@@ -30,18 +30,18 @@ class FavouritesCubit extends Cubit<FavouritesState> {
   GetRestaurantModel getRestaurantModel=GetRestaurantModel();
 
 
-getFavourite() async {
+getFavourite({required int moduleId}) async {
     emit(LoadingReservationFavourite());
-    final res = await api.getFavourite(moduleId: selectedModuleId,);
+    final res = await api.getFavourite(moduleId: moduleId,);
     res.fold((l) {
       emit(ErrorGetReservationFavourite());
     }, (r) {
-      if (selectedModuleId == 1) {
+      if (moduleId == 1) {
         residenceFavouriteModel = r;
       }
-      if (selectedModuleId == 2) {
+      if (moduleId == 2) {
         transportationFavouriteModel = r;
-      }if (selectedModuleId == 3) {
+      }if (moduleId == 3) {
         getRestaurantModel = r;
       }
       emit(LoadedReservationFavourite());
@@ -49,13 +49,16 @@ getFavourite() async {
   }
   void changeModule(int moduleId) {
     selectedModuleId = moduleId;
-    getFavourite();
+    getFavourite(moduleId: moduleId);
     emit(IndexChanged());
   }
 
 addAndRemoveFav({required   BuildContext context,required String id,required bool isFav ,required int selectedModuleIdd,bool favScreen=false})async{
   emit(LoadingReservationFavourite());
-  updateFavouritesInModels(context, isFav: isFav, id: id, selectedModuleIdd: selectedModuleIdd);
+  updateFavouritesInModels(
+      context, isFav: isFav,
+      id: id,
+      selectedModuleIdd: selectedModuleIdd);
   final res = await api.postFav(moduleId: context.read<PaymentCubit>().currentModuleId.toString(), id: id,);
   res.fold((l) {
 
@@ -63,7 +66,7 @@ addAndRemoveFav({required   BuildContext context,required String id,required boo
     },
           (r) {
             if(favScreen)
-            getFavourite();
+            getFavourite(moduleId: selectedModuleIdd);
 
             emit(LoadedReservationFavourite());
   });

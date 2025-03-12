@@ -1,17 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_state.dart';
-import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_rounded_button.dart';
 import '../../../../transportation/cubit/transportation_cubit.dart';
 import '../../../cubit/my_bookings_cubit.dart';
-import '../../widgets/show_rate_bottom_sheet.dart';
+import '../../../data/models/food_reservation_details.dart';
+import '../../../data/models/food_reservation_model.dart';
+import '../../../data/models/residence_reservation_details_model.dart';
 import '../widgets/big_container_food.dart';
 import '../widgets/member_details.dart';
-
+class FoodDetailsBookingArguments {
+  final ReservationFood foodReservationModel;
+  FoodDetailsBookingArguments({required this.foodReservationModel});
+}
 class DetailsBookingFood extends StatefulWidget {
-  const DetailsBookingFood({super.key});
+  final FoodDetailsBookingArguments arguments;
+
+  const DetailsBookingFood({super.key, required this.arguments});
 
   @override
   State<DetailsBookingFood> createState() => _DetailsBookingFoodState();
@@ -20,13 +25,17 @@ class DetailsBookingFood extends StatefulWidget {
 class _DetailsBookingFoodState extends State<DetailsBookingFood> {
   @override
   void initState() {
+
+    context.read<MyReservationsCubit>().foodReservationDetails = GetFoodReservationDetailsModel();
+      context.read<MyReservationsCubit>().getReservationDetails(
+          reservationId: widget.arguments.foodReservationModel.id!);
     // TODO: implement initState
-    context.read<TransportationCubit>().isGoOnly = false;
+    // context.read<TransportationCubit>().isGoOnly = false;
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
+    var cubit=context.read<MyReservationsCubit>();
     return BlocBuilder<MyReservationsCubit, MyReservationsState>(
       builder: (BuildContext context, state) {
         return CustomScreen(
@@ -43,12 +52,12 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
                   ),
                   CustomBookingFoodContainerBig(
                     foodModel: FoodModel(
-                        numofnights: "4 ليالي ",
-                        price: "5000",
-                        title: "nono",
-                        date: "13/12/2002",
-                        rate: 0,
-                        numOfBooking: "48721728",
+                        numofnights:widget.arguments.foodReservationModel.process.toString(),
+                        price:widget.arguments.foodReservationModel.totalPrice.toString(),
+                        title:widget.arguments.foodReservationModel.restaurant.toString(),
+                        date:widget.arguments.foodReservationModel.date.toString(),
+                        rate: widget.arguments.foodReservationModel.rate,
+                        numOfBooking:widget.arguments.foodReservationModel.transactionId,
                         status: true),
                   ), //text
 
@@ -58,8 +67,10 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
                     height: 30.h,
                   ),
 //members details
-
-                  MemberDetails(),
+                state is LoadingGetReservationDetailsState?Center(child: CustomLoadingIndicator()):
+                  MemberDetails(
+                      foodReservationDetails: cubit.foodReservationDetails.data??FoodReservationDetails(), date: widget.arguments.foodReservationModel.date.toString(),
+                  ),
 
                   SizedBox(
                     height: 10.h,
