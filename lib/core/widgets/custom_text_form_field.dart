@@ -50,7 +50,8 @@ class CustomTextField extends StatefulWidget {
       this.title,
       this.autoFocus = false,
       this.isPhoneNumber = false,
-      this.onPhoneChanged, this.inputFormatters // إضافة المتغير
+      this.onPhoneChanged,
+      this.inputFormatters // إضافة المتغير
       });
 
   @override
@@ -78,7 +79,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 4.0.w),
+      padding: EdgeInsets.symmetric(horizontal: 4.0.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -360,18 +361,19 @@ class CustomPhoneFormField extends StatelessWidget {
               child: IntlPhoneField(
                 controller: controller,
                 showCountryFlag: true,
+                // invalidNumberMessage: "dasdas",
                 dropdownTextStyle: getBoldStyle(fontSize: 13.sp),
 
-                validator: (value) {
-                  if (value == null || value.toString().length < 11) {
-                    return 'enter your phone';
-                  }
-                  return null;
-                },
+                // validator: (value) {
+                //   if (value == null ) {
+                //     return 'enter your phone';
+                //   }
+                //   return null;
+                // },
+
                 keyboardType: TextInputType.number,
                 disableLengthCheck: false,
                 showDropdownIcon: false,
-
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: enabled!

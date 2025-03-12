@@ -40,9 +40,7 @@ class PaymentCubit extends Cubit<PaymentState> {
   // GetPaymentUrlModel getPaymentUrlModel = GetPaymentUrlModel();
   getPaymentUrl(BuildContext context, {required int reservationId}) async {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
-
     emit(LoadingCheckCopouneState());
-
     final response = await api.getPaymentUrl(
         reservationId: reservationId,
         code: checkCopouneModel.data == null ? "" : couponController.text,
@@ -71,13 +69,12 @@ class PaymentCubit extends Cubit<PaymentState> {
       }
     });
   }
-
   CheckPaymentStatusModel checkPaymentStatusModel = CheckPaymentStatusModel();
-  checkPaymentStatus(BuildContext context, {required int reservationId}) async {
+  checkPaymentStatus(BuildContext context,
+  {required int reservationId}
+  ) async {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
-
     emit(LoadingCheckCopouneState());
-
     final response = await api.checkPaymentStatus(
         reservationId: reservationId,
         code: checkCopouneModel.data == null ? "" : couponController.text,
