@@ -32,10 +32,7 @@ class BigContainerFood extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       //small container
-                      SmallContainerFood(
-                        resturantData: resturantData,
-                      ),
-                      //
+                      SmallContainerFood(resturantData: resturantData,),
                       SizedBox(
                         height: 10.h,
                       ),
@@ -73,7 +70,8 @@ class BigContainerFood extends StatelessWidget {
                       SizedBox(
                         height: 10.h,
                       ),
-                    ]),
+                    ]
+                ),
               )),
         );
       },

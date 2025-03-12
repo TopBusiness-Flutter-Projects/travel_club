@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_club/features/my_bookings/view/food_booking/screens/details_booking_food_screen.dart';
 
 import '../../../../../../config/routes/app_routes.dart';
 import '../../../../../core/widgets/show_loading_indicator.dart';
@@ -39,8 +40,9 @@ class FoodBookingBody extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return    GestureDetector(
                       onTap: (){
-          
-                        Navigator.pushNamed(context, Routes.detailsBookingFood);
+                        Navigator.pushNamed(context, Routes.detailsBookingFood,arguments: FoodDetailsBookingArguments(
+                           foodReservationModel: cubit.foodReservationModel!.data!.reservations![index]
+                        ));
                       },
                       child: CustomBookingFoodContainerBig(
                         foodModel: FoodModel(
@@ -49,8 +51,10 @@ class FoodBookingBody extends StatelessWidget {
                           title: cubit.foodReservationModel.data?.reservations?[index].restaurant??"",
                           date:  cubit.foodReservationModel.data?.reservations?[index].date??"0",
                           rate:  cubit.foodReservationModel.data?.reservations?[index].rate,
-                            numOfBooking: cubit.foodReservationModel.data?.reservations?[index].transactionId??"",
-                            status:true),));
+                          numOfBooking: cubit.foodReservationModel.data?.reservations?[index].transactionId,
+                          status:true
+                        )
+                        ,));
                 },),
             ]
           ),

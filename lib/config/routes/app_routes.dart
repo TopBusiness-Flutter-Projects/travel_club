@@ -314,8 +314,10 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsBookingFood:
+        FoodDetailsBookingArguments args =
+        settings.arguments as FoodDetailsBookingArguments;
         return PageTransition(
-          child: const DetailsBookingFood(),
+          child:  DetailsBookingFood(arguments: args,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

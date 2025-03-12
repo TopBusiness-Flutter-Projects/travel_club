@@ -4,6 +4,7 @@ import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_details_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
+import '../data/models/food_reservation_details.dart';
 import '../data/models/food_reservation_model.dart';
 import '../data/models/residence_reservation_details_model.dart';
 import '../data/models/residence_reservation_model.dart';
@@ -41,8 +42,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
           residenceReservationModel = GetMyResidenceReservationModel();
         }
         if (selectedModuleId == 2) {
-          transportationReservationModel =
-              GetMyTransportationReservationModel();
+          transportationReservationModel = GetMyTransportationReservationModel();
         }
         getMyReservation(moduleId: selectedModuleId);
         getReservationDetails(reservationId: reservationId);
@@ -143,6 +143,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   GeTransportationReservationDetailsModel
       getTransportationReservationDetailsModel =
       GeTransportationReservationDetailsModel();
+  GetFoodReservationDetailsModel foodReservationDetails=GetFoodReservationDetailsModel();
   getReservationDetails({
     required int reservationId,
   }) async {
@@ -157,6 +158,10 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       }
       if (selectedModuleId == 2) {
         getTransportationReservationDetailsModel = r;
+      }
+      if (selectedModuleId == 3) {
+        print("okkkk");
+        foodReservationDetails = r;
       }
       emit(SucessGetReservationDetailsState());
     });
