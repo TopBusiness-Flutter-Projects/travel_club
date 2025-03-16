@@ -1,4 +1,6 @@
 
+import 'package:travel_club/features/entertainment/data/model/get_orginization_model.dart';
+
 import '../../../../../core/exports.dart';
 import '../../../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../../cubit/entertainment_cubit.dart';
@@ -38,7 +40,7 @@ class ContainerInCenterEntertainment extends StatelessWidget {
                   );
                 }).toList(),
               ),
-                CustomContainerCompanies()
+                CustomContainerCompanies(orginizationData: OrginizationData(),)
              // CustomRatingIncenter()
             ],
 

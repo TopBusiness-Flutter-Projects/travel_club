@@ -227,8 +227,11 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.compainiesEntertainment:
+        String id = settings.arguments as String;
+
         return PageTransition(
-          child: const EntertainmentCompanies(),
+
+          child:  EntertainmentCompanies(id:id),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
