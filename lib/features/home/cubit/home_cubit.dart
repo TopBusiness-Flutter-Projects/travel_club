@@ -14,6 +14,7 @@ class HomeCubit extends Cubit<HomeState> {
   int moduleslenth = 4;
   TextEditingController searchController = TextEditingController();
 
+
   GetHomeModel homeModel = GetHomeModel();
   getHomeData() async {
     emit(LoadingHomeData());
