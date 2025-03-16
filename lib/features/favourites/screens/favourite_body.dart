@@ -160,27 +160,27 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                     ],
                     if (cubit.categories[cubit.selectedIndex] ==
                         AppTranslations.entertainment) ...[
-                      Expanded(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, Routes.detailsEntertainment);
-                                  },
-                                  child: CustomContainerCompanies(
-                                    isDetails: true,
-                                //    isFavouriteScreen: true,
-                                  )),
-                            );
-                          },
-                          itemCount: 10,
-                        ),
-                      )
+                      // Expanded(
+                      //   child: ListView.builder(
+                      //     shrinkWrap: true,
+                      //     physics: BouncingScrollPhysics(),
+                      //     itemBuilder: (context, index) {
+                      //       return Padding(
+                      //         padding: const EdgeInsets.all(8.0),
+                      //         child: GestureDetector(
+                      //             onTap: () {
+                      //               Navigator.pushNamed(
+                      //                   context, Routes.detailsEntertainment);
+                      //             },
+                      //             child: CustomContainerCompanies(
+                      //               isDetails: true,
+                      //           //    isFavouriteScreen: true,
+                      //             )),
+                      //       );
+                      //     },
+                      //     itemCount: 10,
+                      //   ),
+                      // )
                     ],
                   ],
                 ),

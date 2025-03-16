@@ -3,13 +3,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/exports.dart';
+import '../data/model/get_orginization_model.dart';
+import '../data/model/get_ways_model.dart';
 import '../data/repo/entertainment_repo_impl.dart';
 
 part 'entertainment_state.dart';
 
 class EntertainmentCubit extends Cubit<EntertainmentState> {
-  EntertainmentCubit(this.entertainmentRepoImpl) : super(EntertainmentInitial());
-  EntertainmentRepoImpl? entertainmentRepoImpl;
+  EntertainmentCubit(this.api) : super(EntertainmentInitial());
+  EntertainmentRepoImpl api;
   bool isServiceSelected = false;
   int currentIndex = 0;
   void onSelectedDateSingle({required BuildContext context}) async {
@@ -44,4 +46,32 @@ void changeIndex(bool index) {
   isServiceSelected = index;
   emit(ChangeIndex());
 }
+  /////get catogrey
+  GetWaysModel getWaysModel = GetWaysModel();
+  getWays() async {
+    emit(LoadingGetWays());
+    final res = await api.GetWays();
+    res.fold((l) {
+      emit(ErrorGetWays());
+    }, (r) {
+
+      getWaysModel = r;
+
+      emit(LoadedGtWays());
+    });
+  }
+  //get orginization
+  GetOrganizationsModel? getOrganizationsModel ;
+  getOrginization({required String id}) async {
+    emit(LoadingOrganizers());
+    final res = await api.getOrganizations(id:id);
+    res.fold((l) {
+      emit(ErrorOrganizers());
+    }, (r) {
+
+      getOrganizationsModel = r;
+
+      emit(LoadedOrganizers());
+    });
+  }
 }
