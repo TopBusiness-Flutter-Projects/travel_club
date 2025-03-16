@@ -34,6 +34,7 @@ class GetFoodReservationDetailsModel {
 
 class FoodReservationDetails {
   int? id;
+  int? restaurantId;
   DateTime? canCancel;
   String? clientCount;
   String? userPhone;
@@ -46,6 +47,7 @@ class FoodReservationDetails {
 
   FoodReservationDetails({
     this.id,
+    this.restaurantId,
     this.canCancel,
     this.clientCount,
     this.userPhone,
@@ -58,6 +60,7 @@ class FoodReservationDetails {
 
   factory FoodReservationDetails.fromJson(Map<String, dynamic> json) => FoodReservationDetails(
     id: json["id"],
+    restaurantId: json["restaurant_id"],
     canCancel: json["canCancel"] == null ? null : DateTime.parse(json["canCancel"]),
     clientCount: json["client_count"],
     userPhone: json["user_phone"],
@@ -72,6 +75,7 @@ class FoodReservationDetails {
 
   Map<String, dynamic> toJson() => {
     "id": id,
+    "restaurant_id": restaurantId,
     "canCancel": "${canCancel!.year.toString().padLeft(4, '0')}-${canCancel!.month.toString().padLeft(2, '0')}-${canCancel!.day.toString().padLeft(2, '0')}",
     "client_count": clientCount,
     "user_phone": userPhone,

@@ -101,10 +101,11 @@ class FoodRepoImpl {
           "user_phone": userPhone,
           "date": date,
           if (restaurantMenuIds.isNotEmpty)
-            for (int i = 0; i < restaurantMenuIds.length; i++)
-              "restaurant_menu_ids[$i]": restaurantMenuIds[i],
+            // for (int i = 0; i < restaurantMenuIds.length; i++)
+              "restaurant_menu_ids": restaurantMenuIds,
           if (counts.isNotEmpty)
-            for (int i = 0; i < counts.length; i++) "counts[$i]": counts[i],
+            // for (int i = 0; i < counts.length; i++)
+             "counts": counts,
         },
       );
       print("dddddddddddddddd ${response.toString()}");
