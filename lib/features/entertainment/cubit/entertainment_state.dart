@@ -12,3 +12,6 @@ final class LoadedGtWays extends EntertainmentState {}
 final class LoadingOrganizers extends EntertainmentState {}
 final class ErrorOrganizers extends EntertainmentState {}
 final class LoadedOrganizers extends EntertainmentState {}
+final class LoadingOrganizersDetails extends EntertainmentState {}
+final class ErrorOrganizersDetails extends EntertainmentState {}
+final class LoadedOrganizersDetails extends EntertainmentState {}

@@ -24,22 +24,7 @@ class ContainerInCenterEntertainment extends StatelessWidget {
             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             //النقط
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: cubit.imageUrls.asMap().entries.map((entry) {
-                  return Container(
-                    width: 10.0,
-                    height: 10.0,
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 4.0),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color:cubit.currentIndex == entry.key ? AppColors.white:(AppColors.white)
-                            .withOpacity( 0.4)
-                    ),
-                  );
-                }).toList(),
-              ),
+       SizedBox(height: 10.h,),
                 CustomContainerCompanies(orginizationData: OrginizationData(),)
              // CustomRatingIncenter()
             ],

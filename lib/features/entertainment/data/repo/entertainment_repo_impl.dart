@@ -4,6 +4,7 @@ import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
+import '../model/get_orginization_details_model.dart';
 import '../model/get_orginization_model.dart';
 import '../model/get_ways_model.dart';
 
@@ -23,7 +24,8 @@ class EntertainmentRepoImpl {
     } on ServerException {
       return Left(ServerFailure());
     }
-  } Future<Either<Failure, GetOrganizationsModel>> getOrganizations(
+  }
+  Future<Either<Failure, GetOrganizationsModel>> getOrganizations(
   {required String id} ) async {
     try {
       var response = await dio.get(
@@ -33,6 +35,16 @@ class EntertainmentRepoImpl {
         },
       );
       return Right(GetOrganizationsModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }Future<Either<Failure, GetOrganizationDetails>> getOrganizationsDetails(
+  {required String id} ) async {
+    try {
+      var response = await dio.get(
+        EndPoints.getOrganizationsDetails+"/"+id,
+      );
+      return Right(GetOrganizationDetails.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

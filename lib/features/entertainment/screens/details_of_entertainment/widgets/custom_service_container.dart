@@ -2,10 +2,11 @@ import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/entertainment/cubit/entertainment_cubit.dart';
 
 import '../../../../../core/exports.dart';
+import '../../../data/model/get_orginization_details_model.dart';
 
 class CustomServiceContainer extends StatelessWidget {
-  const CustomServiceContainer({super.key});
-
+  const CustomServiceContainer({super.key,required this.wayService});
+ final WayService wayService ;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EntertainmentCubit, EntertainmentState>(
@@ -27,7 +28,7 @@ class CustomServiceContainer extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "تاجير يخت كامل",
+                         wayService.name.toString(),
                           style: getSemiBoldStyle(
                             fontSize: 14.sp,
                             color: AppColors.secondPrimary,
@@ -37,7 +38,7 @@ class CustomServiceContainer extends StatelessWidget {
                           height: 20.h,
                         ),
                         Text(
-                          "200" + " " + AppTranslations.currency,
+                          wayService.price.toString() + " " + AppTranslations.currency,
                           style: getSemiBoldStyle(
                             fontSize: 14.sp,
                             color: AppColors.green,

@@ -4,8 +4,10 @@ import '../../../../../core/exports.dart';
 import '../../../cubit/entertainment_cubit.dart';
 
 class AboutWidget extends StatelessWidget {
-  const AboutWidget({super.key});
-
+  const AboutWidget({super.key,required this.about,required this.lat,required this.long});
+ final String about;
+ final String lat;
+ final String long;
   @override
   Widget build(BuildContext context) {
   return BlocBuilder<EntertainmentCubit, EntertainmentState>(builder: (BuildContext context, state) {
@@ -23,7 +25,7 @@ class AboutWidget extends StatelessWidget {
             ),
           ),
           Text(
-            "خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو,وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المالصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسركارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحثتعداد الجنو",
+            about,
             style: getMediumStyle(
               fontSize: 14.sp,
               color: AppColors.grey,
@@ -41,7 +43,7 @@ class AboutWidget extends StatelessWidget {
        //   ContactButtonsScreen(),
           SizedBox(height: 10.h),
           //map
-        PositionMap(lat: 30.1234567, long: 29.24),
+        PositionMap(lat: double.parse(lat), long: double.parse(long),),
           SizedBox(height: 30.h),
         ],),
     );
