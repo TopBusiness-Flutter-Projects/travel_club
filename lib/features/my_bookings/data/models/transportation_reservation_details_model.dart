@@ -58,6 +58,8 @@ class Data {
   dynamic rule;
   dynamic totalPriceAfterVat;
   dynamic canCancel;
+    bool? isRated;
+
   int? returnGuests;
   int? departureGuests;
   List<ReservedChairsNumber>? departureReservedChairsNumber;
@@ -78,7 +80,8 @@ class Data {
     this.fromReturnTime,
     this.fromDepartureTimePrice,
     this.fromReturnTimePrice,
-    this.totalPrice,
+    this.totalPrice,    this.isRated,
+
     this.vat, this.rule,
     this.totalPriceAfterVat,
     this.returnGuests,
@@ -97,7 +100,8 @@ class Data {
         returnDate: json["return_date"],
         bus: json["bus"],
         chairs: json["chairs"],
-    companyId: json["company_id"],
+    companyId: json["company_id"],    isRated: json["is_rated"],
+
     rule: json["rule"],
         plateNumber: json["plate_number"],
         fromDepartureTime: json["from_departure_time"],
@@ -130,7 +134,8 @@ class Data {
         "to_departure_company_station": toDepartureCompanyStation,
         "departure_date": departureDate,
         "return_date": returnDate,
-        "bus": bus,
+        "bus": bus,    "is_rated": isRated,
+
         "chairs": chairs,
     "company_id":companyId,
     "rule": rule,

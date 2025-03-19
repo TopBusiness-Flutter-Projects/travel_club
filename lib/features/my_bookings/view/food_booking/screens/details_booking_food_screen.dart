@@ -104,8 +104,7 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
                           terms: cubit.foodReservationDetails.data!.rule
                               .toString(),
                           reservationId:
-                              cubit.foodReservationDetails.data?.id ?? 0,  
-                                                
+                              cubit.foodReservationDetails.data?.id ?? 0,
                         ),
                       ),
                     if (cubit.foodReservationDetails.data!.canCancel != null)
@@ -116,7 +115,8 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
                               widget.arguments.foodReservationModel.id ?? 0,
                         ),
                       ),
-                    if (widget.arguments.foodReservationModel.process == 2 && cubit.foodReservationDetails.data!.isRated == false)
+                    if (widget.arguments.foodReservationModel.process == 2 &&
+                        cubit.foodReservationDetails.data?.isRated == false)
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: RateReservationButton(

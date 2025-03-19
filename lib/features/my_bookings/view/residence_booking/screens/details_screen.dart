@@ -283,7 +283,7 @@ class _ResidenceRessrvationDetailsState
 
                     if (cubit.getResidenceReservationDetailsModel.data!
                             .process ==   2
-                            //  &&  cubit.getResidenceReservationDetailsModel.data!.isRate==false
+                              &&  cubit.getResidenceReservationDetailsModel.data?.isRated==false
                              )
                        RateReservationButton( reservationId:  widget.arguments.residenceReservationModel.id??0, id: cubit.getResidenceReservationDetailsModel.data?.lodgeId??0  ,),
 

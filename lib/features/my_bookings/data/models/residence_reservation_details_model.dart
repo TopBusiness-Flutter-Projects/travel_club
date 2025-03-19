@@ -38,7 +38,8 @@ class Data {
     dynamic canCancel;
     int? process;
     int? lodgeId;
-    int? guest;
+    int? guest;  bool? isRated;
+
     List<RoomModel>? rooms;
     dynamic totalPrice;
     dynamic vat;
@@ -53,7 +54,8 @@ class Data {
         this.guest,
         this.rooms,
         this.totalPrice,
-       this.lodgeId,
+       this.lodgeId,    this.isRated,
+
         this.vat,
         this.totalPriceAfterVat,
     });
@@ -64,7 +66,8 @@ class Data {
         to: json["to"],
         canCancel: json["canCancel"],
         process: json["process"],
-        guest: json["guest"],
+        guest: json["guest"],    isRated: json["is_rated"],
+
         rooms: json["rooms"] == null ? [] : List<RoomModel>.from(json["rooms"]!.map((x) => RoomModel.fromJson(x))),
         totalPrice: json["total_price"],
         lodgeId: json["lodge_id"],
@@ -80,7 +83,8 @@ class Data {
         "to": "${to!.year.toString().padLeft(4, '0')}-${to!.month.toString().padLeft(2, '0')}-${to!.day.toString().padLeft(2, '0')}",
         "canCancel": canCancel,
         "process": process,
-        "guest": guest,
+        "guest": guest,    "is_rated": isRated,
+
         "rooms": rooms == null ? [] : List<dynamic>.from(rooms!.map((x) => x.toJson())),
         "total_price": totalPrice,
         "vat": vat,
