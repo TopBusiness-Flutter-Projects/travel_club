@@ -9,18 +9,18 @@ class SecondBookTableScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async {
-          checkGoToHome(context);
-          return false;
-        },
+      onWillPop: () async {
+        checkGoToHome(context);
+        return false;
+      },
       child: BlocBuilder<FoodCubit, FoodState>(
           builder: (BuildContext context, state) {
         var cubit = context.read<FoodCubit>();
         return CustomScreen(
             appbarTitle: AppTranslations.bookTable,
-              appBarOnPresses: () {
-                checkGoToHome(context);
-              },
+            appBarOnPresses: () {
+              checkGoToHome(context);
+            },
             body: Padding(
               padding: const EdgeInsets.all(12.0),
               child: SingleChildScrollView(
@@ -48,6 +48,10 @@ class SecondBookTableScreen extends StatelessWidget {
                       height: 20.h,
                     ),
                     CustomPricesWidget(
+                      mealsName: cubit
+                              .addFoodReservationModel.data?.totalPriceOfMeals
+                              .toString() ??
+                          "",
                       totalPrice: cubit.addFoodReservationModel.data?.totalPrice
                               .toString() ??
                           "0",
@@ -59,7 +63,8 @@ class SecondBookTableScreen extends StatelessWidget {
                           "0",
                       terms: cubit.getRestaurantDetailsModel?.data?.rule ?? "",
                       reservationId:
-                          cubit.addFoodReservationModel.data?.reservationId ?? 0,
+                          cubit.addFoodReservationModel.data?.reservationId ??
+                              0,
                     ),
                     SizedBox(
                       height: 5.h,

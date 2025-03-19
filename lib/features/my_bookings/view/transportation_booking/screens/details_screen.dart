@@ -190,7 +190,9 @@ class _DetailsBookingTransportaionState
                       reservationid: widget.transportationReservation.id ?? 0,
                     ),
                   ),
-                if (widget.transportationReservation.process == 2) // completed
+                if (widget.transportationReservation.process == 2
+                 && cubit.getTransportationReservationDetailsModel.data?.isRated == false
+                ) // completed
                   Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: getHorizontalPadding(context)),

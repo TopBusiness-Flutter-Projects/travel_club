@@ -30,14 +30,12 @@ class HomeCubit extends Cubit<HomeState> {
   GetHomeFilter homeFilterModel = GetHomeFilter();
   GetLodgesModel residenceFavouriteModel = GetLodgesModel();
   GetRestaurantModel getRestaurantModel=GetRestaurantModel();
-
   GetCompaniesModel transportationFavouriteModel = GetCompaniesModel();
   getHomeFilterData({String ?text,BuildContext ?context}) async {
     print("selectedIndex $selectedIndex");
   int selectedId= selectedIndex+1;
     print("selectedIndex $selectedIndex");
     print("selectedId $selectedId");
-
     emit(LoadingHomeFilterDataState());
     final res = await api.getHomeFilter(catId:selectedId.toString()??"0" , searchText: searchController.text??"");
     res.fold((l) {
@@ -67,7 +65,6 @@ class HomeCubit extends Cubit<HomeState> {
     getHomeFilterData(context: context);
     emit(IndexChanged());
   }
-
   onChangeSearch(String? value, BuildContext context) {
     getHomeFilterData( context:  context);
   }

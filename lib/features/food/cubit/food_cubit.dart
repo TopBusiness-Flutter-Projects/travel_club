@@ -6,9 +6,6 @@ import 'package:travel_club/features/food/data/models/get_menu_meals_model.dart'
 import 'package:travel_club/features/location/cubit/location_cubit.dart';
 
 import '../../../core/utils/appwidget.dart';
-import '../../auth/data/models/default_model.dart';
-import '../../residence/data/models/addRoomReservation_model.dart';
-import '../../residence/data/models/rooms_model.dart';
 import '../data/models/get_catogrey_model.dart';
 import '../data/models/get_restaurant_details_model.dart';
 import '../data/models/get_resturant_model.dart';
@@ -353,10 +350,10 @@ class FoodCubit extends Cubit<FoodState> {
         errorGetBar(r.msg ?? "");
       } else {
         addFoodReservationModel = r;
-
         Navigator.pushNamed(context, Routes.secondBookingFood);
         userPhoneController.clear();
         userNameController.clear();
+        clientCountController.clear();
         emit(ReservationLoaded());
         successGetBar(r.msg);
       }

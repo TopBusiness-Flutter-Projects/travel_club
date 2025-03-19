@@ -115,14 +115,14 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
                               widget.arguments.foodReservationModel.id ?? 0,
                         ),
                       ),
-                    if (widget.arguments.foodReservationModel.process != 2)
+                    if (widget.arguments.foodReservationModel.process == 2 &&
+                        cubit.foodReservationDetails.data?.isRated == false)
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: RateReservationButton(
                           reservationId:
                               widget.arguments.foodReservationModel.id ?? 0,
-                          id: cubit.getResidenceReservationDetailsModel.data
-                                  ?.lodgeId ??
+                          id: cubit.foodReservationDetails.data?.restaurantId ??
                               0,
                         ),
                       ),

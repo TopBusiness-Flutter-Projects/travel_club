@@ -12,13 +12,16 @@ class PaymentDetailsContainer extends StatelessWidget {
       this.vat,
       this.totalPriceAfterVat,
       this.afterDiscountPrice,
-      this.isTickets = false});
+      this.isTickets = false,
+      this.mealsName ,
+      });
 
   final String? totalPrice;
   final String? vat;
   final String? totalPriceAfterVat;
   final String? afterDiscountPrice;
   final bool isTickets;
+  final String? mealsName;
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<PaymentCubit>();
@@ -28,6 +31,15 @@ class PaymentDetailsContainer extends StatelessWidget {
         padding: const EdgeInsets.all(30.0),
         child: Column(
           children: [
+            if (mealsName != null && mealsName!.isNotEmpty) ...[
+              CustomPriceRow(
+              price: formatNumber(double.parse(totalPrice!)),
+              title: "سعر الوجبات",
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            ],
             CustomPriceRow(
               price: formatNumber(double.parse(totalPrice!)),
               title: isTickets

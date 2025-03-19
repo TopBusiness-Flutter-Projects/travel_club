@@ -16,6 +16,8 @@ class CustomPricesWidget extends StatefulWidget {
     required this.reservationId,
     this.ticketsWidget,
     this.isPaid = false,
+    this.mealsName,
+
   });
 
   final String? terms;
@@ -25,6 +27,7 @@ class CustomPricesWidget extends StatefulWidget {
   final int reservationId;
   final Widget? ticketsWidget;
   final bool isPaid;
+  final String? mealsName;
   @override
   State<CustomPricesWidget> createState() => _CustomPricesWidgetState();
 }
@@ -62,6 +65,7 @@ class _CustomPricesWidgetState extends State<CustomPricesWidget> {
             totalPrice: widget.totalPrice,
             vat: widget.vat,
             totalPriceAfterVat: widget.totalPriceAfterVat,
+            mealsName: widget.mealsName,
           ),
           if (!widget.isPaid) ...[
             SizedBox(

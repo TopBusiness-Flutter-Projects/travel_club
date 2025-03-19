@@ -44,6 +44,9 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
         if (selectedModuleId == 2) {
           transportationReservationModel = GetMyTransportationReservationModel();
         }
+        if (selectedModuleId == 3) {
+          foodReservationModel = GetMyFoodReservationModel();
+        }
         getMyReservation(moduleId: selectedModuleId);
         getReservationDetails(reservationId: reservationId);
         Navigator.pop(context);
@@ -127,6 +130,9 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
         if (selectedModuleId == 2) {
           transportationReservationModel =
               GetMyTransportationReservationModel();
+        }
+        if (selectedModuleId == 3) {
+          foodReservationModel = GetMyFoodReservationModel();
         }
         getMyReservation(moduleId: selectedModuleId);
         getReservationDetails(reservationId: reservationId);
