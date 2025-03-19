@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/exports.dart';
+import '../data/model/get_orginization_details_model.dart';
 import '../data/model/get_orginization_model.dart';
 import '../data/model/get_ways_model.dart';
 import '../data/repo/entertainment_repo_impl.dart';
@@ -72,6 +73,17 @@ void changeIndex(bool index) {
       getOrganizationsModel = r;
 
       emit(LoadedOrganizers());
+    });
+  }
+  GetOrganizationDetails? getOrganizationsDetailsModel ;
+  getOrginizationDetails({required String id}) async {
+    emit(LoadingOrganizersDetails());
+    final res = await api.getOrganizationsDetails(id:id);
+    res.fold((l) {
+      emit(ErrorOrganizersDetails());
+    }, (r) {
+      getOrganizationsDetailsModel = r;
+      emit(LoadedOrganizersDetails());
     });
   }
 }

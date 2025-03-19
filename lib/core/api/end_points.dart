@@ -74,6 +74,7 @@ static const String getRestaurantDetails = '${baseUrl}getRestaurantDetails/';
 ////////////////////////////////////////////////////////////
   static const String getWays = '${baseUrl}getWays';
   static const String getOrganizations = '${baseUrl}getOrganizations';
+  static const String getOrganizationsDetails = '${baseUrl}getOrganizationDetails';
 
 //static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
   // static const String getMyReservationUrl = '${baseUrl}getMyReservation';

@@ -45,7 +45,7 @@ class _EntertainmentCompaniesState extends State<EntertainmentCompanies> {
                         child: GestureDetector(
                             onTap: () {
                               Navigator.pushNamed(
-                                  context, Routes.detailsEntertainment);
+                                  context, Routes.detailsEntertainment,arguments: cubit.getOrganizationsModel?.data?[index].id.toString());
                             },
                             child: CustomContainerCompanies(
                               isDetails: true, orginizationData: cubit.getOrganizationsModel!.data![index],

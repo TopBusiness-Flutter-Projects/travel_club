@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../../../food/data/models/get_menu_meals_model.dart';
+
 GetFoodReservationDetailsModel getFoodReservationDetailsModelFromJson(String str) => GetFoodReservationDetailsModel.fromJson(json.decode(str));
 
 String getFoodReservationDetailsModelToJson(GetFoodReservationDetailsModel data) => json.encode(data.toJson());
@@ -35,15 +37,17 @@ class GetFoodReservationDetailsModel {
 class FoodReservationDetails {
   int? id;
   int? restaurantId;
-  DateTime? canCancel;
+  dynamic canCancel;
   String? clientCount;
   String? userPhone;
   String? userName;
   bool? isRated;
-    dynamic totalPrice;
-  dynamic vat;
-  dynamic rule;
-  dynamic totalPriceAfterVat;
+  int? priceTable;
+  String? totalPrice;
+  String? totalPriceAfterVat;
+  String? rule;
+  List<MealModel>? meals;
+  int? vat;
 
   FoodReservationDetails({
     this.id,
@@ -53,38 +57,44 @@ class FoodReservationDetails {
     this.userPhone,
     this.userName,
     this.isRated,
-     this.totalPrice,
-    this.vat, this.rule,
+    this.priceTable,
+    this.totalPrice,
     this.totalPriceAfterVat,
+    this.rule,
+    this.meals,
+    this.vat,
   });
 
   factory FoodReservationDetails.fromJson(Map<String, dynamic> json) => FoodReservationDetails(
     id: json["id"],
     restaurantId: json["restaurant_id"],
-    canCancel: json["canCancel"] == null ? null : DateTime.parse(json["canCancel"]),
+    canCancel: json["canCancel"],
     clientCount: json["client_count"],
     userPhone: json["user_phone"],
     userName: json["user_name"],
     isRated: json["is_rated"],
-      rule: json["rule"],
-        totalPrice: json["total_price"],
-        vat: json["vat"],
-        totalPriceAfterVat: json["total_price_after_vat"],
-    
+    priceTable: json["price_table"],
+    totalPrice: json["total_price"],
+    totalPriceAfterVat: json["total_price_after_vat"],
+    rule: json["rule"],
+    meals: json["meals"] == null ? [] : List<MealModel>.from(json["meals"]!.map((x) => MealModel.fromJson(x))),
+    vat: json["vat"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "restaurant_id": restaurantId,
-    "canCancel": "${canCancel!.year.toString().padLeft(4, '0')}-${canCancel!.month.toString().padLeft(2, '0')}-${canCancel!.day.toString().padLeft(2, '0')}",
+    "canCancel": canCancel,
     "client_count": clientCount,
     "user_phone": userPhone,
     "user_name": userName,
     "is_rated": isRated,
+    "price_table": priceTable,
+    "total_price": totalPrice,
+    "total_price_after_vat": totalPriceAfterVat,
     "rule": rule,
-           "total_price": totalPrice,
-
-        "vat": vat,
-        "total_price_after_vat": totalPriceAfterVat,
+    "meals": meals == null ? [] : List<dynamic>.from(meals!.map((x) => x.toJson())),
+    "vat": vat,
   };
 }
+

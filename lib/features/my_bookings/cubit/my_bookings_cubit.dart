@@ -4,6 +4,7 @@ import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_details_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
+import '../../food/data/models/get_menu_meals_model.dart';
 import '../data/models/food_reservation_details.dart';
 import '../data/models/food_reservation_model.dart';
 import '../data/models/residence_reservation_details_model.dart';
@@ -142,6 +143,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       emit(LoadedCancelReservation());
     });
   }
+  List<MealModel> cartItems = [];
 
   /// reservation details
   GetResidenceReservationDetailsModel getResidenceReservationDetailsModel =
