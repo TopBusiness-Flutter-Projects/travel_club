@@ -42,7 +42,7 @@ class _CustomContainerCompaniesState extends State<CustomContainerCompanies> {
                  Row(
                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                    children: [
-                     Text(widget.name??widget.orginizationData.name.toString(),style: getSemiBoldStyle(fontSize: 14.sp,),),
+                     Text(widget.orginizationData.name.toString(),style: getSemiBoldStyle(fontSize: 14.sp,),),
                      // Padding(
                      //   padding: const EdgeInsets.all(8.0),
                      //   child: Icon(Icons.favorite_border_outlined,color: AppColors.secondPrimary,),
@@ -70,7 +70,7 @@ class _CustomContainerCompaniesState extends State<CustomContainerCompanies> {
                      // )
                      Padding(
                        padding: const EdgeInsets.all(8.0),
-                       child: CustomFavWidget(isFav: widget.isfav??widget.orginizationData.isFav??false, id: widget.orginizationData.id.toString(),),
+                       child: CustomFavWidget(isFav: widget.orginizationData.isFav??false, id: widget.orginizationData.id.toString(),),
                      )
                    ],
                  ),
@@ -80,7 +80,7 @@ class _CustomContainerCompaniesState extends State<CustomContainerCompanies> {
                       Row(
                        children: [
                          StarRating(
-                             rating:double.parse( widget.rate==null? widget.orginizationData.rate.toString()=="null"?"0.0": widget.orginizationData.rate.toString():widget.rate.toString()) ?? 0.0, size: 14.sp,
+                             rating:double.parse(  widget.orginizationData.rate.toString()=="null"?"0.0": widget.orginizationData.rate.toString()) ?? 0.0, size: 14.sp,
                              allowHalfRating: false, emptyIcon: CupertinoIcons.star_fill,
                       filledIcon: CupertinoIcons.star_fill,
                              onRatingChanged: (rating){
@@ -89,7 +89,7 @@ class _CustomContainerCompaniesState extends State<CustomContainerCompanies> {
                        ],
                      ),
                      SizedBox(width: 5.w,),
-                     Flexible(child: Text(widget.memberNum??widget.orginizationData.users.toString()+AppTranslations.personRateCompany,style:
+                     Flexible(child: Text(widget.orginizationData.users.toString()+AppTranslations.personRateCompany,style:
                      widget.isDetails==true?
                      getMediumStyle(fontSize: 12.sp,color: AppColors.grey):
                      getUnderLine(color: AppColors.primary,fontSize: 12.sp),maxLines: 1,))
