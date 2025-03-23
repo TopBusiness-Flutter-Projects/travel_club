@@ -7,8 +7,8 @@ import '../../../cubit/entertainment_cubit.dart';
 
 
 class ContainerInCenterEntertainment extends StatelessWidget {
-  ContainerInCenterEntertainment({super.key});
-
+  ContainerInCenterEntertainment({super.key,required this.orginizationData});
+  OrginizationData orginizationData;
   @override
   Widget build(BuildContext context) {
     var cubit=context.read<EntertainmentCubit>();
@@ -25,7 +25,7 @@ class ContainerInCenterEntertainment extends StatelessWidget {
             //النقط
             children: [
        SizedBox(height: 10.h,),
-                CustomContainerCompanies(orginizationData: OrginizationData(),)
+                CustomContainerCompanies(orginizationData: orginizationData)
              // CustomRatingIncenter()
             ],
 
