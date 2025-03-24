@@ -7,6 +7,7 @@ import 'package:travel_club/features/my_bookings/data/models/transportation_rese
 import '../../food/data/models/get_menu_meals_model.dart';
 import '../data/models/food_reservation_details.dart';
 import '../data/models/food_reservation_model.dart';
+import '../data/models/get_entertainment_details_reserv.dart';
 import '../data/models/get_entertainment_reservation_model.dart';
 import '../data/models/residence_reservation_details_model.dart';
 import '../data/models/residence_reservation_model.dart';
@@ -81,7 +82,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   GetEntertainmentReservationModel entertainmentReservationModel = GetEntertainmentReservationModel();
   GetMyTransportationReservationModel transportationReservationModel =
       GetMyTransportationReservationModel();
-  getMyReservation( {required int moduleId}) async {
+  getMyReservation({required int moduleId}) async {
     emit(LoadingReservationBooking());
     final res = await api.getMyReservation(
       moduleId: moduleId,
@@ -150,8 +151,8 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   List<MealModel> cartItems = [];
 
   /// reservation details
-  GetResidenceReservationDetailsModel getResidenceReservationDetailsModel =
-      GetResidenceReservationDetailsModel();
+  GetResidenceReservationDetailsModel getResidenceReservationDetailsModel = GetResidenceReservationDetailsModel();
+  GetEntertainmentReservationDetailsModel getEntertainmentReservationDetailsModel = GetEntertainmentReservationDetailsModel();
   GeTransportationReservationDetailsModel
       getTransportationReservationDetailsModel =
       GeTransportationReservationDetailsModel();
@@ -174,6 +175,9 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       if (selectedModuleId == 3) {
         print("okkkk");
         foodReservationDetails = r;
+      }  if (selectedModuleId == 4) {
+        print("okkkk");
+        getEntertainmentReservationDetailsModel = r;
       }
       emit(SucessGetReservationDetailsState());
     });
