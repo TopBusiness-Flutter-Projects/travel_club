@@ -59,6 +59,7 @@ import '../../features/my_account/screens/privacy_screen.dart';
 import '../../features/my_account/screens/profile_info.dart';
 import '../../features/my_bookings/view/residence_booking/screens/details_screen.dart';
 import '../../features/my_bookings/view/food_booking/screens/details_booking_food_screen.dart';
+import '../../features/other_services/data/models/sub_services_model.dart';
 import '../../features/other_services/screens/sub_services.dart';
 
 class Routes {
@@ -202,15 +203,17 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.subServicesRoute:
+        String id = settings.arguments as String;
         return PageTransition(
-          child: const SubServicesScreen(),
+          child:  SubServicesScreen(id:id ,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsOtherServices:
+        SubServicesData model = settings.arguments as SubServicesData;
         return PageTransition(
-          child: const ServiceDetailsScreen(),
+          child:  ServiceDetailsScreen(model:model),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

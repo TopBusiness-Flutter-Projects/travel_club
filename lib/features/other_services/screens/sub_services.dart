@@ -1,13 +1,33 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../core/exports.dart';
+import '../../location/cubit/location_cubit.dart';
 import '../cubit/other_services_cubit.dart';
 import '../cubit/other_services_state.dart';
 import 'package:travel_club/features/other_services/screens/widgets/custom_nearst_others.dart';
 
-class SubServicesScreen extends StatelessWidget {
-  const SubServicesScreen({super.key});
+import '../data/models/sub_services_model.dart';
 
+class SubServicesScreen extends StatefulWidget {
+  const SubServicesScreen({super.key,required this.id});
+final String id;
+  @override
+  State<SubServicesScreen> createState() => _SubServicesScreenState();
+}
+
+class _SubServicesScreenState extends State<SubServicesScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    // context.read<LocationCubit>().getAddressFromLatLng(
+    //     double.tryParse( context.read<OtherServicesCubit>().subServicesModel.data?.first.latitude.toString() ?? "") ?? 0,
+    //     double.tryParse(r.data?.longitude.toString() ?? "") ?? 0);
+    context.read<OtherServicesCubit>().getSubServices(id: widget.id);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+    var cubit=context.read<OtherServicesCubit>();
     return BlocBuilder<OtherServicesCubit, OtherServicesScreenState>(
       builder: (BuildContext context, state) {
         return CustomScreen(
@@ -29,18 +49,25 @@ class SubServicesScreen extends StatelessWidget {
                       height: 10.h,
                     ),
                     Expanded(
-                      child: ListView.separated(
+                      child:cubit.subServicesModel.data == null
+                          ? Center(
+                        child: CustomLoadingIndicator(),
+                      )
+                          : cubit.subServicesModel.data?.isEmpty??false
+                          ? Center(
+                        child: Text('no_data'.tr()),
+                      ): ListView.separated(
                         shrinkWrap: true,
                         physics: BouncingScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
-                          return CustomNearstOthers();
+                          return CustomNearstOthers(model: cubit.subServicesModel.data?[index]??SubServicesData(),);
                         },
                         separatorBuilder: (BuildContext context, int index) {
                           return SizedBox(
                             height: 10.h,
                           );
                         },
-                        itemCount: 5,
+                        itemCount: cubit.subServicesModel.data?.length??0,
                       ),
                     )
                   ]),

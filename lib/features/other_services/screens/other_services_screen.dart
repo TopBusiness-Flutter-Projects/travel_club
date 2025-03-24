@@ -1,6 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/widgets/network_image.dart';
+
+import '../cubit/other_services_cubit.dart';
+import '../cubit/other_services_state.dart';
 
 class OtherServicesScreen extends StatefulWidget {
   const OtherServicesScreen({super.key});
@@ -10,29 +15,48 @@ class OtherServicesScreen extends StatefulWidget {
 
 class _OtherServicesScreenState extends State<OtherServicesScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    context.read<OtherServicesCubit>().getOthers();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    return CustomScreen(
-      appbarTitle: AppTranslations.otherServices,
-      body: SingleChildScrollView(
-          child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.h),
-        child: StaggeredGrid.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 0,
-            crossAxisSpacing: 0,
-            children: List.generate(
-                7,
-                (index) => OtherServicesContainer(
-                      categoryModel: OtherServicesModel(
-                        title: "سوبر ماركت",
-                        image: AppIcons.others,
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.subServicesRoute);
-                        },
-                      ),
-                    ))),
-      )),
-    );
+    var cubit=context.read<OtherServicesCubit>();
+    return BlocBuilder<OtherServicesCubit, OtherServicesScreenState>(builder: (BuildContext context, state) {
+      return  CustomScreen(
+        appbarTitle: AppTranslations.otherServices,
+        body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.h),
+              child:cubit.othersModel.data == null
+                  ? Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 30.0),
+                                    child: CustomLoadingIndicator(),
+                                  ),
+                                )
+                  : cubit.othersModel.data!.isEmpty
+                  ? Center(
+                child: Text('no_data'.tr()),
+              ): StaggeredGrid.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 0,
+                  crossAxisSpacing: 0,
+                  children: List.generate(
+                      cubit.othersModel.data?.length??0,
+                          (index) => OtherServicesContainer(
+                        categoryModel: OtherServicesModel(
+                          title:cubit.othersModel.data?[index].title??'',
+                          image: cubit.othersModel.data?[index].image??'',
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.subServicesRoute,arguments: cubit.othersModel.data?[index].id.toString());
+                          },
+                        ),
+                      ))),
+            )),
+      );
+    }, );
   }
 }
 
@@ -69,12 +93,7 @@ class OtherServicesContainer extends StatelessWidget {
                 //   categoryModel.image,
                 //   width: getWidthSize(context) * 0.13,
                 // ),
-                Image.network(
-                  "https://lotel.efaculty.tech/storage/cities/65701735112706.webp",
-                  fit: BoxFit.cover,
-                  width: getWidthSize(context) * 0.13,
-                  // height: getHeightSize(context) * 0.2,
-                ),
+               CustomNetworkImage(image: categoryModel.image,width: getWidthSize(context) * 0.13,),
                 SizedBox(width: getWidthSize(context) * 0.02),
                 Flexible(
                   child: AutoSizeText(categoryModel.title,

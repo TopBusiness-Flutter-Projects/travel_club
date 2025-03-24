@@ -1,12 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/features/entertainment/screens/details_of_entertainment/widgets/custom_contact_container.dart';
 import 'package:travel_club/features/location/screens/position_map.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_cubit.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_state.dart';
 
 import '../../../../../core/exports.dart';
+import '../../data/models/get_single_service_model.dart';
 
 class ServiceAboutWidget extends StatelessWidget {
-  const ServiceAboutWidget({super.key});
+  const ServiceAboutWidget({super.key,required this.singleServiceData});
+final  SingleServiceData singleServiceData;
 
   @override
   Widget build(BuildContext context) {
@@ -18,26 +21,31 @@ class ServiceAboutWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                AppTranslations.about,
-                style: getMediumStyle(
-                  color: AppColors.secondPrimary,
-                  fontSize: 14.sp,
+              if(singleServiceData.about.toString()!="null")...[
+                Text(
+                  AppTranslations.about,
+                  style: getMediumStyle(
+                    color: AppColors.secondPrimary,
+                    fontSize: 14.sp,
+                  ),
                 ),
-              ),
-              Text(
-                "خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو,وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المالصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسركارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحثتعداد الجنو",
-                style: getMediumStyle(
-                  fontSize: 14.sp,
-                  color: AppColors.grey,
-                ),
-              ),
-              SizedBox(height: 10.h),
 
-              ContactButtonsScreen(),
+                Text(
+                  singleServiceData.about.toString(),
+                  style: getMediumStyle(
+                    fontSize: 14.sp,
+                    color: AppColors.grey,
+                  ),
+                ),
+                SizedBox(height: 10.h),
+              ]
+           ,
+
+
+              ContactButtonsScreen(phoneNumberForCall: singleServiceData.phone.toString(), phoneNumberForWhatsApp: singleServiceData.whatsapp.toString(),),
               SizedBox(height: 10.h),
               //map
-              PositionMap(lat: 30.1234567, long: 29.24),
+              PositionMap(lat: double.tryParse(singleServiceData.latitude.toString())??0.0 , long: double.tryParse(singleServiceData.longitude.toString())??0.0,),
               SizedBox(height: 30.h),
             ],
           ),

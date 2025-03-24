@@ -92,6 +92,12 @@ class EndPoints {
       '${baseUrl}getOrganizationDetails';
   static const String addEntertainmentReservation =
       '${baseUrl}addEntertainmentReservation';
+////////////////////////////////////////////////////////////
+//////////////////    others    ////////////////////////
+////////////////////////////////////////////////////////////
+  static const String otherServicesUrl = '${baseUrl}getServices';
+  static const String getSubServices = '${baseUrl}getSubServices';
+  static const String getSingleSubServices = '${baseUrl}getSubServicesDetails';
 
 //static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
   // static const String getMyReservationUrl = '${baseUrl}getMyReservation';
