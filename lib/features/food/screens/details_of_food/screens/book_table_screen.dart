@@ -122,11 +122,7 @@ class BookTableScreen extends StatelessWidget {
                               hintText: AppTranslations.enter +
                                   AppTranslations.nameOwner,
                             ),
-                            SizedBox(height: getHeightSize(context) / 90),
-                            // Text(
-                            //   AppTranslations.numberOfPhoneContact,
-                            //   style: getMediumStyle(fontSize: 14.sp),
-                            // ),
+                            SizedBox(height: getHeightSize(context) / 90),                           
                             CustomPhoneFormField(
                               controller: cubit.userPhoneController,
                               initialValue: cubit.countryCode,
@@ -139,6 +135,7 @@ class BookTableScreen extends StatelessWidget {
                                 debugPrint(phone.completeNumber);
                               },
                             ),
+                        
                           ],
                         ),
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_club/features/auth/view/screens/new_pass_screen.dart';
+import 'package:travel_club/features/entertainment/data/model/get_orginization_details_model.dart';
 import 'package:travel_club/features/home/screens/best_bags_screen.dart';
 import 'package:travel_club/features/home/screens/new_offers_screen.dart';
 import 'package:travel_club/features/main_screen/screens/main_screen.dart';
@@ -141,8 +142,9 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.secondBookTableEntertainment:
+         WayService wayService = settings.arguments as WayService;
         return PageTransition(
-          child: const SecondBookTableEntermaint(),
+          child:  SecondBookTableEntermaint(  wayService: wayService,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -162,8 +164,11 @@ class AppRoutes {
       //     duration: const Duration(milliseconds: 200),
       //   );
       case Routes.bookTableEntermaint:
+        WayService wayService = settings.arguments as WayService;
         return PageTransition(
-          child: const BookTableEntermaint(),
+          child: BookTableEntermaint(
+            wayService: wayService,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -176,17 +181,20 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsbookingTransportation:
-        TransportationReservation transportationReservation = settings.arguments as TransportationReservation;
+        TransportationReservation transportationReservation =
+            settings.arguments as TransportationReservation;
         return PageTransition(
-          child:  DetailsBookingTransportaion( transportationReservation: transportationReservation,),
+          child: DetailsBookingTransportaion(
+            transportationReservation: transportationReservation,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsFoodRoute:
-    String id = settings.arguments as String;
-    return PageTransition(
-          child:  DetailsFood(id:id),
+        String id = settings.arguments as String;
+        return PageTransition(
+          child: DetailsFood(id: id),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -208,7 +216,7 @@ class AppRoutes {
       case Routes.bookTable:
         String id = settings.arguments as String;
         return PageTransition(
-          child:  BookTableScreen(id:id),
+          child: BookTableScreen(id: id),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -223,10 +231,11 @@ class AppRoutes {
       case Routes.detailsEntertainment:
         final args = settings.arguments as Map<String, dynamic>;
 
-        OrginizationData orginizationData = args['orginizationData'] as OrginizationData;
+        OrginizationData orginizationData =
+            args['orginizationData'] as OrginizationData;
 
         return PageTransition(
-          child: DetailsEntertainment( orginizationData: orginizationData),
+          child: DetailsEntertainment(orginizationData: orginizationData),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -236,8 +245,7 @@ class AppRoutes {
         String id = settings.arguments as String;
 
         return PageTransition(
-
-          child:  EntertainmentCompanies(id:id),
+          child: EntertainmentCompanies(id: id),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -324,9 +332,11 @@ class AppRoutes {
         );
       case Routes.detailsBookingFood:
         FoodDetailsBookingArguments args =
-        settings.arguments as FoodDetailsBookingArguments;
+            settings.arguments as FoodDetailsBookingArguments;
         return PageTransition(
-          child:  DetailsBookingFood(arguments: args,),
+          child: DetailsBookingFood(
+            arguments: args,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -449,10 +459,9 @@ class AppRoutes {
         );
 
       case Routes.transportationBookingDetailsRoute:
-      CompanyModel company =
-          settings.arguments as CompanyModel;
+        CompanyModel company = settings.arguments as CompanyModel;
         return PageTransition(
-          child:  TransportationBookingDetailsScreen(
+          child: TransportationBookingDetailsScreen(
             companyModel: company,
           ),
           type: PageTransitionType.fade,
@@ -475,19 +484,22 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.tripDetailsfirstRoute:
-       
-      BusCompanyModel  busCompanyModel = settings.arguments as BusCompanyModel;
+        BusCompanyModel busCompanyModel = settings.arguments as BusCompanyModel;
         return PageTransition(
-          child:  TripDetailsFirstScreen(busCompanyModel: busCompanyModel,),
+          child: TripDetailsFirstScreen(
+            busCompanyModel: busCompanyModel,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
       case Routes.tripDetailsSecondRoute:
-            BusCompanyModel  busCompanyModel = settings.arguments as BusCompanyModel;
+        BusCompanyModel busCompanyModel = settings.arguments as BusCompanyModel;
 
         return PageTransition(
-          child: TripDetailsSecondScreen(busCompanyModel: busCompanyModel,),
+          child: TripDetailsSecondScreen(
+            busCompanyModel: busCompanyModel,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
