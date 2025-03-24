@@ -31,7 +31,6 @@ class CustomPricesWidget extends StatefulWidget {
   @override
   State<CustomPricesWidget> createState() => _CustomPricesWidgetState();
 }
-
 class _CustomPricesWidgetState extends State<CustomPricesWidget> {
   @override
   void initState() {

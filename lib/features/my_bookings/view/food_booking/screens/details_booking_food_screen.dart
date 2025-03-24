@@ -1,9 +1,10 @@
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/widgets/network_image.dart';
+import 'package:travel_club/features/food/data/models/get_menu_meals_model.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_state.dart';
 import 'package:travel_club/features/my_bookings/view/widgets/custom_buttons.dart';
 import 'package:travel_club/features/payment/screens/widgets/custom_price_widget.dart';
 
-import '../../../../food/screens/details_of_food/screens/book_table_screen.dart';
 import '../../../cubit/my_bookings_cubit.dart';
 import '../../../data/models/food_reservation_details.dart';
 import '../../../data/models/food_reservation_model.dart';
@@ -53,20 +54,22 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  if( cubit.foodReservationDetails.data?.meals?.isNotEmpty??false)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: StaggeredGrid.count(
-                      crossAxisCount: 2,
-                      children: List.generate(
-                        cubit.foodReservationDetails.data?.meals?.length??0,
-                            (index) => CustomMealContainer(
-                          mealModel:  cubit.foodReservationDetails.data!.meals![index],
-                          isSecondBooking: true,
+                  if (cubit.foodReservationDetails.data?.meals?.isNotEmpty ??
+                      false)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: StaggeredGrid.count(
+                        crossAxisCount: 2,
+                        children: List.generate(
+                          cubit.foodReservationDetails.data?.meals?.length ?? 0,
+                          (index) => CustomMealContainerBooking(
+                            mealModel: cubit
+                                .foodReservationDetails.data!.meals![index],
+                            isSecondBooking: true,
+                          ),
                         ),
                       ),
                     ),
-                  ),
                   CustomBookingFoodContainerBig(
                     foodModel: FoodModel(
                         numofnights: widget
@@ -94,7 +97,6 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
                   if (cubit.foodReservationDetails.data == null)
                     Center(child: CustomLoadingIndicator())
                   else ...[
-
                     MemberDetails(
                       foodReservationDetails:
                           cubit.foodReservationDetails.data ??
@@ -179,6 +181,64 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
           ),
         );
       },
+    );
+  }
+}
+
+class CustomMealContainerBooking extends StatelessWidget {
+  const CustomMealContainerBooking({
+    super.key,
+    this.isSecondBooking = false,
+    required this.mealModel,
+  });
+
+  final MealModel mealModel;
+
+  final bool isSecondBooking;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(3.0),
+      child: CustomContainerWithShadow(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomNetworkImage(
+              image: mealModel.image ?? "",
+              borderRadius: 20.r,
+              height: 100.h,
+              width: double.infinity,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AutoSizeText(
+                    "${mealModel.title ?? ""}" "\n",
+                    maxLines: 2,
+                    style: getSemiBoldStyle(fontSize: 14.sp, fontHeight: 1),
+                  ),
+                  AutoSizeText(
+                    '${mealModel.priceAfterDiscount} * ${mealModel.count}',
+                    maxLines: 2,
+                    style: getSemiBoldStyle(fontSize: 14.sp, fontHeight: 1),
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
+                  AutoSizeText(
+                    "${mealModel.priceAfterDiscount * mealModel.count ?? ""} ${AppTranslations.currency}",
+                    maxLines: 1,
+                    style: getSemiBoldStyle(
+                        fontSize: 13.sp, fontHeight: 1, color: AppColors.green),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

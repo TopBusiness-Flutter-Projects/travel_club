@@ -138,7 +138,6 @@ class BookTableScreen extends StatelessWidget {
                               onChanged: (phone) {
                                 debugPrint(phone.completeNumber);
                               },
-                             
                             ),
                           ],
                         ),
@@ -201,7 +200,7 @@ class CustomMealContainer extends StatelessWidget {
                       style: getSemiBoldStyle(fontSize: 14.sp, fontHeight: 1),
                     ),
                     AutoSizeText(
-                      "${mealModel.priceAfterDiscount ?? ""} ${AppTranslations.currency}",
+                      "${mealModel.priceAfterDiscount * mealModel.userQty ?? ""} ${AppTranslations.currency}",
                       maxLines: 1,
                       style: getSemiBoldStyle(
                           fontSize: 13.sp,
@@ -213,7 +212,7 @@ class CustomMealContainer extends StatelessWidget {
                     ),
                     isSecondBooking
                         ? AutoSizeText(
-                            "عدد" " " + '${mealModel.userQty}',
+                            '${mealModel.priceAfterDiscount} * ${mealModel.userQty}',
                             maxLines: 2,
                             style: getSemiBoldStyle(
                                 fontSize: 14.sp, fontHeight: 1),
