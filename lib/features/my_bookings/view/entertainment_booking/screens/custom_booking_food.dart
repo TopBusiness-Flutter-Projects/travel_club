@@ -40,16 +40,19 @@ class EntertainmentBookingBody extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return    GestureDetector(
                       onTap: (){
-                        Navigator.pushNamed(context, Routes.detailsBookingEntertainment);
+                        Navigator.pushNamed(context, Routes.detailsBookingEntertainment,
+                            arguments: cubit.entertainmentReservationModel.data!.reservations![index]
+                        );
                       },
-                      child: CustomBookingEntertainmentContainerBig(foodModel: EntertainmentModel(
+                      child: CustomBookingEntertainmentContainerBig(entertainmentModel: EntertainmentModel(
                           numofnights: cubit.entertainmentReservationModel.data!.reservations![index].process.toString(),
                           price:cubit.entertainmentReservationModel.data!.reservations![index].totalPrice.toString(),
                           title:cubit.entertainmentReservationModel.data!.reservations![index].wayService.toString(),
                           date: cubit.entertainmentReservationModel.data!.reservations![index].date.toString(),
                           rate: cubit.entertainmentReservationModel.data!.reservations![index].rate,
                           numOfBooking: cubit.entertainmentReservationModel.data!.reservations![index].transactionId.toString() ,
-                          status:true),));
+                          status:true
+                      ),));
                 },),
             ]
           ),

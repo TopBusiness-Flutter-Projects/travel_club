@@ -129,8 +129,7 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CancelReservationButton(
-                          reservationid:
-                              widget.arguments.foodReservationModel.id ?? 0,
+                          reservationid: widget.arguments.foodReservationModel.id ?? 0,
                         ),
                       ),
                     if (widget.arguments.foodReservationModel.process == 2 &&

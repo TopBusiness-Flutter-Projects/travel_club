@@ -50,6 +50,7 @@ import '../../features/food/screens/details_of_food/screens/details_food_screen.
 import '../../features/food/screens/details_of_food/screens/second_book_table_screen.dart';
 import '../../features/food/screens/food_screen.dart';
 import '../../features/my_account/screens/change_lang.dart';
+import '../../features/my_bookings/data/models/get_entertainment_reservation_model.dart';
 import '../../features/my_bookings/view/entertainment_booking/screens/details_booking_food_screen.dart';
 import '../../features/my_bookings/view/transportation_booking/screens/details_screen.dart';
 import '../../features/notification/screens/notification_screen.dart';
@@ -154,13 +155,14 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-      // case Routes.detailsBookingEntertainment:
-      //   return PageTransition(
-      //     child: const DetailsBookingEntertainment(),
-      //     type: PageTransitionType.fade,
-      //     alignment: Alignment.center,
-      //     duration: const Duration(milliseconds: 200),
-      //   );
+      case Routes.detailsBookingEntertainment:
+        ReservationEntertainment reservationEntertainment = settings.arguments as ReservationEntertainment;
+        return PageTransition(
+          child:  DetailsBookingEntertainment(entertainmentModel:reservationEntertainment),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
       case Routes.bookTableEntermaint:
         return PageTransition(
           child: const BookTableEntermaint(),

@@ -8,6 +8,7 @@ import 'package:travel_club/features/my_bookings/data/models/transportation_rese
 import '../../../../core/api/base_api_consumer.dart';
 import '../models/food_reservation_details.dart';
 import '../models/food_reservation_model.dart';
+import '../models/get_entertainment_details_reserv.dart';
 import '../models/get_entertainment_reservation_model.dart';
 import '../models/residence_reservation_details_model.dart';
 import '../models/residence_reservation_model.dart';
@@ -48,7 +49,8 @@ class MyReservationsRepoImpl {
           : moduleId == 2 // transportation
               ? Right(
                   GeTransportationReservationDetailsModel.fromJson(response))
-              :Right(GetFoodReservationDetailsModel.fromJson(response));
+              :moduleId == 3 // transportation
+          ?Right(GetFoodReservationDetailsModel.fromJson(response)):Right(GetEntertainmentReservationDetailsModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }
