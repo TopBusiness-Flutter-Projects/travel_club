@@ -45,12 +45,12 @@ class CustomBookingEntertainmentContainerBig extends StatelessWidget {
 
               CustomBookingFoodContainerSmall(
                 foodModel: EntertainmentModel(
-                  title: "title",
-                  rate: 4,
-                  date: "date",
-                  price: "price",
-                  numOfBooking: "numOfBooking",
-                  numofnights: "numofnights",
+                  title:foodModel.title,
+                  rate: foodModel.rate,
+                  date: foodModel.date,
+                  price: foodModel.price,
+                  numOfBooking:foodModel.numOfBooking,
+                  numofnights: foodModel.numofnights,
                 ),
               ),
               //Row

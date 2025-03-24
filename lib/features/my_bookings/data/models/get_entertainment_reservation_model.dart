@@ -33,14 +33,14 @@ class GetEntertainmentReservationModel {
 }
 
 class Data {
-  List<Reservation>? reservations;
+  List<ReservationEntertainment>? reservations;
 
   Data({
     this.reservations,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    reservations: json["reservations"] == null ? [] : List<Reservation>.from(json["reservations"]!.map((x) => Reservation.fromJson(x))),
+    reservations: json["reservations"] == null ? [] : List<ReservationEntertainment>.from(json["reservations"]!.map((x) => ReservationEntertainment.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -48,7 +48,7 @@ class Data {
   };
 }
 
-class Reservation {
+class ReservationEntertainment {
   int? id;
   String? wayService;
   String? organization;
@@ -59,7 +59,7 @@ class Reservation {
   String? totalPrice;
   dynamic discount;
 
-  Reservation({
+  ReservationEntertainment({
     this.id,
     this.wayService,
     this.organization,
@@ -71,7 +71,7 @@ class Reservation {
     this.discount,
   });
 
-  factory Reservation.fromJson(Map<String, dynamic> json) => Reservation(
+  factory ReservationEntertainment.fromJson(Map<String, dynamic> json) => ReservationEntertainment(
     id: json["id"],
     wayService: json["way_service"],
     organization: json["organization"],
