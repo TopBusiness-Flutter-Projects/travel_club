@@ -42,7 +42,7 @@ class FoodReservationDetails {
   String? userPhone;
   String? userName;
   bool? isRated;
-  int? priceTable;
+  dynamic? priceTable;
   String? totalPrice;
   String? totalPriceAfterVat;
   String? rule;

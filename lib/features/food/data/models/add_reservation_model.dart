@@ -48,7 +48,6 @@ class Data {
         this.vat,
         this.totalPrice,
     });
-
     factory Data.fromJson(Map<String, dynamic> json) => Data(
         reservationId: json["reservation_id"],
         totalPriceOfMeals: json["total_price_of_meals"],

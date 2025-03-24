@@ -47,24 +47,33 @@ class SecondBookTableScreen extends StatelessWidget {
                     SizedBox(
                       height: 20.h,
                     ),
-                    CustomPricesWidget(
-                      mealsName: cubit
-                              .addFoodReservationModel.data?.totalPriceOfMeals
-                              .toString() ??
-                          "",
-                      totalPrice: cubit.addFoodReservationModel.data?.totalPrice
-                              .toString() ??
-                          "0",
-                      totalPriceAfterVat: cubit
-                              .addFoodReservationModel.data?.totalPriceAfterVat
-                              .toString() ??
-                          "0",
-                      vat: cubit.addFoodReservationModel.data?.vat.toString() ??
-                          "0",
-                      terms: cubit.getRestaurantDetailsModel?.data?.rule ?? "",
-                      reservationId:
-                          cubit.addFoodReservationModel.data?.reservationId ??
-                              0,
+                    GestureDetector(
+                      onTap: () {
+                        print(cubit
+                            .addFoodReservationModel.data?.totalPriceOfMeals
+                            .toString());
+                      },
+                      child: CustomPricesWidget(
+                        mealsName: cubit
+                            .addFoodReservationModel.data?.totalPrice
+                            .toString(),
+                        totalPrice: cubit
+                                .addFoodReservationModel.data?.totalPrice
+                                .toString() ??
+                            "0",
+                        totalPriceAfterVat: cubit.addFoodReservationModel.data
+                                ?.totalPriceAfterVat
+                                .toString() ??
+                            "0",
+                        vat: cubit.addFoodReservationModel.data?.vat
+                                .toString() ??
+                            "0",
+                        terms:
+                            cubit.getRestaurantDetailsModel?.data?.rule ?? "",
+                        reservationId:
+                            cubit.addFoodReservationModel.data?.reservationId ??
+                                0,
+                      ),
                     ),
                     SizedBox(
                       height: 5.h,

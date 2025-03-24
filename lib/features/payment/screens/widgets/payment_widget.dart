@@ -6,15 +6,15 @@ import 'package:travel_club/features/payment/cubit/payment_state.dart';
 import '../../../../core/exports.dart';
 
 class PaymentDetailsContainer extends StatelessWidget {
-  const PaymentDetailsContainer(
-      {super.key,
-      this.totalPrice,
-      this.vat,
-      this.totalPriceAfterVat,
-      this.afterDiscountPrice,
-      this.isTickets = false,
-      this.mealsName ,
-      });
+  const PaymentDetailsContainer({
+    super.key,
+    this.totalPrice,
+    this.vat,
+    this.totalPriceAfterVat,
+    this.afterDiscountPrice,
+    this.isTickets = false,
+    this.mealsName,
+  });
 
   final String? totalPrice;
   final String? vat;
@@ -31,14 +31,14 @@ class PaymentDetailsContainer extends StatelessWidget {
         padding: const EdgeInsets.all(30.0),
         child: Column(
           children: [
-            if (mealsName != null && mealsName!.isNotEmpty) ...[
+            if (mealsName.toString() != "null") ...[
               CustomPriceRow(
-              price: formatNumber(double.parse(totalPrice!)),
-              title: "سعر الوجبات",
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
+                price: formatNumber(double.parse(mealsName!)),
+                title: "سعر الوجبات",
+              ),
+              SizedBox(
+                height: 15.h,
+              )
             ],
             CustomPriceRow(
               price: formatNumber(double.parse(totalPrice!)),
