@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:travel_club/core/widgets/network_image.dart';
 import 'package:travel_club/features/entertainment/cubit/entertainment_cubit.dart';
 
 import '../../../../core/exports.dart';
+import '../../data/models/sub_services_model.dart';
 
 class CustomContainerOthers extends StatefulWidget {
-  CustomContainerOthers({super.key,this.isDetails,this.isFavouriteScreen});
+  CustomContainerOthers({super.key,this.isDetails,this.isFavouriteScreen,required this.model});
   bool ?isDetails;
   bool ?isFavouriteScreen;
-
+  SubServicesData model;
   @override
   State<CustomContainerOthers> createState() => _CustomContainerOthersState();
 }
@@ -24,7 +26,9 @@ class _CustomContainerOthersState extends State<CustomContainerOthers> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Image.asset(ImageAssets.logoImage,height: 61.h,width: 60.w,),
+              child:
+                CustomNetworkImage(image: widget.model.logo.toString(),height: 61.h,width: 60.w,),
+              //Image.asset(ImageAssets.logoImage,height: 61.h,width: 60.w,),
             ),
             SizedBox(width:5.w,),
             Flexible(
@@ -35,7 +39,7 @@ class _CustomContainerOthersState extends State<CustomContainerOthers> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("شركة سيكرت ترافيل",style: getSemiBoldStyle(fontSize: 14.sp,),),
+                      Text(widget.model.title.toString(),style: getSemiBoldStyle(fontSize: 14.sp,),),
                       // Padding(
                       //   padding: const EdgeInsets.all(8.0),
                       //   child: Icon(Icons.favorite_border_outlined,color: AppColors.secondPrimary,),
@@ -64,12 +68,13 @@ class _CustomContainerOthersState extends State<CustomContainerOthers> {
                     ],
                   ),
                   SizedBox(height: 10.h,),
+                  //widget.model.rate.toString()=="null"?SizedBox():
                   Row(
                     children: [
                       Row(
                         children: [
                           StarRating(
-                              rating: 4, size: 14.sp,
+                              rating: double.tryParse(widget.model.rate.toString())??0.0, size: 14.sp,
                              emptyIcon: CupertinoIcons.star_fill,
                       filledIcon: CupertinoIcons.star_fill,  allowHalfRating: false,
                               onRatingChanged: (rating){
@@ -78,7 +83,8 @@ class _CustomContainerOthersState extends State<CustomContainerOthers> {
                         ],
                       ),
                       SizedBox(width: 5.w,),
-                      Flexible(child: Text("200"+AppTranslations.personRateCompany,style:
+
+                      Flexible(child: Text( widget.model.users.toString()=="null"?"":widget.model.users.toString()+AppTranslations.personRateCompany,style:
                       widget.isDetails==true?
                       getMediumStyle(fontSize: 12.sp,color: AppColors.grey):
                       getUnderLine(color: AppColors.primary,fontSize: 12.sp),maxLines: 1,))

@@ -1,12 +1,13 @@
 
 import '../../../../../core/exports.dart';
 import '../../../entertainment/cubit/entertainment_cubit.dart';
+import '../../data/models/sub_services_model.dart';
 import 'custom_container_others.dart';
 
 
 class ContainerInCenterOthers extends StatelessWidget {
-  ContainerInCenterOthers({super.key});
-
+  ContainerInCenterOthers({super.key,required this.model});
+  SubServicesData model;
   @override
   Widget build(BuildContext context) {
     var cubit=context.read<EntertainmentCubit>();
@@ -22,23 +23,8 @@ class ContainerInCenterOthers extends StatelessWidget {
             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             //النقط
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: cubit.imageUrls.asMap().entries.map((entry) {
-                  return Container(
-                    width: 10.0,
-                    height: 10.0,
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 4.0),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color:cubit.currentIndex == entry.key ? AppColors.white:(AppColors.white)
-                            .withOpacity( 0.4)
-                    ),
-                  );
-                }).toList(),
-              ),
-              CustomContainerOthers()
+
+              CustomContainerOthers(model: model,)
               // CustomRatingIncenter()
             ],
 
