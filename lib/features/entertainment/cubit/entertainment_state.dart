@@ -15,3 +15,6 @@ final class LoadedOrganizers extends EntertainmentState {}
 final class LoadingOrganizersDetails extends EntertainmentState {}
 final class ErrorOrganizersDetails extends EntertainmentState {}
 final class LoadedOrganizersDetails extends EntertainmentState {}
+final class ReservationLoading extends EntertainmentState {}
+final class ReservationError extends EntertainmentState {}
+final class ReservationLoaded extends EntertainmentState {}

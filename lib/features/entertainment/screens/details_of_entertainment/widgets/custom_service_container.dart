@@ -52,7 +52,7 @@ class CustomServiceContainer extends StatelessWidget {
                             width: 123.w,
                             onTap: () {
                               Navigator.pushNamed(
-                                  context, Routes.bookTableEntermaint);
+                                  context, Routes.bookTableEntermaint, arguments: wayService );
                             })),
                   ],
                 ),

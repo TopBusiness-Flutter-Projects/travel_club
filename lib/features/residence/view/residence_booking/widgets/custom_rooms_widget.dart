@@ -1,3 +1,5 @@
+import 'package:travel_club/core/widgets/network_image.dart';
+
 import '../../../../../core/exports.dart';
 import '../../../data/models/rooms_model.dart';
 
@@ -12,8 +14,8 @@ class CustomFacilityWidget extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.network(
-            facility.image ?? "",
+          CustomNetworkImage(
+            image: facility.image ?? "",
             height: getWidthSize(context) * 0.08,
             width: getWidthSize(context) * 0.08,
           ),
