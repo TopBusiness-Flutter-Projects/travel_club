@@ -301,5 +301,6 @@
   "evaluation": "Evaluation",
   "menu_food": "Food Menu",
   "about_restaurant": "About the Restaurant",
-  "raise_photo_or_file": "Upload Photo or File"
+  "raise_photo_or_file": "Upload Photo or File",
+  "price_of_foods" : "Price of Foods"
 }
