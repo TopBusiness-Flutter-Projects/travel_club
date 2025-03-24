@@ -30,8 +30,8 @@ class EntertainmentModel {
 
 //big conatiner
 class CustomBookingEntertainmentContainerBig extends StatelessWidget {
-  CustomBookingEntertainmentContainerBig({super.key, required this.foodModel});
-  final EntertainmentModel foodModel;
+  CustomBookingEntertainmentContainerBig({super.key, required this.entertainmentModel});
+  final EntertainmentModel entertainmentModel;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MyReservationsCubit, MyReservationsState>(
@@ -45,42 +45,48 @@ class CustomBookingEntertainmentContainerBig extends StatelessWidget {
 
               CustomBookingFoodContainerSmall(
                 foodModel: EntertainmentModel(
-                  title:foodModel.title,
-                  rate: foodModel.rate,
-                  date: foodModel.date,
-                  price: foodModel.price,
-                  numOfBooking:foodModel.numOfBooking,
-                  numofnights: foodModel.numofnights,
+                  title:entertainmentModel.title,
+                  rate: entertainmentModel.rate,
+                  date: entertainmentModel.date,
+                  price: entertainmentModel.price,
+                  numOfBooking:entertainmentModel.numOfBooking,
+                  numofnights: entertainmentModel.numofnights,
                 ),
               ),
               //Row
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        // mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
-                            AppTranslations.numberBooking,
-                            style: getRegularStyle(color: AppColors.grey),
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          Text(
-                            foodModel.numOfBooking.toString() ?? "",
-                            style: getMediumStyle(),
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
+
+                          if(entertainmentModel.numOfBooking.toString() != "null")...[
+                            Text(
+                              AppTranslations.numberBooking,
+                              style: getRegularStyle(color: AppColors.grey),
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Text(
+                              entertainmentModel.numOfBooking ?? "",
+                              style: getMediumStyle(),
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                          ],
+
+
                           CustomContainerWithShadow(
                             reduis: 7,
                             isShadow: false,
-                            color: foodModel.status == true
+                            color: entertainmentModel.status == true
                                 ? AppColors.green.withOpacity(.12)
                                 : AppColors.red.withOpacity(.12),
                             width: 100.w,
@@ -89,12 +95,12 @@ class CustomBookingEntertainmentContainerBig extends StatelessWidget {
                                   horizontal: 6.0, vertical: 7),
                               child: Center(
                                   child: Text(
-                                foodModel.status == true
+                                entertainmentModel.status == true
                                     ? AppTranslations.bookingSuccess
                                     : AppTranslations.cancelBooking,
                                 style: getMediumStyle(
                                     fontSize: 14.sp,
-                                    color: foodModel.status == true
+                                    color: entertainmentModel.status == true
                                         ? AppColors.green
                                         : AppColors.red),
                                 maxLines: 1,
@@ -121,7 +127,7 @@ class CustomBookingEntertainmentContainerBig extends StatelessWidget {
                                 color: AppColors.secondPrimary,
                               ),
                               Text(
-                                foodModel.date.toString(),
+                                entertainmentModel.date.toString(),
                                 style: getRegularStyle(
                                   fontSize: 14.sp,
                                 ),
@@ -140,7 +146,7 @@ class CustomBookingEntertainmentContainerBig extends StatelessWidget {
                             height: 10.h,
                           ),
                           Text(
-                            foodModel.price.toString() ??
+                            entertainmentModel.price.toString() ??
                                 "" + " " + AppTranslations.currency,
                             style: getSemiBoldStyle(
                                 fontSize: 14.sp, color: AppColors.primary),
