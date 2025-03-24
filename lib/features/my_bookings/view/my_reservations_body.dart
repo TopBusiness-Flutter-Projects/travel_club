@@ -78,7 +78,8 @@ class _ReservationsBodyState extends State<ReservationsBody> {
                 )
               ],
 
-              if (cubit.selectedModuleId == 2) TransportationReservedBody(),
+              if (cubit.selectedModuleId == 2)
+                TransportationReservedBody(),
               if (cubit.selectedModuleId == 3) ...[
                 FoodBookingBody(),
                 SizedBox(
