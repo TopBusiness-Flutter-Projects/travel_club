@@ -1,6 +1,7 @@
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
+import '../../entertainment/data/model/get_orginization_model.dart';
 import '../../food/data/models/get_resturant_model.dart';
 import '../../home/data/models/home_model.dart';
 import '../../payment/cubit/payment_cubit.dart';
@@ -28,6 +29,7 @@ class FavouritesCubit extends Cubit<FavouritesState> {
   GetLodgesModel residenceFavouriteModel = GetLodgesModel();
   GetCompaniesModel transportationFavouriteModel = GetCompaniesModel();
   GetRestaurantModel getRestaurantModel=GetRestaurantModel();
+  GetOrganizationsModel getEntertainmentModel=GetOrganizationsModel();
 
 
 getFavourite({required int moduleId}) async {
@@ -43,6 +45,8 @@ getFavourite({required int moduleId}) async {
         transportationFavouriteModel = r;
       }if (moduleId == 3) {
         getRestaurantModel = r;
+      }if (moduleId == 4) {
+        getEntertainmentModel = r;
       }
       emit(LoadedReservationFavourite());
     });

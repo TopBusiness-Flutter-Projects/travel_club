@@ -30,7 +30,7 @@ class _SwiperWithAutoplayState extends State<SwiperWithAutoplay> {
         child: Swiper(
           controller: cubit.swiperController,
           onIndexChanged: (index) {
-          //  cubit.changeIndex(index);
+            //  cubit.changeIndex(index);
           },
           itemCount: widget.images.length,
           itemBuilder: (BuildContext context, int index) {
@@ -107,7 +107,7 @@ class FullScreenImageViewer extends StatelessWidget {
               value: progress == null || progress.expectedTotalBytes == null
                   ? null
                   : progress.cumulativeBytesLoaded /
-                      progress.expectedTotalBytes!,
+                  progress.expectedTotalBytes!,
             ),
           );
         },
