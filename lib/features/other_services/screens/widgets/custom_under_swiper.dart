@@ -2,11 +2,12 @@
 import 'package:travel_club/features/other_services/cubit/other_services_cubit.dart';
 import 'package:travel_club/features/other_services/cubit/other_services_state.dart';
 import '../../../../../../core/exports.dart';
+import '../../data/models/get_single_service_model.dart';
 import 'about_widget.dart';
 
 class ContainerUnderSwiperOtherService  extends StatelessWidget {
-  const ContainerUnderSwiperOtherService({super.key});
-
+   ContainerUnderSwiperOtherService({super.key,required this.singleServiceData});
+  SingleServiceData singleServiceData;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OtherServicesCubit, OtherServicesScreenState>(builder: (BuildContext context, state) {
@@ -28,7 +29,8 @@ class ContainerUnderSwiperOtherService  extends StatelessWidget {
             child: ListView(
               children: [
               SizedBox(height: 30.h,),
-                  const ServiceAboutWidget()
+                singleServiceData==null?Container():
+                   ServiceAboutWidget(singleServiceData:singleServiceData)
               ],
             ),
           ),

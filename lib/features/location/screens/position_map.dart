@@ -100,19 +100,24 @@ class _PositionMapState extends State<PositionMap> {
                     PositionedDirectional(
                       bottom: 10.0,
                       end: 10.0,
-                      child: Container(
-                        width: getWidthSize(context) * 0.7,
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        // alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            cubit.address,
-                            style: getMediumStyle(
-                              fontSize: 14.sp,
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                            maxWidth: getWidthSize(context) * 0.7),
+                        child: Container(
+                          // width: getWidthSize(context) * 0.7,
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          // alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              cubit.address,
+                              maxLines: 2,
+                              style: getMediumStyle(
+                                fontSize: 14.sp,
+                              ),
                             ),
                           ),
                         ),

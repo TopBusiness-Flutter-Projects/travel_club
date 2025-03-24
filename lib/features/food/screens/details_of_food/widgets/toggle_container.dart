@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_club/core/exports.dart';
 
@@ -25,21 +26,24 @@ class _ToggleButtonsFoodState extends State<ToggleButtonsFood> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+               if( cubit.getRestaurantDetailsModel?.data?.hasMenu==1)...[
+                 MenuButton(
+                   title: "menu_food".tr(),
+                   isSelected: cubit.selectedIndexMenue == 0,
+                   onTap: () {
+                     cubit.changeIndexMenue(0);
+                   },
+                 ),
+               ],
+
                 MenuButton(
-                  title: "قائمة الطعام",
-                  isSelected: cubit.selectedIndexMenue == 0,
-                  onTap: () {
-                    cubit.changeIndexMenue(0);
-                  },
-                ),
-                MenuButton(
-                  title: "عن المطعم",
+                  title: "about_restaurant".tr(),
                   isSelected: cubit.selectedIndexMenue == 1,
                   onTap: () {
    cubit.changeIndexMenue(1);}
                 ),
                 MenuButton(
-                  title: "التقييم",
+                  title: "evaluation".tr(),
                   isSelected: cubit.selectedIndexMenue == 2,
                   onTap: (){cubit.changeIndexMenue(2);},
                 ),

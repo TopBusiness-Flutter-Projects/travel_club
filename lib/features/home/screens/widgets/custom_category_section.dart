@@ -33,12 +33,12 @@ class _CustomCategorySectionState extends State<CustomCategorySection> {
             : SizedBox(
                 height: getHeightSize(context) * 0.15,
                 child: ListView.builder(
-                  itemBuilder: (context, index) => CustomCategoryContainer(
+                  itemBuilder: (context, index) =>
+                      CustomCategoryContainer(
                     categoryModel: cubit.homeModel.data!.modules![index],
                     islast: index ==
                         (cubit.homeModel.data!.modules!.length <
-                                    cubit.moduleslenth
-                                ? cubit.homeModel.data!.modules!.length
+                                    cubit.moduleslenth ? cubit.homeModel.data!.modules!.length
                                 : cubit.moduleslenth) -
                             1,
                   ),

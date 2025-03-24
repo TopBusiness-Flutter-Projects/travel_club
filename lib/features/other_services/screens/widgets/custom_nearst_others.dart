@@ -1,13 +1,16 @@
+import 'package:travel_club/core/widgets/network_image.dart';
+
 import '../../../../core/exports.dart';
+import '../../data/models/sub_services_model.dart';
 
 class CustomNearstOthers extends StatelessWidget {
-  const CustomNearstOthers({super.key});
-
+  const CustomNearstOthers({super.key,required this.model});
+ final SubServicesData model ;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, Routes.detailsOtherServices);
+        Navigator.pushNamed(context, Routes.detailsOtherServices,arguments: model);
       },
       child: CustomContainerWithShadow(
         child: Padding(
@@ -15,10 +18,11 @@ class CustomNearstOthers extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset(
-                ImageAssets.logoImage,
-                height: 60.h,
-              ),
+              // Image.asset(
+              //   ImageAssets.logoImage,
+              //   height: 60.h,
+              // ),
+              CustomNetworkImage(image:model.logo.toString() , height: 60.h,),
               SizedBox(
                 width: 10.w,
               ),
@@ -29,12 +33,12 @@ class CustomNearstOthers extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "اسم السوبر ماركت",
+                     model.title.toString(),
                       style: getSemiBoldStyle(
                           color: AppColors.secondPrimary, fontSize: 14.sp),
                     ),
                     Text(
-                      "٢٠ شارع الملك الصالح / العين السخنه /مصر",
+                      model.latitude.toString(),
                       maxLines: 2,
                       style: getRegularStyle(
                           color: AppColors.grey, fontSize: 12.sp),

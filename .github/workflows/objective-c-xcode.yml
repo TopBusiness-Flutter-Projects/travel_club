@@ -1,0 +1,40 @@
+name: Build iOS IPA
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Xcode
+      run: |
+        sudo xcode-select --switch /Applications/Xcode_15.0.app # Use an available Xcode version
+        xcodebuild -version
+
+    - name: Install CocoaPods
+      run: |
+        cd ios
+        if [ -f "Podfile" ]; then
+          pod install
+        else
+          echo "No Podfile found. Skipping pod install."
+        fi
+
+    - name: Build IPA
+      run: |
+        cd ios
+        xcodebuild -workspace YourApp.xcworkspace -scheme YourApp -sdk iphoneos -configuration Release archive -archivePath $PWD/build/YourApp.xcarchive
+        xcodebuild -exportArchive -archivePath $PWD/build/YourApp.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath $PWD/build
+
+    - name: Upload IPA
+      uses: actions/upload-artifact@v4
+      with:
+        name: YourApp.ipa
+        path: ios/build/YourApp.ipa

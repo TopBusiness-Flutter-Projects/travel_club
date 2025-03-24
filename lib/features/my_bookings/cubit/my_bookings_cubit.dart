@@ -4,6 +4,11 @@ import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_details_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
+import '../../food/data/models/get_menu_meals_model.dart';
+import '../data/models/food_reservation_details.dart';
+import '../data/models/food_reservation_model.dart';
+import '../data/models/get_entertainment_details_reserv.dart';
+import '../data/models/get_entertainment_reservation_model.dart';
 import '../data/models/residence_reservation_details_model.dart';
 import '../data/models/residence_reservation_model.dart';
 import '../data/repo/my_reservations_repo_impl.dart';
@@ -36,12 +41,17 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       if (r.data == false) {
         errorGetBar(r.msg ?? AppTranslations.error);
       } else {
-        if (selectedModuleId == 1) {
+        if (selectedModuleId == 1) {                    
           residenceReservationModel = GetMyResidenceReservationModel();
         }
         if (selectedModuleId == 2) {
-          transportationReservationModel =
-              GetMyTransportationReservationModel();
+          transportationReservationModel = GetMyTransportationReservationModel();
+        }
+        if (selectedModuleId == 3) {
+          foodReservationModel = GetMyFoodReservationModel();
+        }
+        if (selectedModuleId == 4) {
+          entertainmentReservationModel = GetEntertainmentReservationModel();
         }
         getMyReservation(moduleId: selectedModuleId);
         getReservationDetails(reservationId: reservationId);
@@ -70,11 +80,12 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
     }
   }
 
-  GetMyResidenceReservationModel residenceReservationModel =
-      GetMyResidenceReservationModel();
+  GetMyResidenceReservationModel residenceReservationModel = GetMyResidenceReservationModel();
+  GetMyFoodReservationModel foodReservationModel = GetMyFoodReservationModel();
+  GetEntertainmentReservationModel entertainmentReservationModel = GetEntertainmentReservationModel();
   GetMyTransportationReservationModel transportationReservationModel =
       GetMyTransportationReservationModel();
-  getMyReservation( {required int moduleId}) async {
+  getMyReservation({required int moduleId}) async {
     emit(LoadingReservationBooking());
     final res = await api.getMyReservation(
       moduleId: moduleId,
@@ -87,6 +98,10 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       }
       if (moduleId == 2) {
         transportationReservationModel = r;
+      } if (moduleId == 3) {
+        foodReservationModel = r;
+      }if(moduleId == 4){
+        entertainmentReservationModel = r;
       }
       emit(LoadedReservationBooking());
     });
@@ -125,6 +140,12 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
           transportationReservationModel =
               GetMyTransportationReservationModel();
         }
+        if (selectedModuleId == 3) {
+          foodReservationModel = GetMyFoodReservationModel();
+        }
+        if (selectedModuleId == 4) {
+          entertainmentReservationModel = GetEntertainmentReservationModel();
+        }
         getMyReservation(moduleId: selectedModuleId);
         getReservationDetails(reservationId: reservationId);
         Navigator.pop(context);
@@ -133,13 +154,15 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       emit(LoadedCancelReservation());
     });
   }
+  List<MealModel> cartItems = [];
 
   /// reservation details
-  GetResidenceReservationDetailsModel getResidenceReservationDetailsModel =
-      GetResidenceReservationDetailsModel();
+  GetResidenceReservationDetailsModel getResidenceReservationDetailsModel = GetResidenceReservationDetailsModel();
+  GetEntertainmentReservationDetailsModel getEntertainmentReservationDetailsModel = GetEntertainmentReservationDetailsModel();
   GeTransportationReservationDetailsModel
       getTransportationReservationDetailsModel =
       GeTransportationReservationDetailsModel();
+  GetFoodReservationDetailsModel foodReservationDetails=GetFoodReservationDetailsModel();
   getReservationDetails({
     required int reservationId,
   }) async {
@@ -154,6 +177,13 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       }
       if (selectedModuleId == 2) {
         getTransportationReservationDetailsModel = r;
+      }
+      if (selectedModuleId == 3) {
+       
+        foodReservationDetails = r;
+      }  if (selectedModuleId == 4) {
+       
+        getEntertainmentReservationDetailsModel = r;
       }
       emit(SucessGetReservationDetailsState());
     });

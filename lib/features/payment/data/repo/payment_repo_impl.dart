@@ -18,11 +18,15 @@ class PaymentRepoImpl {
   }) async {
     try {
       var response = await dio.post(
-        moduleId == 1?
-        EndPoints.checkCouponUrl
-        : moduleId == 2?
-       EndPoints. checkCouponTransportationUrl : ""
-        ,
+        moduleId == 1
+            ? EndPoints.checkCouponUrl
+            : moduleId == 2
+                ? EndPoints.checkCouponTransportationUrl
+                : moduleId == 3
+                    ? EndPoints.checkCouponRestaurantUrl
+                    : moduleId == 4
+                        ? EndPoints.checkEntertainmentCouponUrl
+                        : "",
         body: {
           'code': code,
           'module_id': moduleId,
@@ -43,12 +47,15 @@ class PaymentRepoImpl {
   }) async {
     try {
       var response = await dio.post(
-        moduleId == 1?
-        EndPoints.continueToPayUrl
-        : moduleId == 2?
-       EndPoints.continueToPayTransportationUrl : ""
-        
-        ,
+        moduleId == 1
+            ? EndPoints.continueToPayUrl
+            : moduleId == 2
+                ? EndPoints.continueToPayTransportationUrl
+                : moduleId == 3
+                    ? EndPoints.continueToPayRestaurantUrl
+                    : moduleId == 4
+                        ? EndPoints.continueToPayEntertainmentUrl
+                        : "",
         body: {
           if (code.isNotEmpty) 'code': code,
           if (code.isNotEmpty) 'module_id': moduleId,
@@ -69,15 +76,18 @@ class PaymentRepoImpl {
   }) async {
     try {
       var response = await dio.post(
-        moduleId == 1?
-        EndPoints.checkPaymentUrl
-        : moduleId == 2?
-       EndPoints.checkPaymentTransportationUrl : ""
-
-        ,
+        moduleId == 1
+            ? EndPoints.checkPaymentUrl
+            : moduleId == 2
+                ? EndPoints.checkPaymentTransportationUrl
+                : moduleId == 3
+                    ? EndPoints.checkPaymentRestaurantUrl
+                    : moduleId == 4
+                        ? EndPoints.checkPaymentEntertainmentUrl
+                        : "",
         body: {
           if (code.isNotEmpty) 'code': code,
-          if (code.isNotEmpty)  'module_id': moduleId,
+          if (code.isNotEmpty) 'module_id': moduleId,
           'reservation_id': reservationId,
         },
       );

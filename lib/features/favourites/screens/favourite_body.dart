@@ -1,13 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/favourites/cubit/favourites_state.dart';
+import 'package:travel_club/features/food/data/models/get_resturant_model.dart';
 import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
+import '../../entertainment/data/model/get_orginization_model.dart';
 import '../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../food/widgets/big_container_food.dart';
 import '../../home/cubit/home_cubit.dart';
 import '../../home/cubit/home_state.dart';
 import '../../home/screens/widgets/custom_appbar.dart';
 import '../../my_account/screens/widgets/profile_not_loging.dart';
+import '../../my_bookings/view/entertainment_booking/widgets/big_container_entertainment.dart';
 import '../../my_bookings/view/widgets/custom_catogrey_reseration.dart';
 import '../../transportation/screens/widgets/custom_company_container.dart';
 import '../cubit/favourites_cubit.dart';
@@ -28,7 +31,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
     if (context.read<HomeCubit>().homeModel.data == null) {
       context.read<HomeCubit>().getHomeData();
     }
-    context.read<FavouritesCubit>().getFavourite();
+    context.read<FavouritesCubit>().getFavourite(moduleId:  context.read<FavouritesCubit>().selectedModuleId);
     super.initState();
   }
   @override
@@ -129,19 +132,27 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                           )
                       ),
                     ],
-                    if (cubit.categories[cubit.selectedIndex] ==
-                        AppTranslations.food) ...[
+                    if (cubit.selectedModuleId == 3) ...[
                       //  FoodBookingBody()
                       SizedBox(
                         height: 30.h,
                       ),
                       Expanded(
-                          child: ListView.builder(
-                        itemCount: 10,
+                          child:
+                          cubit.getRestaurantModel.data == null
+                              ? Center(
+                            child: CustomLoadingIndicator(),
+                          )
+                              : cubit.getRestaurantModel.data!.isEmpty
+                              ? Center(
+                            child: Text('no_data'.tr()),
+                          ):
+                          ListView.builder(
+                        itemCount: cubit.getRestaurantModel.data!.length,
                         itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: BigContainerFood(
-                            index: 0,
+                           resturantData:  cubit.getRestaurantModel.data![index],
                           ),
                         ),
                       )
@@ -149,10 +160,16 @@ class _FavouriteBodyState extends State<FavouriteBody> {
 
                       // Container()
                     ],
-                    if (cubit.categories[cubit.selectedIndex] ==
-                        AppTranslations.entertainment) ...[
+                    if (cubit.selectedModuleId == 4) ...[
                       Expanded(
-                        child: ListView.builder(
+                        child:  cubit.getEntertainmentModel.data == null
+                            ? Center(
+                          child: CustomLoadingIndicator(),
+                        )
+                            : cubit.getEntertainmentModel.data!.isEmpty
+                            ? Center(
+                          child: Text('no_data'.tr()),
+                        ):ListView.builder(
                           shrinkWrap: true,
                           physics: BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
@@ -164,12 +181,12 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                         context, Routes.detailsEntertainment);
                                   },
                                   child: CustomContainerCompanies(
-                                    isDetails: true,
+                                    isDetails: true, orginizationData: cubit.getEntertainmentModel.data?[index]??OrginizationData(),
                                 //    isFavouriteScreen: true,
                                   )),
                             );
                           },
-                          itemCount: 10,
+                          itemCount: cubit.getEntertainmentModel.data?.length??0,
                         ),
                       )
                     ],

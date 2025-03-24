@@ -1,14 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:travel_club/core/widgets/custom_fav_widget.dart';
 import 'package:travel_club/features/entertainment/cubit/entertainment_cubit.dart';
 
 import '../../../../core/exports.dart';
+import '../../data/model/get_orginization_model.dart';
 
 class CustomContainerCompanies extends StatefulWidget {
-   CustomContainerCompanies({super.key,this.isDetails,this.isFavouriteScreen});
+   CustomContainerCompanies({super.key,this.memberNum,this.rate,this.name,this.isfav,
+     this.isDetails,this.isFavouriteScreen,required this.orginizationData});
  bool ?isDetails;
  bool ?isFavouriteScreen;
-
+ bool ?isfav;
+ String ?rate;
+ String ?memberNum;
+ String ?name;
+   OrginizationData orginizationData;
   @override
   State<CustomContainerCompanies> createState() => _CustomContainerCompaniesState();
 }
@@ -35,41 +42,45 @@ class _CustomContainerCompaniesState extends State<CustomContainerCompanies> {
                  Row(
                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                    children: [
-                     Text("شركة سيكرت ترافيل",style: getSemiBoldStyle(fontSize: 14.sp,),),
+                     Text(widget.orginizationData.name.toString(),style: getSemiBoldStyle(fontSize: 14.sp,),),
                      // Padding(
                      //   padding: const EdgeInsets.all(8.0),
                      //   child: Icon(Icons.favorite_border_outlined,color: AppColors.secondPrimary,),
                      // ),
+                     // Padding(
+                     //   padding: const EdgeInsets.all(8.0),
+                     //   child: GestureDetector(
+                     //     onTap: (){
+                     //       setState(() {
+                     //         cubit.isFavoriteTrue = !(cubit.isFavoriteTrue ?? false);
+                     //       });
+                     //
+                     //     },
+                     //     child:
+                     //     widget.isFavouriteScreen==true? Icon(CupertinoIcons.heart_fill,color: AppColors.red,size: 25,):
+                     //     CircleAvatar(
+                     //       backgroundColor:  cubit.isFavoriteTrue==true?AppColors.red: AppColors.lightWhite,
+                     //       child: Icon(
+                     //         CupertinoIcons.heart,
+                     //         color: cubit.isFavoriteTrue==true?AppColors.white: AppColors.secondPrimary,
+                     //         size: 25.sp,
+                     //       ),
+                     //     ),
+                     //   ),
+                     // )
                      Padding(
                        padding: const EdgeInsets.all(8.0),
-                       child: GestureDetector(
-                         onTap: (){
-                           setState(() {
-                             cubit.isFavoriteTrue = !(cubit.isFavoriteTrue ?? false);
-                           });
-
-                         },
-                         child:
-                         widget.isFavouriteScreen==true? Icon(CupertinoIcons.heart_fill,color: AppColors.red,size: 25,):
-                         CircleAvatar(
-                           backgroundColor:  cubit.isFavoriteTrue==true?AppColors.red: AppColors.lightWhite,
-                           child: Icon(
-                             CupertinoIcons.heart,
-                             color: cubit.isFavoriteTrue==true?AppColors.white: AppColors.secondPrimary,
-                             size: 25.sp,
-                           ),
-                         ),
-                       ),
+                       child: CustomFavWidget(isFav: widget.orginizationData.isFav??false, id: widget.orginizationData.id.toString(),),
                      )
                    ],
                  ),
                  SizedBox(height: 10.h,),
-                 Row(
+                  Row(
                    children: [
-                     Row(
+                      Row(
                        children: [
                          StarRating(
-                             rating: 4, size: 14.sp,
+                             rating:double.parse(  widget.orginizationData.rate.toString()=="null"?"0.0": widget.orginizationData.rate.toString()) ?? 0.0, size: 14.sp,
                              allowHalfRating: false, emptyIcon: CupertinoIcons.star_fill,
                       filledIcon: CupertinoIcons.star_fill,
                              onRatingChanged: (rating){
@@ -78,7 +89,7 @@ class _CustomContainerCompaniesState extends State<CustomContainerCompanies> {
                        ],
                      ),
                      SizedBox(width: 5.w,),
-                     Flexible(child: Text("200"+AppTranslations.personRateCompany,style:
+                     Flexible(child: Text(widget.orginizationData.users.toString()+AppTranslations.personRateCompany,style:
                      widget.isDetails==true?
                      getMediumStyle(fontSize: 12.sp,color: AppColors.grey):
                      getUnderLine(color: AppColors.primary,fontSize: 12.sp),maxLines: 1,))

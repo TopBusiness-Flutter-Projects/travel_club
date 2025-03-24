@@ -1,4 +1,3 @@
-
 import 'package:travel_club/core/exports.dart';
 
 class AppWidget {

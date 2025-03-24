@@ -304,7 +304,6 @@ class TransportationCubit extends Cubit<TransportationState> {
       Navigator.pop(context);
       if (r.data!.isNotEmpty) {
         getAvailableBusesModel = r;
-
         for (var element in getAvailableBusesModel.data!) {
           element.selectedGoTime = element.busTimeInDeparture?.first;
           print("selectedGoTime: ${element.selectedGoTime?.fromTime}");

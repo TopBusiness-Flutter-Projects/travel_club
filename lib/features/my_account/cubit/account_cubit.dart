@@ -16,16 +16,31 @@ class AccountCubit extends Cubit<AccountState> {
   late TextEditingController currentPassController = TextEditingController();
   late TextEditingController newpassController = TextEditingController();
   late TextEditingController confirmPassController = TextEditingController();
-  String? selectedLanguage = 'Arabic';
+  // String? selectedLanguage = 'Arabic';
+  // First, let's update the changeLanguage method to handle all languages
   void changeLanguage(BuildContext context, String newLanguage) {
-    selectedLanguage = newLanguage; // Update the selected language
-    if (newLanguage == 'Arabic') {
-      context.setLocale(const Locale('ar', ''));
-      Preferences.instance.savedLang(AppStrings.arabicCode);
-    } else {
-      context.setLocale(const Locale('en', ''));
-      Preferences.instance.savedLang(AppStrings.englishCode);
-    }
+    // selectedLanguage = newLanguage; // Update the selected language
+
+    // Map of language display names to their codes
+    final Map<String, String> languageCodes = {
+      'Arabic': 'ar',
+      'English': 'en',
+      'German': 'de',
+      'Italian': 'it',
+      'Korean': 'ko',
+      'Russian': 'ru',
+      'Spanish': 'es'
+    };
+
+    // Get the language code from the map
+    final String langCode = languageCodes[newLanguage] ?? 'en';
+
+    // Set the locale
+    context.setLocale(Locale(langCode, ''));
+
+    // Save the language preference
+    Preferences.instance.savedLang(langCode);
+
     emit(AccountLanguageChanged()); // Emit a new state to notify the UI
     Preferences.instance.getSavedLang();
     HotRestartController.performHotRestart(context);

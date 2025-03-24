@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_club/features/auth/view/screens/new_pass_screen.dart';
+import 'package:travel_club/features/entertainment/data/model/get_orginization_details_model.dart';
 import 'package:travel_club/features/home/screens/best_bags_screen.dart';
 import 'package:travel_club/features/home/screens/new_offers_screen.dart';
 import 'package:travel_club/features/main_screen/screens/main_screen.dart';
@@ -21,7 +22,7 @@ import 'package:travel_club/features/residence/view/residence_booking/screens/se
 import 'package:travel_club/features/residence/view/screens/lodges_screen.dart';
 import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
 import 'package:travel_club/features/residence/view/screens/residence_screen.dart';
-import 'package:travel_club/features/search/screens/search_screen.dart';
+import 'package:travel_club/features/home/screens/search_screen.dart';
 import 'package:travel_club/features/splash/screens/splash_screen.dart';
 import 'package:travel_club/features/transportation/data/models/get_available_busis_model.dart';
 import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
@@ -39,6 +40,7 @@ import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
 import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
+import '../../features/entertainment/data/model/get_orginization_model.dart';
 import '../../features/entertainment/screens/details_of_entertainment/screens/book_table.dart';
 import '../../features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
 import '../../features/entertainment/screens/details_of_entertainment/screens/second_book_table.dart';
@@ -49,6 +51,7 @@ import '../../features/food/screens/details_of_food/screens/details_food_screen.
 import '../../features/food/screens/details_of_food/screens/second_book_table_screen.dart';
 import '../../features/food/screens/food_screen.dart';
 import '../../features/my_account/screens/change_lang.dart';
+import '../../features/my_bookings/data/models/get_entertainment_reservation_model.dart';
 import '../../features/my_bookings/view/entertainment_booking/screens/details_booking_food_screen.dart';
 import '../../features/my_bookings/view/transportation_booking/screens/details_screen.dart';
 import '../../features/notification/screens/notification_screen.dart';
@@ -56,6 +59,7 @@ import '../../features/my_account/screens/privacy_screen.dart';
 import '../../features/my_account/screens/profile_info.dart';
 import '../../features/my_bookings/view/residence_booking/screens/details_screen.dart';
 import '../../features/my_bookings/view/food_booking/screens/details_booking_food_screen.dart';
+import '../../features/other_services/data/models/sub_services_model.dart';
 import '../../features/other_services/screens/sub_services.dart';
 
 class Routes {
@@ -140,8 +144,9 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.secondBookTableEntertainment:
+         WayService wayService = settings.arguments as WayService;
         return PageTransition(
-          child: const SecondBookTableEntermaint(),
+          child:  SecondBookTableEntermaint(  wayService: wayService,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -154,15 +159,19 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsBookingEntertainment:
+        ReservationEntertainment reservationEntertainment = settings.arguments as ReservationEntertainment;
         return PageTransition(
-          child: const DetailsBookingEntertainment(),
+          child:  DetailsBookingEntertainment(entertainmentModel:reservationEntertainment),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
       case Routes.bookTableEntermaint:
+        WayService wayService = settings.arguments as WayService;
         return PageTransition(
-          child: const BookTableEntermaint(),
+          child: BookTableEntermaint(
+            wayService: wayService,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -175,37 +184,44 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsbookingTransportation:
-        TransportationReservation transportationReservation = settings.arguments as TransportationReservation;
+        TransportationReservation transportationReservation =
+            settings.arguments as TransportationReservation;
         return PageTransition(
-          child:  DetailsBookingTransportaion( transportationReservation: transportationReservation,),
+          child: DetailsBookingTransportaion(
+            transportationReservation: transportationReservation,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsFoodRoute:
+        String id = settings.arguments as String;
         return PageTransition(
-          child: const DetailsFood(),
+          child: DetailsFood(id: id),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
       case Routes.subServicesRoute:
+        String id = settings.arguments as String;
         return PageTransition(
-          child: const SubServicesScreen(),
+          child:  SubServicesScreen(id:id ,),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsOtherServices:
+        SubServicesData model = settings.arguments as SubServicesData;
         return PageTransition(
-          child: const ServiceDetailsScreen(),
+          child:  ServiceDetailsScreen(model:model),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
       case Routes.bookTable:
+        String id = settings.arguments as String;
         return PageTransition(
-          child: const BookTableScreen(),
+          child: BookTableScreen(id: id),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -218,15 +234,23 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsEntertainment:
+        final args = settings.arguments as Map<String, dynamic>;
+
+        OrginizationData orginizationData =
+            args['orginizationData'] as OrginizationData;
+
         return PageTransition(
-          child: const DetailsEntertainment(),
+          child: DetailsEntertainment(orginizationData: orginizationData),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
+
       case Routes.compainiesEntertainment:
+        String id = settings.arguments as String;
+
         return PageTransition(
-          child: const EntertainmentCompanies(),
+          child: EntertainmentCompanies(id: id),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -312,8 +336,12 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsBookingFood:
+        FoodDetailsBookingArguments args =
+            settings.arguments as FoodDetailsBookingArguments;
         return PageTransition(
-          child: const DetailsBookingFood(),
+          child: DetailsBookingFood(
+            arguments: args,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -436,10 +464,9 @@ class AppRoutes {
         );
 
       case Routes.transportationBookingDetailsRoute:
-      CompanyModel company =
-          settings.arguments as CompanyModel;
+        CompanyModel company = settings.arguments as CompanyModel;
         return PageTransition(
-          child:  TransportationBookingDetailsScreen(
+          child: TransportationBookingDetailsScreen(
             companyModel: company,
           ),
           type: PageTransitionType.fade,
@@ -462,19 +489,22 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.tripDetailsfirstRoute:
-       
-      BusCompanyModel  busCompanyModel = settings.arguments as BusCompanyModel;
+        BusCompanyModel busCompanyModel = settings.arguments as BusCompanyModel;
         return PageTransition(
-          child:  TripDetailsFirstScreen(busCompanyModel: busCompanyModel,),
+          child: TripDetailsFirstScreen(
+            busCompanyModel: busCompanyModel,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
       case Routes.tripDetailsSecondRoute:
-            BusCompanyModel  busCompanyModel = settings.arguments as BusCompanyModel;
+        BusCompanyModel busCompanyModel = settings.arguments as BusCompanyModel;
 
         return PageTransition(
-          child: TripDetailsSecondScreen(busCompanyModel: busCompanyModel,),
+          child: TripDetailsSecondScreen(
+            busCompanyModel: busCompanyModel,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

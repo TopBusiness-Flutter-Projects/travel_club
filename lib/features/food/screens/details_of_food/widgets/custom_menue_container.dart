@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:travel_club/core/widgets/network_image.dart';
 import 'package:travel_club/features/food/cubit/food_cubit.dart';
+import 'package:travel_club/features/food/data/models/get_menu_meals_model.dart';
 
 import '../../../../../core/exports.dart';
 
 class CustomMenueContainer extends StatelessWidget {
-  const CustomMenueContainer({super.key});
+  const CustomMenueContainer({super.key, required this.mealModel});
+  final MealModel mealModel;
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +19,17 @@ class CustomMenueContainer extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: CustomContainerWithShadow(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(10.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    ImageAssets.foodContainer,
+                  CustomNetworkImage(
+                    image: mealModel.image ?? "",
+                    borderRadius: 20.r,
                     height: 61.h,
-                    width: 60.w,
+                    width: 61.h,
                   ),
+                  10.horizontalSpace,
                   Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +41,7 @@ class CustomMenueContainer extends StatelessWidget {
                           children: [
                             Flexible(
                               child: Text(
-                                "وجبة الدجاج المحموجبة الدجاج المحموجبة الدجاج المحمر",
+                                mealModel.title ?? "",
                                 style: getSemiBoldStyle(
                                   fontSize: 14.sp,
                                 ),
@@ -46,29 +51,37 @@ class CustomMenueContainer extends StatelessWidget {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    cubit.addOrRemoveMenuCart(true);
+                                    cubit.addOrRemoveFromBasket(
+                                      context,
+                                      isAdd: true,
+                                      product: mealModel,
+                                    );
                                   },
                                   child: Icon(
                                     CupertinoIcons.add_circled,
                                     color: AppColors.primary,
-                                    size: 20.sp,
+                                    size: 30.sp,
                                   ),
                                 ),
-                                if (cubit.itemsQty > 0) ...[
+                                if (mealModel.userQty > 0) ...[
                                   Text(
-                                    " ${cubit.itemsQty} ",
+                                    " ${mealModel.userQty} ",
                                     style: getSemiBoldStyle(
                                         fontSize: 14.sp,
                                         color: AppColors.primary),
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      cubit.addOrRemoveMenuCart(false);
+                                      cubit.addOrRemoveFromBasket(
+                                        context,
+                                        isAdd: false,
+                                        product: mealModel,
+                                      );
                                     },
                                     child: Icon(
                                       CupertinoIcons.minus_circled,
                                       color: AppColors.primary,
-                                      size: 20.sp,
+                                      size: 30.sp,
                                     ),
                                   ),
                                 ],
@@ -80,7 +93,7 @@ class CustomMenueContainer extends StatelessWidget {
                           height: 5.h,
                         ),
                         Text(
-                          "ربع دجاج صدر - طبق سلطة طحينة - ارز بسمتي",
+                          mealModel.description ?? "",
                           style: getRegularStyle(
                               fontSize: 12.sp, color: AppColors.grey),
                         ),
@@ -93,20 +106,23 @@ class CustomMenueContainer extends StatelessWidget {
                           children: [
                             Flexible(
                               child: Text(
-                                " 1000" + AppTranslations.currency,
+                                "${mealModel.priceAfterDiscount}" +
+                                    AppTranslations.currency,
                                 style: getSemiBoldStyle(
                                     fontSize: 13.sp, color: AppColors.green),
                               ),
                             ),
-                            Flexible(
-                              child: Text(
-                                "1520" + AppTranslations.currency,
-                                style: getThroughLine(
-                                  color: AppColors.grey,
-                                  fontSize: 13.sp,
+                            if (mealModel.discount != 0)
+                              Flexible(
+                                child: Text(
+                                  "${mealModel.price}" +
+                                      AppTranslations.currency,
+                                  style: getThroughLine(
+                                    color: AppColors.grey,
+                                    fontSize: 13.sp,
+                                  ),
                                 ),
                               ),
-                            ),
                           ],
                         ),
                       ],

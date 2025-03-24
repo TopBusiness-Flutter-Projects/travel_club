@@ -116,9 +116,7 @@ class BusTimeInDeparture {
         this.price,
         this.fromStation,
         this.toStation,
-        
     });
-
     factory BusTimeInDeparture.fromJson(Map<String, dynamic> json) => BusTimeInDeparture(
         id: json["id"],
         fromTime: json["from_time"],
@@ -129,7 +127,6 @@ class BusTimeInDeparture {
         fromStation: json["from_station"],
         toStation: json["to_station"],
     );
-
     Map<String, dynamic> toJson() => {
         "id": id,
         "from_time": fromTime,

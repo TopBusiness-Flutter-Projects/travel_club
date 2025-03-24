@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/my_bookings/view/residence_booking/screens/details_screen.dart';
 
@@ -33,41 +34,42 @@ class _ResidenceReservedBodyState extends State<ResidenceReservedBody> {
                 )
               : cubit.residenceReservationModel.data!.reservations!.isEmpty
                   ? Center(
-                      child: Text('لا يوجد حجوزات'),
+                      child: Text('no_reservation'.tr()),
                     )
-                  : Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 90.h),
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: BouncingScrollPhysics(),
-                            itemCount: cubit.residenceReservationModel.data!
-                                .reservations!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(context,
-                                        Routes.detailsReservationResidence,
-                                        arguments:
-                                            ResidenceDetailsBookingArguments(
-                                                residenceReservationModel: cubit
-                                                    .residenceReservationModel
-                                                    .data!
-                                                    .reservations![index]));
-                                  },
-                                  child: CustomBookingAccommodationContainerBig(
-                                    residenceReservationModel: cubit
-                                        .residenceReservationModel
-                                        .data!
-                                        .reservations![index],
-                                    goTolodgeDetails: false,
-                                  ));
-                            },
+                  : SingleChildScrollView(
+                    child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 90.h),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: BouncingScrollPhysics(),
+                              itemCount: cubit.residenceReservationModel.data!
+                                  .reservations!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(context, Routes.detailsReservationResidence,
+                                          arguments:
+                                              ResidenceDetailsBookingArguments(
+                                                  residenceReservationModel: cubit
+                                                      .residenceReservationModel
+                                                      .data!
+                                                      .reservations![index]));
+                                    },
+                                    child: CustomBookingAccommodationContainerBig(
+                                      residenceReservationModel: cubit
+                                          .residenceReservationModel
+                                          .data!
+                                          .reservations![index],
+                                      goTolodgeDetails: false,
+                                    ));
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                  ),
         );
       },
     );

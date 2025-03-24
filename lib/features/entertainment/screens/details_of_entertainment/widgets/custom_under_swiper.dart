@@ -2,6 +2,7 @@
 import 'package:travel_club/features/entertainment/screens/details_of_entertainment/widgets/toggle_container.dart';
 import '../../../../../../core/exports.dart';
 import '../../../cubit/entertainment_cubit.dart';
+import '../../../data/model/get_orginization_details_model.dart';
 import 'about_widget.dart';
 import 'custom_service_container.dart';
 
@@ -35,14 +36,14 @@ class ContainerUnderSwiperEntertainment  extends StatelessWidget {
                 SizedBox(height: 30.h,),
                 ToggleButtonScreen(),
                 if(cubit.isServiceSelected==true)
-                  AboutWidget()
+                  AboutWidget(about: cubit.getOrganizationsDetailsModel?.data?.about.toString()??"", lat: cubit.getOrganizationsDetailsModel?.data?.latitude.toString()??"0.0", long:  cubit.getOrganizationsDetailsModel?.data?.longitude.toString()??"0.0",)
                 else...[
                   SizedBox(height: 9.h,),
                   ListView.separated(
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
-                    itemCount: 5, itemBuilder: (BuildContext context, int index) {
-                    return CustomServiceContainer();
+                    itemCount: cubit.getOrganizationsDetailsModel?.data?.wayServices?.length??0, itemBuilder: (BuildContext context, int index) {
+                    return CustomServiceContainer(wayService: cubit.getOrganizationsDetailsModel?.data?.wayServices?[index]??WayService(),);
                           }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10.h); },),
                   SizedBox(height: 100.h,)
                 ]

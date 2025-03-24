@@ -1,57 +1,68 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:travel_club/core/widgets/no_data_widget.dart';
+import 'package:travel_club/features/food/data/models/get_catogrey_model.dart';
+import 'package:travel_club/features/food/data/models/get_resturant_model.dart';
+
 import '../../../core/exports.dart';
 import '../cubit/food_cubit.dart';
 import '../widgets/big_container_food.dart';
-class FoodScreen extends StatelessWidget {
+class FoodScreen extends StatefulWidget {
   const FoodScreen({super.key});
+
+  @override
+  State<FoodScreen> createState() => _FoodScreenState();
+}
+
+class _FoodScreenState extends State<FoodScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    // CatogreyDataFood selectedIndex = CatogreyDataFood(id: 0, name: "all_foods".tr());
+    context.read<FoodCubit>().getCategoryData();
+    // context.read<FoodCubit>().getResturant();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var cubit= context.read<FoodCubit>();
   return BlocBuilder<FoodCubit,FoodState>(builder: (BuildContext context, state) {
-    return CustomScreen(appbarTitle: AppTranslations.food,body:
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(height:getVerticalPadding(context)*1,),
-        HomeScreen(),
-        if(cubit.selectedIndex==0)...[
-          SizedBox(height: 20.h,),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: 5, itemBuilder: (BuildContext context, int index) { return
-              BigContainerFood(); }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 13.h,); },),
+    return
+      CustomScreen(appbarTitle: AppTranslations.food,body:
+    RefreshIndicator(
+      onRefresh: () {
+        // print("refresh"+" "+cubit.catogreyId.toString());
+        return cubit.getRestaurant();
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(height:getVerticalPadding(context)*1,),
+          HomeScreen(),
+
+            SizedBox(height: 20.h,),
+            Expanded(
+              child:
+              state is LoadingGetFood || cubit.getRestaurantModel==null?
+              Center(child: CustomLoadingIndicator(),):
+
+              cubit.getRestaurantModel?.data!.isEmpty??true?Center(child: NoDataWidget(title: "no_data".tr()),):
+              ListView.separated(
+                shrinkWrap: true,
+                itemCount: cubit.getRestaurantModel?.data?.length??0, itemBuilder: (BuildContext context, int index) { return
+                BigContainerFood(
+                  resturantData: cubit.getRestaurantModel?.data?[index] ?? ResturantData(),
+                    
+                ); }, separatorBuilder: (BuildContext context, int index) {
+                   return SizedBox(height: 13.h,); },),
+            ),
+            SizedBox(height: 10.h,)
+
+        ],
           ),
-          SizedBox(height: 10.h,)
-        ]
-      else if(cubit.selectedIndex==1)...[
-          SizedBox(height: 20.h,),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: 5, itemBuilder: (BuildContext context, int index) { return
-              BigContainerFood(); }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 13.h,); },),
-          ),
-          SizedBox(height: 10.h,)
-        ]else...[
-          SizedBox(height: 20.h,),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: 5, itemBuilder: (BuildContext context, int index) { return
-              GestureDetector(
-                onTap: (){
-                  print("nono");
-                  Navigator.pushNamed(context, Routes.detailsFoodRoute);
-                },
-                  child: BigContainerFood(index:index)); }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 13.h,); },),
-          ),
-          SizedBox(height: 10.h,)
-        ]
-      ],
-        ),
+      ),
     ) ,);
     },);
   }
@@ -68,34 +79,32 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var cubit= context.read<FoodCubit>();
-   return BlocBuilder<FoodCubit,FoodState>(builder: (BuildContext context, state) {  return Center(
-     child: Row(
-       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-       children: [
-         MenuButton(
-           title: AppTranslations.fishes,
-           isSelected: cubit.selectedIndex == 0,
+   return BlocBuilder<FoodCubit,FoodState>(builder: (BuildContext context, state) {
+     return
+       SizedBox(
+       height: 50.h,
+       child:
+       // state is LoadingGetFood?Center(child: CustomLoadingIndicator(),):
+       ListView.builder(
+         itemCount: cubit.categoryModel.data?.length??0,
+         scrollDirection: Axis.horizontal,
+         physics: BouncingScrollPhysics(),
+           itemBuilder: (context, index) {
+       return Padding(
+           padding: const EdgeInsets.all(2.0),
+           child: MenuButton(
+           title:cubit.categoryModel.data?[index].name?.toString()??"",
+           isSelected: cubit.selectedIndex.id == cubit.categoryModel.data?[index].id,
            onTap: (){
-             cubit.changeIndex(0);
+             cubit.changeIndex(cubit.categoryModel.data?[index]??CatogreyDataFood());
+
+            // cubit.catogreyModel.data?[index].id
+            //  cubit.changeIndex(0);
            },
-         ),
-         MenuButton(
-           title: AppTranslations.grilled,
-           isSelected: cubit.selectedIndex == 1,
-           onTap: (){
-             cubit.changeIndex(1);
-           },
-         ),
-         MenuButton(
-           title: AppTranslations.allRestaurants,
-           isSelected: cubit.selectedIndex == 2,
-           onTap: () {
-             cubit.changeIndex(2);
-           },
-         ),
-       ],
-     ),
-   ); },);
+                ),
+         );
+       }),
+     ); },);
   }
 }
 

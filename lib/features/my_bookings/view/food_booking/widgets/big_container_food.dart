@@ -45,17 +45,17 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
 
               CustomBookingFoodContainerSmall(
                 foodModel: FoodModel(
-                  title: "title",
-                  rate: 4,
-                  date: "date",
-                  price: "price",
-                  numOfBooking: "numOfBooking",
-                  numofnights: "numofnights",
+                  title:foodModel.title,
+                  rate: foodModel.rate,
+                  date: foodModel.date,
+                  price: foodModel.price,
+                  numOfBooking:foodModel.numOfBooking,
+                  numofnights: foodModel.numofnights,
                 ),
               ),
               //Row
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
@@ -63,42 +63,47 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            AppTranslations.numberBooking,
-                            style: getRegularStyle(color: AppColors.grey),
-                          ),
+                          if(foodModel.numOfBooking!=null)...[
+                            Text(
+                              AppTranslations.numberBooking,
+                              style: getRegularStyle(color: AppColors.grey),
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Text(
+                              foodModel.numOfBooking.toString(),
+                              style: getMediumStyle(),
+                            ),
+                          ],
+
                           SizedBox(
                             height: 5.h,
                           ),
-                          Text(
-                            foodModel.numOfBooking.toString(),
-                            style: getMediumStyle(),
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          CustomContainerWithShadow(
-                            reduis: 7,
-                            isShadow: false,
-                            color: foodModel.status == true
-                                ? AppColors.green.withOpacity(.12)
-                                : AppColors.red.withOpacity(.12),
-                            width: 100.w,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 6.0, vertical: 7),
-                              child: Center(
-                                  child: Text(
-                                foodModel.status == true
-                                    ? AppTranslations.bookingSuccess
-                                    : AppTranslations.cancelBooking,
-                                style: getMediumStyle(
-                                    fontSize: 14.sp,
-                                    color: foodModel.status == true
-                                        ? AppColors.green
-                                        : AppColors.red),
-                                maxLines: 1,
-                              )),
+                          Center(
+                            child: CustomContainerWithShadow(
+                              reduis: 7,
+                              isShadow: false,
+                              color: foodModel.status == true
+                                  ? AppColors.green.withOpacity(.12)
+                                  : AppColors.red.withOpacity(.12),
+                              width: 100.w,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 6.0, vertical: 7),
+                                child: Center(
+                                    child: Text(
+                                  foodModel.status == true
+                                      ? AppTranslations.bookingSuccess
+                                      : AppTranslations.cancelBooking,
+                                  style: getMediumStyle(
+                                      fontSize: 14.sp,
+                                      color: foodModel.status == true
+                                          ? AppColors.green
+                                          : AppColors.red),
+                                  maxLines: 1,
+                                )),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -121,7 +126,7 @@ class CustomBookingFoodContainerBig extends StatelessWidget {
                                 color: AppColors.secondPrimary,
                               ),
                               Text(
-                                foodModel.toString() ?? "",
+                                foodModel.date.toString() ?? "",
                                 style: getRegularStyle(
                                   fontSize: 14.sp,
                                 ),

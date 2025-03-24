@@ -1,6 +1,8 @@
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
+import '../../entertainment/data/model/get_orginization_model.dart';
+import '../../food/data/models/get_resturant_model.dart';
 import '../../home/data/models/home_model.dart';
 import '../../payment/cubit/payment_cubit.dart';
 import '../../residence/data/models/lodges_model.dart';
@@ -24,35 +26,43 @@ class FavouritesCubit extends Cubit<FavouritesState> {
   //   selectedIndex=index;
   //   emit(IndexChanged());
   // }
-  GetLodgesModel residenceFavouriteModel =
-  GetLodgesModel();
+  GetLodgesModel residenceFavouriteModel = GetLodgesModel();
   GetCompaniesModel transportationFavouriteModel = GetCompaniesModel();
+  GetRestaurantModel getRestaurantModel=GetRestaurantModel();
+  GetOrganizationsModel getEntertainmentModel=GetOrganizationsModel();
 
 
-getFavourite() async {
+getFavourite({required int moduleId}) async {
     emit(LoadingReservationFavourite());
-    final res = await api.getFavourite(moduleId: selectedModuleId,);
+    final res = await api.getFavourite(moduleId: moduleId,);
     res.fold((l) {
       emit(ErrorGetReservationFavourite());
     }, (r) {
-      if (selectedModuleId == 1) {
+      if (moduleId == 1) {
         residenceFavouriteModel = r;
       }
-      if (selectedModuleId == 2) {
+      if (moduleId == 2) {
         transportationFavouriteModel = r;
+      }if (moduleId == 3) {
+        getRestaurantModel = r;
+      }if (moduleId == 4) {
+        getEntertainmentModel = r;
       }
       emit(LoadedReservationFavourite());
     });
   }
   void changeModule(int moduleId) {
     selectedModuleId = moduleId;
-    getFavourite();
+    getFavourite(moduleId: moduleId);
     emit(IndexChanged());
   }
 
 addAndRemoveFav({required   BuildContext context,required String id,required bool isFav ,required int selectedModuleIdd,bool favScreen=false})async{
   emit(LoadingReservationFavourite());
-  updateFavouritesInModels(context, isFav: isFav, id: id, selectedModuleIdd: selectedModuleIdd);
+  updateFavouritesInModels(
+      context, isFav: isFav,
+      id: id,
+      selectedModuleIdd: selectedModuleIdd);
   final res = await api.postFav(moduleId: context.read<PaymentCubit>().currentModuleId.toString(), id: id,);
   res.fold((l) {
 
@@ -60,7 +70,7 @@ addAndRemoveFav({required   BuildContext context,required String id,required boo
     },
           (r) {
             if(favScreen)
-            getFavourite();
+            getFavourite(moduleId: selectedModuleIdd);
 
             emit(LoadedReservationFavourite());
   });
