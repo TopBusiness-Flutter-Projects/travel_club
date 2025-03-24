@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
@@ -27,9 +28,38 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 void main() async {
-
+int ?num ;
 
   WidgetsFlutterBinding.ensureInitialized();
+  await SentryFlutter.init(
+        (options) {
+      options.dsn = 'https://387e1e113ff64816092bc4b77705d7b7@o4509026470133760.ingest.us.sentry.io/4509026478063616';
+      // Adds request headers and IP for users,
+      // visit: https://docs.sentry.io/platforms/dart/data-management/data-collected/ for more info
+      options.sendDefaultPii = true;
+    },
+
+    appRunner: () => runApp(
+      SentryWidget(
+        child: EasyLocalization(
+          supportedLocales: const [
+            Locale('en'),
+            Locale('ar'),
+            // Locale('de'),
+            // Locale('it'),
+            // Locale('ko'),
+            // Locale('ru'),
+            // Locale('es'),
+          ],
+          path: 'assets/lang',
+          saveLocale: true,
+          startLocale: const Locale('ar', ''),
+          fallbackLocale: const Locale('ar', ''),
+          child: const MyAppWithScreenUtil(),
+        ),
+      ),
+    ),
+  );
   // final shorebirdCodePush = ShorebirdCodePush();
   // ShorebirdCodePush.initialize();
 // Get the current patch version, or null if no patch is installed.
@@ -170,24 +200,7 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   await injector.setup();
   Bloc.observer = AppBlocObserver();
-  runApp(
-    EasyLocalization(
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ar'),
-        // Locale('de'),
-        // Locale('it'),
-        // Locale('ko'),
-        // Locale('ru'),
-        // Locale('es'),
-        ],
-      path: 'assets/lang',
-      saveLocale: true,
-      startLocale: const Locale('ar', ''),
-      fallbackLocale: const Locale('ar', ''),
-      child: const MyAppWithScreenUtil(),
-    ),
-  );
+
 }
 class MyAppWithScreenUtil extends StatelessWidget {
   const MyAppWithScreenUtil({super.key});

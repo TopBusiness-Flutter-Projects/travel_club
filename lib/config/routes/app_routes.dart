@@ -39,6 +39,7 @@ import '../../features/auth/view/screens/forget_pass_screen.dart';
 import '../../features/auth/view/screens/login_screen.dart';
 import '../../features/auth/view/screens/otp_screen.dart';
 import '../../features/auth/view/screens/sign_up_screen.dart';
+import '../../features/entertainment/data/model/get_orginization_model.dart';
 import '../../features/entertainment/screens/details_of_entertainment/screens/book_table.dart';
 import '../../features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
 import '../../features/entertainment/screens/details_of_entertainment/screens/second_book_table.dart';
@@ -220,13 +221,17 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsEntertainment:
-        String id = settings.arguments as String;
+        final args = settings.arguments as Map<String, dynamic>;
+
+        OrginizationData orginizationData = args['orginizationData'] as OrginizationData;
+
         return PageTransition(
-          child:  DetailsEntertainment(id: id),
+          child: DetailsEntertainment( orginizationData: orginizationData),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
+
       case Routes.compainiesEntertainment:
         String id = settings.arguments as String;
 

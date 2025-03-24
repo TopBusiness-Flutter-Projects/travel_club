@@ -3,11 +3,12 @@ import 'package:travel_club/features/residence/view/widgets/details_widgets/cust
 import 'package:travel_club/features/residence/view/widgets/details_widgets/custom_swiper.dart';
 import '../../../../../core/exports.dart';
 import '../../../cubit/entertainment_cubit.dart';
+import '../../../data/model/get_orginization_model.dart';
 import '../widgets/container_in_center.dart';
 
 class DetailsEntertainment extends StatefulWidget {
-  const DetailsEntertainment({super.key,required this.id});
-final String id;
+  const DetailsEntertainment({super.key,required this.orginizationData});
+final OrginizationData orginizationData;
   @override
   State<DetailsEntertainment> createState() => _DetailsEntertainmentState();
 }
@@ -16,7 +17,7 @@ class _DetailsEntertainmentState extends State<DetailsEntertainment> {
   @override
   void initState() {
     // TODO: implement initState
-    context.read<EntertainmentCubit>().getOrginizationDetails(id: widget.id);
+    context.read<EntertainmentCubit>().getOrginizationDetails(id: widget.orginizationData.id.toString());
     super.initState();
   }
   @override
@@ -41,14 +42,14 @@ class _DetailsEntertainmentState extends State<DetailsEntertainment> {
                     top: 16.0,
                     left: 16.0,
                     right: 16.0,
-                    child: CustomDetailsAppBar(lodgeId: widget.id,),
+                    child: CustomDetailsAppBar(lodgeId: widget.orginizationData.id.toString(),),
                   ),
 
                   // Container under the Swiper
                   ContainerUnderSwiperEntertainment(),
                   // Centered container in the middle of the image
                   //   ContainerInCenter()
-                  ContainerInCenterEntertainment()
+                  ContainerInCenterEntertainment(orginizationData: widget.orginizationData,)
                 ],
               ),
             ),
