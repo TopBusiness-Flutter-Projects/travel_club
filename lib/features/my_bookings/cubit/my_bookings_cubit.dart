@@ -41,7 +41,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       if (r.data == false) {
         errorGetBar(r.msg ?? AppTranslations.error);
       } else {
-        if (selectedModuleId == 1) {
+        if (selectedModuleId == 1) {                    
           residenceReservationModel = GetMyResidenceReservationModel();
         }
         if (selectedModuleId == 2) {
@@ -49,6 +49,9 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
         }
         if (selectedModuleId == 3) {
           foodReservationModel = GetMyFoodReservationModel();
+        }
+        if (selectedModuleId == 4) {
+          entertainmentReservationModel = GetEntertainmentReservationModel();
         }
         getMyReservation(moduleId: selectedModuleId);
         getReservationDetails(reservationId: reservationId);
@@ -140,6 +143,9 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
         if (selectedModuleId == 3) {
           foodReservationModel = GetMyFoodReservationModel();
         }
+        if (selectedModuleId == 4) {
+          entertainmentReservationModel = GetEntertainmentReservationModel();
+        }
         getMyReservation(moduleId: selectedModuleId);
         getReservationDetails(reservationId: reservationId);
         Navigator.pop(context);
@@ -173,10 +179,10 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
         getTransportationReservationDetailsModel = r;
       }
       if (selectedModuleId == 3) {
-        print("okkkk");
+       
         foodReservationDetails = r;
       }  if (selectedModuleId == 4) {
-        print("okkkk");
+       
         getEntertainmentReservationDetailsModel = r;
       }
       emit(SucessGetReservationDetailsState());

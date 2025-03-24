@@ -103,7 +103,7 @@ class EntertainmentCubit extends Cubit<EntertainmentState> {
     });
   }
 
-  AddEntertainmentReservationModel? addFoodReservationModel;
+  AddEntertainmentReservationModel? addEntetainmentReservationModel;
   addEntertainmentReservation(
       BuildContext context, WayService wayService) async {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
@@ -126,7 +126,7 @@ class EntertainmentCubit extends Cubit<EntertainmentState> {
       if (r.status != 200 && r.status != 201) {
         errorGetBar(r.msg ?? "");
       } else {
-        addFoodReservationModel = r;
+        addEntetainmentReservationModel = r;
         Navigator.pushNamed(context, Routes.secondBookTableEntertainment,
             arguments: wayService);
         userPhoneController.clear();

@@ -34,23 +34,27 @@ class GetEntertainmentReservationDetailsModel {
 
 class EntertainmentData {
   int? id;
+  int? organizationId;
   DateTime? canCancel;
   String? clientCount;
   DateTime? date;
   String? userName;
   String? userPhone;
+  String? rule;
   bool? isRated;
-  int? vat;
-  String? totalPrice;
-  String? totalPriceAfterVat;
+  dynamic vat;
+ dynamic totalPrice;
+  dynamic totalPriceAfterVat;
 
   EntertainmentData({
     this.id,
+    this.organizationId,
     this.canCancel,
     this.clientCount,
     this.date,
     this.userName,
     this.userPhone,
+    this.rule,
     this.isRated,
     this.vat,
     this.totalPrice,
@@ -59,10 +63,12 @@ class EntertainmentData {
 
   factory EntertainmentData.fromJson(Map<String, dynamic> json) => EntertainmentData(
     id: json["id"],
+    organizationId: json["organization_id"],
     canCancel: json["canCancel"] == null ? null : DateTime.parse(json["canCancel"]),
     clientCount: json["client_count"],
     date: json["date"] == null ? null : DateTime.parse(json["date"]),
     userName: json["user_name"],
+    rule: json["rule"],
     userPhone: json["user_phone"],
     isRated: json["is_rated"],
     vat: json["vat"],
@@ -72,11 +78,13 @@ class EntertainmentData {
 
   Map<String, dynamic> toJson() => {
     "id": id,
+    "organization_id": organizationId,
     "canCancel": "${canCancel!.year.toString().padLeft(4, '0')}-${canCancel!.month.toString().padLeft(2, '0')}-${canCancel!.day.toString().padLeft(2, '0')}",
     "client_count": clientCount,
     "date": "${date!.year.toString().padLeft(4, '0')}-${date!.month.toString().padLeft(2, '0')}-${date!.day.toString().padLeft(2, '0')}",
     "user_name": userName,
     "user_phone": userPhone,
+    "rule": rule,
     "is_rated": isRated,
     "vat": vat,
     "total_price": totalPrice,
