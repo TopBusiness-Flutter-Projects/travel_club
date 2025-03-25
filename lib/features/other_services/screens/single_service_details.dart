@@ -37,7 +37,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                 children: [
                   // Swiper for images
                   SwiperWithAutoplay(
-                    images:    [''],
+                    images:   cubit.getSingleServiceModel.data?.media??[""],
                   ),
 
                   // Custom row (back button, favorite, etc.)

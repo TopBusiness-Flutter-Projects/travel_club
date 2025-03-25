@@ -41,7 +41,7 @@ class SingleServiceData {
   int? longitude;
   String? whatsapp;
   String? phone;
-  List<dynamic>? media;
+  List<String>? media;
 
   SingleServiceData({
     this.id,
@@ -64,7 +64,7 @@ class SingleServiceData {
     longitude: json["longitude"],
     whatsapp: json["whatsapp"],
     phone: json["phone"],
-    media: json["media"] == null ? [] : List<dynamic>.from(json["media"]!.map((x) => x)),
+    media: json["media"] == null ? [] : List<String>.from(json["media"]!.map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {

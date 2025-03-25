@@ -24,7 +24,7 @@ class OtherServicesRepoImpl {
     try {
       var response = await dio.get(
         EndPoints.otherServicesUrl,
-        queryParameters: {"service_id": id},
+        queryParameters: {  "service_id": id},
       );
       return Right(GetSubServicesModel.fromJson(response));
     } on ServerException {
