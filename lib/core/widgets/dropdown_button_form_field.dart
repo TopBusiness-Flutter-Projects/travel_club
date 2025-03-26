@@ -1,17 +1,12 @@
 import 'package:travel_club/core/exports.dart';
 
 class CustomDropdownButtonFormField extends StatelessWidget {
-  final List<DropdownMenuItem<String>> items;
+  final List<DropdownMenuItem<dynamic>> items;
   final dynamic value;
   final String? hint;
   final ValueChanged<dynamic>? onChanged;
   final FormFieldValidator<dynamic>? validator;
-// items.map((String item) {
-//           return DropdownMenuItem<String>(
-//             value: item,
-//             child: Text(item),
-//           );
-//         }).toList()
+
   const CustomDropdownButtonFormField({
     super.key,
     required this.items,
@@ -24,16 +19,30 @@ class CustomDropdownButtonFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: EdgeInsets.symmetric(horizontal: 8.0.w),
       child: DropdownButtonFormField<dynamic>(
-        icon: Container(),
         value: value,
+        icon: Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.grey1),
         decoration: InputDecoration(
+          filled: true,
+          fillColor: AppColors.lightWhite2, // لون الخلفية
           hintText: hint ?? "اختر",
-          contentPadding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 5.h),
-          border: UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
-            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
+          contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.r), // حواف دائرية
+            borderSide: BorderSide.none, // إزالة الخط السفلي
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.r),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.r),
+            borderSide: BorderSide(color: AppColors.lightWhite2, width: 1.5),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.r),
+            borderSide: BorderSide(color: AppColors.red, width: 1.5),
           ),
           hintStyle: getRegularStyle(
             color: AppColors.grey1,
@@ -41,36 +50,7 @@ class CustomDropdownButtonFormField extends StatelessWidget {
             fontHeight: 2,
           ),
           errorStyle: getRegularStyle(color: AppColors.red),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
-            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
-          ),
-          disabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
-            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
-            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
-          ),
-          errorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
-            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
-          ),
-          focusedErrorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.grey1, width: 1.5),
-            // borderRadius: BorderRadius.all(Radius.circular(10.r)),
-          ),
-          suffixIcon: Padding(
-            padding:
-                EdgeInsets.only(right: 8.w), // Adjust padding for alignment
-            child: Icon(
-              Icons.expand_more_rounded, // Suffix icon
-              color: AppColors.grey1,
-            ),
-          ),
         ),
-        alignment: Alignment.bottomCenter,
         items: items,
         onChanged: onChanged,
         validator: validator,

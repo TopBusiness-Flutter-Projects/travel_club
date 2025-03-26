@@ -14,7 +14,16 @@ class HomeCubit extends Cubit<HomeState> {
   int moduleslenth = 4;
   TextEditingController searchController = TextEditingController();
 
+  String? selectedModule; // المتغير الذي يحمل القيمة المختارة
+  ModuleModel? selectedModulee; // حفظ الكائن المختار
+  String? moduleId; // حفظ الكائن المختار
 
+  void selectModule(ModuleModel module) {
+    selectedModulee = module;
+    print("module id is "+'${selectedModulee?.id.toString()}');
+    moduleId=selectedModulee?.id.toString();
+    emit(HomeModuleSelected()); // تحديث الحالة
+  }
   GetHomeModel homeModel = GetHomeModel();
   getHomeData() async {
     emit(LoadingHomeData());
