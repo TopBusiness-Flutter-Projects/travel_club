@@ -53,7 +53,7 @@ class _ContactUsState extends State<ContactUs> {
                     Padding(
                       padding:  EdgeInsets.symmetric(horizontal: 8.0.w),
                       child: Text(
-                        "اختر ".tr(),
+                        "choose_field".tr(),
                         style: getMediumStyle(
                             color: AppColors.secondPrimary, fontSize: 14.sp),
                       ),
