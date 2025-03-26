@@ -144,9 +144,11 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.secondBookTableEntertainment:
-         WayService wayService = settings.arguments as WayService;
+        WayService wayService = settings.arguments as WayService;
         return PageTransition(
-          child:  SecondBookTableEntermaint(  wayService: wayService,),
+          child: SecondBookTableEntermaint(
+            wayService: wayService,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -159,9 +161,11 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsBookingEntertainment:
-        ReservationEntertainment reservationEntertainment = settings.arguments as ReservationEntertainment;
+        ReservationEntertainment reservationEntertainment =
+            settings.arguments as ReservationEntertainment;
         return PageTransition(
-          child:  DetailsBookingEntertainment(entertainmentModel:reservationEntertainment),
+          child: DetailsBookingEntertainment(
+              entertainmentModel: reservationEntertainment),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -205,15 +209,18 @@ class AppRoutes {
       case Routes.subServicesRoute:
         String id = settings.arguments as String;
         return PageTransition(
-          child:  SubServicesScreen(id:id ,),
+          child: SubServicesScreen(
+            id: id,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsOtherServices:
-        SubServicesData model = settings.arguments as SubServicesData;
+        ServicesDetailsArguments args =
+            settings.arguments as ServicesDetailsArguments;
         return PageTransition(
-          child:  ServiceDetailsScreen(model:model),
+          child: ServiceDetailsScreen(args: args),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -234,13 +241,13 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsEntertainment:
-        final args = settings.arguments as Map<String, dynamic>;
 
-        OrginizationData orginizationData =
-            args['orginizationData'] as OrginizationData;
+        EntertainmentDetailsArgs args = settings.arguments as EntertainmentDetailsArgs;
+
+      
 
         return PageTransition(
-          child: DetailsEntertainment(orginizationData: orginizationData),
+          child: DetailsEntertainment(args: args),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

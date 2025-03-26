@@ -1,6 +1,7 @@
 import 'package:travel_club/features/entertainment/screens/widgets/custom_container_companies.dart';
 import '../../../core/exports.dart';
 import '../cubit/entertainment_cubit.dart';
+import 'details_of_entertainment/screens/details_entertainment.dart';
 
 class EntertainmentCompanies extends StatefulWidget {
   const EntertainmentCompanies({super.key,required this.id});
@@ -46,9 +47,9 @@ class _EntertainmentCompaniesState extends State<EntertainmentCompanies> {
                             onTap: () {
                               Navigator.pushNamed(
                                   context, Routes.detailsEntertainment,
-                                arguments:{
-                                  "orginizationData":cubit.getOrganizationsModel!.data![index],
-                                }
+                                arguments:EntertainmentDetailsArgs(
+                                  id: cubit.getOrganizationsModel!.data![index].id ?? 0,
+                                ) 
 
 
                               );

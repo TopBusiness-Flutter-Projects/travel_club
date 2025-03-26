@@ -5,10 +5,10 @@ import '../../../../../core/widgets/custom_fav_widget.dart';
 
 class CustomDetailsAppBar extends StatelessWidget {
   const CustomDetailsAppBar(
-      {super.key, this.onTap, this.sharedLink, this.isFav = false,this.lodgeId});
+      {super.key, this.onTap, this.sharedLink, this.isFav = false, this.id});
   final void Function()? onTap;
   final String? sharedLink;
-  final String? lodgeId;
+  final String? id;
   final bool isFav;
 
   @override
@@ -50,9 +50,11 @@ class CustomDetailsAppBar extends StatelessWidget {
           SizedBox(
             width: 8.w,
           ),
-       CustomFavWidget(isFav:isFav, id: lodgeId.toString(), )
-
-    ],
+          CustomFavWidget(
+            isFav: isFav,
+            id: id.toString(),
+          )
+        ],
       ),
     );
   }

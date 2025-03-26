@@ -50,10 +50,9 @@ class _DetailsFoodState extends State<DetailsFood> {
                             isFav:
                                 cubit.getRestaurantDetailsModel?.data?.isFav ??
                                     false,
-                            lodgeId:
-                                "${cubit.getRestaurantDetailsModel?.data?.id}",
-                                sharedLink: AppStrings.restaurantShareLink +
-                                   widget.id,
+                            id: "${cubit.getRestaurantDetailsModel?.data?.id}",
+                            sharedLink:
+                                AppStrings.restaurantShareLink + widget.id,
                           ),
                         ),
                         // Container under the Swiper
