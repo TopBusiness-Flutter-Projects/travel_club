@@ -234,7 +234,6 @@ class _SplashScreenState extends State<SplashScreen>
       debugPrint('Error handling deep link: $err');
     });
   }
-
   void _handleDeepLink(Uri initialDeepLink) {
     print("the link is : ${initialDeepLink.toString()}");
     if (initialDeepLink.toString().contains("lodge") &&
