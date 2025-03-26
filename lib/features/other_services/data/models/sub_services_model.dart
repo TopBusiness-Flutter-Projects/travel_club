@@ -36,8 +36,9 @@ class SubServicesData {
   int? id;
   String? title;
   String? logo;
-  int? latitude;
-  int? longitude;
+  String? latitude;
+  String? longitude;
+  String? location;
   String? whatsapp;
   String? phone;
   int? rate;
@@ -50,6 +51,7 @@ class SubServicesData {
     this.logo,
     this.latitude,
     this.longitude,
+    this.location,
     this.whatsapp,
     this.phone,
     this.rate,

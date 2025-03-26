@@ -17,11 +17,7 @@ final String id;
 
 class _SubServicesScreenState extends State<SubServicesScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    // context.read<LocationCubit>().getAddressFromLatLng(
-    //     double.tryParse( context.read<OtherServicesCubit>().subServicesModel.data?.first.latitude.toString() ?? "") ?? 0,
-    //     double.tryParse(r.data?.longitude.toString() ?? "") ?? 0);
+  void initState() {   
     context.read<OtherServicesCubit>().getSubServices(id: widget.id);
     super.initState();
   }

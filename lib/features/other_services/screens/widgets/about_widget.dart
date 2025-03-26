@@ -8,8 +8,8 @@ import '../../../../../core/exports.dart';
 import '../../data/models/get_single_service_model.dart';
 
 class ServiceAboutWidget extends StatelessWidget {
-  const ServiceAboutWidget({super.key,required this.singleServiceData});
-final  SingleServiceData singleServiceData;
+  const ServiceAboutWidget({super.key, required this.singleServiceData});
+  final SingleServiceData singleServiceData;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ final  SingleServiceData singleServiceData;
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              if(singleServiceData.about.toString()!="null")...[
+              if (singleServiceData.about.toString() != "null") ...[
                 Text(
                   AppTranslations.about,
                   style: getMediumStyle(
@@ -29,7 +29,6 @@ final  SingleServiceData singleServiceData;
                     fontSize: 14.sp,
                   ),
                 ),
-
                 Text(
                   singleServiceData.about.toString(),
                   style: getMediumStyle(
@@ -38,14 +37,16 @@ final  SingleServiceData singleServiceData;
                   ),
                 ),
                 SizedBox(height: 10.h),
-              ]
-           ,
-
-
-              ContactButtonsScreen(phoneNumberForCall: singleServiceData.phone.toString(), phoneNumberForWhatsApp: singleServiceData.whatsapp.toString(),),
+              ],
+              ContactButtonsScreen(
+                phoneNumberForCall: singleServiceData.phone ?? "",
+                phoneNumberForWhatsApp: singleServiceData.whatsapp ?? "",
+              ),
               SizedBox(height: 10.h),
-              //map
-              PositionMap(lat: double.tryParse(singleServiceData.latitude.toString())??0.0 , long: double.tryParse(singleServiceData.longitude.toString())??0.0,),
+              PositionMap(
+                lat: double.tryParse("${singleServiceData.latitude}") ?? 0.0,
+                long: double.tryParse("${singleServiceData.longitude}") ?? 0.0,
+              ),
               SizedBox(height: 30.h),
             ],
           ),

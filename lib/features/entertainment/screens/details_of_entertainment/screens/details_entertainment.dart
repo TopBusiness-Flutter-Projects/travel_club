@@ -7,8 +7,8 @@ import '../../../data/model/get_orginization_model.dart';
 import '../widgets/container_in_center.dart';
 
 class DetailsEntertainment extends StatefulWidget {
-  const DetailsEntertainment({super.key,required this.orginizationData});
-final OrginizationData orginizationData;
+  const DetailsEntertainment({super.key, required this.orginizationData});
+  final OrginizationData orginizationData;
   @override
   State<DetailsEntertainment> createState() => _DetailsEntertainmentState();
 }
@@ -17,12 +17,15 @@ class _DetailsEntertainmentState extends State<DetailsEntertainment> {
   @override
   void initState() {
     // TODO: implement initState
-    context.read<EntertainmentCubit>().getOrginizationDetails(id: widget.orginizationData.id.toString());
+    context
+        .read<EntertainmentCubit>()
+        .getOrginizationDetails(id: widget.orginizationData.id.toString());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    var cubit=context.read<EntertainmentCubit>();
+    var cubit = context.read<EntertainmentCubit>();
     return BlocBuilder<EntertainmentCubit, EntertainmentState>(
       builder: (BuildContext context, state) {
         return SafeArea(
@@ -35,21 +38,28 @@ class _DetailsEntertainmentState extends State<DetailsEntertainment> {
                 children: [
                   // Swiper for images
                   SwiperWithAutoplay(
-                  images: cubit.getOrganizationsDetailsModel?.data?.media?.map((e) => e.image??"").toList()??[""],
+                    images: cubit.getOrganizationsDetailsModel?.data?.media
+                            ?.map((e) => e.image ?? "")
+                            .toList() ??
+                        [""],
                   ),
                   // Custom row (back button, favorite, etc.)
                   Positioned(
                     top: 16.0,
                     left: 16.0,
                     right: 16.0,
-                    child: CustomDetailsAppBar(lodgeId: widget.orginizationData.id.toString(),),
+                    child: CustomDetailsAppBar(
+                      id: widget.orginizationData.id.toString(),
+                    ),
                   ),
 
                   // Container under the Swiper
                   ContainerUnderSwiperEntertainment(),
                   // Centered container in the middle of the image
                   //   ContainerInCenter()
-                  ContainerInCenterEntertainment(orginizationData: widget.orginizationData,)
+                  ContainerInCenterEntertainment(
+                    orginizationData: widget.orginizationData,
+                  )
                 ],
               ),
             ),

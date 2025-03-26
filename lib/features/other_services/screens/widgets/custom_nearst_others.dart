@@ -2,15 +2,17 @@ import 'package:travel_club/core/widgets/network_image.dart';
 
 import '../../../../core/exports.dart';
 import '../../data/models/sub_services_model.dart';
+import '../single_service_details.dart';
 
 class CustomNearstOthers extends StatelessWidget {
-  const CustomNearstOthers({super.key,required this.model});
- final SubServicesData model ;
+  const CustomNearstOthers({super.key, required this.model});
+  final SubServicesData model;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, Routes.detailsOtherServices,arguments: model);
+        Navigator.pushNamed(context, Routes.detailsOtherServices,
+            arguments: ServicesDetailsArguments(id: model.id??0));
       },
       child: CustomContainerWithShadow(
         child: Padding(
@@ -18,27 +20,25 @@ class CustomNearstOthers extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // Image.asset(
-              //   ImageAssets.logoImage,
-              //   height: 60.h,
-              // ),
-              CustomNetworkImage(image:model.logo.toString() , height: 60.h,),
+              CustomNetworkImage(
+                image: model.logo ?? "",
+                height: 60.h,
+              ),
               SizedBox(
                 width: 10.w,
               ),
-              // Text("الاماكن الاقرب",style: getMediumStyle(fontSize: 14.sp),),
               Flexible(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                     model.title.toString(),
+                      model.title ?? "",
                       style: getSemiBoldStyle(
                           color: AppColors.secondPrimary, fontSize: 14.sp),
                     ),
                     Text(
-                      model.latitude.toString(),
+                      model.location ?? "",
                       maxLines: 2,
                       style: getRegularStyle(
                           color: AppColors.grey, fontSize: 12.sp),

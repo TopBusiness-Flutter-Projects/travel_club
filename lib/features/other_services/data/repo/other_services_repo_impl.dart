@@ -20,22 +20,28 @@ class OtherServicesRepoImpl {
     } on ServerException {
       return Left(ServerFailure());
     }
-  } Future<Either<Failure, GetSubServicesModel>> getSubServices({required String id}) async {
+  }
+
+  Future<Either<Failure, GetSubServicesModel>> getSubServices(
+      {required String id}) async {
     try {
       var response = await dio.get(
         EndPoints.otherServicesUrl,
-        queryParameters: {  "service_id": id},
+        queryParameters: {"service_id": id},
       );
       return Right(GetSubServicesModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }
-  }Future<Either<Failure, GetSingleServiceMoedl>> getSubSingleServices({required String id}) async {
+  }
+  
+  Future<Either<Failure, GetSubServiceDetailsModel>> getServiceDetails(
+      {required String id}) async {
     try {
       var response = await dio.get(
-        EndPoints.otherServicesUrl+"/$id",
+        "${EndPoints.getSingleSubServices}/$id",
       );
-      return Right(GetSingleServiceMoedl.fromJson(response));
+      return Right(GetSubServiceDetailsModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

@@ -54,11 +54,11 @@ class _ReservationsBodyState extends State<ReservationsBody> {
                     child: SizedBox(
                       height: 54.h, // Fixed height for the ListView
                       child: ListView.separated(
-                        itemCount: cubit.homeModel.data?.modules?.length ?? 0,
+                        itemCount: cubit.homeModel.data!.modules!.length - 1,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (BuildContext context, int index) {
                           return CustomReservationSection(
-                            // index: index,
+                         
                             module: cubit.homeModel.data?.modules?[index],
                           );
                         },
