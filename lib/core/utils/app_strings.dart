@@ -27,11 +27,13 @@ class AppStrings {
   // static const String transportationShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/transportation?id=';
   // static const String otherServiceShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/otherservice?id=';
   // static const String entertainmentShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/entertainment?id=';
-
   // static const String googleApiKey = '';
 }
 
 class AppConst {
   // static bool isLogged = prefs.getBool("ISLOGGED") ?? false;
+
     static bool get isLogged  =>  prefs.getBool("ISLOGGED") ?? false;
+
+    
 }
