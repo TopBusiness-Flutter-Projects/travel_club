@@ -9,7 +9,6 @@ import 'package:travel_club/features/residence/view/widgets/residence_widgets/ac
 import 'package:travel_club/features/home/screens/widgets/custom_booking_sectoin.dart';
 import 'package:travel_club/features/transportation/data/models/get_companies_model.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
-import '../../entertainment/screens/widgets/custom_container_companies.dart';
 import '../../entertainment/screens/widgets/entertainment_widget.dart';
 import '../../food/data/models/get_resturant_model.dart';
 import '../../food/widgets/big_container_food.dart';
