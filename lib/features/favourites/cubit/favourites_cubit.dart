@@ -2,8 +2,10 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import '../../entertainment/data/model/get_orginization_model.dart';
+import '../../entertainment/data/model/get_ways_model.dart';
 import '../../food/data/models/get_resturant_model.dart';
 import '../../home/data/models/home_model.dart';
+import '../../other_services/data/models/get_others_model.dart';
 import '../../payment/cubit/payment_cubit.dart';
 import '../../residence/data/models/lodges_model.dart';
 import '../../transportation/data/models/get_companies_model.dart';
@@ -30,6 +32,7 @@ class FavouritesCubit extends Cubit<FavouritesState> {
   GetCompaniesModel transportationFavouriteModel = GetCompaniesModel();
   GetRestaurantModel getRestaurantModel=GetRestaurantModel();
   GetOrganizationsModel getEntertainmentModel=GetOrganizationsModel();
+  GetOthersModel othersModel = GetOthersModel();
 
 
 getFavourite({required int moduleId}) async {
@@ -47,6 +50,8 @@ getFavourite({required int moduleId}) async {
         getRestaurantModel = r;
       }if (moduleId == 4) {
         getEntertainmentModel = r;
+      }if (moduleId == 5) {
+        othersModel = r;
       }
       emit(LoadedReservationFavourite());
     });
