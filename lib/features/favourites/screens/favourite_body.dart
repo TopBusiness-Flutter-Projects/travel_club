@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
 import 'package:travel_club/features/favourites/cubit/favourites_state.dart';
 import 'package:travel_club/features/food/data/models/get_resturant_model.dart';
 import 'package:travel_club/features/residence/view/widgets/residence_widgets/accomendation_rating.dart';
@@ -31,9 +32,11 @@ class _FavouriteBodyState extends State<FavouriteBody> {
     if (context.read<HomeCubit>().homeModel.data == null) {
       context.read<HomeCubit>().getHomeData();
     }
-    context.read<FavouritesCubit>().getFavourite(moduleId:  context.read<FavouritesCubit>().selectedModuleId);
+    context.read<FavouritesCubit>().getFavourite(
+        moduleId: context.read<FavouritesCubit>().selectedModuleId);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     FavouritesCubit cubit = context.read<FavouritesCubit>();
@@ -43,8 +46,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
           ? ProfileNotLoging(
               title: AppTranslations.favorites,
             )
-          : Column(
-          children: [
+          : Column(children: [
               SizedBox(height: getVerticalPadding(context) * 2),
               //app bar
               CustomHomeAppbar(
@@ -64,7 +66,8 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                           child: SizedBox(
                             height: 54.h, // Fixed height for the ListView
                             child: ListView.separated(
-                              itemCount: cubit.homeModel.data?.modules?.length ?? 0,
+                              itemCount:
+                                  cubit.homeModel.data?.modules?.length ?? 0,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (BuildContext context, int index) {
                                 return CustomReservationSection(
@@ -73,7 +76,8 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                   module: cubit.homeModel.data?.modules?[index],
                                 );
                               },
-                              separatorBuilder: (BuildContext context, int index) {
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
                                 return SizedBox(width: 10.w);
                               },
                             ),
@@ -84,53 +88,53 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                     //body ...
                     if (cubit.selectedModuleId == 1) ...[
                       Expanded(
-                          child:
-                          cubit.residenceFavouriteModel.data == null
+                          child: cubit.residenceFavouriteModel.data == null
                               ? Center(
-                            child: CustomLoadingIndicator(),
-                          )
+                                  child: CustomLoadingIndicator(),
+                                )
                               : cubit.residenceFavouriteModel.data!.isEmpty
-                              ? Center(
-                            child: Text('no_data'.tr()),
-                          )
-                              :
-                          ListView.builder(
-                        itemCount:cubit.residenceFavouriteModel.data!.length,
-                        itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomLodgeContainer(
-                            isFavouriteScreen:true,
-                            lodgesModel:cubit.residenceFavouriteModel.data![index],
-                            // HotelsModel(isFavorite: true,isFavoriteTrue: true,title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 , discription: '٢٠٠ فرد قام بتقيم الفندق', image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-                            //   )
-
-                          ),
-                        ),
-                      ))
+                                  ? Center(
+                                      child: Text('no_data'.tr()),
+                                    )
+                                  : ListView.builder(
+                                      itemCount: cubit
+                                          .residenceFavouriteModel.data!.length,
+                                      itemBuilder: (context, index) => Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: CustomLodgeContainer(
+                                          isFavouriteScreen: true,
+                                          lodgesModel: cubit
+                                              .residenceFavouriteModel
+                                              .data![index],
+                                          // HotelsModel(isFavorite: true,isFavoriteTrue: true,title: 'مراسي ريزورت العين السخنه البحر الاحمر', rate:4 , discription: '٢٠٠ فرد قام بتقيم الفندق', image:   "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+                                          //   )
+                                        ),
+                                      ),
+                                    ))
                     ],
                     // SizedBox(height: 30.h,)
                     if (cubit.selectedModuleId == 2) ...[
                       Expanded(
-                          child:
-                          cubit.transportationFavouriteModel.data == null
+                          child: cubit.transportationFavouriteModel.data == null
                               ? Center(
-                            child: CustomLoadingIndicator(),
-                          )
+                                  child: CustomLoadingIndicator(),
+                                )
                               : cubit.transportationFavouriteModel.data!.isEmpty
-                              ?
-                          Center(
-                            child: Text('no_data'.tr()),
-                          )
-                              :
-                          ListView.builder(
-                              itemCount: cubit.transportationFavouriteModel.data!.length,
-                              itemBuilder: (context, index) =>
-                                  CustomCompanyContainer(
-                                    isFavouriteScreen: true,
-                                    companyModel: cubit.transportationFavouriteModel.data![index],
-                                  )
-                          )
-                      ),
+                                  ? Center(
+                                      child: Text('no_data'.tr()),
+                                    )
+                                  : ListView.builder(
+                                      itemCount: cubit
+                                          .transportationFavouriteModel
+                                          .data!
+                                          .length,
+                                      itemBuilder: (context, index) =>
+                                          CustomCompanyContainer(
+                                            isFavouriteScreen: true,
+                                            companyModel: cubit
+                                                .transportationFavouriteModel
+                                                .data![index],
+                                          ))),
                     ],
                     if (cubit.selectedModuleId == 3) ...[
                       //  FoodBookingBody()
@@ -138,56 +142,71 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                         height: 30.h,
                       ),
                       Expanded(
-                          child:
-                          cubit.getRestaurantModel.data == null
+                          child: cubit.getRestaurantModel.data == null
                               ? Center(
-                            child: CustomLoadingIndicator(),
-                          )
+                                  child: CustomLoadingIndicator(),
+                                )
                               : cubit.getRestaurantModel.data!.isEmpty
-                              ? Center(
-                            child: Text('no_data'.tr()),
-                          ):
-                          ListView.builder(
-                        itemCount: cubit.getRestaurantModel.data!.length,
-                        itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: BigContainerFood(
-                           resturantData:  cubit.getRestaurantModel.data![index],
-                          ),
-                        ),
-                      )
-                      )
+                                  ? Center(
+                                      child: Text('no_data'.tr()),
+                                    )
+                                  : ListView.builder(
+                                      itemCount:
+                                          cubit.getRestaurantModel.data!.length,
+                                      itemBuilder: (context, index) => Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: BigContainerFood(
+                                          resturantData: cubit
+                                              .getRestaurantModel.data![index],
+                                        ),
+                                      ),
+                                    ))
 
                       // Container()
                     ],
                     if (cubit.selectedModuleId == 4) ...[
                       Expanded(
-                        child:  cubit.getEntertainmentModel.data == null
+                        child: cubit.getEntertainmentModel.data == null
                             ? Center(
-                          child: CustomLoadingIndicator(),
-                        )
+                                child: CustomLoadingIndicator(),
+                              )
                             : cubit.getEntertainmentModel.data!.isEmpty
-                            ? Center(
-                          child: Text('no_data'.tr()),
-                        ):ListView.builder(
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, Routes.detailsEntertainment);
-                                  },
-                                  child: CustomContainerCompanies(
-                                    isDetails: true, orginizationData: cubit.getEntertainmentModel.data?[index]??OrginizationData(),
-                                //    isFavouriteScreen: true,
-                                  )),
-                            );
-                          },
-                          itemCount: cubit.getEntertainmentModel.data?.length??0,
-                        ),
+                                ? Center(
+                                    child: Text('no_data'.tr()),
+                                  )
+                                : ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: BouncingScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.pushNamed(context,
+                                                  Routes.detailsEntertainment,
+                                                  arguments:
+                                                      EntertainmentDetailsArgs(
+                                                    id: cubit
+                                                            .getEntertainmentModel
+                                                            .data![index]
+                                                            .id ??
+                                                        0,
+                                                  ));
+                                            },
+                                            child: CustomContainerCompanies(
+                                              isDetails: true,
+                                              orginizationData: cubit
+                                                      .getEntertainmentModel
+                                                      .data?[index] ??
+                                                  OrginizationData(),
+                                              //    isFavouriteScreen: true,
+                                            )),
+                                      );
+                                    },
+                                    itemCount: cubit.getEntertainmentModel.data
+                                            ?.length ??
+                                        0,
+                                  ),
                       )
                     ],
                   ],

@@ -7,8 +7,10 @@ import '../../../cubit/entertainment_cubit.dart';
 
 
 class ContainerInCenterEntertainment extends StatelessWidget {
-  ContainerInCenterEntertainment({super.key,required this.orginizationData});
-  OrginizationData orginizationData;
+  const ContainerInCenterEntertainment({super.key,required this.orginizationData , this.isDetails = false});
+ final  OrginizationData orginizationData;
+ final bool isDetails;
+  
   @override
   Widget build(BuildContext context) {
     var cubit=context.read<EntertainmentCubit>();

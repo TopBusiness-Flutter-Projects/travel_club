@@ -217,7 +217,8 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsOtherServices:
-        ServicesDetailsArguments args = settings.arguments as ServicesDetailsArguments;
+        ServicesDetailsArguments args =
+            settings.arguments as ServicesDetailsArguments;
         return PageTransition(
           child: ServiceDetailsScreen(args: args),
           type: PageTransitionType.fade,
@@ -240,13 +241,13 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsEntertainment:
-        final args = settings.arguments as Map<String, dynamic>;
 
-        OrginizationData orginizationData =
-            args['orginizationData'] as OrginizationData;
+        EntertainmentDetailsArgs args = settings.arguments as EntertainmentDetailsArgs;
+
+      
 
         return PageTransition(
-          child: DetailsEntertainment(orginizationData: orginizationData),
+          child: DetailsEntertainment(args: args),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
