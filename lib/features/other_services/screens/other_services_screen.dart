@@ -39,7 +39,8 @@ class _OtherServicesScreenState extends State<OtherServicesScreen> {
                   : cubit.othersModel.data!.isEmpty
                   ? Center(
                 child: Text('no_data'.tr()),
-              ): StaggeredGrid.count(
+              ):
+              StaggeredGrid.count(
                   crossAxisCount: 2,
                   mainAxisSpacing: 0,
                   crossAxisSpacing: 0,

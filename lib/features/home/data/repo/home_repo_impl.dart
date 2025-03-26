@@ -5,6 +5,8 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/preferences/preferences.dart';
 import '../../../auth/data/models/login_model.dart';
+import '../../../entertainment/data/model/get_ways_model.dart';
+import '../../../other_services/data/models/get_others_model.dart';
 import '../../../residence/data/models/lodges_model.dart';
 import '../../../transportation/data/models/get_companies_model.dart';
 import '../models/home_filter_model.dart';
@@ -36,8 +38,8 @@ class HomeRepoImpl {
       return  catId.toString() == "1" // residence
           ? Right(GetLodgesModel.fromJson(response))
           : catId.toString() == "2" // transportation
-          ? Right(GetCompaniesModel.fromJson(response))
-          : Right(response);
+          ? Right(GetCompaniesModel.fromJson(response)):catId.toString() == "4"? Right(GetWaysModel.fromJson(response))
+          :catId.toString() == "5"? Right(GetOthersModel.fromJson(response)): Right(response);
     } on ServerException {
       return Left(ServerFailure());
     }

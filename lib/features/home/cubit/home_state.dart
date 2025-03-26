@@ -9,6 +9,7 @@ class FailureCheckCopouneState extends HomeState {}
 class LoadingCheckCopouneState extends HomeState {}
 class LoadingHomeFilterDataState extends HomeState {}
 class ErrorHomeFilterDataState extends HomeState {}
+class HomeModuleSelected extends HomeState {}
 class SucessHomeFilterDataState extends HomeState {}
 class IndexChanged extends HomeState {}
 

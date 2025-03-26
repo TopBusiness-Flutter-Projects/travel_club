@@ -56,5 +56,22 @@ class AccountRepoImpl {
       return Left(ServerFailure());
     }
   }
+//contact
+  Future<Either<Failure, DefaultPostModel>> contactUs( {required String subject ,required String message,required String moduleId} ) async {
+    try {
+      var response = await dio.post(
+          EndPoints.contactUs,
+          body: {
+            'subject' : subject,
+            'module_id' : moduleId,
+            'message' : message,
+          },
+
+      );
+      return Right(DefaultPostModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 
 }

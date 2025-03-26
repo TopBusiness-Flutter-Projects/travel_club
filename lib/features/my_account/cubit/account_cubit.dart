@@ -4,7 +4,9 @@ import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/core/utils/restart_app_class.dart';
+import 'package:travel_club/features/auth/data/models/default_model.dart';
 import 'package:travel_club/features/auth/data/models/login_model.dart';
+import 'package:travel_club/features/home/cubit/home_cubit.dart';
 import '../data/repo/account_repo_impl.dart';
 import 'account_state.dart';
 
@@ -16,6 +18,38 @@ class AccountCubit extends Cubit<AccountState> {
   late TextEditingController currentPassController = TextEditingController();
   late TextEditingController newpassController = TextEditingController();
   late TextEditingController confirmPassController = TextEditingController();
+  //controller in account screen
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+DefaultPostModel ?defaultPostModel;
+  late TextEditingController subjectController = TextEditingController();
+  late TextEditingController messageController = TextEditingController();
+  contactUs(BuildContext context, ) async {
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    emit(GetAccountLoading());
+    final res = await api.contactUs(
+  subject:subjectController.text,
+        message: messageController.text,
+        moduleId:context.read<HomeCubit>().moduleId.toString()
+    );
+    res.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(GetAccountError());
+    }, (r) {
+      Navigator.pop(context);
+      if (r.status == 200 || r.status == 201) {
+        defaultPostModel = r;
+        subjectController.clear();
+        messageController.clear();
+        successGetBar(r.msg);
+      } else if (r.status == 401 || r.status == 407 || r.status == 403) {
+        errorGetBar(r.msg ?? AppTranslations.error);
+      }
+
+      emit(GetAccountSuccess());
+    });
+  }
+
   // String? selectedLanguage = 'Arabic';
   // First, let's update the changeLanguage method to handle all languages
   void changeLanguage(BuildContext context, String newLanguage) {
