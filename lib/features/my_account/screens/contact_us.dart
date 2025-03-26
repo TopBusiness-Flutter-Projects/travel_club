@@ -72,7 +72,7 @@ class _ContactUsState extends State<ContactUs> {
                                 (module) => module.id == cubit.selectedModulee?.id,
                             orElse: () =>  cubit.selectedModulee?? cubit.homeModel.data!.modules!.first, // تأمين عدم حدوث خطأ
                           )
-                              : null, // إذا لم يكن هناك بيانات، القيمة تظل null
+                              : null,
                           hint: "اختر الموديول",
                           items: cubit.homeModel.data?.modules?.map((ModuleModel module) {
                             return DropdownMenuItem<ModuleModel>(
