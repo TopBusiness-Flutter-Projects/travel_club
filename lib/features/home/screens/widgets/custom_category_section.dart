@@ -36,11 +36,9 @@ class _CustomCategorySectionState extends State<CustomCategorySection> {
                   itemBuilder: (context, index) =>
                       CustomCategoryContainer(
                     categoryModel: cubit.homeModel.data!.modules![index],
-                    islast: index ==
-                        (cubit.homeModel.data!.modules!.length <
+                    islast: index == (cubit.homeModel.data!.modules!.length <
                                     cubit.moduleslenth ? cubit.homeModel.data!.modules!.length
-                                : cubit.moduleslenth) -
-                            1,
+                                : cubit.moduleslenth) - 1,
                   ),
                   itemCount: cubit.homeModel.data!.modules!.length,
                   scrollDirection: Axis.horizontal,
