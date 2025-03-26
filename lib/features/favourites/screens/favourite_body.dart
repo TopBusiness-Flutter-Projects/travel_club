@@ -13,6 +13,7 @@ import '../../home/screens/widgets/custom_appbar.dart';
 import '../../my_account/screens/widgets/profile_not_loging.dart';
 import '../../my_bookings/view/entertainment_booking/widgets/big_container_entertainment.dart';
 import '../../my_bookings/view/widgets/custom_catogrey_reseration.dart';
+import '../../other_services/screens/other_services_screen.dart';
 import '../../transportation/screens/widgets/custom_company_container.dart';
 import '../cubit/favourites_cubit.dart';
 
@@ -208,6 +209,30 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                         0,
                                   ),
                       )
+                    ],if (cubit.selectedModuleId == 5) ...[
+                      Expanded(
+                        child: cubit.othersModel.data == null
+                            ? Center(
+                                child: CustomLoadingIndicator(),
+                              )
+                            : cubit.othersModel.data!.isEmpty
+                                ? Center(
+                                    child: Text('no_data'.tr()),
+                                  )
+                                :  ListView.separated(
+          shrinkWrap: true,
+          itemCount:  cubit.othersModel.data?.length??0, itemBuilder: (BuildContext context, int index) { return
+          OtherServicesContainer(
+          categoryModel: OtherServicesModel(
+          title:cubit.othersModel.data?[index].title??'',
+          image: cubit.othersModel.data?[index].image??'',
+          onTap: () {
+          Navigator.pushNamed(context, Routes.subServicesRoute,arguments: cubit.othersModel.data?[index].id.toString());
+          },
+          ),
+          );
+          }, separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(height: 13.h,); },),)
                     ],
                   ],
                 ),
