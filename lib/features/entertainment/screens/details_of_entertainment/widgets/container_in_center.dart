@@ -22,13 +22,11 @@ class ContainerInCenterEntertainment extends StatelessWidget {
         child: SizedBox(
           height: getHeightSize(context) * 0.50,
 
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //النقط
+          child: Column(            
             children: [
        SizedBox(height: 10.h,),
-                CustomContainerCompanies(orginizationData: orginizationData)
-             // CustomRatingIncenter()
+                CustomContainerCompanies(orginizationData: orginizationData, isDetails: isDetails),
+        
             ],
 
 

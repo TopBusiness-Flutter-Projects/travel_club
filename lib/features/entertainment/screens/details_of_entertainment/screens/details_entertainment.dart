@@ -37,61 +37,81 @@ class _DetailsEntertainmentState extends State<DetailsEntertainment> {
     var cubit = context.read<EntertainmentCubit>();
     return BlocBuilder<EntertainmentCubit, EntertainmentState>(
       builder: (BuildContext context, state) {
-        return SafeArea(
-          child: Scaffold(
-            body: cubit.getOrganizationsDetailsModel?.data == null
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : SizedBox(
-                    height: getHeightSize(context),
-                    width: getWidthSize(context),
-                    child: Stack(
-                      alignment: Alignment.topCenter,
-                      children: [
-                        // Swiper for images
-                        SwiperWithAutoplay(
-                          images: cubit
-                                  .getOrganizationsDetailsModel?.data?.media
-                                  ?.map((e) => e.image ?? "")
-                                  .toList() ??
-                              [""],
-                        ),
-                        // Custom row (back button, favorite, etc.)
-                        Positioned(
-                          top: 16.0,
-                          left: 16.0,
-                          right: 16.0,
-                          child: CustomDetailsAppBar(
-                            id: widget.args.id.toString(),
+        return WillPopScope(
+          onWillPop: () async {
+              widget.args.isDeeplink
+                ? Navigator.pushNamedAndRemoveUntil(
+                    context, Routes.mainRoute, (route) => false)
+                : Navigator.pop(context);
+            return false;
+        
+          },
+          child: SafeArea(
+            child: Scaffold(
+              body: cubit.getOrganizationsDetailsModel?.data == null
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : SizedBox(
+                      height: getHeightSize(context),
+                      width: getWidthSize(context),
+                      child: Stack(
+                        alignment: Alignment.topCenter,
+                        children: [
+                          // Swiper for images
+                          SwiperWithAutoplay(
+                            images: cubit
+                                    .getOrganizationsDetailsModel?.data?.media
+                                    ?.map((e) => e.image ?? "")
+                                    .toList() ??
+                                [""],
                           ),
-                        ),
-                        ContainerUnderSwiperEntertainment(),
-                        ContainerInCenterEntertainment(
-                          isDetails: true,
-                          orginizationData: OrginizationData(
-                            name: cubit
-                                    .getOrganizationsDetailsModel?.data?.name ??
-                                "",
-                            logo: cubit
-                                    .getOrganizationsDetailsModel?.data?.logo ??
-                                "",
-                            isFav: cubit.getOrganizationsDetailsModel?.data
-                                    ?.isFav ??
-                                false,
-                            rate: cubit
-                                    .getOrganizationsDetailsModel?.data?.rate ??
-                                0,
-                            users: cubit.getOrganizationsDetailsModel?.data
-                                    ?.users ??
-                                0,
-
-                            // about: cubit.getOrganizationsDetailsModel?.data?.about ?? "",
+                          // Custom row (back button, favorite, etc.)
+                          Positioned(
+                            top: 16.0,
+                            left: 16.0,
+                            right: 16.0,
+                            child: CustomDetailsAppBar(
+                              id: widget.args.id.toString(),
+                                isFav: cubit.getOrganizationsDetailsModel?.data?.isFav ??
+                                  false,
+                               sharedLink: AppStrings.entertainmentShareLink +
+                                  widget.args.id.toString(),
+                                onTap: () {
+                                widget.args.isDeeplink
+                                    ? Navigator.pushNamedAndRemoveUntil(context,
+                                        Routes.mainRoute, (route) => false)
+                                    : Navigator.pop(context);
+                              },
+                            ),
                           ),
-                        )
-                      ],
+                          ContainerUnderSwiperEntertainment(),
+                          ContainerInCenterEntertainment(
+                            isDetails: true,
+                            orginizationData: OrginizationData(
+                              name: cubit
+                                      .getOrganizationsDetailsModel?.data?.name ??
+                                  "",
+                              logo: cubit
+                                      .getOrganizationsDetailsModel?.data?.logo ??
+                                  "",
+                              isFav: cubit.getOrganizationsDetailsModel?.data
+                                      ?.isFav ??
+                                  false,
+                              rate: cubit
+                                      .getOrganizationsDetailsModel?.data?.rate ??
+                                  0,
+                              users: cubit.getOrganizationsDetailsModel?.data
+                                      ?.users ??
+                                  0,
+          
+                              // about: cubit.getOrganizationsDetailsModel?.data?.about ?? "",
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
+            ),
           ),
         );
       },

@@ -12,7 +12,6 @@ class EntertainmentScreen extends StatefulWidget {
 class _EntertainmentScreenState extends State<EntertainmentScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     context.read<EntertainmentCubit>().getWays();
     super.initState();
   }

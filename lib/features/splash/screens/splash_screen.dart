@@ -182,17 +182,23 @@
 import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
+import 'package:travel_club/features/food/screens/details_of_food/screens/details_food_screen.dart';
+import 'package:travel_club/features/other_services/screens/single_service_details.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
 import '../../../core/preferences/preferences.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
+
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late final AppLinks _appLinks;
+
   Future<void> navigateToHome() async {
     if (prefs.getBool('onBoarding') != null) {
       if (AppConst.isLogged) {
@@ -211,6 +217,7 @@ class _SplashScreenState extends State<SplashScreen>
       );
     }
   }
+
   Future<void> _initializeAppLinks() async {
     _appLinks = AppLinks();
     final initialLink = await _appLinks.getInitialLink();
@@ -230,24 +237,42 @@ class _SplashScreenState extends State<SplashScreen>
 
   void _handleDeepLink(Uri initialDeepLink) {
     print("the link is : ${initialDeepLink.toString()}");
-    if (initialDeepLink.toString().contains("transportation")) {
-      String id = initialDeepLink.queryParameters['id'] ?? "-1";
-      // Navigator.pushReplacementNamed(
-      //   context,
-      //   Routes.detailsbookingTransportation,
-      // );
-    } else if (initialDeepLink.toString().contains("lodge") &&
+    if (initialDeepLink.toString().contains("lodge") &&
         initialDeepLink.queryParameters['id'] != null) {
       String? id = initialDeepLink.queryParameters['id'];
       id == null
           ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
           : Navigator.pushReplacementNamed(context, Routes.lodgeDetailsRoute,
-              arguments: LodgeDetailsArguments(lodgeId: int.parse(id)));
+              arguments: LodgeDetailsArguments(
+                  lodgeId: int.parse(id), isDeeplink: true));
+    } else if (initialDeepLink.toString().contains("entertainment") &&
+        initialDeepLink.queryParameters['id'] != null) {
+      String? id = initialDeepLink.queryParameters['id'];
+      id == null
+          ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
+          : Navigator.pushReplacementNamed(context, Routes.detailsEntertainment,
+              arguments: EntertainmentDetailsArgs(
+                  id: int.parse(id), isDeeplink: true));
+    } else if (initialDeepLink.toString().contains("restaurant") &&
+        initialDeepLink.queryParameters['id'] != null) {
+      String? id = initialDeepLink.queryParameters['id'];
+      id == null
+          ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
+          : Navigator.pushReplacementNamed(context, Routes.detailsFoodRoute,
+              arguments: DetailsFoodArgs(id: id, isDeeplink: true));
+    } else if (initialDeepLink.toString().contains("otherservice") &&
+        initialDeepLink.queryParameters['id'] != null) {
+      String? id = initialDeepLink.queryParameters['id'];
+      id == null
+          ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
+          : Navigator.pushReplacementNamed(context, Routes.detailsOtherServices,
+              arguments: ServicesDetailsArguments(
+                  id: int.parse(id), isDeeplink: true));
     } else {
       Navigator.pushReplacementNamed(context, Routes.mainRoute);
     }
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return PulseRotateSplashScreen(
@@ -258,6 +283,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 }
+
 class PulseRotateSplashScreen extends StatefulWidget {
   final VoidCallback onAnimationComplete;
   const PulseRotateSplashScreen({
@@ -337,7 +363,7 @@ class _PulseRotateSplashScreenState extends State<PulseRotateSplashScreen>
   @override
   void dispose() {
     _controller.dispose();
-      super.dispose();
+    super.dispose();
   }
 
   @override
