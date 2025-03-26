@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:travel_club/features/food/cubit/food_cubit.dart';
 import 'package:travel_club/features/food/data/models/get_resturant_model.dart';
+import 'package:travel_club/features/food/screens/details_of_food/screens/details_food_screen.dart';
 import 'package:travel_club/features/food/widgets/small_container_food.dart';
 
 import '../../../core/exports.dart';
@@ -22,7 +23,7 @@ class BigContainerFood extends StatelessWidget {
         return InkWell(
           onTap: () {
             Navigator.pushNamed(context, Routes.detailsFoodRoute,
-                arguments: resturantData.id.toString());
+                arguments: DetailsFoodArgs(id: resturantData.id.toString()));
           },
           child: CustomContainerWithShadow(
               color: AppColors.white,

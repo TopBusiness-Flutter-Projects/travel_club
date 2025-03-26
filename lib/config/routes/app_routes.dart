@@ -199,9 +199,9 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsFoodRoute:
-        String id = settings.arguments as String;
+        DetailsFoodArgs args = settings.arguments as DetailsFoodArgs;
         return PageTransition(
-          child: DetailsFood(id: id),
+          child: DetailsFood(args: args),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
@@ -241,10 +241,8 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.detailsEntertainment:
-
-        EntertainmentDetailsArgs args = settings.arguments as EntertainmentDetailsArgs;
-
-      
+        EntertainmentDetailsArgs args =
+            settings.arguments as EntertainmentDetailsArgs;
 
         return PageTransition(
           child: DetailsEntertainment(args: args),

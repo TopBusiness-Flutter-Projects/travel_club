@@ -12,7 +12,7 @@ class CustomNearstOthers extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, Routes.detailsOtherServices,
-            arguments: ServicesDetailsArguments(id: model.id??0));
+            arguments: ServicesDetailsArguments(id:  model.id??0));
       },
       child: CustomContainerWithShadow(
         child: Padding(
