@@ -1,8 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
+import '../../entertainment/data/model/get_ways_model.dart';
 import '../../food/data/models/get_catogrey_model.dart';
 import '../../food/data/models/get_resturant_model.dart';
+import '../../other_services/data/models/get_others_model.dart';
+import '../../other_services/data/models/sub_services_model.dart';
 import '../../residence/data/models/lodges_model.dart';
 import '../../transportation/data/models/get_companies_model.dart';
 import '../data/models/home_filter_model.dart';
@@ -42,6 +45,9 @@ class HomeCubit extends Cubit<HomeState> {
   GetLodgesModel residenceFavouriteModel = GetLodgesModel();
   GetRestaurantModel getRestaurantModel = GetRestaurantModel();
   GetCompaniesModel transportationFavouriteModel = GetCompaniesModel();
+  GetOthersModel othersModel = GetOthersModel();
+  GetWaysModel getWaysModel = GetWaysModel();
+
   getHomeFilterData({String? text, BuildContext? context}) async {
     print("selectedIndex $selectedIndex");
     int selectedId = selectedIndex + 1;
@@ -61,6 +67,10 @@ class HomeCubit extends Cubit<HomeState> {
         transportationFavouriteModel = r;
       } else if (selectedId.toString() == "3") {
         getRestaurantModel = r;
+      }else if(selectedId.toString() == "5"){
+        othersModel=r;
+      }else if(selectedId.toString() == "4"){
+        getWaysModel=r;
       } else {
         homeFilterModel = r;
       }
