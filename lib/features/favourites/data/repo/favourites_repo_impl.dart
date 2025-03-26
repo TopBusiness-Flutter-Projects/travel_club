@@ -6,7 +6,9 @@ import '../../../../core/api/end_points.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../entertainment/data/model/get_orginization_model.dart';
+import '../../../entertainment/data/model/get_ways_model.dart';
 import '../../../food/data/models/get_resturant_model.dart';
+import '../../../other_services/data/models/get_others_model.dart';
 import '../../../residence/data/models/lodges_model.dart';
 import '../../../transportation/data/models/get_companies_model.dart';
 
@@ -25,7 +27,10 @@ class FavouritesRepoImpl {
           : moduleId == 2 // transportation
           ? Right(GetCompaniesModel.fromJson(response))
           :moduleId == 3 // transportation
-          ? Right(GetRestaurantModel.fromJson(response)):Right(GetOrganizationsModel.fromJson(response));
+          ? Right(GetRestaurantModel.fromJson(response)):
+      moduleId == 4 // transportation
+          ?Right(GetOrganizationsModel.fromJson(response))
+          :Right(GetOthersModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }
