@@ -17,11 +17,16 @@ class AppStrings {
   static const String englishCode = 'en';
   static const String arabicCode = 'ar';
   static const String inviteLink = 'https://travelclub.page.link/invite';
-  static const String lodgeShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/lodge?id=';
-  static const String restaurantShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/restaurant?id=';
-  static const String transportationShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/transportation?id=';
-  static const String otherServiceShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/otherservice?id=';
-  static const String entertainmentShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/entertainment?id=';
+  static const String lodgeShareLink = 'https://travelclub.page.link/deeplink/lodge?id=';
+  static const String restaurantShareLink = 'https://travelclub.page.link/deeplink/restaurant?id=';
+  static const String transportationShareLink = 'https://travelclub.page.link/deeplink/transportation?id=';
+  static const String otherServiceShareLink = 'https://travelclub.page.link/deeplink/otherservice?id=';
+  static const String entertainmentShareLink = 'https://travelclub.page.link/deeplink/entertainment?id=';
+  // static const String lodgeShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/lodge?id=';
+  // static const String restaurantShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/restaurant?id=';
+  // static const String transportationShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/transportation?id=';
+  // static const String otherServiceShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/otherservice?id=';
+  // static const String entertainmentShareLink = 'https://travel.topbusiness.ebharbook.com/deeplink/entertainment?id=';
 
   // static const String googleApiKey = '';
 }
