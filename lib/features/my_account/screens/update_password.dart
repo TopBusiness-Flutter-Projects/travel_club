@@ -28,7 +28,8 @@ class UpdatePassword extends StatelessWidget {
                       ),
                       CustomTextField(
                         enabled: true,
-                        isPassword: true,
+                        isPassword: true,                        textInputAction: TextInputAction.next,
+
                         title: AppTranslations.currentPassword,
                         hintText: AppTranslations.writePass,
                         controller: cubit.currentPassController,
@@ -44,7 +45,8 @@ class UpdatePassword extends StatelessWidget {
                       20.h.verticalSpace,
                       CustomTextField(
                         enabled: true,
-                        isPassword: true,
+                        isPassword: true,                        textInputAction: TextInputAction.next,
+
                         title: AppTranslations.newPass,
                         hintText: AppTranslations.writeNewPass,
                         controller: cubit.newpassController,
