@@ -35,115 +35,119 @@ context.read<LoginCubit>().signOutFromGmail();
             //  backgroundColor: AppColors.white,
             body: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Form(
-                key: formKeyLogin,
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        child: CustomSkipRow(
-                            onTap: () {
-                              Navigator.pushNamedAndRemoveUntil(context, Routes.mainRoute , (route) => false,);
-                            },
-                            backgroundColor: AppColors.yellow),
-                      ),
-                      // CustomContainer(),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      CustomTitle(
-                        title: AppTranslations.login,
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      CustomPhoneFormField(
-                        controller: cubit.phoneController,
-                        initialValue: cubit.countryCode,
-                        title: AppTranslations.phone,
-                        onCountryChanged: (v) {
-                          cubit.countryCode = '+${v.fullCountryCode}';
-                         debugPrint("Country changed to: ${v.name}");
-                        },
-                        onChanged: (phone) {
-                          debugPrint(phone.completeNumber);
-                        },
-                      ),
-                      CustomTextField(
-                        controller: cubit.passwordControllerLogin,
-                        enabled: true,
-                        isPassword: true,
-                        title: AppTranslations.pass,
-                        hintText: AppTranslations.writePass,
-                      ),
-                      SizedBox(
-                        height: 30.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          //forget pass
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, Routes.forgetPass);
-                            },
-                            child: Text(
-                              AppTranslations.forgetPass,
-                              style: getUnderLine(
-                                  fontSize: 14.sp,
-                                  color: AppColors.primary,
-                                  fontweight: FontWeight.w500),
-                            ),
-                          ),
-                          CustomForward(
-                            onTap: () {
-                              if (formKeyLogin.currentState!.validate()) {
-                                cubit.login(context);
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 30.h,
-                      ),
-                      SocialLoginRow(),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            AppTranslations.havenotAccount,
-                            style: getSemiBoldStyle(
-                                color: AppColors.secondPrimary,
-                                fontSize: 14.sp),
-                          ),
-                          SizedBox(
-                            width: 7.w,
-                          ),
-                          InkWell(
+              child: AutofillGroup(
+                child: Form(
+                  key: formKeyLogin,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
+                          child: CustomSkipRow(
                               onTap: () {
-                                Navigator.pushNamed(context, Routes.signUp);
+                                Navigator.pushNamedAndRemoveUntil(context, Routes.mainRoute , (route) => false,);
+                              },
+                              backgroundColor: AppColors.yellow),
+                        ),
+                        // CustomContainer(),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        CustomTitle(
+                          title: AppTranslations.login,
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        CustomPhoneFormField(
+
+                          controller: cubit.phoneController,
+                          initialValue: cubit.countryCode,
+                          title: AppTranslations.phone,
+                          onCountryChanged: (v) {
+                            cubit.countryCode = '+${v.fullCountryCode}';
+                           debugPrint("Country changed to: ${v.name}");
+                          },
+                          onChanged: (phone) {
+                            debugPrint(phone.completeNumber);
+                          },
+                        ),
+                        CustomTextField(
+                          autoFillHints: [cubit.passwordControllerLogin.text],
+                          controller: cubit.passwordControllerLogin,
+                          enabled: true,
+                          isPassword: true,
+                          title: AppTranslations.pass,
+                          hintText: AppTranslations.writePass,
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            //forget pass
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, Routes.forgetPass);
                               },
                               child: Text(
-                                AppTranslations.createNewAccount,
+                                AppTranslations.forgetPass,
                                 style: getUnderLine(
-                                  fontSize: 14.sp,
-                                  color: AppColors.primary,
-                                  fontweight: FontWeight.w500,
-                                ),
-                              )),
-                        ],
-                      )
-                    ],
+                                    fontSize: 14.sp,
+                                    color: AppColors.primary,
+                                    fontweight: FontWeight.w500),
+                              ),
+                            ),
+                            CustomForward(
+                              onTap: () {
+                                if (formKeyLogin.currentState!.validate()) {
+                                  cubit.login(context);
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        SocialLoginRow(),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              AppTranslations.havenotAccount,
+                              style: getSemiBoldStyle(
+                                  color: AppColors.secondPrimary,
+                                  fontSize: 14.sp),
+                            ),
+                            SizedBox(
+                              width: 7.w,
+                            ),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, Routes.signUp);
+                                },
+                                child: Text(
+                                  AppTranslations.createNewAccount,
+                                  style: getUnderLine(
+                                    fontSize: 14.sp,
+                                    color: AppColors.primary,
+                                    fontweight: FontWeight.w500,
+                                  ),
+                                )),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -60,7 +60,8 @@ class _SearchbodyState extends State<Searchbody> {
         ),
         Expanded(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               //list view حجوزات اول حاجه
               Padding(
@@ -188,41 +189,21 @@ class _SearchbodyState extends State<Searchbody> {
               ],
               if (cubit.selectedIndex == 4) ...[
                 Expanded(
-                  child: state is LoadingHomeFilterDataState
-                      ? Center(child: CustomLoadingIndicator())
-                      : cubit.othersModel.data?.isEmpty ?? true
-                          ? Center(
-                              child: NoDataWidget(title: "no_data".tr()),
-                            )
-                          : ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: cubit.othersModel.data?.length ?? 0,
-                              itemBuilder: (BuildContext context, int index) {
-                                return OtherServicesContainer(
-                                  categoryModel: OtherServicesModel(
-                                    title:
-                                        cubit.othersModel.data?[index].title ??
-                                            '',
-                                    image:
-                                        cubit.othersModel.data?[index].image ??
-                                            '',
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, Routes.subServicesRoute,
-                                          arguments: cubit
-                                              .othersModel.data?[index].id
-                                              .toString());
-                                    },
-                                  ),
-                                );
-                              },
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return SizedBox(
-                                  height: 13.h,
-                                );
-                              },
-                            ),
+                  child:            state is LoadingHomeFilterDataState? Expanded(child: Center(child: CustomLoadingIndicator()))    :       cubit.othersModel.data?.isEmpty??true?Center(child: NoDataWidget(title: "no_data".tr()),):
+                  ListView.separated(
+                    shrinkWrap: true,
+                    itemCount:  cubit.othersModel.data?.length??0, itemBuilder: (BuildContext context, int index) { return
+                    OtherServicesContainer(
+                      categoryModel: OtherServicesModel(
+                        title:cubit.othersModel.data?[index].title??'',
+                        image: cubit.othersModel.data?[index].image??'',
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.subServicesRoute,arguments: cubit.othersModel.data?[index].id.toString());
+                        },
+                      ),
+                    );
+                      }, separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(height: 13.h,); },),
                 ),
               ],
             ],

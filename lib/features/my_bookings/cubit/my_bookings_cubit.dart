@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
@@ -80,7 +81,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
     }
   }
 
-  GetMyResidenceReservationModel residenceReservationModel = GetMyResidenceReservationModel();
+  GetMyResidenceReservationModel ?residenceReservationModel;
   GetMyFoodReservationModel foodReservationModel = GetMyFoodReservationModel();
   GetEntertainmentReservationModel entertainmentReservationModel = GetEntertainmentReservationModel();
   GetMyTransportationReservationModel transportationReservationModel =
@@ -91,7 +92,12 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       moduleId: moduleId,
     );
     res.fold((l) {
-      emit(ErrorReservationBooking());
+      if (l is ServerFailure) {
+        emit(ErrorReservationBooking(error:"server_error_occurred".tr()));
+      } else {
+        emit(ErrorReservationBooking(error:"unKnown_error_occurred".tr()));
+      }
+  //    emit(ErrorReservationBooking(error: l.toString()));
     }, (r) {
       if (moduleId == 1) {
         residenceReservationModel = r;

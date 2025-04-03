@@ -16,6 +16,7 @@ class CustomTextField extends StatefulWidget {
   final bool? enabled;
   final String? title;
   final String? hintText;
+  final List<String>? autoFillHints;
   final bool isMessage;
   final bool isPassword;
   final bool ischange;
@@ -42,6 +43,7 @@ class CustomTextField extends StatefulWidget {
       this.onTap,
       this.isPassword = false,
       this.onSubmitted,
+        this.autoFillHints,
       this.borderRadius,
       this.enabled = true,
       this.ischange = false,
@@ -221,6 +223,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 3.0.w),
       child: TextFormField(
         enabled: widget.enabled,
+        autofillHints:widget.autoFillHints??[AutofillHints.password, AutofillHints.email,AutofillHints.telephoneNumber],
         controller: widget.controller,
         onTap: widget.onTap,
         inputFormatters: widget.inputFormatters,

@@ -302,5 +302,7 @@
   "menu_food": "음식 메뉴",
   "about_restaurant": "레스토랑 소개",
   "raise_photo_or_file": "사진 또는 파일 업로드",
+  "unKnown_error_occurred": "알 수 없는 오류가 발생했습니다. 나중에 다시 시도해 주세요.",
+  "server_error_occurred": "서버 오류가 발생했습니다. 나중에 다시 시도해 주세요.",
   "--": "--"
 }
