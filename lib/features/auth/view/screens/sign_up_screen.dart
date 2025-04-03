@@ -51,7 +51,8 @@ context.read<LoginCubit>().signOutFromGmail();
                         height: 10.h,
                       ),
                       CustomTextField(
-                          controller: cubit.nameController,
+                          controller: cubit.nameController,                        textInputAction: TextInputAction.next,
+
                           enabled: true,
                           title: AppTranslations.fullName,
                           hintText: AppTranslations.writeFullName,
@@ -80,7 +81,8 @@ context.read<LoginCubit>().signOutFromGmail();
                   
                       CustomTextField(
                         controller: cubit.passwordControllerSignUp,
-                        enabled: true,
+                        enabled: true,                        textInputAction: TextInputAction.next,
+
                         isPassword: true,
                         title: AppTranslations.pass,
                         hintText: AppTranslations.writePass,

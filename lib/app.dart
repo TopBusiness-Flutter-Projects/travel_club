@@ -9,10 +9,12 @@ import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_cubit.dart';
+import 'package:travel_club/features/notification/screens/notification_screen.dart';
 import 'package:travel_club/features/on_boarding/cubit/onboarding_cubit.dart';
 import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
+import 'package:travel_club/notification_service.dart';
 import 'config/routes/app_routes.dart';
 import 'config/themes/app_theme.dart';
 import 'core/utils/app_strings.dart';
@@ -23,6 +25,7 @@ import 'features/food/cubit/food_cubit.dart';
 import 'features/notification/cubit/notification_cubit.dart';
 import 'features/other_services/cubit/other_services_cubit.dart';
 import 'features/splash/cubit/cubit.dart';
+import 'features/splash/screens/splash_screen.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -45,7 +48,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // print(text);
-
+  NotificationService notificationService = NotificationService();
     return MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -107,13 +110,18 @@ class _MyAppState extends State<MyApp> {
         child: GetMaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
+          key: notificationService.navigatorKey,
           locale: context.locale,
           theme: appTheme(),
           themeMode: ThemeMode.light,
           darkTheme: ThemeData.light(),
-          // standard dark theme
           debugShowCheckedModeBanner: false,
           title: AppStrings.appName,
+              home:notificationService.isWithNotification ?
+            // widget.newsDetailsModel == null?
+              const NotificationScreen():
+             // NewsDetailsScreen(newsDetailsModel: widget.newsDetailsModel!):
+              const SplashScreen(),
           onGenerateRoute: AppRoutes.onGenerateRoute,
         ));
   }

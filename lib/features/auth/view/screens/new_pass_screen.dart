@@ -54,6 +54,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                         isPassword: true,
                         title: AppTranslations.newPass,
                         hintText: AppTranslations.writeNewPass,
+                        textInputAction: TextInputAction.next,
                         controller: cubit.passwordControllerSignUp,
                         validator: (v) {
                           if (v == null || v.isEmpty) {
