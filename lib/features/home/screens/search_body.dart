@@ -59,7 +59,8 @@ class _SearchbodyState extends State<Searchbody> {
         ),
  Expanded(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               //list view حجوزات اول حاجه
               Padding(
@@ -145,7 +146,7 @@ class _SearchbodyState extends State<Searchbody> {
               if (cubit.selectedIndex == 4) ...[
 
                 Expanded(
-                  child:            state is LoadingHomeFilterDataState? Center(child: CustomLoadingIndicator())    :       cubit.othersModel.data?.isEmpty??true?Center(child: NoDataWidget(title: "no_data".tr()),):
+                  child:            state is LoadingHomeFilterDataState? Expanded(child: Center(child: CustomLoadingIndicator()))    :       cubit.othersModel.data?.isEmpty??true?Center(child: NoDataWidget(title: "no_data".tr()),):
                   ListView.separated(
                     shrinkWrap: true,
                     itemCount:  cubit.othersModel.data?.length??0, itemBuilder: (BuildContext context, int index) { return

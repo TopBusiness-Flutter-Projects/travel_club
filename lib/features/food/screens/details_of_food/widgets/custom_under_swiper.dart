@@ -106,7 +106,7 @@ class ContainerUnderSwiperFood extends StatelessWidget {
                             child: CustomLoadingIndicator(),
                           )
                         : cubit.getRestaurantDetailsModel!.data!.rates
-                                    ?.isNotEmpty ??
+                                    ?.isEmpty ??
                                 false
                             ? Expanded(
                                 child: Center(

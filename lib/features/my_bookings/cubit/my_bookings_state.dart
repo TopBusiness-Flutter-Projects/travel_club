@@ -10,7 +10,10 @@ class SucessGetReservationDetailsState extends MyReservationsState {}
 class LoadingGetReservationDetailsState extends MyReservationsState {}
 class LoadingReservationBooking extends MyReservationsState {}
 class LoadedReservationBooking extends MyReservationsState {}
-class ErrorReservationBooking extends MyReservationsState {}
+class ErrorReservationBooking extends MyReservationsState {
+  String error;
+    ErrorReservationBooking({required this.error});
+}
 //cancel reservation
 class LoadingCancelReservation extends MyReservationsState {}
 class LoadedCancelReservation extends MyReservationsState {}

@@ -176,6 +176,7 @@ class LoginCubit extends Cubit<LoginState> {
         Navigator.pop(context);
         errorGetBar(r.msg!);
       } else {
+        TextInput.finishAutofillContext();
         loginModel = r;
         phoneController.clear();
         passwordControllerLogin.clear();
