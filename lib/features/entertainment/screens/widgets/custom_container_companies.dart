@@ -53,7 +53,6 @@ class _CustomContainerCompaniesState extends State<CustomContainerCompanies> {
                           fontSize: 14.sp,
                         ),
                       ),
-                      if (!widget.isDetails )
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CustomFavWidget(

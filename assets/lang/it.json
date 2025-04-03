@@ -302,5 +302,8 @@
   "menu_food": "Menu del cibo",
   "about_restaurant": "Sul ristorante",
   "raise_photo_or_file": "Carica foto o file",
+  "unKnown_error_occurred": "Si è verificato un errore sconosciuto, si prega di riprovare più tardi.",
+  "server_error_occurred": "Si è verificato un errore del server, si prega di riprovare più tardi.",
+
   "--": "--"
 }

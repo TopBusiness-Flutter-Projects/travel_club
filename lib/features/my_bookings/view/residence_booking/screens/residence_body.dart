@@ -27,12 +27,13 @@ class _ResidenceReservedBodyState extends State<ResidenceReservedBody> {
     var cubit = context.read<MyReservationsCubit>();
     return BlocBuilder<MyReservationsCubit, MyReservationsState>(
       builder: (BuildContext context, state) {
+
         return Expanded(
-          child: cubit.residenceReservationModel.data == null
+          child: cubit.residenceReservationModel?.data == null
               ? Center(
                   child: CustomLoadingIndicator(),
                 )
-              : cubit.residenceReservationModel.data!.reservations!.isEmpty
+              : cubit.residenceReservationModel?.data!.reservations!.isEmpty??false
                   ? Center(
                       child: Text('no_reservation'.tr()),
                     )
@@ -44,7 +45,7 @@ class _ResidenceReservedBodyState extends State<ResidenceReservedBody> {
                             child: ListView.builder(
                               shrinkWrap: true,
                               physics: BouncingScrollPhysics(),
-                              itemCount: cubit.residenceReservationModel.data!
+                              itemCount: cubit.residenceReservationModel?.data!
                                   .reservations!.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
@@ -54,13 +55,13 @@ class _ResidenceReservedBodyState extends State<ResidenceReservedBody> {
                                               ResidenceDetailsBookingArguments(
                                                   residenceReservationModel: cubit
                                                       .residenceReservationModel
-                                                      .data!
+                                                      !.data!
                                                       .reservations![index]));
                                     },
                                     child: CustomBookingAccommodationContainerBig(
                                       residenceReservationModel: cubit
                                           .residenceReservationModel
-                                          .data!
+                                          !.data!
                                           .reservations![index],
                                       goTolodgeDetails: false,
                                     ));

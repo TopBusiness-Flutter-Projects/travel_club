@@ -313,6 +313,9 @@
   "menu_food": "Speisekarte",
   "about_restaurant": "Über das Restaurant",
   "raise_photo_or_file": "Bild oder Datei hochladen",
+  "unKnown_error_occurred": "Es ist ein unbekannter Fehler aufgetreten, bitte versuchen Sie es später erneut.",
+  "server_error_occurred": "Es ist ein Serverfehler aufgetreten, bitte versuchen Sie es später erneut.",
+
   "--": "--"
 
 

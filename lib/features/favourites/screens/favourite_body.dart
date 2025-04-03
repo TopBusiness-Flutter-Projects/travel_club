@@ -219,7 +219,8 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                 ? Center(
                                     child: Text('no_data'.tr()),
                                   )
-                                :  ListView.separated(
+                                :
+                        ListView.separated(
           shrinkWrap: true,
           itemCount:  cubit.othersModel.data?.length??0, itemBuilder: (BuildContext context, int index) { return
           OtherServicesContainer(
