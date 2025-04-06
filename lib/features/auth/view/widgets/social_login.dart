@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/auth/cubit/cubit.dart';
 
@@ -73,7 +75,10 @@ class SocialLoginRow extends StatelessWidget {
                   ],
                 ),
               ),
-            ), InkWell(
+            ),
+            SizedBox(width: 16.w),
+            if (Platform.isIOS)
+            InkWell(
               onTap: () {
                 BlocProvider.of<LoginCubit>(context).signInWithApple();
               },
@@ -87,12 +92,12 @@ class SocialLoginRow extends StatelessWidget {
                 child: Row(
                   children: [
                     SvgPicture.asset(
-                      AppIcons.google, // Add your Google logo here
+                      AppIcons.apple, // Add your Google logo here
                       width: 20,
                       height: 20,
                     ),
                     SizedBox(width: 8),
-                    Text(AppTranslations.google,
+                    Text("APPLE",
                         style: getRegularStyle(fontSize: 14.sp)),
                   ],
                 ),
