@@ -86,20 +86,48 @@ Expanded(child: Center(child: Text(state.error.toString())))
               ],
 
               if (cubit.selectedModuleId == 2)
+                if (state is ErrorReservationBooking)
+                  Expanded(child: Center(child: Text(state.error.toString())))
+                //  Text("Error In Server please try again in another time")
+                else if (state is LoadingReservationBooking || cubit.residenceReservationModel == null)
+                  Expanded(child: Center(child: CustomLoadingIndicator()))
+
+                else
                 TransportationReservedBody(),
               if (cubit.selectedModuleId == 3) ...[
+                if (state is ErrorReservationBooking)
+                  Expanded(child: Center(child: Text(state.error.toString())))
+                //  Text("Error In Server please try again in another time")
+                else if (state is LoadingReservationBooking || cubit.residenceReservationModel == null)
+                  Expanded(child: Center(child: CustomLoadingIndicator()))
+
+                else
                 FoodBookingBody(),
                 SizedBox(
                   height: 90.h,
                 )
               ],
               if (cubit.selectedModuleId == 4) ...[
+                if (state is ErrorReservationBooking)
+                  Expanded(child: Center(child: Text(state.error.toString())))
+                //  Text("Error In Server please try again in another time")
+                else if (state is LoadingReservationBooking || cubit.residenceReservationModel == null)
+                  Expanded(child: Center(child: CustomLoadingIndicator()))
+
+                else
                 EntertainmentBookingBody(),
                 SizedBox(
                   height: 90.h,
                 )
               ],
               if (cubit.selectedModuleId == 5) ...[
+                if (state is ErrorReservationBooking)
+                  Expanded(child: Center(child: Text(state.error.toString())))
+                //  Text("Error In Server please try again in another time")
+                else if (state is LoadingReservationBooking || cubit.residenceReservationModel == null)
+                  Expanded(child: Center(child: CustomLoadingIndicator()))
+
+                else
                 EntertainmentBookingBody(),
                 SizedBox(
                   height: 90.h,
