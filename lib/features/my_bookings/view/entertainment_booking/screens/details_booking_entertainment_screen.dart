@@ -31,8 +31,7 @@ class _DetailsBookingEntertainmentState
     context
         .read<MyReservationsCubit>()
         .getReservationDetails(reservationId: widget.entertainmentModel.id!);
-    // TODO: implement initState
-    // context.read<TransportationCubit>().isGoOnly = false;
+
     super.initState();
   }
 
@@ -71,7 +70,17 @@ class _DetailsBookingEntertainmentState
                   SizedBox(
                     height: 30.h,
                   ),
-                  if (cubit.getEntertainmentReservationDetailsModel.data ==
+                  if (state is FailureGetReservationDetailsState)
+                    const Center(
+                      child: Text(
+                        "server error",
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  else if (cubit.getEntertainmentReservationDetailsModel.data ==
                       null)
                     const Center(child: CustomLoadingIndicator())
                   else ...[

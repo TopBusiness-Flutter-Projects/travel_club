@@ -15,31 +15,28 @@ import 'firebase_options.dart';
 import 'notification_service.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
-  
   await EasyLocalization.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await injector.setup();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
   await _setupSecureStorage();
   NotificationService notificationService = NotificationService();
   await notificationService.initialize();
   Bloc.observer = AppBlocObserver();
-   if(kReleaseMode){
+  if (kReleaseMode) {
     await SentryFlutter.init(
-          (options) {
-        options.dsn = 'https://387e1e113ff64816092bc4b77705d7b7@o4509026470133760.ingest.us.sentry.io/4509026478063616';
+      (options) {
+        options.dsn =
+            'https://387e1e113ff64816092bc4b77705d7b7@o4509026470133760.ingest.us.sentry.io/4509026478063616';
         options.sendDefaultPii = true;
       },
-
       appRunner: () => runApp(
         SentryWidget(
           child: EasyLocalization(
             supportedLocales: const [
               Locale('en'),
-              Locale('ar'),
+              Locale('ar'),              
               // Locale('de'),
               // Locale('it'),
               // Locale('ko'),
@@ -55,8 +52,7 @@ void main() async {
         ),
       ),
     );
-  }else{
-    runApp(
+  } else {    runApp(
       EasyLocalization(
         supportedLocales: const [
           Locale('en'),
@@ -75,7 +71,6 @@ void main() async {
       ),
     );
   }
-
 }
 
 /// **Sets Up Secure Storage**
@@ -90,16 +85,16 @@ Future<void> _setupSecureStorage() async {
   prefs = await SharedPreferences.getInstance();
   storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
 }
+
 class MyAppWithScreenUtil extends StatelessWidget {
   const MyAppWithScreenUtil({super.key});
   @override
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        
         return ScreenUtilInit(
           designSize: Size(MediaQuery.of(context).size.width,
-          MediaQuery.of(context).size.height),
+              MediaQuery.of(context).size.height),
           minTextAdapt: true,
           splitScreenMode: true,
           builder: (context, child) {
@@ -112,4 +107,3 @@ class MyAppWithScreenUtil extends StatelessWidget {
     );
   }
 }
-

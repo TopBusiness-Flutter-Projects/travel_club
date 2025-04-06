@@ -7,7 +7,7 @@ import '../../home/screens/widgets/custom_appbar.dart';
 import '../cubit/my_bookings_cubit.dart';
 import '../cubit/my_bookings_state.dart';
 import 'residence_booking/screens/residence_body.dart';
-import 'entertainment_booking/screens/custom_booking_food.dart';
+import 'entertainment_booking/screens/custom_booking_entertainment.dart';
 import 'food_booking/screens/custom_booking_food.dart';
 
 class ReservationsBody extends StatefulWidget {
