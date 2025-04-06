@@ -53,6 +53,7 @@ class _LodgeDetailsScreenState extends State<LodgeDetailsScreen> {
             statusBarIconBrightness: Brightness.dark,
           ),
           child: WillPopScope(
+            // عشان وهوه راجع لو جاي من دييب لينك هيرجع  ع الmain مش الsplach
             onWillPop: () async {
               widget.args.isDeeplink
                   ? Navigator.pushNamedAndRemoveUntil(

@@ -130,11 +130,12 @@ class NotificationService {
     String? payload,
   }) async {
     const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'your_channel_id',
+      'your_channel_id_v2',
       'your_channel_name',
       channelDescription: 'your_channel_description',
       importance: Importance.max,
       priority: Priority.high,
+      sound: RawResourceAndroidNotificationSound('happy_sound'),
       icon: '@mipmap/ic_launcher',
       ticker: 'ticker',
     );
