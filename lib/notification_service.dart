@@ -6,17 +6,12 @@ import 'package:travel_club/core/preferences/preferences.dart';
 
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
-
   factory NotificationService() => _instance;
-
   NotificationService._internal();
-
   /// Global Key for Navigation
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
   /// Firebase Messaging Instance
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
-
   /// Local Notifications Plugin
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
