@@ -73,6 +73,30 @@ class SocialLoginRow extends StatelessWidget {
                   ],
                 ),
               ),
+            ), InkWell(
+              onTap: () {
+                BlocProvider.of<LoginCubit>(context).signInWithApple();
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: AppColors.greyborder),
+                ),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      AppIcons.google, // Add your Google logo here
+                      width: 20,
+                      height: 20,
+                    ),
+                    SizedBox(width: 8),
+                    Text(AppTranslations.google,
+                        style: getRegularStyle(fontSize: 14.sp)),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

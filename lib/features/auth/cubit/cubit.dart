@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
@@ -155,7 +157,38 @@ class LoginCubit extends Cubit<LoginState> {
 
     return googleUser;
   }
+  Future<void> signInWithApple() async {
+    try {
+      log("Starting Apple Sign-In...");
+      final credential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        // webAuthenticationOptions: WebAuthenticationOptions(
+        //   clientId: "com.topbusiness.finakapp", // Apple Service ID
+        //   redirectUri: Uri.parse(
+        //     "https://finak-8a4c9.firebaseapp.com/__/auth/handler",
+        //   ),
+        // ),
+      );
 
+      final oauthCredential = OAuthProvider("apple.com").credential(
+        idToken: credential.identityToken,
+        accessToken: credential.authorizationCode,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+      log("Apple Sign-In successful!");
+    } catch (e) {
+      print("Apple Sign-In Error: $e");
+      if (e is PlatformException) {
+        log("Error code: ${e.code}");
+        log("Error message: ${e.message}");
+        log("Error details: ${e.details}");
+      }
+    }
+  }
   String countryCode = '+20';
   // login
   LoginModel loginModel = LoginModel();
