@@ -92,9 +92,17 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
                   SizedBox(
                     height: 30.h,
                   ),
-//members details
-
-                  if (cubit.foodReservationDetails.data == null)
+                  if (state is FailureGetReservationDetailsState)
+                    const Center(
+                      child: Text(
+                        "server error",
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  else if (cubit.foodReservationDetails.data == null)
                     Center(child: CustomLoadingIndicator())
                   else ...[
                     MemberDetails(
@@ -129,7 +137,8 @@ class _DetailsBookingFoodState extends State<DetailsBookingFood> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CancelReservationButton(
-                          reservationid: widget.arguments.foodReservationModel.id ?? 0,
+                          reservationid:
+                              widget.arguments.foodReservationModel.id ?? 0,
                         ),
                       ),
                     if (widget.arguments.foodReservationModel.process == 2 &&
