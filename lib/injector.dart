@@ -111,8 +111,7 @@ Future<void> setup() async {
       .registerLazySingleton(() => TransportationRepoImpl(serviceLocator()));
   serviceLocator
       .registerLazySingleton(() => LocationRepoImpl(serviceLocator()));
-  serviceLocator
-      .registerLazySingleton(() => NotificationRepoImpl(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => NotificationRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => FoodRepoImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(() => PaymentRepoImpl(serviceLocator()));
 

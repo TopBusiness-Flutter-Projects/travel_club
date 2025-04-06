@@ -99,6 +99,8 @@ class EndPoints {
   static const String getSubServices = '${baseUrl}getSubServices';
   static const String getSingleSubServices = '${baseUrl}getSubServicesDetails';
   static const String contactUs = '${baseUrl}contact-us';
+  static const String setting = '${baseUrl}get-settings';
+  static const String notificationUrl = '${baseUrl}get-notifications';
 
 //static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
   // static const String getMyReservationUrl = '${baseUrl}getMyReservation';

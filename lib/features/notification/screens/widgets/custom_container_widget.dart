@@ -1,9 +1,10 @@
 import '../../../../core/exports.dart';
 import '../../cubit/notification_cubit.dart';
+import '../../data/model/get_notification.dart';
 
 class CustomContainerWidget extends StatelessWidget {
-  const CustomContainerWidget({super.key});
-
+  const CustomContainerWidget({super.key,required this.data});
+ final NotificationData data;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NotificationCubit, NotificationState>(
