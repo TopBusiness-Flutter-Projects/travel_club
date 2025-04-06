@@ -72,16 +72,13 @@ class _ReservationsBodyState extends State<ReservationsBody> {
               ),
               //body ...
               if (cubit.selectedModuleId == 1) ...[
-          if (state is LoadingReservationBooking)
-            Expanded(child: Center(child: CustomLoadingIndicator()))
-           else if (state is ErrorReservationBooking)
+         if (state is ErrorReservationBooking)
 Expanded(child: Center(child: Text(state.error.toString())))
          //  Text("Error In Server please try again in another time")
-           else if (state is LoadedReservationBooking)
-          cubit.residenceReservationModel?.data == null
-          ?             Expanded(child: Center(child: CustomLoadingIndicator()))
+           else if (state is LoadingReservationBooking || cubit.residenceReservationModel == null)
+                     Expanded(child: Center(child: CustomLoadingIndicator()))
 
-              :
+              else
            ResidenceReservedBody(),
                 SizedBox(
                   height: 90.h,
