@@ -25,12 +25,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
          return
           CustomScreen(
             appbarTitle: AppTranslations.notifications,
-            body:
+            body:cubit.getNotificationModel.data==null?const Center(child: CircularProgressIndicator(),):
+            cubit.getNotificationModel.data?.isEmpty??false? Center(child: Text(AppTranslations.noData)):
             ListView.separated(
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
-
-
                return
                  CustomContainerWidget(data: cubit.getNotificationModel.data![index],);
               },

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
@@ -7,6 +8,7 @@ import 'package:travel_club/core/utils/restart_app_class.dart';
 import 'package:travel_club/features/auth/data/models/default_model.dart';
 import 'package:travel_club/features/auth/data/models/login_model.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
+import '../../splash/screens/splash_screen.dart';
 import '../data/model/get_setting_model.dart';
 import '../data/repo/account_repo_impl.dart';
 import 'account_state.dart';
@@ -71,14 +73,18 @@ DefaultPostModel ?defaultPostModel;
     final String langCode = languageCodes[newLanguage] ?? 'en';
 
     // Set the locale
-    context.setLocale(Locale(langCode, ''));
-
+    context.setLocale(Locale(langCode));
     // Save the language preference
     Preferences.instance.savedLang(langCode);
+    Preferences.instance.getSavedLang();
+    //Restart.restartApp();
+
+     HotRestartController.performHotRestart(context);
+//Navigator.push(context, MaterialPageRoute(builder: (context) => const SplashScreen()));
+    print("change lang and restart");
 
     emit(AccountLanguageChanged()); // Emit a new state to notify the UI
-    Preferences.instance.getSavedLang();
-    HotRestartController.performHotRestart(context);
+
   }
 
   LoginModel loginModel = LoginModel();

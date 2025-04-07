@@ -32,42 +32,46 @@ void main() async {
         options.sendDefaultPii = true;
       },
       appRunner: () => runApp(
-        SentryWidget(
-          child: EasyLocalization(
-            supportedLocales: const [
-              Locale('en'),
-              Locale('ar'),              
-              // Locale('de'),
-              // Locale('it'),
-              // Locale('ko'),
-              // Locale('ru'),
-              // Locale('es'),
-            ],
-            path: 'assets/lang',
-            saveLocale: true,
-            startLocale: const Locale('ar', ''),
-            fallbackLocale: const Locale('ar', ''),
-            child: const MyAppWithScreenUtil(),
+        HotRestartController(
+          child: SentryWidget(
+            child: EasyLocalization(
+              supportedLocales: const [
+                Locale('en'),
+                Locale('ar'),              
+                // Locale('de'),
+                // Locale('it'),
+                // Locale('ko'),
+                // Locale('ru'),
+                // Locale('es'),
+              ],
+              path: 'assets/lang',
+              saveLocale: true,
+              startLocale: const Locale('ar', ''),
+              fallbackLocale: const Locale('ar', ''),
+              child: const MyAppWithScreenUtil(),
+            ),
           ),
         ),
       ),
     );
   } else {    runApp(
-      EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-          Locale('ar'),
-          // Locale('de'),
-          // Locale('it'),
-          // Locale('ko'),
-          // Locale('ru'),
-          // Locale('es'),
-        ],
-        path: 'assets/lang',
-        saveLocale: true,
-        startLocale: const Locale('ar', ''),
-        fallbackLocale: const Locale('ar', ''),
-        child: const MyAppWithScreenUtil(),
+    HotRestartController(
+        child: EasyLocalization(
+          supportedLocales: const [
+            Locale('en'),
+            Locale('ar'),
+            // Locale('de'),
+            // Locale('it'),
+            // Locale('ko'),
+            // Locale('ru'),
+            // Locale('es'),
+          ],
+          path: 'assets/lang',
+          saveLocale: true,
+          startLocale: const Locale('ar', ''),
+          fallbackLocale: const Locale('ar', ''),
+          child: HotRestartController(child: const MyAppWithScreenUtil()),
+        ),
       ),
     );
   }
