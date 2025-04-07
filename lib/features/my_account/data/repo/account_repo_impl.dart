@@ -7,6 +7,7 @@ import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
+import '../model/get_setting_model.dart';
 
 class AccountRepoImpl {
   final BaseApiConsumer dio;
@@ -69,6 +70,18 @@ class AccountRepoImpl {
 
       );
       return Right(DefaultPostModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+//get setting
+  Future<Either<Failure, GetSettingModel>> getSetting() async {
+    try {
+      var response = await dio.get(
+        EndPoints.setting,
+
+      );
+      return Right(GetSettingModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

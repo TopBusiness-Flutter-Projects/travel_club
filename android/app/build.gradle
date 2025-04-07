@@ -5,10 +5,10 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
     id "com.google.gms.google-services"
 }
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
+//def flutterVersionName = localProperties.getProperty('flutter.versionName')
+//if (flutterVersionName == null) {
+//    flutterVersionName = '1.0'
+//}
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
@@ -34,8 +34,8 @@ android {
         targetSdk = 34
         // versionCode = flutter.versionCode      
         // versionName = flutter.versionName
-        versionCode = 1
-        versionName = "1"
+        versionCode = 4
+        versionName = "4.0"
         // versionCode = flutter.versionCode      
         // versionName = flutter.versionName
     }

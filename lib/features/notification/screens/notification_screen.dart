@@ -3,26 +3,43 @@ import 'package:travel_club/features/notification/screens/widgets/custom_contain
 import '../../../core/exports.dart';
 import '../cubit/notification_cubit.dart';
 
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
 
   @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    context.read<NotificationCubit>().getNotification();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+    var cubit = context.read<NotificationCubit>();
     return BlocBuilder<NotificationCubit, NotificationState>(
       builder: (BuildContext context, state) {
-        return CustomScreen(
+         return
+          CustomScreen(
             appbarTitle: AppTranslations.notifications,
-            body: ListView.separated(
+            body:
+            ListView.separated(
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
-                return CustomContainerWidget();
+
+
+               return
+                 CustomContainerWidget(data: cubit.getNotificationModel.data![index],);
               },
               separatorBuilder: (BuildContext context, int index) {
                 return SizedBox(
                   height: getVerticalPadding(context) * 1,
                 );
               },
-              itemCount: 30,
+              itemCount: cubit.getNotificationModel.data?.length??0,
             ));
       },
     );
