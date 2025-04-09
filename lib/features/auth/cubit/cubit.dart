@@ -157,29 +157,47 @@ class LoginCubit extends Cubit<LoginState> {
 
     return googleUser;
   }
-  Future<void> signInWithApple() async {
+
+  Future<void> signInWithApple(BuildContext context) async {
     try {
+      // Check if a user is already logged in
+      final currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        log("User is already logged in. Logging out...");
+        await FirebaseAuth.instance.signOut(); // Log out if already logged in
+      }
       log("Starting Apple Sign-In...");
       final credential = await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
-        // webAuthenticationOptions: WebAuthenticationOptions(
-        //   clientId: "com.topbusiness.finakapp", // Apple Service ID
-        //   redirectUri: Uri.parse(
-        //     "https://finak-8a4c9.firebaseapp.com/__/auth/handler",
-        //   ),
-        // ),
       );
 
       final oauthCredential = OAuthProvider("apple.com").credential(
         idToken: credential.identityToken,
         accessToken: credential.authorizationCode,
       );
+      FirebaseAuth.instance.signInWithCredential(oauthCredential).then((auth){
+        log("auth code: ${auth.user?.email}");
+        log("auth code: ${auth.user?.displayName}");
+        log("auth code: ${auth.user?.isAnonymous}");
+        log("auth code: ${auth.user?.phoneNumber}");
+        log("auth code: ${auth.user?.photoURL}");
+        log("auth code: ${auth.user?.photoURL}");
+        log("auth code: ${auth.user?.uid}");
+        log("Apple Sign-In successful!");
+        if (auth.user != null) {
+          loginWithApple(context, name: auth.user?.displayName?? 'Apple Account', email: auth.user!.email!);
+        }else{
 
-      await FirebaseAuth.instance.signInWithCredential(oauthCredential);
-      log("Apple Sign-In successful!");
+        }
+      }).catchError( (e){
+        log ("Apple Sign-In Error: $e");
+      });
+
+
+
     } catch (e) {
       print("Apple Sign-In Error: $e");
       if (e is PlatformException) {
@@ -189,6 +207,7 @@ class LoginCubit extends Cubit<LoginState> {
       }
     }
   }
+
   String countryCode = '+20';
   // login
   LoginModel loginModel = LoginModel();
@@ -223,7 +242,9 @@ class LoginCubit extends Cubit<LoginState> {
       }
     });
   }
+loginWithApple(BuildContext context, {required String name ,required String email , String? image }) async {
 
+}
   // login google
   loginWithGoogle(BuildContext context, {required String accessToken}) async {
     emit(LoadingLoginState());

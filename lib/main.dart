@@ -13,7 +13,6 @@ import 'app_bloc_observer.dart';
 import 'core/utils/restart_app_class.dart';
 import 'firebase_options.dart';
 import 'notification_service.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -52,7 +51,8 @@ void main() async {
         ),
       ),
     );
-  } else {    runApp(
+  } else {
+    runApp(
     EasyLocalization(
       supportedLocales: const [
         Locale('en'),
