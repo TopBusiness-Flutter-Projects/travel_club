@@ -1,8 +1,13 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
+
+import 'features/residence/view/screens/lodge_details.dart';
+import 'features/residence/view/screens/lodges_screen.dart';
 
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
@@ -39,6 +44,17 @@ class NotificationService {
 
     // Handle notification click when app is in background
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      log("recieved onMessageOpenedApp ${message.data.toString()}");
+      message.data['reference_table'] == 'places'?
+      navigatorKey.currentState?.pushNamed( Routes.hotelsScreen,
+          arguments: LodgesScreenArguments(
+              placeId:int.tryParse(message.data['reference_id']) ??0,
+              title: message.data['reference_name'])):
+      message.data['reference_table'] == "lodges"?
+      navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
+      arguments:
+      LodgeDetailsArguments(lodgeId: int.tryParse(message.data['reference_id']) ?? 0))
+      :
       navigatorKey.currentState?.pushNamed(Routes.notificationScreen);
     });
     // Request notification permissions
@@ -50,10 +66,11 @@ class NotificationService {
     print('User granted permission: ${settings.authorizationStatus}');
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     FirebaseMessaging.onMessage.listen((message) {
+      log("recieved onMessage ${message.data.toString()}");
       _showLocalNotification(
         title: message.notification?.title ?? '',
         body: message.notification?.body ?? '',
-        payload: message.data.toString(),
+        payload: jsonEncode(message.data), // message.data.toString(),
       );
     });
 
@@ -98,7 +115,52 @@ class NotificationService {
     await _flutterLocalNotificationsPlugin.initialize(
       initSettings,
       onDidReceiveNotificationResponse: (details) {
-        navigatorKey.currentState?.pushNamed(Routes.notificationScreen);
+        final payload = details.payload;
+        log('Notification payload: $payload');
+
+        try {
+          if (payload != null) {
+            Map<String, dynamic> message;
+            // try {
+            message = jsonDecode(payload);
+            // } catch (e) {
+            //   final cleanPayload =
+            //       payload.replaceAll('{', '').replaceAll('}', '');
+            //   final pairs = cleanPayload.split(',');
+
+            //   message = {};
+            //   for (var pair in pairs) {
+            //     final keyValue = pair.split(':');
+            //     if (keyValue.length == 2) {
+            //       final key = keyValue[0].trim();
+            //       final value = keyValue[1].trim();
+            //       message[key] = value;
+            //     }
+            //   }
+            // }
+
+            log('Notification message after parsing: $message');
+
+        if(message['reference_table'] == "places"){
+          navigatorKey.currentState?.pushNamed( Routes.hotelsScreen,
+              arguments: LodgesScreenArguments(
+                  placeId:int.tryParse(message['reference_id']) ??0,
+                  title: message['reference_name']));
+
+        }else if(message['reference_table'] == "lodges"){
+          print("lodes");
+          navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
+              arguments:
+              LodgeDetailsArguments(lodgeId: int.tryParse(message['reference_id']) ?? 0));
+        } else {
+              navigatorKey.currentState?.pushNamed(Routes.notificationScreen);
+            }
+          }
+        } catch (e) {
+          log('Error parsing notification payload: $e');
+          // Fallback action
+          navigatorKey.currentState?.pushNamed(Routes.notificationScreen);
+        }
       },
     );
 
