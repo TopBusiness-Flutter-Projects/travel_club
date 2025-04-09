@@ -37,28 +37,37 @@ class _AboutUsState extends State<AboutUs> {
                 children: [
                   SizedBox(height: getVerticalPadding(context) * 1,),
                   //imag
-                  Center(
-                    child: Image.asset(
-                      ImageAssets.about,
-                      height: 140.h,
-                       width:100.w,
-                    ),
-                  ),
-                  SizedBox(height: getVerticalPadding(context) * 1.5,),
-              
-                //  Text(AppTranslations.whoUs,style: getSemiBoldStyle(fontSize: 24.sp),),
-                  SizedBox(height: getVerticalPadding(context) * .5,),
+                  if (state is GetSettingError )...[
+                    Center(child: Text(state.error.toString()))
 
-            if (state is GetSettingError )
-      Expanded(child: Center(child: Text(state.error.toString())))
-      //  Text("Error In Server please try again in another time")
-      else if (state is GetSettingLoading || cubit.getSettingModel.data == null)
-      Expanded(child: Center(child: CustomLoadingIndicator()))
+                  ]
+                  //  Text("Error In Server please try again in another time")
+                  else if (state is GetSettingLoading || cubit.getSettingModel.data == null)...[
+                    SizedBox(
+                      height: getHeightSize(context)/2,
+                        child: Center(child: CustomLoadingIndicator()))
 
-      else
-            Html(
-              data:cubit.getSettingModel.data?.aboutUs?.toString()??"" ,
-          ),
+                  ]
+
+                  else...[
+                      Center(
+                        child: Image.asset(
+                          ImageAssets.about,
+                          height: 140.h,
+                          width:100.w,
+                        ),
+                      ),
+                      SizedBox(height: getVerticalPadding(context) * 1.5,),
+
+                      //  Text(AppTranslations.whoUs,style: getSemiBoldStyle(fontSize: 24.sp),),
+                      SizedBox(height: getVerticalPadding(context) * .5,),
+
+
+                      Html(
+                        data:cubit.getSettingModel.data?.aboutUs?.toString()??"" ,
+                      ),
+                    ],
+
              //    Text(cubit.getSettingModel.data?.aboutUs?.toString()??"",
                   //    style: getMediumStyle(fontSize: 14.sp,color: AppColors.grey),),     SizedBox(height: getVerticalPadding(context) * 1,),
               SizedBox(height: 10.h,)

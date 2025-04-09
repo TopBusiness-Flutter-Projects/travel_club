@@ -33,6 +33,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                         SizedBox(
                           height: getVerticalPadding(context) * 3,
                         ),
+
                         Text(
                           AppTranslations.privacyAndSecurity,
                           style: getSemiBoldStyle(fontSize: 24.sp),
@@ -40,15 +41,21 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                         SizedBox(
                           height: getVerticalPadding(context) * .5,
                         ),
-                        if (state is GetSettingError )
-                          Expanded(child: Center(child: Text(state.error.toString())))
+                        if (state is GetSettingError )...[
+                          Center(child: Text(state.error.toString()))
+
+                        ]
                         //  Text("Error In Server please try again in another time")
-                        else if (state is GetSettingLoading || cubit.getSettingModel.data == null)
-                          Expanded(child: Center(child: CustomLoadingIndicator()))
-                        else
-                        Html(
-                          data:cubit.getSettingModel.data?.aboutUs?.toString()??"" ,
-                        ),
+                        else if (state is GetSettingLoading || cubit.getSettingModel.data == null)...[
+                          Center(child: CustomLoadingIndicator())
+
+                        ]
+                        else...[
+                            Html(
+                              data:cubit.getSettingModel.data?.aboutUs?.toString()??"" ,
+                            ),
+                          ],
+
                         SizedBox(
                           height: getVerticalPadding(context) * 1,
                         ),
