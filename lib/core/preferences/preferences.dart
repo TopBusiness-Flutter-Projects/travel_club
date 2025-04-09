@@ -40,6 +40,7 @@ class Preferences {
     print(await getUserModel());
   }
 
+
   Future<LoginModel> getUserModel() async {
     String? jsonData = await storage.read(key: 'user');
     LoginModel userModel;
