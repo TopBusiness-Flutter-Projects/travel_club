@@ -43,18 +43,20 @@ class _ResidenceScreenState extends State<ResidenceScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           20.verticalSpace,
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10.h),
-                            child: StaggeredGrid.count(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 0,
-                                crossAxisSpacing: 0,
-                                children: List.generate(
-                                    cubit.placesModel.data?.places!.length ?? 0,
-                                    (index) => CustomPlaceContainer(
-                                          categoryModel: cubit
-                                              .placesModel.data!.places![index],
-                                        ))),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10.h),
+                              child: StaggeredGrid.count(
+                                  crossAxisCount: 3,
+                                  mainAxisSpacing: 0,
+                                  crossAxisSpacing: 0,
+                                  children: List.generate(
+                                      cubit.placesModel.data?.places!.length ?? 0,
+                                      (index) => CustomPlaceContainer(
+                                            categoryModel: cubit
+                                                .placesModel.data!.places![index],
+                                          ))),
+                            ),
                           ),
                           if (cubit.placesModel.data?.lodges != null)
                             if (cubit.placesModel.data!.lodges!.isNotEmpty) ...[
