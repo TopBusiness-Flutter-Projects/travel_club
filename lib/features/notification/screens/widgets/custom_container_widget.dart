@@ -19,19 +19,20 @@ class CustomContainerWidget extends StatelessWidget {
             log(data.referenceId.toString());
             log(data.referenceTable.toString());
 
-            // if(data.referenceTable=="places"){
-            //   Navigator.pushNamed(context, Routes.hotelsScreen,
-            //       arguments: LodgesScreenArguments(
-            //           placeId: data.referenceId??0,
-            //           title: data.title.toString()));
-            //  // Navigator.pushNamed(context, Routes.)
-            // }else if(data.referenceTable=="lodges"){
-            //   log(data.referenceId.toString());
-            //
-            //   Navigator.pushNamed(context, Routes.lodgeDetailsRoute,
-            //       arguments: LodgeDetailsArguments(lodgeId: data.referenceId??0));
-            // }
+            if(data.referenceTable=="places"){
+              Navigator.pushNamed(context, Routes.hotelsScreen,
+                  arguments: LodgesScreenArguments(
+                      placeId: data.referenceId??0,
+                      title: data.title.toString()));
+             // Navigator.pushNamed(context, Routes.)
+            }else if(data.referenceTable=="lodges"){
+              log(data.referenceId.toString());
+
+              Navigator.pushNamed(context, Routes.lodgeDetailsRoute,
+                  arguments: LodgeDetailsArguments(lodgeId: data.referenceId??0));
+            }
          if (data.seen==0){
+           data.seen=1;
            cubit.seenNotification(context, id: data.id.toString());
          }
           },
