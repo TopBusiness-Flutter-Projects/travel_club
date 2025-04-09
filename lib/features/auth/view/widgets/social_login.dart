@@ -80,7 +80,7 @@ class SocialLoginRow extends StatelessWidget {
             if (Platform.isIOS)
             InkWell(
               onTap: () {
-                BlocProvider.of<LoginCubit>(context).signInWithApple();
+                BlocProvider.of<LoginCubit>(context).signInWithApple(context);
               },
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),

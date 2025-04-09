@@ -36,6 +36,7 @@ class UserDataModel {
     String? email;
     String? image;
     bool? isGoogle;
+    int? isSocial;
     String? googleImage;
     dynamic code;
     dynamic points;
@@ -49,6 +50,7 @@ class UserDataModel {
         this.phone,
         this.email,
         this.image,
+        this.isSocial,
         this.isGoogle,
         this.googleImage,
         this.code,
@@ -64,6 +66,7 @@ class UserDataModel {
         phone: json["phone"],
         email: json["email"],
         image: json["image"],
+        isSocial: json['is_social'],
         isGoogle: json["is_google"],
         googleImage: json["google_image"],
         code: json["code"],
@@ -79,6 +82,7 @@ class UserDataModel {
         "phone": phone,
         "email": email,
         "image": image,
+        "is_social":isSocial,
         "is_google": isGoogle,
         "google_image": googleImage,
         "code": code,
