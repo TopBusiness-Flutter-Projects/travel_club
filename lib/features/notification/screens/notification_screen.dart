@@ -23,23 +23,31 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return BlocBuilder<NotificationCubit, NotificationState>(
       builder: (BuildContext context, state) {
          return
-          CustomScreen(
-            appbarTitle: AppTranslations.notifications,
-            body:cubit.getNotificationModel.data==null?const Center(child: CircularProgressIndicator(),):
-            cubit.getNotificationModel.data?.isEmpty??false? Center(child: Text(AppTranslations.noData)):
-            ListView.separated(
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-               return
-                 CustomContainerWidget(data: cubit.getNotificationModel.data![index],);
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  height: getVerticalPadding(context) * 1,
-                );
-              },
-              itemCount: cubit.getNotificationModel.data?.length??0,
-            ));
+          RefreshIndicator(
+            onRefresh: () {
+
+           return   cubit.getNotification();
+            },
+            child: CustomScreen(
+              appbarTitle: AppTranslations.notifications,
+              body:cubit.getNotificationModel.data==null?const Center(child: CustomLoadingIndicator(),):
+              cubit.getNotificationModel.data?.isEmpty??false? Center(child: Text(AppTranslations.noData)):
+              ListView.separated(
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                 return
+                   CustomContainerWidget(
+
+                     data: cubit.getNotificationModel.data![index],);
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: getVerticalPadding(context) * 1,
+                  );
+                },
+                itemCount: cubit.getNotificationModel.data?.length??0,
+              )),
+          );
       },
     );
   }

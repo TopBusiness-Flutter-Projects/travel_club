@@ -101,6 +101,7 @@ class EndPoints {
   static const String contactUs = '${baseUrl}contact-us';
   static const String setting = '${baseUrl}get-settings';
   static const String notificationUrl = '${baseUrl}get-notifications';
+  static const String seenNotificationUrl = '${baseUrl}seen-notification';
 
 //static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
   // static const String getMyReservationUrl = '${baseUrl}getMyReservation';
