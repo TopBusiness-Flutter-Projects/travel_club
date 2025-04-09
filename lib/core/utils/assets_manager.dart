@@ -76,6 +76,7 @@ class AppIcons {
   static const String myAccount = '$iconsPath/account.svg';
   static const String facebook = '$iconsPath/facebook.svg';
   static const String google = '$iconsPath/google_icon.svg';
+  static const String apple = '$iconsPath/apple.svg';
   static const String calendar = '$iconsPath/calendar.svg';
   static const String line = '$iconsPath/line.svg';
   static const String profilInfo = '$iconsPath/line.svg';

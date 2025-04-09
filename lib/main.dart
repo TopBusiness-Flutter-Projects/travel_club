@@ -13,7 +13,6 @@ import 'app_bloc_observer.dart';
 import 'core/utils/restart_app_class.dart';
 import 'firebase_options.dart';
 import 'notification_service.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -36,7 +35,7 @@ void main() async {
           child: EasyLocalization(
             supportedLocales: const [
               Locale('en'),
-              Locale('ar'),              
+              Locale('ar'),
               // Locale('de'),
               // Locale('it'),
               // Locale('ko'),
@@ -47,28 +46,29 @@ void main() async {
             saveLocale: true,
             startLocale: const Locale('ar', ''),
             fallbackLocale: const Locale('ar', ''),
-            child: const MyAppWithScreenUtil(),
+            child: HotRestartController(child: const MyAppWithScreenUtil()),
           ),
         ),
       ),
     );
-  } else {    runApp(
-      EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-          Locale('ar'),
-          // Locale('de'),
-          // Locale('it'),
-          // Locale('ko'),
-          // Locale('ru'),
-          // Locale('es'),
-        ],
-        path: 'assets/lang',
-        saveLocale: true,
-        startLocale: const Locale('ar', ''),
-        fallbackLocale: const Locale('ar', ''),
-        child: const MyAppWithScreenUtil(),
-      ),
+  } else {
+    runApp(
+    EasyLocalization(
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ar'),
+        // Locale('de'),
+        // Locale('it'),
+        // Locale('ko'),
+        // Locale('ru'),
+        // Locale('es'),
+      ],
+      path: 'assets/lang',
+      saveLocale: true,
+      startLocale: const Locale('ar', ''),
+      fallbackLocale: const Locale('ar', ''),
+      child: HotRestartController(child: const MyAppWithScreenUtil()),
+    ),
     );
   }
 }
@@ -98,12 +98,11 @@ class MyAppWithScreenUtil extends StatelessWidget {
           minTextAdapt: true,
           splitScreenMode: true,
           builder: (context, child) {
-            return HotRestartController(
-              child: const MyApp(),
-            );
+            return const MyApp();
           },
         );
       },
     );
+
   }
 }

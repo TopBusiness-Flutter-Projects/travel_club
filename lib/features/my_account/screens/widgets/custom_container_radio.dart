@@ -1,6 +1,7 @@
 // Finally, let's update the LanguageSelectionScreen class
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/utils/restart_app_class.dart';
 
 import '../../cubit/account_cubit.dart';
 import '../../cubit/account_state.dart';
@@ -105,6 +106,8 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           child: GestureDetector(
             onTap: () {
               cubit.changeLanguage(context, value);
+             // HotRestartController.performHotRestart(context);
+
             },
             child: ListTile(
               leading: Icon(

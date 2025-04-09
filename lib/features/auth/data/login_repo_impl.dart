@@ -31,7 +31,6 @@ class LoginRepoImpl {
           'phone': phone,
         },
       );
-
       return Right(LoginModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());

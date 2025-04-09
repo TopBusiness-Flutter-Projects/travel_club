@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
@@ -156,6 +158,56 @@ class LoginCubit extends Cubit<LoginState> {
     return googleUser;
   }
 
+  Future<void> signInWithApple(BuildContext context) async {
+    try {
+      // Check if a user is already logged in
+      final currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        log("User is already logged in. Logging out...");
+        await FirebaseAuth.instance.signOut(); // Log out if already logged in
+      }
+      log("Starting Apple Sign-In...");
+      final credential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      final oauthCredential = OAuthProvider("apple.com").credential(
+        idToken: credential.identityToken,
+        accessToken: credential.authorizationCode,
+      );
+      FirebaseAuth.instance.signInWithCredential(oauthCredential).then((auth){
+        log("auth code: ${auth.user?.email}");
+        log("auth code: ${auth.user?.displayName}");
+        log("auth code: ${auth.user?.isAnonymous}");
+        log("auth code: ${auth.user?.phoneNumber}");
+        log("auth code: ${auth.user?.photoURL}");
+        log("auth code: ${auth.user?.photoURL}");
+        log("auth code: ${auth.user?.uid}");
+        log("Apple Sign-In successful!");
+        if (auth.user != null) {
+          loginWithApple(context, name: auth.user?.displayName?? 'Apple Account', email: auth.user!.email!);
+        }else{
+
+        }
+      }).catchError( (e){
+        log ("Apple Sign-In Error: $e");
+      });
+
+
+
+    } catch (e) {
+      print("Apple Sign-In Error: $e");
+      if (e is PlatformException) {
+        log("Error code: ${e.code}");
+        log("Error message: ${e.message}");
+        log("Error details: ${e.details}");
+      }
+    }
+  }
+
   String countryCode = '+20';
   // login
   LoginModel loginModel = LoginModel();
@@ -190,7 +242,9 @@ class LoginCubit extends Cubit<LoginState> {
       }
     });
   }
+loginWithApple(BuildContext context, {required String name ,required String email , String? image }) async {
 
+}
   // login google
   loginWithGoogle(BuildContext context, {required String accessToken}) async {
     emit(LoadingLoginState());

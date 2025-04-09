@@ -27,28 +27,13 @@ import 'features/other_services/cubit/other_services_cubit.dart';
 import 'features/splash/cubit/cubit.dart';
 import 'features/splash/screens/splash_screen.dart';
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     // print(text);
-  NotificationService notificationService = NotificationService();
+   NotificationService notificationService = NotificationService();
     return MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -110,7 +95,7 @@ class _MyAppState extends State<MyApp> {
         child: GetMaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
-          key: notificationService.navigatorKey,
+          navigatorKey: notificationService.navigatorKey,
           locale: context.locale,
           theme: appTheme(),
           themeMode: ThemeMode.light,
@@ -122,6 +107,7 @@ class _MyAppState extends State<MyApp> {
               const NotificationScreen():
              // NewsDetailsScreen(newsDetailsModel: widget.newsDetailsModel!):
               const SplashScreen(),
+
           onGenerateRoute: AppRoutes.onGenerateRoute,
         ));
   }
