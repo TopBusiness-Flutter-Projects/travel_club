@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/home/screens/widgets/search_container.dart';
 import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
 import '../cubit/home_cubit.dart';
@@ -22,7 +23,7 @@ class _HomeBodyState extends State<HomeBody> {
   @override
   void initState() {
     if (context.read<HomeCubit>().homeModel.data == null) {
-        context.read<HomeCubit>().getHomeData();
+      context.read<HomeCubit>().getHomeData();
     }
     super.initState();
   }

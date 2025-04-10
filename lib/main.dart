@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -35,7 +34,9 @@ void main() async {
           child: EasyLocalization(
             supportedLocales: const [
               Locale('en'),
+
               Locale('ar'),
+
               // Locale('de'),
               // Locale('it'),
               // Locale('ko'),

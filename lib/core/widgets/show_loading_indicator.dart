@@ -72,6 +72,7 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator>
             ImageAssets.logoImage,
             height: 50.h,
             width: 50.h,
+            
           ),
         ),
       ],
