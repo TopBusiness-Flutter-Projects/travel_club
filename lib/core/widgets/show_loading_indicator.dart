@@ -51,13 +51,14 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator>
      Stack(
       alignment: Alignment.center,
       children: [
-        // Platform specific loading indicator in the background
-        Platform.isIOS
-            ? const CupertinoActivityIndicator(
-                animating: true,
-                radius: 30,
-              )
-            : SizedBox(
+        // // Platform specific loading indicator in the background
+        // Platform.isIOS
+        //     ? const CupertinoActivityIndicator(
+        //         animating: true,
+        //         radius: 30,
+        //       )
+        //     :
+        SizedBox(
                 height: 55.h, // Increased size
                 width: 55.h, // Increased size
                 child: CircularProgressIndicator(
@@ -72,6 +73,7 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator>
             ImageAssets.logoImage,
             height: 50.h,
             width: 50.h,
+            
           ),
         ),
       ],
@@ -79,7 +81,7 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator>
      Platform.isIOS
             ? const CupertinoActivityIndicator(
                 animating: true,
-                radius: 30,
+                // radius: 30,
               )
             : CircularProgressIndicator(
               color: AppColors.primary,

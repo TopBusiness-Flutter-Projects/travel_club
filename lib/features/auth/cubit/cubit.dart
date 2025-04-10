@@ -188,7 +188,7 @@ class LoginCubit extends Cubit<LoginState> {
         log("auth code: ${auth.user?.uid}");
         log("Apple Sign-In successful!");
         if (auth.user != null) {
-          loginWithApple(context, name: auth.user?.displayName?? 'Apple Account', email: auth.user!.email!);
+          loginWithApple(context, name: auth.user?.displayName?? 'Apple Account', email: auth.user!.email! , phone: auth.user?.phoneNumber??'' , imageUrl: auth.user?.photoURL??'');
         }else{
 
         }
@@ -242,8 +242,42 @@ class LoginCubit extends Cubit<LoginState> {
       }
     });
   }
-loginWithApple(BuildContext context, {required String name ,required String email , String? image }) async {
-
+loginWithApple(BuildContext context, {required String name ,required String email ,required  String phone ,required String imageUrl }) async {
+  emit(LoadingLoginState());
+  AppWidget.createProgressDialog(context, AppTranslations.loading);
+  final response = await api.loginWithApple(email: email, name: name, phone: phone ,imageUrl: imageUrl );
+  response.fold((l) {
+    Navigator.pop(context);
+    errorGetBar(AppTranslations.error);
+    emit(FailureLoginState());
+  }, (r) {
+    debugPrint("code: ${r.status.toString()}");
+    if (r.status != 200 && r.status != 201) {
+      Navigator.pop(context);
+      errorGetBar(r.msg!);
+    } else {
+      loginModel = r;
+      phoneController.clear();
+      passwordControllerLogin.clear();
+      context.read<MainCubit>().changePage(0);
+      emit(SuccessLoginState());
+      Navigator.pop(context);
+      successGetBar(r.msg);
+      prefs.setBool("ISLOGGED", true);
+      Preferences.instance.setUser(r);
+      if (r.data?.isRegister != null) {
+        r.data?.isRegister??false ?
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.apply, (route) => false)
+            :
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.mainRoute, (route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.mainRoute, (route) => false);
+      }
+    }
+  });
 }
   // login google
   loginWithGoogle(BuildContext context, {required String accessToken}) async {
@@ -264,7 +298,6 @@ loginWithApple(BuildContext context, {required String name ,required String emai
         phoneController.clear();
         passwordControllerLogin.clear();
         context.read<MainCubit>().changePage(0);
-
         emit(SuccessLoginState());
         Navigator.pop(context);
         successGetBar(r.msg);

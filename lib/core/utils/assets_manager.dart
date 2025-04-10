@@ -6,7 +6,7 @@ class ImageAssets {
   //images
   static const String appIcon = '$imagePath/logo_app.png';
   static const String splashLogo = '$imagePath/splash_logo.png';
-  static const String logoImage = '$imagePath/logo_app.png';
+  static const String logoImage = '$imagePath/logo_app2.png';
   static const String profileDefault = '$imagePath/1.png';
   static const String topBusinessImage = '$imagePath/topbusiness.png';
   static const String introBackgroundImage = '$imagePath/on1.png';

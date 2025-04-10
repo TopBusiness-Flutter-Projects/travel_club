@@ -51,7 +51,8 @@ class _AccountbodyState extends State<Accountbody> {
                     // crossAxisAlignment:   CrossAxisAlignment.start,
                     children: [
                       if (AppConst.isLogged && cubit.loginModel.data != null)
-                        if (!cubit.loginModel.data!.isGoogle!)
+                        if (cubit.loginModel.data!.isSocial != 1)
+                        // if (!cubit.loginModel.data!.isGoogle!)
                           CustomRowProfile(
                             title: AppTranslations.personalData,
                             onTap: () {

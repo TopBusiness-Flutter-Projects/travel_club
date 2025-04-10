@@ -6,6 +6,7 @@ class EndPoints {
   //////////////////////////////////////////////////////
   static const String loginUrl = '${baseUrl}login';
   static const String loginGoogleUrl = '${baseUrl}login/google';
+  static const String loginAppleUrl = '${baseUrl}login/apple';
   static const String registerUrl = '${baseUrl}register';
   static const String checkOtpUrl = '${baseUrl}checkOtp';
   static const String logoutUrl = '${baseUrl}logout';
