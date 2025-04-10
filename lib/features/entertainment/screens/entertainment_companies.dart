@@ -36,7 +36,7 @@ class _EntertainmentCompaniesState extends State<EntertainmentCompanies> {
                   style: getMediumStyle(fontSize: 14.sp),
                 ),
                 Expanded(
-                  child: cubit.getOrganizationsModel?.data==null?const Center(child: CircularProgressIndicator(),):      cubit.getOrganizationsModel!.data!.isEmpty? Center(child: Text(AppTranslations.noData)):
+                  child: cubit.getOrganizationsModel?.data==null?const Center(child: CustomLoadingIndicator(),):      cubit.getOrganizationsModel!.data!.isEmpty? Center(child: Text(AppTranslations.noData)):
                   ListView.builder(
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
@@ -49,9 +49,7 @@ class _EntertainmentCompaniesState extends State<EntertainmentCompanies> {
                                   context, Routes.detailsEntertainment,
                                 arguments:EntertainmentDetailsArgs(
                                   id: cubit.getOrganizationsModel!.data![index].id ?? 0,
-                                ) 
-
-
+                                )
                               );
                             },
                             child: CustomContainerCompanies(

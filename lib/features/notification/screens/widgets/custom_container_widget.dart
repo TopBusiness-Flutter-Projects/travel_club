@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import '../../../../core/exports.dart';
+import '../../../entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
+import '../../../food/screens/details_of_food/screens/details_food_screen.dart';
+import '../../../main_screen/cubit/cubit.dart';
 import '../../../residence/view/screens/lodge_details.dart';
 import '../../../residence/view/screens/lodges_screen.dart';
 import '../../cubit/notification_cubit.dart';
@@ -25,11 +28,46 @@ class CustomContainerWidget extends StatelessWidget {
                       placeId: data.referenceId??0,
                       title: data.title.toString()));
              // Navigator.pushNamed(context, Routes.)
-            }else if(data.referenceTable=="lodges"){
+            }
+            else if(data.referenceTable=="lodges"){
               log(data.referenceId.toString());
 
               Navigator.pushNamed(context, Routes.lodgeDetailsRoute,
                   arguments: LodgeDetailsArguments(lodgeId: data.referenceId??0));
+            }
+            else if(data.referenceTable=="offers"||data.referenceTable=="suitcases"){
+              log(data.referenceId.toString());
+              context.read<MainCubit>().changePage(0);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.mainRoute,
+                    (route) => false,
+              );
+            }
+            else if(data.referenceTable == "restaurants"){
+              log(data.referenceId.toString());
+              Navigator.pushNamed( context,Routes.detailsFoodRoute,
+                  arguments: DetailsFoodArgs(id:  data.referenceId.toString()));
+            }
+            else if(data.referenceTable == "organizations"){
+              Navigator.pushNamed(
+                  context, Routes.detailsEntertainment,
+                  arguments:EntertainmentDetailsArgs(
+                    id:  data.referenceId ?? 0,
+                  )
+
+
+              );
+            }
+            else if(data.referenceTable == "companies"){
+              Navigator.pushNamed(
+                  context, Routes.detailsEntertainment,
+                  arguments:EntertainmentDetailsArgs(
+                    id:  data.referenceId ?? 0,
+                  )
+
+
+              );
             }
          if (data.seen==0){
            data.seen=1;
@@ -66,7 +104,7 @@ class CustomContainerWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("تم قبول حجز بنجاح من قبل فندق مرسي علم"),
+                          Text(data.body.toString()??""),
                           SizedBox(
                             height: getVerticalPadding(context) * 1,
                           ),
@@ -79,12 +117,13 @@ class CustomContainerWidget extends StatelessWidget {
                                 color: AppColors.grey,
                               ),
                               Text(
-                                "٢٠ يناير ٢٠٢٢",
+                               data.createdAt.toString().substring(0,10),
                                 style: getMediumStyle(
                                     color: AppColors.grey, fontSize: 14.sp),
                               ),
                             ],
-                          )
+                          ),
+
                         ],
                       ),
                     )

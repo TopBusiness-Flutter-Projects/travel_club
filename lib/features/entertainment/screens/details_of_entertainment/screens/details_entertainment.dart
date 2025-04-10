@@ -50,7 +50,7 @@ class _DetailsEntertainmentState extends State<DetailsEntertainment> {
             child: Scaffold(
               body: cubit.getOrganizationsDetailsModel?.data == null
                   ? Center(
-                      child: CircularProgressIndicator(),
+                      child: CustomLoadingIndicator(),
                     )
                   : SizedBox(
                       height: getHeightSize(context),

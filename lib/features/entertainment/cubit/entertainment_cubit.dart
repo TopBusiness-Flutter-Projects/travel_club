@@ -80,6 +80,7 @@ class EntertainmentCubit extends Cubit<EntertainmentState> {
   //get orginization
   GetOrganizationsModel? getOrganizationsModel;
   getOrginization({required String id}) async {
+    getOrganizationsModel=null;
     emit(LoadingOrganizers());
     final res = await api.getOrganizations(id: id);
     res.fold((l) {
@@ -93,6 +94,7 @@ class EntertainmentCubit extends Cubit<EntertainmentState> {
 
   GetOrganizationDetails? getOrganizationsDetailsModel;
   getOrginizationDetails({required String id}) async {
+    getOrganizationsDetailsModel=null;
     emit(LoadingOrganizersDetails());
     final res = await api.getOrganizationsDetails(id: id);
     res.fold((l) {

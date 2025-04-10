@@ -46,7 +46,7 @@ class _FoodScreenState extends State<FoodScreen> {
             Expanded(
               child:
               state is LoadingGetFood || cubit.getRestaurantModel==null?
-              CustomLoadingIndicator():
+              Center(child: CustomLoadingIndicator()):
 
               cubit.getRestaurantModel?.data!.isEmpty??true?Center(child: NoDataWidget(title: "no_data".tr()),):
               ListView.separated(
