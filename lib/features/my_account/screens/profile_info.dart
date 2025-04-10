@@ -86,13 +86,27 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       height: getVerticalPadding(context) * 1,
                     ),
                     //rounded button
-                    CustomRoundedButton(
-                      title: AppTranslations.changeImage,
-                      width: 195.w,
-                      height: 41.h,
+                    GestureDetector(
                       onTap: () {
                         imageCubit.showImageSourceDialog(context);
                       },
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.r),
+                            color: AppColors.white,
+                            border: Border.all(
+                              color: AppColors.primary,
+                            ),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12.w, vertical: 5.h),
+                          child: Text(
+                            AppTranslations.changeImage,
+                            style: getRegularStyle(
+                              color: AppColors.primary,
+                              fontSize: 14.sp,
+                            ),
+                          )),
                     ),
                     SizedBox(
                       height: getVerticalPadding(context) * 1,
@@ -114,17 +128,19 @@ class _ProfileInfoState extends State<ProfileInfo> {
                         return null;
                       },
                     ),
-                    //phone
-                    CustomTextField(
-                      controller: cubit.phoneController,
-                      enabled: false,
-                      title: AppTranslations.phone,
-                      hintText: AppTranslations.writePhone,
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SvgPicture.asset(AppIcons.phone),
+                    if (cubit.loginModel.data?.isSocial == 1)
+
+                      //phone
+                      CustomTextField(
+                        controller: cubit.phoneController,
+                        enabled: false,
+                        title: AppTranslations.phone,
+                        hintText: AppTranslations.writePhone,
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SvgPicture.asset(AppIcons.phone),
+                        ),
                       ),
-                    ),
 
                     //custom button
                     Padding(
@@ -139,17 +155,18 @@ class _ProfileInfoState extends State<ProfileInfo> {
                         },
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, Routes.updatePassword);
-                      },
-                      child: Text(
-                        AppTranslations.changePassword,
-                        style: getUnderLine(
-                            color: AppColors.primary, fontSize: 14.sp),
+                    if (cubit.loginModel.data?.isSocial == 1)
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushReplacementNamed(
+                              context, Routes.updatePassword);
+                        },
+                        child: Text(
+                          AppTranslations.changePassword,
+                          style: getUnderLine(
+                              color: AppColors.primary, fontSize: 14.sp),
+                        ),
                       ),
-                    ),
                     SizedBox(
                       height: 20.h,
                     )

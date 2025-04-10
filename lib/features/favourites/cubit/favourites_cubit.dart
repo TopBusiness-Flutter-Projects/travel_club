@@ -80,16 +80,11 @@ addAndRemoveFav({required   BuildContext context,required String id,required boo
             emit(LoadedReservationFavourite());
   });
     }
-// changeFavourite({required bool isFav}) {
-//     isFav = !isFav;
-//   //  isFavourite=isFav;
-//     emit(ChangeFavourite());
-//   }
+
 updateFavouritesInModels(BuildContext context,{required bool isFav,required String id, required int selectedModuleIdd})async{
   if(selectedModuleIdd==1){
 
 if (context.read<ResidenceCubit>().placesModel.data != null) {
-
 
     for(int i=0;i<context.read<ResidenceCubit>().placesModel.data!.lodges!.length;i++){
       if(context.read<ResidenceCubit>().placesModel.data!.lodges![i].id.toString()==id){

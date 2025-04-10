@@ -57,7 +57,6 @@ class NotificationService {
       :
       navigatorKey.currentState?.pushNamed(Routes.notificationScreen);
     });
-
     // Request notification permissions
     NotificationSettings settings = await _messaging.requestPermission(
       alert: true,
@@ -65,7 +64,6 @@ class NotificationService {
       sound: true,
     );
     print('User granted permission: ${settings.authorizationStatus}');
-
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     FirebaseMessaging.onMessage.listen((message) {
       log("recieved onMessage ${message.data.toString()}");
@@ -77,7 +75,8 @@ class NotificationService {
     });
 
     await _getToken();
-  }
+
+}
 
   /// **Handles Background Notifications**
   static Future<void> _firebaseMessagingBackgroundHandler(
