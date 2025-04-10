@@ -11,7 +11,7 @@ import 'features/food/screens/details_of_food/screens/details_food_screen.dart';
 import 'features/main_screen/cubit/cubit.dart';
 import 'features/residence/view/screens/lodge_details.dart';
 import 'features/residence/view/screens/lodges_screen.dart';
-
+RemoteMessage? initialMessageRcieved;
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
   factory NotificationService() => _instance;
@@ -25,9 +25,8 @@ class NotificationService {
       FlutterLocalNotificationsPlugin();
 
   int _notificationCounter = 0;
-  bool isWithNotification = false;
-  String notificationId = "0";
-  String notificationType = "";
+
+
 
   /// **Initialize Notifications**
   Future<void> initialize() async {
@@ -38,11 +37,18 @@ class NotificationService {
   /// **Firebase Messaging Initialization**
   Future<void> _initializeFirebaseMessaging() async {
     // Handle when app is completely closed and opened via notification
+    // RemoteMessage? initialMessage = await _messaging.getInitialMessage();
+    // if (initialMessage != null) {
+    //   isWithNotification = true;
+    //   notificationType = initialMessage.data['reference_table'] ?? "";
+    //   notificationId = initialMessage.data['id'] ?? "-1";
+    // }
     RemoteMessage? initialMessage = await _messaging.getInitialMessage();
     if (initialMessage != null) {
-      isWithNotification = true;
-      notificationType = initialMessage.data['type'] ?? "";
-      notificationId = initialMessage.data['id'] ?? "-1";
+      initialMessageRcieved = initialMessage;
+      // notificationType = initialMessage.data['reference_table'] ?? "";
+      // notificationId = initialMessage.data['reference_id'] ?? "";
+      //! open
     }
 
     // Handle notification click when app is in background
@@ -56,14 +62,14 @@ class NotificationService {
       }
       else if(message.data['reference_table'] == "lodges"){
         navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
-            arguments:
-            LodgeDetailsArguments(lodgeId: int.tryParse(message.data['reference_id']) ?? 0));
+            arguments: LodgeDetailsArguments(lodgeId: int.tryParse(message.data['reference_id']) ?? 0));
       }
       else if(message.data['reference_table'] == "offers"||message.data['reference_table'] == "suitcases"){
-        // navigatorKey .read<MainCubit>().changePage(0);
-        navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
-            arguments:
-            LodgeDetailsArguments(lodgeId: int.tryParse(message.data['reference_id']) ?? 0));
+      //   navigatorKey .read<MainCubit>().changePage(0);
+        navigatorKey.currentState?.pushNamed(Routes.mainRoute);
+      //   navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
+      //       arguments:
+      //       LodgeDetailsArguments(lodgeId: int.tryParse(message.data['reference_id']) ?? 0));
       }
       else if(message.data['reference_table'] == "restaurants"){
         navigatorKey.currentState?.pushNamed( Routes.detailsFoodRoute,

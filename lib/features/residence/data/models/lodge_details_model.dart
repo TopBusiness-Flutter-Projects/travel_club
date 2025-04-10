@@ -43,7 +43,7 @@ class Data {
   double? latitude;
   double? longitude;
   int? placeId;
-  int? vat;
+  dynamic? vat;
   List<Media>? media;
   List<Facility>? facilities;
   Rule? rule;
