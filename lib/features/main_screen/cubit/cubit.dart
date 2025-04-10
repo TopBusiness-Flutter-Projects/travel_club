@@ -22,6 +22,4 @@ class MainCubit extends Cubit<MainState> {
     currentpage = index;
     emit(ChangepageIndex());
   }
-
-
 }

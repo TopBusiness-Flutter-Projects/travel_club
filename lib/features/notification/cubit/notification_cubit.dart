@@ -50,7 +50,7 @@ class NotificationCubit extends Cubit<NotificationState> {
       if (r.status == 200 || r.status == 201) {
        // if(r.)
      //   getNotification();
-        successGetBar(r.msg);
+        //successGetBar(r.msg);
       } else if (r.status == 401 || r.status == 407 || r.status == 403) {
         errorGetBar(r.msg ?? AppTranslations.error);
       }

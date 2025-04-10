@@ -21,9 +21,14 @@ import 'core/utils/app_strings.dart';
 import 'package:travel_club/injector.dart' as injector;
 import 'features/auth/cubit/cubit.dart';
 import 'features/entertainment/cubit/entertainment_cubit.dart';
+import 'features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
 import 'features/food/cubit/food_cubit.dart';
+import 'features/food/screens/details_of_food/screens/details_food_screen.dart';
+import 'features/main_screen/screens/main_screen.dart';
 import 'features/notification/cubit/notification_cubit.dart';
 import 'features/other_services/cubit/other_services_cubit.dart';
+import 'features/residence/view/screens/lodge_details.dart';
+import 'features/residence/view/screens/lodges_screen.dart';
 import 'features/splash/cubit/cubit.dart';
 import 'features/splash/screens/splash_screen.dart';
 
@@ -102,12 +107,44 @@ class MyApp extends StatelessWidget {
           darkTheme: ThemeData.light(),
           debugShowCheckedModeBanner: false,
           title: AppStrings.appName,
-              home:notificationService.isWithNotification ?
+              home:
+             initialMessageRcieved != null ?
             // widget.newsDetailsModel == null?
-              const NotificationScreen():
-             // NewsDetailsScreen(newsDetailsModel: widget.newsDetailsModel!):
-              const SplashScreen(),
+             initialMessageRcieved?.data['reference_table'] == 'places'?
+             LodgesScreen(
+               arguments:  LodgesScreenArguments(
+                 placeId:int.tryParse(initialMessageRcieved?.data['reference_id']) ??0,
+                 title: initialMessageRcieved?.data['reference_name']),
+             ):
+             initialMessageRcieved?.data['reference_table'] == 'lodges'?
+             LodgeDetailsScreen(args: LodgeDetailsArguments(
+               isDeeplink: true,
+                 lodgeId: initialMessageRcieved?.data['reference_id'])):
 
+             initialMessageRcieved?.data['reference_table'] == 'companies'?
+             DetailsEntertainment(args:
+             EntertainmentDetailsArgs(
+               isDeeplink: true,
+               id:  int.tryParse(initialMessageRcieved?.data['reference_id']) ?? 0,
+             )):
+             initialMessageRcieved?.data['reference_table'] == 'organizations'?
+             DetailsEntertainment(
+                 args: EntertainmentDetailsArgs(
+                   isDeeplink: true,
+               id:  initialMessageRcieved?.data['reference_id']?? 0,
+             )):
+             initialMessageRcieved?.data['reference_table'] == "offers"||initialMessageRcieved?.data['reference_table'] == "suitcases"?
+                 MainScreen():
+             initialMessageRcieved?.data['reference_table'] == 'restaurants'?
+             DetailsFood(args:
+
+             DetailsFoodArgs(
+               isDeeplink: true,
+                 id: initialMessageRcieved?.data['reference_id'])
+    )
+             :NotificationScreen():
+             // NewsDetailsScreen(newsDetailsModel: widget.newsDetailsModel!):
+               SplashScreen(),
           onGenerateRoute: AppRoutes.onGenerateRoute,
         ));
   }

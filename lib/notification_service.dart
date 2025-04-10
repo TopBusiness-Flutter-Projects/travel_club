@@ -6,9 +6,12 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
 
+import 'features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
+import 'features/food/screens/details_of_food/screens/details_food_screen.dart';
+import 'features/main_screen/cubit/cubit.dart';
 import 'features/residence/view/screens/lodge_details.dart';
 import 'features/residence/view/screens/lodges_screen.dart';
-
+RemoteMessage? initialMessageRcieved;
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
   factory NotificationService() => _instance;
@@ -22,9 +25,8 @@ class NotificationService {
       FlutterLocalNotificationsPlugin();
 
   int _notificationCounter = 0;
-  bool isWithNotification = false;
-  String notificationId = "0";
-  String notificationType = "";
+
+
 
   /// **Initialize Notifications**
   Future<void> initialize() async {
@@ -35,27 +37,65 @@ class NotificationService {
   /// **Firebase Messaging Initialization**
   Future<void> _initializeFirebaseMessaging() async {
     // Handle when app is completely closed and opened via notification
+    // RemoteMessage? initialMessage = await _messaging.getInitialMessage();
+    // if (initialMessage != null) {
+    //   isWithNotification = true;
+    //   notificationType = initialMessage.data['reference_table'] ?? "";
+    //   notificationId = initialMessage.data['id'] ?? "-1";
+    // }
     RemoteMessage? initialMessage = await _messaging.getInitialMessage();
     if (initialMessage != null) {
-      isWithNotification = true;
-      notificationType = initialMessage.data['type'] ?? "";
-      notificationId = initialMessage.data['id'] ?? "-1";
+      initialMessageRcieved = initialMessage;
+      // notificationType = initialMessage.data['reference_table'] ?? "";
+      // notificationId = initialMessage.data['reference_id'] ?? "";
+      //! open
     }
 
     // Handle notification click when app is in background
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
       log("recieved onMessageOpenedApp ${message.data.toString()}");
-      message.data['reference_table'] == 'places'?
-      navigatorKey.currentState?.pushNamed( Routes.hotelsScreen,
-          arguments: LodgesScreenArguments(
-              placeId:int.tryParse(message.data['reference_id']) ??0,
-              title: message.data['reference_name'])):
-      message.data['reference_table'] == "lodges"?
-      navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
-      arguments:
-      LodgeDetailsArguments(lodgeId: int.tryParse(message.data['reference_id']) ?? 0))
-      :
-      navigatorKey.currentState?.pushNamed(Routes.notificationScreen);
+      if(message.data['reference_table'] == "places"){
+        navigatorKey.currentState?.pushNamed( Routes.hotelsScreen,
+            arguments: LodgesScreenArguments(
+                placeId:int.tryParse(message.data['reference_id']) ??0,
+                title: message.data['reference_name']));
+      }
+      else if(message.data['reference_table'] == "lodges"){
+        navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
+            arguments: LodgeDetailsArguments(lodgeId: int.tryParse(message.data['reference_id']) ?? 0));
+      }
+      else if(message.data['reference_table'] == "offers"||message.data['reference_table'] == "suitcases"){
+      //   navigatorKey .read<MainCubit>().changePage(0);
+        navigatorKey.currentState?.pushNamed(Routes.mainRoute);
+      //   navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
+      //       arguments:
+      //       LodgeDetailsArguments(lodgeId: int.tryParse(message.data['reference_id']) ?? 0));
+      }
+      else if(message.data['reference_table'] == "restaurants"){
+        navigatorKey.currentState?.pushNamed( Routes.detailsFoodRoute,
+            arguments: DetailsFoodArgs(id: message.data['reference_id'].toString()));
+      }
+      else if(message.data['reference_table']== "companies"){
+        navigatorKey.currentState?.pushNamed(
+            Routes.detailsEntertainment,
+            arguments:EntertainmentDetailsArgs(
+              id:  int.tryParse(message.data['reference_id']) ?? 0,
+            )
+        );
+      }
+      else if(message.data['reference_table'] == "organizations"){
+        navigatorKey.currentState?.pushNamed(
+            Routes.detailsEntertainment,
+            arguments:EntertainmentDetailsArgs(
+              id:  message.data['reference_id']?? 0,
+            )
+        );
+      }
+      else{
+        navigatorKey.currentState?.pushNamed(Routes.notificationScreen);
+
+      }
+
     });
     // Request notification permissions
     NotificationSettings settings = await _messaging.requestPermission(
@@ -147,12 +187,43 @@ class NotificationService {
                   placeId:int.tryParse(message['reference_id']) ??0,
                   title: message['reference_name']));
 
-        }else if(message['reference_table'] == "lodges"){
+        }
+        else if(message['reference_table'] == "lodges"){
           print("lodes");
           navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
               arguments:
               LodgeDetailsArguments(lodgeId: int.tryParse(message['reference_id']) ?? 0));
-        } else {
+        }
+        else if(message['reference_table'] == "offers"||message['reference_table'] == "suitcases"){
+          // navigatorKey .read<MainCubit>().changePage(0);
+          navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
+              arguments:
+              LodgeDetailsArguments(lodgeId: int.tryParse(message['reference_id']) ?? 0));
+        }
+        else if(message['reference_table'] == "restaurants"){
+          navigatorKey.currentState?.pushNamed( Routes.detailsFoodRoute,
+              arguments: DetailsFoodArgs(id: message['reference_id'].toString()));
+        }
+        else if(message['reference_table']== "companies"){
+          navigatorKey.currentState?.pushNamed(
+               Routes.detailsEntertainment,
+              arguments:EntertainmentDetailsArgs(
+                id:  int.tryParse(message['reference_id']) ?? 0,
+              )
+
+
+          );
+        }
+
+        else if(message['reference_table'] == "organizations"){
+          navigatorKey.currentState?.pushNamed(
+              Routes.detailsEntertainment,
+              arguments:EntertainmentDetailsArgs(
+                id:  message['reference_id']?? 0,
+              )
+          );
+        }
+        else {
               navigatorKey.currentState?.pushNamed(Routes.notificationScreen);
             }
           }

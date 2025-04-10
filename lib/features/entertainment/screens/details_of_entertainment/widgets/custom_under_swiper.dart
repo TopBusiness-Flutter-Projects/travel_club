@@ -39,11 +39,13 @@ class ContainerUnderSwiperEntertainment  extends StatelessWidget {
                   AboutWidget(about: cubit.getOrganizationsDetailsModel?.data?.about.toString()??"", lat: cubit.getOrganizationsDetailsModel?.data?.latitude.toString()??"0.0", long:  cubit.getOrganizationsDetailsModel?.data?.longitude.toString()??"0.0",)
                 else...[
                   SizedBox(height: 9.h,),
-                  ListView.separated(
+                  cubit.getOrganizationsDetailsModel?.data==null?Center(child: CustomLoadingIndicator(),):
+                  cubit.getOrganizationsDetailsModel?.data?.wayServices?.isEmpty??false?Center(child: Text(AppTranslations.noData),):     ListView.separated(
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
                     itemCount: cubit.getOrganizationsDetailsModel?.data?.wayServices?.length??0, itemBuilder: (BuildContext context, int index) {
-                    return CustomServiceContainer(wayService: cubit.getOrganizationsDetailsModel?.data?.wayServices?[index]??WayService(),);
+                    return CustomServiceContainer(
+                      wayService: cubit.getOrganizationsDetailsModel?.data?.wayServices?[index]??WayService(),);
                           }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10.h); },),
                   SizedBox(height: 100.h,)
                 ]
