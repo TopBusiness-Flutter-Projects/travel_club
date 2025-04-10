@@ -31,15 +31,20 @@ class CustomContainerMyAccount extends StatelessWidget {
               SizedBox(
                 height: 30.h,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(cubit.loginModel.data!.name ?? ""),
-                    Text(cubit.loginModel.data!.email ??
-                        cubit.loginModel.data!.phone.toString()),
-                  ],
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(cubit.loginModel.data!.name ?? "" , style: getMediumStyle(),),
+                      Text(cubit.loginModel.data!.email ??
+                          cubit.loginModel.data!.phone.toString(),style: getRegularStyle(
+                        fontSize: 14.sp
+                      ),),
+
+                    ],
+                  ),
                 ),
               )
             ],

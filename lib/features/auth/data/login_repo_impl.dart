@@ -37,8 +37,7 @@ class LoginRepoImpl {
     }
   }
 /// Google login
-  Future<Either<Failure, LoginModel>> loginWithGoogle({
-    
+  Future<Either<Failure, LoginModel>> loginWithGoogle({    
     required String accessToken,
   }) async {
     String? notificationToken =
@@ -82,6 +81,31 @@ class LoginRepoImpl {
           'phone': phone,
           'name': name,
           if (otp != null) "otp": otp
+        },
+      );
+      return Right(LoginModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+ Future<Either<Failure, LoginModel>> loginWithApple(
+      {required String email,
+      required String phone,
+      required String imageUrl,
+      required String name}) async {
+    String? notificationToken =
+        await Preferences.instance.getNotificationToken();
+    String deviceType = Platform.isAndroid ? 'android' : 'ios';
+    try {
+      var response = await api.post(
+         EndPoints.loginAppleUrl,
+        body: {
+          'device_type': deviceType,
+          'device_token': notificationToken ?? "device_token",
+          'email': email,
+         if (phone.isNotEmpty) 'phone': phone,
+          if (imageUrl.isNotEmpty) 'image': imageUrl,
+          'name': name,
         },
       );
       return Right(LoginModel.fromJson(response));
