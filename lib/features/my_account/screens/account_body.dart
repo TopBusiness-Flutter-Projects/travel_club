@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:travel_club/core/exports.dart';
@@ -118,6 +119,16 @@ class _AccountbodyState extends State<Accountbody> {
                           await Share.share(url);
                         },
                       ),
+                      if (AppConst.isLogged)  
+                        CustomRowProfile(
+                        title:"delete_account".tr(),
+                        onTap: () {
+                          deleteAccountDialog(context, onPressed: () {
+                          context.read<LoginCubit>().deleteAccount(context);
+                        });
+                        },
+                      ),
+                  
                       CustomRowProfile(
                         title: AppConst.isLogged
                             ? AppTranslations.logout

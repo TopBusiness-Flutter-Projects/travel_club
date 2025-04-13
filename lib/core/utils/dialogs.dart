@@ -1,12 +1,13 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get_core/get_core.dart';
+
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 import 'package:travel_club/core/exports.dart';
-import 'package:travel_club/core/utils/app_colors.dart';
-import 'package:travel_club/core/utils/assets_manager.dart';
+// import 'package:easy_localization/easy_localization.dart' as easy;
 
 /*----------------------------------------------------------------------------*/
 /*------------------------------  Error Get Bar  -----------------------------*/
@@ -40,7 +41,7 @@ errorGetBar(String message) {
 successGetBar(String? message) {
   Get.showSnackbar(GetSnackBar(
     messageText: Text(
-      message ?? 'success'.tr,
+      message ?? 'success'.tr(),
       style: Get.textTheme.bodyMedium!.copyWith(
         color: Colors.white,
         height: 1.5,
@@ -244,4 +245,25 @@ showExitDialog(BuildContext context) async {
   //     );
   //   },
   // );
+}
+
+deleteAccountDialog(BuildContext context, {void Function()? onPressed}) async {
+  await AwesomeDialog(
+    context: context,
+    customHeader: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Image.asset(
+        ImageAssets.logoImage,
+      ),
+    ),
+    animType: AnimType.topSlide,
+    showCloseIcon: true,
+    padding: EdgeInsets.all(10.w),
+    title: "delete_account_desc".tr(),
+    titleTextStyle: getRegularStyle(fontSize: 16.sp),
+    btnOkText: "delete".tr(),
+    btnOkOnPress: onPressed,
+    btnCancelOnPress: () {},
+    btnCancelText: "cancel".tr(),
+  ).show();
 }

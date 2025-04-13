@@ -305,5 +305,9 @@
   "raise_photo_or_file": "Upload Photo or File",
   "price_of_foods" : "Price of Foods",
   "unKnown_error_occurred" : "Unknown Error Occurred, please try again later",
-  "server_error_occurred" : "Server Error Occurred, please try again later"
+  "server_error_occurred" : "Server Error Occurred, please try again later",
+  "delete_account_desc": "Are you sure you want to delete this account?",
+  "delete": "Delete",
+  "delete_account": "Delete Account",
+  "_" : " "
 }

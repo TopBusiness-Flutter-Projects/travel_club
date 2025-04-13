@@ -315,6 +315,9 @@
   "raise_photo_or_file": "Bild oder Datei hochladen",
   "unKnown_error_occurred": "Es ist ein unbekannter Fehler aufgetreten, bitte versuchen Sie es später erneut.",
   "server_error_occurred": "Es ist ein Serverfehler aufgetreten, bitte versuchen Sie es später erneut.",
+"delete_account_desc": "Sind Sie sicher, dass Sie dieses Konto löschen möchten?",
+"delete": "Löschen",
+"delete_account": "Konto löschen",
 
   "--": "--"
 

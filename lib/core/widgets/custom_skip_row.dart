@@ -19,7 +19,7 @@ class CustomSkipRow extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(4.h),
           child: Image.asset(
-            ImageAssets.appIcon,
+            ImageAssets.logoImage,
           ),
         ),
       ),

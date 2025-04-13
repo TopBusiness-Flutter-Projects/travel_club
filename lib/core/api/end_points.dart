@@ -10,6 +10,7 @@ class EndPoints {
   static const String registerUrl = '${baseUrl}register';
   static const String checkOtpUrl = '${baseUrl}checkOtp';
   static const String logoutUrl = '${baseUrl}logout';
+  static const String deleteAccountUrl = '${baseUrl}delete-account';
   static const String forgetPasswordUrl = '${baseUrl}forgetPassword';
   static const String resetPasswordUrl = '${baseUrl}resetPassword';
   static const String checkLoyaltyPointsUrl = '${baseUrl}checkLoyaltyPoints';
