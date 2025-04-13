@@ -9,6 +9,7 @@ import 'package:travel_club/core/preferences/preferences.dart';
 import 'features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
 import 'features/food/screens/details_of_food/screens/details_food_screen.dart';
 import 'features/main_screen/cubit/cubit.dart';
+import 'features/my_bookings/cubit/my_bookings_cubit.dart';
 import 'features/residence/view/screens/lodge_details.dart';
 import 'features/residence/view/screens/lodges_screen.dart';
 RemoteMessage? initialMessageRcieved;
@@ -60,7 +61,8 @@ class NotificationService {
                 placeId:int.tryParse(message.data['reference_id']) ??0,
                 title: message.data['reference_name']));
       }
-      else if(message.data['reference_table'] == "lodges"){
+      else
+        if(message.data['reference_table'] == "lodges"){
         navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
             arguments: LodgeDetailsArguments(lodgeId: int.tryParse(message.data['reference_id']) ?? 0));
       }
@@ -91,6 +93,73 @@ class NotificationService {
             )
         );
       }
+        else if(message.data['reference_table']=="room_reservations"){
+          // log(data.referenceId.toString());
+          navigatorKey.currentContext?.read<MainCubit>().changePage(1);
+          navigatorKey.currentContext?.read<MyReservationsCubit>() . selectedModuleId=1;
+          navigatorKey.currentContext?.read<MyReservationsCubit>() . changeModule(1);
+          navigatorKey.currentState?.pushNamedAndRemoveUntil(
+            Routes.mainRoute,
+                (route) => false,
+          );
+        }  else if(message.data['reference_table']=="bus_reservations"){
+          // log(data.referenceId.toString());
+          navigatorKey.currentContext?.read<MainCubit>().changePage(1);
+          navigatorKey.currentContext?.read<MyReservationsCubit>() . selectedModuleId=2;
+          navigatorKey.currentContext?.read<MyReservationsCubit>() . changeModule(2);
+          navigatorKey.currentState?.pushNamedAndRemoveUntil(
+            Routes.mainRoute,
+                (route) => false,
+          );
+        }else if(message.data['reference_table']=="organization_reservations"){
+          // log(data.referenceId.toString());
+          navigatorKey.currentContext?.read<MainCubit>().changePage(1);
+          navigatorKey.currentContext?.read<MyReservationsCubit>() . selectedModuleId=3;
+          navigatorKey.currentContext?.read<MyReservationsCubit>() . changeModule(3);
+          navigatorKey.currentState?.pushNamedAndRemoveUntil(
+            Routes.mainRoute,
+                (route) => false,
+          );
+        }else if(message.data['reference_table']=="restaurant_reservations"){
+          // log(data.referenceId.toString());
+          navigatorKey.currentContext?.read<MainCubit>().changePage(1);
+          navigatorKey.currentContext?.read<MyReservationsCubit>() . selectedModuleId=4;
+          navigatorKey.currentContext?.read<MyReservationsCubit>() . changeModule(4);
+          navigatorKey.currentState?.pushNamedAndRemoveUntil(
+            Routes.mainRoute,
+                (route) => false,
+          );
+        }
+      // else if(message.data['reference_table']=="bus_reservations"){
+      //   log(data.referenceId.toString());
+      //   context.read<MainCubit>().changePage(1);
+      //   context.read<MyReservationsCubit>() . selectedModuleId=2;
+      //   context.read<MyReservationsCubit>() . changeModule(2);
+      //   Navigator.pushNamedAndRemoveUntil(
+      //     context,
+      //     Routes.mainRoute,
+      //         (route) => false,
+      //   );
+      // } else if(message.data['reference_table']=="organization_reservations"){
+      //   log(data.referenceId.toString());
+      //   context.read<MainCubit>().changePage(1);
+      //   context.read<MyReservationsCubit>() . selectedModuleId=3;
+      //   context.read<MyReservationsCubit>() . changeModule(3);
+      //   Navigator.pushNamedAndRemoveUntil(
+      //     context,
+      //     Routes.mainRoute,
+      //         (route) => false,
+      //   );
+      // } else if(message.data['reference_table']=="restaurant_reservations"){
+      //   context.read<MainCubit>().changePage(1);
+      //   context.read<MyReservationsCubit>() . selectedModuleId=4;
+      //   context.read<MyReservationsCubit>() . changeModule(4);
+      //   Navigator.pushNamedAndRemoveUntil(
+      //     context,
+      //     Routes.mainRoute,
+      //         (route) => false,
+      //   );
+      // }
       else{
         navigatorKey.currentState?.pushNamed(Routes.notificationScreen);
 
@@ -188,7 +257,8 @@ class NotificationService {
                   title: message['reference_name']));
 
         }
-        else if(message['reference_table'] == "lodges"){
+        else
+          if(message['reference_table'] == "lodges"){
           print("lodes");
           navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
               arguments:
@@ -199,7 +269,43 @@ class NotificationService {
           navigatorKey.currentState?.pushNamed( Routes.lodgeDetailsRoute,
               arguments:
               LodgeDetailsArguments(lodgeId: int.tryParse(message['reference_id']) ?? 0));
-        }
+        }    else if(message['reference_table']=="room_reservations"){
+            // log(data.referenceId.toString());
+            navigatorKey.currentContext?.read<MainCubit>().changePage(1);
+            navigatorKey.currentContext?.read<MyReservationsCubit>() . selectedModuleId=1;
+            navigatorKey.currentContext?.read<MyReservationsCubit>() . changeModule(1);
+            navigatorKey.currentState?.pushNamedAndRemoveUntil(
+              Routes.mainRoute,
+                  (route) => false,
+            );
+          }  else if(message['reference_table']=="bus_reservations"){
+            // log(data.referenceId.toString());
+            navigatorKey.currentContext?.read<MainCubit>().changePage(1);
+            navigatorKey.currentContext?.read<MyReservationsCubit>() . selectedModuleId=2;
+            navigatorKey.currentContext?.read<MyReservationsCubit>() . changeModule(2);
+            navigatorKey.currentState?.pushNamedAndRemoveUntil(
+              Routes.mainRoute,
+                  (route) => false,
+            );
+          }else if(message['reference_table']=="organization_reservations"){
+            // log(data.referenceId.toString());
+            navigatorKey.currentContext?.read<MainCubit>().changePage(1);
+            navigatorKey.currentContext?.read<MyReservationsCubit>() . selectedModuleId=3;
+            navigatorKey.currentContext?.read<MyReservationsCubit>() . changeModule(3);
+            navigatorKey.currentState?.pushNamedAndRemoveUntil(
+              Routes.mainRoute,
+                  (route) => false,
+            );
+          }else if(message['reference_table']=="restaurant_reservations"){
+            // log(data.referenceId.toString());
+            navigatorKey.currentContext?.read<MainCubit>().changePage(1);
+            navigatorKey.currentContext?.read<MyReservationsCubit>() . selectedModuleId=4;
+            navigatorKey.currentContext?.read<MyReservationsCubit>() . changeModule(4);
+            navigatorKey.currentState?.pushNamedAndRemoveUntil(
+              Routes.mainRoute,
+                  (route) => false,
+            );
+          }
         else if(message['reference_table'] == "restaurants"){
           navigatorKey.currentState?.pushNamed( Routes.detailsFoodRoute,
               arguments: DetailsFoodArgs(id: message['reference_id'].toString()));

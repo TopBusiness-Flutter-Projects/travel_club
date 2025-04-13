@@ -15,6 +15,7 @@ import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/transportation/cubit/transportation_cubit.dart';
 import 'package:travel_club/notification_service.dart';
+import 'check_mian.dart';
 import 'config/routes/app_routes.dart';
 import 'config/themes/app_theme.dart';
 import 'core/utils/app_strings.dart';
@@ -109,13 +110,16 @@ class MyApp extends StatelessWidget {
           title: AppStrings.appName,
               home:
              initialMessageRcieved != null ?
-            // widget.newsDetailsModel == null?
+          ///  widget.newsDetailsModel == null?
              initialMessageRcieved?.data['reference_table'] == 'places'?
+            // InitialRouteDecider( referenceTable: 'room_reservations',)
              LodgesScreen(
                arguments:  LodgesScreenArguments(
                  placeId:int.tryParse(initialMessageRcieved?.data['reference_id']) ??0,
                  title: initialMessageRcieved?.data['reference_name']),
-             ):
+             )
+
+                 :
              initialMessageRcieved?.data['reference_table'] == 'lodges'?
              LodgeDetailsScreen(args: LodgeDetailsArguments(
                isDeeplink: true,
@@ -141,8 +145,16 @@ class MyApp extends StatelessWidget {
              DetailsFoodArgs(
                isDeeplink: true,
                  id: initialMessageRcieved?.data['reference_id'])
-    )
-             :NotificationScreen():
+    ):
+             initialMessageRcieved?.data['reference_table'] == 'room_reservations'?
+             InitialRouteDecider( referenceTable: 'room_reservations',)
+             :  initialMessageRcieved?.data['reference_table'] == 'bus_reservations'?
+             InitialRouteDecider( referenceTable: 'bus_reservations',)
+             :  initialMessageRcieved?.data['reference_table'] == 'organization_reservations'?
+             InitialRouteDecider( referenceTable: 'organization_reservations',):
+             initialMessageRcieved?.data['reference_table'] == 'restaurant_reservations'?
+             InitialRouteDecider( referenceTable: 'restaurant_reservations',)            :
+             NotificationScreen():
              // NewsDetailsScreen(newsDetailsModel: widget.newsDetailsModel!):
                SplashScreen(),
           onGenerateRoute: AppRoutes.onGenerateRoute,

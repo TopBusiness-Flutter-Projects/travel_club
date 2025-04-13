@@ -4,6 +4,7 @@ import '../../../../core/exports.dart';
 import '../../../entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
 import '../../../food/screens/details_of_food/screens/details_food_screen.dart';
 import '../../../main_screen/cubit/cubit.dart';
+import '../../../my_bookings/cubit/my_bookings_cubit.dart';
 import '../../../residence/view/screens/lodge_details.dart';
 import '../../../residence/view/screens/lodges_screen.dart';
 import '../../cubit/notification_cubit.dart';
@@ -44,6 +45,47 @@ class CustomContainerWidget extends StatelessWidget {
                     (route) => false,
               );
             }
+            else if(data.referenceTable=="room_reservations"){
+              log(data.referenceId.toString());
+              context.read<MainCubit>().changePage(1);
+              context.read<MyReservationsCubit>() . selectedModuleId=1;
+              context.read<MyReservationsCubit>() . changeModule(1);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.mainRoute,
+                    (route) => false,
+              );
+            } else if(data.referenceTable=="bus_reservations"){
+              log(data.referenceId.toString());
+              context.read<MainCubit>().changePage(1);
+              context.read<MyReservationsCubit>() . selectedModuleId=2;
+              context.read<MyReservationsCubit>() . changeModule(2);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.mainRoute,
+                    (route) => false,
+              );
+            } else if(data.referenceTable=="organization_reservations"){
+              log(data.referenceId.toString());
+              context.read<MainCubit>().changePage(1);
+              context.read<MyReservationsCubit>() . selectedModuleId=3;
+              context.read<MyReservationsCubit>() . changeModule(3);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.mainRoute,
+                    (route) => false,
+              );
+            } else if(data.referenceTable=="restaurant_reservations"){
+              log(data.referenceId.toString());
+              context.read<MainCubit>().changePage(1);
+              context.read<MyReservationsCubit>() . selectedModuleId=4;
+              context.read<MyReservationsCubit>() . changeModule(4);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.mainRoute,
+                    (route) => false,
+              );
+            }
             else if(data.referenceTable == "restaurants"){
               log(data.referenceId.toString());
               Navigator.pushNamed( context,Routes.detailsFoodRoute,
@@ -69,6 +111,7 @@ class CustomContainerWidget extends StatelessWidget {
 
               );
             }
+
          if (data.seen==0){
            data.seen=1;
            cubit.seenNotification(context, id: data.id.toString());
