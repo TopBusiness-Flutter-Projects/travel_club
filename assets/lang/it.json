@@ -304,6 +304,9 @@
   "raise_photo_or_file": "Carica foto o file",
   "unKnown_error_occurred": "Si è verificato un errore sconosciuto, si prega di riprovare più tardi.",
   "server_error_occurred": "Si è verificato un errore del server, si prega di riprovare più tardi.",
-
+"delete_account_desc": "Sei sicuro di voler eliminare questo account?",
+"delete": "Elimina",
+"delete_account": "Elimina account"
+,
   "--": "--"
 }

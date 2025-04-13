@@ -308,6 +308,9 @@
   "price_of_foods": "سعر الوجبات",
   "unKnown_error_occurred": "حدث خطأ غير معروف، يرجى المحاولة لاحقًا",
   "server_error_occurred": "حدث خطأ في السيرفر، يرجى المحاولة لاحقًا",
+  "delete_account_desc": "هل أنت متأكد من حذف هذا الحساب؟",
+"delete": "حذف",
+"delete_account": "حذف الحساب",
   "--": "--"
 }
 

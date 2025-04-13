@@ -210,4 +210,17 @@ class LoginRepoImpl {
       return Left(ServerFailure());
     }
   }
+  Future<Either<Failure, DefaultPostModel>> deleteAccount() async {
+   
+    try {
+      var response = await api.post(
+        EndPoints.deleteAccountUrl,
+      
+      );
+
+      return Right(DefaultPostModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }
