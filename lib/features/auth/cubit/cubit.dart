@@ -523,10 +523,11 @@ loginWithApple(BuildContext context, {required String name ,required String emai
       emit(SuccessLoginState());
     });
   }
+  
   deleteAccount(BuildContext context) async {
     emit(LoadingLoginState());
     AppWidget.createProgressDialog(context, AppTranslations.loading);
-    final response = await api.logout();
+    final response = await api.deleteAccount();
     response.fold((l) {
       Navigator.pop(context);
       errorGetBar(AppTranslations.error);
