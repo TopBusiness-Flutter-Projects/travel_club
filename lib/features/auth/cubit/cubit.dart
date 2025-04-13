@@ -523,4 +523,31 @@ loginWithApple(BuildContext context, {required String name ,required String emai
       emit(SuccessLoginState());
     });
   }
+  deleteAccount(BuildContext context) async {
+    emit(LoadingLoginState());
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    final response = await api.deleteAccount();
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(FailureLoginState());
+    }, (r) {
+      print("code: ${r.status.toString()}");
+      if (r.status != 200 && r.status != 201) {
+        Navigator.pop(context);
+        prefs.setBool("ISLOGGED", false);
+        Preferences.instance.clearUser();
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.loginRoute, (route) => false);
+      } else {
+        Navigator.pop(context);
+        successGetBar(r.msg);
+        prefs.setBool("ISLOGGED", false);
+        Preferences.instance.clearUser();
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.loginRoute, (route) => false);
+      }
+      emit(SuccessLoginState());
+    });
+  }
 }

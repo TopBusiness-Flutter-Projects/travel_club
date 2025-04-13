@@ -302,5 +302,9 @@
   "menu_food": "Menú de comida",
   "about_restaurant": "Sobre el restaurante",
   "raise_photo_or_file": "Subir foto o archivo",
+  "delete_account_desc": "¿Estás seguro de que deseas eliminar esta cuenta?",
+"delete": "Eliminar",
+"delete_account": "Eliminar cuenta",
+
   "--": "--"
 }
