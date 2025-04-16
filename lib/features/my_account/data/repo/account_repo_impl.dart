@@ -7,6 +7,7 @@ import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
+import '../model/get_points_history.dart';
 import '../model/get_setting_model.dart';
 
 class AccountRepoImpl {
@@ -19,6 +20,17 @@ class AccountRepoImpl {
         
       );
       return Right(LoginModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  Future<Either<Failure, GetPointsHistoryModel>> getMyPointHistory() async {
+    try {
+      var response = await dio.get(
+        EndPoints.getMyPointHistoryUrl,
+        
+      );
+      return Right(GetPointsHistoryModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

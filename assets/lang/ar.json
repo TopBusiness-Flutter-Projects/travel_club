@@ -311,6 +311,11 @@
   "delete_account_desc": "هل أنت متأكد من حذف هذا الحساب؟",
 "delete": "حذف",
 "delete_account": "حذف الحساب",
+"booking_success_with_points": "تم إتمام الحجز بنجاح",
+"yes": "نعم",
+"use": "هل تريد استخدام",
+"from_points": "من نقاطك؟",
+"enter_amount" : "ادخل المبلغ",
   "--": "--"
 }
 

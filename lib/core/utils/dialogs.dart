@@ -211,7 +211,6 @@ showExitDialog(BuildContext context) async {
     title: AppTranslations.areYouSureClose,
     titleTextStyle: getRegularStyle(fontSize: 16.sp),
     showCloseIcon: true,
-
     btnOkText: AppTranslations.exit,
     btnOkOnPress: () {
       Navigator.of(context).pop();

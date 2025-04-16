@@ -67,8 +67,8 @@ class ReservationData {
     lodge: json["lodge"] == null ? null : LodgeModel.fromJson(json["lodge"]),
     rooms: json["rooms"] == null ? [] : List<RoomModel>.from(json["rooms"]!.map((x) => RoomModel.fromJson(x))),
     totalPrice: json["total_price"],
-    vat: json["vat"]?.toDouble(),
-    totalPriceAfterVat: json["total_price_after_vat"]?.toDouble(),
+    vat: json["vat"],
+    totalPriceAfterVat: json["total_price_after_vat"],
   );
 
   Map<String, dynamic> toJson() => {

@@ -309,5 +309,10 @@
   "delete_account_desc": "Are you sure you want to delete this account?",
   "delete": "Delete",
   "delete_account": "Delete Account",
+  "booking_success_with_points": "The booking has been successfully completed",
+ "yes": "Yes",
+ "use" :"Do you want to use",
+ "from_points" : "from your points?",
+ "enter_amount" : "Enter Amount",
   "_" : " "
 }

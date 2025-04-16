@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:travel_club/features/auth/data/models/default_model.dart';
 import 'package:travel_club/features/payment/data/models/check_payment_status_model.dart';
 import 'package:travel_club/features/payment/data/models/get_payment_url_model.dart';
 
@@ -62,8 +63,27 @@ class PaymentRepoImpl {
           'reservation_id': reservationId,
         },
       );
-
       return Right(GetPaymentUrlModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, DefaultPostModel>> payWithPoints({
+    required int reservationId,
+    required String code,
+    required int moduleId,
+  }) async {
+    try {
+      var response = await dio.post(
+        EndPoints.continueToPayUsingPointsUrl,
+        body: {
+          if (code.isNotEmpty) 'code': code,
+          'module_id': moduleId.toString(),
+          'reservation_id': reservationId.toString(),
+        },
+      );
+      return Right(DefaultPostModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

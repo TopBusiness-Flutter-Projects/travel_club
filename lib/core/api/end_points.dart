@@ -16,6 +16,7 @@ class EndPoints {
   static const String checkLoyaltyPointsUrl = '${baseUrl}checkLoyaltyPoints';
   static const String validateOtpUrl = '${baseUrl}validateOtp';
   static const String userDataUrl = '${baseUrl}userDate';
+  static const String getMyPointHistoryUrl = '${baseUrl}getMyPointHistory';
   static const String updateUserDataUrl = '${baseUrl}updateProfile';
   static const String updatePasswordUrl = '${baseUrl}updatePassword';
   static const String addOrRemoveFavUrl = '${baseUrl}addOrDeleteToFav';
@@ -104,6 +105,7 @@ class EndPoints {
   static const String setting = '${baseUrl}get-settings';
   static const String notificationUrl = '${baseUrl}get-notifications';
   static const String seenNotificationUrl = '${baseUrl}seen-notification';
+  static const String continueToPayUsingPointsUrl = '${baseUrl}continueToPayUsingPoints';
 
 //static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
   // static const String getMyReservationUrl = '${baseUrl}getMyReservation';

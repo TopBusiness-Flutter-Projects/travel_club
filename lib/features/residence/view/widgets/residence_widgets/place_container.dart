@@ -23,7 +23,6 @@ class CustomPlaceContainer extends StatelessWidget {
         },
         child: CustomContainerWithShadow(
           // width: getWidthSize(context) * 0.27,
-
           child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getWidthSize(context) * 0.02,
@@ -32,7 +31,8 @@ class CustomPlaceContainer extends StatelessWidget {
               children: [
                 CustomNetworkImage(
                   image: categoryModel.image ?? "",
-                  width: getWidthSize(context) * 0.13,
+                  width:60,
+                  height : 60
                 ),
                 SizedBox(width: getWidthSize(context) * 0.02),
                 Flexible(

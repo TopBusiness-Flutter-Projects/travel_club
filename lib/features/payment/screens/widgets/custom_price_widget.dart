@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/widgets/custom_terms_and_conditions.dart';
 import 'package:travel_club/features/payment/data/models/check_copoune_model.dart';
 import 'package:travel_club/features/payment/screens/widgets/custom_copun_widget.dart';
@@ -17,7 +19,6 @@ class CustomPricesWidget extends StatefulWidget {
     this.ticketsWidget,
     this.isPaid = false,
     this.mealsName,
-
   });
 
   final String? terms;
@@ -31,6 +32,7 @@ class CustomPricesWidget extends StatefulWidget {
   @override
   State<CustomPricesWidget> createState() => _CustomPricesWidgetState();
 }
+
 class _CustomPricesWidgetState extends State<CustomPricesWidget> {
   @override
   void initState() {
@@ -99,17 +101,17 @@ class _CustomPricesWidgetState extends State<CustomPricesWidget> {
                 title: AppTranslations.completePayment,
                 onTap: widget.terms == null
                     ? () async {
-                        cubit.getPaymentUrl(
-                          context,
-                          reservationId: widget.reservationId,
-                        );
+                        checkPointsDialog(context,
+                            cubit: cubit,
+                            reservationId: widget.reservationId,
+                                price:cubit.checkCopouneModel.data != null? cubit.checkCopouneModel.data.toString(): widget.totalPriceAfterVat);
                       }
                     : cubit.isChecked
                         ? () async {
-                            cubit.getPaymentUrl(
-                              context,
-                              reservationId: widget.reservationId,
-                            );
+                            checkPointsDialog(context,
+                                cubit: cubit,
+                                reservationId: widget.reservationId,
+                                price:cubit.checkCopouneModel.data != null? cubit.checkCopouneModel.data.toString(): widget.totalPriceAfterVat);
                           }
                         : null,
               ),
@@ -118,5 +120,78 @@ class _CustomPricesWidgetState extends State<CustomPricesWidget> {
         ],
       );
     });
+  }
+}
+
+void checkPointsDialog(BuildContext context,
+    {required int reservationId,
+    required PaymentCubit cubit,
+    required String price}) {
+  if (cubit.checkPoints(context, price: price)) {
+    AwesomeDialog(
+        closeIcon: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.close)),
+        showCloseIcon: true,
+        dialogBackgroundColor: AppColors.white,
+        context: context,
+        customHeader: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(
+            ImageAssets.logoImage,
+          ),
+        ),
+        animType: AnimType.topSlide,
+        //   showCloseIcon: true,
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(10.h),
+              child: Text(
+                textAlign: TextAlign.center,
+             "${"use".tr()}${cubit.moneyEquals(context, price: price)}${"from_points".tr()}",
+                style: getMediumStyle(fontSize: 16.sp),
+              ),
+            ),
+            Row(children: [
+              Expanded(
+                child: CustomButton(
+                  title: "yes".tr(),
+                  isBordered: true,
+                  onTap: () {
+                    Navigator.pop(context);
+                    cubit.payWithPoints(
+                      context,
+                      reservationId: reservationId,
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                width: 5.w,
+              ),
+              Expanded(
+                child: CustomButton(
+                  title: "payment".tr(),
+                  onTap: () {
+                    Navigator.pop(context);
+                    cubit.getPaymentUrl(
+                      context,
+                      reservationId: reservationId,
+                    );
+                  },
+                ),
+              ),
+            ])
+          ],
+        )).show();
+  } else {
+    cubit.getPaymentUrl(
+      context,
+      reservationId: reservationId,
+    );
   }
 }

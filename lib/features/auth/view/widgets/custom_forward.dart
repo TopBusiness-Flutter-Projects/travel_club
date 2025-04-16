@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../core/exports.dart';
 
-
 class CustomForward extends StatelessWidget {
   const CustomForward({super.key, this.onTap});
   final void Function()? onTap;
@@ -15,12 +14,12 @@ class CustomForward extends StatelessWidget {
                 quarterTurns: 2,
                 child: Image.asset(
                   ImageAssets.forward,
-                  height: getHeightSize(context) * 0.09,
+                  height: getHeightSize(context) * 0.075,
                 ),
               )
             : Image.asset(
                 ImageAssets.forward,
-                height: getHeightSize(context) * 0.09,
+                height: getHeightSize(context) * 0.075,
               ));
   }
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_cubit.dart';
 import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
@@ -69,7 +70,9 @@ class DonePaymentScreen extends StatelessWidget {
               ),
               //message
               Text(
-                AppTranslations.bookingSuccessMessage +
+                paymentModel.transactionId!.isEmpty
+                    ? "booking_success_with_points".tr()
+                    : AppTranslations.bookingSuccessMessage +
                     '${paymentModel.transactionId.toString()}',
                 style: getMediumStyle(
                   fontSize: 14.sp,

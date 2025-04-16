@@ -33,6 +33,7 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(getWidthSize(context) / 12),
           ),
           child: Text(title,
+          
               style: getSemiBoldStyle(
                   color: isBordered ? AppColors.primary : AppColors.white,
                   fontSize: 14.sp)),
