@@ -120,25 +120,28 @@ class _DatePickerFieldState extends State<DatePickerField> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: widget.onTap, // Call the date picker on tap
-      child: Row(
-        mainAxisAlignment: widget.isSingle
-            ? MainAxisAlignment.spaceEvenly
-            : MainAxisAlignment.center,
-        children: [
-          Text(
-            widget.selectedDate,
-            style: getRegularStyle(
-              fontSize: 14.sp,
-              color: AppColors.grey,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Row(
+          mainAxisAlignment: widget.isSingle
+              ? MainAxisAlignment.spaceEvenly
+              : MainAxisAlignment.center,
+          children: [
+            Text(
+              widget.selectedDate,
+              style: getRegularStyle(
+                fontSize: 14.sp,
+                color: AppColors.grey,
+              ),
             ),
-          ),
-         Spacer(),
-         // SizedBox(width: 8.w),
-          SvgPicture.asset(
-            AppIcons.calendar,
-            width: 25.w,
-          ),
-        ],
+           Spacer(),
+           // SizedBox(width: 8.w),
+            SvgPicture.asset(
+              AppIcons.calendar,
+              width: 25.w,
+            ),
+          ],
+        ),
       ),
     );
   }

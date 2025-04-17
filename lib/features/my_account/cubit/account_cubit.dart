@@ -9,6 +9,7 @@ import 'package:travel_club/features/auth/data/models/default_model.dart';
 import 'package:travel_club/features/auth/data/models/login_model.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
 import '../../splash/screens/splash_screen.dart';
+import '../data/model/get_points_history.dart';
 import '../data/model/get_setting_model.dart';
 import '../data/repo/account_repo_impl.dart';
 import 'account_state.dart';
@@ -109,6 +110,20 @@ DefaultPostModel ?defaultPostModel;
       });
     }
   }
+  GetPointsHistoryModel? getPointsHistoryModel ;
+  getMyPointHistory() async {
+    
+      emit(GetAccountLoading());
+      final res = await api.getMyPointHistory();
+      res.fold((l) {
+        emit(GetAccountError());
+      }, (r) {
+          getPointsHistoryModel = r;        
+      
+        emit(GetAccountSuccess());
+      });
+   
+  }
 
   updateUserData(BuildContext context, {String? imagePath}) async {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
@@ -182,5 +197,9 @@ DefaultPostModel ?defaultPostModel;
       emit(GetSettingSuccess());
     });
   }
+    String countryCode = '+20';
+   TextEditingController phonePointsController = TextEditingController();
+
+  TextEditingController amountController = TextEditingController();
 }
 // Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RyYXZlbC50b3BidXNpbmVzcy5lYmhhcmJvb2suY29tL2FwaS92MS9sb2dpbi9nb29nbGUiLCJpYXQiOjE3MzY2Nzk4NzMsImV4cCI6MTc2ODIxNTg3MywibmJmIjoxNzM2Njc5ODczLCJqdGkiOiJha21ja3VoWFhKTFdhamNlIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.uGiUcBdTaHcm_Wt1irBsXi6-FSp9Gf_n_uV505p43-M

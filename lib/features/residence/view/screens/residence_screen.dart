@@ -36,36 +36,39 @@ class _ResidenceScreenState extends State<ResidenceScreen> {
                   ? const Center(
                       child: CustomLoadingIndicator(),
                     )
-                  : Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        // mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          20.verticalSpace,
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10.h),
-                            child: StaggeredGrid.count(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 0,
-                                crossAxisSpacing: 0,
-                                children: List.generate(
-                                    cubit.placesModel.data?.places!.length ?? 0,
-                                        (index) => CustomPlaceContainer(
-                                      categoryModel: cubit
-                                          .placesModel.data!.places![index],
-                                    ))),
-                          ),
-
-                          if (cubit.placesModel.data?.lodges != null)
-                            if (cubit.placesModel.data!.lodges!.isNotEmpty) ...[
-                              Text(
-                                AppTranslations.mostPlaceRating,
-                                style: getMediumStyle(fontSize: 14.sp),
-                              ),
-                              Expanded(
-                                child: ListView.separated(
+                  : SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          // mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            20.verticalSpace,
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10.h),
+                              child: StaggeredGrid.count(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 0,
+                                  crossAxisSpacing: 0,
+                                  children: List.generate(
+                                      cubit.placesModel.data?.places!.length ??
+                                          0,
+                                      (index) => CustomPlaceContainer(
+                                            categoryModel: cubit.placesModel
+                                                .data!.places![index],
+                                          ))),
+                            ),
+                            if (cubit.placesModel.data?.lodges != null)
+                              if (cubit
+                                  .placesModel.data!.lodges!.isNotEmpty) ...[
+                                Text(
+                                  AppTranslations.mostPlaceRating,
+                                  style: getMediumStyle(fontSize: 14.sp),
+                                ),
+                                ListView.separated(
                                     shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     itemCount:
                                         cubit.placesModel.data!.lodges!.length,
                                     separatorBuilder: (context, index) =>
@@ -77,9 +80,9 @@ class _ResidenceScreenState extends State<ResidenceScreen> {
                                         CustomLodgeContainer(
                                             lodgesModel: cubit.placesModel.data!
                                                 .lodges![index])),
-                              ),
-                            ]
-                        ],
+                              ]
+                          ],
+                        ),
                       ),
                     ),
         );

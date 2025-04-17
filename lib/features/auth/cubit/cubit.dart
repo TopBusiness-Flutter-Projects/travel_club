@@ -515,7 +515,6 @@ loginWithApple(BuildContext context, {required String name ,required String emai
         Navigator.pop(context);
         successGetBar(r.msg);
         prefs.setBool("ISLOGGED", false);
-
         Preferences.instance.clearUser();
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.loginRoute, (route) => false);
@@ -523,6 +522,7 @@ loginWithApple(BuildContext context, {required String name ,required String emai
       emit(SuccessLoginState());
     });
   }
+  
   deleteAccount(BuildContext context) async {
     emit(LoadingLoginState());
     AppWidget.createProgressDialog(context, AppTranslations.loading);

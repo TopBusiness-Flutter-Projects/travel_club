@@ -318,7 +318,11 @@
 "delete_account_desc": "Sind Sie sicher, dass Sie dieses Konto löschen möchten?",
 "delete": "Löschen",
 "delete_account": "Konto löschen",
-
+"booking_success_with_points": "Die Buchung wurde erfolgreich abgeschlossen",
+"yes": "Ja",
+"use": "Möchten Sie verwenden",
+"from_points": "von Ihren Punkten?",
+"enter_amount" : "Betrag eingeben",
   "--": "--"
 
 

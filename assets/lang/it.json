@@ -307,6 +307,10 @@
 "delete_account_desc": "Sei sicuro di voler eliminare questo account?",
 "delete": "Elimina",
 "delete_account": "Elimina account"
-,
+,"booking_success_with_points": "La prenotazione è stata completata con successo",
+"yes": "Sì",
+"use": "Vuoi usare",
+"from_points": "dei tuoi punti?"
+, "enter_amount" : "Inserisci l'importo",
   "--": "--"
 }
