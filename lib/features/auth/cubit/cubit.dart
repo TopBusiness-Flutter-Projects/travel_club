@@ -85,7 +85,7 @@ class LoginCubit extends Cubit<LoginState> {
       }
       // Validate tokens
       if (googleAuth.accessToken == null || googleAuth.idToken == null) {
-        print("Missing required authentication tokens.");
+        log("Missing required authentication tokens.");
         emit(FailureSignInWithGoogleState(
             error: 'Missing authentication tokens'));
         throw Exception('Missing Google authentication tokens.');
@@ -113,7 +113,7 @@ class LoginCubit extends Cubit<LoginState> {
             "Firebase Sign-In successful. User ID: ${userCredential.user?.uid}");
         return userCredential;
       } on FirebaseAuthException catch (e) {
-        print("Firebase Auth Exception: ${e.code} - ${e.message}");
+        log("Firebase Auth Exception: ${e.code} - ${e.message}");
         emit(FailureSignInWithGoogleState(
           error: _getFirebaseErrorMessage(e.code),
         ));

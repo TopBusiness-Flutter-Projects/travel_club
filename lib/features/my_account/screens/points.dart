@@ -78,47 +78,63 @@ class _PointsScreenState extends State<PointsScreen> {
                               showModalBottomSheet(
                                   context: context,
                                   builder: (context) => Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              CustomTextField(
-                                                title: "enter_amount".tr(),
-                                                controller:
-                                                    cubit.amountController,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter.digitsOnly
-                                                    ],
-                                                validator: (value) {
-                                                  if (value!.isEmpty) {
-                                                    return "enter_amount".tr();
-                                                  }
-                                                  return null;
-                                                },
-                                              ),
-                                               CustomPhoneFormField(
-
-                          controller: cubit.phonePointsController,
-                          initialValue: cubit.countryCode,
-                          title: AppTranslations.phone,
-                          onCountryChanged: (v) {
-                            cubit.countryCode = '+${v.fullCountryCode}';
-                           debugPrint("Country changed to: ${v.name}");
-                          },
-                          onChanged: (phone) {
-                            debugPrint(phone.completeNumber);
-                          },
-                        ),
-                        20.h.verticalSpace,
-                        CustomButton(title: AppTranslations.withdraw,
-                          onTap: () {
-                            // cubit.withdrawPoints();
-                        })
-                                            ]),
-                                  ),
-                                  
+                                        padding: EdgeInsets.only(
+                                          left: 12.0,
+                                          right: 12.0,
+                                          top: 12.0,
+                                          bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom,
+                                        ),
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                CustomTextField(
+                                                  title: "enter_amount".tr(),
+                                                  controller:
+                                                      cubit.amountController,
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return "enter_amount"
+                                                          .tr();
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                CustomPhoneFormField(
+                                                  controller: cubit
+                                                      .phonePointsController,
+                                                  initialValue:
+                                                      cubit.countryCode,
+                                                  title: AppTranslations.phone,
+                                                  onCountryChanged: (v) {
+                                                    cubit.countryCode =
+                                                        '+${v.fullCountryCode}';
+                                                    debugPrint(
+                                                        "Country changed to: ${v.name}");
+                                                  },
+                                                  onChanged: (phone) {
+                                                    debugPrint(
+                                                        phone.completeNumber);
+                                                  },
+                                                ),
+                                                20.h.verticalSpace,
+                                                CustomButton(
+                                                    title: AppTranslations
+                                                        .withdraw,
+                                                    onTap: () {
+                                                      // cubit.withdrawPoints();
+                                                    })
+                                              ]),
+                                        ),
+                                      ),
                                   isScrollControlled: true,
                                   backgroundColor: AppColors.white,
                                   shape: const RoundedRectangleBorder(

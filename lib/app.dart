@@ -101,7 +101,7 @@ class MyApp extends StatelessWidget {
         child: GetMaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
-          navigatorKey: notificationService.navigatorKey,
+          navigatorKey: navigatorKey,
           locale: context.locale,
           theme: appTheme(),
           themeMode: ThemeMode.light,

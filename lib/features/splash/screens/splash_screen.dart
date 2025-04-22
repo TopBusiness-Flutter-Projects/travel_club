@@ -45,7 +45,6 @@
 //   }
 
 //   late final AppLinks _appLinks;
-
 //   @override
 //   void initState() {
 //     super.initState();
@@ -187,6 +186,7 @@ import 'package:travel_club/features/food/screens/details_of_food/screens/detail
 import 'package:travel_club/features/other_services/screens/single_service_details.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/residence/view/screens/lodge_details.dart';
+import 'package:travel_club/notification_service.dart';
 import '../../../core/preferences/preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -236,6 +236,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
   void _handleDeepLink(Uri initialDeepLink) {
     print("the link is : ${initialDeepLink.toString()}");
+    
     if (initialDeepLink.toString().contains("lodge") &&
         initialDeepLink.queryParameters['id'] != null) {
       String? id = initialDeepLink.queryParameters['id'];
@@ -255,10 +256,15 @@ class _SplashScreenState extends State<SplashScreen>
     } else if (initialDeepLink.toString().contains("restaurant") &&
         initialDeepLink.queryParameters['id'] != null) {
       String? id = initialDeepLink.queryParameters['id'];
-      id == null
-          ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
-          : Navigator.pushReplacementNamed(context, Routes.detailsFoodRoute,
-              arguments: DetailsFoodArgs(id: id, isDeeplink: true));
+         id == null
+          ?
+            navigatorKey.currentState?.pushNamedAndRemoveUntil(Routes.mainRoute, (route) => false)
+          :  navigatorKey.currentState?.pushReplacementNamed( Routes.detailsFoodRoute,
+              arguments: DetailsFoodArgs(id:id, isDeeplink: true));
+      // id == null
+      //     ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
+      //     : Navigator.pushReplacementNamed(context, Routes.detailsFoodRoute,
+      //         arguments: DetailsFoodArgs(id: id, isDeeplink: true));
     } else if (initialDeepLink.toString().contains("otherservice") &&
         initialDeepLink.queryParameters['id'] != null) {
       String? id = initialDeepLink.queryParameters['id'];

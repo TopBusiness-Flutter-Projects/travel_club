@@ -1,1 +1,22 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"travelclup-e8728","appId":"1:762370307959:android:098cb3a66d7283587e5372","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"travelclup-e8728","configurations":{"android":"1:762370307959:android:098cb3a66d7283587e5372","ios":"1:762370307959:ios:ba934df1abae70187e5372"}}}}}}
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "travelclup-e8728",
+                    "appId": "1:762370307959:android:098cb3a66d7283587e5372",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "travelclup-e8728",
+                    "configurations": {
+                        "android": "1:762370307959:android:098cb3a66d7283587e5372",
+                        "ios": "1:762370307959:ios:ba934df1abae70187e5372"
+                    }
+                }
+            }
+        }
+    }
+}[]

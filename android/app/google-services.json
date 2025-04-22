@@ -22,6 +22,22 @@
           }
         },
         {
+          "client_id": "762370307959-htgmq3b88upslbe6rsq1guup12hc06id.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.topbusiness.travelclub",
+            "certificate_hash": "daee6ef25654cb3763533eb124edde154b200872"
+          }
+        },
+        {
+          "client_id": "762370307959-q8egq0rk3c85b426kfriffo5ld1l3t3i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.topbusiness.travelclub",
+            "certificate_hash": "bb7460b2c202f846fd937bd687d9cf2eadde7394"
+          }
+        },
+        {
           "client_id": "762370307959-dkpqipchrmoc6673gpjv9lb30k58olge.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,6 +53,13 @@
             {
               "client_id": "762370307959-dkpqipchrmoc6673gpjv9lb30k58olge.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "762370307959-9e9if0bve4gs58stdkg3lj278r8cvenp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.topbusiness.travelclub"
+              }
             }
           ]
         }

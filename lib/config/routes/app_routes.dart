@@ -234,12 +234,15 @@ class AppRoutes {
           duration: const Duration(milliseconds: 200),
         );
       case Routes.foodScreen:
-        return PageTransition(
-          child: const FoodScreen(),
-          type: PageTransitionType.fade,
-          alignment: Alignment.center,
-          duration: const Duration(milliseconds: 200),
-        );
+      return MaterialPageRoute(
+    builder: (_) => FoodScreen(), 
+  );
+        // return PageTransition(
+        //   child: const FoodScreen(),
+        //   type: PageTransitionType.fade,
+        //   alignment: Alignment.center,
+        //   duration: const Duration(milliseconds: 200),
+        // );
       case Routes.detailsEntertainment:
         EntertainmentDetailsArgs args =
             settings.arguments as EntertainmentDetailsArgs;
@@ -382,6 +385,7 @@ class AppRoutes {
       case Routes.bookingResidenceRoute:
         int lodgeId = settings.arguments as int;
         return PageTransition(
+          
           child: ResidenceBooking(lodgeId: lodgeId),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
