@@ -37,12 +37,14 @@ class PointModel {
     dynamic? points;
     String? referenceTable;
     int? userId;
+    String? paymentMethod;
     String? createdAt;
 
     PointModel({
         this.id,
         this.points,
         this.referenceTable,
+        this.paymentMethod,
         this.userId,
         this.createdAt,
     });
@@ -51,6 +53,7 @@ class PointModel {
         id: json["id"],
         points: json["points"],
         referenceTable: json["reference_table"],
+        paymentMethod: json["payment_method"],
         userId: json["user_id"],
         createdAt: json["created_at"],
     );
@@ -59,6 +62,7 @@ class PointModel {
         "id": id,
         "points": points,
         "reference_table": referenceTable,
+        "payment_method": paymentMethod,
         "user_id": userId,
         "created_at": createdAt,
     };

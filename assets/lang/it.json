@@ -312,5 +312,22 @@
 "use": "Vuoi usare",
 "from_points": "dei tuoi punti?"
 , "enter_amount" : "Inserisci l'importo",
+
+"no_transactions": "Nessuna transazione precedente",
+"payment_method": "Metodo di pagamento",
+"enter_ipan": "Inserisci il numero della carta IPAN",
+"select_payment_method": "Seleziona il metodo di pagamento",
+"choose": "Scegli",
+"not_enough_money": "Saldo insufficiente",
+"added": "Aggiunto",
+"rewards_points": "Punti di ricompensa per il login",
+"you_withdraw": "Hai prelevato",
+"from_points_by": "Da punti tramite",
+"you_used": "Hai utilizzato",
+"book_points": "Da punti per la prenotazione",
+"room": "Camera",
+"bus": "Autobus",
+"food_reservation": "Cibo",
+"organization": "Agenzia di viaggi",
   "--": "--"
 }

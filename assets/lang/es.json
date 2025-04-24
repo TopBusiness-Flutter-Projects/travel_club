@@ -309,6 +309,21 @@
 "yes": "Sí",
 "use": "¿Desea usar",
 "from_points": "de sus puntos?"
-,"enter_amount" : "Ingrese el monto",
+,"enter_amount" : "Ingrese el monto", "no_transactions": "No hay transacciones anteriores",
+"payment_method": "Método de pago",
+"enter_ipan": "Introduce el número de tarjeta IPAN",
+"select_payment_method": "Selecciona el método de pago",
+"choose": "Elegir",
+"not_enough_money": "Saldo insuficiente",
+"added": "Añadido",
+"rewards_points": "Puntos de recompensa por inicio de sesión",
+"you_withdraw": "Has retirado",
+"from_points_by": "Desde puntos por",
+"you_used": "Has utilizado",
+"book_points": "Desde puntos para reserva",
+"room": "Habitación",
+"bus": "Autobús",
+"food_reservation": "Comida",
+"organization": "Agencia de viajes",
   "--": "--"
 }

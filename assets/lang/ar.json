@@ -316,6 +316,27 @@
 "use": "هل تريد استخدام",
 "from_points": "من نقاطك؟",
 "enter_amount" : "ادخل المبلغ",
+"no_transactions":  "لا يوجد معاملات سابقة",
+"payment_method": "طريقة الدفع",
+"enter_ipan": "ادخل رقم البطاقة IPAN",
+"select_payment_method": "اختر طريقة الدفع",
+"choose": "اختر",
+"not_enough_money": "لا يوجد رصيد كافي",
+"added": "تم إضافة",
+"rewards_points" :"نقطة مكفأة تسجيل دخول" ,
+"you_withdraw" :"لقد سحبت",
+"from_points_by" :"من النقاط عن طريق",
+"you_used" :"لقد استخدمت",
+"book_points" :"من النقاط لحجز ",
+"room" : "غرفة",
+"bus" : "اتوبيس",
+"food_reservation" : "طعام",
+"organization" : "شركة سياحية",
+
+
+
+
+
   "--": "--"
 }
 

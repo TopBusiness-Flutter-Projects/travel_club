@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 
 class CustomDropdownButtonFormField extends StatelessWidget {
@@ -26,8 +27,9 @@ class CustomDropdownButtonFormField extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.lightWhite2, // لون الخلفية
-          hintText: hint ?? "اختر",
-          contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
+          hintText: hint ?? "choose".tr(),
+         contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.r), // حواف دائرية
             borderSide: BorderSide.none, // إزالة الخط السفلي
@@ -49,6 +51,7 @@ class CustomDropdownButtonFormField extends StatelessWidget {
             fontSize: 15.sp,
             fontHeight: 2,
           ),
+          
           errorStyle: getRegularStyle(color: AppColors.red),
         ),
         items: items,

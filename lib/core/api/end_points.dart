@@ -1,6 +1,7 @@
 class EndPoints {
   static const String baseUrl =
-      'https://travel.topbusiness.ebharbook.com/api/v1/';
+      'http://192.168.1.18:8000/api/v1/'; // local
+      // 'https://travel.topbusiness.ebharbook.com/api/v1/'; // production
   //////////////////////////////////////////////////////
   //////////////////    Auth   /////////////////////////
   //////////////////////////////////////////////////////
@@ -106,6 +107,8 @@ class EndPoints {
   static const String notificationUrl = '${baseUrl}get-notifications';
   static const String seenNotificationUrl = '${baseUrl}seen-notification';
   static const String continueToPayUsingPointsUrl = '${baseUrl}continueToPayUsingPoints';
+  static const String getPaymentMethodsUrl = '${baseUrl}get-payment-methods';
+  static const String addWhitelistPoints = '${baseUrl}add-whitelist-points';
 
 //static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
   // static const String getMyReservationUrl = '${baseUrl}getMyReservation';

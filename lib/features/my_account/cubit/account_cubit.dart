@@ -9,6 +9,7 @@ import 'package:travel_club/features/auth/data/models/default_model.dart';
 import 'package:travel_club/features/auth/data/models/login_model.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
 import '../../splash/screens/splash_screen.dart';
+import '../data/model/get_payment_types.dart';
 import '../data/model/get_points_history.dart';
 import '../data/model/get_setting_model.dart';
 import '../data/repo/account_repo_impl.dart';
@@ -111,8 +112,7 @@ DefaultPostModel ?defaultPostModel;
     }
   }
   GetPointsHistoryModel? getPointsHistoryModel ;
-  getMyPointHistory() async {
-    
+  getMyPointHistory() async {    
       emit(GetAccountLoading());
       final res = await api.getMyPointHistory();
       res.fold((l) {
@@ -121,9 +121,66 @@ DefaultPostModel ?defaultPostModel;
           getPointsHistoryModel = r;        
       
         emit(GetAccountSuccess());
-      });
-   
+      });   
   }
+  GetPaymentMethodsModel? getPaymentMethodsModel ;
+  getPaymentMethods() async {    
+      emit(GetAccountLoading());
+      final res = await api.getPaymentMethods();
+      res.fold((l) {
+        emit(GetAccountError());
+      }, (r) {
+          getPaymentMethodsModel = r;        
+      
+        emit(GetAccountSuccess());
+      });   
+  }
+  PaymentType ?selectedPaymentMethod;
+changePaymentMethod(PaymentType paymentType) async {
+    selectedPaymentMethod = paymentType;
+    emit(GetAccountSuccess());  
+}
+String amountToPoints(){
+  double amount = double.parse(amountController.text);
+  double pointValue = 
+   double.parse(
+        loginModel.data?.pointValue.toString() ??
+            "0");
+  double points = amount * pointValue; // Assuming 1 point = 10 currency units
+  return points.toStringAsFixed(0); // Convert to string with no decimal places
+}
+ addWhitelistPoints(BuildContext context) async {
+    AppWidget.createProgressDialog(context, AppTranslations.loading);
+    emit(GetAccountLoading());
+    final res = await api.addWhitelistPoints(
+        points: amountToPoints(),
+        number:selectedPaymentMethod!.need!?ipanController.text: countryCode+ phonePointsController.text,
+        paymentMethodId: selectedPaymentMethod!.id.toString());
+    res.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(AppTranslations.error);
+      emit(GetAccountError());
+    }, (r) {
+      Navigator.pop(context);
+      if (r.status == 200 || r.status == 201) {
+        ipanController.clear();
+        phonePointsController.clear();
+        amountController.clear();
+        selectedPaymentMethod = null;
+        Navigator.pop(context);
+        successGetBar(r.msg);
+        getMyPointHistory() ;
+        getUserData();
+      } else if (r.status == 401 ||
+          r.status == 407 ||
+          r.status == 403 ||
+          r.status == 422) {
+        errorGetBar(r.msg ?? AppTranslations.error);
+      }
+      emit(GetAccountSuccess());
+    });
+  }
+
 
   updateUserData(BuildContext context, {String? imagePath}) async {
     AppWidget.createProgressDialog(context, AppTranslations.loading);
@@ -201,5 +258,6 @@ DefaultPostModel ?defaultPostModel;
    TextEditingController phonePointsController = TextEditingController();
 
   TextEditingController amountController = TextEditingController();
+  TextEditingController ipanController = TextEditingController();
 }
 // Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RyYXZlbC50b3BidXNpbmVzcy5lYmhhcmJvb2suY29tL2FwaS92MS9sb2dpbi9nb29nbGUiLCJpYXQiOjE3MzY2Nzk4NzMsImV4cCI6MTc2ODIxNTg3MywibmJmIjoxNzM2Njc5ODczLCJqdGkiOiJha21ja3VoWFhKTFdhamNlIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.uGiUcBdTaHcm_Wt1irBsXi6-FSp9Gf_n_uV505p43-M

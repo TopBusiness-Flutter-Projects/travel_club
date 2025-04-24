@@ -323,6 +323,22 @@
 "use": "Möchten Sie verwenden",
 "from_points": "von Ihren Punkten?",
 "enter_amount" : "Betrag eingeben",
+"no_transactions": "Keine vorherigen Transaktionen",
+"payment_method": "Zahlungsmethode",
+"enter_ipan": "Geben Sie die IPAN-Kartennummer ein",
+"select_payment_method": "Wählen Sie die Zahlungsmethode",
+"choose": "Wählen",
+"not_enough_money": "Nicht genug Guthaben",
+"added": "Hinzugefügt",
+"rewards_points": "Anmelde-Belohnungspunkte",
+"you_withdraw": "Sie haben abgehoben",
+"from_points_by": "Von Punkten durch",
+"you_used": "Sie haben verwendet",
+"book_points": "Von Punkten für die Buchung",
+"room": "Zimmer",
+"bus": "Bus",
+"food_reservation": "Essen",
+"organization": "Reiseagentur",
   "--": "--"
 
 

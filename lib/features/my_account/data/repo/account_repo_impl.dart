@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:travel_club/features/auth/data/models/default_model.dart';
 import 'package:travel_club/features/auth/data/models/login_model.dart';
+import 'package:travel_club/features/my_account/data/model/get_payment_types.dart';
 
 import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
@@ -31,6 +32,35 @@ class AccountRepoImpl {
         
       );
       return Right(GetPointsHistoryModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  Future<Either<Failure, GetPaymentMethodsModel>> getPaymentMethods() async {
+    try {
+      var response = await dio.get(
+        EndPoints.getPaymentMethodsUrl,
+        
+      );
+      return Right(GetPaymentMethodsModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+    Future<Either<Failure, DefaultPostModel>> addWhitelistPoints( {required String number ,required String points , required String paymentMethodId} ) async {
+    try {
+      var response = await dio.post(
+        EndPoints.addWhitelistPoints,
+        body: {
+          'points' : points,
+          'number' : number,
+          'payment_method_id' :  paymentMethodId
+        },
+        formDataIsEnabled: true
+
+        
+      );
+      return Right(DefaultPostModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

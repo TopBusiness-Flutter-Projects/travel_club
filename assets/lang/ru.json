@@ -311,6 +311,21 @@
 "yes": "Да",
 "use": "Вы хотите использовать",
 "from_points": "из ваших баллов?"
-,"enter_amount" : "Введите сумму",
+,"enter_amount" : "Введите сумму","no_transactions": "Нет предыдущих транзакций",
+  "payment_method": "Способ оплаты",
+  "enter_ipan": "Введите номер карты IPAN",
+  "select_payment_method": "Выберите способ оплаты",
+  "choose": "Выбрать",
+  "not_enough_money": "Недостаточно средств",
+  "added": "Добавлено",
+  "rewards_points": "Очки за вход",
+  "you_withdraw": "Вы сняли",
+  "from_points_by": "С баллов через",
+  "you_used": "Вы использовали",
+  "book_points": "С баллов для бронирования",
+  "room": "Комната",
+  "bus": "Автобус",
+  "food_reservation": "Еда",
+  "organization": "Туристическое агентство",
   "--": "--"
 }

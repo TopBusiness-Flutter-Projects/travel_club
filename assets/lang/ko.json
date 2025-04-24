@@ -312,5 +312,21 @@
 "use": "사용하시겠습니까",
 "from_points": "보유한 포인트에서?"
 ,"enter_amount" : "금액 입력하기",
+"no_transactions": "이전 거래가 없습니다",
+  "payment_method": "지불 방법",
+  "enter_ipan": "IPAN 카드 번호 입력",
+  "select_payment_method": "지불 방법 선택",
+  "choose": "선택",
+  "not_enough_money": "잔액이 부족합니다",
+  "added": "추가됨",
+  "rewards_points": "로그인 보상 포인트",
+  "you_withdraw": "출금하셨습니다",
+  "from_points_by": "포인트로부터",
+  "you_used": "사용하셨습니다",
+  "book_points": "예약을 위한 포인트",
+  "room": "방",
+  "bus": "버스",
+  "food_reservation": "음식",
+  "organization": "여행사",
   "--": "--"
 }
