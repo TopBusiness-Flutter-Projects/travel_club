@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
+
 class EndPoints {
   static const String baseUrl =
-      'http://192.168.1.18:8000/api/v1/'; // local
-      // 'https://travel.topbusiness.ebharbook.com/api/v1/'; // production
+    kReleaseMode ? 'https://travel.topbusiness.ebharbook.com/api/v1/' 
+    :'http://192.168.1.18:8000/api/v1/'; // production
   //////////////////////////////////////////////////////
   //////////////////    Auth   /////////////////////////
   //////////////////////////////////////////////////////
