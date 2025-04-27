@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -8,6 +12,7 @@ import 'package:travel_club/features/location/cubit/location_cubit.dart';
 import 'package:travel_club/features/main_screen/cubit/cubit.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:travel_club/features/my_account/cubit/account_cubit.dart';
+import 'package:travel_club/features/my_account/screens/update_password.dart';
 import 'package:travel_club/features/my_bookings/cubit/my_bookings_cubit.dart';
 import 'package:travel_club/features/notification/screens/notification_screen.dart';
 import 'package:travel_club/features/on_boarding/cubit/onboarding_cubit.dart';
@@ -32,14 +37,53 @@ import 'features/residence/view/screens/lodge_details.dart';
 import 'features/residence/view/screens/lodges_screen.dart';
 import 'features/splash/cubit/cubit.dart';
 import 'features/splash/screens/splash_screen.dart';
-
-class MyApp extends StatelessWidget {
+String? initilaLink;
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+   StreamSubscription<Uri>? _linkSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    initDeepLinks();
+  }
+
+  @override
+  void dispose() {
+    _linkSubscription?.cancel();
+
+    super.dispose();
+  }
+
+  Future<void> initDeepLinks() async {
+    // Handle links
+    _linkSubscription = AppLinks().uriLinkStream.listen((uri) {
+      debugPrint('onAppLink: $uri');
+      openAppLink(uri);
+    });
+  }
+
+  void openAppLink(Uri uri) {
+     log('openAppLink: ${uri.path}');
+  
+  // Extract the path from the URI and push the appropriate route
+  final route = uri.path; // Get the full path (e.g., /deeplink/book/11)
+  initilaLink = route;
+  // You may want to use the path or extract parts from it
+  navigatorKey.currentState?.pushNamed(Routes.updatePassword);
+  // navigatorKey.currentState?.pushNamed(route);
+  }
 
   @override
   Widget build(BuildContext context) {
     // print(text);
-   NotificationService notificationService = NotificationService();
     return MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -108,55 +152,63 @@ class MyApp extends StatelessWidget {
           darkTheme: ThemeData.light(),
           debugShowCheckedModeBanner: false,
           title: AppStrings.appName,
-              home:
-             initialMessageRcieved != null ?
-          ///  widget.newsDetailsModel == null?
-             initialMessageRcieved?.data['reference_table'] == 'places'?
-            // InitialRouteDecider( referenceTable: 'room_reservations',)
-             LodgesScreen(
-               arguments:  LodgesScreenArguments(
-                 placeId:int.tryParse(initialMessageRcieved?.data['reference_id']) ??0,
-                 title: initialMessageRcieved?.data['reference_name']),
-             )
+              // home:
+    //          initialMessageRcieved != null ?
+    //       ///  widget.newsDetailsModel == null?
+    //          initialMessageRcieved?.data['reference_table'] == 'places'?
+    //         // InitialRouteDecider( referenceTable: 'room_reservations',)
+    //          LodgesScreen(
+    //            arguments:  LodgesScreenArguments(
+    //              placeId:int.tryParse(initialMessageRcieved?.data['reference_id']) ??0,
+    //              title: initialMessageRcieved?.data['reference_name']),
+    //          )
 
-                 :
-             initialMessageRcieved?.data['reference_table'] == 'lodges'?
-             LodgeDetailsScreen(args: LodgeDetailsArguments(
-               isDeeplink: true,
-                 lodgeId: initialMessageRcieved?.data['reference_id'])):
+    //              :
+    //          initialMessageRcieved?.data['reference_table'] == 'lodges'?
+    //          LodgeDetailsScreen(args: LodgeDetailsArguments(
+    //            isDeeplink: true,
+    //              lodgeId: initialMessageRcieved?.data['reference_id'])):
 
-             initialMessageRcieved?.data['reference_table'] == 'companies'?
-             DetailsEntertainment(args:
-             EntertainmentDetailsArgs(
-               isDeeplink: true,
-               id:  int.tryParse(initialMessageRcieved?.data['reference_id']) ?? 0,
-             )):
-             initialMessageRcieved?.data['reference_table'] == 'organizations'?
-             DetailsEntertainment(
-                 args: EntertainmentDetailsArgs(
-                   isDeeplink: true,
-               id:  initialMessageRcieved?.data['reference_id']?? 0,
-             )):
-             initialMessageRcieved?.data['reference_table'] == "offers"||initialMessageRcieved?.data['reference_table'] == "suitcases"?
-                 MainScreen():
-             initialMessageRcieved?.data['reference_table'] == 'restaurants'?
-             DetailsFood(args:
+    //          initialMessageRcieved?.data['reference_table'] == 'companies'?
+    //          DetailsEntertainment(args:
+    //          EntertainmentDetailsArgs(
+    //            isDeeplink: true,
+    //            id:  int.tryParse(initialMessageRcieved?.data['reference_id']) ?? 0,
+    //          )):
+    //          initialMessageRcieved?.data['reference_table'] == 'organizations'?
+    //          DetailsEntertainment(
+    //              args: EntertainmentDetailsArgs(
+    //                isDeeplink: true,
+    //            id:  initialMessageRcieved?.data['reference_id']?? 0,
+    //          )):
+    //          initialMessageRcieved?.data['reference_table'] == "offers"||initialMessageRcieved?.data['reference_table'] == "suitcases"?
+    //              MainScreen():
+    //          initialMessageRcieved?.data['reference_table'] == 'restaurants'?
+    //          DetailsFood(args:
 
-             DetailsFoodArgs(
-               isDeeplink: true,
-                 id: initialMessageRcieved?.data['reference_id'])
-    ):
-             initialMessageRcieved?.data['reference_table'] == 'room_reservations'?
-             InitialRouteDecider( referenceTable: 'room_reservations',)
-             :  initialMessageRcieved?.data['reference_table'] == 'bus_reservations'?
-             InitialRouteDecider( referenceTable: 'bus_reservations',)
-             :  initialMessageRcieved?.data['reference_table'] == 'organization_reservations'?
-             InitialRouteDecider( referenceTable: 'organization_reservations',):
-             initialMessageRcieved?.data['reference_table'] == 'restaurant_reservations'?
-             InitialRouteDecider( referenceTable: 'restaurant_reservations',)            :
-             NotificationScreen():
-             // NewsDetailsScreen(newsDetailsModel: widget.newsDetailsModel!):
-               SplashScreen(),
+    //          DetailsFoodArgs(
+    //            isDeeplink: true,
+    //              id: initialMessageRcieved?.data['reference_id'])
+    // ):
+    //          initialMessageRcieved?.data['reference_table'] == 'room_reservations'?
+    //          InitialRouteDecider( referenceTable: 'room_reservations',)
+    //          :  initialMessageRcieved?.data['reference_table'] == 'bus_reservations'?
+    //          InitialRouteDecider( referenceTable: 'bus_reservations',)
+    //          :  initialMessageRcieved?.data['reference_table'] == 'organization_reservations'?
+    //          InitialRouteDecider( referenceTable: 'organization_reservations',):
+    //          initialMessageRcieved?.data['reference_table'] == 'restaurant_reservations'?
+    //          InitialRouteDecider( referenceTable: 'restaurant_reservations',)     
+    //                 :
+    //          NotificationScreen():
+             
+initialRoute: initilaLink != null?
+           Routes.notificationScreen :
+            Routes.initialRoute,
+            //   UpdatePassword()
+            //  initilaLink != null?
+            //   NotificationScreen()
+            //  :
+            //    SplashScreen(),
           onGenerateRoute: AppRoutes.onGenerateRoute,
         ));
   }

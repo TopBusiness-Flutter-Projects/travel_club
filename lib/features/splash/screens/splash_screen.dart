@@ -283,7 +283,8 @@ class _SplashScreenState extends State<SplashScreen>
     return PulseRotateSplashScreen(
       onAnimationComplete: () {
         context.read<ResidenceCubit>().getmarker();
-        _initializeAppLinks();
+       // _initializeAppLinks();
+        navigateToHome();
       },
     );
   }

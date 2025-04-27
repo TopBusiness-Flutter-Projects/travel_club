@@ -119,12 +119,31 @@ class Routes {
   static const String updatePassword = '/updatePassword';
   static const String secondBookTableEntertainment =
       '/secondBookTableEntertainment';
+ 
+  static const String lodgeDeepLink = '/lodge';
+  static const String foodDeepLink = '/restaurant';
+  static const String transportationDeepLink = '/transportation';
+  static const String otherServiceDeepLink = '/otherservice';
+  static const String entertainmentDeepLink = '/entertainment';
+
+
 }
 
 class AppRoutes {
   static String route = '';
   static Route onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
+    String route = settings.name ?? '';
+   String id = '';
+ if (route.contains('/deeplink')) {      
+route = route.replaceAll('/deeplink', '');   
+    final uri = Uri.parse(route);
+     route = uri.path; // This will give you '/book'
+    final queryParams = uri.queryParameters; // This will give you {'id': '11'}
+
+     id = (queryParams['id']).toString(); // Extract the query parameter 'id'
+ }
+ 
+    switch (route) {
       case Routes.initialRoute:
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
@@ -556,27 +575,62 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-
-      // case Routes.resultOfLessonExam:
-      //   ResponseOfApplyLessonExmamData model =
-      //       settings.arguments as ResponseOfApplyLessonExmamData;
-      //   return PageTransition(
-      //     child: ResultExamLessonScreen(model: model),
-      //     type: PageTransitionType.fade,
-      //     alignment: Alignment.center,
-      //     duration: const Duration(milliseconds: 800),
-      //   );
-
+  case Routes.lodgeDeepLink:       
+        return PageTransition(
+          child: LodgeDetailsScreen(args: LodgeDetailsArguments(
+            isDeeplink: true,
+            lodgeId: int.parse(id),
+          )),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );      
+case Routes.foodDeepLink:       
+        return PageTransition(
+          child: DetailsFood(args: DetailsFoodArgs(
+            isDeeplink: true,
+            id: id,
+            
+          )),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.otherServiceDeepLink:       
+        return PageTransition(
+          child: ServiceDetailsScreen(args: ServicesDetailsArguments(
+            isDeeplink: true,
+            id: int.parse(id),
+          )),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.entertainmentDeepLink:       
+        return PageTransition(
+          child: DetailsEntertainment(args: EntertainmentDetailsArgs(
+            isDeeplink: true,
+            id: int.parse(id),
+          )),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      
       default:
-        return undefinedRoute();
+         return MaterialPageRoute(
+          builder: (context) => const SplashScreen(),
+        );
+//return undefinedRoute( route ?? '');
     }
   }
 
-  static Route<dynamic> undefinedRoute() {
+  static Route<dynamic> undefinedRoute(String routeName) {
     return MaterialPageRoute(
-      builder: (context) => const Scaffold(
+      builder: (context) =>  Scaffold(
         body: Center(
-          child: Text(AppStrings.noRouteFound),
+          child: Text('No route defined for $routeName'),
+        //  child: Text(AppStrings.noRouteFound),
         ),
       ),
     );

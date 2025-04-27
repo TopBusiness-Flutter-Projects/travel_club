@@ -35,7 +35,8 @@
         <data
             android:scheme="https"
             android:host="travelclub.page.link"
-            android:pathPrefix="/lodge/" />
+            android:pathPrefix="/deeplink/" 
+            />
              </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
