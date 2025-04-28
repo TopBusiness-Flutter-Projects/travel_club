@@ -48,7 +48,7 @@ class _EntertainmentCompaniesState extends State<EntertainmentCompanies> {
                               Navigator.pushNamed(
                                   context, Routes.detailsEntertainment,
                                 arguments:EntertainmentDetailsArgs(
-                                  id: cubit.getOrganizationsModel!.data![index].id ?? 0,
+                                  id: cubit.getOrganizationsModel!.data![index].id.toString(),
                                 )
                               );
                             },

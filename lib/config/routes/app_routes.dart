@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:travel_club/features/auth/view/screens/new_pass_screen.dart';
 import 'package:travel_club/features/entertainment/data/model/get_orginization_details_model.dart';
@@ -125,25 +127,36 @@ class Routes {
   static const String transportationDeepLink = '/transportation';
   static const String otherServiceDeepLink = '/otherservice';
   static const String entertainmentDeepLink = '/entertainment';
-
-
 }
 
 class AppRoutes {
-  static String route = '';
+  // static String route = '';
   static Route onGenerateRoute(RouteSettings settings) {
-    String route = settings.name ?? '';
-   String id = '';
- if (route.contains('/deeplink')) {      
-route = route.replaceAll('/deeplink', '');   
-    final uri = Uri.parse(route);
-     route = uri.path; // This will give you '/book'
-    final queryParams = uri.queryParameters; // This will give you {'id': '11'}
+  String route = settings.name ?? '';
+  String idLink = '0';
+ log('the route is: $route');
+final uri = Uri.parse(route);
+log('the link is: $uri');
 
-     id = (queryParams['id']).toString(); // Extract the query parameter 'id'
- }
- 
-    switch (route) {
+// Check for query parameters first
+if (uri.queryParameters.containsKey('id')) {
+  idLink = uri.queryParameters['id'] ?? '0';
+  log('Found ID in query params: $idLink');
+}
+
+// Get path for route matching
+String path = uri.path;
+
+// If path contains "deeplink", extract the actual route
+if (path.contains('/deeplink/')) {
+  // Extract the part after "/deeplink/"
+  path = path.split('/deeplink/').last;
+  path = '/$path'; // Add leading slash
+}
+
+log('Route for matching: $path, ID: $idLink');
+
+switch (path) {
       case Routes.initialRoute:
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
@@ -579,7 +592,7 @@ route = route.replaceAll('/deeplink', '');
         return PageTransition(
           child: LodgeDetailsScreen(args: LodgeDetailsArguments(
             isDeeplink: true,
-            lodgeId: int.parse(id),
+            lodgeId: int.tryParse(idLink ) ?? 0,
           )),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
@@ -589,7 +602,7 @@ case Routes.foodDeepLink:
         return PageTransition(
           child: DetailsFood(args: DetailsFoodArgs(
             isDeeplink: true,
-            id: id,
+            id: idLink,
             
           )),
           type: PageTransitionType.fade,
@@ -600,7 +613,7 @@ case Routes.foodDeepLink:
         return PageTransition(
           child: ServiceDetailsScreen(args: ServicesDetailsArguments(
             isDeeplink: true,
-            id: int.parse(id),
+            id: idLink   ,
           )),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
@@ -610,7 +623,7 @@ case Routes.foodDeepLink:
         return PageTransition(
           child: DetailsEntertainment(args: EntertainmentDetailsArgs(
             isDeeplink: true,
-            id: int.parse(id),
+            id: idLink ,
           )),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
@@ -618,10 +631,10 @@ case Routes.foodDeepLink:
         );
       
       default:
-         return MaterialPageRoute(
-          builder: (context) => const SplashScreen(),
-        );
-//return undefinedRoute( route ?? '');
+return MaterialPageRoute(
+         builder: (context) => const SplashScreen(),
+       );
+// return undefinedRoute( route ?? '');
     }
   }
 

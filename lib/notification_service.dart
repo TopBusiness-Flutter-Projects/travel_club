@@ -13,13 +13,13 @@ import 'features/my_bookings/cubit/my_bookings_cubit.dart';
 import 'features/residence/view/screens/lodge_details.dart';
 import 'features/residence/view/screens/lodges_screen.dart';
 RemoteMessage? initialMessageRcieved;
- final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
   factory NotificationService() => _instance;
   NotificationService._internal();
   /// Global Key for Navigation
- 
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   /// Firebase Messaging Instance
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
   /// Local Notifications Plugin
@@ -82,7 +82,7 @@ class NotificationService {
         navigatorKey.currentState?.pushNamed(
             Routes.detailsEntertainment,
             arguments:EntertainmentDetailsArgs(
-              id:  int.tryParse(message.data['reference_id']) ?? 0,
+              id:  message.data['reference_id'] ?? "0",
             )
         );
       }
@@ -315,7 +315,7 @@ class NotificationService {
           navigatorKey.currentState?.pushNamed(
                Routes.detailsEntertainment,
               arguments:EntertainmentDetailsArgs(
-                id:  int.tryParse(message['reference_id']) ?? 0,
+                id: message['reference_id'] ?? "0",
               )
 
 

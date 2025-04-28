@@ -26,7 +26,7 @@ context.read<LoginCubit>().signOutFromGmail();
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (BuildContext context, state) {
         return SafeArea(
-          child: Scaffold(
+          child: Scaffold(            
             body: Form(
               key: formKeySignUp,
               child: SingleChildScrollView(

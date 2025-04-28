@@ -237,45 +237,45 @@ class _SplashScreenState extends State<SplashScreen>
   void _handleDeepLink(Uri initialDeepLink) {
     print("the link is : ${initialDeepLink.toString()}");
     
-    if (initialDeepLink.toString().contains("lodge") &&
-        initialDeepLink.queryParameters['id'] != null) {
-      String? id = initialDeepLink.queryParameters['id'];
-      id == null
-          ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
-          : Navigator.pushReplacementNamed(context, Routes.lodgeDetailsRoute,
-              arguments: LodgeDetailsArguments(
-                  lodgeId: int.parse(id), isDeeplink: true));
-    } else if (initialDeepLink.toString().contains("entertainment") &&
-        initialDeepLink.queryParameters['id'] != null) {
-      String? id = initialDeepLink.queryParameters['id'];
-      id == null
-          ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
-          : Navigator.pushReplacementNamed(context, Routes.detailsEntertainment,
-              arguments: EntertainmentDetailsArgs(
-                  id: int.parse(id), isDeeplink: true));
-    } else if (initialDeepLink.toString().contains("restaurant") &&
-        initialDeepLink.queryParameters['id'] != null) {
-      String? id = initialDeepLink.queryParameters['id'];
-         id == null
-          ?
-            navigatorKey.currentState?.pushNamedAndRemoveUntil(Routes.mainRoute, (route) => false)
-          :  navigatorKey.currentState?.pushReplacementNamed( Routes.detailsFoodRoute,
-              arguments: DetailsFoodArgs(id:id, isDeeplink: true));
-      // id == null
-      //     ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
-      //     : Navigator.pushReplacementNamed(context, Routes.detailsFoodRoute,
-      //         arguments: DetailsFoodArgs(id: id, isDeeplink: true));
-    } else if (initialDeepLink.toString().contains("otherservice") &&
-        initialDeepLink.queryParameters['id'] != null) {
-      String? id = initialDeepLink.queryParameters['id'];
-      id == null
-          ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
-          : Navigator.pushReplacementNamed(context, Routes.detailsOtherServices,
-              arguments: ServicesDetailsArguments(
-                  id: int.parse(id), isDeeplink: true));
-    } else {
-      Navigator.pushReplacementNamed(context, Routes.mainRoute);
-    }
+    // if (initialDeepLink.toString().contains("lodge") &&
+    //     initialDeepLink.queryParameters['id'] != null) {
+    //   String? id = initialDeepLink.queryParameters['id'];
+    //   id == null
+    //       ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
+    //       : Navigator.pushReplacementNamed(context, Routes.lodgeDetailsRoute,
+    //           arguments: LodgeDetailsArguments(
+    //               lodgeId: int.parse(id), isDeeplink: true));
+    // } else if (initialDeepLink.toString().contains("entertainment") &&
+    //     initialDeepLink.queryParameters['id'] != null) {
+    //   String? id = initialDeepLink.queryParameters['id'];
+    //   id == null
+    //       ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
+    //       : Navigator.pushReplacementNamed(context, Routes.detailsEntertainment,
+    //           arguments: EntertainmentDetailsArgs(
+    //               id: int.parse(id), isDeeplink: true));
+    // } else if (initialDeepLink.toString().contains("restaurant") &&
+    //     initialDeepLink.queryParameters['id'] != null) {
+    //   String? id = initialDeepLink.queryParameters['id'];
+    //      id == null
+    //       ?
+    //         navigatorKey.currentState?.pushNamedAndRemoveUntil(Routes.mainRoute, (route) => false)
+    //       :  navigatorKey.currentState?.pushReplacementNamed( Routes.detailsFoodRoute,
+    //           arguments: DetailsFoodArgs(id:id, isDeeplink: true));
+    //   // id == null
+    //   //     ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
+    //   //     : Navigator.pushReplacementNamed(context, Routes.detailsFoodRoute,
+    //   //         arguments: DetailsFoodArgs(id: id, isDeeplink: true));
+    // } else if (initialDeepLink.toString().contains("otherservice") &&
+    //     initialDeepLink.queryParameters['id'] != null) {
+    //   String? id = initialDeepLink.queryParameters['id'];
+    //   id == null
+    //       ? Navigator.pushReplacementNamed(context, Routes.mainRoute)
+    //       : Navigator.pushReplacementNamed(context, Routes.detailsOtherServices,
+    //           arguments: ServicesDetailsArguments(
+    //               id: int.parse(id), isDeeplink: true));
+    // } else {
+    //   Navigator.pushReplacementNamed(context, Routes.mainRoute);
+    // }
   }
 
   @override

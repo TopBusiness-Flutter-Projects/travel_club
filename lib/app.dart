@@ -36,7 +36,6 @@ import 'features/residence/view/screens/lodge_details.dart';
 import 'features/residence/view/screens/lodges_screen.dart';
 import 'features/splash/cubit/cubit.dart';
 import 'features/splash/screens/splash_screen.dart';
-
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -51,7 +50,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    // initDeepLinks();
+    //  initDeepLinks();
   }
 
   @override
@@ -64,7 +63,12 @@ class _MyAppState extends State<MyApp> {
   Future<void> initDeepLinks() async {
     // Handle links
     _linkSubscription = AppLinks().uriLinkStream.listen((uri) {
-      debugPrint('onAppLink: $uri');
+      log('onAppLink: $uri');
+      log('queryParams: ${uri.queryParametersAll}');
+      log('queryParams: ${uri.queryParameters}');
+      log('queryParams: ${uri.query}');
+      log('queryParams: ${uri.pathSegments}');
+      log('queryParams: ${uri.pathSegments.length}');
      // openAppLink(uri);
     });
   }
@@ -75,12 +79,14 @@ class _MyAppState extends State<MyApp> {
   // Extract the path from the URI and push the appropriate route
   final route = uri.path; // Get the full path (e.g., /deeplink/book/11)
   
-  // You may want to use the path or extract parts from it
-  navigatorKey.currentState?.pushNamed(route);
+ 
   }
 
+
+  //  StreamSubscription<Uri>? _linkSubscription;
   @override
   Widget build(BuildContext context) {
+    NotificationService notificationService = NotificationService();
     // print(text);
     return MultiBlocProvider(
         providers: [
@@ -143,7 +149,7 @@ class _MyAppState extends State<MyApp> {
         child: GetMaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
-          navigatorKey: navigatorKey,
+          navigatorKey:notificationService. navigatorKey,
           locale: context.locale,
           theme: appTheme(),
           themeMode: ThemeMode.light,
@@ -171,7 +177,7 @@ class _MyAppState extends State<MyApp> {
              DetailsEntertainment(args:
              EntertainmentDetailsArgs(
                isDeeplink: true,
-               id:  int.tryParse(initialMessageRcieved?.data['reference_id']) ?? 0,
+               id:  initialMessageRcieved?.data['reference_id']?? "0",
              )):
              initialMessageRcieved?.data['reference_table'] == 'organizations'?
              DetailsEntertainment(

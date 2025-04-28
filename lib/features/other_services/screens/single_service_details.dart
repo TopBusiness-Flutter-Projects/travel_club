@@ -9,7 +9,7 @@ import '../data/models/get_single_service_model.dart';
 import '../data/models/sub_services_model.dart';
 
 class ServicesDetailsArguments {
-  final int id;
+  final String id;
   final bool isDeeplink;
 
   ServicesDetailsArguments({
@@ -91,7 +91,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                           ),
                           ContainerInCenterOthers(
                             model: SubServicesData(
-                              id: widget.args.id,
+                              id: int.tryParse( widget.args.id ),
                               title: cubit.getSingleServiceModel.data?.title,
                               isFav: cubit.getSingleServiceModel.data?.isFav,
                               rate: cubit.getSingleServiceModel.data?.rate,

@@ -190,8 +190,8 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                                     id: cubit
                                                             .getEntertainmentModel
                                                             .data![index]
-                                                            .id ??
-                                                        0,
+                                                            .id.toString() ??
+                                                        "0",
                                                   ));
                                             },
                                             child: CustomContainerCompanies(

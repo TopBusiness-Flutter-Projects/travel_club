@@ -7,7 +7,7 @@ import '../../../data/model/get_orginization_model.dart';
 import '../widgets/container_in_center.dart';
 
 class EntertainmentDetailsArgs {
-  final int id;
+  final String id;
   final bool isDeeplink;
   EntertainmentDetailsArgs({
     required this.id,

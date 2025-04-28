@@ -95,7 +95,7 @@ class CustomContainerWidget extends StatelessWidget {
               Navigator.pushNamed(
                   context, Routes.detailsEntertainment,
                   arguments:EntertainmentDetailsArgs(
-                    id:  data.referenceId ?? 0,
+                    id:  data.referenceId.toString(),
                   )
 
 
@@ -105,7 +105,7 @@ class CustomContainerWidget extends StatelessWidget {
               Navigator.pushNamed(
                   context, Routes.detailsEntertainment,
                   arguments:EntertainmentDetailsArgs(
-                    id:  data.referenceId ?? 0,
+                    id:  data.referenceId.toString(),
                   )
 
 
