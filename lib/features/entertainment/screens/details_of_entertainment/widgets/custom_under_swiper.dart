@@ -29,18 +29,17 @@ class ContainerUnderSwiperEntertainment  extends StatelessWidget {
             padding:  EdgeInsets.only(top:                  getHeightSize(context) * 0.05,
             ),
             child: ListView(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //togle
                 SizedBox(height: 30.h,),
                 ToggleButtonScreen(),
                 if(cubit.isServiceSelected==true)
-                  AboutWidget(about: cubit.getOrganizationsDetailsModel?.data?.about.toString()??"", lat: cubit.getOrganizationsDetailsModel?.data?.latitude.toString()??"0.0", long:  cubit.getOrganizationsDetailsModel?.data?.longitude.toString()??"0.0",)
+                  AboutWidget(about: cubit.getOrganizationsDetailsModel?.data?.about.toString()??"",
+                   lat: cubit.getOrganizationsDetailsModel?.data?.latitude.toString()??"0.0", long:  cubit.getOrganizationsDetailsModel?.data?.longitude.toString()??"0.0",)
                 else...[
                   SizedBox(height: 9.h,),
                   cubit.getOrganizationsDetailsModel?.data==null?Center(child: CustomLoadingIndicator(),):
-                  cubit.getOrganizationsDetailsModel?.data?.wayServices?.isEmpty??false?Center(child: Text(AppTranslations.noData),):     ListView.separated(
+                  cubit.getOrganizationsDetailsModel?.data?.wayServices?.isEmpty??false?Center(child: Text(AppTranslations.noData),):  
+                     ListView.separated(
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
                     itemCount: cubit.getOrganizationsDetailsModel?.data?.wayServices?.length??0, itemBuilder: (BuildContext context, int index) {

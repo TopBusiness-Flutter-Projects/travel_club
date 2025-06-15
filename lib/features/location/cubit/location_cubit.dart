@@ -18,10 +18,8 @@ class LocationCubit extends Cubit<LocationState> {
     getmarker();
   }
   LocationRepoImpl api;
-
   Set<Marker> transportationMarkers = const <Marker>{};
   Uint8List? markerIcon;
-
 //location section
   loc.LocationData? currentLocation;
   bool isFirstTime = true;
