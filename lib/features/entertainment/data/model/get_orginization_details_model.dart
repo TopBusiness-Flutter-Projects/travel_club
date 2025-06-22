@@ -80,7 +80,7 @@ class Data {
         wayServicesCategory: json["wayServiceCategory"] == null
             ? []
             : List<WayServiceCategoryModel>.from(
-                json["way_services"]!.map((x) => WayServiceCategoryModel.fromJson(x))),
+                json["wayServiceCategory"]!.map((x) => WayServiceCategoryModel.fromJson(x))),
         media: json["media"] == null
             ? []
             : List<Media>.from(json["media"]!.map((x) => Media.fromJson(x))),
