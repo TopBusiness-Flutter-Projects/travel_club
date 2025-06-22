@@ -46,7 +46,7 @@ class Data {
   bool? isFav;
   String? latitude;
   String? longitude;
-  List<WayService>? wayServices;
+  List<WayServiceCategoryModel>? wayServicesCategory;
   List<Media>? media;
   List<Hour>? hours;
 
@@ -61,7 +61,7 @@ class Data {
     this.isFav,
     this.latitude,
     this.longitude,
-    this.wayServices,
+    this.wayServicesCategory,
     this.media,
     this.hours,
   });
@@ -77,10 +77,10 @@ class Data {
         isFav: json["is_fav"],
         latitude: json["latitude"],
         longitude: json["longitude"],
-        wayServices: json["way_services"] == null
+        wayServicesCategory: json["wayServiceCategory"] == null
             ? []
-            : List<WayService>.from(
-                json["way_services"]!.map((x) => WayService.fromJson(x))),
+            : List<WayServiceCategoryModel>.from(
+                json["way_services"]!.map((x) => WayServiceCategoryModel.fromJson(x))),
         media: json["media"] == null
             ? []
             : List<Media>.from(json["media"]!.map((x) => Media.fromJson(x))),
@@ -100,9 +100,9 @@ class Data {
         "is_fav": isFav,
         "latitude": latitude,
         "longitude": longitude,
-        "way_services": wayServices == null
+        "wayServiceCategory": wayServicesCategory == null
             ? []
-            : List<dynamic>.from(wayServices!.map((x) => x.toJson())),
+            : List<dynamic>.from(wayServicesCategory!.map((x) => x.toJson())),
         "media": media == null
             ? []
             : List<dynamic>.from(media!.map((x) => x.toJson())),
@@ -188,3 +188,59 @@ class WayService {
         "price": price,
       };
 }
+class WayServiceCategoryModel {
+  int? id;
+  String? name;
+    List<WayService>? wayService;
+
+
+  WayServiceCategoryModel({
+    this.id,
+    this.name,
+           this.wayService,
+});
+
+   factory WayServiceCategoryModel.fromJson(Map<String, dynamic> json) => WayServiceCategoryModel(
+        id: json["id"],
+        name: json["name"],
+        wayService: json["way_service"] == null ? [] : List<WayService>.from(json["way_service"]!.map((x) => WayService.fromJson(x))),
+    );
+
+   Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "way_service": wayService == null ? [] : List<dynamic>.from(wayService!.map((x) => x.toJson())),
+    };
+
+}
+/*
+"wayServiceCategory": [
+            {
+                "id": 1,
+                "name": "Iliana Blevins",
+                "way_service": [
+                    {
+                        "id": 1,
+                        "name": "Banana",
+                        "price": "100"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Dalton Hess",
+                        "price": "696"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "name": "صAlexander Richardson",
+                "way_service": [
+                    {
+                        "id": 2,
+                        "name": "duck",
+                        "price": "1200"
+                    }
+                ]
+            }
+        ],
+*/

@@ -1,13 +1,11 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:travel_club/core/widgets/custom_button.dart';
 import 'package:travel_club/features/entertainment/cubit/entertainment_cubit.dart';
 
 import '../../../../../core/exports.dart';
 import '../../../data/model/get_orginization_details_model.dart';
 
 class CustomServiceContainer extends StatefulWidget {
-  const CustomServiceContainer({super.key, required this.wayService});
-  final WayService wayService;
+  const CustomServiceContainer({super.key, required this.wayServiceCategory});
+  final WayServiceCategoryModel wayServiceCategory;
 
   @override
   State<CustomServiceContainer> createState() => _CustomServiceContainerState();
@@ -28,7 +26,7 @@ class _CustomServiceContainerState extends State<CustomServiceContainer> {
               child: Column(
                 children: [
                   CustomExpandableWidget(
-                    title: ' العاب',
+                    title: widget.wayServiceCategory.name ?? "",
                     isExpanded: isExpanded,
                     onTap: () {
                       setState(() {
@@ -40,72 +38,78 @@ class _CustomServiceContainerState extends State<CustomServiceContainer> {
                     duration: const Duration(milliseconds: 250),
                     curve: Curves.easeInOut,
                     child: isExpanded
-                        ? Column(children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top : 10.0),
-                              child: ListView.separated(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  separatorBuilder: (context, index) => Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        ? Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: ListView.separated(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              separatorBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 15.0),
                                     child: Divider(
-                                          color: AppColors.grey1,
-                                        ),
+                                      color: AppColors.grey1,
+                                    ),
                                   ),
-                                  // const Divider(),
-                                  itemBuilder: (context, index) => Padding(
-                                    padding: const EdgeInsets.symmetric( horizontal:  20.0),
+                         
+                              itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20.0),
                                     child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Flexible(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
-                                                    crossAxisAlignment: CrossAxisAlignment.start  ,
-                                                children: [
-                                                  Text(
-                                                    widget.wayService.name.toString() ,
-                                                    style: getSemiBoldStyle(
-                                                      fontSize: 14.sp,
-                                                      color: AppColors.secondPrimary,
-                                                    ),
-                                                  ),
-                                                  10.h.verticalSpace,
-                                                  Text(
-                                                    widget.wayService.price
-                                                            .toString() +
-                                                        " " +
-                                                        AppTranslations.currency,
-                                                    style: getSemiBoldStyle(
-                                                      fontSize: 14.sp,
-                                                      color: AppColors.primary,
-                                                    ),
-                                                  ),
-                                                ],
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Flexible(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                widget.wayServiceCategory.wayService?[index].name ?? ""
+                                                    ,
+                                                style: getSemiBoldStyle(
+                                                  fontSize: 14.sp,
+                                                  color: AppColors
+                                                      .secondPrimary,
+                                                ),
                                               ),
-                                            ),
-                                            GestureDetector(
-                                                onTap: () {
-                                                  Navigator.pushNamed(context,
-                                                      Routes.bookTableEntermaint,
-                                                      arguments: widget.wayService);
-                                                },
-                                                child: Text(
-                                                  AppTranslations.bookNow,
-                                                  style: getBoldStyle(
-                                                      fontSize: 14.sp,
-                                                      color: AppColors.primary),
-                                                )),
-                                          ],
+                                              10.h.verticalSpace,
+                                              Text(
+                                                 widget.wayServiceCategory.wayService?[index].price ??
+                                                    " ${AppTranslations
+                                                        .currency}",
+                                                style: getSemiBoldStyle(
+                                                  fontSize: 14.sp,
+                                                  color: AppColors.primary,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
+                                        GestureDetector(
+                                            onTap: () {
+                                              Navigator.pushNamed(
+                                                  context,
+                                                  Routes
+                                                      .bookTableEntermaint,
+                                                  arguments:
+                                                      widget.wayServiceCategory.wayService?[index]);
+                                            },
+                                            child: Text(
+                                              AppTranslations.bookNow,
+                                              style: getBoldStyle(
+                                                  fontSize: 14.sp,
+                                                  color: AppColors.primary),
+                                            )),
+                                      ],
+                                    ),
                                   ),
-                                  itemCount: 4),
-                            ),
-                          ])
+                              itemCount: widget.wayServiceCategory.wayService?.length ?? 0,),
+                        )
                         : Container(), // Empty container when collapsed
                   ),
                 ],

@@ -61,8 +61,7 @@ class _SearchbodyState extends State<Searchbody> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              //list view حجوزات اول حاجه
+            children: [             
               Padding(
                 padding: EdgeInsets.only(top: 10.0.h, right: 10.w),
                 child: SizedBox(
@@ -89,7 +88,7 @@ class _SearchbodyState extends State<Searchbody> {
 
                 Expanded(
                     child: state is LoadingHomeFilterDataState
-                        ? CustomLoadingIndicator()
+                        ? const CustomLoadingIndicator()
                         : cubit.residenceFavouriteModel.data?.isEmpty ?? false
                             ? Center(
                                 child: NoDataWidget(title: "no_data".tr()),
@@ -112,7 +111,7 @@ class _SearchbodyState extends State<Searchbody> {
               if (cubit.selectedIndex == 1) ...[
                 Expanded(
                     child: state is LoadingHomeFilterDataState
-                        ? Center(child: CustomLoadingIndicator())
+                        ? const Center(child: CustomLoadingIndicator())
                         : cubit.transportationFavouriteModel.data?.isEmpty ??
                                 false
                             ? Center(
@@ -136,19 +135,19 @@ class _SearchbodyState extends State<Searchbody> {
                 ),
                 Expanded(
                   child: state is LoadingHomeFilterDataState
-                      ? Center(child: CustomLoadingIndicator())
-                      : cubit.getRestaurantModel?.data?.isEmpty ?? true
+                      ? const Center(child: CustomLoadingIndicator())
+                      : cubit.getRestaurantModel.data?.isEmpty ?? true
                           ? Center(
                               child: NoDataWidget(title: "no_data".tr()),
                             )
                           : ListView.separated(
                               shrinkWrap: true,
                               itemCount:
-                                  cubit.getRestaurantModel?.data?.length ?? 0,
+                                  cubit.getRestaurantModel.data?.length ?? 0,
                               itemBuilder: (BuildContext context, int index) {
                                 return BigContainerFood(
                                   resturantData:
-                                      cubit.getRestaurantModel?.data?[index] ??
+                                      cubit.getRestaurantModel.data?[index] ??
                                           ResturantData(),
                                 );
                               },
@@ -165,7 +164,7 @@ class _SearchbodyState extends State<Searchbody> {
               if (cubit.selectedIndex == 3) ...[
                 Expanded(
                   child: state is LoadingHomeFilterDataState
-                      ? Center(child: CustomLoadingIndicator())
+                      ? const Center(child: CustomLoadingIndicator())
                       : cubit.getWaysModel.data?.isEmpty ?? false
                           ? Center(
                               child: NoDataWidget(title: "no_data".tr()),
@@ -189,7 +188,7 @@ class _SearchbodyState extends State<Searchbody> {
               if (cubit.selectedIndex == 4) ...[
                 Expanded(
                   child: state is LoadingHomeFilterDataState
-                      ? Expanded(child: Center(child: CustomLoadingIndicator()))
+                      ? const Expanded(child: Center(child: CustomLoadingIndicator()))
                       : cubit.othersModel.data?.isEmpty ?? true
                           ? Center(
                               child: NoDataWidget(title: "no_data".tr()),
