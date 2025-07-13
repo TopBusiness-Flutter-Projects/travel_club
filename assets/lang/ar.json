@@ -332,6 +332,12 @@
 "bus" : "اتوبيس",
 "food_reservation" : "طعام",
 "organization" : "شركة سياحية",
+"upload_now":"تحديث الان!",
+"update_available":"متاح تحديث",
+  "invalid_version_format": "تنسيق إصدار غير صالح",
+  "maintenance_mode_description": "التطبيق حالياً تحت الصيانة.\nنحن نعمل على تحسين تجربتك. يرجى العودة لاحقاً.",
+  "maintenance_mode_title": "وضع الصيانة",
+
 
 
 

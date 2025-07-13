@@ -329,5 +329,10 @@
   "bus": "Bus",
   "food_reservation": "Food",
   "organization": "Travel agency",
+  "upload_now":"Upload now!",
+  "update_available":"Update available",
+  "invalid_version_format": "Invalid version format",
+  "maintenance_mode_description": "The app is currently under maintenance.\nWe are working to improve your experience. Please check back later.",
+  "maintenance_mode_title": "Maintenance Mode",
   "_" : " "
 }

@@ -15,12 +15,7 @@ class AboutUs extends StatefulWidget {
 }
 
 class _AboutUsState extends State<AboutUs> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    context.read<AccountCubit>().getSetting();
-    super.initState();
-  }
+
   @override
   Widget build(BuildContext context) {
     var cubit=context.read<AccountCubit>();
