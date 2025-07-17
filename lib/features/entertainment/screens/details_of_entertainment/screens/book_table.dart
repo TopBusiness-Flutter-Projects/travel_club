@@ -190,7 +190,7 @@ class _BookTableEntermaintState extends State<BookTableEntermaint> {
                           },
                         ),
                         CustomButton(
-                          title: AppTranslations.bookTable,
+                          title: AppTranslations.bookNow,
                           onTap: () {
                             if (formKeyTable.currentState!.validate()) {
                               cubit.addEntertainmentReservation(
