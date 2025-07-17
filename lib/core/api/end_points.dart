@@ -2,10 +2,11 @@ import 'package:flutter/foundation.dart';
 
 class EndPoints {
   static const String baseUrl =
-    kReleaseMode ?
-     'https://travel.topbusiness.ebharbook.com/api/v1/' 
-    :'http://192.168.1.18:8001/api/v1/'
-    ; // production
+      'https://travel.topbusiness.ebharbook.com/api/v1/';
+    // kReleaseMode ?
+    //  'https://travel.topbusiness.ebharbook.com/api/v1/'
+    // :'http://192.168.1.18:8001/api/v1/'
+    // ; // production
   //////////////////////////////////////////////////////
   //////////////////    Auth   /////////////////////////
   //////////////////////////////////////////////////////
@@ -16,6 +17,7 @@ class EndPoints {
   static const String checkOtpUrl = '${baseUrl}checkOtp';
   static const String logoutUrl = '${baseUrl}logout';
   static const String deleteAccountUrl = '${baseUrl}delete-account';
+  static const String settingUrl = '${baseUrl}get-setting';
   static const String forgetPasswordUrl = '${baseUrl}forgetPassword';
   static const String resetPasswordUrl = '${baseUrl}resetPassword';
   static const String checkLoyaltyPointsUrl = '${baseUrl}checkLoyaltyPoints';

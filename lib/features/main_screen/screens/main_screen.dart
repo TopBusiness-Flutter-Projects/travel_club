@@ -18,7 +18,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   @override
+  void initState() {
+    context.read<AccountCubit>().getSetting(context);
+    super.initState();
+  }
+  @override
   //
+
   Widget build(BuildContext context) {
     MainCubit cubit = context.read<MainCubit>();
     return BlocBuilder<MainCubit, MainState>(

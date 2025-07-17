@@ -1,12 +1,3 @@
-// To parse this JSON data, do
-//
-//     final getSettingModel = getSettingModelFromJson(jsonString);
-
-import 'dart:convert';
-
-GetSettingModel getSettingModelFromJson(String str) => GetSettingModel.fromJson(json.decode(str));
-
-String getSettingModelToJson(GetSettingModel data) => json.encode(data.toJson());
 
 class GetSettingModel {
   String? msg;
@@ -33,25 +24,45 @@ class GetSettingModel {
 }
 
 class Data {
-  String? aboutUs;
-  String? termsAndConditions;
-  String? privacy;
+  dynamic aboutUs;
+  dynamic termsAndConditions;
+  dynamic privacy;
+  String? pointValue;
+  String? androidAppVersion;
+  String? iosAppVersion;
+  String? developmentMode;
+  String? appMentainance;
 
   Data({
     this.aboutUs,
     this.termsAndConditions,
     this.privacy,
+    this.pointValue,
+    this.androidAppVersion,
+    this.iosAppVersion,
+    this.developmentMode,
+    this.appMentainance,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     aboutUs: json["about_us"],
     termsAndConditions: json["terms_and_conditions"],
     privacy: json["privacy"],
+    pointValue: json["point_value"],
+    androidAppVersion: json["android_app_version"],
+    iosAppVersion: json["ios_app_version"],
+    developmentMode: json["development_mode"],
+    appMentainance: json["app_mentainance"],
   );
 
   Map<String, dynamic> toJson() => {
     "about_us": aboutUs,
     "terms_and_conditions": termsAndConditions,
     "privacy": privacy,
+    "point_value": pointValue,
+    "android_app_version": androidAppVersion,
+    "ios_app_version": iosAppVersion,
+    "development_mode": developmentMode,
+    "app_mentainance": appMentainance,
   };
 }

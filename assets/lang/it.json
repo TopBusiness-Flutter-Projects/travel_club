@@ -329,5 +329,11 @@
 "bus": "Autobus",
 "food_reservation": "Cibo",
 "organization": "Agenzia di viaggi",
+  "upload_now": "Carica ora!",
+  "update_available": "Aggiornamento disponibile",
+  "invalid_version_format": "Formato di versione non valido",
+  "maintenance_mode_description": "L'app è attualmente in manutenzione.\nStiamo lavorando per migliorare la tua esperienza. Per favore, riprova più tardi.",
+  "maintenance_mode_title": "Modalità di manutenzione",
+
   "--": "--"
 }

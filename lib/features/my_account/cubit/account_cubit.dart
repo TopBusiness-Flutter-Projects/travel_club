@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restart_app/restart_app.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/preferences/preferences.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
@@ -8,12 +7,14 @@ import 'package:travel_club/core/utils/restart_app_class.dart';
 import 'package:travel_club/features/auth/data/models/default_model.dart';
 import 'package:travel_club/features/auth/data/models/login_model.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
-import '../../splash/screens/splash_screen.dart';
+import '../../maintenance_screen.dart';
 import '../data/model/get_payment_types.dart';
 import '../data/model/get_points_history.dart';
 import '../data/model/get_setting_model.dart';
 import '../data/repo/account_repo_impl.dart';
 import 'account_state.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class AccountCubit extends Cubit<AccountState> {
   AccountCubit(this.api) : super(AccountInitial());
@@ -236,7 +237,7 @@ String amountToPoints(){
   }
   //get setting
   GetSettingModel getSettingModel = GetSettingModel();
-  getSetting() async {
+  getSetting(BuildContext context) async {
     //getSettingModel = GetMenuMealsModel();
     emit(GetSettingLoading());
     final res =
@@ -248,11 +249,144 @@ String amountToPoints(){
         emit(GetSettingError(error:"unKnown_error_occurred".tr()));
       }
 
-    }, (r) {
-      getSettingModel = r;
 
+    }, (r) async {
+      getSettingModel = r;
+      if (r.data?.appMentainance.toString() == 'true') {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const MaintenanceScreen()));
+      }
+      await checkAndShowUpdateDialog(
+      context: context,
+      latestAndroidVersion: r.data?.androidAppVersion ?? "1.0.0",
+      latestIosVersion: r.data?.iosAppVersion ?? "1.0.0",
+      );
       emit(GetSettingSuccess());
     });
+  }
+  Future<void> checkAndShowUpdateDialog({
+    required BuildContext context,
+    required String latestAndroidVersion,
+    required String latestIosVersion,
+  }) async {
+    // Get current app version info
+    final packageInfo = await PackageInfo.fromPlatform();
+
+    // Determine platform and latest version
+    final isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    final latestVersion = isIOS ? latestIosVersion : latestAndroidVersion;
+
+    // Extract build numbers for comparison
+    final currentBuild = int.tryParse(packageInfo.buildNumber) ?? 0;
+    final latestBuild = extractBuildMetadata(latestVersion) ?? 0;
+
+    // Debug prints (optional, can be removed)
+    debugPrint('Current: ${packageInfo.version}+${packageInfo.buildNumber}');
+    debugPrint('Latest: $latestVersion');
+
+    // Check if update is needed
+    final needsUpdate = !isCurrentVersionGreaterThanOrEqual(
+      packageInfo.version,
+      latestVersion,
+      currentBuild,
+      latestBuild,
+    );
+
+    if (needsUpdate) {
+      _showUpdateDialog(context, latestVersion, packageInfo.packageName, isIOS);
+    }
+  }
+  void _showUpdateDialog(
+      BuildContext context,
+      String latestVersion,
+      String packageName,
+      bool isIOS,
+      ) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            title:  Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsetsDirectional.only(end: 8.0),
+                  child: Icon(
+                    Icons.tips_and_updates_rounded,
+                    color: Colors.orange,
+                  ),
+                ),
+                Flexible(child: Text("update_available".tr())),
+              ],
+            ),
+            content: Text(
+              'توجد نسخة جديدة ($latestVersion). يرجى التحديث إلى أحدث نسخة.',
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text("upload_now".tr()),
+                onPressed: () async {
+                  final url = isIOS
+                      ? 'https://apps.apple.com/app/idYOUR_APP_ID' // <-- Replace with your App Store ID
+                      : 'https://play.google.com/store/apps/details?id=$packageName';
+                  _launchUrl(url);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+  Future<void> _launchUrl(url) async {
+    if (!await launchUrl(Uri.parse(url),
+        mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+  int? extractBuildMetadata(String version) {
+    final buildRegExp = RegExp(r'\+(\d+)$');
+    final match = buildRegExp.firstMatch(version);
+    return match != null ? int.parse(match.group(1)!) : null;
+  }
+
+  bool isCurrentVersionGreaterThanOrEqual(
+      String currentVersion,
+      String targetVersion,
+      int currentBuildNumber,
+      int targetBuildVersion,
+      ) {
+    final versionRegExp = RegExp(r'^(\d+)\.(\d+)\.(\d+)');
+    final currentMatch = versionRegExp.firstMatch(currentVersion);
+    final targetMatch = versionRegExp.firstMatch(targetVersion);
+
+    if (currentMatch == null || targetMatch == null) {
+      throw FormatException('invalid_version_format'.tr());
+    }
+
+    final currentMajor = int.parse(currentMatch.group(1)!);
+    final currentMinor = int.parse(currentMatch.group(2)!);
+    final currentPatch = int.parse(currentMatch.group(3)!);
+
+    final targetMajor = int.parse(targetMatch.group(1)!);
+    final targetMinor = int.parse(targetMatch.group(2)!);
+    final targetPatch = int.parse(targetMatch.group(3)!);
+
+    if (currentMajor > targetMajor) return true;
+    if (currentMajor < targetMajor) return false;
+
+    if (currentMinor > targetMinor) return true;
+    if (currentMinor < targetMinor) return false;
+
+    if (currentPatch > targetPatch) return true;
+    if (currentPatch < targetPatch) return false;
+
+    // If version numbers are equal, compare build numbers
+    return currentBuildNumber >= targetBuildVersion;
   }
     String countryCode = '+20';
    TextEditingController phonePointsController = TextEditingController();

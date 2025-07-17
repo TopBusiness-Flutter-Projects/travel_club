@@ -339,6 +339,11 @@
 "bus": "Bus",
 "food_reservation": "Essen",
 "organization": "Reiseagentur",
+  "upload_now": "Jetzt hochladen!",
+  "update_available": "Update verfügbar",
+  "invalid_version_format": "Ungültiges Versionsformat",
+  "maintenance_mode_description": "Die App befindet sich derzeit im Wartungsmodus.\nWir arbeiten daran, deine Erfahrung zu verbessern. Bitte versuche es später erneut.",
+  "maintenance_mode_title": "Wartungsmodus",
   "--": "--"
 
 
