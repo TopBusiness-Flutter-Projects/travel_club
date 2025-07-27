@@ -2,11 +2,10 @@ import 'package:flutter/foundation.dart';
 
 class EndPoints {
   static const String baseUrl =
-      'http://192.168.1.18:8001/api/v1/';
-    // kReleaseMode ?
-    //  'https://trvlgate.com/api/v1/'
-    // :'http://192.168.1.18:8001/api/v1/'
-    // ; // production
+    kReleaseMode ?
+     'https://travel.topbusiness.ebharbook.com/api/v1/'
+    :'http://192.168.1.18:8001/api/v1/'
+    ; // production
   //////////////////////////////////////////////////////
   //////////////////    Auth   /////////////////////////
   //////////////////////////////////////////////////////
@@ -48,7 +47,7 @@ class EndPoints {
   ////////////////////////////////////////////////////////////
   static const String getCompaniesUrl = '${baseUrl}getCompanies';
   static const String getCompanyStationUrl = '${baseUrl}getCompanyStation';
-  static const String getAvailableBusesUrl = '${baseUrl}getAvailableBfuture_app.dartuses';
+  static const String getAvailableBusesUrl = '${baseUrl}getAvailableBuses';
   static const String addBusReservationUrl = '${baseUrl}addBusReservation';
 
   ////////////////////////////////////////////////////////////

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,51 +36,43 @@ import 'features/residence/view/screens/lodges_screen.dart';
 import 'features/splash/cubit/cubit.dart';
 import 'features/splash/screens/splash_screen.dart';
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  const MyApp({super.key});
   @override
   State<MyApp> createState() => _MyAppState();
 }
-
 class _MyAppState extends State<MyApp> {
-   StreamSubscription<Uri>? _linkSubscription;
+  // StreamSubscription<Uri>? _linkSubscription;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   //  initDeepLinks();
+  // }
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void dispose() {
+  //   _linkSubscription?.cancel();
 
-    //  initDeepLinks();
-  }
+  //   super.dispose();
+  // }
 
-  @override
-  void dispose() {
-    _linkSubscription?.cancel();
+  // Future<void> initDeepLinks() async {
+  //   // Handle links
+  //   _linkSubscription = AppLinks().uriLinkStream.listen((uri) {
+  //     log('onAppLink: $uri');
+  //     log('queryParams: ${uri.queryParametersAll}');
+  //     log('queryParams: ${uri.queryParameters}');
+  //     log('queryParams: ${uri.query}');
+  //     log('queryParams: ${uri.pathSegments}');
+  //     log('queryParams: ${uri.pathSegments.length}');
+  //     // openAppLink(uri);
+  //   });
+  // }
 
-    super.dispose();
-  }
-
-  Future<void> initDeepLinks() async {
-    // Handle links
-    _linkSubscription = AppLinks().uriLinkStream.listen((uri) {
-      log('onAppLink: $uri');
-      log('queryParams: ${uri.queryParametersAll}');
-      log('queryParams: ${uri.queryParameters}');
-      log('queryParams: ${uri.query}');
-      log('queryParams: ${uri.pathSegments}');
-      log('queryParams: ${uri.pathSegments.length}');
-     // openAppLink(uri);
-    });
-  }
-
-  void openAppLink(Uri uri) {
-     log('openAppLink: ${uri.path}');
-  
-  // Extract the path from the URI and push the appropriate route
-  final route = uri.path; // Get the full path (e.g., /deeplink/book/11)
-  
- 
-  }
-
+  // void openAppLink(Uri uri) {
+  //   log('openAppLink: ${uri.path}');
+  //   // Extract the path from the URI and push the appropriate route
+  //   final route = uri.path; // Get the full path (e.g., /deeplink/book/11)
+  // }
 
   //  StreamSubscription<Uri>? _linkSubscription;
   @override
@@ -99,7 +90,6 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(
             create: (_) => injector.serviceLocator<LoginCubit>(),
           ),
-
           BlocProvider(
             create: (_) => injector.serviceLocator<MainCubit>(),
           ),
@@ -149,62 +139,94 @@ class _MyAppState extends State<MyApp> {
         child: GetMaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
-          navigatorKey:notificationService. navigatorKey,
+          navigatorKey: notificationService.navigatorKey,
           locale: context.locale,
           theme: appTheme(),
           themeMode: ThemeMode.light,
           darkTheme: ThemeData.light(),
           debugShowCheckedModeBanner: false,
           title: AppStrings.appName,
-              home:
-             initialMessageRcieved != null ?
-          ///  widget.newsDetailsModel == null?
-             initialMessageRcieved?.data['reference_table'] == 'places'?
-            // InitialRouteDecider( referenceTable: 'room_reservations',)
-             LodgesScreen(
-               arguments:  LodgesScreenArguments(
-                 placeId:int.tryParse(initialMessageRcieved?.data['reference_id']) ??0,
-                 title: initialMessageRcieved?.data['reference_name']),
-             )
+          home: initialMessageRcieved != null
+              ?
 
-                 :
-             initialMessageRcieved?.data['reference_table'] == 'lodges'?
-             LodgeDetailsScreen(args: LodgeDetailsArguments(
-               isDeeplink: true,
-                 lodgeId: initialMessageRcieved?.data['reference_id'])):
-
-             initialMessageRcieved?.data['reference_table'] == 'companies'?
-             DetailsEntertainment(args:
-             EntertainmentDetailsArgs(
-               isDeeplink: true,
-               id:  initialMessageRcieved?.data['reference_id']?? "0",
-             )):
-             initialMessageRcieved?.data['reference_table'] == 'organizations'?
-             DetailsEntertainment(
-                 args: EntertainmentDetailsArgs(
-                   isDeeplink: true,
-               id:  initialMessageRcieved?.data['reference_id']?? 0,
-             )):
-             initialMessageRcieved?.data['reference_table'] == "offers"||initialMessageRcieved?.data['reference_table'] == "suitcases"?
-                 MainScreen():
-             initialMessageRcieved?.data['reference_table'] == 'restaurants'?
-             DetailsFood(args:
-
-             DetailsFoodArgs(
-               isDeeplink: true,
-                 id: initialMessageRcieved?.data['reference_id'])
-    ):
-             initialMessageRcieved?.data['reference_table'] == 'room_reservations'?
-             InitialRouteDecider( referenceTable: 'room_reservations',)
-             :  initialMessageRcieved?.data['reference_table'] == 'bus_reservations'?
-             InitialRouteDecider( referenceTable: 'bus_reservations',)
-             :  initialMessageRcieved?.data['reference_table'] == 'organization_reservations'?
-             InitialRouteDecider( referenceTable: 'organization_reservations',):
-             initialMessageRcieved?.data['reference_table'] == 'restaurant_reservations'?
-             InitialRouteDecider( referenceTable: 'restaurant_reservations',)            :
-             NotificationScreen():
-             // NewsDetailsScreen(newsDetailsModel: widget.newsDetailsModel!):
-               SplashScreen(),
+              ///  widget.newsDetailsModel == null?
+              initialMessageRcieved?.data['reference_table'] == 'places'
+                  ?
+                  // InitialRouteDecider( referenceTable: 'room_reservations',)
+                  LodgesScreen(
+                      arguments: LodgesScreenArguments(
+                          placeId: int.tryParse(initialMessageRcieved
+                                  ?.data['reference_id']) ??
+                              0,
+                          title: initialMessageRcieved?.data['reference_name']),
+                    )
+                  : initialMessageRcieved?.data['reference_table'] == 'lodges'
+                      ? LodgeDetailsScreen(
+                          args: LodgeDetailsArguments(
+                              isDeeplink: true,
+                              lodgeId:
+                                  initialMessageRcieved?.data['reference_id']))
+                      : initialMessageRcieved?.data['reference_table'] ==
+                              'companies'
+                          ? DetailsEntertainment(
+                              args: EntertainmentDetailsArgs(
+                              isDeeplink: true,
+                              id: initialMessageRcieved?.data['reference_id'] ??
+                                  "0",
+                            ))
+                          : initialMessageRcieved?.data['reference_table'] ==
+                                  'organizations'
+                              ? DetailsEntertainment(
+                                  args: EntertainmentDetailsArgs(
+                                  isDeeplink: true,
+                                  id: initialMessageRcieved
+                                          ?.data['reference_id'] ??
+                                      0,
+                                ))
+                              : initialMessageRcieved?.data['reference_table'] ==
+                                          "offers" ||
+                                      initialMessageRcieved
+                                              ?.data['reference_table'] ==
+                                          "suitcases"
+                                  ? const MainScreen()
+                                  : initialMessageRcieved
+                                              ?.data['reference_table'] ==
+                                          'restaurants'
+                                      ? DetailsFood(
+                                          args: DetailsFoodArgs(
+                                              isDeeplink: true,
+                                              id: initialMessageRcieved
+                                                  ?.data['reference_id']))
+                                      : initialMessageRcieved
+                                                  ?.data['reference_table'] ==
+                                              'room_reservations'
+                                          ? const InitialRouteDecider(
+                                              referenceTable:
+                                                  'room_reservations',
+                                            )
+                                          : initialMessageRcieved?.data['reference_table'] ==
+                                                  'bus_reservations'
+                                              ? const InitialRouteDecider(
+                                                  referenceTable:
+                                                      'bus_reservations',
+                                                )
+                                              : initialMessageRcieved?.data['reference_table'] ==
+                                                      'organization_reservations'
+                                                  ? const InitialRouteDecider(
+                                                      referenceTable:
+                                                          'organization_reservations',
+                                                    )
+                                                  : initialMessageRcieved
+                                                              ?.data['reference_table'] ==
+                                                          'restaurant_reservations'
+                                                      ? const InitialRouteDecider(
+                                                          referenceTable:
+                                                              'restaurant_reservations',
+                                                        )
+                                                      : const NotificationScreen()
+              :
+  
+              const SplashScreen(),
           onGenerateRoute: AppRoutes.onGenerateRoute,
         ));
   }
