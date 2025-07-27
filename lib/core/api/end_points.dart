@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 class EndPoints {
   static const String baseUrl =
     kReleaseMode ?
-     'https://travel.topbusiness.ebharbook.com/api/v1/'
+     'https://trvlgate.com/api/v1/'
     :'http://192.168.1.18:8001/api/v1/'
     ; // production
   //////////////////////////////////////////////////////
