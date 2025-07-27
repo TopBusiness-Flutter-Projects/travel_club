@@ -8,6 +8,7 @@ import 'package:travel_club/features/home/screens/new_offers_screen.dart';
 import 'package:travel_club/features/main_screen/screens/main_screen.dart';
 import 'package:travel_club/features/my_account/screens/about_us.dart';
 import 'package:travel_club/features/my_account/screens/contact_us.dart';
+import 'package:travel_club/features/my_account/screens/future_app.dart';
 import 'package:travel_club/features/my_account/screens/points.dart';
 import 'package:travel_club/features/my_account/screens/promo_code.dart';
 import 'package:travel_club/features/my_account/screens/update_password.dart';
@@ -79,6 +80,7 @@ class Routes {
   static const String bestChoosenScreen = '/bestChoosenScreen';
   static const String aboutUs = '/aboutUs';
   static const String changeLanguage = '/changeLanguage';
+  static const String futureAppUrl = '/futureAppUrl';
   static const String profileInfo = '/profileInfo';
   static const String privacyRoute = '/privacyRoute';
   static const String hotelsScreen = '/hotelsScreen';
@@ -188,6 +190,12 @@ switch (path) {
       case Routes.searchScreen:
         return PageTransition(
           child: const SearchScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );case Routes.futureAppUrl:
+        return PageTransition(
+          child: const FutureApp(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

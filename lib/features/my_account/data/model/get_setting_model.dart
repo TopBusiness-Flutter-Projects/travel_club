@@ -32,6 +32,7 @@ class Data {
   String? iosAppVersion;
   String? developmentMode;
   String? appMentainance;
+  List<App>? apps;
 
   Data({
     this.aboutUs,
@@ -42,6 +43,7 @@ class Data {
     this.iosAppVersion,
     this.developmentMode,
     this.appMentainance,
+    this.apps,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -53,6 +55,8 @@ class Data {
     iosAppVersion: json["ios_app_version"],
     developmentMode: json["development_mode"],
     appMentainance: json["app_mentainance"],
+    apps: json["apps"] == null ? [] : List<App>.from(json["apps"]!.map((x) => App.fromJson(x))),
+
   );
 
   Map<String, dynamic> toJson() => {
@@ -64,5 +68,39 @@ class Data {
     "ios_app_version": iosAppVersion,
     "development_mode": developmentMode,
     "app_mentainance": appMentainance,
+    "apps": apps == null ? [] : List<dynamic>.from(apps!.map((x) => x.toJson())),
+
+  };
+}
+
+class App {
+  int? id;
+  String? name;
+  String? androidUrl;
+  String? iosUrl;
+  String? icon;
+
+  App({
+    this.id,
+    this.name,
+    this.androidUrl,
+    this.iosUrl,
+    this.icon,
+  });
+
+  factory App.fromJson(Map<String, dynamic> json) => App(
+    id: json["id"],
+    name: json["name"],
+    androidUrl: json["android_url"],
+    iosUrl: json["ios_url"],
+    icon: json["icon"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "android_url": androidUrl,
+    "ios_url": iosUrl,
+    "icon": icon,
   };
 }

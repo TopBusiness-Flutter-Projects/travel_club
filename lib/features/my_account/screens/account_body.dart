@@ -85,6 +85,20 @@ class _AccountbodyState extends State<Accountbody> {
                             }
                           },
                         ),
+                      // if (AppConst.isLogged)
+                        CustomRowProfile(
+                          title: AppTranslations.futureApp,
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context, Routes.futureAppUrl,
+                            );
+                            // if (cubit.loginModel.data?.code != null) {
+                            //   Navigator.pushNamed(
+                            //       context, Routes.futureAppUrl,
+                            //       arguments: cubit.loginModel.data?.code.toString());
+                            // }
+                          },
+                        ),
                       CustomRowProfile(
                         title: AppTranslations.contactUs,
                         onTap: () {

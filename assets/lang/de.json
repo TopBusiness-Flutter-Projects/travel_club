@@ -107,18 +107,6 @@
   "seats": "Sitzplatz",
   "vehicle_number": "Fahrzeugnummer",
   "currency": "€",
-
-  "tranportation_results": "Transportergebnisse",
-  "companies_menu": "Unternehmensmenü",
-  "person_rate_company": "Person bewertet das Unternehmen",
-  "booking_details": "Buchungsdetails",
-  "go_only": "Nur Hinfahrt",
-  "go_and_back": "Hin- und Rückfahrt",
-  "search_results": "Suchergebnisse",
-  "seats": "Sitz",
-  "vehicle_number": "Fahrzeugnummer",
-  "currency": "€",
-
   "busy": "Besetzt",
   "available": "Verfügbar",
   "your_seat": "Dein Sitzplatz",
@@ -344,6 +332,7 @@
   "invalid_version_format": "Ungültiges Versionsformat",
   "maintenance_mode_description": "Die App befindet sich derzeit im Wartungsmodus.\nWir arbeiten daran, deine Erfahrung zu verbessern. Bitte versuche es später erneut.",
   "maintenance_mode_title": "Wartungsmodus",
+  "future_app": "Zukunftsanwendungen",
   "--": "--"
 
 

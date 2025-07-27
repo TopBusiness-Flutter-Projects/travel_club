@@ -22,6 +22,7 @@ class AppTranslations {
   static String get morning => 'a_morning'.tr();
   static String get accommodation => 'accommodation'.tr();
   static String get transportation => 'transportation'.tr();
+  static String get futureApp => 'future_app'.tr();
   static String get food => 'food'.tr();
   static String get entertainment => 'entertainment'.tr();
   static String get otherServices => 'other_services'.tr();
