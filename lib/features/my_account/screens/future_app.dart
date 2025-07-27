@@ -102,8 +102,8 @@ class FutureAppCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
               image,
-              width: 60.w,
-              height: 60.w,
+              width: 45.w,
+              height: 45.w,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) =>
               const Icon(Icons.broken_image, size: 40),
@@ -115,7 +115,7 @@ class FutureAppCard extends StatelessWidget {
               nameApp,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16.sp,
+                fontSize: 14.sp,
                 color: AppColors.black,
               ),
               maxLines: 2,
