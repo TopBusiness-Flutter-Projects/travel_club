@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/convert_numbers_method.dart';
+import 'package:travel_club/core/widgets/no_data_widget.dart';
 import 'package:travel_club/features/residence/cubit/residence_cubit.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_member_widget.dart';
@@ -108,7 +109,7 @@ class _ResidenceBookingState extends State<ResidenceBooking> {
                                 child: SizedBox(),
                               )
                             : cubit.lodgesRoomsModel.data?.isEmpty ?? false
-                                ? Center(child: Text(AppTranslations.noData))
+                                ? Center(child: NoDataWidget(title: AppTranslations.noData))
                                 : ListView.builder(
                                     shrinkWrap: true,
                                     itemCount:

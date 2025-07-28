@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/custom_skip_row.dart';
@@ -33,7 +34,30 @@ class CustomOnBoardingBody extends StatelessWidget {
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(height: getHeightSize(context) * 0.08),
+                    SizedBox(height: getHeightSize(context) * 0.06),
+                           InkWell(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              
+                              Text(
+                                "language".tr(),
+                                style: getSemiBoldStyle(
+                                    color: AppColors.secondPrimary,
+                                    fontSize: 14.sp),
+                              ),
+                              5.w.horizontalSpace,
+                              Icon(
+                                Icons.language,
+                                size: 20.sp,
+                                color: AppColors.secondPrimary,
+                              ), 10.w.horizontalSpace,
+                            ],
+                          ),
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.changeLanguage);
+                          },
+                        ), SizedBox(height: getHeightSize(context) * 0.0008),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.w),
                       child: CustomSkipRow(

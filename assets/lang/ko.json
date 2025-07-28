@@ -332,5 +332,6 @@
   "update_available": "업데이트 가능",
   "invalid_version_format": "잘못된 버전 형식입니다",
   "future_app": "미래 애플리케이션",
+  "language": "언어",
   "--": "--"
 }

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:travel_club/core/widgets/no_data_widget.dart';
 
 import '../../../core/exports.dart';
 import '../../location/cubit/location_cubit.dart';
@@ -51,7 +52,7 @@ class _SubServicesScreenState extends State<SubServicesScreen> {
                       )
                           : cubit.subServicesModel.data?.isEmpty??false
                           ? Center(
-                        child: Text('no_data'.tr()),
+                        child:  NoDataWidget(title: "no_data".tr()),
                       ): ListView.separated(
                         shrinkWrap: true,
                         physics: BouncingScrollPhysics(),

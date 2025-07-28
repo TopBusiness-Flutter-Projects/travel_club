@@ -3,6 +3,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/widgets/network_image.dart';
+import 'package:travel_club/core/widgets/no_data_widget.dart';
 
 import '../cubit/other_services_cubit.dart';
 import '../cubit/other_services_state.dart';
@@ -20,44 +21,51 @@ class _OtherServicesScreenState extends State<OtherServicesScreen> {
     context.read<OtherServicesCubit>().getOthers();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    var cubit=context.read<OtherServicesCubit>();
-    return BlocBuilder<OtherServicesCubit, OtherServicesScreenState>(builder: (BuildContext context, state) {
-      return  CustomScreen(
-        appbarTitle: AppTranslations.otherServices,
-        body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h),
-              child:cubit.othersModel.data == null
-                  ? Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 30.0),
-                                    child: CustomLoadingIndicator(),
-                                  ),
-                                )
-                  : cubit.othersModel.data!.isEmpty
-                  ? Center(
-                child: Text('no_data'.tr()),
-              ):
-              StaggeredGrid.count(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 0,
-                  crossAxisSpacing: 0,
-                  children: List.generate(
-                      cubit.othersModel.data?.length??0,
+    var cubit = context.read<OtherServicesCubit>();
+    return BlocBuilder<OtherServicesCubit, OtherServicesScreenState>(
+      builder: (BuildContext context, state) {
+        return CustomScreen(
+          appbarTitle: AppTranslations.otherServices,
+          body: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: cubit.othersModel.data == null
+            ? Center(
+                child: CustomLoadingIndicator(),
+              )
+            : cubit.othersModel.data!.isEmpty
+                ? Center(child: NoDataWidget(title: "no_data".tr()))
+                : SingleChildScrollView(
+                  child: StaggeredGrid.count(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 0,
+                      crossAxisSpacing: 0,
+                      children: List.generate(
+                          cubit.othersModel.data?.length ?? 0,
                           (index) => OtherServicesContainer(
-                        categoryModel: OtherServicesModel(
-                          title:cubit.othersModel.data?[index].title??'',
-                          image: cubit.othersModel.data?[index].image??'',
-                          onTap: () {
-                            Navigator.pushNamed(context, Routes.subServicesRoute,arguments: cubit.othersModel.data?[index].id.toString());
-                          },
-                        ),
-                      ))),
-            )),
-      );
-    }, );
+                                categoryModel: OtherServicesModel(
+                                  title:
+                                      cubit.othersModel.data?[index].title ??
+                                          '',
+                                  image:
+                                      cubit.othersModel.data?[index].image ??
+                                          '',
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, Routes.subServicesRoute,
+                                        arguments: cubit
+                                            .othersModel.data?[index].id
+                                            .toString());
+                                  },
+                                ),
+                              ))),
+                ),
+                    ),
+        );
+      },
+    );
   }
 }
 
@@ -94,7 +102,10 @@ class OtherServicesContainer extends StatelessWidget {
                 //   categoryModel.image,
                 //   width: getWidthSize(context) * 0.13,
                 // ),
-               CustomNetworkImage(image: categoryModel.image,width: getWidthSize(context) * 0.13,),
+                CustomNetworkImage(
+                  image: categoryModel.image,
+                  width: getWidthSize(context) * 0.13,
+                ),
                 SizedBox(width: getWidthSize(context) * 0.02),
                 Flexible(
                   child: AutoSizeText(categoryModel.title,

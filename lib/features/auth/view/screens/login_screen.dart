@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_club/core/exports.dart';
@@ -19,12 +21,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-    GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
- @override
+  GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
+  @override
   void initState() {
-context.read<LoginCubit>().signOutFromGmail();
+    context.read<LoginCubit>().signOutFromGmail();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<LoginCubit>();
@@ -46,11 +49,40 @@ context.read<LoginCubit>().signOutFromGmail();
                         SizedBox(
                           height: 10.h,
                         ),
+                        InkWell(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "language".tr(),
+                                style: getSemiBoldStyle(
+                                    color: AppColors.secondPrimary,
+                                    fontSize: 14.sp),
+                              ),
+                              5.w.horizontalSpace,
+                              Icon(
+                                Icons.language,
+                                size: 20.sp,
+                                color: AppColors.secondPrimary,
+                              )
+                            ],
+                          ),
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.changeLanguage);
+                          },
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.w),
                           child: CustomSkipRow(
                               onTap: () {
-                                Navigator.pushNamedAndRemoveUntil(context, Routes.mainRoute , (route) => false,);
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  Routes.mainRoute,
+                                  (route) => false,
+                                );
                               },
                               backgroundColor: AppColors.yellow),
                         ),
@@ -65,13 +97,12 @@ context.read<LoginCubit>().signOutFromGmail();
                           height: 10.h,
                         ),
                         CustomPhoneFormField(
-
                           controller: cubit.phoneController,
                           initialValue: cubit.countryCode,
                           title: AppTranslations.phone,
                           onCountryChanged: (v) {
                             cubit.countryCode = '+${v.fullCountryCode}';
-                           debugPrint("Country changed to: ${v.name}");
+                            debugPrint("Country changed to: ${v.name}");
                           },
                           onChanged: (phone) {
                             debugPrint(phone.completeNumber);

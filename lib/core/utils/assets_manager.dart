@@ -38,7 +38,7 @@ class ImageAssets {
 
   //Lottie
 
-  static const String noLessons = '$lottiePath/no_lessons.json';
+  static const String noData = '$lottiePath/empty.json';
 }
 
 class AppIcons {

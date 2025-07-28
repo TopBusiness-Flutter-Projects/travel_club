@@ -70,7 +70,7 @@ class PlaceModel {
     });
 
     factory PlaceModel.fromJson(Map<String, dynamic> json) => PlaceModel(
-        moduleId: json["module_id"],
+        moduleId:json["module_id"],
         moduleType: json["module_type"],
         id: json["id"],
         name: json["name"],

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/widgets/no_data_widget.dart';
 import 'package:travel_club/features/entertainment/screens/details_of_entertainment/screens/details_entertainment.dart';
 import 'package:travel_club/features/favourites/cubit/favourites_state.dart';
 import 'package:travel_club/features/food/data/models/get_resturant_model.dart';
@@ -95,7 +96,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                 )
                               : cubit.residenceFavouriteModel.data!.isEmpty
                                   ? Center(
-                                      child: Text('no_data'.tr()),
+                                      child:  NoDataWidget(title: "no_data".tr()),
                                     )
                                   : ListView.builder(
                                       itemCount: cubit
@@ -122,7 +123,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                 )
                               : cubit.transportationFavouriteModel.data!.isEmpty
                                   ? Center(
-                                      child: Text('no_data'.tr()),
+                                      child: NoDataWidget(title: "no_data".tr()),
                                     )
                                   : ListView.builder(
                                       itemCount: cubit
@@ -149,7 +150,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                 )
                               : cubit.getRestaurantModel.data!.isEmpty
                                   ? Center(
-                                      child: Text('no_data'.tr()),
+                                      child: NoDataWidget(title: "no_data".tr()),
                                     )
                                   : ListView.builder(
                                       itemCount:
@@ -173,7 +174,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                               )
                             : cubit.getEntertainmentModel.data!.isEmpty
                                 ? Center(
-                                    child: Text('no_data'.tr()),
+                                    child: NoDataWidget(title: "no_data".tr()),
                                   )
                                 : ListView.builder(
                                     shrinkWrap: true,
@@ -217,7 +218,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                               )
                             : cubit.othersModel.data!.isEmpty
                                 ? Center(
-                                    child: Text('no_data'.tr()),
+                                    child: NoDataWidget(title: "no_data".tr()),
                                   )
                                 :
                         ListView.separated(

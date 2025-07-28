@@ -331,5 +331,6 @@
   "maintenance_mode_description": "La aplicación está actualmente en mantenimiento.\nEstamos trabajando para mejorar tu experiencia. Por favor, vuelve más tarde.",
   "maintenance_mode_title": "Modo de mantenimiento",
   "future_app": "Aplicaciones del futuro",
+  "language": "Idioma",
   "--": "--"
 }

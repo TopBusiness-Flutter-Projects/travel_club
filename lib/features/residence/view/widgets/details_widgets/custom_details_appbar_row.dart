@@ -10,7 +10,6 @@ class CustomDetailsAppBar extends StatelessWidget {
   final String? sharedLink;
   final String? id;
   final bool isFav;
-
   @override
   Widget build(BuildContext context) {
     return Padding(

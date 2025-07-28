@@ -1,3 +1,4 @@
+import 'package:travel_club/core/widgets/no_data_widget.dart';
 import 'package:travel_club/features/entertainment/screens/details_of_entertainment/widgets/toggle_container.dart';
 import '../../../../../../core/exports.dart';
 import '../../../cubit/entertainment_cubit.dart';
@@ -59,7 +60,7 @@ class ContainerUnderSwiperEntertainment extends StatelessWidget {
                                     ?.isEmpty ??
                                 false
                             ? Center(
-                                child: Text(AppTranslations.noData),
+                                child:NoDataWidget(title: AppTranslations.noData)
                               )
                             : ListView.separated(
                                 shrinkWrap: true,

@@ -1,27 +1,26 @@
 import 'package:travel_club/core/widgets/no_data_widget.dart';
-import 'package:travel_club/features/notification/screens/widgets/custom_container_widget.dart';
 
 import '../../../core/exports.dart';
-import '../cubit/notification_cubit.dart';
+import '../cubit/bugs_cubit.dart';
+import 'widgets/custom_container_widget.dart';
 
-class NotificationScreen extends StatefulWidget {
-  const NotificationScreen({super.key});
+class BugsScreen extends StatefulWidget {
+  const BugsScreen({super.key});
 
   @override
-  State<NotificationScreen> createState() => _NotificationScreenState();
+  State<BugsScreen> createState() => _BugsScreenState();
 }
 
-class _NotificationScreenState extends State<NotificationScreen> {
+class _BugsScreenState extends State<BugsScreen> {
   @override
   void initState() {
-    // TODO: implement initState
-    context.read<NotificationCubit>().getNotification();
+    context.read<BugsCubit>().getNotification();
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-    var cubit = context.read<NotificationCubit>();
-    return BlocBuilder<NotificationCubit, NotificationState>(
+    var cubit = context.read<BugsCubit>();
+    return BlocBuilder<BugsCubit, BugsState>(
       builder: (BuildContext context, state) {
          return
           RefreshIndicator(
