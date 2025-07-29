@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
+import 'package:travel_club/core/widgets/no_data_widget.dart';
 import 'package:travel_club/features/my_bookings/view/residence_booking/screens/details_screen.dart';
 
 import '../../../cubit/my_bookings_cubit.dart';
@@ -35,7 +36,7 @@ class _ResidenceReservedBodyState extends State<ResidenceReservedBody> {
                 )
               : cubit.residenceReservationModel?.data!.reservations!.isEmpty??false
                   ? Center(
-                      child: Text('no_reservation'.tr()),
+                      child: NoDataWidget(title: 'no_reservation'.tr()),
                     )
                   : SingleChildScrollView(
                     child: Column(

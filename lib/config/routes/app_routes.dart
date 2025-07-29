@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:travel_club/features/auth/view/screens/new_pass_screen.dart';
+import 'package:travel_club/features/bags/screens/bugs_screen.dart';
 import 'package:travel_club/features/entertainment/data/model/get_orginization_details_model.dart';
 import 'package:travel_club/features/home/screens/best_bags_screen.dart';
 import 'package:travel_club/features/home/screens/new_offers_screen.dart';
@@ -121,6 +122,7 @@ class Routes {
   static const String secondBookingFood = '/secondBookingFood';
   static const String promoCodeRoute = '/promocodeRoute';
   static const String updatePassword = '/updatePassword';
+  static const String bugScreenRoute = '/bugScreenRoute';
   static const String secondBookTableEntertainment =
       '/secondBookTableEntertainment';
  
@@ -582,6 +584,13 @@ switch (path) {
       case Routes.updatePassword:
         return PageTransition(
           child: const UpdatePassword(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.bugScreenRoute:
+        return PageTransition(
+          child: const BugsScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

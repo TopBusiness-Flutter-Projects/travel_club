@@ -34,6 +34,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
               ),
               Text(
                 AppTranslations.accountActivated,
+                textAlign: TextAlign.center,
                 style: getSemiBoldStyle(
                   fontSize: 20.sp,
                   color: AppColors.green,

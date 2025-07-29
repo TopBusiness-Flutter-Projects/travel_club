@@ -4,6 +4,7 @@ import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:travel_club/features/bags/cubit/bugs_cubit.dart';
 import 'package:travel_club/features/custom_upload_image/cubit/upload_image_cubit.dart';
 import 'package:travel_club/features/favourites/cubit/favourites_cubit.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
@@ -134,6 +135,9 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<PaymentCubit>(),
+          ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<BugsCubit>(),
           ),
         ],
         child: GetMaterialApp(
