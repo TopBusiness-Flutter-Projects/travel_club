@@ -9,6 +9,7 @@ class PaymentDetailsContainer extends StatelessWidget {
   const PaymentDetailsContainer({
     super.key,
     this.totalPrice,
+    this.nights,
     this.vat,
     this.totalPriceAfterVat,
     this.afterDiscountPrice,
@@ -16,6 +17,7 @@ class PaymentDetailsContainer extends StatelessWidget {
     this.mealsName,
   });
 
+  final String? nights;
   final String? totalPrice;
   final String? vat;
   final String? totalPriceAfterVat;
@@ -30,6 +32,7 @@ class PaymentDetailsContainer extends StatelessWidget {
           child: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (mealsName.toString() != "null") ...[
               CustomPriceRow(
@@ -40,6 +43,14 @@ class PaymentDetailsContainer extends StatelessWidget {
                 height: 15.h,
               )
             ],
+            if (nights != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Text(
+                  "${AppTranslations.priceFor} $nights ${AppTranslations.nights} ",
+                  style: getMediumStyle(fontSize: 14.sp, color: AppColors.primary),
+                ),
+              ),
             CustomPriceRow(
               price: formatNumber(double.parse(totalPrice!)),
               title: isTickets

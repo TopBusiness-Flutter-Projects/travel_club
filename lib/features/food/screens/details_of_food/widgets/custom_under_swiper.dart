@@ -108,11 +108,10 @@ class ContainerUnderSwiperFood extends StatelessWidget {
                         : cubit.getRestaurantDetailsModel!.data!.rates
                                     ?.isEmpty ??
                                 false
-                            ? Expanded(
-                                child: Center(
-                                    child: NoDataWidget(
-                                title: "no_data".tr(),
-                              )))
+                            ? Center(
+                                child: NoDataWidget(
+                            title: "no_data".tr(),
+                                                          ))
                             : ListView.separated(
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,

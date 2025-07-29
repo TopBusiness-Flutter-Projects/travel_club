@@ -336,5 +336,10 @@
   "maintenance_mode_title": "Maintenance Mode",
   "future_app": "Future Applications",
   "language": "Language",
+  "bags": "Bags",
+  "bag_details": "Bag Details",
+  "select_date": "Select Date",
+  "available_persons": "Available Persons: ",
+  "person": "Person",
   "_" : " "
 }

@@ -68,33 +68,13 @@ class TransportationCubit extends Cubit<TransportationState> {
   StationModel? selectedToStation;
 
   void changeStationValue(StationModel value, bool isFrom) {
-    print("Selected Station ID: ${value.id}");
-    print("Current Selected From Station ID: ${selectedFromStation?.id}");
-    print("Current Selected To Station ID: ${selectedToStation?.id}");
-    // if ((isFrom &&
-    //         selectedToStation != null &&
-    //         value.id == selectedToStation?.id) ||
-    //     (!isFrom && selectedFromStation != null &&
-    //         value.id == selectedFromStation?.id)) {
-    //   print("You cannot select the same station.");
-    //   errorGetBar(AppTranslations.youCanNotSelectSameStation);
-
-    //   // Reset the corresponding station
-    //   if (isFrom) {
-    //     selectedFromStation = null;
-    //   } else {
-    //     selectedToStation = null;
-    //   }
-    // } else {
-    // Set the station based on isFrom
+  
     if (isFrom) {
       selectedFromStation = value;
     } else {
       selectedToStation = value;
     }
-    // }
-
-    // Emit the updated state
+  
     emit(TransportationInitial());
   }
 

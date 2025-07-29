@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:travel_club/features/cases/data/model/get_suitcase.dart';
+
 import '../../../auth/data/models/login_model.dart';
 
 GetHomeModel getHomeModelFromJson(String str) =>
@@ -40,7 +42,7 @@ class Data {
   UserDataModel? user;
   List<ModuleModel>? modules;
   List<Offer>? offers;
-  List<Suitcase>? suitcases;
+  List<SuitCaseData>? suitcases;
 
   Data({
     this.notifications,
@@ -62,8 +64,8 @@ class Data {
             : List<Offer>.from(json["offers"]!.map((x) => Offer.fromJson(x))),
         suitcases: json["suitcases"] == null
             ? []
-            : List<Suitcase>.from(
-                json["suitcases"]!.map((x) => Suitcase.fromJson(x))),
+            : List<SuitCaseData>.from(
+                json["suitcases"]!.map((x) => SuitCaseData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -138,33 +140,5 @@ class Offer {
         "discount": discount,
         "image": image,
         "description": description,
-      };
-}
-
-class Suitcase {
-  int? id;
-  String? title;
-  int? price;
-  String? image;
-
-  Suitcase({
-    this.id,
-    this.title,
-    this.price,
-    this.image,
-  });
-
-  factory Suitcase.fromJson(Map<String, dynamic> json) => Suitcase(
-        id: json["id"],
-        title: json["title"],
-        price: json["price"],
-        image: json["image"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "price": price,
-        "image": image,
       };
 }

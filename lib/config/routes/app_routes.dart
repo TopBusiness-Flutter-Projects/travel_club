@@ -2,9 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:travel_club/features/auth/view/screens/new_pass_screen.dart';
-import 'package:travel_club/features/bags/screens/bugs_screen.dart';
+import 'package:travel_club/features/cases/screens/book_screen.dart';
+import 'package:travel_club/features/cases/screens/case_details_screen.dart';
+import 'package:travel_club/features/cases/screens/cases_screen.dart';
 import 'package:travel_club/features/entertainment/data/model/get_orginization_details_model.dart';
-import 'package:travel_club/features/home/screens/best_bags_screen.dart';
 import 'package:travel_club/features/home/screens/new_offers_screen.dart';
 import 'package:travel_club/features/main_screen/screens/main_screen.dart';
 import 'package:travel_club/features/my_account/screens/about_us.dart';
@@ -112,7 +113,7 @@ class Routes {
   static const String tripDetailsfirstRoute = '/tripDetailsfirstRoute';
   static const String tripDetailsSecondRoute = '/tripDetailsSecondRoute';
   static const String offers = '/offers';
-  static const String bags = '/bags';
+
   static const String searchScreen = '/searchScreen';
   static const String detailsBookingEntertainment =
       '/detailsBookingEntertainment';
@@ -122,7 +123,9 @@ class Routes {
   static const String secondBookingFood = '/secondBookingFood';
   static const String promoCodeRoute = '/promocodeRoute';
   static const String updatePassword = '/updatePassword';
-  static const String bugScreenRoute = '/bugScreenRoute';
+  static const String casesScreenRoute = '/caseScreenRoute';
+  static const String bookCasesRoute = '/bookCasesRoute';
+  static const String caseDescriptionScreenRoute = '/caseDescriptionScreenRoute';
   static const String secondBookTableEntertainment =
       '/secondBookTableEntertainment';
  
@@ -567,13 +570,7 @@ switch (path) {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-      case Routes.bags:
-        return PageTransition(
-          child: const BestBagsScreen(),
-          type: PageTransitionType.fade,
-          alignment: Alignment.center,
-          duration: const Duration(milliseconds: 200),
-        );
+    
       case Routes.pointsRoute:
         return PageTransition(
           child: const PointsScreen(),
@@ -588,9 +585,26 @@ switch (path) {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),
         );
-      case Routes.bugScreenRoute:
+      case Routes.casesScreenRoute:
         return PageTransition(
-          child: const BugsScreen(),
+          child: const CasesScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.bookCasesRoute:
+        return PageTransition(
+          child: const BookCaseScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.caseDescriptionScreenRoute:
+      CaseDetailsArguments args = settings.arguments as CaseDetailsArguments;
+        return PageTransition(
+          child:  CaseDescriptionScreen(
+            args: args,
+          ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 200),

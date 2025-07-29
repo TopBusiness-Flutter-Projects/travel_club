@@ -18,10 +18,10 @@ TextStyle getLineOverStyle({bool isBold = true}) {
     decoration: TextDecoration.lineThrough,
     decorationColor: AppColors.primary,
     height: 2,
-    decorationThickness: 15,
-    fontSize: 16.sp,
+    decorationThickness: 1,
+    fontSize: 14.sp,
     fontFamily: AppStrings.fontFamily,
-    color: AppColors.primary,
+    color: AppColors.gray,
     fontWeight: isBold ? FontWeight.w700 : FontWeight.w500,
   );
 }

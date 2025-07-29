@@ -73,17 +73,11 @@ class _HomeBodyState extends State<HomeBody> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, Routes.bugScreenRoute);
-                                  },
-                                  child: Center(
-                                      child: Image.asset(
-                                    ImageAssets.noOffers,
-                                    width: 150.w,
-                                  )),
-                                ),
+                                Center(
+                                    child: Image.asset(
+                                  ImageAssets.noOffers,
+                                  width: 150.w,
+                                )),
                               ],
                             ),
                           ),

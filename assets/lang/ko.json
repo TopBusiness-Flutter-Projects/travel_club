@@ -333,5 +333,10 @@
   "invalid_version_format": "잘못된 버전 형식입니다",
   "future_app": "미래 애플리케이션",
   "language": "언어",
+  "bags": "가방",
+  "bag_details": "가방 상세",
+  "select_date": "적절한 날짜 선택",
+  "available_persons": "사용 가능한 인원 수: ",
+  "person": "인원",
   "--": "--"
 }

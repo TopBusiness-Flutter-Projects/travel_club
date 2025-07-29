@@ -334,6 +334,11 @@
   "maintenance_mode_title": "Wartungsmodus",
   "future_app": "Zukunftsanwendungen",
   "language": "Sprache",
+  "bags": "Taschen",
+  "bag_details": "Taschendetails",
+  "select_date": "Wähle ein passendes Datum",
+  "available_persons": "Verfügbare Personen: ",
+  "person": "Person",
   "--": "--"
 
 

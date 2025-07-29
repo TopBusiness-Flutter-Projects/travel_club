@@ -24,11 +24,17 @@ class CustomDropdownButtonFormField extends StatelessWidget {
       child: DropdownButtonFormField<dynamic>(
         value: value,
         icon: Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.grey1),
+        hint: Text(
+          hint ?? "choose".tr(),
+          style: getRegularStyle(
+            color: AppColors.grey1,
+            fontSize: 15.sp,
+                      ),
+        ),
         decoration: InputDecoration(
           filled: true,
-          fillColor: AppColors.lightWhite2, // لون الخلفية
-          hintText: hint ?? "choose".tr(),
-         contentPadding:
+          fillColor: AppColors.lightWhite2, 
+          contentPadding:
               EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.r), // حواف دائرية
@@ -46,12 +52,6 @@ class CustomDropdownButtonFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(30.r),
             borderSide: BorderSide(color: AppColors.red, width: 1.5),
           ),
-          hintStyle: getRegularStyle(
-            color: AppColors.grey1,
-            fontSize: 15.sp,
-            fontHeight: 2,
-          ),
-          
           errorStyle: getRegularStyle(color: AppColors.red),
         ),
         items: items,

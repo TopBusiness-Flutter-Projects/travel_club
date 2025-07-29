@@ -332,5 +332,10 @@
   "maintenance_mode_title": "Modo de mantenimiento",
   "future_app": "Aplicaciones del futuro",
   "language": "Idioma",
-  "--": "--"
+  "bags": "Bolsas",
+  "bag_details": "Detalles de la bolsa",
+  "select_date": "Selecciona la fecha adecuada",
+  "available_persons": "Número de personas disponibles: ",
+  "person": "Persona",
+   "--": "--"
 }
