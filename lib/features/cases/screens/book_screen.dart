@@ -5,28 +5,21 @@ import 'package:travel_club/features/cases/cubit/cases_cubit.dart';
 import 'package:travel_club/features/payment/screens/widgets/custom_price_widget.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
 
-
-
-
 class BookCaseScreen extends StatefulWidget {
-  const BookCaseScreen({super.key, });
-
+  const BookCaseScreen({
+    super.key,
+  });
 
   @override
-  State<BookCaseScreen> createState() =>
-      _BookCaseScreenState();
+  State<BookCaseScreen> createState() => _BookCaseScreenState();
 }
 
-class _BookCaseScreenState
-    extends State<BookCaseScreen> {
+class _BookCaseScreenState extends State<BookCaseScreen> {
   @override
   void initState() {
-   
-
     super.initState();
   }
 
- 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CasesCubit, CasesState>(
@@ -44,13 +37,7 @@ class _BookCaseScreenState
                   SizedBox(
                     height: 20.h,
                   ),
-                  // CustomBookingAccommodationContainerBig(
-                  //   residenceReservationModel:
-                  //       widget.arguments.residenceReservationModel,
-                  // ),
-                  SizedBox(
-                    height: 25.h,
-                  ),
+                  
                   if (cubit.bookSuitcaseDetailsModel?.data == null)
                     Padding(
                       padding:
@@ -60,36 +47,22 @@ class _BookCaseScreenState
                       ),
                     )
                   else ...[
-               
-                
-
-             
-
-
-                      CustomPricesWidget(
-                        nights: cubit.bookSuitcaseDetailsModel!.data!.nightCount.toString(),
-                       
-                        totalPrice: cubit.bookSuitcaseDetailsModel!.data!
-                            .totalPrice
-                            .toString(),
-                         
-                        totalPriceAfterVat: cubit
-                            .bookSuitcaseDetailsModel!
-                            .data!
-                            .totalPriceAfterVat
-                            .toString(),
-                        vat: cubit.bookSuitcaseDetailsModel!.data!.vat
-                            .toString(),
-                       
-                        reservationId: cubit.getSuitcaseDetailsModel?.data?.id ??
-                               
-                            0,
-                      )
-                  ,
+                    CustomPricesWidget(
+                      nights: cubit.bookSuitcaseDetailsModel!.data!.nightCount
+                          .toString(),
+                      totalPrice: cubit
+                          .bookSuitcaseDetailsModel!.data!.totalPrice
+                          .toString(),
+                      totalPriceAfterVat: cubit
+                          .bookSuitcaseDetailsModel!.data!.totalPriceAfterVat
+                          .toString(),
+                      vat: cubit.bookSuitcaseDetailsModel!.data!.vat.toString(),
+                      reservationId:
+                          cubit.getSuitcaseDetailsModel?.data?.id ?? 0,
+                    ),
                     SizedBox(
                       height: 40.h,
                     )
-
                   ],
                 ],
               ),
