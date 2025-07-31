@@ -15,6 +15,7 @@ import 'package:travel_club/features/my_account/screens/points.dart';
 import 'package:travel_club/features/my_account/screens/promo_code.dart';
 import 'package:travel_club/features/my_account/screens/update_password.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
+import 'package:travel_club/features/my_bookings/view/suitcase_booking/screens/details_screen.dart';
 import 'package:travel_club/features/on_boarding/screen/onboarding_screen.dart';
 import 'package:travel_club/features/other_services/screens/other_services_screen.dart';
 import 'package:travel_club/features/other_services/screens/single_service_details.dart';
@@ -108,6 +109,8 @@ class Routes {
   static const String transportationMenuRoute = '/transportationMenuRoute';
   static const String transportationBookingDetailsRoute =
       '/transportationBookingDetailsRoute';
+  static const String suitcaseBookingDetailsRoute =
+      '/suitcaseBookingDetailsRoute';
   static const String transportationSearchResultRoute =
       '/transportationSearchResultRoute';
   static const String tripDetailsfirstRoute = '/tripDetailsfirstRoute';
@@ -522,6 +525,16 @@ switch (path) {
         return PageTransition(
           child: TransportationBookingDetailsScreen(
             companyModel: company,
+          ),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 200),
+        );
+      case Routes.suitcaseBookingDetailsRoute:
+        SuitCaseDetailsBookingArguments args = settings.arguments as SuitCaseDetailsBookingArguments;
+        return PageTransition(
+          child: SuitCaseRessrvationDetails(
+            arguments: args,
           ),
           type: PageTransitionType.fade,
           alignment: Alignment.center,

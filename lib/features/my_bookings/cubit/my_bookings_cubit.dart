@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/home/data/models/home_model.dart';
+import 'package:travel_club/features/my_bookings/data/models/suitcase_details.dart';
+import 'package:travel_club/features/my_bookings/data/models/suitcase_reservation.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_details_model.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
 import '../../food/data/models/get_menu_meals_model.dart';
@@ -86,6 +88,8 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
   GetEntertainmentReservationModel entertainmentReservationModel = GetEntertainmentReservationModel();
   GetMyTransportationReservationModel transportationReservationModel =
       GetMyTransportationReservationModel();
+
+        SuitCaseReservationModel? suitcaseReservationModel ;
   getMyReservation({required int moduleId}) async {
     emit(LoadingReservationBooking());
     final res = await api.getMyReservation(
@@ -108,6 +112,9 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
         foodReservationModel = r;
       }if(moduleId == 4){
         entertainmentReservationModel = r;
+      }
+      if (moduleId == 6) {
+        suitcaseReservationModel = r;
       }
       emit(LoadedReservationBooking());
     });
@@ -152,6 +159,9 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
         if (selectedModuleId == 4) {
           entertainmentReservationModel = GetEntertainmentReservationModel();
         }
+        if (selectedModuleId == 6) {
+          suitcaseReservationModel = SuitCaseReservationModel();
+        }
         getMyReservation(moduleId: selectedModuleId);
         getReservationDetails(reservationId: reservationId);
         Navigator.pop(context);
@@ -169,6 +179,7 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       getTransportationReservationDetailsModel =
       GeTransportationReservationDetailsModel();
   GetFoodReservationDetailsModel foodReservationDetails=GetFoodReservationDetailsModel();
+  SuitCaseReservationDetailsModel ? getSuitcaseReservationDetailsModel;
   getReservationDetails({
     required int reservationId,
   }) async {
@@ -190,6 +201,9 @@ class MyReservationsCubit extends Cubit<MyReservationsState> {
       }  if (selectedModuleId == 4) {
        
         getEntertainmentReservationDetailsModel = r;
+      }
+      if (selectedModuleId == 6) {
+        getSuitcaseReservationDetailsModel = r;
       }
       emit(SucessGetReservationDetailsState());
     });

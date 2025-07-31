@@ -35,9 +35,9 @@ class BookSuitCaseDetailsModel {
 class Data {
     int? id;
     int? nightCount;
-    int? totalPrice;
-    int? vat;
-    int? totalPriceAfterVat;
+    num? totalPrice;
+    num? vat;
+    num? totalPriceAfterVat;
 
     Data({
         this.id,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/utils/appwidget.dart';
 import 'package:travel_club/features/cases/data/model/book_case_model.dart';
@@ -77,8 +79,9 @@ class CasesCubit extends Cubit<CasesState> {
         emit(SeenNotificationLoadedState());
       });
     } catch (e) {
+      log("Error in bookSuitcases: $e");
       Navigator.pop(context);
-      errorGetBar(AppTranslations.error);
+      errorGetBar(e.toString());
       emit(SeenNotificationErrorState(error: "unKnown_error_occurred".tr()));
     }
   }

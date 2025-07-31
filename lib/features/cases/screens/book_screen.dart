@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/cases/cubit/cases_cubit.dart';
+import 'package:travel_club/features/payment/cubit/payment_cubit.dart';
 
 import 'package:travel_club/features/payment/screens/widgets/custom_price_widget.dart';
 import 'package:travel_club/features/residence/view/residence_booking/widgets/custom_container_booking.dart';
@@ -18,6 +19,7 @@ class _BookCaseScreenState extends State<BookCaseScreen> {
   @override
   void initState() {
     super.initState();
+    context.read<PaymentCubit>().currentModuleId = 6;
   }
 
   @override
@@ -37,7 +39,6 @@ class _BookCaseScreenState extends State<BookCaseScreen> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  
                   if (cubit.bookSuitcaseDetailsModel?.data == null)
                     Padding(
                       padding:
@@ -57,8 +58,11 @@ class _BookCaseScreenState extends State<BookCaseScreen> {
                           .bookSuitcaseDetailsModel!.data!.totalPriceAfterVat
                           .toString(),
                       vat: cubit.bookSuitcaseDetailsModel!.data!.vat.toString(),
+                      terms: cubit
+                          .getSuitcaseDetailsModel?.data?.rule
+                          ,
                       reservationId:
-                          cubit.getSuitcaseDetailsModel?.data?.id ?? 0,
+                          cubit.bookSuitcaseDetailsModel?.data?.id ?? 0,
                     ),
                     SizedBox(
                       height: 40.h,

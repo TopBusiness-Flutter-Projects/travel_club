@@ -75,18 +75,24 @@ class EndPoints {
       '${baseUrl}checkRestaurantCoupon';
   static const String checkEntertainmentCouponUrl =
       '${baseUrl}checkEntertainmentCoupon';
+  static const String checkCouponSuitcaseUrl =
+      '${baseUrl}check-suitcase-coupon';
   static const String continueToPayTransportationUrl =
       '${baseUrl}continueToPayTransportation';
   static const String continueToPayRestaurantUrl =
       '${baseUrl}continueToPayRestaurant';
   static const String continueToPayEntertainmentUrl =
       '${baseUrl}continueToPayEntertainment';
+  static const String continueToPaySuitcaseUrl =
+      '${baseUrl}continue-to-pay-suitcase';
   static const String checkPaymentTransportationUrl =
       '${baseUrl}checkPaymentTransportation';
   static const String checkPaymentRestaurantUrl =
       '${baseUrl}checkPaymentRestaurant';
   static const String checkPaymentEntertainmentUrl =
       '${baseUrl}checkPaymentEntertainment';
+  static const String checkPaymentSuitcaseUrl =
+      '${baseUrl}check-suitcase-payment-status';
   static const String getMyFavouritesUrl = '${baseUrl}getMyFavs';
   static const String homeFilterUrl = '${baseUrl}homeFilter';
 ////////////////////////////////////////////////////////////

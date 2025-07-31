@@ -41,6 +41,7 @@ class Data {
   int? notifications;
   UserDataModel? user;
   List<ModuleModel>? modules;
+  List<ModuleModel>? reservationModules;
   List<Offer>? offers;
   List<SuitCaseData>? suitcases;
 
@@ -48,6 +49,7 @@ class Data {
     this.notifications,
     this.user,
     this.modules,
+    this.reservationModules,
     this.offers,
     this.suitcases,
   });
@@ -59,6 +61,10 @@ class Data {
             ? []
             : List<ModuleModel>.from(
                 json["modules"]!.map((x) => ModuleModel.fromJson(x))),
+        reservationModules: json["reservation_modules"] == null
+            ? []
+            : List<ModuleModel>.from(
+                json["reservation_modules"]!.map((x) => ModuleModel.fromJson(x))),
         offers: json["offers"] == null
             ? []
             : List<Offer>.from(json["offers"]!.map((x) => Offer.fromJson(x))),
@@ -74,6 +80,9 @@ class Data {
         "modules": modules == null
             ? []
             : List<dynamic>.from(modules!.map((x) => x.toJson())),
+        "reservation_modules": reservationModules == null
+            ? []
+            : List<dynamic>.from(reservationModules!.map((x) => x.toJson())),
         "offers": offers == null
             ? []
             : List<dynamic>.from(offers!.map((x) => x.toJson())),

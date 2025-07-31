@@ -1,5 +1,7 @@
 import 'package:travel_club/core/exports.dart';
 import 'package:travel_club/features/home/cubit/home_cubit.dart';
+import 'package:travel_club/features/my_bookings/view/suitcase_booking/screens/details_screen.dart';
+import 'package:travel_club/features/my_bookings/view/suitcase_booking/screens/suitcase_body.dart';
 import 'package:travel_club/features/my_bookings/view/transportation_booking/screens/transportation_body.dart';
 import 'package:travel_club/features/my_bookings/view/widgets/custom_catogrey_reseration.dart';
 import '../../home/cubit/home_state.dart';
@@ -25,7 +27,8 @@ class _ReservationsBodyState extends State<ReservationsBody> {
     if (context.read<HomeCubit>().homeModel.data == null) {
       context.read<HomeCubit>().getHomeData();
     }
-    context.read<MyReservationsCubit>().getMyReservation(moduleId: context.read<MyReservationsCubit>().selectedModuleId );
+    context.read<MyReservationsCubit>().getMyReservation(
+        moduleId: context.read<MyReservationsCubit>().selectedModuleId);
     super.initState();
   }
 
@@ -53,38 +56,37 @@ class _ReservationsBodyState extends State<ReservationsBody> {
                     padding: EdgeInsets.only(top: 20.0.h, right: 10.w),
                     child: SizedBox(
                       height: 54.h, // Fixed height for the ListView
-                      child:
-                      cubit.homeModel.data == null ?
-                      Container()
-                      :
-                      
-                       ListView.separated(
-                        itemCount: cubit.homeModel.data!.modules!.length - 1,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          return CustomReservationSection(
-                         
-                            module: cubit.homeModel.data?.modules?[index],
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return SizedBox(width: 10.w);
-                        },
-                      ),
+                      child: cubit.homeModel.data?.reservationModules == null
+                          ? Container()
+                          : ListView.separated(
+                              itemCount: cubit
+                                  .homeModel.data!.reservationModules!.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                return CustomReservationSection(
+                                  module: cubit.homeModel.data
+                                      ?.reservationModules?[index],
+                                );
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return SizedBox(width: 10.w);
+                              },
+                            ),
                     ),
                   );
                 },
               ),
               //body ...
               if (cubit.selectedModuleId == 1) ...[
-         if (state is ErrorReservationBooking)
-Expanded(child: Center(child: Text(state.error.toString())))
-         //  Text("Error In Server please try again in another time")
-           else if (state is LoadingReservationBooking || cubit.residenceReservationModel == null)
-                     Expanded(child: Center(child: CustomLoadingIndicator()))
-
-              else
-           ResidenceReservedBody(),
+                if (state is ErrorReservationBooking)
+                  Expanded(child: Center(child: Text(state.error.toString())))
+                //  Text("Error In Server please try again in another time")
+                else if (state is LoadingReservationBooking ||
+                    cubit.residenceReservationModel == null)
+                  const Expanded(child: Center(child: CustomLoadingIndicator()))
+                else
+                  const ResidenceReservedBody(),
                 SizedBox(
                   height: 90.h,
                 )
@@ -94,20 +96,20 @@ Expanded(child: Center(child: Text(state.error.toString())))
                 if (state is ErrorReservationBooking)
                   Expanded(child: Center(child: Text(state.error.toString())))
                 //  Text("Error In Server please try again in another time")
-                else if (state is LoadingReservationBooking || cubit.residenceReservationModel == null)
-                  Expanded(child: Center(child: CustomLoadingIndicator()))
-
+                else if (state is LoadingReservationBooking ||
+                    cubit.transportationReservationModel.data == null)
+                  const Expanded(child: Center(child: CustomLoadingIndicator()))
                 else
-                TransportationReservedBody(),
+                  const TransportationReservedBody(),
               if (cubit.selectedModuleId == 3) ...[
                 if (state is ErrorReservationBooking)
                   Expanded(child: Center(child: Text(state.error.toString())))
                 //  Text("Error In Server please try again in another time")
-                else if (state is LoadingReservationBooking || cubit.residenceReservationModel == null)
-                  Expanded(child: Center(child: CustomLoadingIndicator()))
-
+                else if (state is LoadingReservationBooking ||
+                    cubit.foodReservationModel.data == null)
+                  const Expanded(child: Center(child: CustomLoadingIndicator()))
                 else
-                FoodBookingBody(),
+                  FoodBookingBody(),
                 SizedBox(
                   height: 90.h,
                 )
@@ -116,24 +118,24 @@ Expanded(child: Center(child: Text(state.error.toString())))
                 if (state is ErrorReservationBooking)
                   Expanded(child: Center(child: Text(state.error.toString())))
                 //  Text("Error In Server please try again in another time")
-                else if (state is LoadingReservationBooking || cubit.residenceReservationModel == null)
-                  Expanded(child: Center(child: CustomLoadingIndicator()))
-
+                else if (state is LoadingReservationBooking ||
+                    cubit.entertainmentReservationModel.data == null)
+                  const Expanded(child: Center(child: CustomLoadingIndicator()))
                 else
-                EntertainmentBookingBody(),
+                  EntertainmentBookingBody(),
                 SizedBox(
                   height: 90.h,
                 )
               ],
-              if (cubit.selectedModuleId == 5) ...[
+              if (cubit.selectedModuleId == 6) ...[
                 if (state is ErrorReservationBooking)
                   Expanded(child: Center(child: Text(state.error.toString())))
                 //  Text("Error In Server please try again in another time")
-                else if (state is LoadingReservationBooking || cubit.residenceReservationModel == null)
-                  Expanded(child: Center(child: CustomLoadingIndicator()))
-
+                else if (state is LoadingReservationBooking ||
+                    cubit.suitcaseReservationModel == null)
+                  const Expanded(child: Center(child: CustomLoadingIndicator()))
                 else
-                EntertainmentBookingBody(),
+                  const SuitCaseReservedBody(),
                 SizedBox(
                   height: 90.h,
                 )

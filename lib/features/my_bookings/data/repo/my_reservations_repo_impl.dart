@@ -3,6 +3,7 @@ import 'package:travel_club/core/api/end_points.dart';
 import 'package:travel_club/core/error/exceptions.dart';
 import 'package:travel_club/core/error/failures.dart';
 import 'package:travel_club/features/my_bookings/data/models/cancel_reservation.dart';
+import 'package:travel_club/features/my_bookings/data/models/suitcase_reservation.dart';
 import 'package:travel_club/features/my_bookings/data/models/transportation_reservation_model.dart';
 
 import '../../../../core/api/base_api_consumer.dart';
@@ -12,6 +13,7 @@ import '../models/get_entertainment_details_reserv.dart';
 import '../models/get_entertainment_reservation_model.dart';
 import '../models/residence_reservation_details_model.dart';
 import '../models/residence_reservation_model.dart';
+import '../models/suitcase_details.dart';
 import '../models/transportation_reservation_details_model.dart';
 
 class MyReservationsRepoImpl {
@@ -28,7 +30,12 @@ class MyReservationsRepoImpl {
           ? Right(GetMyResidenceReservationModel.fromJson(response))
           : moduleId == 2 // transportation
               ? Right(GetMyTransportationReservationModel.fromJson(response))
-              : moduleId == 3?Right(GetMyFoodReservationModel.fromJson(response)):Right(GetEntertainmentReservationModel.fromJson(response));
+              : moduleId == 3
+                  ? Right(GetMyFoodReservationModel.fromJson(response))
+                  : moduleId == 4 // entertainment
+                      ? Right(GetEntertainmentReservationModel.fromJson(response))
+                      : Right(SuitCaseReservationModel.fromJson(response));
+                  
     } on ServerException {
       return Left(ServerFailure());
     }
@@ -49,18 +56,23 @@ class MyReservationsRepoImpl {
           : moduleId == 2 // transportation
               ? Right(
                   GeTransportationReservationDetailsModel.fromJson(response))
-              :moduleId == 3 // transportation
-          ?Right(GetFoodReservationDetailsModel.fromJson(response)):Right(GetEntertainmentReservationDetailsModel.fromJson(response));
+              : moduleId == 3 // transportation
+                  ? Right(GetFoodReservationDetailsModel.fromJson(response))
+                  :  moduleId == 4 // entertainment
+                      ? Right(GetEntertainmentReservationDetailsModel.fromJson(response))
+                      : Right(SuitCaseReservationDetailsModel.fromJson(response));
+                  
+                
     } on ServerException {
       return Left(ServerFailure());
     }
   }
+
   //cancel reservation
   Future<Either<Failure, CancelReservationModel>> cancelReservation(
       {required int moduleId, required int reservationId}) async {
     try {
-      var response =
-          await dio.post(EndPoints.cancelReservationurl, body: {
+      var response = await dio.post(EndPoints.cancelReservationurl, body: {
         "module_id": moduleId,
         "reservation_id": reservationId,
       });
@@ -69,17 +81,21 @@ class MyReservationsRepoImpl {
       return Left(ServerFailure());
     }
   }
+
   /// add rate
   Future<Either<Failure, CancelReservationModel>> addRate(
-      {required int moduleId, required int reservationId, required int id, required String comment, required List<double> rates}) async {
+      {required int moduleId,
+      required int reservationId,
+      required int id,
+      required String comment,
+      required List<double> rates}) async {
     try {
-      var response =
-          await dio.post(EndPoints.addRate, body: {
+      var response = await dio.post(EndPoints.addRate, body: {
         "module_id": moduleId.toString(),
         "id": id.toString(),
         "reservation_id": reservationId.toString(),
-       if (comment.isNotEmpty)  "comment" : comment,
-        "rates" :rates
+        if (comment.isNotEmpty) "comment": comment,
+        "rates": rates
       });
       return Right(CancelReservationModel.fromJson(response));
     } on ServerException {
